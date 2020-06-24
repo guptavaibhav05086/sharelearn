@@ -1,0 +1,6 @@
+<app-navbar *ngIf="!displayUserNavbar"></app-navbar>
+<app-navbaruser *ngIf="displayUserNavbar"></app-navbaruser>
+<app-navbarcommon *ngIf="displayUserNavbar"></app-navbarcommon>
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>

@@ -1,0 +1,322 @@
+<div class="popular_courses lite_bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="main_title">
+                    <h2>Register Course</h2>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+               
+            <div class="col-lg-7 col-md-7">
+                    <div class="cardRegister" *ngIf="displayForm">
+        
+                            <h3 class="mb-30 title_color">1. Welcome to mLearn</h3>
+                            <hr>
+                            <div class="app-body" style="margin-left: 5%;">
+                              <h3>Your are not Logged In</h3>
+                              <p>Click here for Login <a routerLink="/login" class="text-primary m-l-5">Log In</a>  &nbsp;&nbsp;   Or &nbsp;&nbsp; Don't have an account? <a routerLink="/register" class="text-primary m-l-5"><b>Sign Up</b></a> &nbsp;&nbsp; Or &nbsp;&nbsp; Want to Continue as Guest? <a (click)="showForm($event)" href="#" class="text-primary m-l-5"><b>Click here</b></a> </p>
+                            
+                             <div class="app-login" *ngIf="displayGuestForm">
+                                <div class="login-box login-sidebar">
+                                    <div class="white-box ">
+                                        <form class="form-horizontal form-material" id="loginform" 
+                                        [formGroup]="loginForm" >
+                                           <div style="display:flex;margin-top: 50px;">
+                                                <div class="form-group" style="width:40%;">
+                                               
+                                                        <input class="form-control" type="text" formControlName="email"  required placeholder="Email">
+                                                        <span
+                                      class="errorMessage"
+                                      *ngIf="
+                                        (loginForm.controls['email'].dirty ||
+                                        loginForm.controls['email'].touched) &&
+                                        loginForm.controls['email'].invalid &&
+                                        loginForm.controls['email'].errors.required
+                                      "
+                                    >
+                                      *Email is required.
+                                    </span>
+                                    <span
+                                      class="errorMessage"
+                                      *ngIf="
+                                        (loginForm.controls['email'].dirty ||
+                                        loginForm.controls['email'].touched) &&
+                                        loginForm.controls['email'].invalid &&
+                                        loginForm.controls['email'].errors.invalidPattern
+                                      "
+                                    >
+                                      *Email is incorrect.
+                                    </span>
+                                
+                                                    </div>
+                                                    <div class="form-group" style="width:10%;text-align: center;">
+                                                        <h3>and </h3>
+                                                    </div>
+                                                    <div class="form-group " style="width:40%">
+                                                            
+                                                            <input
+                                                              class="form-control"
+                                                              type="text"
+                                                              required
+                                                              formControlName="mobileNumber"
+                                                              placeholder="+91 Mobile Number"
+                                                            />
+                                                            <span
+                                                              class="errorMessage"
+                                                              *ngIf="
+                                                                (loginForm.controls['mobileNumber'].dirty ||
+                                                                loginForm.controls['mobileNumber'].touched) &&
+                                                                loginForm.controls['mobileNumber'].invalid &&
+                                                                loginForm.controls['mobileNumber'].errors.invalidPattern
+                                                              "
+                                                            >
+                                                              *Mobile# is incorrect.
+                                                            </span>
+                                                            <span
+                                                              class="errorMessage"
+                                                              *ngIf="
+                                                                (loginForm.controls['mobileNumber'].dirty ||
+                                                                loginForm.controls['mobileNumber'].touched) &&
+                                                                loginForm.controls['mobileNumber'].invalid &&
+                                                                loginForm.controls['mobileNumber'].errors.required
+                                                              "
+                                                            >
+                                                              *Mobile# is required.
+                                                            </span>
+                                                          </div>
+                                           </div>
+                                            
+                                           
+                                            <div class="form-group text-center mt-4">
+                                                <button class="btn btn-info btn-lg btn-block text-uppercase " [disabled]="!loginForm.valid" type="submit" (click)="registerGuest()">Continue as Guest</button>
+                                            </div>
+                        
+                                                 
+                                        </form>
+                                      
+                                    </div>
+                        
+                                </div>
+                                
+                            </div>
+                               
+                                
+                                <!--
+                                <div class=" footer  clearfix">
+                                    <div class="content">
+                                        Copyright © 2018 - mSupply.in
+                        
+                                    </div>
+                        
+                                </div>-->
+                            </div>
+                            
+                        </div>
+                <div class="cardRegister" *ngIf="!displayForm">
+                        <h3 class="mb-30 title_color">1. Welcome to mLearn</h3>
+                        <hr>
+                        <h5 class="mb-30 sub_heading">Please review you order .In case of any doubt please call on our number <a>+918884615431</a> or Chat with us</h5>
+                </div>
+                <div class="cardRegister">
+                        <h3 class="mb-30 title_color">2. Order Details and Select Batch</h3>
+                        <hr>
+                        
+                      <p class="mb-30 sub_heading" style="font-weight: 700;"><img [src]="imageUrl" width="80px" height="60px" style="border-radius: 300px;">
+                         
+                        {{selectedCourse}} -{{ selectedTopic}}
+                         
+                        </p>  
+                        <hr>
+                        
+                            <div class="form-check">
+                                    <label class="form-check-label sub_heading">
+                                      <input type="radio" class="form-check-input" name="optradio"><b>Weekday Batches (7:00 to 8:30 A.M.)</b> 
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <label class="form-check-label sub_heading">
+                                      <input type="radio" class="form-check-input" name="optradio"><b>Weekend Batches (9 to 11:30 am)/ (3:30 to 6 p.m.)</b>
+                                    </label>
+                                  </div>
+                                
+                    
+                </div>
+                
+               
+            </div>
+            <div class="col-lg-4 col-md-5 mt-sm-30 element-wrap orderSummary" >
+                    <div class="single-element-widget">
+                        <h3 class="mb-30 title_color">Order Summary</h3>
+                        <hr>
+                        <div class="switch-wrap d-flex justify-content-between title_summary">
+                            <p>Course Price</p>
+                            <div class="amount" >
+                                    &#x20B9;   {{
+                                        this.feesDetails.fees}}/-
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="switch-wrap d-flex justify-content-between title_summary">
+                            <p>Discount ({{feesDetails.disPer}}%)</p>
+                            <div class="amount" style="color:red">
+                                 -   &#x20B9;    {{feesDetails.discount}}/-
+                            </div>
+                        </div>
+                        <hr>
+                        
+                        <div class="switch-wrap d-flex justify-content-between title_summary">
+                            <p>Total Price</p>
+                            <div class="amount" >
+                                    &#x20B9;  {{feesDetails.totalFees}}/-
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="switch-wrap d-flex justify-content-between title_summary">
+                                <p>GST</p>
+                                <div class="amount"  >
+                                        &#x20B9;   {{feesDetails.GST}}/-
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="switch-wrap d-flex justify-content-between title_summary">
+                                    <p><b>Net Total</b></p>
+                                    <div class="amount" >
+                                            &#x20B9; {{feesDetails.netTotal}}/-
+                                    </div>
+                                </div>
+                                <hr>
+                    </div>
+                    <div style="text-align: center;">
+                            <a href="#" class="genric-btn primary circle arrow">Proceed to Payment<span class="lnr lnr-arrow-right"></span></a>
+                        <!-- <button class="btn btn-primary" >Proceed to Payment</button> -->
+                    </div>
+                </div>
+            <div class="col-lg-3 col-md-4 mt-sm-30 element-wrap"  style="display: none;">
+                <div class="single-element-widget">
+                    <h3 class="mb-30 title_color">Switches</h3>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <p>01. Sample Switch</p>
+                        <div class="primary-switch">
+                            <input type="checkbox" id="default-switch">
+                            <label for="default-switch"></label>
+                        </div>
+                    </div>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <p>02. Primary Color Switch</p>
+                        <div class="primary-switch">
+                            <input type="checkbox" id="primary-switch" checked>
+                            <label for="primary-switch"></label>
+                        </div>
+                    </div>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <p>03. Confirm Color Switch</p>
+                        <div class="confirm-switch">
+                            <input type="checkbox" id="confirm-switch" checked>
+                            <label for="confirm-switch"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-element-widget">
+                    <h3 class="mb-30 title_color">Selectboxes</h3>
+                    <div class="default-select" id="default-select">
+                        <select>
+                            <option value="1">English</option>
+                            <option value="1">Spanish</option>
+                            <option value="1">Arabic</option>
+                            <option value="1">Portuguise</option>
+                            <option value="1">Bengali</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="single-element-widget">
+                    <h3 class="mb-30 title_color">Checkboxes</h3>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <p>01. Sample Checkbox</p>
+                        <div class="primary-checkbox">
+                            <input type="checkbox" id="default-checkbox">
+                            <label for="default-checkbox"></label>
+                        </div>
+                    </div>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <p>02. Primary Color Checkbox</p>
+                        <div class="primary-checkbox">
+                            <input type="checkbox" id="primary-checkbox" checked>
+                            <label for="primary-checkbox"></label>
+                        </div>
+                    </div>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <p>03. Confirm Color Checkbox</p>
+                        <div class="confirm-checkbox">
+                            <input type="checkbox" id="confirm-checkbox">
+                            <label for="confirm-checkbox"></label>
+                        </div>
+                    </div>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <p>04. Disabled Checkbox</p>
+                        <div class="disabled-checkbox">
+                            <input type="checkbox" id="disabled-checkbox" disabled>
+                            <label for="disabled-checkbox"></label>
+                        </div>
+                    </div>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <p>05. Disabled Checkbox active</p>
+                        <div class="disabled-checkbox">
+                            <input type="checkbox" id="disabled-checkbox-active" checked disabled>
+                            <label for="disabled-checkbox-active"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-element-widget">
+                    <h3 class="mb-30 title_color">Radios</h3>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <p>01. Sample radio</p>
+                        <div class="primary-radio">
+                            <input type="checkbox" id="default-radio">
+                            <label for="default-radio"></label>
+                        </div>
+                    </div>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <p>02. Primary Color radio</p>
+                        <div class="primary-radio">
+                            <input type="checkbox" id="primary-radio" checked>
+                            <label for="primary-radio"></label>
+                        </div>
+                    </div>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <p>03. Confirm Color radio</p>
+                        <div class="confirm-radio">
+                            <input type="checkbox" id="confirm-radio" checked>
+                            <label for="confirm-radio"></label>
+                        </div>
+                    </div>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <p>04. Disabled radio</p>
+                        <div class="disabled-radio">
+                            <input type="checkbox" id="disabled-radio" disabled>
+                            <label for="disabled-radio"></label>
+                        </div>
+                    </div>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <p>05. Disabled radio active</p>
+                        <div class="disabled-radio">
+                            <input type="checkbox" id="disabled-radio-active" checked disabled>
+                            <label for="disabled-radio-active"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row ">
+                <div class="col-lg-8 col-md-8 cardRegister">
+                    <h3 class="mb-30 title_color">2. Course Details</h3>
+                    <h5 class="mb-30 sub_heading">Course - React JS</h5>
+                    <h5 class="mb-30 sub_heading">Topic - React Routing</h5>
+                   
+                </div>
+                
+            </div> -->
+    </div>
+</div>

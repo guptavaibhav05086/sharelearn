@@ -1,0 +1,525 @@
+<!-- <div class="panel-header panel-header-sm">
+
+
+</div> -->
+
+<div
+  class="content"
+  style="
+    margin-top: 50px;
+    margin-left: 40px;
+"
+>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="image">
+          <img
+            src="../../../assets/StudentDashboard/img/damir-bosnjak.jpg"
+            alt="..."
+          />
+        </div>
+        <div class="card-body">
+          <div class="author">
+            <a href="#">
+              <img
+                class="avatar border-gray"
+                src="../../../assets/StudentDashboard/img/mike.jpg"
+                alt="..."
+              />
+              <h5 class="title">Chet Faker</h5>
+            </a>
+
+            <div class="input-group" >
+              <div class="custom-file">
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  id="inputGroupFile01"
+                  aria-describedby="inputGroupFileAddon01"
+                />
+                <label class="custom-file-label" for="inputGroupFile01"
+                  >Choose Photo</label
+                >
+              </div>
+            </div>
+          </div>
+          <p class="description text-center">
+            "I like the way you work it
+            <br />
+            No diggity <br />
+            I wanna bag it up"
+          </p>
+        </div>
+        <div class="card-footer">
+          <hr />
+          <div class="button-container">
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                <h5>
+                  12
+                  <br />
+                  <small>Files</small>
+                </h5>
+              </div>
+              <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+                <h5>
+                  2GB
+                  <br />
+                  <small>Used</small>
+                </h5>
+              </div>
+              <div class="col-lg-3 mr-auto">
+                <h5>
+                  24,6$
+                  <br />
+                  <small>Spent</small>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title">Personel Details</h5>
+          <button class="btn btn-primary"  (click)="editForm('personal')">Edit Profile</button>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="profileform" id="profileform">
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="First Name"
+                    
+                    [disabled]="isDisabled"
+                    formControlName="fName"  
+                    required
+                  />
+                  {{profileform.controls["fName"].value}}
+                </div>
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Last Name"
+                    
+                    formControlName="lName"  
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Gender</label>
+                  <select class="form-control" [disabled]="isDisabled" 
+                  formControlName="gender"  
+                  required>
+                    <option selected></option>
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 pr-1">
+                <div class="form-group">
+                  <label>Phone Number</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="+91"
+                    [disabled]="isDisabled"
+                    
+                    formControlName="mobileNumber"  
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-2 pr-1" style="padding-top: 20px;">
+                  <div class="form-group">
+                    
+                    <button type="button" (click)="openVerifyOTP()"  class="btn btn-primary btn-round">
+                        verify OTP
+                      </button>
+                  </div>
+                </div>
+              <div class="col-md-3 px-1">
+                  <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                      <label class="control-label" for="datepicker">Date Of Birth</label>
+                      <input type="date" class="form-control" id="datepicker" 
+                      formControlName="dob"  
+                      required>
+                    </div>
+               
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Qualification</label>
+                  <select class="form-control" 
+                  [disabled]="isDisabled" 
+                  formControlName="qualification"  
+                  required>
+                      <option selected></option>
+                      <option>B.Tech</option>
+                      <option>M.Tech</option>
+                      <option>Bsc</option>
+                      <option>Msc</option>
+                      <option>B.com</option>
+                      <option>M.com</option>
+                      <option>M.Tech</option>
+                      <option>Bsc</option>
+                      <option>Msc</option>
+                      <option>BBA</option>
+                      <option>MBA</option>
+                      <option>BCA</option>
+                      <option>MCA</option>
+                      <option>Other</option>
+                    </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 pr-1">
+                    <div class="form-group">
+                      <label>Experience</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        placeholder="# of years"
+                        
+                    formControlName="exp"  
+                    required
+                        [disabled]="isDisabled"
+                      />
+                    </div>
+                  </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label>Linkedin Profile</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="https://www.linkedin.com/in/vaibhav-gupta-6a78a81b/"
+                    
+                    formControlName="profile"  
+                    required
+                    [disabled]="isDisabled"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>City</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="City"
+                    
+                    formControlName="city"  
+                    required
+                    [disabled]="isDisabled"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label>State</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="state"
+                   
+                    formControlName="state"  
+                    required
+                    [disabled]="isDisabled"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Postal Code</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="ZIP Code"
+                    [disabled]="isDisabled"
+                    
+                    formControlName="postalCode"  
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-md-12" >
+                    <h4 class="card-title">Softwares</h4>
+                    <div style="display: flex;">
+                        <div class="checkbox">
+                            <input id="checkbox1" type="checkbox" class="checkboxelement">
+                            <label for="checkbox1" class="checkboxLabel">
+                            Unchecked
+                          </label>
+                        </div>
+                        <div class="checkbox">
+                           <input id="checkbox2" type="checkbox" checked="" class="checkboxelement">
+                           <label for="checkbox2" class="checkboxLabel">
+                              Checked
+                            </label>
+                         </div>
+                        <div class="checkbox">
+                                <input id="checkbox3" type="checkbox" disabled="" class="checkboxelement">
+                                <label for="checkbox3"class="checkboxLabel">
+                                      Disabled unchecked
+                                  </label>
+                              </div>
+                          <div class="checkbox">
+                           <input id="checkbox4" type="checkbox" checked="" disabled="" class="checkboxelement">
+                           <label for="checkbox4" class="checkboxLabel">
+                             Disabled checked
+                           </label>
+                          </div>
+                    </div>
+                    <div style="display: flex;">
+                        <div class="checkbox">
+                            <input id="checkbox1" type="checkbox" class="checkboxelement">
+                            <label for="checkbox1" class="checkboxLabel">
+                            Unchecked
+                          </label>
+                        </div>
+                        <div class="checkbox">
+                           <input id="checkbox2" type="checkbox" checked="" class="checkboxelement">
+                           <label for="checkbox2" class="checkboxLabel">
+                              Checked
+                            </label>
+                         </div>
+                        <div class="checkbox">
+                                <input id="checkbox3" type="checkbox" disabled="" class="checkboxelement">
+                                <label for="checkbox3"class="checkboxLabel">
+                                      Disabled unchecked
+                                  </label>
+                              </div>
+                          <div class="checkbox">
+                           <input id="checkbox4" type="checkbox" checked="" disabled="" class="checkboxelement">
+                           <label for="checkbox4" class="checkboxLabel">
+                             Disabled checked
+                           </label>
+                          </div>
+                    </div>
+     
+    </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-4" ></div>
+                <div class="col-md-8" >
+                    <div style="display: flex;margin-top: 50px;margin-bottom: 20px;">
+                        <div class="">
+                            <input id="checkbox1" type="checkbox" class="checkboxAcceptelement">
+                            <label for="checkbox1" class="checkboxLabel" style="font-size: large;color: black;">
+                           I Accept <a href="#" (click)="openTermCondition($event)">
+                             <span ><u style="color:blue">Terms and Conditons</u></span> 
+                           </a>
+                          </label>
+                        </div>
+                        <div>
+                           
+                        </div>
+                       
+                       
+                          
+                    </div>
+                  
+                </div>
+              </div>
+            <div class="row" >
+              <div class="update ml-auto mr-auto">
+                <button type="submit" (click)="updateForm('personal')" class="btn btn-primary btn-round">
+                  Proceed To Payment
+                </button>
+              </div>
+            </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="row">
+      <div class="col-md-4">
+        <div class="card card-user">
+          <div class="image">
+            <img
+              src="../../../assets/StudentDashboard/img/damir-bosnjak.jpg"
+              alt="..."
+            />
+          </div>
+          <div class="card-body">
+            <div class="author">
+              <a href="#">
+                <img
+                  class="avatar border-gray"
+                  src="../../../assets/StudentDashboard/img/mike.jpg"
+                  alt="..."
+                />
+                <h5 class="title">Chet Faker</h5>
+              </a>
+  
+              <div class="input-group" >
+                <div class="custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01"
+                  />
+                  <label class="custom-file-label" for="inputGroupFile01"
+                    >Choose Photo</label
+                  >
+                </div>
+              </div>
+            </div>
+            <p class="description text-center">
+              "I like the way you work it
+              <br />
+              No diggity <br />
+              I wanna bag it up"
+            </p>
+          </div>
+          <div class="card-footer">
+            <hr />
+            <div class="button-container">
+              <div class="row">
+                <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                  <h5>
+                    12
+                    <br />
+                    <small>Files</small>
+                  </h5>
+                </div>
+                <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+                  <h5>
+                    2GB
+                    <br />
+                    <small>Used</small>
+                  </h5>
+                </div>
+                <div class="col-lg-3 mr-auto">
+                  <h5>
+                    24,6$
+                    <br />
+                    <small>Spent</small>
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card card-user">
+          <div class="card-header">
+            <h5 class="card-title">Personel Details</h5>
+            <button class="btn btn-primary"  (click)="editForm('personal')">Edit Profile</button>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="profileformdemo" id="profileform">
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>First Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="First Name"
+                      
+                      [disabled]="isDisabled"
+                      formControlName="fName"  
+                      required
+                    />
+                   
+                  </div>
+                </div>
+                <div class="col-md-4 px-1">
+                  <div class="form-group">
+                    <label>Last Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Last Name"
+                      
+                      formControlName="lName"  
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4 pl-1">
+                  <div class="form-group">
+                    <label>Gender</label>
+                    <select class="form-control" [disabled]="isDisabled" 
+                    formControlName="gender"  
+                    required>
+                      <option selected></option>
+                      <option>Male</option>
+                      <option>Female</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              
+              
+              
+              
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+</div>
+
+<footer class="footer footer-black  footer-white ">
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="footer-nav">
+        <ul>
+          <li>
+            <a href="https://www.creative-tim.com" target="_blank"
+              >Creative Tim</a
+            >
+          </li>
+          <li>
+            <a href="http://blog.creative-tim.com/" target="_blank">Blog</a>
+          </li>
+          <li>
+            <a href="https://www.creative-tim.com/license" target="_blank"
+              >Licenses</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <div class="credits ml-auto">
+        <span class="copyright">
+          ©
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          , made with <i class="fa fa-heart heart"></i> by Creative Tim
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>

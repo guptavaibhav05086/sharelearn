@@ -1,0 +1,46 @@
+.cardRegister {
+  background-color: white;
+  border-radius: 5px;
+
+  /* height: 20%; */
+}
+.lite_bg {
+  background-color: #f3f3f4;
+  font-family: "Open Sans";
+}
+.title_color {
+  font-family: initial;
+  font: caption;
+  font-size: 25px;
+  font-weight: 500;
+  padding-left: 30px;
+  padding-top: 30px;
+  font-weight: 700;
+}
+.sub_heading {
+  font-family: initial;
+  font: caption;
+  font-size: 20px;
+  padding-left: 30px;
+}
+.orderSummary {
+  background-color: white;
+  margin-left: 7%;
+  border-radius: 20px;
+  padding-top: 20px;
+}
+.title_summary {
+  font-family: initial;
+  font: caption;
+  font-size: 20px;
+  font-weight: 500;
+}
+.amount {
+  font-weight: 600;
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 90%;
+  }
+}

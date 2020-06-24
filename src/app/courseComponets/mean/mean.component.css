@@ -1,0 +1,63 @@
+.courseLink {
+    display: flex;
+  }
+  .courseRegister {
+    margin-left: 3%;
+    width: 30%;
+  }
+  .btn-link {
+    color: black;
+    font-weight: bolder;
+  }
+  /* You can add global styles to this file, and also import other style files */
+  .card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+  }
+  .card-header {
+    /* padding: 0.75rem 1.25rem; */
+    margin-bottom: 0;
+    background: #90caf9 !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
+  }
+  /* .accordion {
+        width: 70% !important;
+      } */
+  
+  .row {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  /* .content {
+        margin-top: 100px;
+      } */
+  .card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+  }
+  h2 {
+    font-size: small;
+    color: white !important;
+  }
+  h5 {
+    font-size: small;
+  }
+  

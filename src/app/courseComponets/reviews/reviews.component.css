@@ -1,0 +1,39 @@
+.right-contents .reviews span,
+.right-contents .reviews .star {
+  width: 20% !important;
+  margin-bottom: 10px;
+}
+.right-contents .comments-area .star {
+  margin-left: 20px;
+  width: 12%;
+  /* margin-left: -20px; */
+}
+.ngxStart {
+  /* width: 120%; */
+}
+label.star {
+  float: right;
+  /* padding: 10px; */
+  font-size: 20px !important;
+  color: #444;
+  transition: 0.2s;
+}
+.star {
+  font-size: 20px !important;
+}
+.star-5 {
+  font-size: 20px !important;
+}
+/* .ng-star-inserted {
+  font-size: 20px !important ;
+} */
+.userImg {
+  display: flex;
+}
+#star-5-0 {
+  font-size: 20px !important;
+}
+img {
+  max-width: none;
+  border-radius: 3px;
+}

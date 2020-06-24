@@ -1,0 +1,122 @@
+<div class="review-top row pt-40">
+  <div class="col-lg-12">
+    <h6 class="mb-15">Provide Your Rating</h6>
+    <div class="d-flex flex-row  justify-content-between">
+      <div class="">
+        <ngx-star-rating
+          [(ngModel)]="rating3"
+          [id]="'rating3'"
+        ></ngx-star-rating>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="feedeback">
+  <h6>Your Feedback</h6>
+  <textarea
+    name="feedback"
+    [(ngModel)]="feedback.feedback"
+    class="form-control"
+    cols="10"
+    rows="10"
+  ></textarea>
+  <div class="mt-10 text-right">
+    <button
+      type="button"
+      (click)="submitFeedback()"
+      class="primary-btn text-right text-uppercase"
+    >
+      Submit
+    </button>
+    <span *ngIf="flag">{{ message }}</span>
+  </div>
+</div>
+<div class="" style="display: none;">
+  <div
+    class="userComments"
+    *ngFor="let item of userFeedbacks | slice: 0:3; let i = index"
+  >
+    <div class="userImg">
+      <div>
+        <img
+          src="../../../assets/img/blog/c1.jpg"
+          alt="../../../assets/img/blog/c1.jpg"
+        />
+      </div>
+      <div>
+        <h5>
+          <a href="#" *ngIf="item.userName">{{ item.userName }}</a>
+          <a href="#" *ngIf="!item.userName">Anonymous User</a>
+        </h5>
+      </div>
+      <div></div>
+    </div>
+    <div class="usrRating">
+      <ngx-star-rating [(ngModel)]="item.starRating" [id]="i"></ngx-star-rating>
+    </div>
+    <div class="usrcomments">
+      {{ item.feedback | slice: 0:20 }}
+    </div>
+  </div>
+</div>
+
+<div class="comments-area mb-30">
+  <div
+    class="comment-list"
+    *ngFor="let item of userFeedbacks | slice: 0:3; let i = index"
+  >
+    <div class="single-comment single-reviews justify-content-between d-flex">
+      <div class="user justify-content-between d-flex">
+        <div class="thumb">
+          <img
+            src="../../../assets/StudentDashboard/img/logo-small.png"
+            alt="../../../assets/img/blog/c1.jpg"
+            height="50px"
+          />
+        </div>
+        <div class="desc">
+          <h5>
+            <a href="#" *ngIf="item.userName">{{ item.userName }}</a>
+            <a href="#" *ngIf="!item.userName">Anonymous User</a>
+            <div class="star">
+              <span
+                class="fa fa-star checked"
+                *ngIf="item.starRating >= 1"
+              ></span>
+              <span class="fa fa-star " *ngIf="item.starRating < 1"></span>
+              <span
+                class="fa fa-star checked"
+                *ngIf="item.starRating >= 2"
+              ></span>
+              <span class="fa fa-star " *ngIf="item.starRating < 2"></span>
+              <span
+                class="fa fa-star checked"
+                *ngIf="item.starRating >= 3"
+              ></span>
+              <span class="fa fa-star " *ngIf="item.starRating < 3"></span>
+              <span
+                class="fa fa-star checked"
+                *ngIf="item.starRating >= 4"
+              ></span>
+              <span class="fa fa-star " *ngIf="item.starRating < 4"></span>
+              <span
+                class="fa fa-star checked"
+                *ngIf="item.starRating >= 5"
+              ></span>
+              <span class="fa fa-star " *ngIf="item.starRating < 5"></span>
+            </div>
+          </h5>
+          <p class="comment" *ngIf="!flags[i]">
+            {{ item.feedback | slice: 0:125 }}
+            <a href="#" (click)="expandComment($event, i)">read more.......</a>
+          </p>
+          <p class="comment" *ngIf="flags[i]">
+            {{ item.feedback }}
+            <a (click)="expandComment($event, i)">read less.......</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

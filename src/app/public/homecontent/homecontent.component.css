@@ -1,0 +1,10 @@
+.single_fact h4 {
+  color: black !important;
+  text-align: center;
+}
+.single_fact .f_icon {
+  text-align: center;
+}
+.hidePrice {
+  display: none;
+}
