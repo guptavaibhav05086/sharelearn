@@ -12,7 +12,9 @@ export const environment = {
   registerFeedback: "/api/Public/userfeedback",
   getFeedback: "/api/Public/getuserfeedback?courseId=$courseId",
   forgotPassword: "/api/Public/resetPassword?email=$email",
-  resetPassword: "/api/Account/ResetPassword"
+  resetPassword: "/api/Account/ResetPassword",
+  getState: "/api/Public/GetStates",
+  updateDesigner: "/api/designer/updateprofile"
 };
 
 /*

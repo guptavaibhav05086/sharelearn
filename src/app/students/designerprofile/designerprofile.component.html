@@ -20,15 +20,24 @@
           />
         </div>
         <div class="card-body">
-          <div class="author">
-            <a href="#">
+          <div class="author" >
+            <div id="logoInfo">
+                <img
+                class="avatar border-gray"
+                src="../../../assets/StudentDashboard/img/mike.jpg"
+                alt="..."
+              />
+            </div>
+             
+            <h5 class="title">Chet Faker</h5>
+            <!-- <a href="#">
               <img
                 class="avatar border-gray"
                 src="../../../assets/StudentDashboard/img/mike.jpg"
                 alt="..."
               />
               <h5 class="title">Chet Faker</h5>
-            </a>
+            </a> -->
 
             <div class="input-group" >
               <div class="custom-file">
@@ -37,6 +46,7 @@
                   class="custom-file-input"
                   id="inputGroupFile01"
                   aria-describedby="inputGroupFileAddon01"
+                  (change)="fileSelect($event.target.files,'logoInfo')"
                 />
                 <label class="custom-file-label" for="inputGroupFile01"
                   >Choose Photo</label
@@ -221,10 +231,29 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4 pr-1">
+                <div class="col-md-4 pr-1">
+                    <div class="form-group">
+                      <label>State</label>
+                      <select
+                        type="text"
+                        class="form-control"
+                        placeholder="state"
+                       
+                        formControlName="state"  
+                        required
+                        [disabled]="isDisabled"
+                        (change)="filterDistricts($event.target.value)"
+                      >
+                      <option *ngFor="let item of distinctStates">
+                        {{item.stateName}}
+                      </option>
+                      </select>
+                    </div>
+                  </div>
+              <div class="col-md-4 px-1">
                 <div class="form-group">
                   <label>City</label>
-                  <input
+                  <select
                     type="text"
                     class="form-control"
                     placeholder="City"
@@ -232,23 +261,15 @@
                     formControlName="city"  
                     required
                     [disabled]="isDisabled"
-                  />
+
+                  >
+                  <option *ngFor="let item of filteredCities">
+                      {{item.cityName}}
+                    </option>
+                </select>
                 </div>
               </div>
-              <div class="col-md-4 px-1">
-                <div class="form-group">
-                  <label>State</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="state"
-                   
-                    formControlName="state"  
-                    required
-                    [disabled]="isDisabled"
-                  />
-                </div>
-              </div>
+              
               <div class="col-md-4 pl-1">
                 <div class="form-group">
                   <label>Postal Code</label>
@@ -264,60 +285,27 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="row">
+            <div class="row">
                 <div class="col-md-12" >
                     <h4 class="card-title">Softwares</h4>
+                   
                     <div style="display: flex;">
-                        <div class="checkbox">
-                            <input id="checkbox1" type="checkbox" class="checkboxelement">
+                        <div class="checkbox" *ngFor="let check of softwares | slice:0:4;let i=index ">
+                            <input [id]="i" type="checkbox" class="checkboxelement" (change)="selectedSoftware(check.name)">
                             <label for="checkbox1" class="checkboxLabel">
-                            Unchecked
+                                {{check.name}}
                           </label>
                         </div>
-                        <div class="checkbox">
-                           <input id="checkbox2" type="checkbox" checked="" class="checkboxelement">
-                           <label for="checkbox2" class="checkboxLabel">
-                              Checked
-                            </label>
-                         </div>
-                        <div class="checkbox">
-                                <input id="checkbox3" type="checkbox" disabled="" class="checkboxelement">
-                                <label for="checkbox3"class="checkboxLabel">
-                                      Disabled unchecked
-                                  </label>
-                              </div>
-                          <div class="checkbox">
-                           <input id="checkbox4" type="checkbox" checked="" disabled="" class="checkboxelement">
-                           <label for="checkbox4" class="checkboxLabel">
-                             Disabled checked
-                           </label>
-                          </div>
+                        
                     </div>
                     <div style="display: flex;">
-                        <div class="checkbox">
-                            <input id="checkbox1" type="checkbox" class="checkboxelement">
-                            <label for="checkbox1" class="checkboxLabel">
-                            Unchecked
+                        <div class="checkbox" *ngFor="let check of softwares | slice:3:8;let i=index ">
+                            <input [id]="i" type="checkbox" class="checkboxelement" (change)="selectedSoftware(check.name)">
+                            <label for="checkbox1" class="checkboxLabel" >
+                                {{check.name}}
                           </label>
                         </div>
-                        <div class="checkbox">
-                           <input id="checkbox2" type="checkbox" checked="" class="checkboxelement">
-                           <label for="checkbox2" class="checkboxLabel">
-                              Checked
-                            </label>
-                         </div>
-                        <div class="checkbox">
-                                <input id="checkbox3" type="checkbox" disabled="" class="checkboxelement">
-                                <label for="checkbox3"class="checkboxLabel">
-                                      Disabled unchecked
-                                  </label>
-                              </div>
-                          <div class="checkbox">
-                           <input id="checkbox4" type="checkbox" checked="" disabled="" class="checkboxelement">
-                           <label for="checkbox4" class="checkboxLabel">
-                             Disabled checked
-                           </label>
-                          </div>
+                        
                     </div>
      
     </div>
@@ -346,11 +334,11 @@
               </div>
             <div class="row" >
               <div class="update ml-auto mr-auto">
-                <button type="submit" (click)="updateForm('personal')" class="btn btn-primary btn-round">
+                <button type="button" (click)="createProfile()" class="btn btn-primary btn-round">
                   Proceed To Payment
                 </button>
               </div>
-            </div> -->
+            </div>
           </form>
         </div>
       </div>
@@ -358,137 +346,7 @@
     
   </div>
 
-  <div class="row">
-      <div class="col-md-4">
-        <div class="card card-user">
-          <div class="image">
-            <img
-              src="../../../assets/StudentDashboard/img/damir-bosnjak.jpg"
-              alt="..."
-            />
-          </div>
-          <div class="card-body">
-            <div class="author">
-              <a href="#">
-                <img
-                  class="avatar border-gray"
-                  src="../../../assets/StudentDashboard/img/mike.jpg"
-                  alt="..."
-                />
-                <h5 class="title">Chet Faker</h5>
-              </a>
-  
-              <div class="input-group" >
-                <div class="custom-file">
-                  <input
-                    type="file"
-                    class="custom-file-input"
-                    id="inputGroupFile01"
-                    aria-describedby="inputGroupFileAddon01"
-                  />
-                  <label class="custom-file-label" for="inputGroupFile01"
-                    >Choose Photo</label
-                  >
-                </div>
-              </div>
-            </div>
-            <p class="description text-center">
-              "I like the way you work it
-              <br />
-              No diggity <br />
-              I wanna bag it up"
-            </p>
-          </div>
-          <div class="card-footer">
-            <hr />
-            <div class="button-container">
-              <div class="row">
-                <div class="col-lg-3 col-md-6 col-6 ml-auto">
-                  <h5>
-                    12
-                    <br />
-                    <small>Files</small>
-                  </h5>
-                </div>
-                <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
-                  <h5>
-                    2GB
-                    <br />
-                    <small>Used</small>
-                  </h5>
-                </div>
-                <div class="col-lg-3 mr-auto">
-                  <h5>
-                    24,6$
-                    <br />
-                    <small>Spent</small>
-                  </h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-8">
-        <div class="card card-user">
-          <div class="card-header">
-            <h5 class="card-title">Personel Details</h5>
-            <button class="btn btn-primary"  (click)="editForm('personal')">Edit Profile</button>
-          </div>
-          <div class="card-body">
-            <form [formGroup]="profileformdemo" id="profileform">
-              <div class="row">
-                <div class="col-md-4 pr-1">
-                  <div class="form-group">
-                    <label>First Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="First Name"
-                      
-                      [disabled]="isDisabled"
-                      formControlName="fName"  
-                      required
-                    />
-                   
-                  </div>
-                </div>
-                <div class="col-md-4 px-1">
-                  <div class="form-group">
-                    <label>Last Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Last Name"
-                      
-                      formControlName="lName"  
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="col-md-4 pl-1">
-                  <div class="form-group">
-                    <label>Gender</label>
-                    <select class="form-control" [disabled]="isDisabled" 
-                    formControlName="gender"  
-                    required>
-                      <option selected></option>
-                      <option>Male</option>
-                      <option>Female</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              
-              
-              
-              
-            </form>
-          </div>
-        </div>
-      </div>
-      
-    </div>
+ 
 </div>
 
 <footer class="footer footer-black  footer-white ">

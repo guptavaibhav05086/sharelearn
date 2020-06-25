@@ -23,7 +23,7 @@ export class StudentGuard implements CanActivate {
     | boolean
     | UrlTree {
     let token = this.service.getUserToken();
-    if (token.type.toLocaleLowerCase() == "student") {
+    if (token.type.toLocaleLowerCase() == "designer") {
       return true;
     }
     this.router.navigate(["/login"]);

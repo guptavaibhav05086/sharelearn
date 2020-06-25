@@ -2,7 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TermsconditionsComponent } from "../termsconditions/termsconditions.component";
 import { VerifyOTPComponent } from "../verify-otp/verify-otp.component";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
+import { DesignerProfileRequest } from "src/app/Models/designer-profile-request";
+import { HelperService } from "../../services/helper.service";
+import { Cities } from "src/app/Models/cities";
+import { DesignerService } from 'src/app/services/designer.service';
 @Component({
   selector: "app-designerprofile",
   templateUrl: "./designerprofile.component.html",
@@ -11,6 +15,8 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 export class DesignerprofileComponent implements OnInit {
   isDisabled: boolean = false;
   isDisableProfession: boolean = false;
+  request: DesignerProfileRequest;
+  isPhotoUrlValid: boolean;
   profileform = new FormGroup({
     fName: new FormControl("", [Validators.required]),
     lName: new FormControl("", [Validators.required]),
@@ -22,19 +28,112 @@ export class DesignerprofileComponent implements OnInit {
     profile: new FormControl("", [Validators.required]),
     city: new FormControl("", [Validators.required]),
     state: new FormControl("", [Validators.required]),
-    postalCode: new FormControl("", [Validators.required])
+    postalCode: new FormControl("", [Validators.required]),
+    softwares: new FormArray([])
   });
-  profileformdemo = new FormGroup({
-    fName: new FormControl("", [Validators.required]),
-    lName: new FormControl("", [Validators.required]),
-    gender: new FormControl("", [Validators.required])
-  });
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private helper: HelperService,private designer:DesignerService) {}
+  statesData: Array<Cities>;
+  distinctStates: Array<Cities>;
+  filteredCities: Array<Cities>;
+  softwares = [
+    {
+      id: 1,
+      name: "Adobe Photo shop",
+      selected: false
+    },
+    {
+      id: 2,
+      name: "Beyounce",
+      selected: false
+    },
+    {
+      id: 3,
+      name: "New Design Software",
+      selected: false
+    },
+    {
+      id: 4,
+      name: "Old Design software",
+      selected: false
+    },
+    {
+      id: 5,
+      name: "Demo",
+      selected: false
+    },
+    {
+      id: 6,
+      name: "Demo 2",
+      selected: false
+    },
+    {
+      id: 7,
+      name: "Demo3",
+      selected: false
+    }
+  ];
+  ngOnInit() {
+    this.helper.getStates().subscribe(
+      data => {
+        this.distinctStates = data.filter((thing, i, arr) => {
+          return arr.indexOf(arr.find(t => t.stateId === thing.stateId)) === i;
+        });
 
-  ngOnInit() {}
+        this.statesData = data;
+        console.log(data);
+      },
+      err => {}
+    );
+  }
+  selectedSoftware(name) {
+    console.log(name);
+    let item = this.softwares.filter(item => item.name == name);
+    if (item[0].selected) {
+      item[0].selected = false;
+    } else {
+      item[0].selected = true;
+    }
+  }
+  filterDistricts(stateId) {
+    debugger;
+    this.filteredCities = this.statesData.filter(
+      item => item.stateName == stateId
+    );
+  }
+  createProfile() {
+    this.request = new DesignerProfileRequest();
+    this.request.softwares = "";
+    this.request.firstName = this.profileform.controls["fName"].value;
+    this.request.lastName = this.profileform.controls["lName"].value;
+    this.request.gender = this.profileform.controls["gender"].value;
+    this.request.postalCode = this.profileform.controls["postalCode"].value;
+    this.request.profileUrl = this.profileform.controls["profile"].value;
+    this.request.qualification = this.profileform.controls[
+      "qualification"
+    ].value;
+    this.request.mobileNumber = this.profileform.controls["mobileNumber"].value;
+    this.request.dob = this.profileform.controls["dob"].value;
+    this.request.exp = this.profileform.controls["exp"].value;
+    this.request.city = this.profileform.controls["city"].value;
+    this.request.state = this.profileform.controls["state"].value;
+    this.request.userId = localStorage.getItem("userId");
+    this.request.emailId = localStorage.getItem("email");
+    let selSoft = this.softwares.filter(item => item.selected == true);
+    selSoft.forEach(item => (this.request.softwares += item.name + ";"));
+    this.designer.updateProfileRequest(this.request).subscribe(data=>{
+      console.log(data);
+
+    },err=>{
+      console.log(err);
+
+    });
+
+    console.log(this.request);
+    //this.request.gender=this.profileform.controls["gender"].value;
+  }
   editForm(formname) {
     debugger;
-    let check = this.profileformdemo.controls["fName"].value;
+    // let check = this.profileform.controls["fName"].value;
     if (formname == "personal") this.isDisabled = false;
     else this.isDisableProfession = false;
   }
@@ -53,5 +152,81 @@ export class DesignerprofileComponent implements OnInit {
       scrollable: true
     });
     modalRef.componentInstance.name = "terms conditions";
+  }
+  fileSelect(images: FileList, name: string) {
+    debugger;
+    var result = "";
+    var file;
+    debugger;
+    for (var i = 0; (file = images[i]); i++) {
+      // if the file is not an image, continue
+      if (!this.validateFiles(name, file)) {
+        if (!this.request.imageURL) {
+          ///this.toast.error('File  should be an Image');
+          alert("File  should be an Image");
+        } else {
+          //this.toast.error('File Size should be less then 5 MB');
+          alert("File Size should be less then 5 MB");
+        }
+        return;
+      }
+      let reader = new FileReader();
+      reader.onload = (function(tFile) {
+        return function(evt) {
+          var div = document.createElement("div");
+          div.innerHTML =
+            '<img class="avatar border-gray" style="width: 110px;height:110px" src="' +
+            evt.target.result +
+            '" />';
+          document.getElementById(name).innerHTML = "";
+          document.getElementById(name).appendChild(div);
+        };
+      })(file);
+      //          this._msupplyFormService.postMsupplyFiles(file,name).subscribe(data=>{
+      //              debugger;
+      //              if(name=="photo1"){
+      //                  this.newCompanyDetails.photo1Url=data.url;
+
+      //              }
+      //              else if(name=="photo2"){
+      //                  this.newCompanyDetails.photo2Url=data.url;
+
+      //              }
+      //              else if(name=="logoInfo"){
+      //                  this.newCompanyDetails.logoUrl=data.url;
+
+      //              }
+      //              this.toast.success('File Uploaded Successfully');
+
+      //          },
+      //          error => {
+      //    this.loading = false;
+
+      //    let handledError: HandledErrorResponse = ServiceHelper.handleErrorResponse({ ...error });
+      //    this.checkUnauthorized(handledError);
+      //  }
+      //      );
+      reader.readAsDataURL(file);
+      //this._awsupload.uploadfile(file);
+    }
+  }
+  validateFiles(name: string, file: File): boolean {
+    if (name == "logoInfo") {
+      if (!file.type.match("image.*")) {
+        this.isPhotoUrlValid = false;
+        return false;
+      } else {
+        this.isPhotoUrlValid = true;
+      }
+      if (file.size > 5000000) {
+        this.isPhotoUrlValid = false;
+
+        return false;
+      } else {
+        this.isPhotoUrlValid = true;
+      }
+    }
+
+    return true;
   }
 }

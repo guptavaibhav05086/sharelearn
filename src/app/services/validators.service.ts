@@ -61,8 +61,8 @@ export class ValidatorsService {
     const name = control.get("password");
     const alterEgo = control.get("confirmPassword");
 
-    return name && alterEgo && name.value === alterEgo.value
-      ? { invalidPattern: { confirmPasswordValidation: false } }
-      : { invalidPattern: { confirmPasswordValidation: true } };
+    return name && alterEgo && name.value !== alterEgo.value
+      ? { invalidPattern: { confirmPasswordValidation: true } }
+      :  null ;
   };
 }

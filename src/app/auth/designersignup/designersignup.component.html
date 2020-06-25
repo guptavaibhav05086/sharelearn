@@ -1,141 +1,140 @@
-
 <form
-class="form-horizontal form-material"
-id="loginform"
-[formGroup]="studentForm"
+  class="form-horizontal form-material"
+  id="loginform"
+  [formGroup]="studentForm"
 >
-<div class="form-group mt-4">
-  <label for="username" class="label text-uppercase">UserName(Email)</label>
-  <input
-    class="form-control"
-    type="text"
-    required
-    formControlName="email"
-    placeholder="Username"
-  />
-  <span
-    class="errorMessage"
-    *ngIf="
-      (studentForm.controls['email'].dirty ||
-        studentForm.controls['email'].touched) &&
-      studentForm.controls['email'].invalid &&
-      studentForm.controls['email'].errors.required
-    "
-  >
-    *Email is required.
-  </span>
-  <span
-    class="errorMessage"
-    *ngIf="
-      (studentForm.controls['email'].dirty ||
-        studentForm.controls['email'].touched) &&
-      studentForm.controls['email'].invalid &&
-      studentForm.controls['email'].errors.invalidPattern
-    "
-  >
-    *Email is incorrect.
-  </span>
-</div>
-<div class="form-group">
-  <label for="username" class="label text-uppercase">Password</label>
-  <input
-    class="form-control"
-    type="password"
-    required
-    formControlName="password"
-    placeholder="Password"
-  />
-  <span
-    class="errorMessage"
-    *ngIf="
-      (studentForm.controls['password'].dirty ||
-        studentForm.controls['password'].touched) &&
-      studentForm.controls['password'].invalid &&
-      studentForm.controls['password'].errors.required
-    "
-  >
-    *Password is required.
-  </span>
-  <span
-    class="errorMessage"
-    *ngIf="
-      (studentForm.controls['password'].dirty ||
-        studentForm.controls['password'].touched) &&
-      studentForm.controls['password'].invalid &&
-      studentForm.controls['password'].errors.invalidPattern
-    "
-  >
-    *Password must be of 6 to 15 characters and consist of 1 lower,upper case
-    1 digit and 1 special character .
-  </span>
-</div>
+  <div class="form-group mt-4">
+    <label for="username" class="label text-uppercase">UserName(Email)</label>
+    <input
+      class="form-control"
+      type="text"
+      required
+      formControlName="email"
+      placeholder="Username"
+    />
+    <span
+      class="errorMessage"
+      *ngIf="
+        (studentForm.controls['email'].dirty ||
+          studentForm.controls['email'].touched) &&
+        studentForm.controls['email'].invalid &&
+        studentForm.controls['email'].errors.required
+      "
+    >
+      *Email is required.
+    </span>
+    <span
+      class="errorMessage"
+      *ngIf="
+        (studentForm.controls['email'].dirty ||
+          studentForm.controls['email'].touched) &&
+        studentForm.controls['email'].invalid &&
+        studentForm.controls['email'].errors.invalidPattern
+      "
+    >
+      *Email is incorrect.
+    </span>
+  </div>
+  <div class="form-group">
+    <label for="username" class="label text-uppercase">Password</label>
+    <input
+      class="form-control"
+      type="password"
+      required
+      formControlName="password"
+      placeholder="Password"
+    />
+    <span
+      class="errorMessage"
+      *ngIf="
+        (studentForm.controls['password'].dirty ||
+          studentForm.controls['password'].touched) &&
+        studentForm.controls['password'].invalid &&
+        studentForm.controls['password'].errors.required
+      "
+    >
+      *Password is required.
+    </span>
+    <span
+      class="errorMessage"
+      *ngIf="
+        (studentForm.controls['password'].dirty ||
+          studentForm.controls['password'].touched) &&
+        studentForm.controls['password'].invalid &&
+        studentForm.controls['password'].errors.invalidPattern
+      "
+    >
+      *Password must be of 6 to 15 characters and consist of 1 lower,upper case
+      1 digit and 1 special character .
+    </span>
+  </div>
 
-<div class="form-group">
-  <label for="username" class="label text-uppercase">Confirm Password</label>
-  <input
-    class="form-control"
-    type="password"
-    required
-    formControlName="confirmPassword"
-    placeholder="Password"
-  />
-  <span
-    class="errorMessage"
-    *ngIf="
-      (studentForm.controls['confirmPassword'].dirty ||
-        studentForm.controls['confirmPassword'].touched) &&
-      studentForm.controls['confirmPassword'].invalid &&
-      studentForm.controls['confirmPassword'].errors.required
-    "
-  >
-    *Confrim Password is required.
-  </span>
-  <span
-    class="errorMessage"
-    *ngIf="
-      (studentForm.controls['confirmPassword'].dirty ||
-        studentForm.controls['confirmPassword'].touched) &&
-      studentForm.errors?.invalidPattern?.confirmPasswordValidation
-    "
-  >
-    *Password and Confrim Password doesnot match.
-  </span>
-</div>
-<div class="form-group ">
-  <label for="username" class="label text-uppercase">mobile Number</label>
-  <input
-    class="form-control"
-    type="text"
-    required
-    formControlName="mobileNumber"
-    placeholder="+91"
-  />
-  <span
-    class="errorMessage"
-    *ngIf="
-      (studentForm.controls['mobileNumber'].dirty ||
-        studentForm.controls['mobileNumber'].touched) &&
-      studentForm.controls['mobileNumber'].invalid &&
-      studentForm.controls['mobileNumber'].errors.invalidPattern
-    "
-  >
-    *Mobile# is incorrect.
-  </span>
-  <span
-    class="errorMessage"
-    *ngIf="
-      (studentForm.controls['mobileNumber'].dirty ||
-        studentForm.controls['mobileNumber'].touched) &&
-      studentForm.controls['mobileNumber'].invalid &&
-      studentForm.controls['mobileNumber'].errors.required
-    "
-  >
-    *Mobile# is required.
-  </span>
-</div>
+  <div class="form-group">
+    <label for="username" class="label text-uppercase">Confirm Password</label>
+    <input
+      class="form-control"
+      type="password"
+      required
+      formControlName="confirmPassword"
+      placeholder="Password"
+    />
+    <span
+      class="errorMessage"
+      *ngIf="
+        (studentForm.controls['confirmPassword'].dirty ||
+          studentForm.controls['confirmPassword'].touched) &&
+        studentForm.controls['confirmPassword'].invalid &&
+        studentForm.controls['confirmPassword'].errors.required
+      "
+    >
+      *Confrim Password is required.
+    </span>
+    <span
+      class="errorMessage"
+      *ngIf="
+        (studentForm.controls['confirmPassword'].dirty ||
+          studentForm.controls['confirmPassword'].touched) &&
+        studentForm.errors?.invalidPattern?.confirmPasswordValidation
+      "
+    >
+      *Password and Confrim Password doesnot match.
+    </span>
+  </div>
+  <div class="form-group ">
+    <label for="username" class="label text-uppercase">mobile Number</label>
+    <input
+      class="form-control"
+      type="text"
+      required
+      formControlName="mobileNumber"
+      placeholder="+91"
+    />
+    <span
+      class="errorMessage"
+      *ngIf="
+        (studentForm.controls['mobileNumber'].dirty ||
+          studentForm.controls['mobileNumber'].touched) &&
+        studentForm.controls['mobileNumber'].invalid &&
+        studentForm.controls['mobileNumber'].errors.invalidPattern
+      "
+    >
+      *Mobile# is incorrect.
+    </span>
+    <span
+      class="errorMessage"
+      *ngIf="
+        (studentForm.controls['mobileNumber'].dirty ||
+          studentForm.controls['mobileNumber'].touched) &&
+        studentForm.controls['mobileNumber'].invalid &&
+        studentForm.controls['mobileNumber'].errors.required
+      "
+    >
+      *Mobile# is required.
+    </span>
+  </div>
 
-<div>
-  <!-- {{ studentForm.controls["mobileNumber"].errors | json }}
+  <div>
+    <!-- {{ studentForm.controls["mobileNumber"].errors | json }}
   Check Invalid: {{ studentForm.controls["mobileNumber"].invalid }} Total
   Condition:
   {{
@@ -144,43 +143,42 @@ id="loginform"
       studentForm.controls["mobileNumber"].invalid &&
       !studentForm.controls["mobileNumber"].errors.invalidPattern.valid
   }} -->
-</div>
-<div *ngIf="serverError">
-<span class="errorMessage" *ngFor="let item of error">
-    {{ item }}
- 
-</span>
-</div>
-<div *ngIf="registered">
-<span class="successMessage">
-    User Registered Successfully
- 
-</span>
-</div>
-<div class="form-group text-center mt-4">
-  <button [disabled]="!studentForm.valid"
-    class="btn btn-info btn-lg btn-block text-uppercase "
-    type="submit"
-    (click)="registerUser()"
-  >
-    Sign Up
-  </button>
- 
-</div>
-
-<div class="form-group m-b-0">
-  <div class="col-sm-12 text-center">
-    <p>
-      I Have an Accont?
-      <a routerLink="/login" class="text-primary m-l-5"><b>Login</b></a>
-    </p>
   </div>
-</div>
+  <div *ngIf="serverError">
+    <span class="errorMessage" *ngFor="let item of error">
+      {{ item }}
+    </span>
+  </div>
+  <div *ngIf="registered">
+    <span class="successMessage">
+      User Registered Successfully
+    </span>
+  </div>
+  {{ studentForm.valid }}
+  <div class="form-group text-center mt-4">
+    <button
+      class="btn btn-info btn-lg btn-block text-uppercase "
+      type="submit"
+      [disabled]="!studentForm.valid"
+      (click)="registerUser()"
+    >
+      Sign Up
+    </button>
+  </div>
+  <!--  -->
+  <div class="form-group m-b-0">
+    <div class="col-sm-12 text-center">
+      <p>
+        I Have an Accont?
+        <a routerLink="/login" class="text-primary m-l-5"><b>Login</b></a>
+      </p>
+    </div>
+  </div>
 </form>
 <ngx-spinner
-bdColor="rgba(51, 51, 51, 0.8)"
-size="default"
-type="ball-spin-clockwise"
+  bdColor="rgba(51, 51, 51, 0.8)"
+  size="default"
+  type="ball-spin-clockwise"
 >
-<p style="color: white">Please Wait.</p>
+  <p style="color: white">Please Wait.</p>
 </ngx-spinner>

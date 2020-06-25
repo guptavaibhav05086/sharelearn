@@ -2,11 +2,19 @@ import { Injectable } from "@angular/core";
 import { CourseList } from "../Models/course-list";
 import { TopicList } from "../Models/topic-list";
 import { Router, ActivatedRoute } from "@angular/router";
+import { environment } from "src/environments/environment";
+import { HttpHeaders, HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { Cities } from "../Models/cities";
 @Injectable({
   providedIn: "root"
 })
 export class HelperService {
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private _httpclient: HttpClient
+  ) {}
 
   getCourseList(): Array<CourseList> {
     let courseList: CourseList[] = [
@@ -309,7 +317,11 @@ export class HelperService {
   navigateToLogin() {
     this.router.navigate(["/login"]);
   }
-  navigateToPath(path:string){
+  navigateToPath(path: string) {
     this.router.navigate([path]);
+  }
+  getStates(): Observable<Array<Cities>> {
+    let url = `${environment.baseUrl}${environment.getState}`;
+    return this._httpclient.get<Array<Cities>>(url);
   }
 }

@@ -41,6 +41,7 @@ import { ResetpasswordComponent } from "./auth/resetpassword/resetpassword.compo
 import { UsersignupComponent } from "./auth/usersignup/usersignup.component";
 import { DesignersignupComponent } from "./auth/designersignup/designersignup.component";
 import { PrintersignupComponent } from "./auth/printersignup/printersignup.component";
+
 @NgModule({
   declarations: [
     AppComponent,

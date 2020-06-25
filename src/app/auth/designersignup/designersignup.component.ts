@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { HelperService } from "src/app/services/helper.service";
 import { ValidatorsService } from "src/app/services/validators.service";
@@ -6,10 +6,11 @@ import { LoginService } from "../../services/login.service";
 import { RegisterUser } from "../../Models/register-user";
 import { NgxSpinnerService } from "ngx-spinner";
 import { delay } from "rxjs/operators";
+import { TokenRequest } from "src/app/Models/token-request";
 @Component({
-  selector: 'app-designersignup',
-  templateUrl: './designersignup.component.html',
-  styleUrls: ['./designersignup.component.css']
+  selector: "app-designersignup",
+  templateUrl: "./designersignup.component.html",
+  styleUrls: ["./designersignup.component.css"]
 })
 export class DesignersignupComponent implements OnInit {
   flag = false;
@@ -80,6 +81,7 @@ export class DesignersignupComponent implements OnInit {
     console.log(items);
   }
   registerUser() {
+    debugger;
     this.spinnerService.show();
     let newUser = new RegisterUser();
     newUser.Email = this.studentForm.controls["email"].value;
@@ -88,14 +90,22 @@ export class DesignersignupComponent implements OnInit {
       "confirmPassword"
     ].value;
     newUser.MobileNumber = this.studentForm.controls["mobileNumber"].value;
-    newUser.Role = "Student";
+    newUser.Role = "Designer";
     this._login.registerUser(newUser).subscribe(
       data => {
         this.spinnerService.hide();
         this.registered = true;
         this.serverError = false;
-        delay(20000);
-        this._helper.navigateToLogin();
+        let tokenRequest = new TokenRequest();
+        tokenRequest.password = newUser.Password;
+        tokenRequest.username = newUser.Email;
+        this._login.getToken(tokenRequest).subscribe(
+          data => {
+            this._login.setToken(data);
+            this._helper.navigateToPath("/students/designerprofile");
+          },
+          err => {}
+        );
       },
       err => {
         this.spinnerService.hide();
@@ -111,5 +121,4 @@ export class DesignersignupComponent implements OnInit {
       }
     );
   }
-
 }

@@ -20,7 +20,9 @@ export class LoginService {
   private authHeaders: HttpHeaders;
   private Tokens = {
     Token: "",
-    type: ""
+    type: "",
+    userId: "",
+    email: ""
   };
   public static token: string;
 
@@ -52,8 +54,12 @@ export class LoginService {
   public setToken(token: TokenResponse) {
     this.Tokens.Token = token.access_token;
     this.Tokens.type = token.role;
+    this.Tokens.userId = token.userId;
+    this.Tokens.email = token.userName;
     localStorage.setItem("Token", this.Tokens.Token);
     localStorage.setItem("type", this.Tokens.type);
+    localStorage.setItem("userId", this.Tokens.userId);
+    localStorage.setItem("email", this.Tokens.email);
   }
   public resetToken() {
     localStorage.setItem("Token", "");
