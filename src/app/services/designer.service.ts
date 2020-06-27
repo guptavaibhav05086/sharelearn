@@ -17,4 +17,11 @@ export class DesignerService {
       this.login.getAuthHeader()
     );
   }
+  uploadUserImage(file) {
+    return this._httpclient.post(
+      `${environment.baseUrl}${environment.uploadImage}`,
+      file,
+      this.login.getAuthHeader()
+    );
+  }
 }

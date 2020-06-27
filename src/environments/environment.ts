@@ -14,7 +14,10 @@ export const environment = {
   forgotPassword: "/api/Public/resetPassword?email=$email",
   resetPassword: "/api/Account/ResetPassword",
   getState: "/api/Public/GetStates",
-  updateDesigner: "/api/designer/updateprofile"
+  updateDesigner: "/api/designer/updateprofile",
+  uploadImage: "/api/designer/uploadimage",
+  updatePrinter: "/api/printer/updateprofile",
+  uploadPrinterImage: "/api/printer/uploadimage"
 };
 
 /*

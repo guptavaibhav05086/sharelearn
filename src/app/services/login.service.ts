@@ -76,7 +76,6 @@ export class LoginService {
   public getAuthHeader() {
     if (this.authHeaders == null) {
       this.authHeaders = new HttpHeaders({
-        "Content-Type": "application/json",
         Authorization: "Bearer " + this.Tokens.Token
       });
     }

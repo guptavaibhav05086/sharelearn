@@ -22,6 +22,7 @@ export class StudentGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    debugger;
     let token = this.service.getUserToken();
     if (token.type.toLocaleLowerCase() == "designer") {
       return true;

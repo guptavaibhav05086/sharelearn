@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { HelperService } from "src/app/services/helper.service";
 import { ValidatorsService } from "src/app/services/validators.service";
@@ -7,12 +7,11 @@ import { LoginService } from "../../services/login.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import { delay } from "rxjs/operators";
 @Component({
-  selector: 'app-printersignup',
-  templateUrl: './printersignup.component.html',
-  styleUrls: ['./printersignup.component.css']
+  selector: "app-printersignup",
+  templateUrl: "./printersignup.component.html",
+  styleUrls: ["./printersignup.component.css"]
 })
 export class PrintersignupComponent implements OnInit {
-
   flag = false;
   dropdownList = [];
   selectedItems = [];
@@ -72,7 +71,7 @@ export class PrintersignupComponent implements OnInit {
       "confirmPassword"
     ].value;
     newUser.MobileNumber = this.studentForm.controls["mobileNumber"].value;
-    newUser.Role = "Trainer";
+    newUser.Role = "Printer";
     let selectedTechs = this.studentForm.controls["technology"].value;
     newUser.TrainerTechnologies = new Array<number>();
     for (let i = 0; i < selectedTechs.length; i++) {
@@ -83,7 +82,7 @@ export class PrintersignupComponent implements OnInit {
         this.spinnerService.hide();
         this.registered = true;
         delay(20000);
-        this._helper.navigateToLogin();
+        this._helper.navigateToPath("/printers/profile");
       },
       err => {
         this.spinnerService.hide();
@@ -130,5 +129,4 @@ export class PrintersignupComponent implements OnInit {
   onSubmit() {
     console.log("Form submitted");
   }
-
 }

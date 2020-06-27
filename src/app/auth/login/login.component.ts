@@ -53,9 +53,10 @@ export class LoginComponent implements OnInit {
       data => {
         this.spinnerService.hide();
         this._login.setToken(data);
-        if (data.role == "Student") {
+        if (data.role == "Designer") {
           this._helper.navigateToPath("/students/dashboard");
-        } else if (data.role == "Trainer") {
+        } else if (data.role == "Printer") {
+          this._helper.navigateToPath("/printers/profile");
         }
       },
       err => {

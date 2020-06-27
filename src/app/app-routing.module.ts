@@ -111,6 +111,11 @@ const routes: Routes = [
       { path: "designerprofile", component: DesignerprofileComponent },
       { path: "test", component: TestformsComponent }
     ]
+  },
+  {
+    path: "printers",
+    loadChildren: () =>
+      import("./printers/printers.module").then(m => m.PrintersModule)
   }
 ];
 

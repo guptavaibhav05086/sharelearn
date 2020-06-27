@@ -1,0 +1,389 @@
+<!-- <div class="panel-header panel-header-sm">
+
+
+</div> -->
+
+<div
+  class="content"
+  style="
+    margin-top: 50px;
+    margin-left: 40px;
+"
+>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="image">
+          <img
+            src="../../../assets/StudentDashboard/img/damir-bosnjak.jpg"
+            alt="..."
+          />
+        </div>
+        <div class="card-body">
+          <div class="author" >
+            <div id="logoInfo">
+                <img
+                class="avatar border-gray"
+                src="../../../assets/StudentDashboard/img/mike.jpg"
+                alt="..."
+              />
+            </div>
+             
+            <h5 class="title">Chet Faker</h5>
+            <!-- <a href="#">
+              <img
+                class="avatar border-gray"
+                src="../../../assets/StudentDashboard/img/mike.jpg"
+                alt="..."
+              />
+              <h5 class="title">Chet Faker</h5>
+            </a> -->
+
+            <div class="input-group" >
+              <div class="custom-file">
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  id="inputGroupFile01"
+                  aria-describedby="inputGroupFileAddon01"
+                  (change)="fileSelect($event.target.files,'logoInfo')"
+                />
+                <label class="custom-file-label" for="inputGroupFile01"
+                  >Choose Photo</label
+                >
+              </div>
+            </div>
+          </div>
+          <p class="description text-center">
+            "I like the way you work it
+            <br />
+            No diggity <br />
+            I wanna bag it up"
+          </p>
+        </div>
+        <div class="card-footer">
+          <hr />
+          <div class="button-container">
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                <h5>
+                  12
+                  <br />
+                  <small>Files</small>
+                </h5>
+              </div>
+              <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+                <h5>
+                  2GB
+                  <br />
+                  <small>Used</small>
+                </h5>
+              </div>
+              <div class="col-lg-3 mr-auto">
+                <h5>
+                  24,6$
+                  <br />
+                  <small>Spent</small>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title">Personel Details</h5>
+          <button class="btn btn-primary"  (click)="editForm('personal')">Edit Profile</button>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="profileform" id="profileform">
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="First Name"
+                    
+                    [disabled]="isDisabled"
+                    formControlName="fName"  
+                    required
+                  />
+                  <span
+      class="errorMessage"
+      *ngIf="
+        (profileform.controls['fName'].dirty ||
+        profileform.controls['fName'].touched) &&
+        profileform.controls['fName'].invalid &&
+        profileform.controls['fName'].errors.required
+      "
+    >
+      *First Name is required.
+    </span>
+                </div>
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Last Name"
+                    
+                    formControlName="lName"  
+                    required
+                  />
+                </div>
+                <span
+      class="errorMessage"
+      *ngIf="
+        (profileform.controls['lName'].dirty ||
+        profileform.controls['lName'].touched) &&
+        profileform.controls['lName'].invalid &&
+        profileform.controls['lName'].errors.required
+      "
+    >
+      *Last Name is required.
+    </span>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Gender</label>
+                  <select class="form-control" [disabled]="isDisabled" 
+                  formControlName="gender"  
+                  required>
+                    <option selected></option>
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+                  <span
+                  class="errorMessage"
+                  *ngIf="
+                    (profileform.controls['gender'].dirty ||
+                    profileform.controls['gender'].touched) &&
+                    profileform.controls['gender'].invalid &&
+                    profileform.controls['gender'].errors.required
+                  "
+                >
+                  *Please Select Gender.
+                </span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Phone Number</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="+91"
+                    [disabled]="isDisabled"
+                    
+                    formControlName="mobileNumber"  
+                    required
+                  />
+                  <span
+      class="errorMessage"
+      *ngIf="
+        (profileform.controls['mobileNumber'].dirty ||
+        profileform.controls['mobileNumber'].touched) &&
+        profileform.controls['mobileNumber'].invalid &&
+        profileform.controls['mobileNumber'].errors.invalidPattern
+      "
+    >
+      *Mobile# is incorrect.
+    </span>
+                  <span
+                  class="errorMessage"
+                  *ngIf="
+                    (profileform.controls['mobileNumber'].dirty ||
+                    profileform.controls['mobileNumber'].touched) &&
+                    profileform.controls['mobileNumber'].invalid &&
+                    profileform.controls['mobileNumber'].errors.required
+                  "
+                >
+                  *Invalid Mobile number.
+                </span>
+                </div>
+              </div>
+              <div class="col-md-2 pr-1" style="padding-top: 20px;">
+                  <div class="form-group">
+                    
+                    <button type="button" (click)="openVerifyOTP()"  class="btn btn-primary btn-round">
+                        verify OTP
+                      </button>
+                  </div>
+                </div>
+              <div class="col-md-5 px-1">
+                  <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                      <label class="control-label" for="datepicker">Date Of Birth</label>
+                      <input type="date" class="form-control" id="datepicker" 
+                      formControlName="dob"  
+                      required>
+                    </div>
+                    <span
+                    class="errorMessage"
+                    *ngIf="
+                      (profileform.controls['dob'].dirty ||
+                      profileform.controls['dob'].touched) &&
+                      profileform.controls['dob'].invalid &&
+                      profileform.controls['dob'].errors.required
+                    "
+                  >
+                    *Date of Birth is required.
+                  </span>
+               
+              </div>
+             
+            </div>
+
+            <div class="row">
+                <!-- <div class="col-md-4 pr-1">
+                    <div class="form-group">
+                      <label>Experience</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        placeholder="# of years"
+                        
+                    formControlName="exp"  
+                    required
+                        [disabled]="isDisabled"
+                      />
+                      <span
+                      class="errorMessage"
+                      *ngIf="
+                        (profileform.controls['exp'].dirty ||
+                        profileform.controls['exp'].touched) &&
+                        profileform.controls['exp'].invalid &&
+                        profileform.controls['exp'].errors.required
+                      "
+                    >
+                      *Experience is required.
+                    </span>
+                    </div>
+                  </div> -->
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Linkedin Profile</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="https://www.linkedin.com/in/vaibhav-gupta-6a78a81b/"
+                    
+                    formControlName="profile"  
+                    required
+                    [disabled]="isDisabled"
+                  />
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12" >
+                    <h4 class="card-title">Softwares</h4>
+                   
+                    <div style="display: flex;">
+                        <div class="checkbox" *ngFor="let check of softwares | slice:0:4;let i=index ">
+                            <input [id]="i" type="checkbox" class="checkboxelement" (change)="selectedSoftware(check.name)">
+                            <label for="checkbox1" class="checkboxLabel">
+                                {{check.name}}
+                          </label>
+                        </div>
+                        
+                    </div>
+                    <div style="display: flex;">
+                        <div class="checkbox" *ngFor="let check of softwares | slice:3:8;let i=index ">
+                            <input [id]="i" type="checkbox" class="checkboxelement" (change)="selectedSoftware(check.name)">
+                            <label for="checkbox1" class="checkboxLabel" >
+                                {{check.name}}
+                          </label>
+                        </div>
+                        
+                    </div>
+     
+    </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-4" ></div>
+                <div class="col-md-8" >
+                    <div style="display: flex;margin-top: 50px;margin-bottom: 20px;">
+                        <div class="">
+                            <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" (change)="acceptTerms()">
+                            <label for="checkbox1" class="checkboxLabel" style="font-size: large;color: black;">
+                           I Accept <a href="#" (click)="openTermCondition($event)">
+                             <span ><u style="color:blue">Terms and Conditons</u></span> 
+                           </a>
+                          </label>
+                        </div>
+                        <div>
+                           
+                        </div>
+                       
+                       
+                          
+                    </div>
+                  
+                </div>
+              </div>
+            <div class="row" >
+              <!-- {{profileform.valid && isTermsAccepted}} -->
+              <div class="update ml-auto mr-auto">
+                <button type="button" (click)="createProfile()" [disabled]= "!(profileform.valid && isTermsAccepted)" class="btn btn-primary btn-round">
+                  Proceed To Payment
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+ 
+</div>
+
+<footer class="footer footer-black  footer-white ">
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="footer-nav">
+        <ul>
+          <li>
+            <a href="https://www.creative-tim.com" target="_blank"
+              >Creative Tim</a
+            >
+          </li>
+          <li>
+            <a href="http://blog.creative-tim.com/" target="_blank">Blog</a>
+          </li>
+          <li>
+            <a href="https://www.creative-tim.com/license" target="_blank"
+              >Licenses</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <div class="credits ml-auto">
+        <span class="copyright">
+          ©
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          , made with <i class="fa fa-heart heart"></i> by Creative Tim
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+<ngx-spinner
+  bdColor="rgba(51, 51, 51, 0.8)"
+  size="default"
+  type="ball-spin-clockwise"
+>
+  <p style="color: white">Please Wait.</p>
+</ngx-spinner>

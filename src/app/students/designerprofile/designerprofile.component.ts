@@ -6,7 +6,9 @@ import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
 import { DesignerProfileRequest } from "src/app/Models/designer-profile-request";
 import { HelperService } from "../../services/helper.service";
 import { Cities } from "src/app/Models/cities";
-import { DesignerService } from 'src/app/services/designer.service';
+import { DesignerService } from "src/app/services/designer.service";
+import { ValidatorsService } from 'src/app/services/validators.service';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: "app-designerprofile",
   templateUrl: "./designerprofile.component.html",
@@ -17,11 +19,14 @@ export class DesignerprofileComponent implements OnInit {
   isDisableProfession: boolean = false;
   request: DesignerProfileRequest;
   isPhotoUrlValid: boolean;
+  isTermsAccepted:boolean =false;;
   profileform = new FormGroup({
     fName: new FormControl("", [Validators.required]),
     lName: new FormControl("", [Validators.required]),
     gender: new FormControl("", [Validators.required]),
-    mobileNumber: new FormControl("", [Validators.required]),
+    mobileNumber: new FormControl("", [Validators.required,this._validator.patternValidation(
+      /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/
+    )]),
     dob: new FormControl("", [Validators.required]),
     qualification: new FormControl("", [Validators.required]),
     exp: new FormControl("", [Validators.required]),
@@ -31,7 +36,13 @@ export class DesignerprofileComponent implements OnInit {
     postalCode: new FormControl("", [Validators.required]),
     softwares: new FormArray([])
   });
-  constructor(private modalService: NgbModal, private helper: HelperService,private designer:DesignerService) {}
+  constructor(
+    private modalService: NgbModal,
+    private helper: HelperService,
+    private designer: DesignerService,
+    private _validator: ValidatorsService,
+    private spinnerService: NgxSpinnerService
+  ) {}
   statesData: Array<Cities>;
   distinctStates: Array<Cities>;
   filteredCities: Array<Cities>;
@@ -85,6 +96,13 @@ export class DesignerprofileComponent implements OnInit {
       err => {}
     );
   }
+  acceptTerms(){
+    debugger;
+    if(this.isTermsAccepted)
+    this.isTermsAccepted=false;
+    else
+    this.isTermsAccepted=true;
+  }
   selectedSoftware(name) {
     console.log(name);
     let item = this.softwares.filter(item => item.name == name);
@@ -120,13 +138,17 @@ export class DesignerprofileComponent implements OnInit {
     this.request.emailId = localStorage.getItem("email");
     let selSoft = this.softwares.filter(item => item.selected == true);
     selSoft.forEach(item => (this.request.softwares += item.name + ";"));
-    this.designer.updateProfileRequest(this.request).subscribe(data=>{
-      console.log(data);
-
-    },err=>{
-      console.log(err);
-
-    });
+    this.spinnerService.show();
+    this.designer.updateProfileRequest(this.request).subscribe(
+      data => {
+        this.spinnerService.hide();
+        console.log(data);
+      },
+      err => {
+        this.spinnerService.hide();
+        console.log(err);
+      }
+    );
 
     console.log(this.request);
     //this.request.gender=this.profileform.controls["gender"].value;
@@ -157,6 +179,8 @@ export class DesignerprofileComponent implements OnInit {
     debugger;
     var result = "";
     var file;
+    const formData = new FormData();
+    var userImage = images.item(0);
     debugger;
     for (var i = 0; (file = images[i]); i++) {
       // if the file is not an image, continue
@@ -182,33 +206,21 @@ export class DesignerprofileComponent implements OnInit {
           document.getElementById(name).appendChild(div);
         };
       })(file);
-      //          this._msupplyFormService.postMsupplyFiles(file,name).subscribe(data=>{
-      //              debugger;
-      //              if(name=="photo1"){
-      //                  this.newCompanyDetails.photo1Url=data.url;
 
-      //              }
-      //              else if(name=="photo2"){
-      //                  this.newCompanyDetails.photo2Url=data.url;
-
-      //              }
-      //              else if(name=="logoInfo"){
-      //                  this.newCompanyDetails.logoUrl=data.url;
-
-      //              }
-      //              this.toast.success('File Uploaded Successfully');
-
-      //          },
-      //          error => {
-      //    this.loading = false;
-
-      //    let handledError: HandledErrorResponse = ServiceHelper.handleErrorResponse({ ...error });
-      //    this.checkUnauthorized(handledError);
-      //  }
-      //      );
       reader.readAsDataURL(file);
       //this._awsupload.uploadfile(file);
     }
+    formData.append("userimage", userImage, userImage.name);
+    this.designer.uploadUserImage(formData).subscribe(
+      data => {
+        debugger;
+        console.log(data);
+      },
+      err => {
+        debugger;
+        console.log(err);
+      }
+    );
   }
   validateFiles(name: string, file: File): boolean {
     if (name == "logoInfo") {
