@@ -17,7 +17,9 @@ export const environment = {
   updateDesigner: "/api/designer/updateprofile",
   uploadImage: "/api/designer/uploadimage",
   updatePrinter: "/api/printer/updateprofile",
-  uploadPrinterImage: "/api/printer/uploadimage"
+  uploadPrinterImage: "/api/printer/uploadimage",
+  generateOrder: "/api/printer/generateorder?amount=$amount",
+  transactionValidate:"/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature"
 };
 
 /*

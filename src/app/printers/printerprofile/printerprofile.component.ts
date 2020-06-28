@@ -221,7 +221,7 @@ export class PrinterprofileComponent implements OnInit {
       //this._awsupload.uploadfile(file);
     }
     formData.append("userimage", userImage, userImage.name);
-    this.designer.uploadUserImage(formData).subscribe(
+    this.printer.uploadUserImage(formData).subscribe(
       data => {
         debugger;
         console.log(data);

@@ -24,4 +24,29 @@ export class PrinterService {
       this.login.getAuthHeader()
     );
   }
+
+  generateOrderId(amount) {
+    let url = `${environment.baseUrl}${environment.generateOrder}`.replace(
+      "$amount",
+      amount
+    );
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
+  validateTransaction(paymentId,orderId,signature){
+    let url = `${environment.baseUrl}${environment.transactionValidate}`.replace(
+      "$paymentId",
+      paymentId
+    ).replace("$orderId",
+    orderId).replace("$signature",
+    signature);
+    return this._httpclient.get(
+      url,
+      this.login.getAuthHeader()
+    );
+
+  }
 }

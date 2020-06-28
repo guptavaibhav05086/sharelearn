@@ -15,6 +15,7 @@ import { VerifyOTPComponent } from "./verify-otp/verify-otp.component";
 import { TopnavComponent } from "./topnav/topnav.component";
 import { TermsconditionsComponent } from "./termsconditions/termsconditions.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { RazorpaymentsComponent } from './razorpayments/razorpayments.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     NavbarcommonComponent,
     VerifyOTPComponent,
     TopnavComponent,
-    TermsconditionsComponent
+    TermsconditionsComponent,
+    RazorpaymentsComponent
   ],
   imports: [CommonModule, PrintersRoutingModule, ReactiveFormsModule]
 })
