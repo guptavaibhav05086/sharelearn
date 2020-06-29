@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h4 class="modal-title">Transaction {{transactionStatus}}</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.close('Close click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      Trasaction is SuccessFul.Please Note the id {{transactionId}} for future reference.
+    </p>
+    <p>
+      For any doubt or Calrification please reach out to us at RJBInt@gmail.com or call us on 08095959596
+    </p>
+    
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      Close
+    </button>
+  </div>
+  

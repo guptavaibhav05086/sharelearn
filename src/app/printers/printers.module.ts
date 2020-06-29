@@ -15,7 +15,10 @@ import { VerifyOTPComponent } from "./verify-otp/verify-otp.component";
 import { TopnavComponent } from "./topnav/topnav.component";
 import { TermsconditionsComponent } from "./termsconditions/termsconditions.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { RazorpaymentsComponent } from './razorpayments/razorpayments.component';
+import { FormsModule } from "@angular/forms";
+import { RazorpaymentsComponent } from "./razorpayments/razorpayments.component";
+import { TransactionsuccessdetailsComponent } from "./transactionsuccessdetails/transactionsuccessdetails.component";
+import { GoogleplacesComponent } from "./googleplaces/googleplaces.component";
 
 @NgModule({
   declarations: [
@@ -31,8 +34,15 @@ import { RazorpaymentsComponent } from './razorpayments/razorpayments.component'
     VerifyOTPComponent,
     TopnavComponent,
     TermsconditionsComponent,
-    RazorpaymentsComponent
+    RazorpaymentsComponent,
+    TransactionsuccessdetailsComponent,
+    GoogleplacesComponent
   ],
-  imports: [CommonModule, PrintersRoutingModule, ReactiveFormsModule]
+  imports: [
+    CommonModule,
+    PrintersRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
+  ]
 })
 export class PrintersModule {}

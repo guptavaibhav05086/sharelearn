@@ -1,16 +1,21 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { WindowRefService } from "src/app/services/window-ref.service";
 import { PrinterService } from "src/app/services/printer.service";
-
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 @Component({
   selector: "app-razorpayments",
   templateUrl: "./razorpayments.component.html",
   styleUrls: ["./razorpayments.component.css"]
 })
 export class RazorpaymentsComponent implements OnInit {
+  @Output() transactionStatus = new EventEmitter<{
+    status: string;
+    tranId: string;
+  }>();
   constructor(
     private winRef: WindowRefService,
-    private printer: PrinterService
+    private printer: PrinterService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {}
@@ -59,6 +64,14 @@ export class RazorpaymentsComponent implements OnInit {
         )
         .subscribe(
           data => {
+            //Passing payment status to parent component
+            this.transactionStatus.emit({
+              status: "Successful",
+              tranId: response.razorpay_payment_id
+            });
+            // const modelRef=this.modalService.open(TransactionsuccessdetailsComponent);
+            // modelRef.componentInstance.transactionId =  response.razorpay_payment_id;
+            // modelRef.componentInstance.transactionStatus = "Successful";
             console.log(data);
           },
           err => {

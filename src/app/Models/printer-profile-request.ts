@@ -8,5 +8,8 @@ export class PrinterProfileRequest {
   public profileUrl: string;
   public userId:string;
   public emailId:string;
+  public lattitude:string;
+  public longitude:string;
+  public address:string;
   
 }

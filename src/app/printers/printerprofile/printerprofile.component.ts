@@ -11,6 +11,7 @@ import { ValidatorsService } from "src/app/services/validators.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import { PrinterService } from "src/app/services/printer.service";
 import { PrinterProfileRequest } from "src/app/Models/printer-profile-request";
+import { TransactionsuccessdetailsComponent } from "../transactionsuccessdetails/transactionsuccessdetails.component";
 
 @Component({
   selector: "app-printerprofile",
@@ -23,6 +24,8 @@ export class PrinterprofileComponent implements OnInit {
   request: PrinterProfileRequest;
   isPhotoUrlValid: boolean;
   isTermsAccepted: boolean = false;
+  modfyAdd:boolean=false;
+  disModyBtn=false;
   profileform = new FormGroup({
     fName: new FormControl("", [Validators.required]),
     lName: new FormControl("", [Validators.required]),
@@ -36,7 +39,7 @@ export class PrinterprofileComponent implements OnInit {
     dob: new FormControl("", [Validators.required]),
 
     profile: new FormControl("", [Validators.required]),
-
+    address:new FormControl(""),
     softwares: new FormArray([])
   });
   constructor(
@@ -86,7 +89,15 @@ export class PrinterprofileComponent implements OnInit {
       selected: false
     }
   ];
+  paymentStatus(paymentStatus) {
+    debugger;
+    console.log(paymentStatus);
+    const modelRef = this.modalService.open(TransactionsuccessdetailsComponent);
+    modelRef.componentInstance.transactionId = paymentStatus.status;
+    modelRef.componentInstance.transactionStatus = paymentStatus.tranId;
+  }
   ngOnInit() {
+    this.request = new PrinterProfileRequest();
     this.helper.getStates().subscribe(
       data => {
         this.distinctStates = data.filter((thing, i, arr) => {
@@ -114,20 +125,42 @@ export class PrinterprofileComponent implements OnInit {
       item[0].selected = true;
     }
   }
+  getAddress(place: any) {
+    this.disModyBtn=true;
+    console.log(place);
+    this.profileform.patchValue({
+      address:place['formatted_address']
+    });
+    this.request.address = place['formatted_address'];
+    this.request.longitude = place.geometry.location.lat();
+    this.request.lattitude = place.geometry.location.lng();
+    
+    console.log(place.geometry.location.lat());
+    console.log(place.geometry.location.lng());
+  }
   filterDistricts(stateId) {
     debugger;
     this.filteredCities = this.statesData.filter(
       item => item.stateName == stateId
     );
   }
+  modifyAddress(){
+    if(this.modfyAdd){
+      this.modfyAdd=false;
+    }
+    else{
+      this.modfyAdd=true;
+    }
+
+  }
   createProfile() {
     debugger;
-    this.request = new PrinterProfileRequest();
+    
     //this.request.softwares = "";
     this.request.firstName = this.profileform.controls["fName"].value;
     this.request.lastName = this.profileform.controls["lName"].value;
     this.request.gender = this.profileform.controls["gender"].value;
-
+    this.request.address = this.profileform.controls["address"].value;
     this.request.profileUrl = this.profileform.controls["profile"].value;
     //
     this.request.mobileNumber = this.profileform.controls["mobileNumber"].value;
@@ -148,20 +181,6 @@ export class PrinterprofileComponent implements OnInit {
         this.spinnerService.hide();
       }
     );
-    //this.printer.updateProfileRequest(this.request)
-    // this.printer.updateProfileRequest(this.request).subscribe(
-    //   data => {
-    //     this.spinnerService.hide();
-    //     console.log(data);
-    //   },
-    //   err => {
-    //     this.spinnerService.hide();
-    //     console.log(err);
-    //   }
-    // );
-
-    console.log(this.request);
-    //this.request.gender=this.profileform.controls["gender"].value;
   }
   editForm(formname) {
     debugger;

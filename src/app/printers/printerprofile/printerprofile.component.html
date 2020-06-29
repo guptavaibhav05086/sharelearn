@@ -60,9 +60,10 @@
             No diggity <br />
             I wanna bag it up"
           </p>
+          <!-- Code is for Payment Gate Integration  -->
           <div class="row" >
               <div class="update ml-auto mr-auto">
-                  <app-razorpayments></app-razorpayments>
+                  <!-- <app-razorpayments (transactionStatus)="paymentStatus($event)"></app-razorpayments> -->
               </div>
            
           </div>
@@ -289,7 +290,38 @@
               </div>
             </div>
             
-            <div class="row">
+          <div class="row">
+              
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Address</label>
+               <div>
+                <app-googleplaces  (setAddress)="getAddress($event)"></app-googleplaces>
+               </div>
+                <div *ngIf="disModyBtn">
+                  <button type="button" (click)="modifyAddress()" class="btn btn-primary btn-round" >
+                    Modify Address
+                  </button>
+               </div>
+                 
+                
+             
+              </div>
+            </div>
+            
+          </div>
+          <div class="row" *ngIf="modfyAdd">
+            <div class="col-md-6">
+              <div class="form-group">
+                <textarea class="form-control" 
+                formControlName="address"  ></textarea>          
+                 
+                
+             
+              </div>
+            </div>
+          </div>
+            <div class="row" style="display: none;">
                 <div class="col-md-12" >
                     <h4 class="card-title">Softwares</h4>
                    
