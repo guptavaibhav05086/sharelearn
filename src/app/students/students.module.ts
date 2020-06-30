@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-
+import { PublicModule } from "../public/public.module";
 import { StudentsRoutingModule } from "./students-routing.module";
 import { StudentsComponent } from "./students.component";
 import { DashboadComponent } from "./dashboad/dashboad.component";
@@ -37,7 +37,12 @@ import { TestformsComponent } from "./testforms/testforms.component";
     TermsconditionsComponent,
     TestformsComponent
   ],
-  imports: [CommonModule, StudentsRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    StudentsRoutingModule,
+    ReactiveFormsModule,
+    PublicModule
+  ],
   exports: [DesignerprofileComponent, TestformsComponent]
 })
 export class StudentsModule {}

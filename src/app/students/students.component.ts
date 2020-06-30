@@ -12,6 +12,7 @@ import { Component, OnInit } from "@angular/core";
   ]
 })
 export class StudentsComponent implements OnInit {
+  isDesignerVerified = false;
   constructor() {}
 
   ngOnInit() {}

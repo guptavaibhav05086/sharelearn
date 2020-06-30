@@ -21,9 +21,10 @@ import { ResetpasswordComponent } from "./auth/resetpassword/resetpassword.compo
 import { UsersignupComponent } from "./auth/usersignup/usersignup.component";
 import { DesignerprofileComponent } from "./students/designerprofile/designerprofile.component";
 import { TestformsComponent } from "./students/testforms/testforms.component";
+import { ComingsoonComponent } from "../app/public/comingsoon/comingsoon.component";
 const routes: Routes = [
   {
-    path: "students",
+    path: "designer",
     loadChildren: () =>
       import("./students/students.module").then(m => m.StudentsModule)
   },
@@ -38,6 +39,10 @@ const routes: Routes = [
     children: [
       {
         path: "",
+        component: ComingsoonComponent
+      },
+      {
+        path: "home",
         component: HomecontentComponent
       },
       {

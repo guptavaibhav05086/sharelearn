@@ -29,7 +29,8 @@
               />
             </div>
              
-            <h5 class="title">Chet Faker</h5>
+            <h5 class="title">{{profileform.controls['fName'].value}} 
+              {{profileform.controls['lName'].value}}</h5>
             <!-- <a href="#">
               <img
                 class="avatar border-gray"
@@ -54,14 +55,14 @@
               </div>
             </div>
           </div>
-          <p class="description text-center">
+          <p class="description text-center" style="display: none;">
             "I like the way you work it
             <br />
             No diggity <br />
             I wanna bag it up"
           </p>
         </div>
-        <div class="card-footer">
+        <div class="card-footer" style="display: none;">
           <hr />
           <div class="button-container">
             <div class="row">
@@ -94,8 +95,8 @@
     <div class="col-md-8">
       <div class="card card-user">
         <div class="card-header">
-          <h5 class="card-title">Personel Details</h5>
-          <button class="btn btn-primary"  (click)="editForm('personal')">Edit Profile</button>
+          <h5 class="card-title">Profile Details</h5>
+          <!-- <button class="btn btn-primary"  (click)="editForm('personal')">Edit Profile</button> -->
         </div>
         <div class="card-body">
           <form [formGroup]="profileform" id="profileform">
@@ -470,7 +471,7 @@
  
 </div>
 
-<footer class="footer footer-black  footer-white ">
+<!-- <footer class="footer footer-black  footer-white ">
   <div class="container-fluid">
     <div class="row">
       <nav class="footer-nav">
@@ -501,7 +502,7 @@
       </div>
     </div>
   </div>
-</footer>
+</footer> -->
 <ngx-spinner
   bdColor="rgba(51, 51, 51, 0.8)"
   size="default"

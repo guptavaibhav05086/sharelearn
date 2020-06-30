@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-
+import { PublicModule } from "../public/public.module";
 import { PrintersRoutingModule } from "./printers-routing.module";
 import { PrintersComponent } from "./printers.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
@@ -42,7 +42,8 @@ import { GoogleplacesComponent } from "./googleplaces/googleplaces.component";
     CommonModule,
     PrintersRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    PublicModule
   ]
 })
 export class PrintersModule {}

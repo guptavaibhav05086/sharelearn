@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 ]
 })
 export class PrintersComponent implements OnInit {
-
+  isPrinterVerified=false;
   constructor() { }
 
   ngOnInit(): void {

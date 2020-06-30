@@ -1,6 +1,8 @@
 <app-navbar *ngIf="!displayUserNavbar"></app-navbar>
 <app-navbaruser *ngIf="displayUserNavbar"></app-navbaruser>
 <app-navbarcommon *ngIf="displayUserNavbar"></app-navbarcommon>
-<router-outlet></router-outlet>
+<div style="background-color: grey;padding-top: 120px;">
+  <router-outlet></router-outlet>
+</div>
 
 <app-footer></app-footer>
