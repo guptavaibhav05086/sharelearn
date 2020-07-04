@@ -24,4 +24,15 @@ export class DesignerService {
       this.login.getAuthHeader()
     );
   }
+  getProfile(userId) {
+    let url = `${environment.baseUrl}${environment.getDesignerProfile}`.replace(
+      "$userId",
+      userId
+    );
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
 }

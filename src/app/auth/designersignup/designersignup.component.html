@@ -100,38 +100,6 @@
       *Password and Confrim Password doesnot match.
     </span>
   </div>
-  <div class="form-group ">
-    <label for="username" class="label text-uppercase">mobile Number</label>
-    <input
-      class="form-control"
-      type="text"
-      required
-      formControlName="mobileNumber"
-      placeholder="+91"
-    />
-    <span
-      class="errorMessage"
-      *ngIf="
-        (studentForm.controls['mobileNumber'].dirty ||
-          studentForm.controls['mobileNumber'].touched) &&
-        studentForm.controls['mobileNumber'].invalid &&
-        studentForm.controls['mobileNumber'].errors.invalidPattern
-      "
-    >
-      *Mobile# is incorrect.
-    </span>
-    <span
-      class="errorMessage"
-      *ngIf="
-        (studentForm.controls['mobileNumber'].dirty ||
-          studentForm.controls['mobileNumber'].touched) &&
-        studentForm.controls['mobileNumber'].invalid &&
-        studentForm.controls['mobileNumber'].errors.required
-      "
-    >
-      *Mobile# is required.
-    </span>
-  </div>
 
   <div>
     <!-- {{ studentForm.controls["mobileNumber"].errors | json }}

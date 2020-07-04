@@ -51,12 +51,17 @@ export class LoginComponent implements OnInit {
     this.spinnerService.show();
     this._login.getToken(loginRequest).subscribe(
       data => {
+        debugger;
         this.spinnerService.hide();
-        this._login.setToken(data);
-        if (data.role == "Designer") {
-          this._helper.navigateToPath("/designer/designerprofile");
-        } else if (data.role == "Printer") {
-          this._helper.navigateToPath("/printers/profile");
+        if (data.emailVerified == "False") {
+          this._helper.navigateToPath("/errorVerify");
+        } else {
+          this._login.setToken(data);
+          if (data.role == "Designer") {
+            this._helper.navigateToPath("/designer/designerprofile");
+          } else if (data.role == "Printer") {
+            this._helper.navigateToPath("/printers/profile");
+          }
         }
       },
       err => {

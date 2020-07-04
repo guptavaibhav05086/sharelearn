@@ -24,7 +24,7 @@
             <div id="logoInfo">
                 <img
                 class="avatar border-gray"
-                src="../../../assets/StudentDashboard/img/mike.jpg"
+                [src]="profileImg"
                 alt="..."
               />
             </div>
@@ -352,7 +352,7 @@
               <div class="col-md-4 px-1">
                 <div class="form-group">
                   <label>City</label>
-                  <select
+                  <select *ngIf="!isEdit"
                     type="text"
                     class="form-control"
                     placeholder="City"
@@ -366,6 +366,7 @@
                       {{item.cityName}}
                     </option>
                 </select>
+                <input type="text" class="form-control" formControlName="city" disabled *ngIf="isEdit">
                 <span
                 class="errorMessage"
                 *ngIf="
@@ -412,7 +413,7 @@
                    
                     <div style="display: flex;">
                         <div class="checkbox" *ngFor="let check of softwares | slice:0:4;let i=index ">
-                            <input [id]="i" type="checkbox" class="checkboxelement" (change)="selectedSoftware(check.name)">
+                            <input [id]="i" type="checkbox" class="checkboxelement" (change)="selectedSoftware(check.name)" [checked]="check.selected">
                             <label for="checkbox1" class="checkboxLabel">
                                 {{check.name}}
                           </label>
@@ -420,11 +421,15 @@
                         
                     </div>
                     <div style="display: flex;">
-                        <div class="checkbox" *ngFor="let check of softwares | slice:3:8;let i=index ">
-                            <input [id]="i" type="checkbox" class="checkboxelement" (change)="selectedSoftware(check.name)">
+                        <div class="checkbox" *ngFor="let check of softwares | slice:4:8;let i=index ">
+                            <input [id]="i" type="checkbox" class="checkboxelement" (change)="selectedSoftware(check.name)" [checked]="check.selected">
                             <label for="checkbox1" class="checkboxLabel" >
                                 {{check.name}}
                           </label>
+                        </div>
+                        <div *ngIf="displayOthers" class="checkbox" style="margin-left: 20px;">
+                          <input type="text" formControlName="others"/>
+
                         </div>
                         
                     </div>
@@ -457,7 +462,7 @@
               <!-- {{profileform.valid && isTermsAccepted}} -->
               <div class="update ml-auto mr-auto">
                 <button type="button" (click)="createProfile()" [disabled]= "!(profileform.valid && isTermsAccepted)" class="btn btn-primary btn-round">
-                  Proceed To Payment
+                  Submit
                 </button>
               </div>
             </div>

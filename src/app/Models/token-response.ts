@@ -6,5 +6,6 @@ export class TokenResponse {
   issued: string;
   expires: string;
   role: string;
-  userId:string;
+  userId: string;
+  emailVerified: string;
 }

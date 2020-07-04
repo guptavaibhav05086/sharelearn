@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ValidatorsService } from "src/app/services/validators.service";
@@ -6,12 +6,11 @@ import { RegisterService } from "src/app/services/register.service";
 import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
-  selector: 'app-verify-otp',
-  templateUrl: './verify-otp.component.html',
-  styleUrls: ['./verify-otp.component.css']
+  selector: "app-verify-otp",
+  templateUrl: "./verify-otp.component.html",
+  styleUrls: ["./verify-otp.component.css"]
 })
 export class VerifyOTPComponent implements OnInit {
-
   message = "";
   constructor(
     public activeModal: NgbActiveModal,
@@ -26,9 +25,11 @@ export class VerifyOTPComponent implements OnInit {
     let number = this.studentForm.controls["mobileNumber"].value;
     this.message = "";
     this.spinner.show();
-    this.register.forgotPasswordEmail(number).subscribe(
+    let userId = localStorage.getItem("userId");
+    // let number =  this.studentForm.controls['mobileNumber'].value;
+    this.register.verifyOTP(userId, number).subscribe(
       data => {
-        this.message = "Please check your email Id";
+        this.message = "Validation is Done";
         this.spinner.hide();
       },
       err => {
@@ -40,5 +41,4 @@ export class VerifyOTPComponent implements OnInit {
   studentForm = new FormGroup({
     mobileNumber: new FormControl("", [Validators.required])
   });
-
 }

@@ -33,14 +33,7 @@ export class PrintersignupComponent implements OnInit {
           /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,15}$/
         )
       ]),
-      confirmPassword: new FormControl("", [Validators.required]),
-      mobileNumber: new FormControl("", [
-        Validators.required,
-        this._validator.patternValidation(
-          /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/
-        )
-      ]),
-      technology: new FormControl([], [Validators.required])
+      confirmPassword: new FormControl("", [Validators.required])
     },
     { validators: this._validator.confirmPasswordValidation }
   );
@@ -70,21 +63,19 @@ export class PrintersignupComponent implements OnInit {
     newUser.ConfirmPassword = this.studentForm.controls[
       "confirmPassword"
     ].value;
-    newUser.MobileNumber = this.studentForm.controls["mobileNumber"].value;
+    //newUser.MobileNumber = this.studentForm.controls["mobileNumber"].value;
     newUser.Role = "Printer";
-    let selectedTechs = this.studentForm.controls["technology"].value;
-    newUser.TrainerTechnologies = new Array<number>();
-    for (let i = 0; i < selectedTechs.length; i++) {
-      newUser.TrainerTechnologies.push(selectedTechs[i].courseId);
-    }
+
     this._login.registerUser(newUser).subscribe(
       data => {
+        debugger;
         this.spinnerService.hide();
         this.registered = true;
         delay(20000);
-        this._helper.navigateToPath("/printers/profile");
+        this._helper.navigateToPath("/errorVerify");
       },
       err => {
+        debugger;
         this.spinnerService.hide();
         console.log(err);
         if (err.status == 500 && err.error.ModelState == null) {

@@ -7,7 +7,7 @@ import { DesignerProfileRequest } from "src/app/Models/designer-profile-request"
 import { HelperService } from "../../services/helper.service";
 import { Cities } from "src/app/Models/cities";
 import { DesignerService } from "src/app/services/designer.service";
-import { ValidatorsService } from 'src/app/services/validators.service';
+import { ValidatorsService } from "src/app/services/validators.service";
 import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: "app-designerprofile",
@@ -19,14 +19,19 @@ export class DesignerprofileComponent implements OnInit {
   isDisableProfession: boolean = false;
   request: DesignerProfileRequest;
   isPhotoUrlValid: boolean;
-  isTermsAccepted:boolean =false;;
+  isTermsAccepted: boolean = false;
+  displayOthers = false;
+  isEdit = false;
   profileform = new FormGroup({
     fName: new FormControl("", [Validators.required]),
     lName: new FormControl("", [Validators.required]),
     gender: new FormControl("", [Validators.required]),
-    mobileNumber: new FormControl("", [Validators.required,this._validator.patternValidation(
-      /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/
-    )]),
+    mobileNumber: new FormControl("", [
+      Validators.required,
+      this._validator.patternValidation(
+        /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/
+      )
+    ]),
     dob: new FormControl("", [Validators.required]),
     qualification: new FormControl("", [Validators.required]),
     exp: new FormControl("", [Validators.required]),
@@ -34,7 +39,8 @@ export class DesignerprofileComponent implements OnInit {
     city: new FormControl("", [Validators.required]),
     state: new FormControl("", [Validators.required]),
     postalCode: new FormControl("", [Validators.required]),
-    softwares: new FormArray([])
+    softwares: new FormArray([]),
+    others: new FormControl("", [])
   });
   constructor(
     private modalService: NgbModal,
@@ -49,40 +55,31 @@ export class DesignerprofileComponent implements OnInit {
   softwares = [
     {
       id: 1,
-      name: "Adobe Photo shop",
+      name: "ADOBE PHOTOSHOP",
       selected: false
     },
     {
       id: 2,
-      name: "Beyounce",
+      name: "ADOBE ILLUSTRTOR",
       selected: false
     },
     {
       id: 3,
-      name: "New Design Software",
+      name: "CORAL DRAW",
       selected: false
     },
     {
       id: 4,
-      name: "Old Design software",
+      name: "INDESIGN",
       selected: false
     },
     {
       id: 5,
-      name: "Demo",
-      selected: false
-    },
-    {
-      id: 6,
-      name: "Demo 2",
-      selected: false
-    },
-    {
-      id: 7,
-      name: "Demo3",
+      name: "Others (please specify)",
       selected: false
     }
   ];
+  profileImg = "../../../assets/StudentDashboard/img/avatar.jpg";
   ngOnInit() {
     this.helper.getStates().subscribe(
       data => {
@@ -91,20 +88,73 @@ export class DesignerprofileComponent implements OnInit {
         });
 
         this.statesData = data;
-        console.log(data);
+        this.filterDistricts(this.profileform.controls["state"].value);
+
+        //console.log(data);
       },
       err => {}
     );
+    let userId = localStorage.getItem("userId");
+    if (userId != null && userId != undefined) {
+      this.designer.getProfile(userId).subscribe(
+        data => {
+          debugger;
+          //console.log(data);
+
+          this.profileform.patchValue({
+            fName: data["firstName"],
+            lName: data["lastName"],
+            gender: data["gender"],
+            mobileNumber: data["mobileNumber"],
+            dob: data["dob"],
+            profile: data["profileUrl"],
+            address: data["address"],
+            qualification: data["qualification"],
+            exp: data["exp"],
+            postalCode: data["postalCode"],
+            state: data["state"],
+            city: data["city"]
+          });
+          if (data["profileImage"] != null) {
+            this.profileImg = data["profileImage"];
+          }
+          this.filterDistricts(data["state"]);
+          this.isEdit = true;
+
+          console.log(this.profileform);
+
+          let softwaresList = data["softwares"].split(";");
+          for (let i = 0; i < softwaresList.length; i++) {
+            let sel = this.softwares.filter(
+              item => item.name == softwaresList[i]
+            );
+            if (sel.length > 0) {
+              sel[0].selected = true;
+            }
+            if (softwaresList[i].includes("others-")) {
+              this.displayOthers = true;
+              let soft = softwaresList[i].split("-")[1];
+              this.profileform.patchValue({
+                others: soft
+              });
+            }
+          }
+        },
+        err => {}
+      );
+    }
   }
-  acceptTerms(){
+  acceptTerms() {
     debugger;
-    if(this.isTermsAccepted)
-    this.isTermsAccepted=false;
-    else
-    this.isTermsAccepted=true;
+    if (this.isTermsAccepted) this.isTermsAccepted = false;
+    else this.isTermsAccepted = true;
   }
   selectedSoftware(name) {
     console.log(name);
+    if (name == "Others (please specify)") {
+      if (this.displayOthers) this.displayOthers = false;
+      else this.displayOthers = true;
+    }
     let item = this.softwares.filter(item => item.name == name);
     if (item[0].selected) {
       item[0].selected = false;
@@ -114,9 +164,13 @@ export class DesignerprofileComponent implements OnInit {
   }
   filterDistricts(stateId) {
     debugger;
-    this.filteredCities = this.statesData.filter(
-      item => item.stateName == stateId
-    );
+    try {
+      this.filteredCities = this.statesData.filter(
+        item => item.stateName == stateId
+      );
+      this.isEdit = false;
+      console.log(this.filteredCities);
+    } catch {}
   }
   createProfile() {
     this.request = new DesignerProfileRequest();
@@ -138,6 +192,14 @@ export class DesignerprofileComponent implements OnInit {
     this.request.emailId = localStorage.getItem("email");
     let selSoft = this.softwares.filter(item => item.selected == true);
     selSoft.forEach(item => (this.request.softwares += item.name + ";"));
+
+    if (this.profileform.controls["others"] != null) {
+      this.request.softwares =
+        this.request.softwares +
+        "others-" +
+        this.profileform.controls["others"].value;
+    }
+
     this.spinnerService.show();
     this.designer.updateProfileRequest(this.request).subscribe(
       data => {

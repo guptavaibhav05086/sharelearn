@@ -4,10 +4,22 @@ import { CommonModule } from "@angular/common";
 //import { NavbarComponent } from "./navbar/navbar.component";
 import { FooterComponent } from "./footer/footer.component";
 import { ComingsoonComponent } from "./comingsoon/comingsoon.component";
+import { ErrorMessageComponent } from "./error-message/error-message.component";
+import { VerifyEmailComponent } from "./verify-email/verify-email.component";
 
 @NgModule({
-  declarations: [FooterComponent, ComingsoonComponent],
+  declarations: [
+    FooterComponent,
+    ComingsoonComponent,
+    ErrorMessageComponent,
+    VerifyEmailComponent
+  ],
   imports: [CommonModule],
-  exports: [FooterComponent, ComingsoonComponent]
+  exports: [
+    FooterComponent,
+    ComingsoonComponent,
+    ErrorMessageComponent,
+    VerifyEmailComponent
+  ]
 })
 export class PublicModule {}

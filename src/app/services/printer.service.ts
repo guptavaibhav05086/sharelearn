@@ -24,6 +24,17 @@ export class PrinterService {
       this.login.getAuthHeader()
     );
   }
+  getProfile(userId) {
+    let url = `${environment.baseUrl}${environment.getPrinterProfile}`.replace(
+      "$userId",
+      userId
+    );
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
 
   generateOrderId(amount) {
     let url = `${environment.baseUrl}${environment.generateOrder}`.replace(

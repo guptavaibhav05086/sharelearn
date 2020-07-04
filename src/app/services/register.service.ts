@@ -31,12 +31,30 @@ export class RegisterService {
     );
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
-
+  generateOTP(userId, phoneNumber) {
+    let url = `${environment.baseUrl}${environment.generateOTP}`
+      .replace("$userId", userId)
+      .replace("$phoneNumber", phoneNumber);
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
+  verifyOTP(userId, OTP) {
+    let url = `${environment.baseUrl}${environment.verifyOTP}`
+      .replace("$userId", userId)
+      .replace("$OTP", OTP);
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   forgotPasswordEmail(email) {
     let url = `${environment.baseUrl}${environment.forgotPassword}`.replace(
       "$email",
       email
     );
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
+  VerifyEmail(email, guid, role) {
+    let url = `${environment.baseUrl}${environment.verifyEmail}`
+      .replace("$userId", email)
+      .replace("$guid", guid)
+      .replace("$role", role);
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
   resetPasswordRequest(resetPassword: ResetPassword) {

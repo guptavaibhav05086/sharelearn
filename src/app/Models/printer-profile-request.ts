@@ -11,5 +11,6 @@ export class PrinterProfileRequest {
   public lattitude:string;
   public longitude:string;
   public address:string;
+  public gst:string;
   
 }

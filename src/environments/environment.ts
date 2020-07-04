@@ -19,7 +19,14 @@ export const environment = {
   updatePrinter: "/api/printer/updateprofile",
   uploadPrinterImage: "/api/printer/uploadimage",
   generateOrder: "/api/printer/generateorder?amount=$amount",
-  transactionValidate:"/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature"
+  transactionValidate:
+    "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature",
+  getDesignerProfile: "/api/designer/getProfile?userId=$userId",
+  getPrinterProfile: "/api/printer/getProfile?userId=$userId",
+  generateOTP:
+    "/api/Public/GenerateOTP?userId=$userId&phoneNumber=$phoneNumber",
+  verifyOTP: "/api/Public/ValidateOTP?userId=$userId&OTP=$OTP",
+  verifyEmail:"/api/Public/verifyemail?userId=$userId&guid=$guid&role=$role"
 };
 
 /*

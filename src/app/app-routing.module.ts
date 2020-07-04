@@ -22,6 +22,8 @@ import { UsersignupComponent } from "./auth/usersignup/usersignup.component";
 import { DesignerprofileComponent } from "./students/designerprofile/designerprofile.component";
 import { TestformsComponent } from "./students/testforms/testforms.component";
 import { ComingsoonComponent } from "../app/public/comingsoon/comingsoon.component";
+import { ErrorMessageComponent } from "../app/public/error-message/error-message.component";
+import { VerifyEmailComponent } from "../app/public/verify-email/verify-email.component";
 const routes: Routes = [
   {
     path: "designer",
@@ -114,7 +116,8 @@ const routes: Routes = [
         component: ResetpasswordComponent
       },
       { path: "designerprofile", component: DesignerprofileComponent },
-      { path: "test", component: TestformsComponent }
+      { path: "verifyemail", component: VerifyEmailComponent },
+      { path: "errorVerify", component: ErrorMessageComponent }
     ]
   },
   {

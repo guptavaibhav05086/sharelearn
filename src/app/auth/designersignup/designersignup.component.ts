@@ -34,13 +34,7 @@ export class DesignersignupComponent implements OnInit {
           /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,15}$/
         )
       ]),
-      confirmPassword: new FormControl("", [Validators.required]),
-      mobileNumber: new FormControl("", [
-        Validators.required,
-        this._validator.patternValidation(
-          /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/
-        )
-      ])
+      confirmPassword: new FormControl("", [Validators.required])
     },
     { validators: this._validator.confirmPasswordValidation }
   );
@@ -89,23 +83,24 @@ export class DesignersignupComponent implements OnInit {
     newUser.ConfirmPassword = this.studentForm.controls[
       "confirmPassword"
     ].value;
-    newUser.MobileNumber = this.studentForm.controls["mobileNumber"].value;
+    // newUser.MobileNumber = this.studentForm.controls["mobileNumber"].value;
     newUser.Role = "Designer";
     this._login.registerUser(newUser).subscribe(
       data => {
         this.spinnerService.hide();
         this.registered = true;
         this.serverError = false;
-        let tokenRequest = new TokenRequest();
-        tokenRequest.password = newUser.Password;
-        tokenRequest.username = newUser.Email;
-        this._login.getToken(tokenRequest).subscribe(
-          data => {
-            this._login.setToken(data);
-            this._helper.navigateToPath("/students/designerprofile");
-          },
-          err => {}
-        );
+        this._helper.navigateToPath("/errorVerify");
+        // let tokenRequest = new TokenRequest();
+        // tokenRequest.password = newUser.Password;
+        // tokenRequest.username = newUser.Email;
+        // this._login.getToken(tokenRequest).subscribe(
+        //   data => {
+        //     this._login.setToken(data);
+        //     this._helper.navigateToPath("/students/designerprofile");
+        //   },
+        //   err => {}
+        // );
       },
       err => {
         this.spinnerService.hide();

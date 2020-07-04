@@ -22,11 +22,12 @@
         <div class="card-body">
           <div class="author" >
             <div id="logoInfo">
-                <img
+                <img 
                 class="avatar border-gray"
-                src="../../../assets/StudentDashboard/img/mike.jpg"
+                [src]="profileImg"
                 alt="..."
               />
+              
             </div>
              
             <h5 class="title">{{profileform.controls['fName'].value}} 
@@ -222,7 +223,7 @@
                   <div class="form-group">
                     
                     <button type="button" (click)="openVerifyOTP()"  class="btn btn-primary btn-round">
-                        verify OTP
+                        verify 
                       </button>
                   </div>
                 </div>
@@ -250,34 +251,69 @@
             </div>
 
             <div class="row">
-                <!-- <div class="col-md-4 pr-1">
+                <div class="col-md-4 pr-1">
                     <div class="form-group">
-                      <label>Experience</label>
+                      <label>GST</label>
                       <input
-                        type="number"
+                        type="text"
                         class="form-control"
-                        placeholder="# of years"
+                        placeholder="GST Number"
                         
-                    formControlName="exp"  
+                    formControlName="gst"  
                     required
                         [disabled]="isDisabled"
                       />
                       <span
                       class="errorMessage"
                       *ngIf="
-                        (profileform.controls['exp'].dirty ||
-                        profileform.controls['exp'].touched) &&
-                        profileform.controls['exp'].invalid &&
-                        profileform.controls['exp'].errors.required
+                        (profileform.controls['gst'].dirty ||
+                        profileform.controls['gst'].touched) &&
+                        profileform.controls['gst'].invalid &&
+                        profileform.controls['gst'].errors.required
                       "
                     >
-                      *Experience is required.
+                      *GST is required.
                     </span>
+                    <span
+                    class="errorMessage"
+                    *ngIf="
+                      (profileform.controls['gst'].dirty ||
+                      profileform.controls['gst'].touched) &&
+                      profileform.controls['gst'].invalid &&
+                      profileform.controls['gst'].errors.invalidPattern
+                    "
+                  >
+                    *GST# is incorrect.
+                  </span>
                     </div>
-                  </div> -->
-              <div class="col-md-12">
+                  </div>
+                  <div class="input-group col-md-8" style="padding-top: 30px;">
+                    <div class="custom-file form-group">
+                      <input
+                        type="file"
+                        accept="application/pdf,application/msword,
+                        application/vnd.openxmlformats-officedocument.wordprocessingml.document,image.*"
+                        class="custom-file-input"
+                        id="inputGroupFile02"
+                        aria-describedby="inputGroupFileAddon02"
+                        (change)="uploadGSTCertificate($event.target.files,'GST')"
+                      />
+                      <label class="custom-file-label" for="inputGroupFile01"
+                        >{{selectedFileName}}</label
+                      >
+                     
+                    </div>
+                   
+                  </div>
+                  <div class="input-group col-md-4" *ngIf="fileError"></div>
+                  <div class="input-group col-md-8" *ngIf="fileError">
+                    <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                  </div> 
+            </div>
+            <div class="row">
+              <div class="col-md-8">
                 <div class="form-group">
-                  <label>Linkedin Profile</label>
+                  <label>Portfolio Link</label>
                   <input
                     type="text"
                     class="form-control"
@@ -290,10 +326,9 @@
                 </div>
               </div>
             </div>
-            
           <div class="row">
               
-            <div class="col-md-12">
+            <div class="col-md-8">
               <div class="form-group">
                 <label>Address</label>
                <div>
@@ -309,6 +344,7 @@
              
               </div>
             </div>
+            
             
           </div>
           <div class="row" *ngIf="modfyAdd">
@@ -373,7 +409,7 @@
               <!-- {{profileform.valid && isTermsAccepted}} -->
               <div class="update ml-auto mr-auto">
                 <button type="button" (click)="createProfile()" [disabled]= "!(profileform.valid && isTermsAccepted)" class="btn btn-primary btn-round">
-                  Proceed To Payment
+                  Submit
                 </button>
               </div>
             </div>

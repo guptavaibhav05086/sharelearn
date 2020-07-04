@@ -10,6 +10,7 @@ import { DesignerService } from "src/app/services/designer.service";
 import { ValidatorsService } from "src/app/services/validators.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import { PrinterService } from "src/app/services/printer.service";
+import {RegisterService } from '../../services/register.service';
 import { PrinterProfileRequest } from "src/app/Models/printer-profile-request";
 import { TransactionsuccessdetailsComponent } from "../transactionsuccessdetails/transactionsuccessdetails.component";
 
@@ -24,8 +25,10 @@ export class PrinterprofileComponent implements OnInit {
   request: PrinterProfileRequest;
   isPhotoUrlValid: boolean;
   isTermsAccepted: boolean = false;
-  modfyAdd:boolean=false;
-  disModyBtn=false;
+  modfyAdd: boolean = false;
+  disModyBtn = false;
+  fileError = false;
+  selectedFileName = "Choose GST Certificate";
   profileform = new FormGroup({
     fName: new FormControl("", [Validators.required]),
     lName: new FormControl("", [Validators.required]),
@@ -37,9 +40,15 @@ export class PrinterprofileComponent implements OnInit {
       )
     ]),
     dob: new FormControl("", [Validators.required]),
+    gst: new FormControl("", [
+      Validators.required,
+      this._validator.patternValidation(
+        /^([0][1-9]|[1-2][0-9]|[3][0-5])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$/
+      )
+    ]),
 
     profile: new FormControl("", [Validators.required]),
-    address:new FormControl(""),
+    address: new FormControl(""),
     softwares: new FormArray([])
   });
   constructor(
@@ -47,7 +56,8 @@ export class PrinterprofileComponent implements OnInit {
     private helper: HelperService,
     private printer: PrinterService,
     private _validator: ValidatorsService,
-    private spinnerService: NgxSpinnerService
+    private spinnerService: NgxSpinnerService,
+    private register:RegisterService
   ) {}
   statesData: Array<Cities>;
   distinctStates: Array<Cities>;
@@ -89,12 +99,39 @@ export class PrinterprofileComponent implements OnInit {
       selected: false
     }
   ];
+  profileImg = "../../../assets/StudentDashboard/img/avatar.jpg";
   paymentStatus(paymentStatus) {
     debugger;
     console.log(paymentStatus);
     const modelRef = this.modalService.open(TransactionsuccessdetailsComponent);
     modelRef.componentInstance.transactionId = paymentStatus.status;
     modelRef.componentInstance.transactionStatus = paymentStatus.tranId;
+  }
+  generateOTP() {
+    debugger;
+    let number = this.profileform.controls["mobileNumber"].value;
+    //this.message = "";
+    //this.spinner.show();
+    let userId = localStorage.getItem("userId");
+    // let number =  this.studentForm.controls['mobileNumber'].value;
+    if(this.profileform.controls["mobileNumber"].value !="" && (!this.profileform.controls['mobileNumber'].invalid)  ){
+      this.register.generateOTP(userId, number).subscribe(
+        data => {
+          //this.message = "Please check your email Id";
+          //this.spinner.hide();
+        },
+        err => {
+          //this.message = "Issue occured please check after some time";
+          //this.spinner.hide();
+        }
+      );
+    }
+    else{
+      alert('Enter Valid Mobile Number');
+      return false;
+    }
+    return true;
+    
   }
   ngOnInit() {
     this.request = new PrinterProfileRequest();
@@ -109,6 +146,31 @@ export class PrinterprofileComponent implements OnInit {
       },
       err => {}
     );
+    let userId = localStorage.getItem("userId");
+    if (userId != null && userId != undefined) {
+      this.printer.getProfile(userId).subscribe(
+        data => {
+          debugger;
+          console.log(data);
+          this.modfyAdd = true;
+          this.profileform.patchValue({
+            fName: data["firstName"],
+            lName: data["lastName"],
+            gender: data["gender"],
+            mobileNumber: data["mobileNumber"],
+            dob: data["dob"],
+            profile: data["profileUrl"],
+            address: data["address"]
+          });
+
+          if (data["profileImage"] != null) {
+            this.profileImg = data["profileImage"];
+          }
+          console.log(this.profileform);
+        },
+        err => {}
+      );
+    }
   }
   acceptTerms() {
     debugger;
@@ -126,15 +188,15 @@ export class PrinterprofileComponent implements OnInit {
     }
   }
   getAddress(place: any) {
-    this.disModyBtn=true;
+    this.disModyBtn = true;
     console.log(place);
     this.profileform.patchValue({
-      address:place['formatted_address']
+      address: place["formatted_address"]
     });
-    this.request.address = place['formatted_address'];
+    this.request.address = place["formatted_address"];
     this.request.longitude = place.geometry.location.lat();
     this.request.lattitude = place.geometry.location.lng();
-    
+
     console.log(place.geometry.location.lat());
     console.log(place.geometry.location.lng());
   }
@@ -144,32 +206,31 @@ export class PrinterprofileComponent implements OnInit {
       item => item.stateName == stateId
     );
   }
-  modifyAddress(){
-    if(this.modfyAdd){
-      this.modfyAdd=false;
+  modifyAddress() {
+    if (this.modfyAdd) {
+      this.modfyAdd = false;
+    } else {
+      this.modfyAdd = true;
     }
-    else{
-      this.modfyAdd=true;
-    }
-
   }
   createProfile() {
     debugger;
-    
+
     //this.request.softwares = "";
     this.request.firstName = this.profileform.controls["fName"].value;
     this.request.lastName = this.profileform.controls["lName"].value;
     this.request.gender = this.profileform.controls["gender"].value;
     this.request.address = this.profileform.controls["address"].value;
     this.request.profileUrl = this.profileform.controls["profile"].value;
+    this.request.gst = this.profileform.controls["gst"].value;
     //
     this.request.mobileNumber = this.profileform.controls["mobileNumber"].value;
     this.request.dob = this.profileform.controls["dob"].value;
 
     this.request.userId = localStorage.getItem("userId");
     this.request.emailId = localStorage.getItem("email");
-    // let selSoft = this.softwares.filter(item => item.selected == true);
-    // selSoft.forEach(item => (this.request.softwares += item.name + ";"));
+    //this.request
+
     this.spinnerService.show();
     this.printer.updateProfileRequest(this.request).subscribe(
       data => {
@@ -193,8 +254,12 @@ export class PrinterprofileComponent implements OnInit {
     else this.isDisableProfession = true;
   }
   openVerifyOTP() {
-    const modalRef = this.modalService.open(VerifyOTPComponent);
-    modalRef.componentInstance.name = "World";
+    let result = this.generateOTP();
+    if(result){
+      const modalRef = this.modalService.open(VerifyOTPComponent);
+      modalRef.componentInstance.name = "World";
+    }
+    
   }
   openTermCondition(event) {
     event.preventDefault();
@@ -203,6 +268,47 @@ export class PrinterprofileComponent implements OnInit {
       scrollable: true
     });
     modalRef.componentInstance.name = "terms conditions";
+  }
+  uploadGSTCertificate(images: FileList, name: string) {
+    debugger;
+    var result = "";
+    var file;
+    const formData = new FormData();
+    var userImage = images.item(0);
+    debugger;
+    for (var i = 0; (file = images[i]); i++) {
+      //if the file is not an image, continue
+      if (!this.validateFiles(name, file)) {
+        if (!this.request.imageURL) {
+          this.fileError = true;
+          ///this.toast.error('File  should be an Image');
+          // alert("File  should be an Image");
+        } else {
+          //this.toast.error('File Size should be less then 5 MB');
+          alert("File Size should be less then 5 MB");
+        }
+        return;
+      }
+      let reader = new FileReader();
+
+      reader.readAsDataURL(file);
+      //this._awsupload.uploadfile(file);
+    }
+    formData.append("userimage", userImage, userImage.name);
+    this.printer.uploadUserImage(formData).subscribe(
+      data => {
+        debugger;
+        console.log(data);
+        alert("File Uploaded Successfully");
+        this.fileError = false;
+        this.selectedFileName = userImage.name;
+      },
+      err => {
+        debugger;
+        this.fileError = true;
+        alert("Issue in file upload please contact admin");
+      }
+    );
   }
   fileSelect(images: FileList, name: string) {
     debugger;
@@ -254,6 +360,25 @@ export class PrinterprofileComponent implements OnInit {
   validateFiles(name: string, file: File): boolean {
     if (name == "logoInfo") {
       if (!file.type.match("image.*")) {
+        this.isPhotoUrlValid = false;
+        return false;
+      } else {
+        this.isPhotoUrlValid = true;
+      }
+      if (file.size > 5000000) {
+        this.isPhotoUrlValid = false;
+
+        return false;
+      } else {
+        this.isPhotoUrlValid = true;
+      }
+    }
+    if (name == "GST") {
+      if (
+        !file.type.match(
+          "text.*|image.*|application.pdf|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        )
+      ) {
         this.isPhotoUrlValid = false;
         return false;
       } else {

@@ -100,7 +100,7 @@
       *Password and Confrim Password doesnot match.
     </span>
   </div>
-  <div class="form-group ">
+  <!-- <div class="form-group ">
     <label for="username" class="label text-uppercase">mobile Number</label>
     <input
       class="form-control"
@@ -109,7 +109,7 @@
       placeholder="+91"
       formControlName="mobileNumber"
     />
-  </div>
+  </div> -->
   <!--  <div class="form-group">
     <label for="exampleFormControlSelect1">TECHNOLOGY </label>
     <div class="c-btnborder">
@@ -137,7 +137,8 @@
     </span>
   </div>
   <div class="form-group text-center mt-4">
-    <button 
+    <button
+      [disabled]="!studentForm.valid"
       class="btn btn-info btn-lg btn-block text-uppercase "
       type="submit"
       (click)="registerUser()"
