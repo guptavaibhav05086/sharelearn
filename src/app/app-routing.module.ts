@@ -20,7 +20,6 @@ import { LogoutComponent } from "./auth/logout/logout.component";
 import { ResetpasswordComponent } from "./auth/resetpassword/resetpassword.component";
 import { UsersignupComponent } from "./auth/usersignup/usersignup.component";
 import { DesignerprofileComponent } from "./students/designerprofile/designerprofile.component";
-import { TestformsComponent } from "./students/testforms/testforms.component";
 import { ComingsoonComponent } from "../app/public/comingsoon/comingsoon.component";
 import { ErrorMessageComponent } from "../app/public/error-message/error-message.component";
 import { VerifyEmailComponent } from "../app/public/verify-email/verify-email.component";
@@ -31,9 +30,9 @@ const routes: Routes = [
       import("./students/students.module").then(m => m.StudentsModule)
   },
   {
-    path: "trainers",
+    path: "printers",
     loadChildren: () =>
-      import("./trainers/trainers.module").then(m => m.TrainersModule)
+      import("./printers/printers.module").then(m => m.PrintersModule)
   },
   {
     path: "",
@@ -119,11 +118,6 @@ const routes: Routes = [
       { path: "verifyemail", component: VerifyEmailComponent },
       { path: "errorVerify", component: ErrorMessageComponent }
     ]
-  },
-  {
-    path: "printers",
-    loadChildren: () =>
-      import("./printers/printers.module").then(m => m.PrintersModule)
   }
 ];
 

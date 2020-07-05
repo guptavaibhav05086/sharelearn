@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api_RegisterUser: "/api/Account/Register",
-  baseUrl: "http://localhost:39117",
+  baseUrl: "https://www.shapenprint.in",
   userDetails: "/api/Students/GetUserProfile",
   tokenUrl: "/Token",
   guestRegister: "/api/Public/guestregister",

@@ -17,7 +17,7 @@ import { DesignerprofileComponent } from "./designerprofile/designerprofile.comp
 import { VerifyOTPComponent } from "./verify-otp/verify-otp.component";
 import { TermsconditionsComponent } from "./termsconditions/termsconditions.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { TestformsComponent } from "./testforms/testforms.component";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -34,15 +34,15 @@ import { TestformsComponent } from "./testforms/testforms.component";
     HelpComponent,
     DesignerprofileComponent,
     VerifyOTPComponent,
-    TermsconditionsComponent,
-    TestformsComponent
+    TermsconditionsComponent
   ],
   imports: [
     CommonModule,
     StudentsRoutingModule,
     ReactiveFormsModule,
-    PublicModule
+    PublicModule,
+    NgxSpinnerModule
   ],
-  exports: [DesignerprofileComponent, TestformsComponent]
+  exports: [DesignerprofileComponent]
 })
 export class StudentsModule {}
