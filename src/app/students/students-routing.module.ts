@@ -11,7 +11,6 @@ import { NotificationsComponent } from "./notifications/notifications.component"
 import { SettingsComponent } from "./settings/settings.component";
 import { HelpComponent } from "./help/help.component";
 import { DesignerprofileComponent } from "./designerprofile/designerprofile.component";
-import { TestformsComponent } from "./testforms/testforms.component";
 
 const routes: Routes = [
   {
@@ -19,7 +18,6 @@ const routes: Routes = [
     component: StudentsComponent,
     canActivate: [StudentGuard],
     children: [
-      { path: "test", component: TestformsComponent },
       { path: "dashboard", component: DashboadComponent },
       { path: "orders", component: CoursetakenComponent },
       { path: "courses", component: CoursetakenComponent },

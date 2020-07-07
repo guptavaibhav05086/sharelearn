@@ -28,7 +28,8 @@ export const environment = {
   verifyOTP: "/api/Public/ValidateOTP?userId=$userId&OTP=$OTP",
   verifyEmail: "/api/Public/verifyemail?userId=$userId&guid=$guid&role=$role",
   resendVerifymail:
-    "/api/Public/resendverifyemail?email=$email&guid=$guid&role=$role"
+    "/api/Public/resendverifyemail?email=$email&guid=$guid&role=$role",
+  getProducts: "/api/admin/getproducts"
 };
 
 /*

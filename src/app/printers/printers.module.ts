@@ -19,6 +19,7 @@ import { FormsModule } from "@angular/forms";
 import { RazorpaymentsComponent } from "./razorpayments/razorpayments.component";
 import { TransactionsuccessdetailsComponent } from "./transactionsuccessdetails/transactionsuccessdetails.component";
 import { GoogleplacesComponent } from "./googleplaces/googleplaces.component";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { GoogleplacesComponent } from "./googleplaces/googleplaces.component";
     PrintersRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    PublicModule
+    PublicModule,
+    NgxSpinnerModule
   ]
 })
 export class PrintersModule {}

@@ -20,7 +20,7 @@ import { LogoutComponent } from "./auth/logout/logout.component";
 import { ResetpasswordComponent } from "./auth/resetpassword/resetpassword.component";
 import { UsersignupComponent } from "./auth/usersignup/usersignup.component";
 import { DesignerprofileComponent } from "./students/designerprofile/designerprofile.component";
-import { TestformsComponent } from "./students/testforms/testforms.component";
+
 import { ComingsoonComponent } from "../app/public/comingsoon/comingsoon.component";
 import { ErrorMessageComponent } from "../app/public/error-message/error-message.component";
 import { VerifyEmailComponent } from "../app/public/verify-email/verify-email.component";
@@ -121,6 +121,7 @@ const routes: Routes = [
     loadChildren: () =>
       import("./printers/printers.module").then(m => m.PrintersModule)
   },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: "**", component: PageNotFoundComponent }
 ];
 

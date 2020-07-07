@@ -41,7 +41,7 @@ import { ResetpasswordComponent } from "./auth/resetpassword/resetpassword.compo
 import { UsersignupComponent } from "./auth/usersignup/usersignup.component";
 import { DesignersignupComponent } from "./auth/designersignup/designersignup.component";
 import { PrintersignupComponent } from "./auth/printersignup/printersignup.component";
-
+import { AgGridModule } from "ag-grid-angular";
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +86,8 @@ import { PrintersignupComponent } from "./auth/printersignup/printersignup.compo
     CarouselModule,
     NgxSpinnerModule,
     NgxStarRatingModule,
-    NgbModule
+    NgbModule,
+    AgGridModule
   ],
   providers: [],
   bootstrap: [AppComponent],
