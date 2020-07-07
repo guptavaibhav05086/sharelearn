@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
         case event instanceof NavigationStart: {
           debugger;
           let token = localStorage.getItem("Token");
-          if (token == "") {
+          if (token == "" || token == null) {
             this.displayUserNavbar = false;
           } else {
             this.displayUserNavbar = true;

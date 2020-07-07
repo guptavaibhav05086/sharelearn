@@ -26,7 +26,9 @@ export const environment = {
   generateOTP:
     "/api/Public/GenerateOTP?userId=$userId&phoneNumber=$phoneNumber",
   verifyOTP: "/api/Public/ValidateOTP?userId=$userId&OTP=$OTP",
-  verifyEmail:"/api/Public/verifyemail?userId=$userId&guid=$guid&role=$role"
+  verifyEmail: "/api/Public/verifyemail?userId=$userId&guid=$guid&role=$role",
+  resendVerifymail:
+    "/api/Public/resendverifyemail?email=$email&guid=$guid&role=$role"
 };
 
 /*

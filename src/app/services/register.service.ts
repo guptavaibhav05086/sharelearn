@@ -57,6 +57,13 @@ export class RegisterService {
       .replace("$role", role);
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
+  resendVerifyEmail(email, guid, role) {
+    let url = `${environment.baseUrl}${environment.resendVerifymail}`
+      .replace("$email", email)
+      .replace("$guid", guid)
+      .replace("$role", role);
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   resetPasswordRequest(resetPassword: ResetPassword) {
     return this._httpclient.post(
       `${environment.baseUrl}${environment.resetPassword}`,

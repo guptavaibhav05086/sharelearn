@@ -24,16 +24,12 @@ import { TestformsComponent } from "./students/testforms/testforms.component";
 import { ComingsoonComponent } from "../app/public/comingsoon/comingsoon.component";
 import { ErrorMessageComponent } from "../app/public/error-message/error-message.component";
 import { VerifyEmailComponent } from "../app/public/verify-email/verify-email.component";
+import { PageNotFoundComponent } from "./public/page-not-found/page-not-found.component";
 const routes: Routes = [
   {
     path: "designer",
     loadChildren: () =>
       import("./students/students.module").then(m => m.StudentsModule)
-  },
-  {
-    path: "trainers",
-    loadChildren: () =>
-      import("./trainers/trainers.module").then(m => m.TrainersModule)
   },
   {
     path: "",
@@ -124,7 +120,8 @@ const routes: Routes = [
     path: "printers",
     loadChildren: () =>
       import("./printers/printers.module").then(m => m.PrintersModule)
-  }
+  },
+  { path: "**", component: PageNotFoundComponent }
 ];
 
 @NgModule({
