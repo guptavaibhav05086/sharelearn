@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         debugger;
         this.spinnerService.hide();
         if (data.emailVerified == "False") {
-          this._helper.navigateToPath("/errorVerify");
+          this._helper.navigateToPath("/verifyvendors");
         } else {
           this._login.setToken(data);
           if (data.role == "Designer") {

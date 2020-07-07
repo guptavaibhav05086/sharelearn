@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
           let token = localStorage.getItem("Token");
           if (token == "") {
             this.displayUserNavbar = false;
+          } else {
+            this.displayUserNavbar = true;
           }
 
           break;
@@ -45,7 +47,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     debugger;
     let userLogin = this.login.getUserToken();
-    if (userLogin.Token != null && userLogin.type == "Student") {
+    if (userLogin.Token != null && userLogin.Token != "") {
       this.displayUserNavbar = true;
     }
   }

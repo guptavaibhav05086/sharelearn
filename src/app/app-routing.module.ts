@@ -117,7 +117,7 @@ const routes: Routes = [
       },
       { path: "designerprofile", component: DesignerprofileComponent },
       { path: "verifyemail", component: VerifyEmailComponent },
-      { path: "errorVerify", component: ErrorMessageComponent }
+      { path: "verifyvendors", component: ErrorMessageComponent }
     ]
   },
   {

@@ -6,10 +6,11 @@ import { Router, ParamMap } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  username;
   constructor() { }
 
   ngOnInit() {
+    this.username = localStorage.getItem("email");
   }
 
 }

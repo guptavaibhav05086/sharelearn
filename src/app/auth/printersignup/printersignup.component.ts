@@ -72,7 +72,7 @@ export class PrintersignupComponent implements OnInit {
         this.spinnerService.hide();
         this.registered = true;
         delay(20000);
-        this._helper.navigateToPath("/errorVerify");
+        this._helper.navigateToPath("/verifyvendors");
       },
       err => {
         debugger;

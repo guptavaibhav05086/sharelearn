@@ -67,10 +67,9 @@ export class LoginService {
   }
 
   public getUserToken() {
-    if (this.Tokens.Token === "") {
-      this.Tokens.Token = localStorage.getItem("Token");
-      this.Tokens.type = localStorage.getItem("type");
-    }
+    this.Tokens.Token = localStorage.getItem("Token");
+    this.Tokens.type = localStorage.getItem("type");
+
     return this.Tokens;
   }
   public getAuthHeader() {

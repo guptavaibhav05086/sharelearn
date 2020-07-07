@@ -1,6 +1,10 @@
 <app-navbar *ngIf="!displayUserNavbar"></app-navbar>
-<app-navbaruser *ngIf="displayUserNavbar"></app-navbaruser>
-<app-navbarcommon *ngIf="displayUserNavbar"></app-navbarcommon>
+<div style="position: fixed;width:100%" *ngIf="displayUserNavbar">
+  <app-navbaruser></app-navbaruser>
+  <!-- <app-topnavuserlogin *ngIf="displayUserNavbar"></app-topnavuserlogin> -->
+  <app-navbarcommon></app-navbarcommon>
+</div>
+
 <div style="background-color: grey;padding-top: 120px;">
   <router-outlet></router-outlet>
 </div>

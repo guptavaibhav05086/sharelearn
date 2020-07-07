@@ -90,7 +90,7 @@ export class DesignersignupComponent implements OnInit {
         this.spinnerService.hide();
         this.registered = true;
         this.serverError = false;
-        this._helper.navigateToPath("/errorVerify");
+        this._helper.navigateToPath("/verifyvendors");
         // let tokenRequest = new TokenRequest();
         // tokenRequest.password = newUser.Password;
         // tokenRequest.username = newUser.Email;

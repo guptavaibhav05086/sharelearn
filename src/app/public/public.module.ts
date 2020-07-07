@@ -6,20 +6,25 @@ import { FooterComponent } from "./footer/footer.component";
 import { ComingsoonComponent } from "./comingsoon/comingsoon.component";
 import { ErrorMessageComponent } from "./error-message/error-message.component";
 import { VerifyEmailComponent } from "./verify-email/verify-email.component";
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { TopnavuserloginComponent } from "./topnavuserlogin/topnavuserlogin.component";
 
 @NgModule({
   declarations: [
     FooterComponent,
     ComingsoonComponent,
     ErrorMessageComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    PageNotFoundComponent,
+    TopnavuserloginComponent
   ],
   imports: [CommonModule],
   exports: [
     FooterComponent,
     ComingsoonComponent,
     ErrorMessageComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    TopnavuserloginComponent
   ]
 })
 export class PublicModule {}

@@ -2,8 +2,11 @@
   <app-leftnav></app-leftnav>
   <div class="main-panel">
     <!-- Navbar -->
-    <app-topnav></app-topnav>
-    <app-studentnavbarcommon *ngIf="isDesignerVerified"></app-studentnavbarcommon>
+    <app-topnavuserlogin></app-topnavuserlogin>
+    <!-- <app-topnav></app-topnav> -->
+    <app-studentnavbarcommon
+      *ngIf="isDesignerVerified"
+    ></app-studentnavbarcommon>
     <!-- End Navbar -->
     <!-- <div class="panel-header panel-header-sm">
 
