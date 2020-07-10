@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ButtonrendererComponent } from "../buttonrenderer/buttonrenderer.component";
 import { AdminService } from "../../services/admin.service";
+import { ProductsFormsComponent } from "../products-forms/products-forms.component";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 @Component({
   selector: "app-products",
   templateUrl: "./products.component.html",
@@ -8,11 +10,18 @@ import { AdminService } from "../../services/admin.service";
 })
 export class ProductsComponent implements OnInit {
   frameworkComponents: any;
+  productLists:any;
   columnDefs = [
     { headerName: "Name", field: "productName", sortable: true, filter: true },
     {
       headerName: "Subcategory",
       field: "productSubcategory",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "Classification",
+      field: "productCategory",
       sortable: true,
       filter: true
     },
@@ -47,7 +56,7 @@ export class ProductsComponent implements OnInit {
   ];
 
   rowData: any;
-  constructor(private admin: AdminService) {
+  constructor(private admin: AdminService, private modalService: NgbModal) {
     this.frameworkComponents = {
       buttonRenderer: ButtonrendererComponent
     };
@@ -59,13 +68,30 @@ export class ProductsComponent implements OnInit {
       data => {
         debugger;
         this.rowData = data["productList"];
+        this.productLists=data['products']
       },
       err => {}
     );
   }
-
+  createProduct(){
+    const modelRef=this.modalService.open(ProductsFormsComponent, {
+      size: "lg",
+      backdrop: "static"
+    });
+    modelRef.componentInstance.productList = this.productLists;
+    modelRef.componentInstance.editForm=false;
+  }
   editProduct(e) {
     console.log(e.rowData);
+    const modelRef=this.modalService.open(ProductsFormsComponent, {
+      size: "lg",
+      backdrop: "static"
+    });
+    modelRef.componentInstance.productList = this.productLists;
+    modelRef.componentInstance.editForm=true;
+    modelRef.componentInstance.selectedProduct=e.rowData;
+
+    //this.modalService.editForm
     //alert()
   }
 }

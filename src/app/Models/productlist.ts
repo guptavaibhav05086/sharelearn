@@ -9,5 +9,6 @@ export class Productlist {
   public paperGSM: string;
   public quantities: string;
   public productPrice: string;
-  public productImage: string;
+  public productImage: any;
+  public price: string;
 }

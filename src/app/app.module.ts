@@ -42,6 +42,8 @@ import { UsersignupComponent } from "./auth/usersignup/usersignup.component";
 import { DesignersignupComponent } from "./auth/designersignup/designersignup.component";
 import { PrintersignupComponent } from "./auth/printersignup/printersignup.component";
 import { AgGridModule } from "ag-grid-angular";
+import { OrderPageComponent } from './mainsitecomponents/order-page/order-page.component';
+import { HomelinkPageComponent } from './mainsitecomponents/homelink-page/homelink-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +74,9 @@ import { AgGridModule } from "ag-grid-angular";
     ResetpasswordComponent,
     UsersignupComponent,
     DesignersignupComponent,
-    PrintersignupComponent
+    PrintersignupComponent,
+    OrderPageComponent,
+    HomelinkPageComponent
   ],
   imports: [
     BrowserModule,

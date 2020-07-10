@@ -1,0 +1,11 @@
+img.map,
+map area {
+  outline: none;
+}
+img[usemap],
+map area {
+  outline: none;
+}
+.map {
+  outline: 0;
+}

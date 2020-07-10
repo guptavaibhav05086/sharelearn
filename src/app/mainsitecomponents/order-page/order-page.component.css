@@ -1,0 +1,142 @@
+.flex-control3 {
+  width: 33%;
+}
+.flex-control4 {
+  width: 25%;
+}
+.flex-control5 {
+  width: 25%;
+  margin-left: 3%;
+}
+.flex-control-50 {
+  width: 55%;
+}
+
+.flex-control8 {
+  width: 80%;
+}
+.flex-control6 {
+  width: 60%;
+}
+.flex-control2 {
+  width: 20%;
+}
+.price-margin {
+  margin-left: 4%;
+}
+.flex-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-left: 5%;
+}
+.container {
+  margin-left: 25%;
+  box-shadow: 20px grey;
+  margin-top: 30px;
+}
+.display-label {
+  text-align: center;
+}
+.or-btn {
+  height: 50px;
+  width: 150px;
+  border-radius: 20px;
+}
+.form-check-label {
+  margin-bottom: 0;
+  margin-left: 10px;
+}
+.input-group,
+.form-group {
+  margin-bottom: 10px;
+  position: inherit;
+}
+.row {
+  margin-left: 3%;
+}
+button.calendar,
+button.calendar:active {
+  width: 2.75rem;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=) !important;
+  background-repeat: no-repeat;
+  background-size: 23px;
+  background-position: 50%;
+}
+.btn-outline-secondary {
+  color: #6c757d !important;
+  background-color: transparent !important;
+  border-color: #6c757d !important;
+}
+.col,
+.col-1,
+.col-10,
+.col-11,
+.col-12,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-auto,
+.col-lg,
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-auto,
+.col-md,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-auto,
+.col-sm,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-auto,
+.col-xl,
+.col-xl-1,
+.col-xl-10,
+.col-xl-11,
+.col-xl-12,
+.col-xl-2,
+.col-xl-3,
+.col-xl-4,
+.col-xl-5,
+.col-xl-6,
+.col-xl-7,
+.col-xl-8,
+.col-xl-9,
+.col-xl-auto {
+  position: inherit !important;
+}

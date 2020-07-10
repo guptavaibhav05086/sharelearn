@@ -29,7 +29,9 @@ export const environment = {
   verifyEmail: "/api/Public/verifyemail?userId=$userId&guid=$guid&role=$role",
   resendVerifymail:
     "/api/Public/resendverifyemail?email=$email&guid=$guid&role=$role",
-  getProducts: "/api/admin/getproducts"
+  getProducts: "/api/admin/getproducts",
+  updateProducts: "/api/admin/updateproducts",
+  uploadProdImage: "/api/admin/uploadproductimage"
 };
 
 /*

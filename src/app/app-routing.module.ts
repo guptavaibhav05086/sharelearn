@@ -25,6 +25,8 @@ import { ComingsoonComponent } from "../app/public/comingsoon/comingsoon.compone
 import { ErrorMessageComponent } from "../app/public/error-message/error-message.component";
 import { VerifyEmailComponent } from "../app/public/verify-email/verify-email.component";
 import { PageNotFoundComponent } from "./public/page-not-found/page-not-found.component";
+import { OrderPageComponent } from "./mainsitecomponents/order-page/order-page.component";
+import { HomelinkPageComponent } from './mainsitecomponents/homelink-page/homelink-page.component';
 const routes: Routes = [
   {
     path: "designer",
@@ -37,7 +39,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        component: ComingsoonComponent
+        component: HomelinkPageComponent
       },
       {
         path: "home",
@@ -47,30 +49,7 @@ const routes: Routes = [
         path: "about",
         component: AboutComponent
       },
-      {
-        path: "react",
-        component: ReactComponent
-      },
-      {
-        path: "angular",
-        component: AngularComponent
-      },
-      {
-        path: "javascript",
-        component: JavascriptComponent
-      },
-      {
-        path: "node",
-        component: NodeComponent
-      },
-      {
-        path: "dotnet",
-        component: DotnetComponent
-      },
-      {
-        path: "java",
-        component: JavaComponent
-      },
+
       {
         path: "login",
         component: LoginComponent
@@ -84,8 +63,8 @@ const routes: Routes = [
         component: UsersignupComponent
       },
       {
-        path: "explorecourses",
-        component: AllcoursesComponent
+        path: "createorder",
+        component: OrderPageComponent
       },
       {
         path: "registerCourse",
@@ -95,14 +74,7 @@ const routes: Routes = [
         path: "contact",
         component: ContactusComponent
       },
-      {
-        path: "mean",
-        component: MeanComponent
-      },
-      {
-        path: "mern",
-        component: MernComponent
-      },
+
       {
         path: "logout",
         component: LogoutComponent
@@ -121,7 +93,10 @@ const routes: Routes = [
     loadChildren: () =>
       import("./printers/printers.module").then(m => m.PrintersModule)
   },
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  {
+    path: "admin",
+    loadChildren: () => import("./admin/admin.module").then(m => m.AdminModule)
+  },
   { path: "**", component: PageNotFoundComponent }
 ];
 

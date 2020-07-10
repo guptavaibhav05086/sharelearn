@@ -1,0 +1,289 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title" style="PADDING-LEFT: 35%;">Product Form</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div
+  class="content"
+>
+  <div class="row">
+    
+    <div class="col-md-12">
+      <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title"></h5>
+          <!-- <button class="btn btn-primary"  (click)="editForm('personal')">Edit Profile</button> -->
+        </div>
+        <div class="card-body">
+          <form [formGroup]="productform" id="productform">
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Product Name</label>
+                  
+                  <select
+                    class="form-control"
+                    [disabled]="isDisabled"
+                    formControlName="Pname"
+                    required
+                  >
+                    <option selected></option>
+                    <option *ngFor="let item of productList" [value]="item.key">
+                      {{item.value}}
+                    </option>
+                    
+                  </select>
+                  <!-- <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Product Name"
+                    [disabled]="isDisabled"
+                    formControlName="Pname"
+                    required
+                  /> -->
+                  <span
+                    class="errorMessage"
+                    *ngIf="
+                      (productform.controls['Pname'].dirty ||
+                        productform.controls['Pname'].touched) &&
+                      productform.controls['Pname'].invalid &&
+                      productform.controls['Pname'].errors.required
+                    "
+                  >
+                    *First Name is required.
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label>Sub Category</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Sub Category"
+                    formControlName="subCat"
+                    required
+                  />
+                </div>
+                <span
+                  class="errorMessage"
+                  *ngIf="
+                    (productform.controls['subCat'].dirty ||
+                      productform.controls['subCat'].touched) &&
+                    productform.controls['subCat'].invalid &&
+                    productform.controls['subCat'].errors.required
+                  "
+                >
+                  *Sub Category is required.
+                </span>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Orientation</label>
+                  <select
+                    class="form-control"
+                    [disabled]="isDisabled"
+                    formControlName="orientation"
+                    required
+                  >
+                    <option selected></option>
+                    <option>Vertical</option>
+                    <option>Horizontal</option>
+                    <option>Not Specify</option>
+                  </select>
+                  <span
+                    class="errorMessage"
+                    *ngIf="
+                      (productform.controls['orientation'].dirty ||
+                        productform.controls['orientation'].touched) &&
+                      productform.controls['orientation'].invalid &&
+                      productform.controls['orientation'].errors.required
+                    "
+                  >
+                    *Please Select Orientation.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Size</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="size"
+                    [disabled]="isDisabled"
+                    formControlName="size"
+                    required
+                  />
+
+                  <span
+                    class="errorMessage"
+                    *ngIf="
+                      (productform.controls['size'].dirty ||
+                        productform.controls['size'].touched) &&
+                      productform.controls['size'].invalid &&
+                      productform.controls['size'].errors.required
+                    "
+                  >
+                    *Size is Required.
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-md-4 px-1">
+                <div
+                  class="form-group pmd-textfield pmd-textfield-floating-label"
+                >
+                  <label class="control-label" for="datepicker"
+                    >Paper GSM</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="datepicker"
+                    formControlName="paperGSM"
+                    required
+                  />
+                </div>
+                <span
+                  class="errorMessage"
+                  *ngIf="
+                    (productform.controls['paperGSM'].dirty ||
+                      productform.controls['paperGSM'].touched) &&
+                    productform.controls['paperGSM'].invalid &&
+                    productform.controls['paperGSM'].errors.required
+                  "
+                >
+                  *Paper GSM is required.
+                </span>
+                
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Quantities</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="# of years"
+                    formControlName="quantities"
+                    required
+                    [disabled]="isDisabled"
+                  />
+                  <span
+                    class="errorMessage"
+                    *ngIf="
+                      (productform.controls['quantities'].dirty ||
+                        productform.controls['quantities'].touched) &&
+                      productform.controls['quantities'].invalid &&
+                      productform.controls['quantities'].errors.required
+                    "
+                  >
+                    *Quantities is required.
+                  </span>
+                </div>
+              </div>
+            </div>
+<div class="row">
+    <div class="col-md-4 pl-1">
+        <div class="form-group">
+          <label>Classification</label>
+          <select
+            class="form-control"
+            [disabled]="isDisabled"
+            formControlName="classification"
+            required
+          >
+            <option selected></option>
+            <option >Design And Print</option>
+            <option>Design Only</option>
+            <option>Print Only</option>
+          </select>
+          <span
+            class="errorMessage"
+            *ngIf="
+              (productform.controls['classification'].dirty ||
+                productform.controls['classification'].touched) &&
+              productform.controls['classification'].invalid &&
+              productform.controls['classification'].errors.required
+            "
+          >
+            *Please Select Classification.
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 pl-1">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Price</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="INR"
+              formControlName="price"
+              required
+              [disabled]="isDisabled"
+            />
+            <span
+              class="errorMessage"
+              *ngIf="
+                (productform.controls['price'].dirty ||
+                  productform.controls['price'].touched) &&
+                productform.controls['price'].invalid &&
+                productform.controls['price'].errors.required
+              "
+            >
+              *Price is required.
+            </span>
+          </div>
+        </div>
+  <div class="input-group col-md-4" style="padding-top: 30px;">
+    <div class="custom-file form-group">
+      <input
+        type="file"
+        accept="image.*"
+        class="custom-file-input"
+        id="inputGroupFile02"
+        aria-describedby="inputGroupFileAddon02"
+        (change)="uploadGSTCertificate($event.target.files,'GST')"
+      />
+      <label class="custom-file-label" for="inputGroupFile01"
+        >{{selectedFileName}}</label
+      >
+     
+    </div>
+   
+  </div>
+</div>
+            <div class="row">
+              <!-- {{productform.valid && isTermsAccepted}} -->
+              <div class="update ml-auto mr-auto">
+                <button
+                  type="button"
+                  (click)="updateProduct()"
+                  [disabled]="!productform.valid"
+                  class="btn btn-primary btn-round"
+                >
+                  Submit
+                </button>
+              </div>
+             <span *ngIf="updateSuccess" style="color:green">Product Update successfully</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<ngx-spinner
+  bdColor="rgba(51, 51, 51, 0.8)"
+  size="default"
+  type="ball-spin-clockwise"
+>
+  <p style="color: white">Please Wait.</p>
+</ngx-spinner>

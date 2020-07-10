@@ -1,293 +1,51 @@
-<div class="content" >
-    <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-          <div class="card-body ">
-            <div class="row">
-              <div class="col-5 col-md-4">
-                <div class="icon-big text-center icon-warning">
-                  <i class="nc-icon nc-cart-simple text-warning"></i>
-                </div>
-              </div>
-              <div class="col-7 col-md-8">
-                <div class="numbers">
-                  <p class="card-category">Total Orders</p>
-                  <p class="card-title">4
-                    <p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-footer ">
-            <hr>
-            <div class="stats">
-              <i class="fa fa-refresh"></i> Update Now
-            </div>
-          </div>
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card ">
+        <div class="card-header ">
+          <h5 class="card-title">Product Specification</h5>
+          <p>
+            <button
+              class="btn btn-primary"
+              type="text"
+              (click)="createProduct()"
+            >
+              Create Product
+            </button>
+          </p>
         </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-          <div class="card-body ">
+        <div class="card-body ">
+          <div class="content" style="margin-top:0px">
             <div class="row">
-              <div class="col-5 col-md-4">
-                <div class="icon-big text-center icon-warning">
-                  <i class="nc-icon nc-money-coins text-success"></i>
-                </div>
-              </div>
-              <div class="col-7 col-md-8">
-                <div class="numbers">
-                  <p class="card-category">Active Orders</p>
-                  <p class="card-title">1
-                    <p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-footer ">
-            <hr>
-            <div class="stats">
-              <i class="fa fa-calendar-o"></i> Last day
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-          <div class="card-body ">
-            <div class="row">
-              <div class="col-5 col-md-4">
-                <div class="icon-big text-center icon-warning">
-                  <i class="nc-icon nc-check-2 text-success"></i>
-                </div>
-              </div>
-              <div class="col-7 col-md-8">
-                <div class="numbers">
-                  <p class="card-category">Orders Completed</p>
-                  <p class="card-title">1
-                    <p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-footer ">
-            <hr>
-            <div class="stats">
-              <i class="fa fa-clock-o"></i> In the last hour
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-          <div class="card-body ">
-            <div class="row">
-              <div class="col-5 col-md-3">
-                <div class="icon-big text-center icon-warning">
-                  <i class="nc-icon nc-watch-time text-primary"></i>
-                </div>
-              </div>
-              <div class="col-7 col-md-9">
-                <div class="numbers">
-                  <p class="card-category"> Upcoming Meetings</p>
-                  <p class="card-title">4
-                    <p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-footer ">
-            <hr>
-            <div class="stats">
-              <i class="fa fa-refresh"></i> Update now
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card ">
-          <div class="card-header ">
-            <h5 class="card-title">Course List</h5>
-            
-          </div>
-          <div class="card-body ">
-            <div class="content" style="margin-top:0px">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="card">
-                    <!-- <div class="card-header">
+              <div class="col-md-12">
+                <div class="card">
+                  <!-- <div class="card-header">
                       <h4 class="card-title"> Simple Table</h4>
                     </div> -->
-                    <div class="card-body">
-                      <ag-grid-angular
+                  <div class="card-body">
+                    <ag-grid-angular
                       style="height: 500px;"
-    class="ag-theme-alpine"
-    [rowData]="rowData "
-    [columnDefs]="columnDefs"
-    [frameworkComponents]="frameworkComponents"
-    [pagination]=true
-    [paginationPageSize]=20
-    >
-</ag-grid-angular>
-                    </div>
+                      class="ag-theme-alpine"
+                      [rowData]="rowData"
+                      [columnDefs]="columnDefs"
+                      [frameworkComponents]="frameworkComponents"
+                      [pagination]="true"
+                      [paginationPageSize]="20"
+                    >
+                    </ag-grid-angular>
                   </div>
                 </div>
-               
               </div>
             </div>
           </div>
-          <div class="card-footer ">
-            <hr>
-            <div class="stats">
-              <i class="fa fa-history"></i> <a href="tables.html">View All</a>
-            </div>
+        </div>
+        <div class="card-footer ">
+          <hr />
+          <div class="stats">
+            <i class="fa fa-history"></i> <a href="tables.html">View All</a>
           </div>
         </div>
       </div>
     </div>
-    
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card ">
-          <div class="card-header ">
-            <h5 class="card-title">Transaction List</h5>
-            <!-- <p class="card-category">24 Hours performance</p> -->
-          </div>
-          <div class="card-body ">
-            <div class="content" style="margin-top:0px">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="card">
-                    <!-- <div class="card-header">
-                      <h4 class="card-title"> Simple Table</h4>
-                    </div> -->
-                    <div class="card-body">
-                      <div class="table-responsive">
-                        <table class="table">
-                          <thead class=" text-primary">
-                            <th>
-                              Id
-                            </th>
-                            <th>
-                              CourseName
-                            </th>
-                            <th>
-                              Amount
-                            </th>
-                            <th>
-                              Status
-                            </th>
-                            <th class="text-right">
-                              Date
-                            </th>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>
-                                1
-                              </td>
-                              <td>
-                               Node-Module1
-                              </td>
-                              <td>
-                                2500
-                              </td>
-                              <td>
-                                Completed
-                              </td>
-                              <td class="text-right">
-                                29-05-2020
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                1
-                              </td>
-                              <td>
-                               Node-Module1
-                              </td>
-                              <td>
-                                2500
-                              </td>
-                              <td>
-                                Completed
-                              </td>
-                              <td class="text-right">
-                                29-05-2020
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                1
-                              </td>
-                              <td>
-                               Node-Module1
-                              </td>
-                              <td>
-                                2500
-                              </td>
-                              <td>
-                                Completed
-                              </td>
-                              <td class="text-right">
-                                29-05-2020
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                1
-                              </td>
-                              <td>
-                               Node-Module1
-                              </td>
-                              <td>
-                                2500
-                              </td>
-                              <td>
-                                Completed
-                              </td>
-                              <td class="text-right">
-                                29-05-2020
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                1
-                              </td>
-                              <td>
-                               Node-Module1
-                              </td>
-                              <td>
-                                2500
-                              </td>
-                              <td>
-                                Completed
-                              </td>
-                              <td class="text-right">
-                                29-05-2020
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-               
-              </div>
-            </div>
-          </div>
-          <div class="card-footer ">
-            <hr>
-            <div class="stats">
-              <i class="fa fa-history"></i> <a href="tables.html">View All</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
   </div>
-  
+</div>
