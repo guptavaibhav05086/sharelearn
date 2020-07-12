@@ -35,7 +35,7 @@ export class DesignerprofileComponent implements OnInit {
     dob: new FormControl("", [Validators.required]),
     qualification: new FormControl("", [Validators.required]),
     exp: new FormControl("", [Validators.required]),
-    profile: new FormControl("", [Validators.required]),
+    profile: new FormControl(""),
     city: new FormControl("", [Validators.required]),
     state: new FormControl("", [Validators.required]),
     postalCode: new FormControl("", [Validators.required]),

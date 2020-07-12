@@ -1,13 +1,18 @@
-<!-- <app-navbar *ngIf="!displayUserNavbar"></app-navbar>
-<div style="position: fixed;width:100%" *ngIf="displayUserNavbar">
+<app-navbar *ngIf="!displayUserNavbar && displayNavigation"></app-navbar>
+<div
+  style="position: fixed;width:100%"
+  *ngIf="displayUserNavbar && displayNavigation"
+>
   <app-navbaruser></app-navbaruser>
-  
-  <app-navbarcommon></app-navbarcommon>
-</div> -->
-<!-- <app-homelink-page></app-homelink-page> -->
-<!-- <div style="padding-top: 120px;">
-    <router-outlet></router-outlet>
-</div> -->
 
-<!-- <app-footer></app-footer> -->
-<router-outlet></router-outlet>
+  <app-navbarcommon></app-navbarcommon>
+</div>
+<!-- <app-homelink-page></app-homelink-page> -->
+<div
+  [ngStyle]="{ 'padding-top': displayNavigation === true ? '120px' : '0px' }"
+>
+  <router-outlet></router-outlet>
+</div>
+
+<app-footer *ngIf="displayNavigation"></app-footer>
+<!-- <router-outlet></router-outlet> -->

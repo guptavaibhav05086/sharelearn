@@ -415,7 +415,7 @@ label.checkbox input[type=checkbox]+.check-mark{
     height:1.25rem;
     width:1.25rem;
     margin-right:.625rem;
-    position:relative;
+    /* position:relative; */
     -webkit-border-radius:.3125rem;
     -moz-border-radius:.3125rem;
     border-radius:.3125rem;

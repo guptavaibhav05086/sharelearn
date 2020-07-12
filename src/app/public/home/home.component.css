@@ -1,0 +1,7 @@
+.home {
+  background-image: url("../../../assets/DashBoard/img/homeblank1.png");
+  background-attachment: fixed;
+  background-size: cover;
+  height: 600px;
+  overflow: hidden;
+}

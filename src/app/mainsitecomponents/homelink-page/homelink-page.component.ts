@@ -1,4 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  HostListener,
+  ViewChild,
+  ElementRef
+} from "@angular/core";
+import { WindowRefService } from "src/app/services/window-ref.service";
+import { HelperService } from "../../services/helper.service";
 
 @Component({
   selector: "app-homelink-page",
@@ -6,18 +14,83 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./homelink-page.component.css"]
 })
 export class HomelinkPageComponent implements OnInit {
+  winSize = {
+    oWidth: 0,
+    oHeigth: 0,
+    nWidth: 0,
+    nHeigth: 0
+  };
+
+  cords;
   cordinate = {
     X: 0,
     Y: 0
   };
-  constructor() {}
+  constructor(
+    private winRef: WindowRefService,
+    private helper: HelperService
+  ) {}
 
   ngOnInit(): void {}
-  imageAreaClick(value) {
-    alert(value);
+
+  socialLink(name) {
+    if (name == "fb") {
+      window.open("https://www.facebook.com/shapenprint/", "_blank");
+    }
+    if (name == "in") {
+      window.open("https://www.instagram.com/shapenprint/", "_blank");
+    }
+    if (name == "ln") {
+      window.open("https://www.linkedin.com/company/shapenprint/", "_blank");
+    }
+    if (name == "tw") {
+      window.open("https://twitter.com/shapeNprint/", "_blank");
+    }
+    if (name == "register") {
+      this.helper.navigateToPath("/register");
+    }
+  }
+
+  @HostListener("window:load")
+  calculateCordsOnload() {
+    this.winSize.oWidth = this.winRef.nativeWindow.visualViewport.width;
+    this.winSize.oHeigth = this.winRef.nativeWindow.visualViewport.height;
+    console.log(this.winSize);
+    //alert("w: " + this.winSize.nWidth + " h: " + this.winSize.nHeigth);
+  }
+  @HostListener("window:resize")
+  calculateCordsOnresize() {
+    this.winSize.nWidth = this.winRef.nativeWindow.visualViewport.width;
+    this.winSize.nHeigth = this.winRef.nativeWindow.visualViewport.height;
+    console.log(this.winSize);
+    //alert("w: " + this.winSize.nWidth + " h: " + this.winSize.nHeigth);
   }
   selectCors(event) {
     this.cordinate.X = event.clientX;
     this.cordinate.Y = event.clientY;
+    console.log(this.cordinate);
+    // alert(this.cordinate);
+  }
+  clickCord(event) {
+    this.cordinate.X = event.clientX;
+    this.cordinate.Y = event.clientY;
+    if (this.cordinate.Y > 363 && this.cordinate.Y < 385) {
+      if (this.cordinate.X > 1270 && this.cordinate.X < 1290) {
+        alert("Linkdn Clicked");
+        window.open("https://www.linkedin.com/company/shapenprint/", "_blank");
+      } else if (this.cordinate.X > 1305 && this.cordinate.X < 1325) {
+        //alert("Insta Clicked");
+        window.open("https://www.instagram.com/shapenprint/", "_blank");
+      } else if (this.cordinate.X > 1345 && this.cordinate.X < 1365) {
+        //alert("Twitter Clicked");
+        window.open("https://twitter.com/shapeNprint/", "_blank");
+      } else if (this.cordinate.X > 1375 && this.cordinate.X < 1395) {
+        //alert("Facebook Clicked");
+        window.open("https://www.facebook.com/shapenprint/", "_blank");
+      }
+    }
+    console.log(this.cordinate);
+    var cord = "X: " + this.cordinate.X + " Y: " + this.cordinate.Y;
+    alert(cord);
   }
 }

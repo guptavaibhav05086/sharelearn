@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject, HostListener } from "@angular/core";
 import { LoginService } from "../../services/login.service";
+import { DOCUMENT } from "@angular/common";
 import {
   Event,
   NavigationCancel,
@@ -16,11 +17,21 @@ import {
 })
 export class HomeComponent implements OnInit {
   displayUserNavbar = false;
-  constructor(private login: LoginService, private router: Router) {
+  displayNavigation = false;
+  cordinate = {
+    X: 0,
+    Y: 0
+  };
+  constructor(
+    private login: LoginService,
+    private router: Router,
+    @Inject(DOCUMENT) private _document
+  ) {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
           debugger;
+          console.log(this.router.url);
           let token = localStorage.getItem("Token");
           if (token == "" || token == null) {
             this.displayUserNavbar = false;
@@ -34,7 +45,14 @@ export class HomeComponent implements OnInit {
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           console.log("Navigation End");
-
+          console.log(this.router.url);
+          if (this.router.url == "/") {
+            this.displayNavigation = false;
+            this._document.body.classList.add("home");
+          } else {
+            this.displayNavigation = true;
+            this._document.body.classList.remove("home");
+          }
           break;
         }
         case event instanceof NavigationStart: {
@@ -44,6 +62,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  calculateCords(event) {
+    this.cordinate.X = event.clientX;
+    this.cordinate.Y = event.clientY;
+    console.log(this.cordinate);
+  }
+  onClickBody() {}
   ngOnInit() {
     debugger;
     let userLogin = this.login.getUserToken();

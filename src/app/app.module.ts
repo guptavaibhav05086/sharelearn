@@ -44,6 +44,7 @@ import { PrintersignupComponent } from "./auth/printersignup/printersignup.compo
 import { AgGridModule } from "ag-grid-angular";
 import { OrderPageComponent } from './mainsitecomponents/order-page/order-page.component';
 import { HomelinkPageComponent } from './mainsitecomponents/homelink-page/homelink-page.component';
+import { AboutusPopupComponent } from './mainsitecomponents/aboutus-popup/aboutus-popup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +77,8 @@ import { HomelinkPageComponent } from './mainsitecomponents/homelink-page/homeli
     DesignersignupComponent,
     PrintersignupComponent,
     OrderPageComponent,
-    HomelinkPageComponent
+    HomelinkPageComponent,
+    AboutusPopupComponent
   ],
   imports: [
     BrowserModule,

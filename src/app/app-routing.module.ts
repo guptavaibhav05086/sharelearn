@@ -26,7 +26,7 @@ import { ErrorMessageComponent } from "../app/public/error-message/error-message
 import { VerifyEmailComponent } from "../app/public/verify-email/verify-email.component";
 import { PageNotFoundComponent } from "./public/page-not-found/page-not-found.component";
 import { OrderPageComponent } from "./mainsitecomponents/order-page/order-page.component";
-import { HomelinkPageComponent } from './mainsitecomponents/homelink-page/homelink-page.component';
+import { HomelinkPageComponent } from "./mainsitecomponents/homelink-page/homelink-page.component";
 const routes: Routes = [
   {
     path: "designer",
@@ -43,7 +43,7 @@ const routes: Routes = [
       },
       {
         path: "home",
-        component: HomecontentComponent
+        component: HomelinkPageComponent
       },
       {
         path: "about",
