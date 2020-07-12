@@ -111,7 +111,7 @@
             <div class="row">
               <div class="col-md-4 pr-1">
                 <div class="form-group">
-                  <label>First Name</label>
+                  <label>First Name *</label>
                   <input
                     type="text"
                     class="form-control"
@@ -136,7 +136,7 @@
               </div>
               <div class="col-md-4 px-1">
                 <div class="form-group">
-                  <label>Last Name</label>
+                  <label>Last Name *</label>
                   <input
                     type="text"
                     class="form-control"
@@ -160,7 +160,7 @@
               </div>
               <div class="col-md-4 pl-1">
                 <div class="form-group">
-                  <label>Gender</label>
+                  <label>Gender *</label>
                   <select class="form-control" [disabled]="isDisabled" 
                   formControlName="gender"  
                   required>
@@ -186,7 +186,7 @@
             <div class="row">
               <div class="col-md-5 pr-1">
                 <div class="form-group">
-                  <label>Phone Number</label>
+                  <label>Phone Number *</label>
                   <input
                     type="text"
                     class="form-control"
@@ -218,6 +218,15 @@
                 >
                   *Invalid Mobile number.
                 </span>
+                <span
+                  class="errorMessage"
+                  *ngIf="
+                  (verifyClicked &&
+                    !(isPhoneVerified))
+                  "
+                >
+                  *Mobile number is not verified.
+                </span>
                 </div>
               </div>
               <div class="col-md-2 pr-1" style="padding-top: 20px;">
@@ -230,7 +239,7 @@
                 </div>
               <div class="col-md-5 px-1">
                   <div class="form-group pmd-textfield pmd-textfield-floating-label">
-                      <label class="control-label" for="datepicker">Date Of Birth</label>
+                      <label class="control-label" for="datepicker">Date Of Birth *</label>
                       <input type="date" class="form-control" id="datepicker" 
                       formControlName="dob"  
                       required>
@@ -254,7 +263,7 @@
             <div class="row">
                 <div class="col-md-4 pr-1">
                     <div class="form-group">
-                      <label>GST</label>
+                      <label>GST*</label>
                       <input
                         type="text"
                         class="form-control"
@@ -288,7 +297,7 @@
                   </span>
                     </div>
                   </div>
-                  <div class="input-group col-md-8" style="padding-top: 30px;">
+                  <div class="input-group col-md-8" style="padding-top: 30px;position: relative !important">
                     <div class="custom-file form-group">
                       <input
                         type="file"
@@ -312,20 +321,70 @@
                   </div> 
             </div>
             <div class="row">
-              <div class="col-md-8">
+                <div class="col-md-4 pr-1">
+                    <div class="form-group">
+                      <label>PAN *</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="PAN "
+                        
+                        [disabled]="isDisabled"
+                        formControlName="pan"  
+                        required
+                      />
+                      <span
+          class="errorMessage"
+          *ngIf="
+            (profileform.controls['pan'].dirty ||
+            profileform.controls['pan'].touched) &&
+            profileform.controls['pan'].invalid &&
+            profileform.controls['pan'].errors.required
+          "
+        >
+          *PAN Number is required.
+        </span>
+                    </div>
+                  </div>
+              <div class="col-md-4">
                 <div class="form-group">
-                  <label>Portfolio Link</label>
+                  <label>Online Presence</label>
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="https://www.linkedin.com/in/vaibhav-gupta-6a78a81b/"
+                    placeholder="Website, Social Media, etc"
                     
                     formControlName="profile"  
-                    required
+                    
                     [disabled]="isDisabled"
                   />
                 </div>
               </div>
+              <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>Aadhar *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Aadhar "
+                      
+                      [disabled]="isDisabled"
+                      formControlName="aadhar"  
+                      required
+                    />
+                    <span
+        class="errorMessage"
+        *ngIf="
+          (profileform.controls['aadhar'].dirty ||
+          profileform.controls['aadhar'].touched) &&
+          profileform.controls['aadhar'].invalid &&
+          profileform.controls['aadhar'].errors.required
+        "
+      >
+        *Aadhar Number is required.
+      </span>
+                  </div>
+                </div>
             </div>
           <div class="row">
               
@@ -409,7 +468,7 @@
             <div class="row" >
               <!-- {{profileform.valid && isTermsAccepted}} -->
               <div class="update ml-auto mr-auto">
-                <button type="button" (click)="createProfile()" [disabled]= "!(profileform.valid && isTermsAccepted)" class="btn btn-primary btn-round">
+                <button type="button" (click)="createProfile()" [disabled]= "!(profileform.valid && isTermsAccepted &&isPhoneVerified)" class="btn btn-primary btn-round">
                   Submit
                 </button>
               </div>

@@ -10,7 +10,7 @@ import { DesignerService } from "src/app/services/designer.service";
 import { ValidatorsService } from "src/app/services/validators.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import { PrinterService } from "src/app/services/printer.service";
-import {RegisterService } from '../../services/register.service';
+import { RegisterService } from "../../services/register.service";
 import { PrinterProfileRequest } from "src/app/Models/printer-profile-request";
 import { TransactionsuccessdetailsComponent } from "../transactionsuccessdetails/transactionsuccessdetails.component";
 
@@ -29,6 +29,8 @@ export class PrinterprofileComponent implements OnInit {
   disModyBtn = false;
   fileError = false;
   selectedFileName = "Choose GST Certificate";
+  verifyClicked = false;
+  isPhoneVerified = false;
   profileform = new FormGroup({
     fName: new FormControl("", [Validators.required]),
     lName: new FormControl("", [Validators.required]),
@@ -48,8 +50,10 @@ export class PrinterprofileComponent implements OnInit {
     ]),
 
     profile: new FormControl("", [Validators.required]),
+    pan: new FormControl("", [Validators.required]),
     address: new FormControl(""),
-    softwares: new FormArray([])
+    softwares: new FormArray([]),
+    aadhar: new FormControl("", [Validators.required])
   });
   constructor(
     private modalService: NgbModal,
@@ -57,7 +61,7 @@ export class PrinterprofileComponent implements OnInit {
     private printer: PrinterService,
     private _validator: ValidatorsService,
     private spinnerService: NgxSpinnerService,
-    private register:RegisterService
+    private register: RegisterService
   ) {}
   statesData: Array<Cities>;
   distinctStates: Array<Cities>;
@@ -114,7 +118,10 @@ export class PrinterprofileComponent implements OnInit {
     //this.spinner.show();
     let userId = localStorage.getItem("userId");
     // let number =  this.studentForm.controls['mobileNumber'].value;
-    if(this.profileform.controls["mobileNumber"].value !="" && (!this.profileform.controls['mobileNumber'].invalid)  ){
+    if (
+      this.profileform.controls["mobileNumber"].value != "" &&
+      !this.profileform.controls["mobileNumber"].invalid
+    ) {
       this.register.generateOTP(userId, number).subscribe(
         data => {
           //this.message = "Please check your email Id";
@@ -125,13 +132,11 @@ export class PrinterprofileComponent implements OnInit {
           //this.spinner.hide();
         }
       );
-    }
-    else{
-      alert('Enter Valid Mobile Number');
+    } else {
+      alert("Enter Valid Mobile Number");
       return false;
     }
     return true;
-    
   }
   ngOnInit() {
     this.request = new PrinterProfileRequest();
@@ -160,9 +165,13 @@ export class PrinterprofileComponent implements OnInit {
             mobileNumber: data["mobileNumber"],
             dob: data["dob"],
             profile: data["profileUrl"],
-            address: data["address"]
+            address: data["address"],
+            gst: data["gst"],
+            aadhar: data["aadhar"],
+            pan:data["pan"]
           });
-
+          this.isPhoneVerified = data["isMobileVerified"];
+          this.selectedFileName = data["gstFileName"];
           if (data["profileImage"] != null) {
             this.profileImg = data["profileImage"];
           }
@@ -222,6 +231,8 @@ export class PrinterprofileComponent implements OnInit {
     this.request.gender = this.profileform.controls["gender"].value;
     this.request.address = this.profileform.controls["address"].value;
     this.request.profileUrl = this.profileform.controls["profile"].value;
+    this.request.aadhar = this.profileform.controls["aadhar"].value;
+    this.request.pan = this.profileform.controls["pan"].value;
     this.request.gst = this.profileform.controls["gst"].value;
     //
     this.request.mobileNumber = this.profileform.controls["mobileNumber"].value;
@@ -254,12 +265,21 @@ export class PrinterprofileComponent implements OnInit {
     else this.isDisableProfession = true;
   }
   openVerifyOTP() {
-    let result = this.generateOTP();
-    if(result){
-      const modalRef = this.modalService.open(VerifyOTPComponent);
-      modalRef.componentInstance.name = "World";
+    if (this.isPhoneVerified == false) {
+      this.verifyClicked = true;
+      let result = this.generateOTP();
+      if (result) {
+        const modalRef = this.modalService.open(VerifyOTPComponent, {
+          backdrop: "static"
+        });
+        modalRef.componentInstance.name = "World";
+        modalRef.result.then(result => {
+          if (result) {
+            console.log(result);
+          }
+        });
+      }
     }
-    
   }
   openTermCondition(event) {
     event.preventDefault();

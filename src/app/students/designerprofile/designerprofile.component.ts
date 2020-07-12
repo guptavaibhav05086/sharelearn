@@ -9,6 +9,7 @@ import { Cities } from "src/app/Models/cities";
 import { DesignerService } from "src/app/services/designer.service";
 import { ValidatorsService } from "src/app/services/validators.service";
 import { NgxSpinnerService } from "ngx-spinner";
+import { RegisterService } from "src/app/services/register.service";
 @Component({
   selector: "app-designerprofile",
   templateUrl: "./designerprofile.component.html",
@@ -22,6 +23,8 @@ export class DesignerprofileComponent implements OnInit {
   isTermsAccepted: boolean = false;
   displayOthers = false;
   isEdit = false;
+  isPhoneVerified = false;
+  verifyClicked = false;
   profileform = new FormGroup({
     fName: new FormControl("", [Validators.required]),
     lName: new FormControl("", [Validators.required]),
@@ -40,14 +43,16 @@ export class DesignerprofileComponent implements OnInit {
     state: new FormControl("", [Validators.required]),
     postalCode: new FormControl("", [Validators.required]),
     softwares: new FormArray([]),
-    others: new FormControl("", [])
+    others: new FormControl("", []),
+    pan: new FormControl("", [Validators.required])
   });
   constructor(
     private modalService: NgbModal,
     private helper: HelperService,
     private designer: DesignerService,
     private _validator: ValidatorsService,
-    private spinnerService: NgxSpinnerService
+    private spinnerService: NgxSpinnerService,
+    private register: RegisterService
   ) {}
   statesData: Array<Cities>;
   distinctStates: Array<Cities>;
@@ -113,8 +118,10 @@ export class DesignerprofileComponent implements OnInit {
             exp: data["exp"],
             postalCode: data["postalCode"],
             state: data["state"],
-            city: data["city"]
+            city: data["city"],
+            pan: data["pan"]
           });
+          this.isPhoneVerified = data["isMobileVerified"];
           if (data["profileImage"] != null) {
             this.profileImg = data["profileImage"];
           }
@@ -190,6 +197,7 @@ export class DesignerprofileComponent implements OnInit {
     this.request.state = this.profileform.controls["state"].value;
     this.request.userId = localStorage.getItem("userId");
     this.request.emailId = localStorage.getItem("email");
+    this.request.pan = this.profileform.controls["pan"].value;
     let selSoft = this.softwares.filter(item => item.selected == true);
     selSoft.forEach(item => (this.request.softwares += item.name + ";"));
 
@@ -226,8 +234,51 @@ export class DesignerprofileComponent implements OnInit {
     else this.isDisableProfession = true;
   }
   openVerifyOTP() {
-    const modalRef = this.modalService.open(VerifyOTPComponent);
-    modalRef.componentInstance.name = "World";
+    if (this.isPhoneVerified == false) {
+      this.verifyClicked = true;
+      let result = this.generateOTP();
+      if (result) {
+        const modalRef = this.modalService.open(VerifyOTPComponent, {
+          backdrop: "static"
+        });
+        modalRef.componentInstance.name = "World";
+        modalRef.result.then(result => {
+          debugger;
+          if (result) {
+            this.isPhoneVerified = result;
+          } else {
+            this.isPhoneVerified = result;
+          }
+        });
+      }
+    }
+  }
+  generateOTP() {
+    debugger;
+    let number = this.profileform.controls["mobileNumber"].value;
+    //this.message = "";
+    //this.spinner.show();
+    let userId = localStorage.getItem("userId");
+    // let number =  this.studentForm.controls['mobileNumber'].value;
+    if (
+      this.profileform.controls["mobileNumber"].value != "" &&
+      !this.profileform.controls["mobileNumber"].invalid
+    ) {
+      this.register.generateOTP(userId, number).subscribe(
+        data => {
+          //this.message = "Please check your email Id";
+          //this.spinner.hide();
+        },
+        err => {
+          //this.message = "Issue occured please check after some time";
+          //this.spinner.hide();
+        }
+      );
+    } else {
+      alert("Enter Valid Mobile Number");
+      return false;
+    }
+    return true;
   }
   openTermCondition(event) {
     event.preventDefault();

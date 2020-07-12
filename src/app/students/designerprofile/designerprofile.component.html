@@ -211,9 +211,18 @@
                 >
                   *Invalid Mobile number.
                 </span>
+                <span
+                  class="errorMessage"
+                  *ngIf="
+                  (verifyClicked &&
+                    !(isPhoneVerified))
+                  "
+                >
+                  *Mobile number is not verified.
+                </span>
                 </div>
               </div>
-              <div class="col-md-2 pr-1" style="padding-top: 20px;">
+              <div class="col-md-2 pr-1" style="padding-top: 20px;" *ngIf="!isPhoneVerified">
                   <div class="form-group">
                     
                     <button type="button" (click)="openVerifyOTP()"  class="btn btn-primary btn-round">
@@ -290,7 +299,7 @@
                     </span>
                     </div>
                   </div>
-              <div class="col-md-8">
+              <div class="col-md-4">
                 <div class="form-group">
                   <label> Portfolio Link  </label>
                   <input
@@ -300,6 +309,20 @@
                     
                     formControlName="profile"  
                     
+                    [disabled]="isDisabled"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label> PAN*  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="PAN"
+                    
+                    formControlName="pan"  
+                    required
                     [disabled]="isDisabled"
                   />
                 </div>
@@ -456,7 +479,7 @@
             <div class="row" >
               <!-- {{profileform.valid && isTermsAccepted}} -->
               <div class="update ml-auto mr-auto">
-                <button type="button" (click)="createProfile()" [disabled]= "!(profileform.valid && isTermsAccepted)" class="btn btn-primary btn-round">
+                <button type="button" (click)="createProfile()" [disabled]= "!(profileform.valid && isTermsAccepted && isPhoneVerified)" class="btn btn-primary btn-round">
                   Submit
                 </button>
               </div>

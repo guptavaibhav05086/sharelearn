@@ -11,6 +11,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class VerifyOTPComponent implements OnInit {
   message = "";
+  verified = false;
   constructor(
     public activeModal: NgbActiveModal,
     private _validator: ValidatorsService,
@@ -20,22 +21,30 @@ export class VerifyOTPComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  resetPassword() {
+  verifyOTP() {
     let number = this.studentForm.controls["mobileNumber"].value;
+    let userId = localStorage.getItem("userId");
     this.message = "";
     this.spinner.show();
-    this.register.forgotPasswordEmail(number).subscribe(
+    this.register.verifyOTP(number, userId).subscribe(
       data => {
-        this.message = "Please check your email Id";
+        this.message = "Phone# Validated";
+        this.verified = true;
         this.spinner.hide();
       },
       err => {
         this.message = "Issue occured please check after some time";
         this.spinner.hide();
+        this.verified = false;
       }
     );
   }
   studentForm = new FormGroup({
     mobileNumber: new FormControl("", [Validators.required])
   });
+
+  closeModel() {
+    debugger;
+    this.activeModal.close(this.verified);
+  }
 }

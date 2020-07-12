@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  api_RegisterUser: "/api/Account/Register",
+
   baseUrl: "http://localhost:39117",
+  api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
   tokenUrl: "/Token",
   guestRegister: "/api/Public/guestregister",
