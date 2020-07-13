@@ -229,7 +229,7 @@
                 </span>
                 </div>
               </div>
-              <div class="col-md-2 pr-1" style="padding-top: 20px;">
+              <div class="col-md-2 pr-1" style="padding-top: 20px;" *ngIf="!isPhoneVerified">
                   <div class="form-group">
                     
                     <button type="button" (click)="openVerifyOTP()"  class="btn btn-primary btn-round">

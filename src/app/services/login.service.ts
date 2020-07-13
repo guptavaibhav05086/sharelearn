@@ -73,11 +73,10 @@ export class LoginService {
     return this.Tokens;
   }
   public getAuthHeader() {
-    if (this.authHeaders == null) {
-      this.authHeaders = new HttpHeaders({
-        Authorization: "Bearer " + this.Tokens.Token
-      });
-    }
+    this.authHeaders = new HttpHeaders({
+      Authorization: "Bearer " + this.Tokens.Token
+    });
+
     const options = {
       headers: this.authHeaders
     };

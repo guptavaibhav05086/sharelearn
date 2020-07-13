@@ -121,7 +121,10 @@ export class DesignerprofileComponent implements OnInit {
             city: data["city"],
             pan: data["pan"]
           });
-          this.isPhoneVerified = data["isMobileVerified"];
+          if (data["mobileNumber"] != null && data["mobileNumber"] != "") {
+            this.isPhoneVerified = data["isMobileVerified"];
+          }
+
           if (data["profileImage"] != null) {
             this.profileImg = data["profileImage"];
           }
@@ -137,9 +140,12 @@ export class DesignerprofileComponent implements OnInit {
             );
             if (sel.length > 0) {
               sel[0].selected = true;
+              if (sel[0].name == "Others (please specify)") {
+                this.displayOthers = true;
+              }
             }
+
             if (softwaresList[i].includes("others-")) {
-              this.displayOthers = true;
               let soft = softwaresList[i].split("-")[1];
               this.profileform.patchValue({
                 others: soft
@@ -156,11 +162,13 @@ export class DesignerprofileComponent implements OnInit {
     if (this.isTermsAccepted) this.isTermsAccepted = false;
     else this.isTermsAccepted = true;
   }
-  selectedSoftware(name) {
-    console.log(name);
+  selectedSoftware(name, event) {
+    debugger;
+    console.log(event);
     if (name == "Others (please specify)") {
-      if (this.displayOthers) this.displayOthers = false;
-      else this.displayOthers = true;
+      if (event.target.checked) this.displayOthers = true;
+      // if (this.displayOthers) this.displayOthers = false;
+      else this.displayOthers = false;
     }
     let item = this.softwares.filter(item => item.name == name);
     if (item[0].selected) {
@@ -201,7 +209,10 @@ export class DesignerprofileComponent implements OnInit {
     let selSoft = this.softwares.filter(item => item.selected == true);
     selSoft.forEach(item => (this.request.softwares += item.name + ";"));
 
-    if (this.profileform.controls["others"] != null) {
+    if (
+      this.profileform.controls["others"].value != null &&
+      this.profileform.controls["others"].value != ""
+    ) {
       this.request.softwares =
         this.request.softwares +
         "others-" +
@@ -249,6 +260,9 @@ export class DesignerprofileComponent implements OnInit {
           } else {
             this.isPhoneVerified = result;
           }
+          console.log(this.profileform);
+          console.log(this.isPhoneVerified);
+          console.log(this.isTermsAccepted);
         });
       }
     }

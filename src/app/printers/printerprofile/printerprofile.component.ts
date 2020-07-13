@@ -153,6 +153,7 @@ export class PrinterprofileComponent implements OnInit {
     );
     let userId = localStorage.getItem("userId");
     if (userId != null && userId != undefined) {
+      this.spinnerService.show();
       this.printer.getProfile(userId).subscribe(
         data => {
           debugger;
@@ -168,16 +169,22 @@ export class PrinterprofileComponent implements OnInit {
             address: data["address"],
             gst: data["gst"],
             aadhar: data["aadhar"],
-            pan:data["pan"]
+            pan: data["pan"]
           });
-          this.isPhoneVerified = data["isMobileVerified"];
+          if (data["mobileNumber"] != null && data["mobileNumber"] != "") {
+            this.isPhoneVerified = data["isMobileVerified"];
+          }
+          //this.isPhoneVerified = data["isMobileVerified"];
           this.selectedFileName = data["gstFileName"];
           if (data["profileImage"] != null) {
             this.profileImg = data["profileImage"];
           }
           console.log(this.profileform);
+          this.spinnerService.hide();
         },
-        err => {}
+        err => {
+          this.spinnerService.hide();
+        }
       );
     }
   }
@@ -275,8 +282,14 @@ export class PrinterprofileComponent implements OnInit {
         modalRef.componentInstance.name = "World";
         modalRef.result.then(result => {
           if (result) {
+            this.isPhoneVerified = result;
             console.log(result);
+          } else {
+            this.isPhoneVerified = result;
           }
+          console.log(this.profileform);
+          console.log(this.isPhoneVerified);
+          console.log(this.isTermsAccepted);
         });
       }
     }
@@ -315,8 +328,10 @@ export class PrinterprofileComponent implements OnInit {
       //this._awsupload.uploadfile(file);
     }
     formData.append("userimage", userImage, userImage.name);
+    this.spinnerService.show();
     this.printer.uploadUserImage(formData).subscribe(
       data => {
+        this.spinnerService.hide();
         debugger;
         console.log(data);
         alert("File Uploaded Successfully");
@@ -324,6 +339,7 @@ export class PrinterprofileComponent implements OnInit {
         this.selectedFileName = userImage.name;
       },
       err => {
+        this.spinnerService.hide();
         debugger;
         this.fileError = true;
         alert("Issue in file upload please contact admin");
@@ -366,14 +382,18 @@ export class PrinterprofileComponent implements OnInit {
       //this._awsupload.uploadfile(file);
     }
     formData.append("userimage", userImage, userImage.name);
+    this.spinnerService.show();
     this.printer.uploadUserImage(formData).subscribe(
       data => {
+        this.spinnerService.hide();
         debugger;
-        console.log(data);
+        alert("Profile pic updated");
       },
       err => {
         debugger;
+        this.spinnerService.hide();
         console.log(err);
+        alert("Issue in saving profile pic.Please try after sometime");
       }
     );
   }

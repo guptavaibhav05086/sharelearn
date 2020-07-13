@@ -14,6 +14,7 @@ export class ProductsFormsComponent implements OnInit {
   isPhotoUrlValid: boolean;
   isImage: boolean;
   isSizeValid;
+  isDisabled=false;
   boolean;
   product = new Productlist();
   selectedFileName = "Choose Image";

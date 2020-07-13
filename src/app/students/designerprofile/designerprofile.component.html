@@ -423,7 +423,7 @@
                    
                     <div style="display: flex;">
                         <div class="checkbox" *ngFor="let check of softwares | slice:0:3;let i=index ">
-                            <input [id]="i" type="checkbox" class="checkboxelement" (change)="selectedSoftware(check.name)" [checked]="check.selected">
+                            <input [id]="i" type="checkbox" class="checkboxelement" (change)="selectedSoftware(check.name,$event)" [checked]="check.selected">
                             <label for="checkbox1" class="checkboxLabel">
                                 {{check.name}}
                           </label>
@@ -432,7 +432,7 @@
                     </div>
                     <div style="display: flex;">
                         <div class="checkbox" *ngFor="let check of softwares | slice:3:6;let i=index ">
-                            <input [id]="i" type="checkbox" class="checkboxelement" (change)="selectedSoftware(check.name)" [checked]="check.selected">
+                            <input [id]="i" type="checkbox" class="checkboxelement" (change)="selectedSoftware(check.name,$event)" [checked]="check.selected">
                             <label for="checkbox1" class="checkboxLabel" >
                                 {{check.name}}
                           </label>
