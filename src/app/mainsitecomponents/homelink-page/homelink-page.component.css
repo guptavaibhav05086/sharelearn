@@ -19,6 +19,19 @@
     width: 200px;
     margin-top: 10%;
   }
+  .freelancetxt {
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 26.4px;
+    color: rgb(27, 117, 179);
+  }
+  .conactustxt {
+    font-family: Acumin variable concept !important;
+    font-size: 10px !important;
+  }
 }
 
 @media only screen and (min-width: 600px) {
@@ -37,6 +50,19 @@
   .copyright {
     width: 200px;
     margin-top: 10%;
+  }
+  .freelancetxt {
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 26.4px;
+    color: rgb(27, 117, 179);
+  }
+  .conactustxt {
+    font-family: Acumin variable concept !important;
+    font-size: 10px !important;
   }
 }
 
@@ -58,6 +84,18 @@
     width: 200px;
     margin-top: 10%;
   }
+  .freelancetxt {
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    color: rgb(27, 117, 179);
+  }
+  .conactustxt {
+    font-family: Acumin variable concept !important;
+    font-size: 12px !important;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -77,6 +115,19 @@
   .copyright {
     width: 200px;
     margin-top: 10%;
+  }
+  .freelancetxt {
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 26.4px;
+    color: rgb(27, 117, 179);
+  }
+  .conactustxt {
+    font-family: Acumin variable concept !important;
+    font-size: 15px !important;
   }
 }
 
@@ -98,6 +149,19 @@
     width: 200px;
     margin-top: 10%;
   }
+  .freelancetxt {
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 26.4px;
+    color: rgb(27, 117, 179);
+  }
+  .conactustxt {
+    font-family: Acumin variable concept !important;
+    font-size: 15px !important;
+  }
 }
 
 img.map,
@@ -112,20 +176,12 @@ map area {
   outline: 0;
 }
 .home {
-  background-image: url("../../../assets/DashBoard/img/homeblank1.png");
+  background-image: url("../../../assets/img/homepageimg.png");
   background-attachment: fixed;
   background-size: cover;
   height: 600px;
   overflow: hidden;
 }
-/* body {
-  background-image: url("../../../assets/DashBoard/img/homeblank1.png")
-    no-repeat center center fixed;
-  background-attachment: fixed;
-  background-size: cover;
-  height: 100%;
-  overflow: hidden;
-} */
 
 * {
   margin: 0;

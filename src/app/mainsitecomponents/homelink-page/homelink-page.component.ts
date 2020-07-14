@@ -3,10 +3,12 @@ import {
   OnInit,
   HostListener,
   ViewChild,
-  ElementRef
+  ElementRef,
+  Inject
 } from "@angular/core";
 import { WindowRefService } from "src/app/services/window-ref.service";
 import { HelperService } from "../../services/helper.service";
+import { DOCUMENT } from "@angular/common";
 
 @Component({
   selector: "app-homelink-page",
@@ -15,10 +17,10 @@ import { HelperService } from "../../services/helper.service";
 })
 export class HomelinkPageComponent implements OnInit {
   winSize = {
-    oWidth: 0,
-    oHeigth: 0,
-    nWidth: 0,
-    nHeigth: 0
+    oWidth: "",
+    oHeigth: "",
+    nWidth: "",
+    nHeigth: ""
   };
 
   cords;
@@ -28,7 +30,8 @@ export class HomelinkPageComponent implements OnInit {
   };
   constructor(
     private winRef: WindowRefService,
-    private helper: HelperService
+    private helper: HelperService,
+    @Inject(DOCUMENT) private _document
   ) {}
 
   ngOnInit(): void {}
@@ -53,15 +56,17 @@ export class HomelinkPageComponent implements OnInit {
 
   @HostListener("window:load")
   calculateCordsOnload() {
-    this.winSize.oWidth = this.winRef.nativeWindow.visualViewport.width;
-    this.winSize.oHeigth = this.winRef.nativeWindow.visualViewport.height;
+    this.winSize.nWidth = this.winRef.nativeWindow.visualViewport.width + "px";
+    this.winSize.nHeigth =
+      this.winRef.nativeWindow.visualViewport.height + "px";
     console.log(this.winSize);
     //alert("w: " + this.winSize.nWidth + " h: " + this.winSize.nHeigth);
   }
   @HostListener("window:resize")
   calculateCordsOnresize() {
-    this.winSize.nWidth = this.winRef.nativeWindow.visualViewport.width;
-    this.winSize.nHeigth = this.winRef.nativeWindow.visualViewport.height;
+    this.winSize.nWidth = this.winRef.nativeWindow.visualViewport.width + "px";
+    this.winSize.nHeigth =
+      this.winRef.nativeWindow.visualViewport.height + "px";
     console.log(this.winSize);
     //alert("w: " + this.winSize.nWidth + " h: " + this.winSize.nHeigth);
   }

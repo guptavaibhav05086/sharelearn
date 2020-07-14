@@ -1,101 +1,57 @@
-<!-- <img
-  src="../../../assets/img/ShapeNPrint_Comming Soon WebPage-01-01.png"
-  usemap="#image-map"
-  (click)="clickCord($event)"
-  width="1402px"
-  height="700px"
-/>
-<map name="image-map" #map>
-  <area
-    alt="Service Provider"
-    title="Service Provider"
-    routerLink="/register"
-    coords="1181,171,1483,221"
-    shape="rect"
-    #maparea
-  />
-  <area
-    alt="test"
-    title="TEST"
-    routerLink="/register"
-    coords="0,0,100,100"
-    shape="rect"
-    #maparea
-  />
-  <area
-    alt="instagram"
-    title="instagram"
-    routerLink="/register"
-    coords="1270,363,1290,385"
-    shape="rect"
-    #maparea
-  />
-</map> -->
-
-<!-- <div>
-  <div>
-    <img
-      src="../../../assets/DashBoard/img/Service Provider_1600.png"
-      style="width: 300px; margin-left: 68%; margin-top: 10%;position:fixed"
-    />
-  </div>
-</div> -->
-
-<!-- <div>X : {{ cordinate.X }} Y:{{ cordinate.Y }}</div> -->
-<!-- <div style="width:1600px;height: 800px;" (click)="clickCord($event)"></div> -->
-
-<!-- <div class="container">
-  <img src="../../../assets/img/homebgimg.png" alt="Snow" style="width:100%;" />
-  <div class="bottom-left">
-    <img
-      src="../../../assets/DashBoard/img/Service Provider_1600.png"
-      style="width: 300px;"
-    />
-  </div>
-  <div class="top-left">Top Left</div>
-  <div class="top-right">Top Right</div>
-  <div class="bottom-right">Bottom Right</div>
-  <div class="centered">Centered</div>
-</div> -->
 <div style="position:relative;text-align:center;">
   <img
-    src="../../../assets/img/homeblank1.png"
+    src="../../../assets/img/homepageimg.png"
     alt="Snow"
-    style="width:100%;height:660px;"
+    [style.width]="winSize.nWidth"
+    [style.height]="winSize.nHeigth"
   />
   <div style="position:absolute;bottom:10%;right:15%">
     <div style="display:flex">
       <div>
-        <img
-          src="../../../assets/DashBoard/img/Instagram.png"
-          class="icons"
-          (click)="socialLink('in')"
-        />
+        <a href="#" (click)="socialLink('in')">
+          <img
+            src="../../../assets/DashBoard/img/Instagram.png"
+            class="icons"
+          />
+        </a>
       </div>
       <div>
-        <img src="../../../assets/DashBoard/img/Twiter1200.png" class="icons" (click)="socialLink('tw')"/>
+        <a href="#" (click)="socialLink('tw')">
+          <img
+            src="../../../assets/DashBoard/img/Twiter1200.png"
+            class="icons"
+          />
+        </a>
       </div>
       <div>
-        <img
-          src="../../../assets/DashBoard/img/FaceBook1200.png"
-          class="icons" (click)="socialLink('fb')"
-        />
+        <a href="#" (click)="socialLink('fb')">
+          <img
+            src="../../../assets/DashBoard/img/FaceBook1200.png"
+            class="icons"
+          />
+        </a>
       </div>
       <div>
-        <img
-          src="../../../assets/DashBoard/img/Asset 191200.png"
-          class="icons" (click)="socialLink('ln')"
-        />
+        <a href="#" (click)="socialLink('ln')">
+          <img
+            src="../../../assets/DashBoard/img/Asset 191200.png"
+            class="icons"
+          />
+        </a>
       </div>
     </div>
   </div>
-  <div style="position:absolute;bottom:6%;right:15%">
+  <div style="position:absolute;bottom:6%;right:10%">
     <div style="display:flex">
       <div>
-        <img
+        <span class="conactustxt" style="font-weight: 400;">CONTACT US</span>
+        <span class="conactustxt" style="font-weight: bold;">
+          INFO@SHAPENPRINT.COM
+        </span>
+        <!-- <img
           src="../../../assets/DashBoard/img/Contact us_2600.png"
           class="contanctus"
-        />
+        /> -->
       </div>
     </div>
   </div>
@@ -109,8 +65,15 @@
       </div>
     </div>
   </div>
+  <div style="position:absolute;top:3%;left:5%">
+    <div style="display:flex">
+      <div>
+        <img src="../../../assets/img/logohome.png" class="copyright" />
+      </div>
+    </div>
+  </div>
   <div
-    style="position:absolute;top:28%;left:80%;transform:translate(-50%, -50%);font-size:18px"
+    style="position:absolute;top:28%;left:80%;transform:translate(-50%, -50%);font-size:18px;display: none;"
   >
     <img
       src="../../../assets/DashBoard/img/ServiceProvider.png"
@@ -119,11 +82,14 @@
     />
   </div>
   <div
-    style="position:absolute;top:70%;left:80%;transform:translate(-50%, -50%);font-size:18px"
+    style="position:absolute;top:80%;left:80%;transform:translate(-50%, -50%);width:500px"
   >
-    <img
+    <span class="freelancetxt">
+      FREELANCING REDEFINED
+    </span>
+    <!-- <img
       src="../../../assets/DashBoard/img/Freelancing.png"
       class="serviceProviderimg"
-    />
+    /> -->
   </div>
 </div>

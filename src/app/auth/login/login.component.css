@@ -29,3 +29,6 @@
   margin-top: 0rem !important;
   /* margin-top: -20px; */
 }
+.login-box {
+  box-shadow: 1px 1px 1px 1px grey;
+}

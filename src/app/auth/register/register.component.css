@@ -27,3 +27,11 @@
 .errorMessage {
   color: red;
 }
+.login-box {
+  box-shadow: 1px 1px 1px 1px grey;
+}
+.registerTitle {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 30px;
+}
