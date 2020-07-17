@@ -48,10 +48,10 @@ export class HomeComponent implements OnInit {
           console.log(this.router.url);
           if (this.router.url == "/") {
             this.displayNavigation = false;
-            this._document.body.classList.add("home");
+            //this._document.body.classList.add("home");
           } else {
             this.displayNavigation = true;
-            this._document.body.classList.remove("home");
+            //this._document.body.classList.remove("home");
           }
           break;
         }
@@ -74,5 +74,24 @@ export class HomeComponent implements OnInit {
     if (userLogin.Token != null && userLogin.Token != "") {
       this.displayUserNavbar = true;
     }
+  }
+
+  getStyle(){
+
+    let style ={ 'padding-top': '0px'  }
+    if(this.displayNavigation == false){
+      return style;
+    }
+    if(this.displayUserNavbar == true){
+     return style={
+        'padding-top': '200px'
+      }
+    }
+    else{
+     return style={
+        'padding-top': '120px'
+      }
+    }
+
   }
 }

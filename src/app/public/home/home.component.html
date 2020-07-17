@@ -8,9 +8,12 @@
   <app-navbarcommon></app-navbarcommon>
 </div>
 
-<div
-  [ngStyle]="{ 'padding-top': displayNavigation === true ? '120px' : '0px' }"
+<!-- <div
+  [ngStyle]="{ 'padding-top': (displayUserNavbar === true ? '200px' : '120px' }"
 >
+  <router-outlet></router-outlet>
+</div> -->
+<div [ngStyle]="getStyle()">
   <router-outlet></router-outlet>
 </div>
 

@@ -2,25 +2,25 @@
   class="navbar navbar-inverse navbar-expand-xl navbar-dark"
   style="height: 40px;width: 100%;"
 >
-  <div class="navbar-header d-flex col" style="margin-left: 10%;">
+  <!-- <div class="navbar-header d-flex col" style="margin-left: 10%;">
     <a href="tel:+919452332848">
       <span class="lnr lnr-phone"></span>
       <span class="text">
         <span class="text">+919452332848</span>
       </span>
     </a>
-  </div>
+  </div> -->
   <!-- Collection of nav links, forms, and other content for toggling -->
   <div
     id="navbarCollapse"
     class="collapse navbar-collapse justify-content-start"
   >
-    <a href="mailto:info@shapenprint.com">
+    <!-- <a href="mailto:info@shapenprint.com">
       <span class="lnr lnr-envelope"></span>
       <span class="text">
         <span class="text">info@shapenprint.com</span>
       </span>
-    </a>
+    </a> -->
     <ul class="nav navbar-nav navbar-right ml-auto">
       <li class="nav-item dropdown">
         <a
@@ -30,21 +30,22 @@
           ><img
             src="../../../assets/StudentDashboard/img/avatar.jpg"
             class="avatar"
-            alt="Avatar"/>
-          {{ username }} <b class="caret"></b
-        ></a>
+            alt="Avatar"
+          />
+          {{ username }}
+        </a>
         <ul class="dropdown-menu">
           <li>
             <a href="#" (click)="navigateprofile($event)" class="dropdown-item"
               ><i class="fa fa-user-o"></i> Profile</a
             >
           </li>
-          <li>
+          <li style="display: none;">
             <a routerLink="/students/dashboard" class="dropdown-item"
               ><i class="fa fa-calendar-o"></i> Dashboard</a
             >
           </li>
-          <li>
+          <li style="display: none;">
             <a href="#" class="dropdown-item"
               ><i class="fa fa-sliders"></i> Settings</a
             >

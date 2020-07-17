@@ -1,15 +1,24 @@
-<header class="header_area">
-  <div class="main_menu" id="mainmenu" style="height: 80px;position: fixed;width: 100%;background-color: #232f3e;;margin-top: -20px;">
+<header class="header_area" style="margin-bottom: 50px;">
+  <div
+    class="main_menu"
+    id="mainmenu"
+    style="height: 80px;position: fixed;width: 100%;;margin-top: -40px;border-bottom:1px solid green"
+  >
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container" style="margin-left: 80px;">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <a class="navbar-brand logo_h" style="margin-top: 8   qa  px;background-color: white;"
-          >
-          <img src="../../../assets/img/logoname.png" alt="" style="height: 50px;"
+        <a
+          class="navbar-brand logo_h"
+          style="margin-top: 8   qa  px;background-color: white;"
+        >
+          <img
+            src="../../../assets/img/logohome.png"
+            alt=""
+            style="height: 60px;"
           />
-          <img src="../../../assets/img/logo.png" alt="" style="height: 40px;"
-          />
-          </a>
+          <!-- <img src="../../../assets/img/logo.png" alt="" style="height: 40px;"
+          /> -->
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -26,7 +35,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div
           class="collapse navbar-collapse offset"
-          id="navbarSupportedContent" style="display: none !important;"
+          id="navbarSupportedContent"
+          style="display: none !important;"
         >
           <ul class="nav navbar-nav menu_nav ml-auto">
             <li class="nav-item active">
@@ -108,109 +118,109 @@
       </div>
     </nav>
   </div>
-        <div class="main_menu" id="mainmenu" style="display:none">
-          <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <a class="navbar-brand logo_h" href="index.html"
-                ><img src="../../../assets/img/logo.png" alt="" "
-              /></a>
-              <button
-                class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
+  <div class="main_menu" id="mainmenu" style="display:none">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <a class="navbar-brand logo_h" href="index.html"
+          ><img src="../../../assets/img/logo.png" alt="" " /></a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div
+          class="collapse navbar-collapse offset"
+          id="navbarSupportedContent"
+        >
+          <ul class="nav navbar-nav menu_nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" routerLink="/" routerLinkActive="active"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/about">About</a>
+            </li>
+            <li class="nav-item submenu dropdown">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
                 aria-expanded="false"
-                aria-label="Toggle navigation"
+                >Courses</a
               >
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <div
-                class="collapse navbar-collapse offset"
-                id="navbarSupportedContent"
+              <ul class="dropdown-menu">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/explorecourses"
+                    >All Course</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/mean">Full Stack (MEAN)</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/mern">Full Stack (MERN)</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/react">React JS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/java">JAVA</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/angular">Angular 8</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/node">Node JS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/dotnet">C#/.Net</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item submenu dropdown">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Blog</a
               >
-                <ul class="nav navbar-nav menu_nav ml-auto">
-                  <li class="nav-item active">
-                    <a class="nav-link" routerLink="/" routerLinkActive="active"
-                      >Home</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLink="/about">About</a>
-                  </li>
-                  <li class="nav-item submenu dropdown">
-                    <a
-                      href="#"
-                      class="nav-link dropdown-toggle"
-                      data-toggle="dropdown"
-                      role="button"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      >Courses</a
-                    >
-                    <ul class="dropdown-menu">
-                      <li class="nav-item">
-                        <a class="nav-link" routerLink="/explorecourses"
-                          >All Course</a
-                        >
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" routerLink="/mean">Full Stack (MEAN)</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" routerLink="/mern">Full Stack (MERN)</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" routerLink="/react">React JS</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" routerLink="/java">JAVA</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" routerLink="/angular">Angular 8</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" routerLink="/node">Node JS</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" routerLink="/dotnet">C#/.Net</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="nav-item submenu dropdown">
-                    <a
-                      href="#"
-                      class="nav-link dropdown-toggle"
-                      data-toggle="dropdown"
-                      role="button"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      >Blog</a
-                    >
-                    <ul class="dropdown-menu">
-                      <li class="nav-item">
-                        <a class="nav-link" href="blog.html">Blog</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="single-blog.html">Blog Details</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLink="/contact">Contact</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link search" id="search">
-                      <i class="lnr lnr-magnifier"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
+              <ul class="dropdown-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="blog.html">Blog</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="single-blog.html">Blog Details</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link search" id="search">
+                <i class="lnr lnr-magnifier"></i>
+              </a>
+            </li>
+          </ul>
         </div>
-      </header>
+      </div>
+    </nav>
+  </div>
+</header>

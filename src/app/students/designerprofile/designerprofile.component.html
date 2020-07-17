@@ -267,7 +267,7 @@
                       profileform.controls['qualification'].errors.required
                     "
                   >
-                    *Qualification is required.
+                    *Aadhar# is required.
                   </span>
                 </div>
               </div>
@@ -301,17 +301,28 @@
                   </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label> Portfolio Link  </label>
+                  <label> Portfolio Link *  </label>
                   <input
                     type="text"
                     class="form-control"
                     placeholder="Behance, Social Media, etc."
-                    
+                    required
                     formControlName="profile"  
                     
                     [disabled]="isDisabled"
                   />
                 </div>
+                <span
+                class="errorMessage"
+                *ngIf="
+                  (profileform.controls['profile'].dirty ||
+                  profileform.controls['profile'].touched) &&
+                  profileform.controls['profile'].invalid &&
+                  profileform.controls['profile'].errors.required
+                "
+              >
+                *Profile Link is required.
+              </span>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
@@ -326,6 +337,17 @@
                     [disabled]="isDisabled"
                   />
                 </div>
+                <span
+                class="errorMessage"
+                *ngIf="
+                  (profileform.controls['pan'].dirty ||
+                  profileform.controls['pan'].touched) &&
+                  profileform.controls['pan'].invalid &&
+                  profileform.controls['pan'].errors.required
+                "
+              >
+                *PAN# Link is required.
+              </span>
               </div>
             </div>
             <div class="row">

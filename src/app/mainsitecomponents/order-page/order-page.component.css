@@ -1,3 +1,47 @@
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 400px) {
+  .flex-control-radio {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .flex-control-radio {
+    width: 50%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .flex-control-radio {
+    width: 33%;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .flex-control-radio {
+    width: 25%;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .flex-control-radio {
+    width: 25%;
+  }
+}
+.checkbox-profession {
+  width: 100%;
+}
+.flex-controlPrice {
+  width: 50%;
+  text-align: right;
+}
+.flex-controllabel {
+  width: 50%;
+  text-align: left;
+}
 .flex-control3 {
   width: 33%;
 }

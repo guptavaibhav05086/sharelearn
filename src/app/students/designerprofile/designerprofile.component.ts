@@ -38,7 +38,7 @@ export class DesignerprofileComponent implements OnInit {
     dob: new FormControl("", [Validators.required]),
     qualification: new FormControl("", [Validators.required]),
     exp: new FormControl("", [Validators.required]),
-    profile: new FormControl(""),
+    profile: new FormControl("", [Validators.required]),
     city: new FormControl("", [Validators.required]),
     state: new FormControl("", [Validators.required]),
     postalCode: new FormControl("", [Validators.required]),
@@ -224,10 +224,13 @@ export class DesignerprofileComponent implements OnInit {
       data => {
         this.spinnerService.hide();
         console.log(data);
+        alert('Thank You for registering with us. You will be informed shortly');
       },
       err => {
         this.spinnerService.hide();
         console.log(err);
+        alert('Issue occured during registration.Please contact the admin');
+
       }
     );
 

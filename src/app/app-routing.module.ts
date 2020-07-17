@@ -27,6 +27,7 @@ import { VerifyEmailComponent } from "../app/public/verify-email/verify-email.co
 import { PageNotFoundComponent } from "./public/page-not-found/page-not-found.component";
 import { OrderPageComponent } from "./mainsitecomponents/order-page/order-page.component";
 import { HomelinkPageComponent } from "./mainsitecomponents/homelink-page/homelink-page.component";
+import { SelectAddressComponent } from "./mainsitecomponents/select-address/select-address.component";
 const routes: Routes = [
   {
     path: "designer",
@@ -65,6 +66,10 @@ const routes: Routes = [
       {
         path: "createorder",
         component: OrderPageComponent
+      },
+      {
+        path: "selectAddress",
+        component: SelectAddressComponent
       },
       {
         path: "registerCourse",

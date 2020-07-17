@@ -254,10 +254,13 @@ export class PrinterprofileComponent implements OnInit {
       data => {
         console.log(data);
         this.spinnerService.hide();
+        alert('Thank You for registering with us. You will be informed shortly');
       },
       err => {
         console.log(err);
         this.spinnerService.hide();
+         alert('Issue occured during registration.Please contact the admin');
+
       }
     );
   }

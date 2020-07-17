@@ -51,7 +51,7 @@
             </h3>
           </div>
           <div class="or-formcontrol flex-container">
-            <div class="flex-control4" *ngFor="let item of selectedCategory">
+            <div class="flex-control-radio" *ngFor="let item of selectedCategory">
               <input
                 class=""
                 type="radio"
@@ -85,7 +85,7 @@
                 <div class="row">
                     <div class="flex-control5" >
                         <div class="form-group">
-                            <label>Order Type</label>
+                            <label>Order Type *</label>
                             <input
                               type="text"
                               class="form-control"
@@ -99,7 +99,7 @@
                     </div>
                     <div class="flex-control5">
                         <div class="form-group">
-                            <label>Category</label>
+                            <label>Category *</label>
                             <input
                               type="text"
                               class="form-control"
@@ -113,7 +113,7 @@
               <div class="row">
                   <div class="flex-control5" >
                       <div class="form-group">
-                          <label>SubCategory</label>
+                          <label>SubCategory *</label>
                           <select
                             type="text"
                             class="form-control"
@@ -130,7 +130,7 @@
                   </div>
                   <div class="flex-control5">
                       <div class="form-group">
-                          <label>Orientation</label>
+                          <label>Orientation *</label>
                           <select
                             type="text"
                             class="form-control"
@@ -146,7 +146,7 @@
                   </div>
                   <div class="flex-control5">
                       <div class="form-group">
-                          <label>Size</label>
+                          <label>Size *</label>
                           <select
                             type="text"
                             class="form-control"
@@ -164,7 +164,7 @@
               <div class="row" *ngIf="displayprinter">
                   <div class="flex-control5" >
                       <div class="form-group">
-                          <label>Paper GSM</label>
+                          <label>Paper GSM *</label>
                           <select
                             type="text"
                             class="form-control"
@@ -181,7 +181,7 @@
                   </div>
                   <div class="flex-control5">
                       <div class="form-group">
-                          <label>Quantities</label>
+                          <label>Quantities *</label>
                           <select
                             type="text"
                             class="form-control"
@@ -210,7 +210,7 @@
               </div>
 
               <div class="row">
-                  <div class="flex-control5" >
+                  <div class="checkbox-profession" >
                       <div class="form-group">
                           <input type="checkbox"/>
                          
@@ -222,15 +222,15 @@
                  
               </div>
               <div class="row">
-                  <div class="flex-control5" style="padding-top: 15px;">
+                  <div class="flex-controllabel" style="padding-top: 15px;">
                       <div class="form-group">
                           <label><span style="font-size: large;font-weight: bold;">Total Cost:  &#x20B9; 10000 </span></label>
                         </div>
                     
                   </div>
-                  <div class="flex-control5" >
+                  <div class="flex-controllabel" >
                       <div class="form-group">
-                          <button type="button" class="btn btn-primary" (click)="proceedOrder()">Proceed</button>
+                          <button type="button" class="btn btn-primary" (click)="proceedOrder()" [disabled]="!orderForm.valid" >Proceed</button>
                         </div>
                     
                   </div>
@@ -261,7 +261,11 @@
                             <div class="input-group">
                                 <input class="form-control" placeholder="yyyy-mm-dd"
                                        name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
-                                       formControlName="meetingDate"  
+                                       formControlName="meetingDate"
+                                       (blur)="d.close();dateSet()"
+                                       (dateSelect)="dateSet()" 
+                                       [minDate]="minDate"
+                                        
                                         >
                                 <div class="input-group-append" style="border: 1px solid rgb(221, 221, 221);
                                 height: 38px;">
@@ -277,7 +281,8 @@
                             <select
                               type="text"
                               class="form-control"
-                              placeholder="quantities"                    formControlName="meetingSlot"                                                                       
+                              placeholder="quantities"                    formControlName="meetingSlot"   
+                              (change)="dateSet()"                           formControlName="meetingSlot"                                         
                             >
                             <option></option>
                             <option *ngFor="let item of meetingSlots">
@@ -295,7 +300,7 @@
             </div>
           </div>
         <!-- Container for Order Review -->
-        <div class="container shadow p-3 mb-5 bg-white rounded" *ngIf="displaySpecs">
+        <div class="container shadow p-3 mb-5 bg-white rounded" *ngIf="displaysummary">
             <div class="or-formcontrol">
               <h3 class="display-label">
                  Order Summary
@@ -311,7 +316,7 @@
                   <div class="row">
                       <div class="flex-control-50" >
                           <div class="form-group">
-                              <label style="font-size: 22px;font-weight:700;">{{orderForm.controls['type'].value}} - {{orderForm.controls['category'].value}}</label>                   
+                              <label style="font-size: 18px;font-weight:700;">{{orderForm.controls['type'].value}} - {{orderForm.controls['category'].value}}</label>                   
                               <hr/>        
                              
                               
@@ -321,7 +326,7 @@
                       </div>
                       <div class="flex-control3 price-margin" >
                           <div class="form-group">
-                              <label style="font-size: 22px;font-weight:700;">Price Details</label>                   
+                              <label style="font-size: 18px;font-weight:700;">Price Details</label>                   
                               <hr/>        
                              
                               
@@ -342,11 +347,15 @@
                       
                     </div>
                     <div class="flex-control3 price-margin" >
-                        <div class="form-group">
-                            <label style="font-size: 16px;font-weight:bold;">Price:</label> 
-                            <label style="padding-left: 60%;">
-                                &#x20B9; 10000
-                            </label>
+                        <div class="form-group" style="display: flex;">
+                            <div class="flex-controllabel">
+                                <label style="font-size: 14px;font-weight:bold;">Price: </label> 
+                            </div>
+                              <div class="flex-controlPrice">
+                                  <label>
+                                      &#x20B9; 10000
+                                  </label>
+                              </div>
                            
                           </div>
                          
@@ -366,11 +375,15 @@
                     </div>
 
                     <div class="flex-control3 price-margin">
-                        <div class="form-group">
-                            <label style="font-size: 14px;font-weight:bold;">Delivery Fees: </label> 
-                            <label style="padding-left: 40%;">
-                                &#x20B9; 10000
-                            </label>
+                        <div class="form-group" style="display: flex;">
+                            <div class="flex-controllabel">
+                                <label style="font-size: 14px;font-weight:bold;">Delivery Fees: </label> 
+                            </div>
+                              <div class="flex-controlPrice">
+                                  <label>
+                                      &#x20B9; 10000
+                                  </label>
+                              </div>
                            
                           </div>
                           <hr>
@@ -389,11 +402,16 @@
                          
                     </div>
                     <div class="flex-control3 price-margin">
-                        <div class="form-group">
-                            <label style="font-size: 14px;font-weight:bold;">GST: </label> 
-                            <label style="padding-left: 40%;">
-                                &#x20B9; 10000
-                            </label>
+                        <div class="form-group" style="display: flex;">
+                          <div class="flex-controllabel">
+                              <label style="font-size: 14px;font-weight:bold;">GST: </label> 
+                          </div>
+                            <div class="flex-controlPrice">
+                                <label>
+                                    &#x20B9; 10000
+                                </label>
+                            </div>
+                          
                            
                           </div>
                           <hr/>
@@ -405,18 +423,22 @@
                 <div class="row" *ngIf="displayprinter">
                     <div class="flex-control-50">
                         <div class="form-group">
-                           <button class="btn btn-primary" style="visibility: none;">Check Out</button>
+                           <button class="btn btn-primary" style="display: none;">Check Out</button>
                             
                            
                           </div>
                          
                     </div>
                     <div class="flex-control3 price-margin">
-                        <div class="form-group">
-                            <label style="font-size: 14px;font-weight:bold;">Total Amount: </label> 
-                            <label style="padding-left: 40%;">
-                                &#x20B9; 10000
-                            </label>
+                        <div class="form-group" style="display: flex;">
+                            <div class="flex-controllabel">
+                                <label style="font-size: 14px;font-weight:bold;">Total: </label> 
+                            </div>
+                              <div class="flex-controlPrice">
+                                  <label>
+                                      &#x20B9; 10000
+                                  </label>
+                              </div>
                            
                           </div>
                           <hr/>
@@ -425,10 +447,10 @@
 
                    
                 </div>
-                <div class="row" *ngIf="displayprinter">
+                <div class="row">
                     <div class="flex-control-50">
                         <div class="form-group">
-                           <button class="btn btn-primary">Check Out</button>
+                           <button class="btn btn-primary" >Check Out</button>
                             
                            
                           </div>

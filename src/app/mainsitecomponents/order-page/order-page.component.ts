@@ -8,6 +8,7 @@ import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ["./order-page.component.css"]
 })
 export class OrderPageComponent implements OnInit {
+  minDate: NgbDateStruct;
   model: NgbDateStruct;
   productList;
   products;
@@ -17,7 +18,8 @@ export class OrderPageComponent implements OnInit {
   displaySpecs = false;
   displayMeetings = false;
   displayprinter = false;
-  meetingSlots=[
+  displaysummary = false;
+  meetingSlots = [
     "10:00 AM -11:00 AM",
     "11:00 AM -12:00 AM",
     "12:00 AM -1:00 PM",
@@ -30,8 +32,7 @@ export class OrderPageComponent implements OnInit {
     "7:00 PM -8:00 PM",
     "8:00 PM -9:00 PM",
     "9:00 PM -10:00 PM"
-    
-  ]
+  ];
 
   orderForm = new FormGroup({
     type: new FormControl(""),
@@ -41,8 +42,8 @@ export class OrderPageComponent implements OnInit {
     size: new FormControl("", [Validators.required]),
     GSM: new FormControl("0", [Validators.required]),
     quantities: new FormControl("0", [Validators.required]),
-    meetingDate: new FormControl(""),
-    meetingSlot:new FormControl("")
+    meetingDate: new FormControl({}),
+    meetingSlot: new FormControl("")
   });
 
   proSpec = {
@@ -58,14 +59,37 @@ export class OrderPageComponent implements OnInit {
   proceedOrder() {
     this.displayMeetings = true;
   }
+  dateSet() {
+    if (
+      this.orderForm.controls["meetingDate"].value != "" &&
+      this.orderForm.controls["meetingSlot"].value == ""
+    ) {
+      this.displaysummary = false;
+    } else {
+      this.displaysummary = true;
+    }
+    //alert(this.orderForm.controls["meetingDate"].value);
+    //alert(this.orderForm.controls["meetingSlot"].value);
+    //alert("Date set is called");
+  }
   resetControls() {
     this.orderForm.patchValue({
-      category: ""
+      category: "",
+
+      subCategory: "",
+      orientation: "",
+      size: "",
+      GSM: "",
+      quantities: "",
+      meetingDate: "",
+      meetingSlot: ""
     });
     this.displaySpecs = false;
     this.displayMeetings = false;
+    this.displaysummary = false;
   }
   showCategory(category) {
+    debugger;
     this.resetControls();
     this.selectedCategory = this.products.filter(
       item => item.category == category || item.category == "Design And Print"
@@ -88,12 +112,23 @@ export class OrderPageComponent implements OnInit {
       },
       err => {}
     );
+    let date = new Date();
+    let initialDate = {
+      year: date.getFullYear(),
+      month: date.getMonth(),
+      day: date.getUTCDate()
+    };
+    this.minDate = initialDate;
+    this.model = initialDate;
+    this.orderForm.patchValue({
+      meetingDate: initialDate
+    });
   }
   selectedProduct(value) {
     this.checkedProduct = this.productList.filter(
       item => item.productName == value
     );
-
+    this.resetControls();
     this.proSpec.subcat = [];
     this.proSpec.size = [];
     this.proSpec.orientation = [];
@@ -130,5 +165,6 @@ export class OrderPageComponent implements OnInit {
       if (quant != null && quant != undefined)
         this.proSpec.displayQuant = quant.qunat.split(",");
     }
+    console.log(this.orderForm);
   }
 }

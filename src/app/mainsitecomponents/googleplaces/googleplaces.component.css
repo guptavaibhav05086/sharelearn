@@ -1,0 +1,6 @@
+.pac-container {
+  z-index: 1051 !important ;
+}
+body > div.pac-container.pac-logo {
+  z-index: 1051 !important ;
+}
