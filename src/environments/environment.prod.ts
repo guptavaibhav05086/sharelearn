@@ -27,5 +27,8 @@ export const environment = {
     "/api/Public/resendverifyemail?email=$email&guid=$guid&role=$role",
   getProducts: "/api/admin/getproducts",
   updateProducts: "/api/admin/updateproducts",
-  uploadProdImage: "/api/admin/uploadproductimage"
+  uploadProdImage: "/api/admin/uploadproductimage",
+  addUserAddress: "/api/customer/updateaddress",
+  getUserAddress: "/api/customer/getaddress?userId=$userId",
+  deleteAddress: "/api/customer/deleteaddress?userId=$userId&addId=$addId"
 };

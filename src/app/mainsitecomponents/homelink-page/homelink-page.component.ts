@@ -22,7 +22,9 @@ export class HomelinkPageComponent implements OnInit {
     nWidth: "",
     nHeigth: ""
   };
-
+  homepageImgUrl = "../../../assets/img/homepageimg.png";
+  homePageMobileUrl = "../../../assets/img/homemob.png";
+  imgUrl = "";
   cords;
   cordinate = {
     X: 0,
@@ -60,6 +62,11 @@ export class HomelinkPageComponent implements OnInit {
     this.winSize.nHeigth =
       this.winRef.nativeWindow.visualViewport.height + "px";
     console.log(this.winSize);
+    if (this.winRef.nativeWindow.visualViewport.width < 768) {
+      this.imgUrl = this.homePageMobileUrl;
+    } else {
+      this.imgUrl = this.homepageImgUrl;
+    }
     //alert("w: " + this.winSize.nWidth + " h: " + this.winSize.nHeigth);
   }
   @HostListener("window:resize")
@@ -68,6 +75,11 @@ export class HomelinkPageComponent implements OnInit {
     this.winSize.nHeigth =
       this.winRef.nativeWindow.visualViewport.height + "px";
     console.log(this.winSize);
+    if (this.winRef.nativeWindow.visualViewport.width < 768) {
+      this.imgUrl = this.homePageMobileUrl;
+    } else {
+      this.imgUrl = this.homepageImgUrl;
+    }
     //alert("w: " + this.winSize.nWidth + " h: " + this.winSize.nHeigth);
   }
   selectCors(event) {

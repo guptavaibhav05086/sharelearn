@@ -1,28 +1,31 @@
 <div class="rowAddress">
   <h2>Select Delivery Address</h2>
-  
 </div>
-<div  class="rowAddress">
-       <div style="font-weight: 500;">
-            Is the address you'd like to use displayed below? If so, click the corresponding "Deliver to this address" button. Or you can enter a new delivery address. 
-       </div> 
-      
-</div><div  class="rowAddress">
-        
-        <div>
-            <button class="btn btn-warning" (click)="openAddressForm()"> + Add New Address 
-               
-            </button>
-        </div>
- </div>
 <div class="rowAddress">
-  <div class="colAddress">
-    <div>
-      <p style="font-weight: bold;">vaibhav gupta,</p>
-      <p>319 radiant Heritage</p>
-      <p>Raysandra village choodasandra</p>
-      <p>BENGALURU, KARNATAKA 560099</p>
-      India
+  <div style="font-weight: 500;">
+    Is the address you'd like to use displayed below? If so, click the
+    corresponding "Deliver to this address" button. Or you can enter a new
+    delivery address.
+  </div>
+</div>
+<div class="rowAddress">
+  <div>
+    <button class="btn btn-warning" (click)="openAddressForm()">
+      + Add New Address
+    </button>
+  </div>
+</div>
+<div class="rowAddress">
+  <div class="colAddress" *ngFor="let item of displayAddressList">
+    <div *ngIf="item.addId != undefined">
+      <p style="font-weight: bold;">{{ item.userName }},</p>
+      <!-- <p *ngFor="let brk of item.breakUp">
+            {{brk}}
+          </p> -->
+      <p>{{ item.address }}</p>
+      <p>
+        <span style="font-weight: bold;">Contact:</span> {{ item.phoneNumber }}
+      </p>
     </div>
     <div>
       <button class="btn btn-success" style="width:100%">
@@ -31,169 +34,12 @@
     </div>
     <div style="display: flex;padding-left: 20%;">
       <div>
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" (click)="editAddress(item)">
           Edit
         </button>
       </div>
       <div>
-        <button class="btn">
-          Delete
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="colAddress">
-        <div>
-          <p style="font-weight: bold;">vaibhav gupta,</p>
-          <p>319 radiant Heritage</p>
-          <p>Raysandra village choodasandra</p>
-          <p>BENGALURU, KARNATAKA 560099</p>
-          India
-        </div>
-        <div>
-          <button class="btn btn-success" style="width:100%">
-            Deliver to this Address
-          </button>
-        </div>
-        <div style="display: flex;padding-left: 20%;">
-          <div>
-            <button class="btn btn-primary">
-              Edit
-            </button>
-          </div>
-          <div>
-            <button class="btn">
-              Delete
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="colAddress">
-            <div>
-              <p style="font-weight: bold;">vaibhav gupta,</p>
-              <p>319 radiant Heritage</p>
-              <p>Raysandra village choodasandra</p>
-              <p>BENGALURU, KARNATAKA 560099</p>
-              India
-            </div>
-            <div>
-              <button class="btn btn-success" style="width:100%">
-                Deliver to this Address
-              </button>
-            </div>
-            <div style="display: flex;padding-left: 20%;">
-              <div>
-                <button class="btn btn-primary">
-                  Edit
-                </button>
-              </div>
-              <div>
-                <button class="btn">
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="colAddress">
-                <div>
-                  <p style="font-weight: bold;">vaibhav gupta,</p>
-                  <p>319 radiant Heritage</p>
-                  <p>Raysandra village choodasandra</p>
-                  <p>BENGALURU, KARNATAKA 560099</p>
-                  India
-                </div>
-                <div>
-                  <button class="btn btn-success" style="width:100%">
-                    Deliver to this Address
-                  </button>
-                </div>
-                <div style="display: flex;padding-left: 20%;">
-                  <div>
-                    <button class="btn btn-primary">
-                      Edit
-                    </button>
-                  </div>
-                  <div>
-                    <button class="btn">
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div class="colAddress">
-                    <div>
-                      <p style="font-weight: bold;">vaibhav gupta,</p>
-                      <p>319 radiant Heritage</p>
-                      <p>Raysandra village choodasandra</p>
-                      <p>BENGALURU, KARNATAKA 560099</p>
-                      India
-                    </div>
-                    <div>
-                      <button class="btn btn-success" style="width:100%">
-                        Deliver to this Address
-                      </button>
-                    </div>
-                    <div style="display: flex;padding-left: 20%;">
-                      <div>
-                        <button class="btn btn-primary">
-                          Edit
-                        </button>
-                      </div>
-                      <div>
-                        <button class="btn">
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="colAddress">
-                        <div>
-                          <p style="font-weight: bold;">vaibhav gupta,</p>
-                          <p>319 radiant Heritage</p>
-                          <p>Raysandra village choodasandra</p>
-                          <p>BENGALURU, KARNATAKA 560099</p>
-                          India
-                        </div>
-                        <div>
-                          <button class="btn btn-primary" style="width:100%">
-                            Deliver to this Address
-                          </button>
-                        </div>
-                        <div style="display: flex;padding-left: 20%;">
-                          <div>
-                            <button class="btn btn-primary">
-                              Edit
-                            </button>
-                          </div>
-                          <div>
-                            <button class="btn">
-                              Delete
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                       <div class="colAddress">
-    <div>
-      <p style="font-weight: bold;">vaibhav gupta,</p>
-      <p>319 radiant Heritage</p>
-      <p>Raysandra village choodasandra</p>
-      <p>BENGALURU, KARNATAKA 560099</p>
-      India
-    </div>
-    <div>
-      <button class="btn btn-primary" style="width:100%">
-        Deliver to this Address
-      </button>
-    </div>
-    <div style="display: flex;padding-left: 20%;">
-      <div>
-        <button class="btn btn-primary">
-          Edit
-        </button>
-      </div>
-      <div>
-        <button class="btn">
+        <button class="btn" (click)="deleteAddress(item)">
           Delete
         </button>
       </div>

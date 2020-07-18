@@ -1,5 +1,84 @@
+@media only screen and (min-width: 200px) {
+  .freelancePosition {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+  }
+  .copyposition {
+    position: absolute;
+    bottom: 0.5%;
+    right: 25%;
+  }
+  .socialposition {
+    position: absolute;
+    bottom: 30%;
+    right: 33%;
+  }
+  .contactPosition {
+    position: absolute;
+    bottom: 26%;
+    right: 30%;
+  }
+  .serviceProviderimg {
+    width: 150px;
+  }
+  .freelance {
+    width: 100px;
+  }
+  .icons {
+    width: 10px;
+    margin-left: 10px;
+  }
+  .contanctus {
+    width: 100px;
+    margin-top: 5%;
+    margin-left: 5%;
+  }
+  .copyright {
+    width: 200px;
+    margin-top: 10%;
+  }
+  .freelancetxt {
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 26.4px;
+    color: rgb(27, 117, 179);
+  }
+  .conactustxt {
+    font-family: Acumin variable concept !important;
+    font-size: 10px !important;
+  }
+}
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 400px) {
+  .freelancePosition {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+  }
+  .copyposition {
+    position: absolute;
+    bottom: 1%;
+    right: 25%;
+  }
+  .socialposition {
+    position: absolute;
+    bottom: 30%;
+    right: 35%;
+  }
+  .contactPosition {
+    position: absolute;
+    bottom: 26%;
+    right: 30%;
+  }
+
   .serviceProviderimg {
     width: 150px;
   }
@@ -35,6 +114,35 @@
 }
 
 @media only screen and (min-width: 600px) {
+  .freelancePosition {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+  }
+  .copyposition {
+    position: absolute;
+    bottom: 0.5%;
+    right: 25%;
+  }
+  .socialposition {
+    position: absolute;
+    bottom: 30%;
+    right: 33%;
+  }
+  .contactPosition {
+    position: absolute;
+    bottom: 26%;
+    right: 30%;
+  }
+  /* .freelancePosition {
+    position: absolute;
+    top: 80%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+  } */
   .serviceProviderimg {
     width: 150px;
   }
@@ -68,6 +176,28 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+  .freelancePosition {
+    position: absolute;
+    top: 80%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+  }
+  .copyposition {
+    position: absolute;
+    bottom: 1%;
+    right: 45%;
+  }
+  .socialposition {
+    position: absolute;
+    bottom: 10%;
+    right: 15%;
+  }
+  .contactPosition {
+    position: absolute;
+    bottom: 6%;
+    right: 10%;
+  }
   .serviceProviderimg {
     width: 200px;
   }
@@ -100,6 +230,28 @@
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+  .freelancePosition {
+    position: absolute;
+    top: 80%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+  }
+  .copyposition {
+    position: absolute;
+    bottom: 1%;
+    right: 45%;
+  }
+  .socialposition {
+    position: absolute;
+    bottom: 10%;
+    right: 15%;
+  }
+  .contactPosition {
+    position: absolute;
+    bottom: 6%;
+    right: 10%;
+  }
   .serviceProviderimg {
     width: 250px;
   }
@@ -133,6 +285,28 @@
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+  .freelancePosition {
+    position: absolute;
+    top: 80%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+  }
+  .copyposition {
+    position: absolute;
+    bottom: 1%;
+    right: 45%;
+  }
+  .socialposition {
+    position: absolute;
+    bottom: 10%;
+    right: 15%;
+  }
+  .contactPosition {
+    position: absolute;
+    bottom: 6%;
+    right: 10%;
+  }
   .serviceProviderimg {
     width: 300px;
   }
@@ -242,4 +416,11 @@ map area {
   .icons {
     width: 30px;
   }
+}
+html,
+body,
+svg {
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }

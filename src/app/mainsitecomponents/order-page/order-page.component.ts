@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AdminService } from "../../services/admin.service";
 import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
 import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
+import { CustomerService } from "src/app/services/customer.service";
 @Component({
   selector: "app-order-page",
   templateUrl: "./order-page.component.html",
@@ -19,6 +20,13 @@ export class OrderPageComponent implements OnInit {
   displayMeetings = false;
   displayprinter = false;
   displaysummary = false;
+  displaycartMessage = false;
+  orderPrice = {
+    price: 1000,
+    deliveryFee: 1000,
+    GST: 1000,
+    Total: 1000
+  };
   meetingSlots = [
     "10:00 AM -11:00 AM",
     "11:00 AM -12:00 AM",
@@ -43,9 +51,57 @@ export class OrderPageComponent implements OnInit {
     GSM: new FormControl("0", [Validators.required]),
     quantities: new FormControl("0", [Validators.required]),
     meetingDate: new FormControl({}),
-    meetingSlot: new FormControl("")
+    meetingSlot: new FormControl(""),
+    professionDesigner: new FormControl(false),
+    sourceFile: new FormControl(false)
   });
+  addToCart() {
+    debugger;
+    if (
+      this.checkCartValidation(this.orderForm.controls["type"].value) == false
+    ) {
+      return;
+    }
+    let id = 1;
+    if (this.custService.getLocalStorageCart().length > 0) {
+      let cartLastItems = this.custService.getLocalStorageCart()[
+        this.custService.getLocalStorageCart().length - 1
+      ];
+      id = cartLastItems.id + 1;
+    }
 
+    let cartItem = {
+      id: id,
+      type: this.orderForm.controls["type"].value,
+      category: [
+        {
+          name: this.orderForm.controls["category"].value,
+          specs: {
+            subCategory: this.orderForm.controls["subCategory"].value,
+            orientation: this.orderForm.controls["orientation"].value,
+            size: this.orderForm.controls["size"].value,
+            paperGSM: this.orderForm.controls["GSM"].value,
+            quantity: this.orderForm.controls["quantities"].value
+          },
+          meetingDetails: {
+            day: this.orderForm.controls["meetingDate"].value,
+            slot: this.orderForm.controls["meetingSlot"].value
+          },
+          price: {
+            price: this.orderPrice.price,
+            deliveryFee: this.orderPrice.deliveryFee,
+            GST: this.orderPrice.GST,
+            Total: this.orderPrice.Total
+          },
+          professionalDesigner: this.orderForm.controls["professionDesigner"]
+            .value,
+          sourceFile: this.orderForm.controls["sourceFile"].value
+        }
+      ]
+    };
+    this.custService.addItemUserOrdersList(cartItem);
+    this.displaycartMessage = true;
+  }
   proSpec = {
     orientation: [],
     size: [],
@@ -54,10 +110,14 @@ export class OrderPageComponent implements OnInit {
     subcat: [],
     displayQuant: []
   };
-  constructor(private admin: AdminService) {}
+  constructor(
+    private admin: AdminService,
+    private custService: CustomerService
+  ) {}
 
   proceedOrder() {
     this.displayMeetings = true;
+    //TODO Calculate Price method
   }
   dateSet() {
     if (
@@ -88,7 +148,25 @@ export class OrderPageComponent implements OnInit {
     this.displayMeetings = false;
     this.displaysummary = false;
   }
+  checkCartValidation(category) {
+    debugger;
+    let cartList = this.custService.getLocalStorageCart();
+    if (cartList != null) {
+      let cartItemsType = cartList.filter(item => item.type == category);
+
+      if (cartItemsType.length >= 3) {
+        alert(
+          "Customer Can order upto 3 Items per Category.Please Clear your cart to add item of this type in cart"
+        );
+        return false;
+      }
+    }
+    return true;
+  }
   showCategory(category) {
+    if (this.checkCartValidation(category) == false) {
+      return;
+    }
     debugger;
     this.resetControls();
     this.selectedCategory = this.products.filter(
@@ -162,8 +240,14 @@ export class OrderPageComponent implements OnInit {
     let val = e.target.value;
     if (this.proSpec.quantities != null) {
       let quant = this.proSpec.quantities.filter(item => item.size == val)[0];
-      if (quant != null && quant != undefined)
+      if (quant.qunat != null && quant.qunat != undefined)
         this.proSpec.displayQuant = quant.qunat.split(",");
+    }
+    if (this.orderForm.controls["type"].value == "Design Only") {
+      this.orderForm.patchValue({
+        quantities: 0,
+        GSM: 0
+      });
     }
     console.log(this.orderForm);
   }

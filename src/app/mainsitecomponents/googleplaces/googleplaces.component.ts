@@ -51,6 +51,7 @@ export class GoogleplacesComponent implements OnInit {
     this.setAddress.emit(place);
   }
   addressChange() {
+    debugger;
     let elemt: any = document.getElementsByClassName("pac-container")[0];
     console.log(elemt);
     if (elemt != null && elemt != undefined) elemt.style.zIndex = 9999;
