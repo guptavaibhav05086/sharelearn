@@ -283,6 +283,7 @@ export class PrinterprofileComponent implements OnInit {
           backdrop: "static"
         });
         modalRef.componentInstance.name = "World";
+        modalRef.componentInstance.number=this.profileform.controls["mobileNumber"].value;
         modalRef.result.then(result => {
           if (result) {
             this.isPhoneVerified = result;
@@ -290,9 +291,7 @@ export class PrinterprofileComponent implements OnInit {
           } else {
             this.isPhoneVerified = result;
           }
-          console.log(this.profileform);
-          console.log(this.isPhoneVerified);
-          console.log(this.isTermsAccepted);
+         
         });
       }
     }

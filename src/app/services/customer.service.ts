@@ -68,6 +68,10 @@ export class CustomerService {
   }
   addItemUserOrdersList(item) {
     debugger;
+    let existnCart = this.getLocalStorageCart();
+    if (existnCart != null && existnCart != undefined) {
+      this.itemsList = existnCart;
+    }
     this.itemsList.push(item);
     this.updateLocalStorageCart();
   }

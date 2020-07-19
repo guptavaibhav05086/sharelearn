@@ -36,7 +36,9 @@ export class HomelinkPageComponent implements OnInit {
     @Inject(DOCUMENT) private _document
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.selectCors();
+  }
 
   socialLink(name) {
     if (name == "fb") {
@@ -82,10 +84,17 @@ export class HomelinkPageComponent implements OnInit {
     }
     //alert("w: " + this.winSize.nWidth + " h: " + this.winSize.nHeigth);
   }
-  selectCors(event) {
-    this.cordinate.X = event.clientX;
-    this.cordinate.Y = event.clientY;
-    console.log(this.cordinate);
+
+  selectCors() {
+    this.winSize.nWidth = this.winRef.nativeWindow.visualViewport.width + "px";
+    this.winSize.nHeigth =
+      this.winRef.nativeWindow.visualViewport.height + "px";
+    console.log(this.winSize);
+    if (this.winRef.nativeWindow.visualViewport.width < 768) {
+      this.imgUrl = this.homePageMobileUrl;
+    } else {
+      this.imgUrl = this.homepageImgUrl;
+    }
     // alert(this.cordinate);
   }
   clickCord(event) {

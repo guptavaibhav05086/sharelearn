@@ -3,6 +3,7 @@ import { AdminService } from "../../services/admin.service";
 import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
 import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
 import { CustomerService } from "src/app/services/customer.service";
+import { HelperService } from "src/app/services/helper.service";
 @Component({
   selector: "app-order-page",
   templateUrl: "./order-page.component.html",
@@ -19,6 +20,7 @@ export class OrderPageComponent implements OnInit {
   displaySpecs = false;
   displayMeetings = false;
   displayprinter = false;
+  displayDesigner = false;
   displaysummary = false;
   displaycartMessage = false;
   orderPrice = {
@@ -112,11 +114,18 @@ export class OrderPageComponent implements OnInit {
   };
   constructor(
     private admin: AdminService,
-    private custService: CustomerService
+    private custService: CustomerService,
+    private _helper: HelperService
   ) {}
 
   proceedOrder() {
-    this.displayMeetings = true;
+    if (this.orderForm.controls["type"].value == "Print Only") {
+      this.displayMeetings = false;
+      this.displaysummary = true;
+    } else {
+      this.displayMeetings = true;
+    }
+
     //TODO Calculate Price method
   }
   dateSet() {
@@ -132,6 +141,9 @@ export class OrderPageComponent implements OnInit {
     //alert(this.orderForm.controls["meetingSlot"].value);
     //alert("Date set is called");
   }
+  checkout() {
+    this._helper.navigateToPath("/selectAddress");
+  }
   resetControls() {
     this.orderForm.patchValue({
       category: "",
@@ -141,7 +153,6 @@ export class OrderPageComponent implements OnInit {
       size: "",
       GSM: "",
       quantities: "",
-      meetingDate: "",
       meetingSlot: ""
     });
     this.displaySpecs = false;
@@ -172,10 +183,14 @@ export class OrderPageComponent implements OnInit {
     this.selectedCategory = this.products.filter(
       item => item.category == category || item.category == "Design And Print"
     );
-    if (category == "Design And Print") {
+    if (category == "Design And Print" || category == "Print Only") {
       this.displayprinter = true;
+      if (category == "Design And Print") {
+        this.displayDesigner = true;
+      }
     } else {
       this.displayprinter = false;
+      this.displayDesigner = true;
     }
     this.displayCategory = true;
     this.orderForm.patchValue({

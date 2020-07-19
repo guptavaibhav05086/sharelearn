@@ -28,6 +28,8 @@ import { PageNotFoundComponent } from "./public/page-not-found/page-not-found.co
 import { OrderPageComponent } from "./mainsitecomponents/order-page/order-page.component";
 import { HomelinkPageComponent } from "./mainsitecomponents/homelink-page/homelink-page.component";
 import { SelectAddressComponent } from "./mainsitecomponents/select-address/select-address.component";
+import { OrderCartComponent } from "./mainsitecomponents/order-cart/order-cart.component";
+import { ReviewOrderComponent } from "./mainsitecomponents/review-order/review-order.component";
 const routes: Routes = [
   {
     path: "designer",
@@ -68,8 +70,16 @@ const routes: Routes = [
         component: OrderPageComponent
       },
       {
+        path: "revieworder",
+        component: ReviewOrderComponent
+      },
+      {
         path: "selectAddress",
         component: SelectAddressComponent
+      },
+      {
+        path: "cart",
+        component: OrderCartComponent
       },
       {
         path: "registerCourse",

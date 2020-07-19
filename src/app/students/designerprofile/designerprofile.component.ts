@@ -256,6 +256,7 @@ export class DesignerprofileComponent implements OnInit {
           backdrop: "static"
         });
         modalRef.componentInstance.name = "World";
+        modalRef.componentInstance.number=this.profileform.controls["mobileNumber"].value;
         modalRef.result.then(result => {
           debugger;
           if (result) {

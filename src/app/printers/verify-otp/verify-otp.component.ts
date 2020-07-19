@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ValidatorsService } from "src/app/services/validators.service";
@@ -13,6 +13,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class VerifyOTPComponent implements OnInit {
   message = "";
   verified = false;
+  @Input() number;
   constructor(
     public activeModal: NgbActiveModal,
     private _validator: ValidatorsService,
@@ -24,6 +25,22 @@ export class VerifyOTPComponent implements OnInit {
 
   closeModel() {
     this.activeModal.close(this.verified);
+  }
+  generateOTP() {
+    
+    let userId = localStorage.getItem("userId");
+    // let number =  this.studentForm.controls['mobileNumber'].value;
+    
+      this.register.generateOTP(userId, this.number).subscribe(
+        data => {
+          
+        },
+        err => {
+         
+        }
+      );
+   
+    return true;
   }
   verifyOTP() {
     let number = this.studentForm.controls["mobileNumber"].value;

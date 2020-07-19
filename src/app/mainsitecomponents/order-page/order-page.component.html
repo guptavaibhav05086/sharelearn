@@ -32,7 +32,7 @@
               <button
                 class="btn btn-primary or-btn"
                 type="button"
-                (click)="showCategory('Design And Print')"
+                (click)="showCategory('Print Only')"
               >
                 Print
               </button>
@@ -209,7 +209,7 @@
                  
               </div>
 
-              <div class="row">
+              <div class="row" *ngIf="displayDesigner">
                   <div class="checkbox-profession" >
                       <div class="form-group">
                           <input type="checkbox" formControlName="professionDesigner" />
@@ -450,7 +450,7 @@
                 <div class="row">
                     <div class="flex-control-50">
                         <div class="form-group">
-                           <button class="btn btn-primary" >Check Out</button>
+                           <button class="btn btn-primary" (click)="checkout()">Check Out</button>
                             
                            
                           </div>

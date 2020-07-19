@@ -1,0 +1,148 @@
+<div class="container-cart">
+        <div class="rowCart">
+                <div class="col-shp-12 pageTitle">Review Order</div>
+        </div>
+            
+            <div class="rowCart">
+                  
+              <div class="col-shp-7">
+              
+                <div class="categoryTitle">Delivery Address 
+                  <span style="margin-left:3%;font-size: small;">
+                    <a routerLink="/selectAddress">Change Address</a>
+                </span>  
+                </div>
+                <div class="rowCart itemCart col-shp-8" style="padding-left: 5%;">
+                        <p>Vaibhav Gupta,</p>
+    
+                       <p>93/3, Rayasandra Village, Main Road Sarjapura Hobli, Anekal, Choodasandra, Bengaluru, Karnataka 560099, India</p> 
+                        
+                       <p>Contact: 8884615431 </p>  
+                </div>
+                <div class="categoryTitle">Total Items (8)</div>
+                <hr />
+                <a href="#" (click)="toggleItems($event)">{{name}}</a>
+                <div *ngIf="toggleDisplayItems">
+                        <div class="rowCart itemCart">
+                                <div class="col-shp-3 mobCard">
+                                  <img
+                                    src="../../../assets/StudentDashboard/img/download.jpg"
+                                    class="productImage"
+                                  />
+                                </div>
+                                <div class="col-shp-7 mobCard" style="padding-left: 1%;">
+                                  <p class="productTitle">Business Card Single Side</p>
+                                  <p class="productDetails">
+                                    <span class="detailsHeading">Orientation:</span> Vertical,
+                                    <span class="detailsHeading">Size:</span> 3.5 x 2
+                                  </p>
+                        
+                                  <p class="productDetails">
+                                    <span class="detailsHeading">Quantitiy:</span> 250 ,
+                                    <span class="detailsHeading">GSM:</span> 300
+                                  </p>
+                                  <p class="productDetails">
+                                    <span class="detailsHeading">Price: &#x20B9;</span> 10000
+                                  </p>
+                                  <p><buton class="btn">Remove</buton></p>
+                                </div>
+                              </div>
+                              <div class="rowCart itemCart">
+                                <div class="col-shp-3 mobCard">
+                                  <img
+                                    src="../../../assets/StudentDashboard/img/download.jpg"
+                                    class="productImage"
+                                  />
+                                </div>
+                                <div class="col-shp-7 mobCard" style="padding-left: 1%;">
+                                  <p class="productTitle">Business Card Single Side</p>
+                                  <p>
+                                    <span class="detailsHeading">Orientation:</span> Vertical,
+                                    <span class="detailsHeading">Size:</span> 3.5 x 2
+                                  </p>
+                        
+                                  <p class="productDetails">
+                                    <span class="detailsHeading">Quantitiy:</span> 250 ,
+                                    <span class="detailsHeading">GSM:</span> 300
+                                  </p>
+                                  <p class="productDetails">
+                                    <span class="detailsHeading">Price: &#x20B9;</span> 10000
+                                  </p>
+                                  <p><buton class="btn">Remove</buton></p>
+                                </div>
+                              </div>
+                              <div class="categoryTitle">Design Only (2 items)</div>
+                        
+                              <div class="rowCart itemCart">
+                                <div class="col-shp-3 mobCard">
+                                  <img
+                                    src="../../../assets/StudentDashboard/img/download.jpg"
+                                    class="productImage"
+                                  />
+                                </div>
+                                <div class="col-shp-7 mobCard" style="padding-left: 1%;">
+                                  <p class="productTitle">Business Card Single Side</p>
+                                  <p class="productDetails">
+                                    <span class="detailsHeading">Orientation:</span> Vertical,
+                                    <span class="detailsHeading">Size:</span> 3.5 x 2
+                                  </p>
+                        
+                                  <p class="productDetails">
+                                    <span class="detailsHeading">Price: &#x20B9;</span> 10000
+                                  </p>
+                                  <p><buton class="btn">Remove</buton></p>
+                                </div>
+                              </div>
+                              <div class="rowCart itemCart">
+                                <div class="col-shp-3 mobCard">
+                                  <img
+                                    src="../../../assets/StudentDashboard/img/download.jpg"
+                                    class="productImage"
+                                  />
+                                </div>
+                                <div class="col-shp-7 mobCard" style="padding-left: 1%;">
+                                  <p class="productTitle">Business Card Single Side</p>
+                                  <p class="productDetails">
+                                    <span class="detailsHeading">Orientation:</span> Vertical,
+                                    <span class="detailsHeading">Size:</span> 3.5 x 2
+                                  </p>
+                        
+                                  <p class="productDetails">
+                                    <span class="detailsHeading">Price: &#x20B9;</span> 10000
+                                  </p>
+                                  <p><buton class="btn">Remove</buton></p>
+                                </div>
+                              </div>
+                </div>
+               
+              </div>
+              <div class="col-shp-3 priceContainer">
+                <div class="categoryTitle">Price Details</div>
+                <hr />
+                <div class="rowCart">
+                  <div class="col-shp-6 priceTitle">Price (8 Items):</div>
+                  <div class="col-shp-4 priceAmount">&#x20B9; 1000</div>
+                </div>
+                <div class="rowCart" style="margin-top: 30px;">
+                  <div class="col-shp-6 priceTitle">Delivery Fees:</div>
+                  <div class="col-shp-4 priceAmount">&#x20B9; 1000</div>
+                </div>
+                <hr />
+                <div class="rowCart">
+                  <div class="col-shp-6 priceTitle">GST:</div>
+                  <div class="col-shp-4 priceAmount">&#x20B9; 1000</div>
+                </div>
+                <hr />
+                <div class="rowCart">
+                  <div class="col-shp-6 priceTitle">Total Price:</div>
+                  <div class="col-shp-4 priceAmount">&#x20B9; 1000</div>
+                </div>
+                <hr />
+                <div class="rowCart">
+                  <div class="col-shp-12 btnAling">
+                    <button class="btn btn-primary">Pay Now</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>

@@ -48,6 +48,8 @@ import { AboutusPopupComponent } from './mainsitecomponents/aboutus-popup/aboutu
 import { SelectAddressComponent } from './mainsitecomponents/select-address/select-address.component';
 import { AddressFormComponent } from './mainsitecomponents/address-form/address-form.component';
 import { GoogleplacesComponent } from './mainsitecomponents/googleplaces/googleplaces.component';
+import { OrderCartComponent } from './mainsitecomponents/order-cart/order-cart.component';
+import { ReviewOrderComponent } from './mainsitecomponents/review-order/review-order.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +86,9 @@ import { GoogleplacesComponent } from './mainsitecomponents/googleplaces/googlep
     AboutusPopupComponent,
     SelectAddressComponent,
     AddressFormComponent,
-    GoogleplacesComponent
+    GoogleplacesComponent,
+    OrderCartComponent,
+    ReviewOrderComponent
   ],
   imports: [
     BrowserModule,

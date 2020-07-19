@@ -3,6 +3,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AddressFormComponent } from "../address-form/address-form.component";
 import { CustomerService } from "src/app/services/customer.service";
 import { AddressRequest } from "src/app/Models/address-request";
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: "app-select-address",
   templateUrl: "./select-address.component.html",
@@ -13,7 +14,8 @@ export class SelectAddressComponent implements OnInit {
   displayAddressList = [];
   constructor(
     private modalService: NgbModal,
-    private custService: CustomerService
+    private custService: CustomerService,
+    private spinnerService: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -22,11 +24,14 @@ export class SelectAddressComponent implements OnInit {
   }
   fetchAddress() {
     let userId = "5541713c-e1b5-4ed4-9e36-a92f0eab91d3";
+    this.spinnerService.show();
     this.custService.getUserAddress(userId).subscribe(
       data => {
+        this.spinnerService.hide();
         this.formatAddressResponse(data);
       },
       err => {
+        this.spinnerService.hide();
         alert("Error in getting address list");
       }
     );
