@@ -1,11 +1,11 @@
 <div class="container-cart">
   <div class="rowCart">
     <div class="col-shp-7">
-      <div class="categoryTitle">My Cart (8 Items)</div>
+      <div class="categoryTitle">My Cart ({{userCart.totalItems}} Items)</div>
       <hr />
-      <div class="categoryTitle">Design and Print (2 items)</div>
+      <div class="categoryTitle" *ngIf="userCart.displayDesign">Design Only ({{userCart.design.length}} items)</div>
 
-      <div class="rowCart itemCart">
+      <div class="rowCart itemCart" *ngFor="let item of userCart.design">
         <div class="col-shp-3 mobCard">
           <img
             src="../../../assets/StudentDashboard/img/download.jpg"
@@ -13,23 +13,20 @@
           />
         </div>
         <div class="col-shp-7 mobCard" style="padding-left: 1%;">
-          <p class="productTitle">Business Card Single Side</p>
+          <p class="productTitle">{{ item.name }}</p>
           <p class="productDetails">
-            <span class="detailsHeading">Orientation:</span> Vertical,
-            <span class="detailsHeading">Size:</span> 3.5 x 2
+            <span class="detailsHeading">Orientation:</span> {{item.specs.orientation}},
+            <span class="detailsHeading">Size:</span> {{item.specs.size}}
           </p>
 
+          
           <p class="productDetails">
-            <span class="detailsHeading">Quantitiy:</span> 250 ,
-            <span class="detailsHeading">GSM:</span> 300
+            <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total}}
           </p>
-          <p class="productDetails">
-            <span class="detailsHeading">Price: &#x20B9;</span> 10000
-          </p>
-          <p><buton class="btn">Remove</buton></p>
+          <p><button class="btn">Remove</button></p>
         </div>
       </div>
-      <div class="rowCart itemCart">
+      <!-- <div class="rowCart itemCart">
         <div class="col-shp-3 mobCard">
           <img
             src="../../../assets/StudentDashboard/img/download.jpg"
@@ -50,12 +47,66 @@
           <p class="productDetails">
             <span class="detailsHeading">Price: &#x20B9;</span> 10000
           </p>
-          <p><buton class="btn">Remove</buton></p>
+          <p><button class="btn">Remove</button></p>
+        </div>
+      </div> -->
+      <div class="categoryTitle" *ngIf="userCart.displayDesignNPrint">Design and Print</div>
+
+      <div class="rowCart itemCart" *ngFor="let item of userCart.designNprint">
+        <div class="col-shp-3 mobCard">
+          <img
+            src="../../../assets/StudentDashboard/img/download.jpg"
+            class="productImage"
+          />
+        </div>
+        <div class="col-shp-7 mobCard" style="padding-left: 1%;">
+          <p class="productTitle">{{ item.name }}</p>
+          <p class="productDetails">
+            <span class="detailsHeading">Orientation:</span> {{item.specs.orientation}},
+            <span class="detailsHeading">Size:</span> {{item.specs.size}}
+          </p>
+
+          <p class="productDetails">
+            <span class="detailsHeading">Quantitiy:</span>{{item.specs.quantity}} ,
+            <span class="detailsHeading">GSM:</span> {{item.specs.paperGSM}}
+          </p>
+          <p class="productDetails">
+            <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total}}
+          </p>
+          
+         
+          <p><button class="btn">Remove</button></p>
         </div>
       </div>
-      <div class="categoryTitle">Design Only (2 items)</div>
 
-      <div class="rowCart itemCart">
+      <div class="categoryTitle" *ngIf="userCart.displayPrint"> Print Only ({{userCart.print.length}} items)</div>
+      <div class="rowCart itemCart" *ngFor="let item of userCart.print">
+        <div class="col-shp-3 mobCard">
+          <img
+            src="../../../assets/StudentDashboard/img/download.jpg"
+            class="productImage"
+          />
+        </div>
+        <div class="col-shp-7 mobCard" style="padding-left: 1%;">
+          <p class="productTitle">{{ item.name }}</p>
+          <p class="productDetails">
+            <span class="detailsHeading">Orientation:</span> {{item.specs.orientation}},
+            <span class="detailsHeading">Size:</span> {{item.specs.size}}
+          </p>
+
+          <p class="productDetails">
+            <span class="detailsHeading">Quantitiy:</span>{{item.specs.quantity}} ,
+            <span class="detailsHeading">GSM:</span> {{item.specs.paperGSM}}
+          </p>
+          <p class="productDetails">
+            <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total}}
+          </p>
+          
+         
+          <p><button class="btn">Remove</button></p>
+        </div>
+      </div>
+      <!-- <div class="rowCart itemCart">
         <div class="col-shp-3 mobCard">
           <img
             src="../../../assets/StudentDashboard/img/download.jpg"
@@ -72,50 +123,30 @@
           <p class="productDetails">
             <span class="detailsHeading">Price: &#x20B9;</span> 10000
           </p>
-          <p><buton class="btn">Remove</buton></p>
+          <p><button class="btn">Remove</button></p>
         </div>
-      </div>
-      <div class="rowCart itemCart">
-        <div class="col-shp-3 mobCard">
-          <img
-            src="../../../assets/StudentDashboard/img/download.jpg"
-            class="productImage"
-          />
-        </div>
-        <div class="col-shp-7 mobCard" style="padding-left: 1%;">
-          <p class="productTitle">Business Card Single Side</p>
-          <p class="productDetails">
-            <span class="detailsHeading">Orientation:</span> Vertical,
-            <span class="detailsHeading">Size:</span> 3.5 x 2
-          </p>
-
-          <p class="productDetails">
-            <span class="detailsHeading">Price: &#x20B9;</span> 10000
-          </p>
-          <p><buton class="btn">Remove</buton></p>
-        </div>
-      </div>
+      </div> -->
     </div>
     <div class="col-shp-3 priceContainer">
       <div class="categoryTitle">Price Details</div>
       <hr />
       <div class="rowCart">
-        <div class="col-shp-6 priceTitle">Price (8 Items):</div>
-        <div class="col-shp-4 priceAmount">&#x20B9; 1000</div>
+        <div class="col-shp-6 priceTitle">Price ({{userCart.totalItems}} Items):</div>
+        <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calPrice}}</div>
       </div>
       <div class="rowCart" style="margin-top: 30px;">
         <div class="col-shp-6 priceTitle">Delivery Fees:</div>
-        <div class="col-shp-4 priceAmount">&#x20B9; 1000</div>
+        <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDelivery}}</div>
       </div>
       <hr />
       <div class="rowCart">
         <div class="col-shp-6 priceTitle">GST:</div>
-        <div class="col-shp-4 priceAmount">&#x20B9; 1000</div>
+        <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calGST}}</div>
       </div>
       <hr />
       <div class="rowCart">
         <div class="col-shp-6 priceTitle">Total Price:</div>
-        <div class="col-shp-4 priceAmount">&#x20B9; 1000</div>
+        <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calFinalTotal}}</div>
       </div>
       <hr />
       <div class="rowCart">
