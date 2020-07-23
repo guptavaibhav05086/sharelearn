@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title" id="modal-basic-title" style="PADDING-LEFT: 35%;">Product Form</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -52,7 +52,7 @@
                       productform.controls['Pname'].errors.required
                     "
                   >
-                    *First Name is required.
+                    *Name is required.
                   </span>
                 </div>
               </div>
@@ -168,7 +168,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="# of years"
+                    placeholder="50,100,200"
                     formControlName="quantities"
                     required
                     [disabled]="isDisabled"
@@ -223,7 +223,7 @@
               class="form-control"
               placeholder="INR"
               formControlName="price"
-              required
+              
               [disabled]="isDisabled"
             />
             <span
@@ -240,7 +240,7 @@
           </div>
         </div>
   <div class="input-group col-md-4" style="padding-top: 30px;">
-    <div class="custom-file form-group">
+    <div class="custom-file form-group"style="position: relative !important">
       <input
         type="file"
         accept="image.*"
@@ -256,6 +256,134 @@
     </div>
    
   </div>
+</div>
+<div class="row">
+  
+    <div class="col-md-4 pl-1">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Designer Price</label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="INR"
+            formControlName="dprice"
+            
+            [disabled]="isDisabled"
+          />
+          
+        </div>
+      </div>
+      <div class="col-md-4 pl-1">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Designer Commisson %</label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="INR"
+            formControlName="dCommission"
+            
+            [disabled]="isDisabled"
+          />
+          
+        </div>
+      </div>
+
+      <div class="col-md-4 pl-1">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Designer GST %</label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="INR"
+            formControlName="dGST"
+            
+            [disabled]="isDisabled"
+          />
+          
+        </div>
+      </div>
+
+</div>
+<div class="row">
+  
+  <div class="col-md-4 pl-1">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Printer Price</label>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="INR"
+          formControlName="pprice"
+          
+          [disabled]="isDisabled"
+        />
+        
+      </div>
+    </div>
+    <div class="col-md-4 pl-1">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Printer Commisson %</label>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="INR"
+          formControlName="pCommission"
+          
+          [disabled]="isDisabled"
+        />
+        
+      </div>
+    </div>
+
+    <div class="col-md-4 pl-1">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Printer GST %</label>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="INR"
+          formControlName="pGST"
+          required
+          [disabled]="isDisabled"
+        />
+        
+      </div>
+    </div>
+
+</div>
+<div class="row">
+  
+  <div class="col-md-4 pl-1">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Preference</label>
+        <input
+          type="number"
+          class="form-control"
+          placeholder=""
+          formControlName="preferenece"
+          
+          [disabled]="isDisabled"
+        />
+        
+      </div>
+    </div>
+    <div class="col-md-8 pl-1">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Product Description </label>
+        <textarea
+          
+          class="form-control"
+          placeholder=""
+          formControlName="description"
+          
+          [disabled]="isDisabled"
+        ></textarea>
+        
+      </div>
+    </div>
+
+    
+
 </div>
             <div class="row">
               <!-- {{productform.valid && isTermsAccepted}} -->
@@ -277,6 +405,8 @@
     </div>
   </div>
 </div>
+
+
 </div>
 
 

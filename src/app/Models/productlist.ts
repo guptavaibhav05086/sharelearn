@@ -11,4 +11,14 @@ export class Productlist {
   public productPrice: string;
   public productImage: any;
   public price: string;
+  public  productDescription :string
+        public producPreference :number
+        public  productCode :string
+        public  DesignPrice :number
+        public  DesignGST :number
+        public  DesignCommision :number
+        public  PrintPrice :number
+        public  PrintGST :number
+        public  PrintCommision :number
+        public  SlotTimeGap :number
 }

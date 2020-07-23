@@ -2,7 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { ButtonrendererComponent } from "../buttonrenderer/buttonrenderer.component";
 import { AdminService } from "../../services/admin.service";
 import { ProductsFormsComponent } from "../products-forms/products-forms.component";
+import { ProductListsComponent } from "../product-lists/product-lists.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: "app-products",
   templateUrl: "./products.component.html",
@@ -10,7 +12,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 })
 export class ProductsComponent implements OnInit {
   frameworkComponents: any;
-  productLists:any;
+  productLists: any;
   columnDefs = [
     { headerName: "Name", field: "productName", sortable: true, filter: true },
     {
@@ -46,6 +48,60 @@ export class ProductsComponent implements OnInit {
       filter: true
     },
     {
+      headerName: "Preference",
+      field: "producPreference",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "ProductCode",
+      field: "productCode",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "DesignPrice",
+      field: "DesignPrice",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "DesignGST",
+      field: "DesignGST",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "DesignCommision",
+      field: "DesignCommision",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "PrintPrice",
+      field: "PrintPrice",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "PrintGST",
+      field: "PrintGST",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "PrintCommision",
+      field: "PrintCommision",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "SlotTimeGap",
+      field: "SlotTimeGap",
+      sortable: true,
+      filter: true
+    },
+    {
       headerName: "Edit Product",
       cellRenderer: "buttonRenderer",
       cellRendererParams: {
@@ -54,42 +110,96 @@ export class ProductsComponent implements OnInit {
       }
     }
   ];
+  colDefProdList = [
+    { headerName: "Product Id", field: "key", sortable: true, filter: true },
+    { headerName: "Name", field: "value", sortable: true, filter: true },
+    {
+      headerName: "Preference",
+      field: "producPreference",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "Edit Product",
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        onClick: this.editprodList.bind(this),
+        label: "Edit"
+      }
+    }
+  ];
 
   rowData: any;
-  constructor(private admin: AdminService, private modalService: NgbModal) {
+  constructor(
+    private admin: AdminService,
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService
+  ) {
     this.frameworkComponents = {
       buttonRenderer: ButtonrendererComponent
     };
   }
   ngOnInit(): void {
     debugger;
+    this.fetchProductsData();
+  }
+  fetchProductsData() {
+    this.spinner.show();
     this.rowData = this.admin.getProducts();
     this.admin.getProducts().subscribe(
       data => {
         debugger;
+        this.spinner.hide();
         this.rowData = data["productList"];
-        this.productLists=data['products']
+        this.productLists = data["products"];
       },
-      err => {}
+      err => {
+        this.spinner.hide();
+      }
     );
   }
-  createProduct(){
-    const modelRef=this.modalService.open(ProductsFormsComponent, {
+  createProduct() {
+    const modelRef = this.modalService.open(ProductsFormsComponent, {
       size: "lg",
       backdrop: "static"
     });
     modelRef.componentInstance.productList = this.productLists;
-    modelRef.componentInstance.editForm=false;
+    modelRef.componentInstance.editForm = false;
+  }
+  createProductList() {
+    const modelRef = this.modalService.open(ProductListsComponent, {
+      backdrop: "static"
+    });
+    //modelRef.componentInstance.productList = this.productLists;
+    modelRef.componentInstance.isEdit = false;
+    modelRef.result.then(data => {
+      this.fetchProductsData();
+    });
+  }
+  editprodList(e) {
+    debugger;
+    const modelRef = this.modalService.open(ProductListsComponent, {
+      backdrop: "static"
+    });
+    //modelRef.componentInstance.productList = this.productLists;
+    modelRef.componentInstance.isEdit = true;
+    modelRef.componentInstance.selProduct = e.rowData;
+    modelRef.result.then(data => {
+      this.fetchProductsData();
+    });
   }
   editProduct(e) {
     console.log(e.rowData);
-    const modelRef=this.modalService.open(ProductsFormsComponent, {
+    const modelRef = this.modalService.open(ProductsFormsComponent, {
       size: "lg",
       backdrop: "static"
     });
     modelRef.componentInstance.productList = this.productLists;
-    modelRef.componentInstance.editForm=true;
-    modelRef.componentInstance.selectedProduct=e.rowData;
+    modelRef.componentInstance.editForm = true;
+    modelRef.componentInstance.selectedProduct = e.rowData;
+    modelRef.result.then(data => {
+      this.fetchProductsData();
+    });
 
     //this.modalService.editForm
     //alert()

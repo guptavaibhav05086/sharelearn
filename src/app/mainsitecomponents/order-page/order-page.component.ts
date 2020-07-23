@@ -55,7 +55,9 @@ export class OrderPageComponent implements OnInit {
     meetingDate: new FormControl({}),
     meetingSlot: new FormControl(""),
     professionDesigner: new FormControl(false),
-    sourceFile: new FormControl(false)
+    sourceFile: new FormControl(false),
+    sourceFileSpecs:new FormControl(false),
+    pinCode:new FormControl("",[Validators.required])
   });
   addToCart() {
     debugger;
@@ -185,6 +187,7 @@ export class OrderPageComponent implements OnInit {
     );
     if (category == "Design And Print" || category == "Print Only") {
       this.displayprinter = true;
+      this.displayDesigner =false;
       if (category == "Design And Print") {
         this.displayDesigner = true;
       }
@@ -196,6 +199,8 @@ export class OrderPageComponent implements OnInit {
     this.orderForm.patchValue({
       type: category
     });
+    console.log(this.selectedCategory);
+    // this.selectedCategory.sort((a, b) => a.value.localeCompare(b.value));
   }
   ngOnInit(): void {
     this.admin.getProducts().subscribe(

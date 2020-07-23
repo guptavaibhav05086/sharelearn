@@ -30,7 +30,15 @@ export class ProductsFormsComponent implements OnInit {
     paperGSM: new FormControl("", [Validators.required]),
     quantities: new FormControl("", [Validators.required]),
     classification: new FormControl("", [Validators.required]),
-    price: new FormControl("", [Validators.required])
+    price: new FormControl("", [Validators.required]),
+    dprice: new FormControl(""),
+    dCommission: new FormControl(""),
+    dGST: new FormControl(""),
+    pprice: new FormControl(""),
+    pCommission: new FormControl(""),
+    pGST: new FormControl(""),
+    preferenece: new FormControl(""),
+    description: new FormControl(""),
   });
   constructor(
     private _validator: ValidatorsService,
@@ -50,7 +58,15 @@ export class ProductsFormsComponent implements OnInit {
         paperGSM: this.selectedProduct["paperGSM"],
         quantities: this.selectedProduct["quantities"],
         classification: this.selectedProduct["productCategory"],
-        price: this.selectedProduct["price"]
+        price: this.selectedProduct["price"],
+        dprice:this.selectedProduct["DesignPrice"],
+    dCommission:this.selectedProduct["DesignCommision"],
+    dGST:this.selectedProduct["DesignGST"],
+    pprice:this.selectedProduct["PrintPrice"],
+    pCommission:this.selectedProduct["PrintCommision"],
+    pGST:this.selectedProduct["PrintGST"],
+    preferenece:this.selectedProduct["producPreference"],
+    description:this.selectedProduct["productDescription"],
       });
     }
   }
@@ -65,6 +81,19 @@ export class ProductsFormsComponent implements OnInit {
       "classification"
     ].value;
     this.product.price = this.productform.controls["price"].value;
+
+
+    this.product.DesignCommision = this.productform.controls["dCommission"].value;
+    this.product.DesignGST = this.productform.controls["dGST"].value;
+    this.product.DesignPrice = this.productform.controls["dprice"].value;
+    this.product.PrintCommision = this.productform.controls["pCommission"].value;
+    this.product.PrintGST = this.productform.controls["pGST"].value;
+    this.product.PrintPrice = this.productform.controls["pprice"].value;
+    this.product.producPreference = this.productform.controls["preferenece"].value;
+    this.product.productDescription = this.productform.controls["description"].value;
+    
+
+
     if (this.editForm == true) {
       this.product.productsubId = this.selectedProduct["productsubId"];
     } else {

@@ -74,7 +74,7 @@
             <h3 class="display-label">
               Product Specification
             </h3>
-            
+           
         
           </div>
           <div class="or-formcontrol flex-container">
@@ -108,7 +108,21 @@
                            
                           </div>
                     </div>
+                     <div class="flex-control5">
+                        <div class="form-group">
+                            <label>Pin Code *</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="orientation"                   formControlName="category"                  disabled                                                        
+                            />                           
+                           
+                          </div>
+                    </div>
                    
+                </div>
+                <div class="row">
+                  <p>Product description</p>
                 </div>
               <div class="row">
                   <div class="flex-control5" >
@@ -119,7 +133,7 @@
                             class="form-control"
                             placeholder="state"                         formControlName="subCategory"                                                                    
                           >
-                          <option></option>
+                          <option>Select</option>
                           <option *ngFor="let item of proSpec.subcat">
                             {{item}}
                           </option>
@@ -136,7 +150,7 @@
                             class="form-control"
                             placeholder="orientation"                   formControlName="orientation"                                                                          
                           >
-                          <option></option>
+                          <option>Select</option>
                           <option *ngFor="let item of proSpec.orientation">
                             {{item}}
                           </option>
@@ -152,7 +166,7 @@
                             class="form-control"
                             placeholder="Sub Category"                   (change)="selectedSize($event)"              formControlName="size"                                                              
                           >
-                          <option></option>
+                          <option>Select</option>
                           <option *ngFor="let item of proSpec.size">
                             {{item}}
                           </option>
@@ -170,7 +184,7 @@
                             class="form-control"
                             placeholder="quantities"                    formControlName="GSM"                                                                       
                           >
-                          <option></option>
+                          <option>Select</option>
                           <option *ngFor="let item of proSpec.gsm">
                             {{item}}
                           </option>
@@ -187,7 +201,7 @@
                             class="form-control"
                             placeholder="quantities"                   formControlName="quantities"                                                                             
                           >
-                          <option></option>
+                          <option>Select</option>
                           <option *ngFor="let item of proSpec.displayQuant">
                             {{item}}
                           </option>
@@ -197,7 +211,18 @@
                   </div>
                  
               </div>
-              
+              <div class="row" *ngIf="displayDesigner">
+                <div class="checkbox-profession" >
+                    <div class="form-group">
+                        <input type="checkbox" formControlName="sourceFileSpecs" />
+                       
+                       <label style="margin-left: 20px;">I want Source File</label>
+                      </div>
+                  
+                </div>
+               
+               
+            </div>
               <div class="row" >
                   <div class="flex-control8" >
                       <div class="form-group">
@@ -214,7 +239,7 @@
                       <div class="form-group">
                           <input type="checkbox" formControlName="professionDesigner" />
                          
-                         <label style="margin-left: 20px;">Professional Designer</label>
+                         <label style="margin-left: 20px;">Illustration Design</label>
                         </div>
                     
                   </div>
@@ -390,7 +415,7 @@
                           
                     </div>
                 </div>
-                <div class="row" *ngIf="displayprinter">
+                <div class="row" *ngIf="displayDesigner">
                     <div class="flex-control-50">
                         <div class="form-group">
                             <input type="checkbox" formControlName="sourceFile"/>

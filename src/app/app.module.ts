@@ -42,14 +42,14 @@ import { UsersignupComponent } from "./auth/usersignup/usersignup.component";
 import { DesignersignupComponent } from "./auth/designersignup/designersignup.component";
 import { PrintersignupComponent } from "./auth/printersignup/printersignup.component";
 import { AgGridModule } from "ag-grid-angular";
-import { OrderPageComponent } from './mainsitecomponents/order-page/order-page.component';
-import { HomelinkPageComponent } from './mainsitecomponents/homelink-page/homelink-page.component';
-import { AboutusPopupComponent } from './mainsitecomponents/aboutus-popup/aboutus-popup.component';
-import { SelectAddressComponent } from './mainsitecomponents/select-address/select-address.component';
-import { AddressFormComponent } from './mainsitecomponents/address-form/address-form.component';
-import { GoogleplacesComponent } from './mainsitecomponents/googleplaces/googleplaces.component';
-import { OrderCartComponent } from './mainsitecomponents/order-cart/order-cart.component';
-import { ReviewOrderComponent } from './mainsitecomponents/review-order/review-order.component';
+import { OrderPageComponent } from "./mainsitecomponents/order-page/order-page.component";
+import { HomelinkPageComponent } from "./mainsitecomponents/homelink-page/homelink-page.component";
+import { AboutusPopupComponent } from "./mainsitecomponents/aboutus-popup/aboutus-popup.component";
+import { SelectAddressComponent } from "./mainsitecomponents/select-address/select-address.component";
+import { AddressFormComponent } from "./mainsitecomponents/address-form/address-form.component";
+import { GoogleplacesComponent } from "./mainsitecomponents/googleplaces/googleplaces.component";
+import { OrderCartComponent } from "./mainsitecomponents/order-cart/order-cart.component";
+import { ReviewOrderComponent } from "./mainsitecomponents/review-order/review-order.component";
 @NgModule({
   declarations: [
     AppComponent,

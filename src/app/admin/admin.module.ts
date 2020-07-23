@@ -11,6 +11,7 @@ import { AgGridModule } from "ag-grid-angular";
 import { ButtonrendererComponent } from "./buttonrenderer/buttonrenderer.component";
 import { ProductsFormsComponent } from "./products-forms/products-forms.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { ProductListsComponent } from './product-lists/product-lists.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -19,7 +20,8 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
     NavbarcommonComponent,
     ProductsComponent,
     ButtonrendererComponent,
-    ProductsFormsComponent
+    ProductsFormsComponent,
+    ProductListsComponent
   ],
   imports: [
     CommonModule,

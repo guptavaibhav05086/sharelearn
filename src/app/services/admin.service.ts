@@ -25,6 +25,14 @@ export class AdminService {
       this.login.getAuthHeader()
     );
   }
+  updateProductList(product){
+    let url = `${environment.baseUrl}${environment.updateProdList}`;
+    return this._httpclient.post(
+      url,
+      product,
+      this.login.getAuthHeader()
+    );
+  }
   uploadProdImage(file) {
     return this._httpclient.post(
       `${environment.baseUrl}${environment.uploadProdImage}`,

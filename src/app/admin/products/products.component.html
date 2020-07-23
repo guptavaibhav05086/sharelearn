@@ -3,6 +3,55 @@
     <div class="col-md-12">
       <div class="card ">
         <div class="card-header ">
+          <h5 class="card-title">Product List</h5>
+          <p>
+            <button
+              class="btn btn-primary"
+              type="text"
+              (click)="createProductList()"
+            >
+              Create Product
+            </button>
+          </p>
+        </div>
+        <div class="card-body ">
+          <div class="content" style="margin-top:0px">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="card">
+                  <!-- <div class="card-header">
+                          <h4 class="card-title"> Simple Table</h4>
+                        </div> -->
+                  <div class="card-body">
+                    <ag-grid-angular
+                      style="height: 500px;"
+                      class="ag-theme-alpine"
+                      [rowData]="productLists"
+                      [columnDefs]="colDefProdList"
+                      [frameworkComponents]="frameworkComponents"
+                      [pagination]="true"
+                      [paginationPageSize]="20"
+                    >
+                    </ag-grid-angular>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr />
+          <!-- <div class="stats">
+                <i class="fa fa-history"></i> <a href="tables.html">View All</a>
+              </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card ">
+        <div class="card-header ">
           <h5 class="card-title">Product Specification</h5>
           <p>
             <button
@@ -41,11 +90,18 @@
         </div>
         <div class="card-footer ">
           <hr />
-          <div class="stats">
+          <!-- <div class="stats">
             <i class="fa fa-history"></i> <a href="tables.html">View All</a>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
   </div>
 </div>
+<ngx-spinner
+  bdColor="rgba(51, 51, 51, 0.8)"
+  size="default"
+  type="ball-spin-clockwise"
+>
+  <p style="color: white">Please Wait.</p>
+</ngx-spinner>
