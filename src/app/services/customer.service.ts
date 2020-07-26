@@ -75,7 +75,15 @@ export class CustomerService {
     this.itemsList.push(item);
     this.updateLocalStorageCart();
   }
-  deletItemFromCart(itemId) {}
+  deletItemFromCart(itemId) {
+    let existnCart = this.getLocalStorageCart();
+    if (existnCart != null && existnCart != undefined) {
+
+      this.itemsList = existnCart.filter(item=> item.id != itemId);
+    }
+    this.updateLocalStorageCart();
+
+  }
   updateLocalStorageCart() {
     localStorage.setItem("cart", JSON.stringify(this.itemsList));
   }

@@ -16,6 +16,14 @@ export class AdminService {
       this.login.getAuthHeader()
     );
   }
+  checkPincodes(pincode) {
+    let url = `${environment.baseUrl}${environment.checkPincodes}`.replace('$pincode',pincode);
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
 
   updateProduct(product){
     let url = `${environment.baseUrl}${environment.updateProducts}`;

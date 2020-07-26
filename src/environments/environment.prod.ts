@@ -30,5 +30,7 @@ export const environment = {
   uploadProdImage: "/api/admin/uploadproductimage",
   addUserAddress: "/api/customer/updateaddress",
   getUserAddress: "/api/customer/getaddress?userId=$userId",
-  deleteAddress: "/api/customer/deleteaddress?userId=$userId&addId=$addId"
+  deleteAddress: "/api/customer/deleteaddress?userId=$userId&addId=$addId",
+  updateProdList: "/api/admin/updateproductslist",
+  checkPincodes: "/api/admin/checkpincodes?pincode=$pincode"
 };

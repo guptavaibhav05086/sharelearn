@@ -12,6 +12,7 @@ import { ButtonrendererComponent } from "./buttonrenderer/buttonrenderer.compone
 import { ProductsFormsComponent } from "./products-forms/products-forms.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { ProductListsComponent } from './product-lists/product-lists.component';
+import { PrintRatesComponent } from './print-rates/print-rates.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -21,7 +22,8 @@ import { ProductListsComponent } from './product-lists/product-lists.component';
     ProductsComponent,
     ButtonrendererComponent,
     ProductsFormsComponent,
-    ProductListsComponent
+    ProductListsComponent,
+    PrintRatesComponent
   ],
   imports: [
     CommonModule,

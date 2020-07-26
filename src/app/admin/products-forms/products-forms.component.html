@@ -163,7 +163,19 @@
                 
               </div>
               <div class="col-md-4 pl-1">
-                <div class="form-group">
+                  <div class="form-group">
+                      <label for="exampleInputEmail1">Printer GST %</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        placeholder="INR"
+                        formControlName="pGST"
+                        required
+                        [disabled]="isDisabled"
+                      />
+                      
+                    </div>
+                <!-- <div class="form-group">
                   <label for="exampleInputEmail1">Quantities</label>
                   <input
                     type="text"
@@ -184,7 +196,7 @@
                   >
                     *Quantities is required.
                   </span>
-                </div>
+                </div> -->
               </div>
             </div>
 <div class="row">
@@ -217,25 +229,25 @@
       </div>
       <div class="col-md-4 pl-1">
           <div class="form-group">
-            <label for="exampleInputEmail1">Price</label>
+            <label for="exampleInputEmail1">Product Code</label>
             <input
               type="text"
               class="form-control"
-              placeholder="INR"
-              formControlName="price"
+              placeholder=""
+              formControlName="productCode"
               
               [disabled]="isDisabled"
             />
             <span
               class="errorMessage"
               *ngIf="
-                (productform.controls['price'].dirty ||
-                  productform.controls['price'].touched) &&
-                productform.controls['price'].invalid &&
-                productform.controls['price'].errors.required
+                (productform.controls['productCode'].dirty ||
+                  productform.controls['productCode'].touched) &&
+                productform.controls['productCode'].invalid &&
+                productform.controls['productCode'].errors.required
               "
             >
-              *Price is required.
+              *ProductCode is required.
             </span>
           </div>
         </div>
@@ -304,7 +316,7 @@
       </div>
 
 </div>
-<div class="row">
+<div class="row" style="display:none">
   
   <div class="col-md-4 pl-1">
       <div class="form-group">
@@ -355,12 +367,26 @@
   
   <div class="col-md-4 pl-1">
       <div class="form-group">
-        <label for="exampleInputEmail1">Preference</label>
+        <label for="exampleInputEmail1">Delivery Fees</label>
         <input
           type="number"
           class="form-control"
           placeholder=""
-          formControlName="preferenece"
+          formControlName="deliveryFees"
+          
+          [disabled]="isDisabled"
+        />
+        
+      </div>
+    </div>
+    <div class="col-md-4 pl-1">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Delivery Time</label>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="in days"
+          formControlName="deliveryTime"
           
           [disabled]="isDisabled"
         />
@@ -380,10 +406,75 @@
         ></textarea>
         
       </div>
+    </div>    
+</div>
+<div class="row" *ngFor="let item of printPrice;let i=index">
+  
+  <div class="col-md-2 pl-1">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Print Qauntitiy</label>
+        <input
+          type="number"
+          class="form-control"
+          placeholder=""
+          [value]="item.qunatity"
+          (blur)="setquantprint($event,i)"
+          [disabled]="isDisabled"
+        />
+        
+      </div>
     </div>
-
-    
-
+    <div class="col-md-2 pl-1">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Print Price</label>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="INR"
+          [value]="item.pricePerUnit"
+          (blur)="setpriceprint($event,i)"
+          
+          [disabled]="isDisabled"
+        />
+        
+      </div>
+    </div>
+    <div class="col-md-2 pl-1">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Print Commision</label>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="in %"
+          (blur)="setcommisonprint($event,i)"
+          [value]="item.printCommission"
+          [disabled]="isDisabled"
+        />
+        
+      </div>
+    </div>
+    <div class="col-md-2 pl-1">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Delivery Days</label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="in days"
+            (blur)="setdeliverydaysprint($event,i)"
+            [value]="item.deliveryDays"
+            [disabled]="isDisabled"
+          />
+          
+        </div>
+      </div>
+    <div class="col-md-2 pl-1" style="padding-top:20px">
+      <div class="form-group">
+        <button class="btn btn-round" (click)="createItem(i)">+</button>
+        <button class="btn btn-round" *ngIf="i !=0" (click)="removeItem(i)">-</button>
+        
+      </div>
+     
+    </div>    
 </div>
             <div class="row">
               <!-- {{productform.valid && isTermsAccepted}} -->

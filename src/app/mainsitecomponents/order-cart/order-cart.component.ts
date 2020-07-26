@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-
+import { CustomerService } from "../../services/customer.service";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-order-cart",
   templateUrl: "./order-cart.component.html",
@@ -19,21 +20,46 @@ export class OrderCartComponent implements OnInit {
       calGST: 0,
       calFinalTotal: 0
     },
-    totalItems:0
+    totalItems: 0
   };
-  constructor() {}
+  constructor(private custService: CustomerService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadCart();
   }
-
+  resetCart() {
+    this.userCart = {
+      designNprint: [],
+      design: [],
+      print: [],
+      displayPrint: false,
+      displayDesign: false,
+      displayDesignNPrint: false,
+      finalPrice: {
+        calPrice: 0,
+        calDelivery: 0,
+        calGST: 0,
+        calFinalTotal: 0
+      },
+      totalItems: 0
+    };
+  }
+  removeItem(id) {
+    this.custService.deletItemFromCart(id);
+    this.resetCart();
+    this.loadCart();
+  }
+  editItem(id) {
+    this.router.navigate(["/createorder"], { queryParams: { itemId: id } });
+  }
   loadCart() {
     debugger;
     let cartItems = JSON.parse(localStorage.getItem("cart"));
-    this.userCart.totalItems=cartItems.length;
+    this.userCart.totalItems = cartItems.length;
     if (cartItems != null && cartItems.length > 0) {
       cartItems.forEach(item => {
         if (item.type == "Design And Print") {
+          item.category[0].id = item.id;
           this.userCart.designNprint.push(item.category[0]);
           this.userCart.finalPrice.calPrice += item.category[0].price.price;
           this.userCart.finalPrice.calGST += item.category[0].price.GST;
@@ -42,6 +68,7 @@ export class OrderCartComponent implements OnInit {
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
         } else if (item.type == "Design Only") {
+          item.category[0].id = item.id;
           console.log(item.category[0]);
           this.userCart.design.push(item.category[0]);
           this.userCart.finalPrice.calPrice += item.category[0].price.price;
@@ -51,6 +78,7 @@ export class OrderCartComponent implements OnInit {
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
         } else if (item.type == "Print Only") {
+          item.category[0].id = item.id;
           this.userCart.print.push(item.category[0]);
           this.userCart.finalPrice.calPrice += item.category[0].price.price;
           this.userCart.finalPrice.calGST += item.category[0].price.GST;

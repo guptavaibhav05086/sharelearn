@@ -23,7 +23,7 @@
           <p class="productDetails">
             <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total}}
           </p>
-          <p><button class="btn">Remove</button></p>
+          <p><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary" (click)="editItem(item.id)">Edit</button></p>
         </div>
       </div>
       <!-- <div class="rowCart itemCart">
@@ -50,7 +50,7 @@
           <p><button class="btn">Remove</button></p>
         </div>
       </div> -->
-      <div class="categoryTitle" *ngIf="userCart.displayDesignNPrint">Design and Print</div>
+      <div class="categoryTitle" *ngIf="userCart.displayDesignNPrint">Design and Print ({{userCart.designNprint.length}} items)</div>
 
       <div class="rowCart itemCart" *ngFor="let item of userCart.designNprint">
         <div class="col-shp-3 mobCard">
@@ -75,7 +75,7 @@
           </p>
           
          
-          <p><button class="btn">Remove</button></p>
+          <p><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary" (click)="editItem(item.id)">Edit</button></p>
         </div>
       </div>
 
@@ -103,7 +103,7 @@
           </p>
           
          
-          <p><button class="btn">Remove</button></p>
+          <p><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary" (click)="editItem(item.id)">Edit</button></p>
         </div>
       </div>
       <!-- <div class="rowCart itemCart">

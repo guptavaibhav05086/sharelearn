@@ -14,6 +14,12 @@ export class ProductsComponent implements OnInit {
   frameworkComponents: any;
   productLists: any;
   columnDefs = [
+    {
+      headerName: "Id",
+      field: "poductDetailsId",
+      sortable: true,
+      filter: true
+    },
     { headerName: "Name", field: "productName", sortable: true, filter: true },
     {
       headerName: "Subcategory",
@@ -96,6 +102,18 @@ export class ProductsComponent implements OnInit {
       filter: true
     },
     {
+      headerName: "Delivery Fees",
+      field: "deliveryFees",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "DeliveryTime",
+      field: "deliveryTime",
+      sortable: true,
+      filter: true
+    },
+    {
       headerName: "SlotTimeGap",
       field: "SlotTimeGap",
       sortable: true,
@@ -130,6 +148,7 @@ export class ProductsComponent implements OnInit {
   ];
 
   rowData: any;
+  printPrice: any;
   constructor(
     private admin: AdminService,
     private modalService: NgbModal,
@@ -152,6 +171,7 @@ export class ProductsComponent implements OnInit {
         this.spinner.hide();
         this.rowData = data["productList"];
         this.productLists = data["products"];
+        this.printPrice = data["printPrice"];
       },
       err => {
         this.spinner.hide();
@@ -197,6 +217,7 @@ export class ProductsComponent implements OnInit {
     modelRef.componentInstance.productList = this.productLists;
     modelRef.componentInstance.editForm = true;
     modelRef.componentInstance.selectedProduct = e.rowData;
+    modelRef.componentInstance.printPriceList=this.printPrice;
     modelRef.result.then(data => {
       this.fetchProductsData();
     });
@@ -204,4 +225,5 @@ export class ProductsComponent implements OnInit {
     //this.modalService.editForm
     //alert()
   }
+  editprintPrice(e) {}
 }
