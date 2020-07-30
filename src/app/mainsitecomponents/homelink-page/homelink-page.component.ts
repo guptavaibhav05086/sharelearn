@@ -40,7 +40,7 @@ export class HomelinkPageComponent implements OnInit {
     this.selectCors();
   }
 
-  socialLink(name) {
+  socialLink(name,event) {
     if (name == "fb") {
       window.open("https://www.facebook.com/shapenprint/", "_blank");
     }
@@ -54,6 +54,7 @@ export class HomelinkPageComponent implements OnInit {
       window.open("https://twitter.com/shapeNprint/", "_blank");
     }
     if (name == "register") {
+      event.preventDefault();
       this.helper.navigateToPath("/register");
     }
   }

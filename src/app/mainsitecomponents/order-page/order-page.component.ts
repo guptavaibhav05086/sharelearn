@@ -6,6 +6,7 @@ import { CustomerService } from "src/app/services/customer.service";
 import { HelperService } from "src/app/services/helper.service";
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
+import { delay } from 'rxjs/internal/operators/delay';
 @Component({
   selector: "app-order-page",
   templateUrl: "./order-page.component.html",
@@ -27,9 +28,19 @@ export class OrderPageComponent implements OnInit {
   displayDesigner = false;
   displaysummary = false;
   displaycartMessage = false;
+  displayLenghtWidth=false;
   Servicable = false;
   isEditOrder=false;
   cartItemId=0;
+  fileError=false;
+  isPhotoUrlValid: boolean;
+  
+  uploadedFileNames={
+    product:"Sample of Product you like",
+    image1:"Logo/Image 1",
+    image2:"Logo/Image 2",
+    content:"Content File in .doc,docx,.pdf format"
+  }
   orderPrice = {
     price: 0,
     deliveryFee: 0,
@@ -61,7 +72,87 @@ export class OrderPageComponent implements OnInit {
     "8:00 PM -9:00 PM",
     "9:00 PM -10:00 PM"
   ];
+  validateFiles(name: string, file: File): boolean {
+    if (name == "content") {
+      if (
+        !file.type.match(
+          "text.*|image.*|application.pdf|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        )
+      ) {
+        this.isPhotoUrlValid = false;
+        return false;
+      } else {
+        this.isPhotoUrlValid = true;
+      }
+      if (file.size > 5000000) {
+        this.isPhotoUrlValid = false;
 
+        return false;
+      } else {
+        this.isPhotoUrlValid = true;
+      }
+      return this.isPhotoUrlValid;
+    }
+    if (name != "GST") {
+      if (!file.type.match("image.*")) {
+        this.isPhotoUrlValid = false;
+        return false;
+      } else {
+        this.isPhotoUrlValid = true;
+      }
+      if (file.size > 5000000) {
+        this.isPhotoUrlValid = false;
+
+        return false;
+      } else {
+        this.isPhotoUrlValid = true;
+      }
+    }
+    
+
+    return true;
+  }
+  uploadGSTCertificate(images: FileList, name: string) {
+    debugger;
+    var result = "";
+    var file;
+    const formData = new FormData();
+    var userImage = images.item(0);
+    debugger;
+    for (var i = 0; (file = images[i]); i++) {
+      //if the file is not an image, continue
+      if (!this.validateFiles(name, file)) {
+        alert('Not a Valid Image File');
+        return;
+      }
+      let reader = new FileReader();
+
+      reader.readAsDataURL(file);
+      
+    }
+    formData.append(name, userImage, userImage.name);
+    
+    //this.selectedFileName=userImage.name;
+    this.spinner.show();
+
+    this.custService.uploadUserImage(formData).subscribe(
+      data => {
+        this.spinner.hide();
+        debugger;
+        console.log(data);
+        alert("File Uploaded Successfully");
+        this.uploadedFileNames[name]=data;
+        this.fileError = false;
+        //this.selectedFileName = userImage.name;
+      },
+      err => {
+        this.spinner.hide();
+        debugger;
+        this.fileError = true;
+        alert("Issue in file upload please contact admin");
+      }
+    );
+  }
   orderForm = new FormGroup({
     type: new FormControl(""),
     category: new FormControl(""),
@@ -78,6 +169,7 @@ export class OrderPageComponent implements OnInit {
     pinCode: new FormControl("", [Validators.required]),
     GSTNumber: new FormControl(""),
     BillingName: new FormControl(""),
+    purpose:new FormControl("")
   });
   addToCart() {
     debugger;
@@ -105,6 +197,7 @@ export class OrderPageComponent implements OnInit {
       type: this.orderForm.controls["type"].value,
       GSTNumber: this.orderForm.controls["GSTNumber"].value,
       BillingName: this.orderForm.controls["BillingName"].value,
+      uploadedimages:this.uploadedFileNames,
       category: [
         {
           name: this.orderForm.controls["category"].value,
@@ -128,12 +221,18 @@ export class OrderPageComponent implements OnInit {
           },
           professionalDesigner: this.orderForm.controls["professionDesigner"]
             .value,
-          sourceFile: this.orderForm.controls["sourceFile"].value
+          sourceFile: this.orderForm.controls["sourceFile"].value,
+          purpose:this.orderForm.controls["purpose"].value
         }
       ]
     };
     this.custService.addItemUserOrdersList(cartItem);
     this.displaycartMessage = true;
+  }
+  scrollToElement($element): void {
+    console.log($element);
+   
+    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
   proSpec = {
     orientation: [],
@@ -151,7 +250,7 @@ export class OrderPageComponent implements OnInit {
     private spinner:NgxSpinnerService
   ) {}
 
-  proceedOrder() {
+  proceedOrder($element:any) {
     this.displayMeetings = false;
     this.displaysummary = true;
     // if (this.orderForm.controls["type"].value == "Print Only") {
@@ -168,6 +267,7 @@ export class OrderPageComponent implements OnInit {
       this.orderForm.controls["size"].value
     );
     console.log(this.orderPrice);
+    this.scrollToElement($element);
     //TODO Calculate Price method
   }
   dateSet() {
@@ -369,7 +469,7 @@ export class OrderPageComponent implements OnInit {
 
       
       this.showCategory(editItem[0].type);
-      this.selectedProduct(editItem[0].category[0].name);
+      this.selectedProduct(editItem[0].category[0].name,null);
       let e ={
         target:{
           value: editItem[0].category[0].specs.size
@@ -396,13 +496,21 @@ export class OrderPageComponent implements OnInit {
     
 
   }
-  selectedProduct(value) {
+  selectedProduct(value,$element) {
     //debugger;
     this.checkedProduct = this.productList.filter(
       item => item.productName == value
     );
 
     this.resetControls();
+
+    this.displaySpecs = true;
+    if(this.checkedProduct.IsPriceInSqFt =="Yes"){
+      this.displayLenghtWidth = true;
+    }
+    else{
+      this.displayLenghtWidth = false;
+    }
     this.proSpec.subcat = [];
     this.proSpec.size = [];
     this.proSpec.orientation = [];
@@ -429,12 +537,14 @@ export class OrderPageComponent implements OnInit {
     this.proSpec.orientation = [...new Set(this.proSpec.orientation)];
     this.proSpec.quantities = [...new Set(this.proSpec.quantities)];
     this.proSpec.size = [...new Set(this.proSpec.size)];
-    this.displaySpecs = true;
+    
     this.orderForm.patchValue({
       category: value
     });
     console.log(this.proSpec);
+     //delay(5000);
     //this.proSpec.displayQuant=this.proSpec.quantities.sp
+    this.scrollToElement($element);
   }
   selectedSize(e) {
     debugger;

@@ -56,6 +56,13 @@ export class CustomerService {
       this.login.getAuthHeader()
     );
   }
+  uploadUserImage(file) {
+    return this._httpclient.post(
+      `${environment.baseUrl}${environment.uploadOrderFiles}`,
+      file,
+      this.login.getAuthHeader()
+    );
+  }
   deleteUserAddress(userId, addId): Observable<Array<AddressRequest>> {
     let url = `${environment.baseUrl}${environment.deleteAddress}`
       .replace("$userId", userId)

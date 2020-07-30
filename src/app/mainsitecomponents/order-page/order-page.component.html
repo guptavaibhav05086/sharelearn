@@ -58,7 +58,7 @@
                 name="category"
                 id="inlineRadio1"
                 [value]="item.value"
-                (change)="selectedProduct(item.value)"
+                (change)="selectedProduct(item.value,specs)"
                 formControlName="category"
               />
               <label class="form-check-label" for="category">{{
@@ -69,211 +69,317 @@
         </div>
 
         <!-- Container for Product Specification -->
-        <div class="container shadow p-3 mb-5 bg-white rounded" *ngIf="displaySpecs">
-          <div class="or-formcontrol">
-            <h3 class="display-label">
-              Product Specification
-            </h3>
-           
-        
-          </div>
-          <div class="or-formcontrol flex-container">
-            <div class="flex-control2">
-              <img src="../../../assets/StudentDashboard/img/download.jpg" />
+        <div [style.visibility]="displaySpecs ? 'visible': 'hidden'" #specs>
+          <div class="container shadow p-3 mb-5 bg-white rounded" >
+            <div class="or-formcontrol">
+              <h3 class="display-label">
+                Product Specification
+              </h3>
+             
+          
             </div>
-            <div class="flex-control8" >
-                <div class="row">
-                    <div style="width:80%;margin-left: 3%;">
-                        <div class="form-group">
-                            {{description}}
-                             
-                            
-                           </div>
+            <div class="or-formcontrol flex-container">
+              <div class="flex-control2">
+                <img src="../../../assets/StudentDashboard/img/download.jpg" />
+              </div>
+              <div class="flex-control8" >
+                  <div class="row">
+                      <div style="width:80%;margin-left: 3%;">
+                          <div class="form-group">
+                              {{description}}
+                               
+                              
+                             </div>
+                      </div>
+                    
+    
                     </div>
-                  
-  
+                  <div class="row">
+                      <div class="flex-control5" >
+                          <div class="form-group">
+                              <label>Order Type *</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder=""                         formControlName="type"                    disabled                                                
+                              />
+                             
+                              
+                             
+                            </div>
+                        
+                      </div>
+                      <div class="flex-control5">
+                          <div class="form-group">
+                              <label>Category *</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="orientation"                   formControlName="category"                  disabled                                                        
+                              />                           
+                             
+                            </div>
+                      </div>
+                       <div class="flex-control5" *ngIf="displayprinter">
+                          <div class="form-group">
+                              <label>Pin Code *</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Check for servicable area"               formControlName="pinCode"                  (blur)="checkServicableArea()"                                                        
+                              />                           
+                             
+                            </div>
+                      </div>
+                     
                   </div>
+                  
                 <div class="row">
                     <div class="flex-control5" >
                         <div class="form-group">
-                            <label>Order Type *</label>
-                            <input
+                            <label>SubCategory *</label>
+                            <select
                               type="text"
                               class="form-control"
-                              placeholder=""                         formControlName="type"                    disabled                                                
-                            />
-                           
-                            
+                              placeholder="state"                         formControlName="subCategory"                                                                    
+                            >
+                            <option>Select</option>
+                            <option *ngFor="let item of proSpec.subcat" [value]="item">
+                              {{item}}
+                            </option>
+                            </select>
                            
                           </div>
                       
                     </div>
                     <div class="flex-control5">
                         <div class="form-group">
-                            <label>Category *</label>
-                            <input
+                            <label>Orientation *</label>
+                            <select
                               type="text"
                               class="form-control"
-                              placeholder="orientation"                   formControlName="category"                  disabled                                                        
-                            />                           
+                              placeholder="orientation"                   formControlName="orientation"                                                                          
+                            >
+                            <option>Select</option>
+                            <option *ngFor="let item of proSpec.orientation" [value]="item">
+                              {{item}}
+                            </option>
+                            </select>
                            
                           </div>
                     </div>
-                     <div class="flex-control5" *ngIf="displayprinter">
+                    <div class="flex-control5">
                         <div class="form-group">
-                            <label>Pin Code *</label>
-                            <input
+                            <label>Size *</label>
+                            <select
                               type="text"
                               class="form-control"
-                              placeholder="Check for servicable area"               formControlName="pinCode"                  (blur)="checkServicableArea()"                                                        
-                            />                           
+                              placeholder="Sub Category"                   (change)="selectedSize($event)"              formControlName="size"                                                              
+                            >
+                            <option>Select</option>
+                            <option *ngFor="let item of proSpec.size" [value]="item">
+                              {{item}}
+                            </option>
+                            </select>
+                           
+                          </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="displayprinter">
+                    <div class="flex-control5" >
+                        <div class="form-group">
+                            <label>Paper GSM *</label>
+                            <select
+                              type="text"
+                              class="form-control"
+                              placeholder="quantities"                    formControlName="GSM"                                                                       
+                            >
+                            <option>Select</option>
+                            <option *ngFor="let item of proSpec.gsm" [value]="item">
+                              {{item}}
+                            </option>
+                            </select>
+                           
+                          </div>
+                      
+                    </div>
+                    <div class="flex-control5">
+                        <div class="form-group">
+                            <label>Quantities *</label>
+                            <select
+                              type="text"
+                              class="form-control"
+                              placeholder="quantities"                   formControlName="quantities"                                                                             
+                            >
+                            <option>Select</option>
+                            <option *ngFor="let item of proSpec.displayQuant" [value]="item">
+                              {{item}}
+                            </option>
+                            </select>
                            
                           </div>
                     </div>
                    
                 </div>
+                <div class="row">
+                   <div class="input-group flex-control5">
+                          <div class="form-group">
+                              <label>Industry Purpose </label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="purpose"               formControlName="purpose"
+                                style="border-left:1px solid #DDDDDD"                                                                         
+                              />                           
+                             
+                            </div>
+                      </div>
+                  <div class="input-group col-md-6" style="padding-top: 30px;position: relative !important">
+                    <div class="custom-file form-group">
+                      <input
+                        type="file"
+                        accept="image.*"
+                        class="custom-file-input"
+                        id="inputGroupFile02"
+                        aria-describedby="inputGroupFileAddon02"
+                        (change)="uploadGSTCertificate($event.target.files,'product')"
+                      />
+                      <label class="custom-file-label" for="inputGroupFile01"
+                        >{{uploadedFileNames.product}}</label
+                      >
+                     
+                    </div>
+                   
+                  </div>
+                  <div class="input-group col-md-4" *ngIf="fileError"></div>
+                  <div class="input-group col-md-8" *ngIf="fileError">
+                    <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                  </div> 
+                </div>
+                <div class="row">
+                  <div class="input-group col-md-4" style="padding-top: 30px;position: relative !important">
+                    <div class="custom-file form-group">
+                      <input
+                        type="file"
+                        accept="image.*"
+                        class="custom-file-input"
+                        id="inputGroupFile02"
+                        aria-describedby="inputGroupFileAddon02"
+                        (change)="uploadGSTCertificate($event.target.files,'image1')"
+                      />
+                      <label class="custom-file-label" for="inputGroupFile01"
+                        >{{uploadedFileNames.image1}}</label
+                      >
+                     
+                    </div>
+                   
+                  </div>
+                  <div class="input-group col-md-4" style="padding-top: 30px;position: relative !important">
+                    <div class="custom-file form-group">
+                      <input
+                        type="file"
+                        accept="image.*"
+                        class="custom-file-input"
+                        id="inputGroupFile02"
+                        aria-describedby="inputGroupFileAddon02"
+                        (change)="uploadGSTCertificate($event.target.files,'image2')"
+                      />
+                      <label class="custom-file-label" for="inputGroupFile01"
+                        >{{uploadedFileNames.image2}}</label
+                      >
+                     
+                    </div>
+                   
+                  </div>
+                  <div class="input-group col-md-4" *ngIf="fileError"></div>
+                  <div class="input-group col-md-8" *ngIf="fileError">
+                    <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                  </div> 
+                </div>
+                <div class="row">
+                  <div class="input-group col-md-8" style="padding-top: 30px;position: relative !important">
+                    <div class="custom-file form-group">
+                      <input
+                        type="file"
+                        accept="application/pdf,application/msword,
+                        application/vnd.openxmlformats-officedocument.wordprocessingml.document,image.*"
+                        class="custom-file-input"
+                        id="inputGroupFile02"
+                        aria-describedby="inputGroupFileAddon02"
+                        (change)="uploadGSTCertificate($event.target.files,'content')"
+                      />
+                      <label class="custom-file-label" for="inputGroupFile01"
+                        >{{uploadedFileNames.content}}</label
+                      >
+                     
+                    </div>
+                   
+                  </div>
+                  <div class="input-group col-md-4" *ngIf="fileError"></div>
+                  <div class="input-group col-md-8" *ngIf="fileError">
+                    <span class="errorMessage" >File should of type doc,docx,pdf format.</span>
+                  </div> 
+                  <div class="input-group col-md-4" *ngIf="fileError"></div>
+                  <div class="input-group col-md-8" *ngIf="fileError">
+                    <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                  </div> 
+                </div>
+                <div class="row" *ngIf="displayDesigner">
+                  <div class="flex-control5" >
+                      <div class="form-group">
+                          <input type="checkbox" formControlName="sourceFileSpecs" />
+                         
+                         <label style="margin-left: 20px;">I want Source File</label>
+                        </div>
+                    
+                  </div>
+                  <div class="flex-control5" >
+                      <div class="form-group">
+                          <input type="checkbox" formControlName="professionDesigner" />
+                         
+                         <label style="margin-left: 20px;">Illustration Design</label>
+                        </div>
+                    
+                  </div>
+                 
+                 
+              </div>
+                <div class="row" >
+                    <div class="flex-control8" >
+                        <div class="form-group">
+                            <a href="#" style="margin-left: 3%;">Click here for {{ orderForm.controls['category'].value}} Blog</a>                                                 
+                          </div>
+                      
+                    </div>
+                   
+                   
+                </div>
+  
                 
-              <div class="row">
-                  <div class="flex-control5" >
-                      <div class="form-group">
-                          <label>SubCategory *</label>
-                          <select
-                            type="text"
-                            class="form-control"
-                            placeholder="state"                         formControlName="subCategory"                                                                    
-                          >
-                          <option>Select</option>
-                          <option *ngFor="let item of proSpec.subcat" [value]="item">
-                            {{item}}
-                          </option>
-                          </select>
-                         
-                        </div>
-                    
-                  </div>
-                  <div class="flex-control5">
-                      <div class="form-group">
-                          <label>Orientation *</label>
-                          <select
-                            type="text"
-                            class="form-control"
-                            placeholder="orientation"                   formControlName="orientation"                                                                          
-                          >
-                          <option>Select</option>
-                          <option *ngFor="let item of proSpec.orientation" [value]="item">
-                            {{item}}
-                          </option>
-                          </select>
-                         
-                        </div>
-                  </div>
-                  <div class="flex-control5">
-                      <div class="form-group">
-                          <label>Size *</label>
-                          <select
-                            type="text"
-                            class="form-control"
-                            placeholder="Sub Category"                   (change)="selectedSize($event)"              formControlName="size"                                                              
-                          >
-                          <option>Select</option>
-                          <option *ngFor="let item of proSpec.size" [value]="item">
-                            {{item}}
-                          </option>
-                          </select>
-                         
-                        </div>
-                  </div>
-              </div>
-              <div class="row" *ngIf="displayprinter">
-                  <div class="flex-control5" >
-                      <div class="form-group">
-                          <label>Paper GSM *</label>
-                          <select
-                            type="text"
-                            class="form-control"
-                            placeholder="quantities"                    formControlName="GSM"                                                                       
-                          >
-                          <option>Select</option>
-                          <option *ngFor="let item of proSpec.gsm" [value]="item">
-                            {{item}}
-                          </option>
-                          </select>
-                         
-                        </div>
-                    
-                  </div>
-                  <div class="flex-control5">
-                      <div class="form-group">
-                          <label>Quantities *</label>
-                          <select
-                            type="text"
-                            class="form-control"
-                            placeholder="quantities"                   formControlName="quantities"                                                                             
-                          >
-                          <option>Select</option>
-                          <option *ngFor="let item of proSpec.displayQuant" [value]="item">
-                            {{item}}
-                          </option>
-                          </select>
-                         
-                        </div>
-                  </div>
-                 
-              </div>
-              <div class="row" *ngIf="displayDesigner">
-                <div class="flex-control5" >
-                    <div class="form-group">
-                        <input type="checkbox" formControlName="sourceFileSpecs" />
-                       
-                       <label style="margin-left: 20px;">I want Source File</label>
-                      </div>
-                  
+                <div class="row">
+                    <div class="flex-controllabel" style="padding-top: 15px;">
+                        <div class="form-group">
+                            <label><span style="font-size: large;font-weight: bold;">Total Cost:  &#x20B9; 10000 </span></label>
+                          </div>
+                      
+                    </div>
+                    <div class="flex-controllabel" >
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary" (click)="proceedOrder(summary)" [disabled]="!(orderForm.valid && Servicable)" >Proceed</button>
+                          </div>
+                      
+                    </div>
+                   
+                   
                 </div>
-                <div class="flex-control5" >
-                    <div class="form-group">
-                        <input type="checkbox" formControlName="professionDesigner" />
-                       
-                       <label style="margin-left: 20px;">Illustration Design</label>
-                      </div>
-                  
-                </div>
-               
-               
-            </div>
-              <div class="row" >
-                  <div class="flex-control8" >
-                      <div class="form-group">
-                          <a href="#" style="margin-left: 3%;">Click here for {{ orderForm.controls['category'].value}} Blog</a>                                                 
-                        </div>
-                    
-                  </div>
-                 
-                 
-              </div>
-
-              
-              <div class="row">
-                  <div class="flex-controllabel" style="padding-top: 15px;">
-                      <div class="form-group">
-                          <label><span style="font-size: large;font-weight: bold;">Total Cost:  &#x20B9; 10000 </span></label>
-                        </div>
-                    
-                  </div>
-                  <div class="flex-controllabel" >
-                      <div class="form-group">
-                          <button type="button" class="btn btn-primary" (click)="proceedOrder()" [disabled]="!(orderForm.valid && Servicable)" >Proceed</button>
-                        </div>
-                    
-                  </div>
-                 
-                 
               </div>
             </div>
           </div>
         </div>
+       
         <!-- Container for Meeting Slot -->
         <!-- <div class="container shadow p-3 mb-5 bg-white rounded" *ngIf="displayMeetings"> -->
-        <div class="container shadow p-3 mb-5 bg-white rounded" style="display:none">
+        <div class="container shadow p-3 mb-5 bg-white rounded" style="display:none" >
             <div class="or-formcontrol">
               <h3 class="display-label">
                 Book a Meeting Slot
@@ -332,7 +438,8 @@
             </div>
           </div>
         <!-- Container for Order Review -->
-        <div class="container shadow p-3 mb-5 bg-white rounded" *ngIf="displaysummary">
+        <div [style.visibility]="displaysummary ? 'visible': 'hidden'"  >
+          <div class="container shadow p-3 mb-5 bg-white rounded" >
             <div class="or-formcontrol">
               <h3 class="display-label">
                  Order Summary
@@ -457,7 +564,7 @@
                 <div class="row">
                     <div class="flex-control-50">
                         <div class="form-group">
-                         <input type="text" class="form-control" placeholder="GST Number(optional)" formControlName="GSTNumber" />
+                         <input type="text" class="form-control" placeholder="GST Number(optional)" formControlName="GSTNumber" style="text-transform:uppercase;" maxlength="12"/>
                             
                            
                           </div>
@@ -522,6 +629,8 @@
               </div>
             </div>
           </div>
+        </div>
+        <div #summary></div>
       </form>
     </div>
   </div>

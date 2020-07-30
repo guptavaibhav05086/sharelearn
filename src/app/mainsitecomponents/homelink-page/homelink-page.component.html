@@ -5,10 +5,10 @@
     [style.width]="winSize.nWidth"
     [style.height]="winSize.nHeigth"
   />
-  <div class="socialposition" >
+  <div class="socialposition">
     <div style="display:flex">
       <div>
-        <a href="#" (click)="socialLink('in')">
+        <a href="#" (click)="socialLink('in', $event)">
           <img
             src="../../../assets/DashBoard/img/Instagram.png"
             class="icons"
@@ -16,7 +16,7 @@
         </a>
       </div>
       <div>
-        <a href="#" (click)="socialLink('tw')">
+        <a href="#" (click)="socialLink('tw', $event)">
           <img
             src="../../../assets/DashBoard/img/Twiter1200.png"
             class="icons"
@@ -24,7 +24,7 @@
         </a>
       </div>
       <div>
-        <a href="#" (click)="socialLink('fb')">
+        <a href="#" (click)="socialLink('fb', $event)">
           <img
             src="../../../assets/DashBoard/img/FaceBook1200.png"
             class="icons"
@@ -32,7 +32,7 @@
         </a>
       </div>
       <div>
-        <a href="#" (click)="socialLink('ln')">
+        <a href="#" (click)="socialLink('ln', $event)">
           <img
             src="../../../assets/DashBoard/img/Asset 191200.png"
             class="icons"
@@ -41,7 +41,7 @@
       </div>
     </div>
   </div>
-  <div class="contactPosition" >
+  <div class="contactPosition">
     <div style="display:flex">
       <div>
         <span class="conactustxt" style="font-weight: 400;">CONTACT US</span>
@@ -51,7 +51,7 @@
       </div>
     </div>
   </div>
-  <div class="copyposition" >
+  <div class="copyposition">
     <div style="display:flex">
       <div>
         <img
@@ -68,18 +68,15 @@
       </div>
     </div>
   </div>
-  <div
-    style="position:absolute;top:28%;left:80%;transform:translate(-50%, -50%);font-size:18px;display: none;"
-  >
-    <img
-      src="../../../assets/DashBoard/img/ServiceProvider.png"
-      class="serviceProviderimg"
-      (click)="socialLink('register')"
-    />
+  <div class="servcProPositon">
+    <a href="#" (click)="socialLink('register', $event)">
+      <img
+        src="../../../assets/DashBoard/img/ServiceProvider.png"
+        class="serviceProviderimg"
+      />
+    </a>
   </div>
-  <div class="freelancePosition"
-    
-  >
+  <div class="freelancePosition">
     <span class="freelancetxt">
       FREELANCING REDEFINED
     </span>

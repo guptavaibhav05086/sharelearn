@@ -17,6 +17,10 @@ export class ProductsFormsComponent implements OnInit {
   isDisabled = false;
   boolean;
   product = new Productlist();
+  options = {
+    Positivie: true,
+    Negative: false
+  };
   selectedFileName = "Choose Image";
   @Input() productList;
   @Input() editForm;
@@ -41,7 +45,8 @@ export class ProductsFormsComponent implements OnInit {
     pGST: new FormControl(""),
     deliveryFees: new FormControl(""),
     description: new FormControl(""),
-    deliveryTime: new FormControl("")
+    deliveryTime: new FormControl(""),
+    inSqft: new FormControl("No")
   });
   constructor(
     private _validator: ValidatorsService,
@@ -52,20 +57,13 @@ export class ProductsFormsComponent implements OnInit {
 
   ngOnInit(): void {
     debugger;
-    if (this.printPriceList.length == 0) {
-      let item = new ProductprintPrice();
-      item.prodDetailsId = this.selectedProduct.poductDetailsId;
-      item.Id = 0;
-      item.pricePerUnit = 0;
-      item.printCommission = 0;
-      item.qunatity = 0;
-      this.printPrice.push(item);
-    } else {
-      for (let i = 0; i < this.printPriceList.length; i++) {
-        this.loadItem(i, this.printPriceList[i]);
-      }
-    }
+    let item = new ProductprintPrice();
+    if (this.printPriceList == undefined || this.printPriceList.length == 0) {
+      this.initializePricingSection(item);
+      
+    } 
     if (this.editForm == true) {
+      item.prodDetailsId = this.selectedProduct.poductDetailsId;
       this.productform.patchValue({
         Pname: this.selectedProduct["productId"],
         subCat: this.selectedProduct["productSubcategory"],
@@ -85,7 +83,23 @@ export class ProductsFormsComponent implements OnInit {
         deliveryFees: this.selectedProduct["deliveryFees"],
         deliveryTime: this.selectedProduct["deliveryTime"]
       });
+      let prodPice = this.printPriceList.filter(item=> item.prodDetailsId ==this.selectedProduct.poductDetailsId );
+      if(prodPice ==null || prodPice.length ==0){
+        this.initializePricingSection(item);
+      }
+      for (let i = 0; i < prodPice.length; i++) {
+        this.loadItem(i, this.printPriceList[i]);
+      }
     }
+  }
+   
+    initializePricingSection(item:ProductprintPrice){
+    item.prodDetailsId = 0;
+    item.Id = 0;
+    item.pricePerUnit = 0;
+    item.printCommission = 0;
+    item.qunatity = 0;
+    this.printPrice.push(item);
   }
   loadItem(index, row) {
     let item = new ProductprintPrice();
@@ -100,7 +114,7 @@ export class ProductsFormsComponent implements OnInit {
   }
   createItem(index) {
     let item = new ProductprintPrice();
-    item.prodDetailsId = this.selectedProduct.poductDetailsId;
+    //item.prodDetailsId = this.selectedProduct.poductDetailsId;
     item.Id = index + 1;
     item.pricePerUnit = 0;
     item.printCommission = 0;
@@ -150,8 +164,14 @@ export class ProductsFormsComponent implements OnInit {
     this.product.productSize = this.productform.controls["size"].value;
     this.product.productSubcategory = this.productform.controls["subCat"].value;
     this.product.paperGSM = this.productform.controls["paperGSM"].value;
-    // this.product.quantities = this.productform.controls["quantities"].value;
-    this.product.quantities = quant;
+    // 
+    if(this.productform.controls['inSqft'].value == 'Yes'){
+      this.product.quantities = this.productform.controls["quantities"].value;
+    }
+    else{
+      this.product.quantities = quant;
+    }
+    
     this.product.productCategory = this.productform.controls[
       "classification"
     ].value;

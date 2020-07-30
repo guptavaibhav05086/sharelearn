@@ -45,9 +45,12 @@ export class OrderCartComponent implements OnInit {
     };
   }
   removeItem(id) {
-    this.custService.deletItemFromCart(id);
-    this.resetCart();
-    this.loadCart();
+    var result = confirm("Do you want to delete the item from the cart");
+    if (result) {
+      this.custService.deletItemFromCart(id);
+      this.resetCart();
+      this.loadCart();
+    }
   }
   editItem(id) {
     this.router.navigate(["/createorder"], { queryParams: { itemId: id } });

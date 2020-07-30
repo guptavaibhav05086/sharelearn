@@ -48,4 +48,12 @@ export class AdminService {
       this.login.getAuthHeader()
     );
   }
+  getProflies(){
+    let url = `${environment.baseUrl}${environment.getRegisteredprofiles}`;
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
 }

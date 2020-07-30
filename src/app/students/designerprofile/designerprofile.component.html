@@ -255,6 +255,7 @@
                   <label for="exampleInputEmail1">Aadhar Number *</label>
                   <input type="text" class="form-control" 
                   [disabled]="isDisabled" 
+                  maxlength="12"
                   formControlName="qualification"  
                   style="text-transform:uppercase;"
                   required/>
@@ -336,6 +337,7 @@
                     formControlName="pan"  
                     required
                     [disabled]="isDisabled"
+                    maxlength="11"
                   />
                 </div>
                 <span

@@ -1,0 +1,115 @@
+
+
+<div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card ">
+          <div class="card-header ">
+            <h5 class="card-title">Designer Profile</h5>
+            <p>
+              
+              <button
+              class="btn btn-primary"
+              type="text"
+              (click)="onBtnExportDataAsCsv()"
+            >
+              Export As CSV
+            </button>
+            </p>
+          </div>
+          <div class="card-body ">
+            <div class="content" style="margin-top:0px">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <!-- <div class="card-header">
+                            <h4 class="card-title"> Simple Table</h4>
+                          </div> -->
+                    <div class="card-body">
+                        <ag-grid-angular
+                        style="height: 500px;"
+                        class="ag-theme-alpine"
+                        [rowData]="rowDatadesigner"
+                        [columnDefs]="columnDefs"
+                        
+                        [pagination]="true"
+                        [paginationPageSize]="50"
+                        (gridReady)="onGridReady($event)"
+                      >
+                      </ag-grid-angular>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer ">
+            <hr />
+            <!-- <div class="stats">
+                  <i class="fa fa-history"></i> <a href="tables.html">View All</a>
+                </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card ">
+          <div class="card-header ">
+            <h5 class="card-title">Printer Profile</h5>
+            <p>
+                <button
+                class="btn btn-primary"
+                type="text"
+                (click)="onBtnExportDataAsCsvPrinter()"
+              >
+                Export As CSV
+              </button>
+            </p>
+          </div>
+          <div class="card-body ">
+            <div class="content" style="margin-top:0px">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <!-- <div class="card-header">
+                        <h4 class="card-title"> Simple Table</h4>
+                      </div> -->
+                    <div class="card-body">
+                        <ag-grid-angular
+                        style="height: 500px;"
+                        class="ag-theme-alpine"
+                        [rowData]="rowDataprinter"
+                        [columnDefs]="columnDefPrinter"
+                        
+                        [pagination]="true"
+                        [paginationPageSize]="50"
+                        (gridReady)="onGridReadyPrinter($event)"
+                      >
+                      </ag-grid-angular>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer ">
+            <hr />
+            <!-- <div class="stats">
+              <i class="fa fa-history"></i> <a href="tables.html">View All</a>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ngx-spinner
+    bdColor="rgba(51, 51, 51, 0.8)"
+    size="default"
+    type="ball-spin-clockwise"
+  >
+    <p style="color: white">Please Wait.</p>
+  </ngx-spinner>
+
+
+

@@ -12,6 +12,13 @@
             >
               Create Product
             </button>
+            <button
+            class="btn btn-primary"
+            type="text"
+            (click)="onBtnExportDataAsCsv()"
+          >
+            Export As CSV
+          </button>
           </p>
         </div>
         <div class="card-body ">
@@ -31,6 +38,7 @@
                       [frameworkComponents]="frameworkComponents"
                       [pagination]="true"
                       [paginationPageSize]="20"
+                      (gridReady)="onGridReady($event)"
                     >
                     </ag-grid-angular>
                   </div>

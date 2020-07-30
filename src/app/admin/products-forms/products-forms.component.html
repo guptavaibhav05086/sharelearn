@@ -379,17 +379,43 @@
         
       </div>
     </div>
-    <div class="col-md-4 pl-1">
+    <div class="col-md-4 pl-1" *ngIf="productform.controls['inSqft'].value == 'Yes'">
       <div class="form-group">
-        <label for="exampleInputEmail1">Delivery Time</label>
-        <input
+        <label for="exampleInputEmail1">Quantities</label>
+        <!-- <input
           type="number"
           class="form-control"
           placeholder="in days"
           formControlName="deliveryTime"
           
           [disabled]="isDisabled"
-        />
+        /> -->
+         <input
+                    type="text"
+                    class="form-control"
+                    placeholder="50,100,200"
+                    formControlName="quantities"
+                    required
+                    [disabled]="isDisabled"
+                  />
+        
+      </div>
+    </div>
+    <div class="col-md-4 pl-1">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Is Price in SqFt</label>
+        <select
+        class="form-control"
+        [disabled]="isDisabled"
+        formControlName="inSqft"
+        required
+        
+      >
+        <option>Yes</option>
+        <option>No</option>
+        
+        
+      </select>
         
       </div>
     </div>
@@ -412,7 +438,9 @@
   
   <div class="col-md-2 pl-1">
       <div class="form-group">
-        <label for="exampleInputEmail1">Print Qauntitiy</label>
+          <label for="exampleInputEmail1" *ngIf="productform.controls['inSqft'].value == 'No'">Print Qauntitiy</label>
+          <label for="exampleInputEmail1" *ngIf="productform.controls['inSqft'].value == 'Yes'">Price Till Sq Ft</label>
+        
         <input
           type="number"
           class="form-control"
@@ -426,7 +454,8 @@
     </div>
     <div class="col-md-2 pl-1">
       <div class="form-group">
-        <label for="exampleInputEmail1">Print Price</label>
+        <label for="exampleInputEmail1" *ngIf="productform.controls['inSqft'].value == 'No'">Print Price</label>
+        <label for="exampleInputEmail1" *ngIf="productform.controls['inSqft'].value == 'Yes'">Price Per Sq Ft</label>
         <input
           type="number"
           class="form-control"

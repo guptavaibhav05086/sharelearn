@@ -25,6 +25,8 @@ export class Productlist {
   public deliveryFees: number;
   public deliveryTime: string;
   public printPrice: Array<ProductprintPrice>;
+  public  IsPriceInSqFt :boolean;
+  public meetingDuration: number;
 }
 export class ProductprintPrice {
   public Id:number;

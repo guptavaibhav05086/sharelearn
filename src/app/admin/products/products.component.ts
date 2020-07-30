@@ -11,6 +11,7 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ["./products.component.css"]
 })
 export class ProductsComponent implements OnInit {
+  private gridApi;
   frameworkComponents: any;
   productLists: any;
   columnDefs = [
@@ -161,6 +162,13 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     debugger;
     this.fetchProductsData();
+  }
+  onGridReady(params){
+    this.gridApi = params.api;
+  }
+  onBtnExportDataAsCsv() {
+    
+    this.gridApi.exportDataAsCsv();
   }
   fetchProductsData() {
     this.spinner.show();

@@ -6,6 +6,13 @@
     transform: translate(-50%, -50%);
     width: 300px;
   }
+  .servcProPositon {
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+  }
   .copyposition {
     position: absolute;
     bottom: 0.5%;
@@ -22,7 +29,7 @@
     right: 30%;
   }
   .serviceProviderimg {
-    width: 150px;
+    width: 200px;
   }
   .freelance {
     width: 100px;
@@ -63,6 +70,13 @@
     transform: translate(-50%, -50%);
     width: 300px;
   }
+  .servcProPositon {
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+  }
   .copyposition {
     position: absolute;
     bottom: 1%;
@@ -80,7 +94,7 @@
   }
 
   .serviceProviderimg {
-    width: 150px;
+    width: 200px;
   }
   .freelance {
     width: 150px;
@@ -121,6 +135,13 @@
     transform: translate(-50%, -50%);
     width: 300px;
   }
+  .servcProPositon {
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+  }
   .copyposition {
     position: absolute;
     bottom: 0.5%;
@@ -144,7 +165,7 @@
     width: 500px;
   } */
   .serviceProviderimg {
-    width: 150px;
+    width: 200px;
   }
   .icons {
     width: 30px;
@@ -182,6 +203,13 @@
     left: 80%;
     transform: translate(-50%, -50%);
     width: 500px;
+  }
+  .servcProPositon {
+    position: absolute;
+    top: 28%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
   }
   .copyposition {
     position: absolute;
@@ -237,6 +265,13 @@
     transform: translate(-50%, -50%);
     width: 500px;
   }
+  .servcProPositon {
+    position: absolute;
+    top: 28%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+  }
   .copyposition {
     position: absolute;
     bottom: 1%;
@@ -291,6 +326,13 @@
     left: 80%;
     transform: translate(-50%, -50%);
     width: 500px;
+  }
+  .servcProPositon {
+    position: absolute;
+    top: 28%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
   }
   .copyposition {
     position: absolute;
@@ -411,7 +453,7 @@ map area {
 }
 @media only screen and (max-width: 600px) {
   .serviceProviderimg {
-    width: 100px;
+    width: 200px;
   }
   .icons {
     width: 30px;
