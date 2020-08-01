@@ -65,6 +65,10 @@
 .flex-control2 {
   width: 20%;
 }
+.flex-control-l {
+  width: 15%;
+  margin-left: 2%;
+}
 .price-margin {
   margin-left: 4%;
 }

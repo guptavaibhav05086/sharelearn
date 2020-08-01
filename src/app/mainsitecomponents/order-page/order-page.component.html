@@ -141,18 +141,18 @@
                             <select
                               type="text"
                               class="form-control"
-                              placeholder="state"                         formControlName="subCategory"                                                                    
+                              placeholder="state"                         formControlName="subCategory"             (change)="selectedSubcategory($event)"                                                       
                             >
                             <option>Select</option>
-                            <option *ngFor="let item of proSpec.subcat" [value]="item">
-                              {{item}}
+                            <option *ngFor="let item of proSpec.subcat" [value]="item.subcat">
+                              {{item.subcat}}
                             </option>
                             </select>
                            
                           </div>
                       
                     </div>
-                    <div class="flex-control5">
+                    <div class="flex-control5" *ngIf="displayDesigner">
                         <div class="form-group">
                             <label>Orientation *</label>
                             <select
@@ -161,14 +161,14 @@
                               placeholder="orientation"                   formControlName="orientation"                                                                          
                             >
                             <option>Select</option>
-                            <option *ngFor="let item of proSpec.orientation" [value]="item">
+                            <option *ngFor="let item of proSpec.displayOrientation" [value]="item">
                               {{item}}
                             </option>
                             </select>
                            
                           </div>
                     </div>
-                    <div class="flex-control5">
+                    <div class="flex-control5" *ngIf="!displayLenghtWidth">
                         <div class="form-group">
                             <label>Size *</label>
                             <select
@@ -184,8 +184,85 @@
                            
                           </div>
                     </div>
+                    <div class="flex-control-l" *ngIf="displayLenghtWidth">
+                      <div class="form-group">
+                          <label>Length *</label>
+                          <select
+                            type="text"
+                            class="form-control"
+                            placeholder="Sub Category"                  formControlName="length"                                                              
+                          >
+                          <option>Select</option>
+                          <option *ngFor="let item of arrLnW" [value]="item">
+                            {{item}}
+                          </option>
+                          </select>
+                         
+                        </div>
+                  </div>
+                  <div class="flex-control-l" *ngIf="displayLenghtWidth">
+                    <div class="form-group">
+                        <label>Width *</label>
+                        <select
+                          type="text"
+                          class="form-control"
+                          placeholder="Sub Category"                    formControlName="width"                                                              
+                        >
+                        <option>Select</option>
+                        <option *ngFor="let item of arrLnW" [value]="item">
+                          {{item}}
+                        </option>
+                        </select>
+                       
+                      </div>
                 </div>
-                <div class="row" *ngIf="displayprinter">
+                <div class="flex-control5" *ngIf="displayprinter" >
+                  <div class="form-group">
+                      <label>Paper GSM *</label>
+                      <select
+                        type="text"
+                        class="form-control"
+                        placeholder="quantities"                    formControlName="GSM"                                                                       
+                      >
+                      <option>Select</option>
+                      <option *ngFor="let item of proSpec.dsiplaygsm" [value]="item.gsm">
+                        {{item.gsm}}
+                      </option>
+                      </select>
+                     
+                    </div>
+                
+              </div>
+              <div class="flex-control5" *ngIf="displayprinter">
+                  <div class="form-group">
+                      <label>Quantities *</label>
+                      <select
+                        type="text"
+                        class="form-control"
+                        placeholder="quantities"                   formControlName="quantities"                                                                             
+                      >
+                      <option>Select</option>
+                      <option *ngFor="let item of proSpec.displayQuant" [value]="item">
+                        {{item}}
+                      </option>
+                      </select>
+                     
+                    </div>
+              </div>
+              <div class="input-group flex-control5">
+                  <div class="form-group">
+                      <label>Industry Purpose * </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="purpose"               formControlName="purpose"
+                        style="border-left:1px solid #DDDDDD"                                                                         
+                      />                           
+                     
+                    </div>
+              </div>
+                </div>
+                <!-- <div class="row" *ngIf="displayprinter">
                     <div class="flex-control5" >
                         <div class="form-group">
                             <label>Paper GSM *</label>
@@ -195,8 +272,8 @@
                               placeholder="quantities"                    formControlName="GSM"                                                                       
                             >
                             <option>Select</option>
-                            <option *ngFor="let item of proSpec.gsm" [value]="item">
-                              {{item}}
+                            <option *ngFor="let item of proSpec.dsiplaygsm" [value]="item.gsm">
+                              {{item.gsm}}
                             </option>
                             </select>
                            
@@ -220,11 +297,11 @@
                           </div>
                     </div>
                    
-                </div>
+                </div> -->
                 <div class="row">
-                   <div class="input-group flex-control5">
+                   <!-- <div class="input-group flex-control5">
                           <div class="form-group">
-                              <label>Industry Purpose </label>
+                              <label>Industry Purpose * </label>
                               <input
                                 type="text"
                                 class="form-control"
@@ -233,9 +310,10 @@
                               />                           
                              
                             </div>
-                      </div>
-                  <div class="input-group col-md-6" style="padding-top: 30px;position: relative !important">
+                      </div> -->
+                  <div class="input-group col-md-6" style="padding-top: 30px;position: relative !important" *ngIf="displayDesigner">
                     <div class="custom-file form-group">
+                        <label style="margin-bottom: 80px;">Sample of Product you like </label>
                       <input
                         type="file"
                         accept="image.*"
@@ -259,6 +337,7 @@
                 <div class="row">
                   <div class="input-group col-md-4" style="padding-top: 30px;position: relative !important">
                     <div class="custom-file form-group">
+                        <label style="margin-bottom: 80px;">Logo/Image 1*</label>
                       <input
                         type="file"
                         accept="image.*"
@@ -276,6 +355,7 @@
                   </div>
                   <div class="input-group col-md-4" style="padding-top: 30px;position: relative !important">
                     <div class="custom-file form-group">
+                        <label style="margin-bottom: 80px;">Logo/Image 2 </label>
                       <input
                         type="file"
                         accept="image.*"
@@ -296,9 +376,10 @@
                     <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
                   </div> 
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="displayDesigner">
                   <div class="input-group col-md-8" style="padding-top: 30px;position: relative !important">
                     <div class="custom-file form-group">
+                        <label style="margin-bottom: 80px;">Content File </label>
                       <input
                         type="file"
                         accept="application/pdf,application/msword,
@@ -357,13 +438,13 @@
   
                 
                 <div class="row">
-                    <div class="flex-controllabel" style="padding-top: 15px;">
+                    <div class="flex-controllabel" style="padding-top: 15px;display:none">
                         <div class="form-group">
                             <label><span style="font-size: large;font-weight: bold;">Total Cost:  &#x20B9; 10000 </span></label>
                           </div>
                       
                     </div>
-                    <div class="flex-controllabel" >
+                    <div class="flex-controllabel" style="margin-left: 30%;">
                         <div class="form-group">
                             <button type="button" class="btn btn-primary" (click)="proceedOrder(summary)" [disabled]="!(orderForm.valid && Servicable)" >Proceed</button>
                           </div>
@@ -397,17 +478,17 @@
                         <div class="form-group">
                             <label>Meeting Slot Day</label>
                             <div class="input-group">
-                                <input class="form-control" placeholder="yyyy-mm-dd"
+                                <!-- <input class="form-control" placeholder="yyyy-mm-dd"
                                        name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
                                        formControlName="meetingDate"
                                        (blur)="d.close();dateSet()"
                                        (dateSelect)="dateSet()" 
                                        [minDate]="minDate"
                                         
-                                        >
+                                        > -->
                                 <div class="input-group-append" style="border: 1px solid rgb(221, 221, 221);
                                 height: 38px;">
-                                  <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                                  <!-- <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button> -->
                                 </div>
                               </div>
                            
@@ -565,11 +646,22 @@
                     <div class="flex-control-50">
                         <div class="form-group">
                          <input type="text" class="form-control" placeholder="GST Number(optional)" formControlName="GSTNumber" style="text-transform:uppercase;" maxlength="12"/>
-                            
+                         <span
+                         class="errorMessage"
+                         *ngIf="
+                           (orderForm.controls['GSTNumber'].dirty ||
+                           orderForm.controls['GSTNumber'].touched) &&
+                           orderForm.controls['GSTNumber'].invalid &&
+                           orderForm.controls['GSTNumber'].errors.invalidPattern
+                         "
+                       >
+                         *GST# is incorrect.
+                       </span>
                            
                           </div>
                          
                     </div>
+                    
                     <div class="flex-control3 price-margin">
                         <div class="form-group" style="display: flex;">
                             <div class="flex-controllabel">

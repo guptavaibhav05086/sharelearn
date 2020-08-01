@@ -121,6 +121,12 @@ export class ProductsComponent implements OnInit {
       filter: true
     },
     {
+      headerName: "IsPriceInSqFt",
+      field: "IsPriceInSqFt",
+      sortable: true,
+      filter: true
+    },
+    {
       headerName: "Edit Product",
       cellRenderer: "buttonRenderer",
       cellRendererParams: {

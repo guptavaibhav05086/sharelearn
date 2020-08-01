@@ -36,7 +36,10 @@ export class DesignerprofileComponent implements OnInit {
       )
     ]),
     dob: new FormControl("", [Validators.required]),
-    qualification: new FormControl("", [Validators.required]),
+    qualification: new FormControl("", [
+      Validators.required,
+      this._validator.patternValidation(/^\d{4}\d{4}\d{4}$/)
+    ]),
     exp: new FormControl("", [Validators.required]),
     profile: new FormControl("", [Validators.required]),
     city: new FormControl("", [Validators.required]),
@@ -44,7 +47,12 @@ export class DesignerprofileComponent implements OnInit {
     postalCode: new FormControl("", [Validators.required]),
     softwares: new FormArray([]),
     others: new FormControl("", []),
-    pan: new FormControl("", [Validators.required])
+    pan: new FormControl("", [
+      Validators.required,
+      this._validator.patternValidation(
+        /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/
+      )
+    ])
   });
   constructor(
     private modalService: NgbModal,
@@ -123,6 +131,7 @@ export class DesignerprofileComponent implements OnInit {
           });
           if (data["mobileNumber"] != null && data["mobileNumber"] != "") {
             this.isPhoneVerified = data["isMobileVerified"];
+            this.profileform.get("mobileNumber").disable();
           }
 
           if (data["profileImage"] != null) {
@@ -224,13 +233,14 @@ export class DesignerprofileComponent implements OnInit {
       data => {
         this.spinnerService.hide();
         console.log(data);
-        alert('Thank You for registering with us. You will be informed shortly');
+        alert(
+          "Thank You for registering with us. You will be informed shortly"
+        );
       },
       err => {
         this.spinnerService.hide();
         console.log(err);
-        alert('Issue occured during registration.Please contact the admin');
-
+        alert("Issue occured during registration.Please contact the admin");
       }
     );
 
@@ -247,6 +257,10 @@ export class DesignerprofileComponent implements OnInit {
     if (formname == "personal") this.isDisabled = true;
     else this.isDisableProfession = true;
   }
+  changeNumber() {
+    this.isPhoneVerified = false;
+    this.profileform.get("mobileNumber").enable();
+  }
   openVerifyOTP() {
     if (this.isPhoneVerified == false) {
       this.verifyClicked = true;
@@ -256,13 +270,17 @@ export class DesignerprofileComponent implements OnInit {
           backdrop: "static"
         });
         modalRef.componentInstance.name = "World";
-        modalRef.componentInstance.number=this.profileform.controls["mobileNumber"].value;
+        modalRef.componentInstance.number = this.profileform.controls[
+          "mobileNumber"
+        ].value;
         modalRef.result.then(result => {
           debugger;
           if (result) {
             this.isPhoneVerified = result;
+            this.profileform.get("mobileNumber").disable();
           } else {
             this.isPhoneVerified = result;
+            this.profileform.get("mobileNumber").enable();
           }
           console.log(this.profileform);
           console.log(this.isPhoneVerified);

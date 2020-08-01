@@ -183,9 +183,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="+91"
-                    [disabled]="isDisabled"
-                    
+                    placeholder="+91"                                
                     formControlName="mobileNumber"  
                     required
                   />
@@ -230,6 +228,14 @@
                       </button>
                   </div>
                 </div>
+                <div class="col-md-2 pr-1" style="padding-top: 20px;" *ngIf="isPhoneVerified">
+                  <div class="form-group">
+                    
+                    <button type="button" (click)="changeNumber()"  class="btn btn-primary btn-round">
+                        Edit
+                      </button>
+                  </div>
+                </div>
               <div class="col-md-3 px-1">
                   <div class="form-group pmd-textfield pmd-textfield-floating-label">
                       <label class="control-label" for="datepicker">Date Of Birth *</label>
@@ -271,6 +277,17 @@
                   >
                     *Aadhar# is required.
                   </span>
+                  <span
+                  class="errorMessage"
+                  *ngIf="
+                    (profileform.controls['qualification'].dirty ||
+                    profileform.controls['qualification'].touched) &&
+                    profileform.controls['qualification'].invalid &&
+                    profileform.controls['qualification'].errors.invalidPattern
+                  "
+                >
+                  *Aadhar# is incorrect.
+                </span>
                 </div>
               </div>
             </div>
@@ -337,7 +354,7 @@
                     formControlName="pan"  
                     required
                     [disabled]="isDisabled"
-                    maxlength="11"
+                    maxlength="10"
                   />
                 </div>
                 <span
@@ -351,6 +368,17 @@
               >
                 *PAN# Link is required.
               </span>
+              <span
+              class="errorMessage"
+              *ngIf="
+                (profileform.controls['pan'].dirty ||
+                profileform.controls['pan'].touched) &&
+                profileform.controls['pan'].invalid &&
+                profileform.controls['pan'].errors.invalidPattern
+              "
+            >
+              *PAN# is incorrect.
+            </span>
               </div>
             </div>
             <div class="row">

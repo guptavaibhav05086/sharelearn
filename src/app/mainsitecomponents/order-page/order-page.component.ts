@@ -4,9 +4,10 @@ import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
 import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
 import { CustomerService } from "src/app/services/customer.service";
 import { HelperService } from "src/app/services/helper.service";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
-import { delay } from 'rxjs/internal/operators/delay';
+import { delay } from "rxjs/internal/operators/delay";
+import { ValidatorsService } from 'src/app/services/validators.service';
 @Component({
   selector: "app-order-page",
   templateUrl: "./order-page.component.html",
@@ -28,19 +29,20 @@ export class OrderPageComponent implements OnInit {
   displayDesigner = false;
   displaysummary = false;
   displaycartMessage = false;
-  displayLenghtWidth=false;
+  displayLenghtWidth = false;
   Servicable = false;
-  isEditOrder=false;
-  cartItemId=0;
-  fileError=false;
+  isEditOrder = false;
+  cartItemId = 0;
+  fileError = false;
   isPhotoUrlValid: boolean;
-  
-  uploadedFileNames={
-    product:"Sample of Product you like",
-    image1:"Logo/Image 1",
-    image2:"Logo/Image 2",
-    content:"Content File in .doc,docx,.pdf format"
-  }
+  arrLnW = new Array<number>();
+
+  uploadedFileNames = {
+    product: ".jpg,.png,.jpeg,pdf format",
+    image1: ".jpg,.png,.jpeg,pdf format",
+    image2: ".jpg,.png,.jpeg,pdf format",
+    content: "Content File in .doc,docx,.pdf format"
+  };
   orderPrice = {
     price: 0,
     deliveryFee: 0,
@@ -52,7 +54,9 @@ export class OrderPageComponent implements OnInit {
     printGST: 0,
     totalDesignCost: 0,
     totalPrintCost: 0,
-    deliveryDays: 0
+    deliveryDays: 0,
+    professiondesignerFees:0,
+    sourceFileFees:0
   };
   trackCartOrderCount = {
     design: 0,
@@ -108,7 +112,6 @@ export class OrderPageComponent implements OnInit {
         this.isPhotoUrlValid = true;
       }
     }
-    
 
     return true;
   }
@@ -122,16 +125,15 @@ export class OrderPageComponent implements OnInit {
     for (var i = 0; (file = images[i]); i++) {
       //if the file is not an image, continue
       if (!this.validateFiles(name, file)) {
-        alert('Not a Valid Image File');
+        alert("Not a Valid Image File");
         return;
       }
       let reader = new FileReader();
 
       reader.readAsDataURL(file);
-      
     }
     formData.append(name, userImage, userImage.name);
-    
+
     //this.selectedFileName=userImage.name;
     this.spinner.show();
 
@@ -141,7 +143,7 @@ export class OrderPageComponent implements OnInit {
         debugger;
         console.log(data);
         alert("File Uploaded Successfully");
-        this.uploadedFileNames[name]=data;
+        this.uploadedFileNames[name] = data;
         this.fileError = false;
         //this.selectedFileName = userImage.name;
       },
@@ -161,15 +163,19 @@ export class OrderPageComponent implements OnInit {
     size: new FormControl("", [Validators.required]),
     GSM: new FormControl("0", [Validators.required]),
     quantities: new FormControl("0", [Validators.required]),
-    meetingDate: new FormControl({}),
+    // meetingDate: new FormControl({}),
     meetingSlot: new FormControl(""),
     professionDesigner: new FormControl(false),
     sourceFile: new FormControl(false),
     sourceFileSpecs: new FormControl(false),
     pinCode: new FormControl("", [Validators.required]),
-    GSTNumber: new FormControl(""),
+    GSTNumber: new FormControl("",[ this._validator.patternValidation(
+      /^([0][1-9]|[1-2][0-9]|[3][0-5])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$/
+    )]),
     BillingName: new FormControl(""),
-    purpose:new FormControl("")
+    purpose: new FormControl(""),
+    length: new FormControl(""),
+    width: new FormControl("")
   });
   addToCart() {
     debugger;
@@ -188,16 +194,16 @@ export class OrderPageComponent implements OnInit {
       ];
       id = cartLastItems.id + 1;
     }
-    if(this.isEditOrder){
+    if (this.isEditOrder) {
       this.custService.deletItemFromCart(this.cartItemId);
-      id=this.cartItemId;
+      id = this.cartItemId;
     }
     let cartItem = {
       id: id,
       type: this.orderForm.controls["type"].value,
       GSTNumber: this.orderForm.controls["GSTNumber"].value,
       BillingName: this.orderForm.controls["BillingName"].value,
-      uploadedimages:this.uploadedFileNames,
+      uploadedimages: this.uploadedFileNames,
       category: [
         {
           name: this.orderForm.controls["category"].value,
@@ -207,10 +213,10 @@ export class OrderPageComponent implements OnInit {
             size: this.orderForm.controls["size"].value,
             paperGSM: this.orderForm.controls["GSM"].value,
             quantity: this.orderForm.controls["quantities"].value,
-            pinCode:this.orderForm.controls["pinCode"].value
+            pinCode: this.orderForm.controls["pinCode"].value
           },
           meetingDetails: {
-            day: this.orderForm.controls["meetingDate"].value,
+            //day: this.orderForm.controls["meetingDate"].value,
             slot: this.orderForm.controls["meetingSlot"].value
           },
           price: {
@@ -222,7 +228,7 @@ export class OrderPageComponent implements OnInit {
           professionalDesigner: this.orderForm.controls["professionDesigner"]
             .value,
           sourceFile: this.orderForm.controls["sourceFile"].value,
-          purpose:this.orderForm.controls["purpose"].value
+          purpose: this.orderForm.controls["purpose"].value
         }
       ]
     };
@@ -231,8 +237,12 @@ export class OrderPageComponent implements OnInit {
   }
   scrollToElement($element): void {
     console.log($element);
-   
-    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+
+    $element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest"
+    });
   }
   proSpec = {
     orientation: [],
@@ -240,17 +250,20 @@ export class OrderPageComponent implements OnInit {
     gsm: [],
     quantities: [],
     subcat: [],
-    displayQuant: []
+    displayQuant: [],
+    dsiplaygsm: [],
+    displayOrientation:[]
   };
   constructor(
     private admin: AdminService,
     private custService: CustomerService,
     private _helper: HelperService,
     private route: ActivatedRoute,
-    private spinner:NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private _validator: ValidatorsService
   ) {}
 
-  proceedOrder($element:any) {
+  proceedOrder($element: any) {
     this.displayMeetings = false;
     this.displaysummary = true;
     // if (this.orderForm.controls["type"].value == "Print Only") {
@@ -272,7 +285,7 @@ export class OrderPageComponent implements OnInit {
   }
   dateSet() {
     if (
-      this.orderForm.controls["meetingDate"].value != "" &&
+      //this.orderForm.controls["meetingDate"].value != "" &&
       this.orderForm.controls["meetingSlot"].value == ""
     ) {
       this.displaysummary = false;
@@ -287,6 +300,22 @@ export class OrderPageComponent implements OnInit {
     this._helper.navigateToPath("/selectAddress");
   }
   resetControls() {
+    
+    this.orderPrice={
+      price: 0,
+      deliveryFee: 0,
+      GST: 0,
+      Total: 0,
+      designCost: 0,
+      printCost: 0,
+      designGST: 0,
+      printGST: 0,
+      totalDesignCost: 0,
+      totalPrintCost: 0,
+      deliveryDays: 0,
+      professiondesignerFees:0,
+      sourceFileFees:0
+    };
     this.orderForm.patchValue({
       category: "",
       GSTNumber: "",
@@ -300,19 +329,7 @@ export class OrderPageComponent implements OnInit {
       professionDesigner: false,
       sourceFile: false
     });
-    this.orderPrice = {
-      price: 0,
-      deliveryFee: 0,
-      GST: 0,
-      Total: 0,
-      designCost: 0,
-      printCost: 0,
-      designGST: 0,
-      printGST: 0,
-      totalDesignCost: 0,
-      totalPrintCost: 0,
-      deliveryDays: 0
-    };
+    
     this.displaySpecs = false;
     this.displayMeetings = false;
     this.displaysummary = false;
@@ -376,12 +393,12 @@ export class OrderPageComponent implements OnInit {
     return true;
   }
   showCategory(category) {
-    if(!this.isEditOrder){
+    if (!this.isEditOrder) {
       if (this.checkCartValidation(category) == false) {
         return;
       }
     }
-    
+
     debugger;
     this.resetControls();
     this.selectedCategory = this.products.filter(
@@ -413,23 +430,22 @@ export class OrderPageComponent implements OnInit {
     // this.selectedCategory.sort((a, b) => a.value.localeCompare(b.value));
   }
   ngOnInit(): void {
-    this.route.queryParams
-      .subscribe(params => {
-        debugger;
-        console.log(params); // { order: "popular" }
-        //this.cartItemId = params.itemId;
-        if(params.itemId !=undefined){
-          this.cartItemId = params.itemId;
-          this.isEditOrder=true;
-        }
-        else{
-          this.isEditOrder=false;
-        }
-        
-        
-       // popular
+    for (let i = 1; i < 101; i++) {
+      this.arrLnW.push(i);
+    }
+    this.route.queryParams.subscribe(params => {
+      debugger;
+      console.log(params); // { order: "popular" }
+      //this.cartItemId = params.itemId;
+      if (params.itemId != undefined) {
+        this.cartItemId = params.itemId;
+        this.isEditOrder = true;
+      } else {
+        this.isEditOrder = false;
       }
-    );
+
+      // popular
+    });
     this.spinner.show();
     this.admin.getProducts().subscribe(
       data => {
@@ -438,7 +454,7 @@ export class OrderPageComponent implements OnInit {
         this.printPrice = data["printPrice"];
         console.log(data);
         debugger;
-        if(this.isEditOrder){
+        if (this.isEditOrder) {
           this.openEditForm(this.cartItemId);
           this.spinner.hide();
         }
@@ -456,66 +472,61 @@ export class OrderPageComponent implements OnInit {
     };
     this.minDate = initialDate;
     this.model = initialDate;
-    this.orderForm.patchValue({
-      meetingDate: initialDate
-    });
+    // this.orderForm.patchValue({
+    //   meetingDate: initialDate
+    // });
   }
 
-  openEditForm(id){
-    
+  openEditForm(id) {
     let cart = this.custService.getLocalStorageCart();
-    let editItem = cart.filter(item=> item.id == id);
-    if(editItem !=null){
-
-      
+    let editItem = cart.filter(item => item.id == id);
+    if (editItem != null) {
       this.showCategory(editItem[0].type);
-      this.selectedProduct(editItem[0].category[0].name,null);
-      let e ={
-        target:{
+      this.selectedProduct(editItem[0].category[0].name, null);
+      let e = {
+        target: {
           value: editItem[0].category[0].specs.size
         }
-      }
+      };
       this.selectedSize(e);
       this.orderForm.patchValue({
-        type:editItem[0].type,
-        category:editItem[0].category[0].name,
-        professionDesigner:editItem[0].category[0].professionalDesigner,
-        sourceFile:editItem[0].category[0].sourceFile,
+        type: editItem[0].type,
+        category: editItem[0].category[0].name,
+        professionDesigner: editItem[0].category[0].professionalDesigner,
+        sourceFile: editItem[0].category[0].sourceFile,
         GSTNumber: editItem[0].GSTNumber,
         BillingName: editItem[0].BillingName,
-        subCategory: editItem[0].category[0].specs.subCategory ,
+        subCategory: editItem[0].category[0].specs.subCategory,
         orientation: editItem[0].category[0].specs.orientation,
         size: editItem[0].category[0].specs.size,
         GSM: editItem[0].category[0].specs.paperGSM,
-        quantities:editItem[0].category[0].specs.quantity,
-        pinCode:editItem[0].category[0].specs.pinCode
-        
+        quantities: editItem[0].category[0].specs.quantity,
+        pinCode: editItem[0].category[0].specs.pinCode
       });
-      this.Servicable=true;
+      this.Servicable = true;
     }
-    
-
   }
-  selectedProduct(value,$element) {
-    //debugger;
+  selectedProduct(value, $element) {
+    debugger;
     this.checkedProduct = this.productList.filter(
       item => item.productName == value
     );
 
+    
     this.resetControls();
 
     this.displaySpecs = true;
-    if(this.checkedProduct.IsPriceInSqFt =="Yes"){
-      this.displayLenghtWidth = true;
-    }
-    else{
-      this.displayLenghtWidth = false;
+    if (this.checkedProduct.IsPriceInSqFt == "Yes") {
+      //this.displayLenghtWidth = true;
+    } else {
+      //this.displayLenghtWidth = false;
     }
     this.proSpec.subcat = [];
     this.proSpec.size = [];
     this.proSpec.orientation = [];
     this.proSpec.quantities = [];
     this.proSpec.gsm = [];
+    this.proSpec.dsiplaygsm = [];
     this.description = "";
     this.displaycartMessage = false;
     this.checkedProduct.forEach((element, index) => {
@@ -523,28 +534,80 @@ export class OrderPageComponent implements OnInit {
         this.description = element.productDescription;
       }
 
-      this.proSpec.subcat.push(element.productSubcategory);
-      this.proSpec.size.push(element.productSize);
-      this.proSpec.orientation.push(element.orientation);
+      this.proSpec.subcat.push({
+        subcat: element.productSubcategory,
+        isPriceSqFt: element.IsPriceInSqFt
+      });
+      if (element.IsPriceInSqFt != true) {
+        this.proSpec.size.push(element.productSize);
+      }
+
+      this.proSpec.orientation.push({
+        subcat: element.productSubcategory,
+        orientation: element.orientation
+       
+      });
       this.proSpec.quantities.push({
         size: element.productSize,
         qunat: element.quantities
       });
-      this.proSpec.gsm.push(element.paperGSM);
+      this.proSpec.gsm.push({
+        gsm: element.paperGSM,
+        subcat: element.productSubcategory
+      });
     });
 
     this.proSpec.gsm = [...new Set(this.proSpec.gsm)];
     this.proSpec.orientation = [...new Set(this.proSpec.orientation)];
     this.proSpec.quantities = [...new Set(this.proSpec.quantities)];
     this.proSpec.size = [...new Set(this.proSpec.size)];
-    
+    this.proSpec.subcat=[...new Set(this.proSpec.subcat)];
+
     this.orderForm.patchValue({
       category: value
     });
     console.log(this.proSpec);
-     //delay(5000);
+    //delay(5000);
     //this.proSpec.displayQuant=this.proSpec.quantities.sp
     this.scrollToElement($element);
+  }
+  selectedCustomizedSize() {}
+  selectedSubcategory(event) {
+    debugger;
+    console.log(this.proSpec.quantities);
+    this.proSpec.dsiplaygsm = this.proSpec.gsm.filter(
+      item => item.subcat == this.orderForm.controls["subCategory"].value
+    );
+    let selItem = this.proSpec.subcat.filter(
+      item => item.subcat == this.orderForm.controls["subCategory"].value
+    )[0];
+    let selOrien = this.proSpec.orientation.filter(item=> item.subcat == this.orderForm.controls["subCategory"].value)[0];
+    this.proSpec.displayOrientation = selOrien.orientation.split(',');
+    if (selItem.isPriceSqFt == true) {
+      this.displayLenghtWidth = true;
+      this.orderForm.patchValue({
+        size: "NA"
+      });
+      let selctedquant = this.proSpec.quantities.filter(
+        item => item.size == "L x W (cutomised)"
+      );
+      if (selctedquant != null) {
+        this.proSpec.displayQuant = selctedquant[0].qunat.split(",");
+      }
+    } else {
+      this.displayLenghtWidth = false;
+    }
+    debugger;
+    if(this.displayprinter == true){
+      this.orderForm.patchValue({
+        orientation:"NA"
+      });
+
+    }else{
+      this.orderForm.patchValue({
+        orientation:""
+      });
+    }
   }
   selectedSize(e) {
     debugger;
@@ -582,27 +645,47 @@ export class OrderPageComponent implements OnInit {
 
   calculatePrice(pCat, pSubcat, orien, size) {
     debugger;
-    let prod = this.productList.filter(
-      item =>
-        (item.productCategory == pCat ||
-          item.productCategory == "Design And Print") &&
-        item.productSubcategory == pSubcat &&
-        item.orientation == orien &&
-        item.productSize == size
-    );
+    let prod;
+    let selItem = this.proSpec.subcat.filter(item => item.subcat == pSubcat)[0];
+
+    if (selItem.isPriceSqFt == true) {
+      prod = this.productList.filter(
+        item =>
+          (item.productCategory == pCat ||
+            item.productCategory == "Design And Print") &&
+          item.productSubcategory == pSubcat
+      );
+    } else {
+      prod = this.productList.filter(
+        item =>
+          (item.productCategory == pCat ||
+            item.productCategory == "Design And Print") &&
+          item.productSubcategory == pSubcat &&
+          item.productSize == size
+      );
+    }
+
     if (prod != null && prod.length > 0) {
       let item = prod[0];
       if (pCat == "Design And Print") {
         this.calculatepriceDesign(item);
-        this.calculatepriceprint(prod);
+        if (selItem.isPriceSqFt == true) {
+          this.calculatepriceprintPerSqFt(prod);
+        } else {
+          this.calculatepriceprint(prod);
+        }
+
         this.orderPrice.deliveryFee = item.deliveryFees;
       } else if (pCat == "Print Only") {
-        this.calculatepriceprint(prod);
+        if (selItem.isPriceSqFt == true) {
+          this.calculatepriceprintPerSqFt(prod);
+        } else {
+          this.calculatepriceprint(prod);
+        }
         this.orderPrice.deliveryFee = item.deliveryFees;
       } else if (pCat == "Design Only") {
         this.calculatepriceDesign(item);
       }
-     
     }
     this.orderPrice.Total = Math.round(
       this.orderPrice.totalDesignCost +
@@ -618,8 +701,24 @@ export class OrderPageComponent implements OnInit {
   }
 
   calculatepriceDesign(item) {
+    debugger;
+    if(this.orderForm.controls["professionDesigner"].value == true){
+      this.orderPrice.professiondesignerFees=item.profDesignerFee;
+    }
+    else{
+      this.orderPrice.professiondesignerFees=0;
+    }
+    if(this.orderForm.controls["sourceFileSpecs"].value == true){
+      this.orderPrice.sourceFileFees=item.sourceFileFees;
+    }
+    else{
+      this.orderPrice.sourceFileFees=0;
+    }
+
+    
+   
     let designCost =
-      item.DesignPrice + (item.DesignCommision / 100) * item.DesignPrice;
+      item.DesignPrice + (item.DesignCommision / 100) * item.DesignPrice+item.profDesignerFee+item.sourceFileFees;
     let designGST = designCost * (item.DesignGST / 100);
     let totalDesignCost = designCost + designGST;
     this.orderPrice.designCost = designCost;
@@ -648,6 +747,52 @@ export class OrderPageComponent implements OnInit {
         this.orderPrice.totalPrintCost = totalPrintCost;
         this.orderPrice.deliveryDays = itemPrice.deliveryDays;
       }
+    } else {
+      this.orderPrice.printGST = 0;
+      this.orderPrice.printCost = 0;
+      this.orderPrice.totalPrintCost = 0;
+    }
+  }
+  calculatepriceprintPerSqFt(item) {
+    debugger;
+    let quant = this.orderForm.controls["quantities"].value;
+    let selectedSqft =
+      this.orderForm.controls["length"].value *
+      this.orderForm.controls["width"].value;
+    this.orderForm.patchValue({
+      size: selectedSqft
+    });
+    item = item.filter(i => i.paperGSM == this.orderForm.controls["GSM"].value);
+    if (item != null && item.length > 0) {
+      // let pricesdata = this.printPrice.filter(
+      //   a => a.prodDetailsId == item[0].poductDetailsId && selectedSqft > a.qunatity && selectedSqft < a.qunatity
+      // );
+      let pricesdata = this.printPrice
+        .filter(
+          i =>
+            i.qunatity > selectedSqft &&
+            i.prodDetailsId == item[0].poductDetailsId
+        )
+        .sort((a, b) => a.quantity - b.quantity);
+      if (pricesdata != null) {
+        let itemPrice = pricesdata[0];
+        let pCost =
+          (itemPrice.pricePerUnit +
+            (itemPrice.printCommission / 100) * itemPrice.pricePerUnit) *
+          selectedSqft *
+          quant;
+        let gstPercentage = item[0].PrintGST / 100;
+        let pGST = pCost * gstPercentage;
+        let totalPrintCost = pCost + pGST;
+        this.orderPrice.printGST = pGST;
+        this.orderPrice.printCost = pCost;
+        this.orderPrice.totalPrintCost = totalPrintCost;
+        this.orderPrice.deliveryDays = itemPrice.deliveryDays;
+      }
+    } else {
+      this.orderPrice.printGST = 0;
+      this.orderPrice.printCost = 0;
+      this.orderPrice.totalPrintCost = 0;
     }
   }
 }

@@ -50,10 +50,18 @@ export class PrinterprofileComponent implements OnInit {
     ]),
 
     profile: new FormControl("", [Validators.required]),
-    pan: new FormControl("", [Validators.required]),
+    pan: new FormControl("", [
+      Validators.required,
+      this._validator.patternValidation(
+        /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/
+      )
+    ]),
     address: new FormControl(""),
     softwares: new FormArray([]),
-    aadhar: new FormControl("", [Validators.required])
+    aadhar: new FormControl("", [
+      Validators.required,
+      this._validator.patternValidation(/^\d{4}\d{4}\d{4}$/)
+    ])
   });
   constructor(
     private modalService: NgbModal,
@@ -138,6 +146,11 @@ export class PrinterprofileComponent implements OnInit {
     }
     return true;
   }
+
+  changeNumber() {
+    this.isPhoneVerified = false;
+    this.profileform.get("mobileNumber").enable();
+  }
   ngOnInit() {
     this.request = new PrinterProfileRequest();
     this.helper.getStates().subscribe(
@@ -173,6 +186,7 @@ export class PrinterprofileComponent implements OnInit {
           });
           if (data["mobileNumber"] != null && data["mobileNumber"] != "") {
             this.isPhoneVerified = data["isMobileVerified"];
+            this.profileform.get("mobileNumber").disable();
           }
           //this.isPhoneVerified = data["isMobileVerified"];
           this.selectedFileName = data["gstFileName"];
@@ -254,13 +268,14 @@ export class PrinterprofileComponent implements OnInit {
       data => {
         console.log(data);
         this.spinnerService.hide();
-        alert('Thank You for registering with us. You will be informed shortly');
+        alert(
+          "Thank You for registering with us. You will be informed shortly"
+        );
       },
       err => {
         console.log(err);
         this.spinnerService.hide();
-         alert('Issue occured during registration.Please contact the admin');
-
+        alert("Issue occured during registration.Please contact the admin");
       }
     );
   }
@@ -283,15 +298,18 @@ export class PrinterprofileComponent implements OnInit {
           backdrop: "static"
         });
         modalRef.componentInstance.name = "World";
-        modalRef.componentInstance.number=this.profileform.controls["mobileNumber"].value;
+        modalRef.componentInstance.number = this.profileform.controls[
+          "mobileNumber"
+        ].value;
         modalRef.result.then(result => {
           if (result) {
             this.isPhoneVerified = result;
+            this.profileform.get("mobileNumber").disable();
             console.log(result);
           } else {
             this.isPhoneVerified = result;
+            this.profileform.get("mobileNumber").enable();
           }
-         
         });
       }
     }

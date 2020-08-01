@@ -14,6 +14,7 @@ export class ProductsFormsComponent implements OnInit {
   isPhotoUrlValid: boolean;
   isImage: boolean;
   isSizeValid;
+  disableSize=false;
   isDisabled = false;
   boolean;
   product = new Productlist();
@@ -46,7 +47,11 @@ export class ProductsFormsComponent implements OnInit {
     deliveryFees: new FormControl(""),
     description: new FormControl(""),
     deliveryTime: new FormControl(""),
-    inSqft: new FormControl("No")
+    inSqft: new FormControl("No"),
+    meetingDuration:new FormControl(""),
+    dDesFees:new FormControl(""),
+    sourceFileFees:new FormControl(""),
+    slotGap:new FormControl("")
   });
   constructor(
     private _validator: ValidatorsService,
@@ -63,6 +68,7 @@ export class ProductsFormsComponent implements OnInit {
       
     } 
     if (this.editForm == true) {
+      console.log(this.selectedProduct);
       item.prodDetailsId = this.selectedProduct.poductDetailsId;
       this.productform.patchValue({
         Pname: this.selectedProduct["productId"],
@@ -81,7 +87,8 @@ export class ProductsFormsComponent implements OnInit {
         pGST: this.selectedProduct["PrintGST"],
         description: this.selectedProduct["productDescription"],
         deliveryFees: this.selectedProduct["deliveryFees"],
-        deliveryTime: this.selectedProduct["deliveryTime"]
+        deliveryTime: this.selectedProduct["deliveryTime"],
+        inSqft:this.selectedProduct["IsPriceInSqFt"] == true ? "Yes"  :"No" 
       });
       let prodPice = this.printPriceList.filter(item=> item.prodDetailsId ==this.selectedProduct.poductDetailsId );
       if(prodPice ==null || prodPice.length ==0){
@@ -148,6 +155,20 @@ export class ProductsFormsComponent implements OnInit {
     let row = this.printPrice.filter(item => item.Id == i)[0];
     row.deliveryDays = event.target.value;
   }
+  freezSize(){
+    if(this.productform.controls['inSqft'].value == 'Yes'){
+      this.disableSize=true;
+      this.productform.patchValue({
+        size:'L x W (cutomised)'
+      });
+    }
+    else{
+      this.disableSize=false;
+      this.productform.patchValue({
+        size:''
+      });
+    }
+  }
   updateProduct() {
     this.product.printPrice = this.printPrice;
     let quant: string = "";
@@ -193,7 +214,11 @@ export class ProductsFormsComponent implements OnInit {
     ].value;
     this.product.deliveryFees = this.productform.controls["deliveryFees"].value;
     this.product.deliveryTime = this.productform.controls["deliveryTime"].value;
-
+    this.product.IsPriceInSqFt=this.productform.controls["inSqft"].value == "Yes" ? true : false;
+    this.product.meetingDuration=this.productform.controls["meetingDuration"].value;
+    this.product.sourceFileFees=this.productform.controls["sourceFileFees"].value;
+    this.product.SlotTimeGap=this.productform.controls["slotGap"].value;
+    this.product.profDesignerFee=this.productform.controls["dDesFees"].value;
     if (this.editForm == true) {
       this.product.productsubId = this.selectedProduct["productsubId"];
     } else {

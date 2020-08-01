@@ -21,17 +21,13 @@ export class VerifyOTPComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-  generateOTP() { 
-    let userId = localStorage.getItem("userId");  
-      this.register.generateOTP(userId, this.number).subscribe(
-        data => {
-          
-        },
-        err => {
-         
-        }
-      );
-   
+  generateOTP() {
+    let userId = localStorage.getItem("userId");
+    this.register.generateOTP(userId, this.number).subscribe(
+      data => {},
+      err => {}
+    );
+
     return true;
   }
   verifyOTP() {
@@ -41,8 +37,15 @@ export class VerifyOTPComponent implements OnInit {
     this.spinner.show();
     this.register.verifyOTP(number, userId).subscribe(
       data => {
-        this.message = "Phone# Validated";
-        this.verified = true;
+        debugger;
+        if (data == true) {
+          this.message = "Phone# Validated";
+          this.verified = true;
+        } else {
+          this.message = "Wrong OTP";
+          this.verified = false;
+        }
+
         this.spinner.hide();
       },
       err => {

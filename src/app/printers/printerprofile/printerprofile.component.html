@@ -237,6 +237,14 @@
                       </button>
                   </div>
                 </div>
+                <div class="col-md-2 pr-1" style="padding-top: 20px;" *ngIf="isPhoneVerified">
+                  <div class="form-group">
+                    
+                    <button type="button" (click)="changeNumber()"  class="btn btn-primary btn-round">
+                        Edit
+                      </button>
+                  </div>
+                </div>
               <div class="col-md-5 px-1">
                   <div class="form-group pmd-textfield pmd-textfield-floating-label">
                       <label class="control-label" for="datepicker">Date Of Birth *</label>
@@ -268,7 +276,7 @@
                         type="text"
                         class="form-control"
                         placeholder="GST Number"
-                        maxlength="12"
+                        maxlength="15"
                     formControlName="gst"  
                     required
                         [disabled]="isDisabled"
@@ -329,7 +337,7 @@
                         type="text"
                         class="form-control"
                         placeholder="PAN "
-                        maxlength="11"
+                        maxlength="10"
                         [disabled]="isDisabled"
                         formControlName="pan"  
                         required
@@ -346,6 +354,17 @@
         >
           *PAN Number is required.
         </span>
+        <span
+        class="errorMessage"
+        *ngIf="
+          (profileform.controls['pan'].dirty ||
+          profileform.controls['pan'].touched) &&
+          profileform.controls['pan'].invalid &&
+          profileform.controls['pan'].errors.invalidPattern
+        "
+      >
+        *PAN# is incorrect.
+      </span>
                     </div>
                   </div>
               <div class="col-md-4">
@@ -385,6 +404,17 @@
         "
       >
         *Aadhar Number is required.
+      </span>
+      <span
+        class="errorMessage"
+        *ngIf="
+          (profileform.controls['aadhar'].dirty ||
+          profileform.controls['aadhar'].touched) &&
+          profileform.controls['aadhar'].invalid &&
+          profileform.controls['aadhar'].errors.invalidPattern
+        "
+      >
+        *Aadhar# is incorrect.
       </span>
                   </div>
                 </div>

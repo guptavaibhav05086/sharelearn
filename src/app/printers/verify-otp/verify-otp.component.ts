@@ -27,38 +27,45 @@ export class VerifyOTPComponent implements OnInit {
     this.activeModal.close(this.verified);
   }
   generateOTP() {
-    
     let userId = localStorage.getItem("userId");
     // let number =  this.studentForm.controls['mobileNumber'].value;
-    
-      this.register.generateOTP(userId, this.number).subscribe(
-        data => {
-          
-        },
-        err => {
-         
-        }
-      );
-   
+
+    this.register.generateOTP(userId, this.number).subscribe(
+      data => {},
+      err => {}
+    );
+
     return true;
   }
   verifyOTP() {
-    let number = this.studentForm.controls["mobileNumber"].value;
-    let userId = localStorage.getItem("userId");
-    this.message = "";
     this.spinner.show();
-    this.register.verifyOTP(number, userId).subscribe(
-      data => {
-        this.message = "Phone# Validated";
-        this.spinner.hide();
-        this.verified = true;
-      },
-      err => {
-        this.message = "Issue occured please check after some time";
-        this.spinner.hide();
-        this.verified = false;
-      }
-    );
+    try {
+      let number = this.studentForm.controls["mobileNumber"].value;
+      let userId = localStorage.getItem("userId");
+      this.message = "";
+
+      this.register.verifyOTP(number, userId).subscribe(
+        data => {
+          debugger;
+          if (data == true) {
+            this.message = "Phone# Validated";
+            this.verified = true;
+          } else {
+            this.message = "Wrong OTP";
+            this.verified = false;
+          }
+          this.spinner.hide();
+        },
+        err => {
+          this.message = "Issue occured please check after some time";
+          this.spinner.hide();
+          this.verified = false;
+        }
+      );
+    } catch (error) {
+      this.spinner.hide();
+      this.message = "Issue occured please check after some time";
+    }
   }
   studentForm = new FormGroup({
     mobileNumber: new FormControl("", [Validators.required])

@@ -60,9 +60,29 @@
     font-family: Acumin variable concept !important;
     font-size: 10px !important;
   }
+  .marginRes {
+    margin-top: 10px;
+  }
+  .registrationOpen {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-family: Bradley Hand ITC, sans-serif;
+    font-size: 40pt;
+    font-weight: bolder;
+    color: #1b76b3;
+  }
+  .registrationOpenimg{
+    width:200px;
+  }
 }
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 400px) {
+  .registrationOpenimg{
+    width:200px;
+  }
   .freelancePosition {
     position: absolute;
     top: 60%;
@@ -125,9 +145,26 @@
     font-family: Acumin variable concept !important;
     font-size: 10px !important;
   }
+  .marginRes {
+    margin-top: 10px;
+  }
+  .registrationOpen {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-family: Bradley Hand ITC, sans-serif;
+    font-size: 20pt;
+    font-weight: bolder;
+    color: #1b76b3;
+  }
 }
 
 @media only screen and (min-width: 600px) {
+  .registrationOpenimg{
+    width:200px;
+  }
   .freelancePosition {
     position: absolute;
     top: 60%;
@@ -193,10 +230,30 @@
     font-family: Acumin variable concept !important;
     font-size: 10px !important;
   }
+  .marginRes {
+    margin-top: 10px;
+  }
+  .registrationOpen {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-family: Bradley Hand ITC, sans-serif;
+    font-size: 20pt;
+    font-weight: bolder;
+    color: #1b76b3;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+  .registrationOpenimg{
+    width:250px;
+  }
+  .marginRes {
+    margin-top: 20px;
+  }
   .freelancePosition {
     position: absolute;
     top: 80%;
@@ -210,6 +267,17 @@
     left: 80%;
     transform: translate(-50%, -50%);
     font-size: 18px;
+  }
+  .registrationOpen {
+    position: absolute;
+    top: 15%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-family: Bradley Hand ITC, sans-serif;
+    font-size: 40pt;
+    font-weight: bolder;
+    color: #1b76b3;
   }
   .copyposition {
     position: absolute;
@@ -258,6 +326,9 @@
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+  .registrationOpenimg{
+    width:250px;
+  }
   .freelancePosition {
     position: absolute;
     top: 80%;
@@ -320,6 +391,9 @@
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+  .registrationOpenimg{
+    width:250px;
+  }
   .freelancePosition {
     position: absolute;
     top: 80%;
