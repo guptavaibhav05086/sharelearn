@@ -88,7 +88,14 @@ export class ProductsFormsComponent implements OnInit {
         description: this.selectedProduct["productDescription"],
         deliveryFees: this.selectedProduct["deliveryFees"],
         deliveryTime: this.selectedProduct["deliveryTime"],
-        inSqft:this.selectedProduct["IsPriceInSqFt"] == true ? "Yes"  :"No" 
+        inSqft:this.selectedProduct["IsPriceInSqFt"] == true ? "Yes"  :"No",
+        slotGap: this.selectedProduct["SlotTimeGap"],
+        sourceFileFees:this.selectedProduct["sourceFileFees"],
+        dDesFees:this.selectedProduct["profDesignerFee"],
+        meetingDuration:this.selectedProduct["meetingDuration"]
+
+
+
       });
       let prodPice = this.printPriceList.filter(item=> item.prodDetailsId ==this.selectedProduct.poductDetailsId );
       if(prodPice ==null || prodPice.length ==0){

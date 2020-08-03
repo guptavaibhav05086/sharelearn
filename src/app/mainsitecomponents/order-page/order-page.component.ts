@@ -36,12 +36,15 @@ export class OrderPageComponent implements OnInit {
   fileError = false;
   isPhotoUrlValid: boolean;
   arrLnW = new Array<number>();
-
+  maxGap=0;
   uploadedFileNames = {
     product: ".jpg,.png,.jpeg,pdf format",
     image1: ".jpg,.png,.jpeg,pdf format",
     image2: ".jpg,.png,.jpeg,pdf format",
-    content: "Content File in .doc,docx,.pdf format"
+    image3: ".jpg,.png,.jpeg,pdf format",
+    image4: ".jpg,.png,.jpeg,pdf format",
+    content: "Content File in .doc,docx,.pdf format",
+    IsImageUploaded:false
   };
   orderPrice = {
     price: 0,
@@ -98,7 +101,7 @@ export class OrderPageComponent implements OnInit {
       return this.isPhotoUrlValid;
     }
     if (name != "GST") {
-      if (!file.type.match("image.*")) {
+      if (!file.type.match("image.*|application.pdf")) {
         this.isPhotoUrlValid = false;
         return false;
       } else {
@@ -145,6 +148,7 @@ export class OrderPageComponent implements OnInit {
         alert("File Uploaded Successfully");
         this.uploadedFileNames[name] = data;
         this.fileError = false;
+        this.uploadedFileNames.IsImageUploaded=true;
         //this.selectedFileName = userImage.name;
       },
       err => {
@@ -173,18 +177,24 @@ export class OrderPageComponent implements OnInit {
       /^([0][1-9]|[1-2][0-9]|[3][0-5])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$/
     )]),
     BillingName: new FormControl(""),
-    purpose: new FormControl(""),
+    purpose: new FormControl("",[Validators.required]),
     length: new FormControl(""),
-    width: new FormControl("")
+    width: new FormControl(""),
+    designcontent: new FormControl("")
   });
   addToCart() {
     debugger;
+    let selItem = this.productList.filter(item=> item.productSubcategory == this.orderForm.controls["subCategory"].value)[0];
     if (
       this.checkCartValidation(this.orderForm.controls["type"].value) == false
     ) {
       return;
     }
+    if(this.checkTimeGapValidation(this.maxGap,selItem.SlotTimeGap)==false){
+      return;
+    }
     let id = 1;
+    
     if (
       this.custService.getLocalStorageCart() != null &&
       this.custService.getLocalStorageCart().length > 0
@@ -198,12 +208,14 @@ export class OrderPageComponent implements OnInit {
       this.custService.deletItemFromCart(this.cartItemId);
       id = this.cartItemId;
     }
+     
     let cartItem = {
       id: id,
       type: this.orderForm.controls["type"].value,
       GSTNumber: this.orderForm.controls["GSTNumber"].value,
       BillingName: this.orderForm.controls["BillingName"].value,
       uploadedimages: this.uploadedFileNames,
+      content:this.orderForm.controls["designcontent"].value,
       category: [
         {
           name: this.orderForm.controls["category"].value,
@@ -217,7 +229,10 @@ export class OrderPageComponent implements OnInit {
           },
           meetingDetails: {
             //day: this.orderForm.controls["meetingDate"].value,
-            slot: this.orderForm.controls["meetingSlot"].value
+            slot: this.orderForm.controls["meetingSlot"].value,
+            timeGap:selItem.SlotTimeGap,
+            meetingDuration:selItem.meetingDuration
+            
           },
           price: {
             price: this.orderPrice.price,
@@ -333,6 +348,23 @@ export class OrderPageComponent implements OnInit {
     this.displaySpecs = false;
     this.displayMeetings = false;
     this.displaysummary = false;
+  }
+  checkTimeGapValidation(maxGap,selItemGap){
+    debugger;
+    let cartList = this.custService.getLocalStorageCart();
+    let calGap = selItemGap;
+    if(cartList !=null){
+      cartList.forEach(item=>{
+        let mD= item.category[0].meetingDetails;
+        calGap=calGap + mD.timeGap
+      });
+    }
+    
+    if(calGap > maxGap){
+      alert("This Item can not be added to Cart because of meeting slot time constraints");
+      return false
+    }
+    return true;
   }
   checkCartValidation(category) {
     debugger;
@@ -452,6 +484,7 @@ export class OrderPageComponent implements OnInit {
         this.productList = data["productList"];
         this.products = data["products"];
         this.printPrice = data["printPrice"];
+        this.maxGap=data["maxGap"];
         console.log(data);
         debugger;
         if (this.isEditOrder) {
@@ -574,6 +607,10 @@ export class OrderPageComponent implements OnInit {
   selectedCustomizedSize() {}
   selectedSubcategory(event) {
     debugger;
+    let selproduct = this.productList.filter(item=> item.productSubcategory == this.orderForm.controls["subCategory"].value)[0];
+    if(this.checkTimeGapValidation(this.maxGap,selproduct.SlotTimeGap)==false){
+      return;
+    }
     console.log(this.proSpec.quantities);
     this.proSpec.dsiplaygsm = this.proSpec.gsm.filter(
       item => item.subcat == this.orderForm.controls["subCategory"].value

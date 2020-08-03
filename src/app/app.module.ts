@@ -50,6 +50,7 @@ import { AddressFormComponent } from "./mainsitecomponents/address-form/address-
 import { GoogleplacesComponent } from "./mainsitecomponents/googleplaces/googleplaces.component";
 import { OrderCartComponent } from "./mainsitecomponents/order-cart/order-cart.component";
 import { ReviewOrderComponent } from "./mainsitecomponents/review-order/review-order.component";
+import { BookMeetingComponent } from './mainsitecomponents/book-meeting/book-meeting.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,7 +89,8 @@ import { ReviewOrderComponent } from "./mainsitecomponents/review-order/review-o
     AddressFormComponent,
     GoogleplacesComponent,
     OrderCartComponent,
-    ReviewOrderComponent
+    ReviewOrderComponent,
+    BookMeetingComponent
   ],
   imports: [
     BrowserModule,

@@ -133,6 +133,14 @@ export class ProductsComponent implements OnInit {
         onClick: this.editProduct.bind(this),
         label: "Edit"
       }
+    },
+    {
+      headerName: "Delete Product",
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        onClick: this.deleteProduct.bind(this),
+        label: "Delete"
+      }
     }
   ];
   colDefProdList = [
@@ -169,11 +177,10 @@ export class ProductsComponent implements OnInit {
     debugger;
     this.fetchProductsData();
   }
-  onGridReady(params){
+  onGridReady(params) {
     this.gridApi = params.api;
   }
   onBtnExportDataAsCsv() {
-    
     this.gridApi.exportDataAsCsv();
   }
   fetchProductsData() {
@@ -222,6 +229,9 @@ export class ProductsComponent implements OnInit {
       this.fetchProductsData();
     });
   }
+  deleteProduct(e) {
+    let result = confirm("Do you want to delete the product");
+  }
   editProduct(e) {
     console.log(e.rowData);
     const modelRef = this.modalService.open(ProductsFormsComponent, {
@@ -231,7 +241,7 @@ export class ProductsComponent implements OnInit {
     modelRef.componentInstance.productList = this.productLists;
     modelRef.componentInstance.editForm = true;
     modelRef.componentInstance.selectedProduct = e.rowData;
-    modelRef.componentInstance.printPriceList=this.printPrice;
+    modelRef.componentInstance.printPriceList = this.printPrice;
     modelRef.result.then(data => {
       this.fetchProductsData();
     });

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { CustomerService } from "../../services/customer.service";
 import { Router } from "@angular/router";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
 @Component({
   selector: "app-order-cart",
   templateUrl: "./order-cart.component.html",
@@ -22,7 +24,11 @@ export class OrderCartComponent implements OnInit {
     },
     totalItems: 0
   };
-  constructor(private custService: CustomerService, private router: Router) {}
+  constructor(
+    private custService: CustomerService,
+    private router: Router,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.loadCart();
@@ -118,5 +124,11 @@ export class OrderCartComponent implements OnInit {
       }
     }
     console.log(this.userCart);
+  }
+  placeOrder() {
+    this.modalService.open(BookMeetingComponent, {
+      
+      backdrop: "static"
+    });
   }
 }

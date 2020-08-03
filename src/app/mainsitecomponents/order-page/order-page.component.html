@@ -256,7 +256,7 @@
                         type="text"
                         class="form-control"
                         placeholder="purpose"               formControlName="purpose"
-                        style="border-left:1px solid #DDDDDD"                                                                         
+                        style="border-left:1px solid #DDDDDD"            required                                                             
                       />                           
                      
                     </div>
@@ -335,7 +335,7 @@
                   </div> 
                 </div>
                 <div class="row">
-                  <div class="input-group col-md-4" style="padding-top: 30px;position: relative !important">
+                  <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
                     <div class="custom-file form-group">
                         <label style="margin-bottom: 80px;">Logo/Image 1*</label>
                       <input
@@ -353,7 +353,7 @@
                     </div>
                    
                   </div>
-                  <div class="input-group col-md-4" style="padding-top: 30px;position: relative !important">
+                  <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
                     <div class="custom-file form-group">
                         <label style="margin-bottom: 80px;">Logo/Image 2 </label>
                       <input
@@ -367,6 +367,63 @@
                       <label class="custom-file-label" for="inputGroupFile01"
                         >{{uploadedFileNames.image2}}</label
                       >
+                     
+                    </div>
+                   
+                  </div>
+                  <div class="input-group col-md-4" *ngIf="fileError"></div>
+                  <div class="input-group col-md-8" *ngIf="fileError">
+                    <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                  </div> 
+                </div>
+                <div class="row">
+                  <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
+                    <div class="custom-file form-group">
+                        <label style="margin-bottom: 80px;">Logo/Image 3</label>
+                      <input
+                        type="file"
+                        accept="image.*"
+                        class="custom-file-input"
+                        id="inputGroupFile02"
+                        aria-describedby="inputGroupFileAddon02"
+                        (change)="uploadGSTCertificate($event.target.files,'image3')"
+                      />
+                      <label class="custom-file-label" for="inputGroupFile01"
+                        >{{uploadedFileNames.image3}}</label
+                      >
+                     
+                    </div>
+                   
+                  </div>
+                  <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
+                    <div class="custom-file form-group">
+                        <label style="margin-bottom: 80px;">Logo/Image 4 </label>
+                      <input
+                        type="file"
+                        accept="image.*"
+                        class="custom-file-input"
+                        id="inputGroupFile02"
+                        aria-describedby="inputGroupFileAddon02"
+                        (change)="uploadGSTCertificate($event.target.files,'image4')"
+                      />
+                      <label class="custom-file-label" for="inputGroupFile01"
+                        >{{uploadedFileNames.image4}}</label
+                      >
+                     
+                    </div>
+                   
+                  </div>
+                  <div class="input-group col-md-4" *ngIf="fileError"></div>
+                  <div class="input-group col-md-8" *ngIf="fileError">
+                    <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                  </div> 
+                </div>
+                <div class="row">
+                  
+                  <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
+                    <div class="custom-file form-group">
+                        <label style="margin-bottom: 80px;color:green;font-style: italic;">*For more files or format, you can send directly to allotted designer on e-mail </label>
+                     
                      
                     </div>
                    
@@ -405,6 +462,30 @@
                     <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
                   </div> 
                 </div>
+                <div class="row" *ngIf="displayDesigner">
+                  <div class="flex-control8">
+                      <div class="form-group" >
+                      
+                          <label>Content Data </label>
+                        <!-- <input
+                          type="text"
+                          class="form-control"
+                          placeholder="max 250 characters are allowed"
+                          formControlName='designcontent'
+                          maxlength="250"
+                        /> -->
+                       <textarea formControlName='designcontent'  class="form-control" maxlength="250" placeholder="Max limit 250 characters">
+
+                       </textarea>
+                        
+                       
+                      
+                     
+                    </div>
+                  </div>
+                    
+                   
+                  </div>
                 <div class="row" *ngIf="displayDesigner">
                   <div class="flex-control5" >
                       <div class="form-group">
@@ -446,7 +527,7 @@
                     </div>
                     <div class="flex-controllabel" style="margin-left: 30%;">
                         <div class="form-group">
-                            <button type="button" class="btn btn-primary" (click)="proceedOrder(summary)" [disabled]="!(orderForm.valid && Servicable)" >Proceed</button>
+                            <button type="button" class="btn btn-primary" (click)="proceedOrder(summary)" [disabled]="!(orderForm.valid && Servicable && uploadedFileNames.IsImageUploaded)" >Proceed</button>
                           </div>
                       
                     </div>
