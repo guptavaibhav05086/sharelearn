@@ -68,7 +68,33 @@
                     *Preference is required.
                   </span>
                 </div>
-                
+                <div class="col-md-4 pl-1">
+                  <div class="form-group">
+                    <label>Classification</label>
+                    <select
+                      class="form-control"
+                      [disabled]="isDisabled"
+                      formControlName="classification"
+                      required
+                    >
+                      <option selected></option>
+                      <option >Design And Print</option>
+                      <option>Design Only</option>
+                      <option>Print Only</option>
+                    </select>
+                    <span
+                      class="errorMessage"
+                      *ngIf="
+                        (productform.controls['classification'].dirty ||
+                          productform.controls['classification'].touched) &&
+                        productform.controls['classification'].invalid &&
+                        productform.controls['classification'].errors.required
+                      "
+                    >
+                      *Please Select Classification.
+                    </span>
+                  </div>
+                </div>
               </div>
               
             </form>

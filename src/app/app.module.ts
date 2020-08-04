@@ -51,6 +51,7 @@ import { GoogleplacesComponent } from "./mainsitecomponents/googleplaces/googlep
 import { OrderCartComponent } from "./mainsitecomponents/order-cart/order-cart.component";
 import { ReviewOrderComponent } from "./mainsitecomponents/review-order/review-order.component";
 import { BookMeetingComponent } from './mainsitecomponents/book-meeting/book-meeting.component';
+import { RazorpaymentsComponent } from './mainsitecomponents/razorpayments/razorpayments.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +91,8 @@ import { BookMeetingComponent } from './mainsitecomponents/book-meeting/book-mee
     GoogleplacesComponent,
     OrderCartComponent,
     ReviewOrderComponent,
-    BookMeetingComponent
+    BookMeetingComponent,
+    RazorpaymentsComponent
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,7 @@ export class ProductsFormsComponent implements OnInit {
   isPhotoUrlValid: boolean;
   isImage: boolean;
   isSizeValid;
-  disableSize=false;
+  disableSize = false;
   isDisabled = false;
   boolean;
   product = new Productlist();
@@ -48,10 +48,10 @@ export class ProductsFormsComponent implements OnInit {
     description: new FormControl(""),
     deliveryTime: new FormControl(""),
     inSqft: new FormControl("No"),
-    meetingDuration:new FormControl(""),
-    dDesFees:new FormControl(""),
-    sourceFileFees:new FormControl(""),
-    slotGap:new FormControl("")
+    meetingDuration: new FormControl(""),
+    dDesFees: new FormControl(""),
+    sourceFileFees: new FormControl(""),
+    slotGap: new FormControl("")
   });
   constructor(
     private _validator: ValidatorsService,
@@ -65,8 +65,7 @@ export class ProductsFormsComponent implements OnInit {
     let item = new ProductprintPrice();
     if (this.printPriceList == undefined || this.printPriceList.length == 0) {
       this.initializePricingSection(item);
-      
-    } 
+    }
     if (this.editForm == true) {
       console.log(this.selectedProduct);
       item.prodDetailsId = this.selectedProduct.poductDetailsId;
@@ -88,17 +87,16 @@ export class ProductsFormsComponent implements OnInit {
         description: this.selectedProduct["productDescription"],
         deliveryFees: this.selectedProduct["deliveryFees"],
         deliveryTime: this.selectedProduct["deliveryTime"],
-        inSqft:this.selectedProduct["IsPriceInSqFt"] == true ? "Yes"  :"No",
+        inSqft: this.selectedProduct["IsPriceInSqFt"] == true ? "Yes" : "No",
         slotGap: this.selectedProduct["SlotTimeGap"],
-        sourceFileFees:this.selectedProduct["sourceFileFees"],
-        dDesFees:this.selectedProduct["profDesignerFee"],
-        meetingDuration:this.selectedProduct["meetingDuration"]
-
-
-
+        sourceFileFees: this.selectedProduct["sourceFileFees"],
+        dDesFees: this.selectedProduct["profDesignerFee"],
+        meetingDuration: this.selectedProduct["meetingDuration"]
       });
-      let prodPice = this.printPriceList.filter(item=> item.prodDetailsId ==this.selectedProduct.poductDetailsId );
-      if(prodPice ==null || prodPice.length ==0){
+      let prodPice = this.printPriceList.filter(
+        item => item.prodDetailsId == this.selectedProduct.poductDetailsId
+      );
+      if (prodPice == null || prodPice.length == 0) {
         this.initializePricingSection(item);
       }
       for (let i = 0; i < prodPice.length; i++) {
@@ -106,8 +104,8 @@ export class ProductsFormsComponent implements OnInit {
       }
     }
   }
-   
-    initializePricingSection(item:ProductprintPrice){
+
+  initializePricingSection(item: ProductprintPrice) {
     item.prodDetailsId = 0;
     item.Id = 0;
     item.pricePerUnit = 0;
@@ -116,18 +114,35 @@ export class ProductsFormsComponent implements OnInit {
     this.printPrice.push(item);
   }
   loadItem(index, row) {
+    debugger;
     let item = new ProductprintPrice();
     item.prodDetailsId = this.selectedProduct.poductDetailsId;
     item.Id = index;
     item.pricePerUnit = row.pricePerUnit;
     item.printCommission = row.printCommission;
     item.qunatity = row.qunatity;
+    item.deliveryDays = row.deliveryDays;
     this.printPrice.push(item);
 
     console.log(this.printPrice);
   }
   createItem(index) {
+    debugger;
     let item = new ProductprintPrice();
+    let itempre = this.printPrice.filter(item => item.Id == index);
+    if (itempre != null && itempre.length > 0) {
+      if (
+        itempre[0].pricePerUnit > 0 &&
+        itempre[0].qunatity > 0 &&
+        itempre[0].printCommission > 0 &&
+        itempre[0].deliveryDays > 0
+      ) {
+      } else {
+        alert("Provide Values for previous item correctly");
+        return;
+      }
+    }
+
     //item.prodDetailsId = this.selectedProduct.poductDetailsId;
     item.Id = index + 1;
     item.pricePerUnit = 0;
@@ -162,17 +177,16 @@ export class ProductsFormsComponent implements OnInit {
     let row = this.printPrice.filter(item => item.Id == i)[0];
     row.deliveryDays = event.target.value;
   }
-  freezSize(){
-    if(this.productform.controls['inSqft'].value == 'Yes'){
-      this.disableSize=true;
+  freezSize() {
+    if (this.productform.controls["inSqft"].value == "Yes") {
+      this.disableSize = true;
       this.productform.patchValue({
-        size:'L x W (cutomised)'
+        size: "L x W (cutomised)"
       });
-    }
-    else{
-      this.disableSize=false;
+    } else {
+      this.disableSize = false;
       this.productform.patchValue({
-        size:''
+        size: ""
       });
     }
   }
@@ -192,14 +206,13 @@ export class ProductsFormsComponent implements OnInit {
     this.product.productSize = this.productform.controls["size"].value;
     this.product.productSubcategory = this.productform.controls["subCat"].value;
     this.product.paperGSM = this.productform.controls["paperGSM"].value;
-    // 
-    if(this.productform.controls['inSqft'].value == 'Yes'){
+    //
+    if (this.productform.controls["inSqft"].value == "Yes") {
       this.product.quantities = this.productform.controls["quantities"].value;
-    }
-    else{
+    } else {
       this.product.quantities = quant;
     }
-    
+
     this.product.productCategory = this.productform.controls[
       "classification"
     ].value;
@@ -221,11 +234,16 @@ export class ProductsFormsComponent implements OnInit {
     ].value;
     this.product.deliveryFees = this.productform.controls["deliveryFees"].value;
     this.product.deliveryTime = this.productform.controls["deliveryTime"].value;
-    this.product.IsPriceInSqFt=this.productform.controls["inSqft"].value == "Yes" ? true : false;
-    this.product.meetingDuration=this.productform.controls["meetingDuration"].value;
-    this.product.sourceFileFees=this.productform.controls["sourceFileFees"].value;
-    this.product.SlotTimeGap=this.productform.controls["slotGap"].value;
-    this.product.profDesignerFee=this.productform.controls["dDesFees"].value;
+    this.product.IsPriceInSqFt =
+      this.productform.controls["inSqft"].value == "Yes" ? true : false;
+    this.product.meetingDuration = this.productform.controls[
+      "meetingDuration"
+    ].value;
+    this.product.sourceFileFees = this.productform.controls[
+      "sourceFileFees"
+    ].value;
+    this.product.SlotTimeGap = this.productform.controls["slotGap"].value;
+    this.product.profDesignerFee = this.productform.controls["dDesFees"].value;
     if (this.editForm == true) {
       this.product.productsubId = this.selectedProduct["productsubId"];
     } else {

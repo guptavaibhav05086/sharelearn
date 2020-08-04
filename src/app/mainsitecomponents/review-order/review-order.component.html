@@ -170,7 +170,8 @@
                   <hr />
                   <div class="rowCart">
                     <div class="col-shp-12 btnAling">
-                      <button class="btn btn-primary">Pay Now</button>
+                      <app-razorpayments [paymentAmount]="userCart.finalPrice.calFinalTotal" (transactionStatus)="transactionUpdate($event)"></app-razorpayments>
+                      <!-- <button class="btn btn-primary">Pay Now</button> -->
                     </div>
                   </div>
                 </div>

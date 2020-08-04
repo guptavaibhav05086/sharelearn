@@ -41,6 +41,11 @@ export class ReviewOrderComponent implements OnInit {
   ngOnInit(): void {
     this.loadCart();
   }
+  transactionUpdate(event){
+    debugger;
+    console.log(event);
+
+  }
   loadCart() {
     debugger;
     let cartItems = JSON.parse(localStorage.getItem("cart"));

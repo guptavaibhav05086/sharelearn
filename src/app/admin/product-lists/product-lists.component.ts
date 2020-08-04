@@ -16,7 +16,8 @@ export class ProductListsComponent implements OnInit {
   productform = new FormGroup({
     Pname: new FormControl("", [Validators.required]),
 
-    preferenece: new FormControl("", [Validators.required])
+    preferenece: new FormControl("", [Validators.required]),
+    classification:new FormControl("", [Validators.required])
   });
   constructor(
     public activeModal: NgbActiveModal,
@@ -28,7 +29,9 @@ export class ProductListsComponent implements OnInit {
     if (this.isEdit) {
       this.productform.patchValue({
         Pname: this.selProduct["value"],
-        preferenece: this.selProduct["producPreference"]
+        preferenece: this.selProduct["producPreference"],
+        classification:this.selProduct["category"]
+        //category
       });
     }
   }
@@ -45,6 +48,9 @@ export class ProductListsComponent implements OnInit {
     this.product.producPreference = this.productform.controls[
       "preferenece"
     ].value;
+    this.product.productCategory = this.productform.controls[
+      "classification"
+    ].value
     this.service.updateProductList(this.product).subscribe(
       data => {
         this.updateSuccess = true;

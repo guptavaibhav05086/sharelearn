@@ -36,7 +36,7 @@ export class ProductprintPrice {
   public qunatity: number;
   public pricePerUnit: number;
 
-  public deliveryDays: string;
+  public deliveryDays: number;
 
   public printCommission: number;
 }

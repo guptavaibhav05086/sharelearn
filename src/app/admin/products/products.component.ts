@@ -153,6 +153,12 @@ export class ProductsComponent implements OnInit {
       filter: true
     },
     {
+      headerName: "Category",
+      field: "category",
+      sortable: true,
+      filter: true
+    },
+    {
       headerName: "Edit Product",
       cellRenderer: "buttonRenderer",
       cellRendererParams: {

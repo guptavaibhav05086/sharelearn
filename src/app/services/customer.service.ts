@@ -85,20 +85,32 @@ export class CustomerService {
   deletItemFromCart(itemId) {
     let existnCart = this.getLocalStorageCart();
     if (existnCart != null && existnCart != undefined) {
-
-      this.itemsList = existnCart.filter(item=> item.id != itemId);
+      this.itemsList = existnCart.filter(item => item.id != itemId);
     }
     this.updateLocalStorageCart();
-
   }
   updateLocalStorageCart() {
     localStorage.setItem("cart", JSON.stringify(this.itemsList));
   }
   getLocalStorageCart() {
     let cart = localStorage.getItem("cart");
-    if (cart != "" && cart != null && cart != undefined) {
+    if (
+      cart != "" &&
+      cart != null &&
+      cart != undefined &&
+      cart != "undefined"
+    ) {
       return JSON.parse(cart);
     }
     return null;
+  }
+  setMeetingSlot(meetingSlot) {
+    let existnCart = this.getLocalStorageCart();
+    existnCart.forEach(item => {
+      item.category[0].meetingDetails.slot = meetingSlot;
+    });
+    this.itemsList = existnCart;
+    console.log(this.itemsList);
+    this.updateLocalStorageCart();
   }
 }

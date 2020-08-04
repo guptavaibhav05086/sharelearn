@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CustomerService } from "../../services/customer.service";
+import { HelperService } from "../../services/helper.service";
 import { Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
@@ -27,7 +28,8 @@ export class OrderCartComponent implements OnInit {
   constructor(
     private custService: CustomerService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private helper: HelperService
   ) {}
 
   ngOnInit(): void {
@@ -126,9 +128,14 @@ export class OrderCartComponent implements OnInit {
     console.log(this.userCart);
   }
   placeOrder() {
-    this.modalService.open(BookMeetingComponent, {
-      
+    let modelRef = this.modalService.open(BookMeetingComponent, {
       backdrop: "static"
+    });
+    modelRef.result.then(data => {
+      debugger;
+      console.log(data);
+      this.custService.setMeetingSlot(data);
+      this.helper.navigateToPath("/revieworder");
     });
   }
 }

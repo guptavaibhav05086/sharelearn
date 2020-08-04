@@ -124,4 +124,8 @@ export class BookMeetingComponent implements OnInit {
     debugger;
     let val = this.productform.controls["meetingSlot"].value();
   }
+  slot(){
+    this.activeModal.close(this.productform.controls['meetingSlot'].value);
+
+  }
 }
