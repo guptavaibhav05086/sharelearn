@@ -126,7 +126,8 @@
                               <input
                                 type="text"
                                 class="form-control"
-                                placeholder="Check for servicable area"               formControlName="pinCode"                  (blur)="checkServicableArea()"                                                        
+                                placeholder="Check for servicable area"               formControlName="pinCode"                  (blur)="checkServicableArea()"  
+                                [ngClass]="{'displayError': (this.orderForm.controls['pinCode'].touched && this.orderForm.controls['pinCode'].invalid ) || (this.orderForm.controls['pinCode'].touched && Servicable == false)}"                                                       
                               />                           
                              
                             </div>
@@ -141,7 +142,7 @@
                             <select
                               type="text"
                               class="form-control"
-                              placeholder="state"                         formControlName="subCategory"             (change)="selectedSubcategory($event)"                                                       
+                              placeholder="state"                         formControlName="subCategory"             (change)="selectedSubcategory($event)"     [ngClass]="{'displayError': (this.orderForm.controls['subCategory'].touched && this.orderForm.controls['subCategory'].invalid)}"                                                  
                             >
                             <option>Select</option>
                             <option *ngFor="let item of proSpec.subcat" [value]="item.subcat">
@@ -158,7 +159,7 @@
                             <select
                               type="text"
                               class="form-control"
-                              placeholder="orientation"                   formControlName="orientation"                                                                          
+                              placeholder="orientation"                   formControlName="orientation"               [ngClass]="{'displayError': (this.orderForm.controls['orientation'].touched && this.orderForm.controls['orientation'].invalid)}"                                                           
                             >
                             <option>Select</option>
                             <option *ngFor="let item of proSpec.displayOrientation" [value]="item">
@@ -174,7 +175,7 @@
                             <select
                               type="text"
                               class="form-control"
-                              placeholder="Sub Category"                   (change)="selectedSize($event)"              formControlName="size"                                                              
+                              placeholder="Sub Category"                   (change)="selectedSize($event)"              formControlName="size"                       [ngClass]="{'displayError': (this.orderForm.controls['size'].touched && this.orderForm.controls['size'].invalid)}"                                         
                             >
                             <option>Select</option>
                             <option *ngFor="let item of proSpec.size" [value]="item">
@@ -190,7 +191,7 @@
                           <select
                             type="text"
                             class="form-control"
-                            placeholder="Sub Category"                  formControlName="length"                                                              
+                            placeholder="Sub Category"                  formControlName="length"                       [ngClass]="{'displayError': (this.orderForm.controls['length'].touched && this.orderForm.controls['length'].invalid)}"                                           
                           >
                           <option>Select</option>
                           <option *ngFor="let item of arrLnW" [value]="item">
@@ -206,7 +207,7 @@
                         <select
                           type="text"
                           class="form-control"
-                          placeholder="Sub Category"                    formControlName="width"                                                              
+                          placeholder="Sub Category"                    formControlName="width"                        [ngClass]="{'displayError': (this.orderForm.controls['width'].touched && this.orderForm.controls['width'].invalid)}"                                       
                         >
                         <option>Select</option>
                         <option *ngFor="let item of arrLnW" [value]="item">
@@ -222,7 +223,7 @@
                       <select
                         type="text"
                         class="form-control"
-                        placeholder="quantities"                    formControlName="GSM"                                                                       
+                        placeholder="quantities"                    formControlName="GSM"                            [ngClass]="{'displayError': (this.orderForm.controls['GSM'].touched && this.orderForm.controls['GSM'].invalid)}"                                           
                       >
                       <option>Select</option>
                       <option *ngFor="let item of proSpec.dsiplaygsm" [value]="item.gsm">
@@ -239,7 +240,7 @@
                       <select
                         type="text"
                         class="form-control"
-                        placeholder="quantities"                   formControlName="quantities"                                                                             
+                        placeholder="quantities"                   formControlName="quantities"                      [ngClass]="{'displayError': (this.orderForm.controls['quantities'].touched && this.orderForm.controls['quantities'].invalid)}"                                                        
                       >
                       <option>Select</option>
                       <option *ngFor="let item of proSpec.displayQuant" [value]="item">
@@ -249,18 +250,33 @@
                      
                     </div>
               </div>
-              <div class="input-group flex-control5">
+              <div class="flex-control5">
                   <div class="form-group">
                       <label>Industry Purpose * </label>
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="purpose"               formControlName="purpose"
-                        style="border-left:1px solid #DDDDDD"            required                                                             
+                        placeholder="School, IT, Gym, etc."               formControlName="purpose"
+                          
+                        [ngClass]="{'displayError': (this.orderForm.controls['purpose'].touched && this.orderForm.controls['purpose'].invalid)}" 
+                                                                                     
                       />                           
                      
                     </div>
               </div>
+              <!-- <div class="flex-control5" *ngIf="displayprinter">
+                  <div class="form-group">
+                      <label>Pin Code *</label>
+                      <input
+                      type="text"
+                      class="form-control"
+                      placeholder="School, IT, Gym, etc."               formControlName="purpose"
+                        
+                      [ngClass]="{'displayError': (this.orderForm.controls['purpose'].touched && this.orderForm.controls['purpose'].invalid)}"                                                       
+                      />                           
+                     
+                    </div>
+              </div> -->
                 </div>
                 <!-- <div class="row" *ngIf="displayprinter">
                     <div class="flex-control5" >
@@ -334,90 +350,53 @@
                     <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
                   </div> 
                 </div>
-                <div class="row">
+                <div class="row" *ngFor="let item of imageUpload;let  i=index">
                   <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
-                    <div class="custom-file form-group">
-                        <label style="margin-bottom: 80px;">Logo/Image 1*</label>
-                      <input
-                        type="file"
-                        accept="image.*"
-                        class="custom-file-input"
-                        id="inputGroupFile02"
-                        aria-describedby="inputGroupFileAddon02"
-                        (change)="uploadGSTCertificate($event.target.files,'image1')"
-                      />
-                      <label class="custom-file-label" for="inputGroupFile01"
-                        >{{uploadedFileNames.image1}}</label
-                      >
+                    <div class="">
+                      <div *ngIf="i == 0">
+                          <label>Logo/Image </label>
+                      </div>
+                       <div style="display: flex;">
+                         <div>
+                            <label [for]="item.name" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
+                            <input
+                            type="file"
+                            accept="image/*"
+                            style="display: none"
+                            [id]="item.name"
+                            
+                            (change)="uploadLogoImage($event.target.files,item.name,item.id)"
+                          /> 
+                         </div>
+                         <div style="width: 40px;" *ngIf="item.displayLoadingGif">
+                            <img src="../../../assets/img/loading.gif"/>
+                          </div>
+                         <div>
+                            <button class="btn btn-outlined" (click)="addImage(item.id)" *ngIf="i<3">+</button>
+                         </div> 
+                         <div>
+                            <button class="btn btn-outlined"  (click)="removeImage(item.id)">-</button>
+                         </div> 
+                        
+                       </div>
+                       <div *ngIf="item.displayFileName">
+                          <a href="#" (click)="stopDefault($event)" >{{item.fileName}}</a> 
+                          
+                              <!-- <button class="btn btn-outlined" *ngIf="i == 0" (click)="removeImage(item.id)">-</button> -->
+                           
+                       </div>
+                      
+                        
                      
                     </div>
                    
                   </div>
-                  <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
-                    <div class="custom-file form-group">
-                        <label style="margin-bottom: 80px;">Logo/Image 2 </label>
-                      <input
-                        type="file"
-                        accept="image.*"
-                        class="custom-file-input"
-                        id="inputGroupFile02"
-                        aria-describedby="inputGroupFileAddon02"
-                        (change)="uploadGSTCertificate($event.target.files,'image2')"
-                      />
-                      <label class="custom-file-label" for="inputGroupFile01"
-                        >{{uploadedFileNames.image2}}</label
-                      >
-                     
-                    </div>
-                   
-                  </div>
+                 
                   <div class="input-group col-md-4" *ngIf="fileError"></div>
                   <div class="input-group col-md-8" *ngIf="fileError">
                     <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
                   </div> 
-                </div>
-                <div class="row">
-                  <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
-                    <div class="custom-file form-group">
-                        <label style="margin-bottom: 80px;">Logo/Image 3</label>
-                      <input
-                        type="file"
-                        accept="image.*"
-                        class="custom-file-input"
-                        id="inputGroupFile02"
-                        aria-describedby="inputGroupFileAddon02"
-                        (change)="uploadGSTCertificate($event.target.files,'image3')"
-                      />
-                      <label class="custom-file-label" for="inputGroupFile01"
-                        >{{uploadedFileNames.image3}}</label
-                      >
-                     
-                    </div>
-                   
-                  </div>
-                  <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
-                    <div class="custom-file form-group">
-                        <label style="margin-bottom: 80px;">Logo/Image 4 </label>
-                      <input
-                        type="file"
-                        accept="image.*"
-                        class="custom-file-input"
-                        id="inputGroupFile02"
-                        aria-describedby="inputGroupFileAddon02"
-                        (change)="uploadGSTCertificate($event.target.files,'image4')"
-                      />
-                      <label class="custom-file-label" for="inputGroupFile01"
-                        >{{uploadedFileNames.image4}}</label
-                      >
-                     
-                    </div>
-                   
-                  </div>
-                  <div class="input-group col-md-4" *ngIf="fileError"></div>
-                  <div class="input-group col-md-8" *ngIf="fileError">
-                    <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
-                  </div> 
-                </div>
+                </div>                            
                 <div class="row">
                   
                   <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
@@ -434,9 +413,30 @@
                   </div> 
                 </div>
                 <div class="row" *ngIf="displayDesigner">
+                    <div class="flex-control-50">
+                        <div class="form-group" >
+                        
+                            <label>Content</label>
+                         
+                         <textarea formControlName='designcontent'  class="form-control" maxlength="250" placeholder="Description" (bulr)="contextValidation()"  [ngClass]="{'displayError': (this.orderForm.controls['designcontent'].touched && uploadedFileNames.contentValidation == false)}">
+  
+                         </textarea>
+                          
+                         
+                        
+                       
+                      </div>
+                    </div>
+                      
+                     
+                    </div>
+                    <div class="row" style="padding-left: 30%;">
+                      OR
+                    </div>
+                <div class="row" *ngIf="displayDesigner">
                   <div class="input-group col-md-8" style="padding-top: 30px;position: relative !important">
                     <div class="custom-file form-group">
-                        <label style="margin-bottom: 80px;">Content File </label>
+                        <!-- <label style="margin-bottom: 80px;">Content File </label>
                       <input
                         type="file"
                         accept="application/pdf,application/msword,
@@ -448,8 +448,17 @@
                       />
                       <label class="custom-file-label" for="inputGroupFile01"
                         >{{uploadedFileNames.content}}</label
-                      >
-                     
+                      > -->
+                      <label for="contentUpload" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
+                            <input
+                            type="file"
+                            accept="application/pdf,application/msword,
+                        application/vnd.openxmlformats-officedocument.wordprocessingml.document,image.*"
+                            style="display: none"
+                            id="contentUpload"
+                            
+                            (change)="uploadGSTCertificate($event.target.files,'content')"
+                          /> 
                     </div>
                    
                   </div>
@@ -462,30 +471,7 @@
                     <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
                   </div> 
                 </div>
-                <div class="row" *ngIf="displayDesigner">
-                  <div class="flex-control8">
-                      <div class="form-group" >
-                      
-                          <label>Content Data </label>
-                        <!-- <input
-                          type="text"
-                          class="form-control"
-                          placeholder="max 250 characters are allowed"
-                          formControlName='designcontent'
-                          maxlength="250"
-                        /> -->
-                       <textarea formControlName='designcontent'  class="form-control" maxlength="250" placeholder="Max limit 250 characters">
-
-                       </textarea>
-                        
-                       
-                      
-                     
-                    </div>
-                  </div>
-                    
-                   
-                  </div>
+                
                 <div class="row" *ngIf="displayDesigner">
                   <div class="flex-control5" >
                       <div class="form-group">
@@ -527,7 +513,8 @@
                     </div>
                     <div class="flex-controllabel" style="margin-left: 30%;">
                         <div class="form-group">
-                            <button type="button" class="btn btn-primary" (click)="proceedOrder(summary)" [disabled]="!(orderForm.valid && Servicable && uploadedFileNames.IsImageUploaded)" >Proceed</button>
+                            <!-- <button type="button" class="btn btn-primary" (click)="proceedOrder(summary)" [disabled]="!(orderForm.valid && Servicable)" >Proceed</button> -->
+                            <button type="button" class="btn btn-primary" (click)="proceedOrder(summary)">Proceed</button>
                           </div>
                       
                     </div>

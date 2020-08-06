@@ -171,6 +171,7 @@
                   <div class="rowCart">
                     <div class="col-shp-12 btnAling">
                       <app-razorpayments [paymentAmount]="userCart.finalPrice.calFinalTotal" (transactionStatus)="transactionUpdate($event)"></app-razorpayments>
+                      <span style="color:red" *ngIf="displayTranFail">Last Transaction is failed/Cancelled.Please retry Payment.</span>
                       <!-- <button class="btn btn-primary">Pay Now</button> -->
                     </div>
                   </div>

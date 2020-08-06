@@ -2,13 +2,14 @@ import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import { WindowRefService } from "src/app/services/window-ref.service";
 import { PrinterService } from "src/app/services/printer.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-razorpayments",
   templateUrl: "./razorpayments.component.html",
   styleUrls: ["./razorpayments.component.css"]
 })
 export class RazorpaymentsComponent implements OnInit {
-  @Input()paymentAmount:number;
+  @Input() paymentAmount: number;
   @Output() transactionStatus = new EventEmitter<{
     status: string;
     tranId: string;
@@ -16,7 +17,8 @@ export class RazorpaymentsComponent implements OnInit {
   constructor(
     private winRef: WindowRefService,
     private printer: PrinterService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router
   ) {}
 
   ngOnInit() {}
@@ -74,6 +76,13 @@ export class RazorpaymentsComponent implements OnInit {
             // modelRef.componentInstance.transactionId =  response.razorpay_payment_id;
             // modelRef.componentInstance.transactionStatus = "Successful";
             console.log(data);
+            // this.router.navigateByUrl("/ordersuccess").then(e => {
+            //   if (e) {
+            //     console.log("navigation successful");
+            //   } else {
+            //     console.log("navigation failed");
+            //   }
+            // });
           },
           err => {
             console.log(err);
@@ -82,6 +91,10 @@ export class RazorpaymentsComponent implements OnInit {
     };
     options.modal.ondismiss = () => {
       // handle the case when user closes the form while transaction is in progress
+      this.transactionStatus.emit({
+        status: "Transaction cancelled.",
+        tranId: null
+      });
       console.log("Transaction cancelled.");
     };
     const rzp = new this.winRef.nativeWindow.Razorpay(options);

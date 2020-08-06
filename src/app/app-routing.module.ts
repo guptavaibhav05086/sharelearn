@@ -30,6 +30,7 @@ import { HomelinkPageComponent } from "./mainsitecomponents/homelink-page/homeli
 import { SelectAddressComponent } from "./mainsitecomponents/select-address/select-address.component";
 import { OrderCartComponent } from "./mainsitecomponents/order-cart/order-cart.component";
 import { ReviewOrderComponent } from "./mainsitecomponents/review-order/review-order.component";
+import { DisplayMessagesComponent } from './mainsitecomponents/display-messages/display-messages.component'
 const routes: Routes = [
   {
     path: "designer",
@@ -72,6 +73,10 @@ const routes: Routes = [
       {
         path: "revieworder",
         component: ReviewOrderComponent
+      },
+      {
+        path: "ordersuccess",
+        component: DisplayMessagesComponent
       },
       {
         path: "selectAddress",

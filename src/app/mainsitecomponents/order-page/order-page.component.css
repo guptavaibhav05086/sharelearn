@@ -188,3 +188,15 @@ button.calendar:active {
 .col-xl-auto {
   position: inherit !important;
 }
+.errorMessage {
+  color: red;
+}
+/* .ng-invalid:not(form) {
+  border-left: 5px solid #a94442; 
+} */
+.displayError {
+  border-left: 5px solid #a94442;
+}
+.sideBorder {
+  border-left: 1px solid #dddddd;
+}

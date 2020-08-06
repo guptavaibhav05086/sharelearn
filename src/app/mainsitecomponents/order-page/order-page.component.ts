@@ -7,7 +7,7 @@ import { HelperService } from "src/app/services/helper.service";
 import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { delay } from "rxjs/internal/operators/delay";
-import { ValidatorsService } from 'src/app/services/validators.service';
+import { ValidatorsService } from "src/app/services/validators.service";
 @Component({
   selector: "app-order-page",
   templateUrl: "./order-page.component.html",
@@ -36,7 +36,7 @@ export class OrderPageComponent implements OnInit {
   fileError = false;
   isPhotoUrlValid: boolean;
   arrLnW = new Array<number>();
-  maxGap=0;
+  maxGap = 0;
   uploadedFileNames = {
     product: ".jpg,.png,.jpeg,pdf format",
     image1: ".jpg,.png,.jpeg,pdf format",
@@ -44,8 +44,19 @@ export class OrderPageComponent implements OnInit {
     image3: ".jpg,.png,.jpeg,pdf format",
     image4: ".jpg,.png,.jpeg,pdf format",
     content: "Content File in .doc,docx,.pdf format",
-    IsImageUploaded:false
+    IsImageUploaded: false,
+    contentValidation:false
+
   };
+  imageUpload=[{
+    id:1,
+    name:'image1',
+    displayLoadingGif:false,
+    displayFileName:false,
+    fileName:'',
+    fileSize:0,
+    fileError:false
+  }];
   orderPrice = {
     price: 0,
     deliveryFee: 0,
@@ -58,8 +69,8 @@ export class OrderPageComponent implements OnInit {
     totalDesignCost: 0,
     totalPrintCost: 0,
     deliveryDays: 0,
-    professiondesignerFees:0,
-    sourceFileFees:0
+    professiondesignerFees: 0,
+    sourceFileFees: 0
   };
   trackCartOrderCount = {
     design: 0,
@@ -79,6 +90,34 @@ export class OrderPageComponent implements OnInit {
     "8:00 PM -9:00 PM",
     "9:00 PM -10:00 PM"
   ];
+  addImage(i){
+    debugger;
+    if(this.imageUpload.length < 4){
+
+      let imgname = 'image' + (i+1);
+    this.imageUpload.push({
+      id:i+1,
+      name:imgname,
+      displayLoadingGif:false,
+      displayFileName:false,
+      fileName:'',
+      fileSize:0,
+      fileError:false
+    })
+    }
+    
+  }
+  removeImage(i){
+    if(i ==1){
+      let item = this.imageUpload.filter(item=>item.id == i)[0];
+      item.displayFileName=false;
+    }
+    else{
+      this.imageUpload=this.imageUpload.filter(item=>item.id != i);
+    }
+    
+
+  }
   validateFiles(name: string, file: File): boolean {
     if (name == "content") {
       if (
@@ -118,13 +157,72 @@ export class OrderPageComponent implements OnInit {
 
     return true;
   }
-  uploadGSTCertificate(images: FileList, name: string) {
-    debugger;
+  stopDefault(event){
+    event.preventDefault();
+  }
+  uploadLogoImage(images: FileList, name: string,itemId:number) {
+    //debugger;
     var result = "";
     var file;
     const formData = new FormData();
     var userImage = images.item(0);
-    debugger;
+    //debugger;
+    for (var i = 0; (file = images[i]); i++) {
+      //if the file is not an image, continue
+      if (!this.validateFiles(name, file)) {
+        alert("Not a Valid Image File");
+        return;
+      }
+      let reader = new FileReader();
+
+      reader.readAsDataURL(file);
+    }
+    formData.append(name, userImage, userImage.name);
+
+    //this.selectedFileName=userImage.name;
+    //this.spinner.show();
+    let item = this.imageUpload.filter(item=>item.id == itemId)[0];
+    item.fileName=userImage.name;
+    item.displayLoadingGif=true;
+    item.fileSize=userImage.size;
+    let totalSize=0;
+    this.imageUpload.forEach(item=> {
+      totalSize += item.fileSize
+    })
+    if(totalSize > 25000000){
+      alert('Total Size exceeds more then 25MB.Please upload smaller files')
+    }
+    this.custService.uploadUserImage(formData).subscribe(
+      data => {
+        //this.spinner.hide();
+        //debugger;
+        item.displayLoadingGif=false;
+        item.displayFileName=true;
+        console.log(data);
+        alert("File Uploaded Successfully");
+        this.uploadedFileNames[name] = data;
+        this.fileError = false;
+        this.uploadedFileNames.IsImageUploaded = true;
+        item.fileError=false;
+        //this.selectedFileName = userImage.name;
+      },
+      err => {
+        //this.spinner.hide();
+        //debugger;
+        item.displayLoadingGif=false;
+        item.fileError=true;
+        this.fileError = true;
+        alert("Issue in file upload please contact admin");
+      }
+    );
+  }
+  uploadGSTCertificate(images: FileList, name: string) {
+    //debugger;
+    var result = "";
+    var file;
+    const formData = new FormData();
+    var userImage = images.item(0);
+    //debugger;
     for (var i = 0; (file = images[i]); i++) {
       //if the file is not an image, continue
       if (!this.validateFiles(name, file)) {
@@ -143,19 +241,25 @@ export class OrderPageComponent implements OnInit {
     this.custService.uploadUserImage(formData).subscribe(
       data => {
         this.spinner.hide();
-        debugger;
+        //debugger;
         console.log(data);
         alert("File Uploaded Successfully");
         this.uploadedFileNames[name] = data;
         this.fileError = false;
-        this.uploadedFileNames.IsImageUploaded=true;
+        this.uploadedFileNames.IsImageUploaded = true;
         //this.selectedFileName = userImage.name;
+        if(name=="content"){
+          this.uploadedFileNames.contentValidation=true;
+        }
       },
       err => {
         this.spinner.hide();
-        debugger;
+        //debugger;
         this.fileError = true;
         alert("Issue in file upload please contact admin");
+        if(name=="content"){
+          this.uploadedFileNames.contentValidation=false;
+        }
       }
     );
   }
@@ -173,28 +277,35 @@ export class OrderPageComponent implements OnInit {
     sourceFile: new FormControl(false),
     sourceFileSpecs: new FormControl(false),
     pinCode: new FormControl("", [Validators.required]),
-    GSTNumber: new FormControl("",[ this._validator.patternValidation(
-      /^([0][1-9]|[1-2][0-9]|[3][0-5])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$/
-    )]),
+    GSTNumber: new FormControl("", [
+      this._validator.patternValidation(
+        /^([0][1-9]|[1-2][0-9]|[3][0-5])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$/
+      )
+    ]),
     BillingName: new FormControl(""),
-    purpose: new FormControl("",[Validators.required]),
+    purpose: new FormControl("", [Validators.required]),
     length: new FormControl(""),
     width: new FormControl(""),
     designcontent: new FormControl("")
   });
   addToCart() {
-    debugger;
-    let selItem = this.productList.filter(item=> item.productSubcategory == this.orderForm.controls["subCategory"].value)[0];
+    //debugger;
+    let selItem = this.productList.filter(
+      item =>
+        item.productSubcategory == this.orderForm.controls["subCategory"].value
+    )[0];
     if (
       this.checkCartValidation(this.orderForm.controls["type"].value) == false
     ) {
       return;
     }
-    if(this.checkTimeGapValidation(this.maxGap,selItem.SlotTimeGap)==false){
+    if (
+      this.checkTimeGapValidation(this.maxGap, selItem.SlotTimeGap) == false
+    ) {
       return;
     }
     let id = 1;
-    
+
     if (
       this.custService.getLocalStorageCart() != null &&
       this.custService.getLocalStorageCart().length > 0
@@ -208,14 +319,14 @@ export class OrderPageComponent implements OnInit {
       this.custService.deletItemFromCart(this.cartItemId);
       id = this.cartItemId;
     }
-     
+
     let cartItem = {
       id: id,
       type: this.orderForm.controls["type"].value,
       GSTNumber: this.orderForm.controls["GSTNumber"].value,
       BillingName: this.orderForm.controls["BillingName"].value,
       uploadedimages: this.uploadedFileNames,
-      content:this.orderForm.controls["designcontent"].value,
+      content: this.orderForm.controls["designcontent"].value,
       category: [
         {
           name: this.orderForm.controls["category"].value,
@@ -230,9 +341,8 @@ export class OrderPageComponent implements OnInit {
           meetingDetails: {
             //day: this.orderForm.controls["meetingDate"].value,
             slot: this.orderForm.controls["meetingSlot"].value,
-            timeGap:selItem.SlotTimeGap,
-            meetingDuration:selItem.meetingDuration
-            
+            timeGap: selItem.SlotTimeGap,
+            meetingDuration: selItem.meetingDuration
           },
           price: {
             price: this.orderPrice.price,
@@ -267,7 +377,7 @@ export class OrderPageComponent implements OnInit {
     subcat: [],
     displayQuant: [],
     dsiplaygsm: [],
-    displayOrientation:[]
+    displayOrientation: []
   };
   constructor(
     private admin: AdminService,
@@ -279,6 +389,14 @@ export class OrderPageComponent implements OnInit {
   ) {}
 
   proceedOrder($element: any) {
+    Object.keys(this.orderForm.controls).forEach(field => { // {1}
+      const control = this.orderForm.get(field);            // {2}
+      control.markAsTouched({ onlySelf: true });       // {3}
+    });
+    if(!this.orderForm.valid || this.Servicable == false || this.uploadedFileNames.contentValidation == false){
+      return;
+    }
+    debugger;
     this.displayMeetings = false;
     this.displaysummary = true;
     // if (this.orderForm.controls["type"].value == "Print Only") {
@@ -287,7 +405,7 @@ export class OrderPageComponent implements OnInit {
     // } else {
     //   this.displayMeetings = true;
     // }
-    debugger;
+    //debugger;
     this.calculatePrice(
       this.orderForm.controls["type"].value,
       this.orderForm.controls["subCategory"].value,
@@ -315,8 +433,7 @@ export class OrderPageComponent implements OnInit {
     this._helper.navigateToPath("/selectAddress");
   }
   resetControls() {
-    
-    this.orderPrice={
+    this.orderPrice = {
       price: 0,
       deliveryFee: 0,
       GST: 0,
@@ -328,8 +445,8 @@ export class OrderPageComponent implements OnInit {
       totalDesignCost: 0,
       totalPrintCost: 0,
       deliveryDays: 0,
-      professiondesignerFees:0,
-      sourceFileFees:0
+      professiondesignerFees: 0,
+      sourceFileFees: 0
     };
     this.orderForm.patchValue({
       category: "",
@@ -344,30 +461,45 @@ export class OrderPageComponent implements OnInit {
       professionDesigner: false,
       sourceFile: false
     });
-    
+
     this.displaySpecs = false;
     this.displayMeetings = false;
     this.displaysummary = false;
+    
+    Object.keys(this.orderForm.controls).forEach(field => { // {1}
+      const control = this.orderForm.get(field);   
+      control.markAsUntouched()         // {2}
+      //control.markAsTouched({ onlySelf: false });       // {3}
+    });
+    
   }
-  checkTimeGapValidation(maxGap,selItemGap){
-    debugger;
+  contextValidation(){
+    if(this.orderForm.controls["designcontent"].value !="" && this.orderForm.controls["designcontent"].value !=null){
+      this.uploadedFileNames.contentValidation=true;
+    }
+
+  }
+  checkTimeGapValidation(maxGap, selItemGap) {
+    //debugger;
     let cartList = this.custService.getLocalStorageCart();
     let calGap = selItemGap;
-    if(cartList !=null){
-      cartList.forEach(item=>{
-        let mD= item.category[0].meetingDetails;
-        calGap=calGap + mD.timeGap
+    if (cartList != null) {
+      cartList.forEach(item => {
+        let mD = item.category[0].meetingDetails;
+        calGap = calGap + mD.timeGap;
       });
     }
-    
-    if(calGap > maxGap){
-      alert("This Item can not be added to Cart because of meeting slot time constraints");
-      return false
+
+    if (calGap > maxGap) {
+      alert(
+        "This Item can not be added to Cart because of meeting slot time constraints"
+      );
+      return false;
     }
     return true;
   }
   checkCartValidation(category) {
-    debugger;
+    //debugger;
     let cartList = this.custService.getLocalStorageCart();
     let cartItemsType = null;
     let validateCount = 0;
@@ -391,7 +523,7 @@ export class OrderPageComponent implements OnInit {
           return false;
         }
       } else {
-        debugger;
+        //debugger;
         let validateOrder = {
           vDNP: 0,
           vDNPP: 0,
@@ -431,7 +563,7 @@ export class OrderPageComponent implements OnInit {
       }
     }
 
-    debugger;
+    //debugger;
     this.resetControls();
     this.selectedCategory = this.products.filter(
       item => item.category == category || item.category == "Design And Print"
@@ -466,7 +598,7 @@ export class OrderPageComponent implements OnInit {
       this.arrLnW.push(i);
     }
     this.route.queryParams.subscribe(params => {
-      debugger;
+      //debugger;
       console.log(params); // { order: "popular" }
       //this.cartItemId = params.itemId;
       if (params.itemId != undefined) {
@@ -484,9 +616,9 @@ export class OrderPageComponent implements OnInit {
         this.productList = data["productList"];
         this.products = data["products"];
         this.printPrice = data["printPrice"];
-        this.maxGap=data["maxGap"];
+        this.maxGap = data["maxGap"];
         console.log(data);
-        debugger;
+        //debugger;
         if (this.isEditOrder) {
           this.openEditForm(this.cartItemId);
           this.spinner.hide();
@@ -511,11 +643,14 @@ export class OrderPageComponent implements OnInit {
   }
 
   openEditForm(id) {
+    debugger;
     let cart = this.custService.getLocalStorageCart();
     let editItem = cart.filter(item => item.id == id);
     if (editItem != null) {
       this.showCategory(editItem[0].type);
+
       this.selectedProduct(editItem[0].category[0].name, null);
+
       let e = {
         target: {
           value: editItem[0].category[0].specs.size
@@ -536,17 +671,22 @@ export class OrderPageComponent implements OnInit {
         quantities: editItem[0].category[0].specs.quantity,
         pinCode: editItem[0].category[0].specs.pinCode
       });
+      this.selectedSubcategory(null);
+      this.orderForm.patchValue({
+        orientation: editItem[0].category[0].specs.orientation
+      });
       this.Servicable = true;
     }
   }
   selectedProduct(value, $element) {
-    debugger;
+    //debugger;
     this.checkedProduct = this.productList.filter(
       item => item.productName == value
     );
 
-    
-    this.resetControls();
+    if (!this.isEditOrder) {
+      this.resetControls();
+    }
 
     this.displaySpecs = true;
     if (this.checkedProduct.IsPriceInSqFt == "Yes") {
@@ -578,7 +718,6 @@ export class OrderPageComponent implements OnInit {
       this.proSpec.orientation.push({
         subcat: element.productSubcategory,
         orientation: element.orientation
-       
       });
       this.proSpec.quantities.push({
         size: element.productSize,
@@ -594,7 +733,7 @@ export class OrderPageComponent implements OnInit {
     this.proSpec.orientation = [...new Set(this.proSpec.orientation)];
     this.proSpec.quantities = [...new Set(this.proSpec.quantities)];
     this.proSpec.size = [...new Set(this.proSpec.size)];
-    this.proSpec.subcat=[...new Set(this.proSpec.subcat)];
+    this.proSpec.subcat = [...new Set(this.proSpec.subcat)];
 
     this.orderForm.patchValue({
       category: value
@@ -602,13 +741,21 @@ export class OrderPageComponent implements OnInit {
     console.log(this.proSpec);
     //delay(5000);
     //this.proSpec.displayQuant=this.proSpec.quantities.sp
-    this.scrollToElement($element);
+    if (!this.isEditOrder) {
+      this.scrollToElement($element);
+    }
   }
   selectedCustomizedSize() {}
   selectedSubcategory(event) {
     debugger;
-    let selproduct = this.productList.filter(item=> item.productSubcategory == this.orderForm.controls["subCategory"].value)[0];
-    if(this.checkTimeGapValidation(this.maxGap,selproduct.SlotTimeGap)==false){
+    let selproduct = this.productList.filter(
+      item =>
+        item.productSubcategory == this.orderForm.controls["subCategory"].value
+    )[0];
+    if (
+      !this.isEditOrder &&
+      this.checkTimeGapValidation(this.maxGap, selproduct.SlotTimeGap) == false
+    ) {
       return;
     }
     console.log(this.proSpec.quantities);
@@ -618,8 +765,10 @@ export class OrderPageComponent implements OnInit {
     let selItem = this.proSpec.subcat.filter(
       item => item.subcat == this.orderForm.controls["subCategory"].value
     )[0];
-    let selOrien = this.proSpec.orientation.filter(item=> item.subcat == this.orderForm.controls["subCategory"].value)[0];
-    this.proSpec.displayOrientation = selOrien.orientation.split(',');
+    let selOrien = this.proSpec.orientation.filter(
+      item => item.subcat == this.orderForm.controls["subCategory"].value
+    )[0];
+    this.proSpec.displayOrientation = selOrien.orientation.split(",");
     if (selItem.isPriceSqFt == true) {
       this.displayLenghtWidth = true;
       this.orderForm.patchValue({
@@ -634,20 +783,19 @@ export class OrderPageComponent implements OnInit {
     } else {
       this.displayLenghtWidth = false;
     }
-    debugger;
-    if(this.displayprinter == true){
+    //debugger;
+    if (this.displayprinter == true) {
       this.orderForm.patchValue({
-        orientation:"NA"
+        orientation: "NA"
       });
-
-    }else{
+    } else {
       this.orderForm.patchValue({
-        orientation:""
+        orientation: ""
       });
     }
   }
   selectedSize(e) {
-    debugger;
+    //debugger;
     let val = e.target.value;
     if (this.proSpec.quantities != null) {
       let quant = this.proSpec.quantities.filter(item => item.size == val)[0];
@@ -681,7 +829,7 @@ export class OrderPageComponent implements OnInit {
   }
 
   calculatePrice(pCat, pSubcat, orien, size) {
-    debugger;
+    //debugger;
     let prod;
     let selItem = this.proSpec.subcat.filter(item => item.subcat == pSubcat)[0];
 
@@ -738,24 +886,23 @@ export class OrderPageComponent implements OnInit {
   }
 
   calculatepriceDesign(item) {
-    debugger;
-    if(this.orderForm.controls["professionDesigner"].value == true){
-      this.orderPrice.professiondesignerFees=item.profDesignerFee;
+    //debugger;
+    if (this.orderForm.controls["professionDesigner"].value == true) {
+      this.orderPrice.professiondesignerFees = item.profDesignerFee;
+    } else {
+      this.orderPrice.professiondesignerFees = 0;
     }
-    else{
-      this.orderPrice.professiondesignerFees=0;
-    }
-    if(this.orderForm.controls["sourceFileSpecs"].value == true){
-      this.orderPrice.sourceFileFees=item.sourceFileFees;
-    }
-    else{
-      this.orderPrice.sourceFileFees=0;
+    if (this.orderForm.controls["sourceFileSpecs"].value == true) {
+      this.orderPrice.sourceFileFees = item.sourceFileFees;
+    } else {
+      this.orderPrice.sourceFileFees = 0;
     }
 
-    
-   
     let designCost =
-      item.DesignPrice + (item.DesignCommision / 100) * item.DesignPrice+item.profDesignerFee+item.sourceFileFees;
+      item.DesignPrice +
+      (item.DesignCommision / 100) * item.DesignPrice +
+      item.profDesignerFee +
+      item.sourceFileFees;
     let designGST = designCost * (item.DesignGST / 100);
     let totalDesignCost = designCost + designGST;
     this.orderPrice.designCost = designCost;
@@ -763,7 +910,7 @@ export class OrderPageComponent implements OnInit {
     this.orderPrice.totalDesignCost = totalDesignCost;
   }
   calculatepriceprint(item) {
-    debugger;
+    //debugger;
     let quant = this.orderForm.controls["quantities"].value;
     item = item.filter(i => i.paperGSM == this.orderForm.controls["GSM"].value);
     if (item != null && item.length > 0) {
@@ -791,7 +938,7 @@ export class OrderPageComponent implements OnInit {
     }
   }
   calculatepriceprintPerSqFt(item) {
-    debugger;
+    //debugger;
     let quant = this.orderForm.controls["quantities"].value;
     let selectedSqft =
       this.orderForm.controls["length"].value *
