@@ -1,5 +1,5 @@
 <div class="row" style="padding-top:50px">
-  <div class="col-md-8">
+  <div class="col-md-10">
     <div>
       <form [formGroup]="orderForm">
         <!-- Container for Order Type Selection -->
@@ -101,7 +101,7 @@
                               <input
                                 type="text"
                                 class="form-control"
-                                placeholder=""                         formControlName="type"                    disabled                                                
+                                placeholder=""                         formControlName="disableType"                    disabled                                                
                               />
                              
                               
@@ -115,7 +115,7 @@
                               <input
                                 type="text"
                                 class="form-control"
-                                placeholder="orientation"                   formControlName="category"                  disabled                                                        
+                                placeholder="orientation"                   formControlName="disableCat"                  disabled                                                        
                               />                           
                              
                             </div>
@@ -252,7 +252,7 @@
               </div>
               <div class="flex-control5">
                   <div class="form-group">
-                      <label>Industry Purpose * </label>
+                      <label>Industry * </label>
                       <input
                         type="text"
                         class="form-control"
@@ -328,9 +328,28 @@
                             </div>
                       </div> -->
                   <div class="input-group col-md-6" style="padding-top: 30px;position: relative !important" *ngIf="displayDesigner">
-                    <div class="custom-file form-group">
-                        <label style="margin-bottom: 80px;">Sample of Product you like </label>
-                      <input
+                    <div class=" form-group">
+                      <div style="display: flex;">
+                        <div>
+                            <label>Reference Image </label>
+                            <label for="productUpload" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
+                            <input
+                            type="file"
+                            accept="image/*"
+                            style="display: none"
+                            id="productUpload"
+                            
+                            (change)="uploadGSTCertificate($event.target.files,'product')"
+                          /> 
+                        </div>
+                        <div style="width: 40px;margin-top: 40px;" *ngIf="uploadedFileNames.displayLoadingProductGif">
+                            <img src="../../../assets/img/loading.gif"/>
+                          </div>
+                      </div>
+                        
+                     
+                        
+                      <!-- <input
                         type="file"
                         accept="image.*"
                         class="custom-file-input"
@@ -338,10 +357,10 @@
                         aria-describedby="inputGroupFileAddon02"
                         (change)="uploadGSTCertificate($event.target.files,'product')"
                       />
-                      <label class="custom-file-label" for="inputGroupFile01"
-                        >{{uploadedFileNames.product}}</label
-                      >
-                     
+                      
+                      > -->
+                      <a href="#" (click)="stopDefault($event)"    *ngIf="uploadedFileNames.IsproductRefUploaded"
+                      >{{uploadedFileNames.product}}</a>
                     </div>
                    
                   </div>
@@ -352,7 +371,7 @@
                 </div>
                 <div class="row" *ngFor="let item of imageUpload;let  i=index">
                   <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
-                    <div class="">
+                    <div class="form-group">
                       <div *ngIf="i == 0">
                           <label>Logo/Image </label>
                       </div>
@@ -418,7 +437,7 @@
                         
                             <label>Content</label>
                          
-                         <textarea formControlName='designcontent'  class="form-control" maxlength="250" placeholder="Description" (bulr)="contextValidation()"  [ngClass]="{'displayError': (this.orderForm.controls['designcontent'].touched && uploadedFileNames.contentValidation == false)}">
+                         <textarea formControlName='designcontent'  class="form-control" maxlength="250" placeholder="Description" (blur)="contextValidation()"  [ngClass]="{'displayError': (this.orderForm.controls['designcontent'].touched && uploadedFileNames.contentValidation == false)}">
   
                          </textarea>
                           
@@ -430,25 +449,13 @@
                       
                      
                     </div>
-                    <div class="row" style="padding-left: 30%;">
+                    <div class="row" style="padding-left: 25%;">
                       OR
                     </div>
                 <div class="row" *ngIf="displayDesigner">
-                  <div class="input-group col-md-8" style="padding-top: 30px;position: relative !important">
-                    <div class="custom-file form-group">
-                        <!-- <label style="margin-bottom: 80px;">Content File </label>
-                      <input
-                        type="file"
-                        accept="application/pdf,application/msword,
-                        application/vnd.openxmlformats-officedocument.wordprocessingml.document,image.*"
-                        class="custom-file-input"
-                        id="inputGroupFile02"
-                        aria-describedby="inputGroupFileAddon02"
-                        (change)="uploadGSTCertificate($event.target.files,'content')"
-                      />
-                      <label class="custom-file-label" for="inputGroupFile01"
-                        >{{uploadedFileNames.content}}</label
-                      > -->
+                  <div class="input-group col-md-8" style="padding-top: 30px;position: relative !important" style="display: flex;">
+                    <div class="form-group">
+                        
                       <label for="contentUpload" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
                             <input
                             type="file"
@@ -460,8 +467,13 @@
                             (change)="uploadGSTCertificate($event.target.files,'content')"
                           /> 
                     </div>
+                    <div style="width: 40px;" *ngIf="uploadedFileNames.displayLoadingContentGif">
+                        <img src="../../../assets/img/loading.gif"/>
+                      </div>
                    
                   </div>
+                  <a  href="#" (click)="stopDefault($event)" *ngIf="uploadedFileNames.IscontentUploaded" style="margin-bottom: 40px;"
+                  >{{uploadedFileNames.content}}</a>
                   <div class="input-group col-md-4" *ngIf="fileError"></div>
                   <div class="input-group col-md-8" *ngIf="fileError">
                     <span class="errorMessage" >File should of type doc,docx,pdf format.</span>
@@ -514,7 +526,8 @@
                     <div class="flex-controllabel" style="margin-left: 30%;">
                         <div class="form-group">
                             <!-- <button type="button" class="btn btn-primary" (click)="proceedOrder(summary)" [disabled]="!(orderForm.valid && Servicable)" >Proceed</button> -->
-                            <button type="button" class="btn btn-primary" (click)="proceedOrder(summary)">Proceed</button>
+                            <button type="button" class="btn btn-primary" *ngIf="displayeproceed" (click)="proceedOrder(summary)">Proceed</button>
+                            <button type="button" class="btn btn-primary" *ngIf="displayeproceed == false" (click)="editSpecification()">Edit</button>
                           </div>
                       
                     </div>
@@ -713,7 +726,7 @@
                 <div class="row">
                     <div class="flex-control-50">
                         <div class="form-group">
-                         <input type="text" class="form-control" placeholder="GST Number(optional)" formControlName="GSTNumber" style="text-transform:uppercase;" maxlength="12"/>
+                         <input type="text" class="form-control" placeholder="GST Number(optional)" formControlName="GSTNumber" style="text-transform:uppercase;" maxlength="15"/>
                          <span
                          class="errorMessage"
                          *ngIf="
@@ -748,10 +761,19 @@
 
                    
                 </div>
-                <div class="row" *ngIf="orderPrice.deliveryDays>0">
+                <div class="row" >
                     <div class="flex-control-50">
-                        <div class="form-group" style="color:green">
-                           Expected Delivery in {{orderPrice.deliveryDays}} Days
+                        <div class="form-group" style="color:green" *ngIf="orderPrice.deliveryDays>0">
+                            Post design, Expected Delivery in {{orderPrice.deliveryDays}} Days
+                            
+                           
+                          </div>
+                         
+                    </div>
+                    <div class="flex-control-3" style="margin-left: 3%;">
+                        <div class="form-group" style="color:green;">
+                            <button type="button" class="btn btn-link" (click)="openPriceDescription($event)">Detailed Pricing</button>
+                           <!-- <a herf="#" (click)="openPriceDescription($event)">Detailed Pricing</a> -->
                             
                            
                           </div>

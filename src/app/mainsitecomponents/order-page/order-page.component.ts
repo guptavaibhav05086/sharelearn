@@ -8,6 +8,8 @@ import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { delay } from "rxjs/internal/operators/delay";
 import { ValidatorsService } from "src/app/services/validators.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import {PriceDescriptionComponent } from '../price-description/price-description.component'
 @Component({
   selector: "app-order-page",
   templateUrl: "./order-page.component.html",
@@ -34,6 +36,7 @@ export class OrderPageComponent implements OnInit {
   isEditOrder = false;
   cartItemId = 0;
   fileError = false;
+  displayeproceed=true;
   isPhotoUrlValid: boolean;
   arrLnW = new Array<number>();
   maxGap = 0;
@@ -45,7 +48,11 @@ export class OrderPageComponent implements OnInit {
     image4: ".jpg,.png,.jpeg,pdf format",
     content: "Content File in .doc,docx,.pdf format",
     IsImageUploaded: false,
-    contentValidation:false
+    contentValidation:false,
+    IsproductRefUploaded:false,
+    displayLoadingProductGif:false,
+    displayLoadingContentGif:false,
+    IscontentUploaded:false
 
   };
   imageUpload=[{
@@ -64,6 +71,7 @@ export class OrderPageComponent implements OnInit {
     Total: 0,
     designCost: 0,
     printCost: 0,
+    baseDesignPrice:0,
     designGST: 0,
     printGST: 0,
     totalDesignCost: 0,
@@ -192,6 +200,7 @@ export class OrderPageComponent implements OnInit {
     if(totalSize > 25000000){
       alert('Total Size exceeds more then 25MB.Please upload smaller files')
     }
+    
     this.custService.uploadUserImage(formData).subscribe(
       data => {
         //this.spinner.hide();
@@ -203,12 +212,15 @@ export class OrderPageComponent implements OnInit {
         this.uploadedFileNames[name] = data;
         this.fileError = false;
         this.uploadedFileNames.IsImageUploaded = true;
+        
         item.fileError=false;
         //this.selectedFileName = userImage.name;
       },
       err => {
         //this.spinner.hide();
         //debugger;
+       
+        this.uploadedFileNames.displayLoadingProductGif=false;
         item.displayLoadingGif=false;
         item.fileError=true;
         this.fileError = true;
@@ -236,8 +248,17 @@ export class OrderPageComponent implements OnInit {
     formData.append(name, userImage, userImage.name);
 
     //this.selectedFileName=userImage.name;
-    this.spinner.show();
-
+    //this.spinner.show();
+    if(name=="product"){
+      this.uploadedFileNames.displayLoadingProductGif=true
+    }else{
+      this.uploadedFileNames.displayLoadingProductGif=false;
+    }
+    if(name=="content"){
+      this.uploadedFileNames.displayLoadingContentGif=true
+    }else{
+      this.uploadedFileNames.displayLoadingContentGif=false;
+    }
     this.custService.uploadUserImage(formData).subscribe(
       data => {
         this.spinner.hide();
@@ -250,7 +271,15 @@ export class OrderPageComponent implements OnInit {
         //this.selectedFileName = userImage.name;
         if(name=="content"){
           this.uploadedFileNames.contentValidation=true;
+          this.uploadedFileNames.displayLoadingContentGif=false;
+          this.uploadedFileNames.IscontentUploaded=true;
         }
+        if(name=="product"){
+          this.uploadedFileNames.IsproductRefUploaded=true;
+        }else{
+          this.uploadedFileNames.IsproductRefUploaded=false;
+        }
+        this.uploadedFileNames.displayLoadingProductGif=false;
       },
       err => {
         this.spinner.hide();
@@ -259,7 +288,15 @@ export class OrderPageComponent implements OnInit {
         alert("Issue in file upload please contact admin");
         if(name=="content"){
           this.uploadedFileNames.contentValidation=false;
+          this.uploadedFileNames.displayLoadingContentGif=false;
+          this.uploadedFileNames.IscontentUploaded=false;
         }
+        if(name="product"){
+          this.uploadedFileNames.IsproductRefUploaded=false;
+        }else{
+          this.uploadedFileNames.IsproductRefUploaded=true;
+        }
+        this.uploadedFileNames.displayLoadingProductGif=false;
       }
     );
   }
@@ -286,10 +323,17 @@ export class OrderPageComponent implements OnInit {
     purpose: new FormControl("", [Validators.required]),
     length: new FormControl(""),
     width: new FormControl(""),
-    designcontent: new FormControl("")
+    designcontent: new FormControl(""),
+    disableCat:new FormControl(""),
+    disableType:new FormControl(""),
   });
   addToCart() {
     //debugger;
+    let id = 1;
+    if (this.isEditOrder) {
+      this.custService.deletItemFromCart(this.cartItemId);
+      id = this.cartItemId;
+    }
     let selItem = this.productList.filter(
       item =>
         item.productSubcategory == this.orderForm.controls["subCategory"].value
@@ -304,7 +348,7 @@ export class OrderPageComponent implements OnInit {
     ) {
       return;
     }
-    let id = 1;
+   
 
     if (
       this.custService.getLocalStorageCart() != null &&
@@ -315,10 +359,7 @@ export class OrderPageComponent implements OnInit {
       ];
       id = cartLastItems.id + 1;
     }
-    if (this.isEditOrder) {
-      this.custService.deletItemFromCart(this.cartItemId);
-      id = this.cartItemId;
-    }
+    
 
     let cartItem = {
       id: id,
@@ -327,6 +368,7 @@ export class OrderPageComponent implements OnInit {
       BillingName: this.orderForm.controls["BillingName"].value,
       uploadedimages: this.uploadedFileNames,
       content: this.orderForm.controls["designcontent"].value,
+      industry: this.orderForm.controls["purpose"].value,
       category: [
         {
           name: this.orderForm.controls["category"].value,
@@ -385,9 +427,22 @@ export class OrderPageComponent implements OnInit {
     private _helper: HelperService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private _validator: ValidatorsService
+    private _validator: ValidatorsService,
+    private modalService: NgbModal
   ) {}
 
+  openPriceDescription(){
+    //e.preventDefault();
+    let modelRef = this.modalService.open(PriceDescriptionComponent);
+    modelRef.componentInstance.orderPrice = this.orderPrice;
+    modelRef.result.then(data => {
+      debugger;
+      console.log(data);
+      
+    });
+  }
+
+  
   proceedOrder($element: any) {
     Object.keys(this.orderForm.controls).forEach(field => { // {1}
       const control = this.orderForm.get(field);            // {2}
@@ -414,7 +469,20 @@ export class OrderPageComponent implements OnInit {
     );
     console.log(this.orderPrice);
     this.scrollToElement($element);
+    this.orderForm.disable();
+    this.orderForm.controls["BillingName"].enable();
+    this.orderForm.controls["GSTNumber"].enable();
+    this.displayeproceed=false;
     //TODO Calculate Price method
+  }
+  editSpecification(){
+    this.orderForm.enable();
+    this.displayeproceed=true;
+    this.displaysummary=false;
+    this.orderForm.controls['disableCat'].disable();
+    this.orderForm.controls['disableType'].disable();
+    
+
   }
   dateSet() {
     if (
@@ -430,7 +498,13 @@ export class OrderPageComponent implements OnInit {
     //alert("Date set is called");
   }
   checkout() {
-    this._helper.navigateToPath("/selectAddress");
+    this.addToCart();
+    if(this.orderForm.controls["type"].value =="Design Only"){
+      this._helper.navigateToPath("/cart");
+    }else{
+      this._helper.navigateToPath("/selectAddress");
+    }
+    
   }
   resetControls() {
     this.orderPrice = {
@@ -446,7 +520,8 @@ export class OrderPageComponent implements OnInit {
       totalPrintCost: 0,
       deliveryDays: 0,
       professiondesignerFees: 0,
-      sourceFileFees: 0
+      sourceFileFees: 0,
+      baseDesignPrice:0,
     };
     this.orderForm.patchValue({
       category: "",
@@ -557,6 +632,8 @@ export class OrderPageComponent implements OnInit {
     return true;
   }
   showCategory(category) {
+    this.orderForm.enable();
+    this.editSpecification();
     if (!this.isEditOrder) {
       if (this.checkCartValidation(category) == false) {
         return;
@@ -669,17 +746,27 @@ export class OrderPageComponent implements OnInit {
         size: editItem[0].category[0].specs.size,
         GSM: editItem[0].category[0].specs.paperGSM,
         quantities: editItem[0].category[0].specs.quantity,
-        pinCode: editItem[0].category[0].specs.pinCode
+        pinCode: editItem[0].category[0].specs.pinCode,
+        designcontent: editItem[0].content,
+        purpose: editItem[0].industry
       });
       this.selectedSubcategory(null);
       this.orderForm.patchValue({
         orientation: editItem[0].category[0].specs.orientation
       });
       this.Servicable = true;
+      this.uploadedFileNames.contentValidation=true;
     }
   }
   selectedProduct(value, $element) {
     //debugger;
+    //disableCat:new FormControl(""),
+    this.orderForm.patchValue({
+      disableCat : this.orderForm.controls['category'].value,
+      disableType:this.orderForm.controls['type'].value
+    });
+    this.orderForm.controls['disableCat'].disable();
+    this.orderForm.controls['disableType'].disable();
     this.checkedProduct = this.productList.filter(
       item => item.productName == value
     );
@@ -886,7 +973,7 @@ export class OrderPageComponent implements OnInit {
   }
 
   calculatepriceDesign(item) {
-    //debugger;
+    debugger;
     if (this.orderForm.controls["professionDesigner"].value == true) {
       this.orderPrice.professiondesignerFees = item.profDesignerFee;
     } else {
@@ -897,17 +984,18 @@ export class OrderPageComponent implements OnInit {
     } else {
       this.orderPrice.sourceFileFees = 0;
     }
-
-    let designCost =
-      item.DesignPrice +
-      (item.DesignCommision / 100) * item.DesignPrice +
-      item.profDesignerFee +
-      item.sourceFileFees;
+    this.orderPrice.baseDesignPrice = item.DesignPrice +
+    (item.DesignCommision / 100) * item.DesignPrice ;
+    let designCost =this.orderPrice.baseDesignPrice
+      +
+      this.orderPrice.professiondesignerFees 
+      +
+      this.orderPrice.sourceFileFees;
     let designGST = designCost * (item.DesignGST / 100);
     let totalDesignCost = designCost + designGST;
     this.orderPrice.designCost = designCost;
-    this.orderPrice.designGST = designGST;
-    this.orderPrice.totalDesignCost = totalDesignCost;
+    this.orderPrice.designGST =Math.round(designGST) ;
+    this.orderPrice.totalDesignCost = Math.round(totalDesignCost);
   }
   calculatepriceprint(item) {
     //debugger;
@@ -926,9 +1014,9 @@ export class OrderPageComponent implements OnInit {
         let gstPercentage = item[0].PrintGST / 100;
         let pGST = pCost * gstPercentage;
         let totalPrintCost = pCost + pGST;
-        this.orderPrice.printGST = pGST;
-        this.orderPrice.printCost = pCost;
-        this.orderPrice.totalPrintCost = totalPrintCost;
+        this.orderPrice.printGST = Math.round(pGST);
+        this.orderPrice.printCost = Math.round(pCost);
+        this.orderPrice.totalPrintCost = Math.round(totalPrintCost);
         this.orderPrice.deliveryDays = itemPrice.deliveryDays;
       }
     } else {

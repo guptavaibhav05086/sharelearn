@@ -52,7 +52,8 @@ import { OrderCartComponent } from "./mainsitecomponents/order-cart/order-cart.c
 import { ReviewOrderComponent } from "./mainsitecomponents/review-order/review-order.component";
 import { BookMeetingComponent } from './mainsitecomponents/book-meeting/book-meeting.component';
 import { RazorpaymentsComponent } from './mainsitecomponents/razorpayments/razorpayments.component';
-import { DisplayMessagesComponent } from './mainsitecomponents/display-messages/display-messages.component'
+import { DisplayMessagesComponent } from './mainsitecomponents/display-messages/display-messages.component';
+import { PriceDescriptionComponent } from './mainsitecomponents/price-description/price-description.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,7 +95,8 @@ import { DisplayMessagesComponent } from './mainsitecomponents/display-messages/
     ReviewOrderComponent,
     BookMeetingComponent,
     RazorpaymentsComponent,
-    DisplayMessagesComponent
+    DisplayMessagesComponent,
+    PriceDescriptionComponent
   ],
   imports: [
     BrowserModule,

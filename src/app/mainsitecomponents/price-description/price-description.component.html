@@ -1,0 +1,82 @@
+<div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" style="PADDING-LEFT: 25%;"> Price Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+          <div aria-hidden="true">&times;</div>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div >
+            <div class="priceflex">
+                <div style="font-weight: bold;" class="price">Base Design Cost</div>
+                <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.baseDesignPrice}}</div>
+            </div>
+            <hr/>
+            <div class="priceflex">
+                    <div style="font-weight: bold;" class="price">Professional Design Fees</div>
+                    <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.professiondesignerFees}}</div>
+                </div>
+                <hr/>
+                <div class="priceflex">
+                        <div style="font-weight: bold;" class="price">Source File Fees</div>
+                        <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.sourceFileFees}}</div>
+                    </div>
+                    <hr/>
+                    <div class="priceflex">
+                            <div style="font-weight: bold;" class="price">Total Design Fees</div>
+                            <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.designCost}}</div>
+                        </div>
+                        <hr/>
+                        <div class="priceflex">
+                                <div style="font-weight: bold;" class="price"> Design GST</div>
+                                <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.designGST}}</div>
+                            </div>
+                            <hr/>
+                            <div class="priceflex">
+                                    <div style="font-weight: bold;" class="price">Design Cost +  GST</div>
+                                    <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.totalDesignCost}}</div>
+                                </div>
+                                <hr/>
+                                <div class="priceflex">
+                                        <div style="font-weight: bold;" class="price">Print Cost </div>
+                                        <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.printCost}}</div>
+                                    </div>
+                                    <hr/>
+                                    <div class="priceflex">
+                                            <div style="font-weight: bold;" class="price">Print GST </div>
+                                            <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.printGST}}</div>
+                                        </div>
+                                        <hr/>
+                                        <div class="priceflex">
+                                                <div style="font-weight: bold;" class="price">Total Print +  GST Cost</div>
+                                                <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.totalPrintCost}}</div>
+                                            </div>
+                                            <hr/>
+                                            <div class="priceflex">
+                                                    <div style="font-weight: bold;" class="price">Total  Cost</div>
+                                                    <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.price}}</div>
+                                                </div>
+                                                <hr/>
+                                                <div class="priceflex">
+                                                        <div style="font-weight: bold;" class="price">Total  GST</div>
+                                                        <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.GST}}</div>
+                                                    </div>
+                                                    <hr/>
+                                                    <div class="priceflex">
+                                                            <div style="font-weight: bold;" class="price">Final Price + GST</div>
+                                                            <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.Total}}</div>
+                                                        </div>
+                                                        <hr/>
+        </div>
+      
+      
+      </div>
+      
+      
+      <ngx-spinner
+        bdColor="rgba(51, 51, 51, 0.8)"
+        size="default"
+        type="ball-spin-clockwise"
+      >
+        <p style="color: white">Please Wait.</p>
+      </ngx-spinner>
+      
