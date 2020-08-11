@@ -56,4 +56,30 @@ export class AdminService {
       this.login.getAuthHeader()
     );
   }
+  getDiscounts(){
+    let url = `${environment.baseUrl}${environment.getDiscounts}`;
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+
+  }
+  deleteDiscounts(id){
+    let url = `${environment.baseUrl}${environment.deleteDiscounts}`.replace("$Id",id);
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+
+  }
+  setDiscounts(discount){
+    let url = `${environment.baseUrl}${environment.updateDiscounts}`;
+    return this._httpclient.post(
+      url,
+      discount,
+      this.login.getAuthHeader()
+    );
+  }
 }

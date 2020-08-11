@@ -6,18 +6,29 @@
             <div class="rowCart">
                   
               <div class="col-shp-7">
-              
+                  <div class="categoryTitle">Meeting Details
+                      <span style="margin-left:3%;font-size: small;">
+                        <a href="#" (click)="changeSlot($event)">Change Slot</a>
+                    </span>  
+                    </div>
+                    <div class="rowCart itemCart col-shp-8" style="padding-left: 5%;display:block">
+                            <div>Date : <b> {{selectedSlot.selectedDate}}</b></div>
+        
+                           <div>Time :<b> {{selectedSlot.selectedTime}}</b></div> 
+                            
+                           <div>Duration:<b> {{selectedSlot.duration}} Mins</b> </div>  
+                    </div>
                 <div class="categoryTitle">Delivery Address 
                   <span style="margin-left:3%;font-size: small;">
                     <a routerLink="/selectAddress">Change Address</a>
                 </span>  
                 </div>
                 <div class="rowCart itemCart col-shp-8" style="padding-left: 5%;">
-                        <p>Vaibhav Gupta,</p>
+                        <p>{{selectedAddress.userName}},</p>
     
-                       <p>93/3, Rayasandra Village, Main Road Sarjapura Hobli, Anekal, Choodasandra, Bengaluru, Karnataka 560099, India</p> 
+                       <p>{{selectedAddress.address}}</p> 
                         
-                       <p>Contact: 8884615431 </p>  
+                       <p>Contact: {{selectedAddress.phoneNumber}} </p>  
                 </div>
                 <div class="categoryTitle">Total Items ({{userCart.totalItems}})</div>
                 <hr />
@@ -44,7 +55,8 @@
                                     <p class="productDetails">
                                       <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total}}
                                     </p>
-                                    <p><button class="btn">Remove</button></p>
+                                    
+                                    <p><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary" (click)="editItem(item.id)">Edit</button></p>
                                   </div>
                                 </div>
                                 <div class="categoryTitle" *ngIf="userCart.displayDesignNPrint">Design and Print</div>
@@ -72,7 +84,7 @@
                                     </p>
                                     
                                    
-                                    <p><button class="btn">Remove</button></p>
+                                    <p><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary" (click)="editItem(item.id)">Edit</button></p>
                                   </div>
                                 </div>
                           
@@ -100,7 +112,7 @@
                                     </p>
                                     
                                    
-                                    <p><button class="btn">Remove</button></p>
+                                    <p><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary" (click)="editItem(item.id)">Edit</button></p>
                                   </div>
                                 </div>
                               <!-- <div class="rowCart itemCart">
@@ -170,7 +182,9 @@
                   <hr />
                   <div class="rowCart">
                     <div class="col-shp-12 btnAling">
-                      <app-razorpayments [paymentAmount]="userCart.finalPrice.calFinalTotal" (transactionStatus)="transactionUpdate($event)"></app-razorpayments>
+                      <app-razorpayments [paymentAmount]="userCart.finalPrice.calFinalTotal" [orderId]="razorPayOrderId" 
+                      (transactionStatus)="transactionUpdate($event)">
+                    </app-razorpayments>
                       <span style="color:red" *ngIf="displayTranFail">Last Transaction is failed/Cancelled.Please retry Payment.</span>
                       <!-- <button class="btn btn-primary">Pay Now</button> -->
                     </div>

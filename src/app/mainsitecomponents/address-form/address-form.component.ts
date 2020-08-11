@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+// import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { AddressRequest } from "src/app/Models/address-request";
 import { CustomerService } from "src/app/services/customer.service";
 import { ValidatorsService } from "src/app/services/validators.service";
@@ -9,18 +9,20 @@ import { ValidatorsService } from "src/app/services/validators.service";
   styleUrls: ["./address-form.component.css"]
 })
 export class AddressFormComponent implements OnInit {
+  @Output() addSave = new EventEmitter<boolean>();
   constructor(
-    public activeModal: NgbActiveModal,
+    // public activeModal: NgbActiveModal,
     private custService: CustomerService,
     private _validator: ValidatorsService
   ) {}
   userAddress = "";
   userPhone = "";
   contactPerson = "";
-  displaySaveButton = false;
+  displaySaveButton = true;
   invalidMobile = false;
   addressRequest: AddressRequest;
   @Input() editAddress;
+  @Input() formName;
   ngOnInit(): void {
     this.addressRequest = new AddressRequest();
     debugger;
@@ -29,6 +31,7 @@ export class AddressFormComponent implements OnInit {
       this.userPhone = this.editAddress.phoneNumber;
       this.contactPerson = this.editAddress.userName;
       this.addressRequest.AddressId = this.editAddress.addId;
+      this.addressRequest.address = this.editAddress.address;
     }
   }
   getAddress(place: any) {
@@ -40,6 +43,7 @@ export class AddressFormComponent implements OnInit {
 
     console.log(place.geometry.location.lat());
     console.log(place.geometry.location.lng());
+    this.displaySaveButton = false;
     //this.displaySaveButton = false;
   }
   validateMobile() {
@@ -50,9 +54,14 @@ export class AddressFormComponent implements OnInit {
       this.invalidMobile = true;
     } else {
       this.invalidMobile = false;
+      this.displaySaveButton = false;
     }
   }
+  Back() {
+    this.addSave.emit(false);
+  }
   saveAddress() {
+    debugger;
     if (
       this.userAddress == "" ||
       this.userPhone == "" ||
@@ -70,11 +79,13 @@ export class AddressFormComponent implements OnInit {
       data => {
         console.log(data);
         alert("Address saved successfully");
-        this.activeModal.close("closed");
+        this.addSave.emit(true);
+        //this.activeModal.close("closed");
       },
       err => {
         this.displaySaveButton = false;
         alert("Issue in saving address.Please try again");
+        this.addSave.emit(false);
         console.log(err);
       }
     );

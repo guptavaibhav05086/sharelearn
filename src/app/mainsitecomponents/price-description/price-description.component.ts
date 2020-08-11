@@ -8,6 +8,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PriceDescriptionComponent implements OnInit {
   @Input() orderPrice;
+  @Input()disDesig;
+  @Input() disPrinter;
 
   // orderPrice = {
   //   price: 0,

@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AddressFormComponent } from "../address-form/address-form.component";
+
 import { CustomerService } from "src/app/services/customer.service";
 import { AddressRequest } from "src/app/Models/address-request";
 import { NgxSpinnerService } from "ngx-spinner";
+import { HelperService } from "../../services/helper.service";
 @Component({
   selector: "app-select-address",
   templateUrl: "./select-address.component.html",
@@ -12,10 +14,13 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class SelectAddressComponent implements OnInit {
   addressList: Array<AddressRequest>;
   displayAddressList = [];
+  addFormName = "Add Address";
+  displayCreateForm = false;
   constructor(
     private modalService: NgbModal,
     private custService: CustomerService,
-    private spinnerService: NgxSpinnerService
+    private spinnerService: NgxSpinnerService,
+    private helper: HelperService
   ) {}
 
   ngOnInit(): void {
@@ -27,8 +32,12 @@ export class SelectAddressComponent implements OnInit {
     this.spinnerService.show();
     this.custService.getUserAddress(userId).subscribe(
       data => {
-        this.spinnerService.hide();
-        this.formatAddressResponse(data);
+        try {
+          this.formatAddressResponse(data);
+          this.spinnerService.hide();
+        } catch (error) {
+          this.spinnerService.hide();
+        }
       },
       err => {
         this.spinnerService.hide();
@@ -54,20 +63,34 @@ export class SelectAddressComponent implements OnInit {
         address: this.addressList[i].address,
         breakUp: disList,
         userName: this.addressList[i].userName,
-        phoneNumber: this.addressList[i].phoneNumber
+        phoneNumber: this.addressList[i].phoneNumber,
+        displayForm: false
       };
       this.displayAddressList.push(item);
     }
     console.log(this.displayAddressList);
   }
-  editAddress(item) {
-    const modalRef = this.modalService.open(AddressFormComponent, {
-      backdrop: "static"
-    });
-    modalRef.componentInstance.editAddress = item;
-    modalRef.result.then(result => {
+  addressCallBack(result, item) {
+    if (item == null) {
+      this.displayCreateForm = false;
+    } else {
+      item.displayForm = false;
+    }
+
+    if (result) {
       this.fetchAddress();
-    });
+    }
+  }
+  editAddress(item) {
+    item.displayForm = true;
+    this.addFormName = "Edit Address";
+    // const modalRef = this.modalService.open(AddressFormComponent, {
+    //   backdrop: "static"
+    // });
+    // modalRef.componentInstance.editAddress = item;
+    // modalRef.result.then(result => {
+    //   this.fetchAddress();
+    // });
   }
   deleteAddress(item) {
     var r = confirm("Press a button!");
@@ -92,13 +115,19 @@ export class SelectAddressComponent implements OnInit {
     // })
   }
   openAddressForm() {
-    const modalRef = this.modalService.open(AddressFormComponent, {
-      backdrop: "static"
-    });
-    //modalRef.componentInstance.name = "World";
-    modalRef.result.then(result => {
-      debugger;
-      this.fetchAddress();
-    });
+    this.displayCreateForm = true;
+    this.addFormName = "Create Address";
+    // const modalRef = this.modalService.open(AddressFormComponent, {
+    //   backdrop: "static"
+    // });
+    // //modalRef.componentInstance.name = "World";
+    // modalRef.result.then(result => {
+    //   debugger;
+    //   this.fetchAddress();
+    // });
+  }
+  setAddress(item) {
+    localStorage.setItem("selectedAddess", JSON.stringify(item));
+    this.helper.navigateToPath("/revieworder");
   }
 }

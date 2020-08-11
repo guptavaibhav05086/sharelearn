@@ -14,6 +14,7 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { ProductListsComponent } from './product-lists/product-lists.component';
 import { PrintRatesComponent } from './print-rates/print-rates.component';
 import { RegsiterProfilesComponent } from './regsiter-profiles/regsiter-profiles.component';
+import { DiscountFormComponent } from './discount-form/discount-form.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -25,7 +26,8 @@ import { RegsiterProfilesComponent } from './regsiter-profiles/regsiter-profiles
     ProductsFormsComponent,
     ProductListsComponent,
     PrintRatesComponent,
-    RegsiterProfilesComponent
+    RegsiterProfilesComponent,
+    DiscountFormComponent
   ],
   imports: [
     CommonModule,

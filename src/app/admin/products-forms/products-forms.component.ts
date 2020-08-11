@@ -36,7 +36,7 @@ export class ProductsFormsComponent implements OnInit {
     size: new FormControl("", [Validators.required]),
     paperGSM: new FormControl("", [Validators.required]),
     quantities: new FormControl(""),
-    classification: new FormControl("", [Validators.required]),
+    classification: new FormControl(""),
     productCode: new FormControl("", [Validators.required]),
     dprice: new FormControl(""),
     dCommission: new FormControl(""),

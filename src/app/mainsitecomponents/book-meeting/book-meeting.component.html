@@ -1,8 +1,8 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title" style="PADDING-LEFT: 25%;"> Book a Meeting Slot</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+    <h5 class="modal-title" id="modal-basic-title" style="PADDING-LEFT: 8%;font-size: 20px;"> Book a Meeting Slot for Live Designing</h5>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
       <span aria-hidden="true">&times;</span>
-    </button>
+    </button> -->
   </div>
   <div class="modal-body">
     <div
@@ -26,9 +26,9 @@
                     </div>
                     <div class="or-formcontrol flex-container">
                       
-                      <div class="flex-control8" style="margin-left: 20%;">
+                      <div class="flex-control8" style="margin-left: 10%;">
                           <div class="row">
-                              <p><span style="color:green;font-style: italic;">Next Slot is Avaliable after:</span> <span style="font-weight: bold;">{{meetingInfo.gap}} Hours</span></p>
+                              <!-- <p><span style="color:green;font-style: italic;">Next Slot is Avaliable after:</span> <span style="font-weight: bold;">{{meetingInfo.gap}} Hours</span></p> -->
                               <p><span style="color:green;font-style: italic;">Meeting Duration is :</span> <span style="font-weight: bold;">{{meetingInfo.duration}} Mins</span></p>
                           </div>
                         <div class="row">
@@ -69,7 +69,7 @@
                                 
   <div *ngIf="productform.controls['meetingSlot'].errors" class="small form-text text-danger">
     <div *ngIf="productform.controls['meetingSlot'].errors['required']">Select some time during lunchtime</div>
-    <div *ngIf="productform.controls['meetingSlot'].errors['tooLate']">Oh no, it's way too late</div>
+    <div *ngIf="productform.controls['meetingSlot'].errors['tooLate']">Oh No, it’s too late. Please select other date</div>
     <div *ngIf="productform.controls['meetingSlot'].errors['tooEarly']">It's a bit too early</div>
     <div *ngIf="productform.controls['meetingSlot'].errors['beforeTimegap']">Before the Minimum Time Gap</div>
                            </div>
@@ -78,8 +78,8 @@
                     </div>
                     <div class="row">
                                   
-                        <div class="flex-control3">
-                            <button class="btn btn-primary" (click)="slot()">Book Slot</button>
+                        <div class="flex-control3" style="padding-left: 25%;">
+                            <button class="btn btn-primary" (click)="slot()" [disabled]="!productform.valid">Book Slot</button>
                         </div>
                          
                     </div>

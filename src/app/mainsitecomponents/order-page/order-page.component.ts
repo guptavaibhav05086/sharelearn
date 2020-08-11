@@ -6,10 +6,11 @@ import { CustomerService } from "src/app/services/customer.service";
 import { HelperService } from "src/app/services/helper.service";
 import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
-import { delay } from "rxjs/internal/operators/delay";
 import { ValidatorsService } from "src/app/services/validators.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import {PriceDescriptionComponent } from '../price-description/price-description.component'
+import { TermsConditionsComponent} from '../terms-conditions/terms-conditions.component'
+import { Discounts } from 'src/app/Models/discounts';
 @Component({
   selector: "app-order-page",
   templateUrl: "./order-page.component.html",
@@ -38,8 +39,11 @@ export class OrderPageComponent implements OnInit {
   fileError = false;
   displayeproceed=true;
   isPhotoUrlValid: boolean;
+  discountPrice:Array<Discounts>;
   arrLnW = new Array<number>();
   maxGap = 0;
+  disbaleCheckout=false;
+  disableCart=false;
   uploadedFileNames = {
     product: ".jpg,.png,.jpeg,pdf format",
     image1: ".jpg,.png,.jpeg,pdf format",
@@ -50,6 +54,7 @@ export class OrderPageComponent implements OnInit {
     IsImageUploaded: false,
     contentValidation:false,
     IsproductRefUploaded:false,
+    displayErrororbutton:false,
     displayLoadingProductGif:false,
     displayLoadingContentGif:false,
     IscontentUploaded:false
@@ -78,7 +83,10 @@ export class OrderPageComponent implements OnInit {
     totalPrintCost: 0,
     deliveryDays: 0,
     professiondesignerFees: 0,
-    sourceFileFees: 0
+    sourceFileFees: 0,
+    discount:0,
+    discountPerc:0,
+    discountedTotal:0
   };
   trackCartOrderCount = {
     design: 0,
@@ -208,7 +216,7 @@ export class OrderPageComponent implements OnInit {
         item.displayLoadingGif=false;
         item.displayFileName=true;
         console.log(data);
-        alert("File Uploaded Successfully");
+        //alert("File Uploaded Successfully");
         this.uploadedFileNames[name] = data;
         this.fileError = false;
         this.uploadedFileNames.IsImageUploaded = true;
@@ -264,8 +272,9 @@ export class OrderPageComponent implements OnInit {
         this.spinner.hide();
         //debugger;
         console.log(data);
-        alert("File Uploaded Successfully");
-        this.uploadedFileNames[name] = data;
+        //alert("File Uploaded Successfully");
+        //this.uploadedFileNames[name] = data;
+        this.uploadedFileNames[name]=userImage.name;
         this.fileError = false;
         this.uploadedFileNames.IsImageUploaded = true;
         //this.selectedFileName = userImage.name;
@@ -276,6 +285,7 @@ export class OrderPageComponent implements OnInit {
         }
         if(name=="product"){
           this.uploadedFileNames.IsproductRefUploaded=true;
+          this.uploadedFileNames.displayErrororbutton=false;
         }else{
           this.uploadedFileNames.IsproductRefUploaded=false;
         }
@@ -326,9 +336,15 @@ export class OrderPageComponent implements OnInit {
     designcontent: new FormControl(""),
     disableCat:new FormControl(""),
     disableType:new FormControl(""),
+    tDesign:new FormControl(false),
+    tPrinter:new FormControl(false)
   });
+
   addToCart() {
     //debugger;
+    if(!this.acceptTerms()){
+      return;
+    }
     let id = 1;
     if (this.isEditOrder) {
       this.custService.deletItemFromCart(this.cartItemId);
@@ -381,7 +397,7 @@ export class OrderPageComponent implements OnInit {
             pinCode: this.orderForm.controls["pinCode"].value
           },
           meetingDetails: {
-            //day: this.orderForm.controls["meetingDate"].value,
+            day: this.minDate,
             slot: this.orderForm.controls["meetingSlot"].value,
             timeGap: selItem.SlotTimeGap,
             meetingDuration: selItem.meetingDuration
@@ -431,10 +447,41 @@ export class OrderPageComponent implements OnInit {
     private modalService: NgbModal
   ) {}
 
-  openPriceDescription(){
-    //e.preventDefault();
+  acceptTerms(){
+    if(this.displayprinter== true){
+      if(this.orderForm.controls['tPrinter'].value == false){
+        alert('Accept Terms and Conditions to proceed.');
+        return false;
+      }
+    }
+    if(this.displayDesigner ==true){
+      if(this.orderForm.controls['tDesign'].value == false){
+        alert('Accept Terms and Conditions to proceed.');
+        return false;
+      }
+    }
+return true;
+  }
+  openTermCondition(type,e){
+    e.preventDefault();
+    let modelRef = this.modalService.open(TermsConditionsComponent);
+    modelRef.componentInstance.type = type;
+    modelRef.result.then(data => {
+      debugger;
+      console.log(data);
+      
+    });
+  }
+  clearContentImage(){
+    this.uploadedFileNames.content="";
+
+  }
+  openPriceDescription(e){
+    e.preventDefault();
     let modelRef = this.modalService.open(PriceDescriptionComponent);
     modelRef.componentInstance.orderPrice = this.orderPrice;
+    modelRef.componentInstance.disDesig=this.displayDesigner;
+    modelRef.componentInstance.disPrinter=this.displayprinter;
     modelRef.result.then(data => {
       debugger;
       console.log(data);
@@ -444,11 +491,20 @@ export class OrderPageComponent implements OnInit {
 
   
   proceedOrder($element: any) {
+    debugger;
     Object.keys(this.orderForm.controls).forEach(field => { // {1}
       const control = this.orderForm.get(field);            // {2}
       control.markAsTouched({ onlySelf: true });       // {3}
     });
-    if(!this.orderForm.valid || this.Servicable == false || this.uploadedFileNames.contentValidation == false){
+    if(!this.orderForm.valid || this.Servicable == false || this.uploadedFileNames.contentValidation == false || ( this.displayDesigner && this.uploadedFileNames.IsproductRefUploaded == false)){
+      if(this.uploadedFileNames.IsproductRefUploaded == false){
+        this.uploadedFileNames.displayErrororbutton = true;
+      }
+      else{
+        this.uploadedFileNames.displayErrororbutton = false;
+      }
+
+      console.log(this.uploadedFileNames);
       return;
     }
     debugger;
@@ -472,6 +528,8 @@ export class OrderPageComponent implements OnInit {
     this.orderForm.disable();
     this.orderForm.controls["BillingName"].enable();
     this.orderForm.controls["GSTNumber"].enable();
+    this.orderForm.controls['tPrinter'].enable();
+    this.orderForm.controls['tDesign'].enable();
     this.displayeproceed=false;
     //TODO Calculate Price method
   }
@@ -498,6 +556,9 @@ export class OrderPageComponent implements OnInit {
     //alert("Date set is called");
   }
   checkout() {
+    if(!this.acceptTerms()){
+      return;
+    }
     this.addToCart();
     if(this.orderForm.controls["type"].value =="Design Only"){
       this._helper.navigateToPath("/cart");
@@ -522,6 +583,9 @@ export class OrderPageComponent implements OnInit {
       professiondesignerFees: 0,
       sourceFileFees: 0,
       baseDesignPrice:0,
+      discount:0,
+      discountPerc:0,
+      discountedTotal:0
     };
     this.orderForm.patchValue({
       category: "",
@@ -534,7 +598,9 @@ export class OrderPageComponent implements OnInit {
       quantities: "",
       meetingSlot: "",
       professionDesigner: false,
-      sourceFile: false
+      sourceFile: false,
+      purpose:"",
+      designcontent:""
     });
 
     this.displaySpecs = false;
@@ -632,6 +698,9 @@ export class OrderPageComponent implements OnInit {
     return true;
   }
   showCategory(category) {
+    if(this.displayeproceed == false){
+      return;
+    }
     this.orderForm.enable();
     this.editSpecification();
     if (!this.isEditOrder) {
@@ -649,8 +718,11 @@ export class OrderPageComponent implements OnInit {
       this.displayprinter = true;
       this.displayDesigner = false;
       this.Servicable = false;
+      this.uploadedFileNames.contentValidation=true;
+      
       if (category == "Design And Print") {
         this.displayDesigner = true;
+        this.uploadedFileNames.contentValidation=false;
       }
       this.orderForm.patchValue({
         pinCode: ""
@@ -694,7 +766,12 @@ export class OrderPageComponent implements OnInit {
         this.products = data["products"];
         this.printPrice = data["printPrice"];
         this.maxGap = data["maxGap"];
-        console.log(data);
+        this.discountPrice=data["discountList"];
+        debugger;
+        this.products.forEach(item=>{
+          item.isSelected=false;
+        });
+        console.log(this.products);
         //debugger;
         if (this.isEditOrder) {
           this.openEditForm(this.cartItemId);
@@ -759,17 +836,29 @@ export class OrderPageComponent implements OnInit {
     }
   }
   selectedProduct(value, $element) {
-    //debugger;
+    if(this.displayeproceed == false){
+      return;
+    }
+    debugger;
     //disableCat:new FormControl(""),
     this.orderForm.patchValue({
-      disableCat : this.orderForm.controls['category'].value,
-      disableType:this.orderForm.controls['type'].value
+      disableCat : value,
+      disableType:this.orderForm.controls['type'].value,
+      category:value
     });
     this.orderForm.controls['disableCat'].disable();
     this.orderForm.controls['disableType'].disable();
     this.checkedProduct = this.productList.filter(
       item => item.productName == value
     );
+    this.products.forEach(item=>{
+      if(item.value == value){
+        item.isSelected =true;
+      }
+      else{
+        item.isSelected=false;
+      }
+    })
 
     if (!this.isEditOrder) {
       this.resetControls();
@@ -970,8 +1059,30 @@ export class OrderPageComponent implements OnInit {
     this.orderPrice.price = Math.round(
       this.orderPrice.designCost + this.orderPrice.printCost
     );
-  }
+    debugger;
+    let totalWithoutDeliveryFees=(this.orderPrice.totalDesignCost +
+      this.orderPrice.totalPrintCost);
+    this.orderPrice.discountPerc=this.getDiscountDetails(totalWithoutDeliveryFees);
+      this.orderPrice.discount=Math.round((totalWithoutDeliveryFees) * (this.orderPrice.discountPerc/100)) ;
+        this.orderPrice.discountedTotal=totalWithoutDeliveryFees-this.orderPrice.discount + this.orderPrice.deliveryFee;
 
+        console.log(this.orderPrice);
+  }
+  getDiscountDetails(cartValue){
+    let discountPer=0;
+    let max=0;
+    this.discountPrice.forEach(element => {
+      let cVal=parseFloat(element.CartAmount);
+      if(cartValue >= cVal && cVal > max ){
+        discountPer=parseFloat( element.DiscountPercentage);
+        max=cVal;
+
+      }
+    });
+    return discountPer;
+    //this.dis
+
+  }
   calculatepriceDesign(item) {
     debugger;
     if (this.orderForm.controls["professionDesigner"].value == true) {

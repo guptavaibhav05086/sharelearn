@@ -200,3 +200,13 @@ button.calendar:active {
 .sideBorder {
   border-left: 1px solid #dddddd;
 }
+.selectedprod {
+  border: 1px solid grey;
+  box-shadow: 5px 10px;
+}
+.displayImageError {
+  color: #a94442 !important;
+}
+.displayBorderError {
+  color: 1px solid #a94442;
+}

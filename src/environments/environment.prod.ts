@@ -34,5 +34,8 @@ export const environment = {
   updateProdList: "/api/admin/updateproductslist",
   checkPincodes: "/api/admin/checkpincodes?pincode=$pincode",
   uploadOrderFiles: "/api/customer/uploadimage",
-  getRegisteredprofiles: "/api/admin/getregisteredprofiles"
+  getRegisteredprofiles: "/api/admin/getregisteredprofiles",
+  getDiscounts: "/api/admin/getDisountList",
+  updateDiscounts: "/api/admin/setDisountList",
+  deleteDiscounts: "/api/admin/deleteDisountList?Id=$Id"
 };

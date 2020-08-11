@@ -1,0 +1,97 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title" style="PADDING-LEFT: 35%;">
+    Product Form
+  </h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.close('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-user">
+          <div class="card-header">
+            <h5 class="card-title"></h5>
+            <!-- <button class="btn btn-primary"  (click)="editForm('personal')">Edit Profile</button> -->
+          </div>
+          <div class="card-body">
+            <form [formGroup]="productform" id="productform">
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>Cart Amount</label>
+
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="Cart Amount "
+                      formControlName="Pname"
+                      required
+                    />
+                    <span
+                      class="errorMessage"
+                      *ngIf="
+                        (productform.controls['Pname'].dirty ||
+                          productform.controls['Pname'].touched) &&
+                        productform.controls['Pname'].invalid &&
+                        productform.controls['Pname'].errors.required
+                      "
+                    >
+                      *Amount is required.
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-4 px-1">
+                  <div class="form-group">
+                    <label>Percentage</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="Percenatge of Discount"
+                      formControlName="preferenece"
+                      required
+                    />
+                  </div>
+                  <span
+                    class="errorMessage"
+                    *ngIf="
+                      (productform.controls['preferenece'].dirty ||
+                        productform.controls['preferenece'].touched) &&
+                      productform.controls['preferenece'].invalid &&
+                      productform.controls['preferenece'].errors.required
+                    "
+                  >
+                    *Percentage is required.
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- {{productform.valid && isTermsAccepted}} -->
+      <div class="update ml-auto mr-auto">
+        <button
+          type="button"
+          (click)="updateDiscount()"
+          [disabled]="!productform.valid"
+          class="btn btn-primary btn-round"
+        >
+          Submit
+        </button>
+      </div>
+      <span *ngIf="updateSuccess" style="color:green"
+        >Product Update successfully</span
+      >
+    </div>
+  </div>
+</div>

@@ -30,6 +30,7 @@ export class GoogleplacesComponent implements OnInit {
   queryWait: boolean;
 
   ngAfterViewInit() {
+    debugger;
     this.getPlaceAutocomplete();
   }
   private getPlaceAutocomplete() {
@@ -41,6 +42,7 @@ export class GoogleplacesComponent implements OnInit {
       }
     );
     google.maps.event.addListener(autocomplete, "place_changed", () => {
+      debugger;
       const place = autocomplete.getPlace();
       this.invokeEvent(place);
     });
@@ -51,7 +53,6 @@ export class GoogleplacesComponent implements OnInit {
     this.setAddress.emit(place);
   }
   addressChange() {
-    debugger;
     let elemt: any = document.getElementsByClassName("pac-container")[0];
     console.log(elemt);
     if (elemt != null && elemt != undefined) elemt.style.zIndex = 9999;

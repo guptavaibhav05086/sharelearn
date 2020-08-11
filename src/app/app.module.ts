@@ -53,7 +53,9 @@ import { ReviewOrderComponent } from "./mainsitecomponents/review-order/review-o
 import { BookMeetingComponent } from './mainsitecomponents/book-meeting/book-meeting.component';
 import { RazorpaymentsComponent } from './mainsitecomponents/razorpayments/razorpayments.component';
 import { DisplayMessagesComponent } from './mainsitecomponents/display-messages/display-messages.component';
-import { PriceDescriptionComponent } from './mainsitecomponents/price-description/price-description.component'
+import { PriceDescriptionComponent } from './mainsitecomponents/price-description/price-description.component';
+import { TermsConditionsComponent } from './mainsitecomponents/terms-conditions/terms-conditions.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -96,7 +98,9 @@ import { PriceDescriptionComponent } from './mainsitecomponents/price-descriptio
     BookMeetingComponent,
     RazorpaymentsComponent,
     DisplayMessagesComponent,
-    PriceDescriptionComponent
+    PriceDescriptionComponent,
+    TermsConditionsComponent,
+    
   ],
   imports: [
     BrowserModule,

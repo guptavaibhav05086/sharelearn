@@ -129,14 +129,15 @@ export class OrderCartComponent implements OnInit {
     console.log(this.userCart);
   }
   placeOrder() {
-    let modelRef = this.modalService.open(BookMeetingComponent, {
-      backdrop: "static"
-    });
-    modelRef.result.then(data => {
-      debugger;
-      console.log(data);
-      this.custService.setMeetingSlot(data);
-      this.helper.navigateToPath("/revieworder");
-    });
+    this.helper.navigateToPath("/selectAddress");
+    // let modelRef = this.modalService.open(BookMeetingComponent, {
+    //   backdrop: "static"
+    // });
+    // modelRef.result.then(data => {
+    //   debugger;
+    //   console.log(data);
+    //   this.custService.setMeetingSlot(data);
+    //   this.helper.navigateToPath("/revieworder");
+    // });
   }
 }

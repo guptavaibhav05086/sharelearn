@@ -107,7 +107,9 @@ export class CustomerService {
   setMeetingSlot(meetingSlot) {
     let existnCart = this.getLocalStorageCart();
     existnCart.forEach(item => {
-      item.category[0].meetingDetails.slot = meetingSlot;
+      item.category[0].meetingDetails.slot = meetingSlot.mSlot;
+      item.category[0].meetingDetails.day = meetingSlot.mDate;
+
     });
     this.itemsList = existnCart;
     console.log(this.itemsList);

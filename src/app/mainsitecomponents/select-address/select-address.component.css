@@ -21,7 +21,7 @@
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .colAddress {
-    width: 25%;
+    width: 30%;
     margin-left: 3%;
     /* box-shadow: 1px 1px 1px 1px grey; */
     margin-top: 50px;
@@ -32,7 +32,7 @@
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .colAddress {
-    width: 25%;
+    width: 30%;
     margin-left: 3%;
     /* box-shadow: 1px 1px 1px 1px grey; */
     margin-top: 50px;
@@ -43,8 +43,8 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   .colAddress {
-    width: 25%;
-    margin-left: 5%;
+    width: 30%;
+    margin-left: 3%;
     /* box-shadow: 1px 1px 1px 1px grey; */
     margin-top: 50px;
     font-weight: 400;
@@ -96,4 +96,12 @@
 }
 body > div.pac-container.pac-logo {
   z-index: 9999 !important ;
+}
+.editForm {
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px #888888;
+}
+.container {
+  margin-left: 5%;
 }

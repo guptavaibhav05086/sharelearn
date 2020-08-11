@@ -103,6 +103,66 @@
       </div>
     </div>
     <div class="row">
+        <div class="input-group col-md-6" style="padding-top: 30px;position: relative !important" >
+            <div class=" form-group">
+              <div style="display: flex;">
+                <div>
+                    <label>Product Image </label>
+                    <label for="productUpload" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
+                    <input
+                    type="file"
+                    accept="image/*"
+                    style="display: none"
+                    id="productUpload"
+                    
+                    (change)="uploadGSTCertificate($event.target.files,'product')"
+                  /> 
+                </div>
+                <div style="width: 40px;margin-top: 40px;" *ngIf="uploadedFileNames.displayLoadingProductGif">
+                    <img src="../../../assets/img/loading.gif"/>
+                  </div>
+              </div>
+                
+             
+                
+              
+              <a href="#" (click)="stopDefault($event)"    *ngIf="uploadedFileNames.IsproductRefUploaded"
+              >{{uploadedFileNames.product}}</a>
+            </div>
+           
+          </div>
+    </div>
+    <div class="row">
+        <div class="input-group col-md-6" style="padding-top: 30px;position: relative !important" >
+            <div class=" form-group">
+              <div style="display: flex;">
+                <div>
+                    <label>Product Icon </label>
+                    <label for="contentUpload" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
+                    <input
+                    type="file"
+                    accept="image/*"
+                    style="display: none"
+                    id="contentUpload"
+                    
+                    (change)="uploadGSTCertificate($event.target.files,'image1')"
+                  /> 
+                </div>
+                <div style="width: 40px;margin-top: 40px;" *ngIf="uploadedFileNames.displayLoadingContentGif">
+                    <img src="../../../assets/img/loading.gif"/>
+                  </div>
+              </div>
+                
+             
+                
+              
+              <a href="#" (click)="stopDefault($event)"    *ngIf="uploadedFileNames.IscontentUploaded"
+              >{{uploadedFileNames.image1}}</a>
+            </div>
+           
+          </div>
+    </div>
+    <div class="row">
         <!-- {{productform.valid && isTermsAccepted}} -->
         <div class="update ml-auto mr-auto">
           <button

@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 })
 export class RazorpaymentsComponent implements OnInit {
   @Input() paymentAmount: number;
+  @Input() orderId: any;
   @Output() transactionStatus = new EventEmitter<{
     status: string;
     tranId: string;
@@ -26,12 +27,13 @@ export class RazorpaymentsComponent implements OnInit {
   createRzpayOrder(amount) {
     debugger;
     console.log(amount);
-    this.printer.generateOrderId(this.paymentAmount).subscribe(
-      data => {
-        this.payWithRazor(data);
-      },
-      err => {}
-    );
+    this.payWithRazor(this.orderId);
+    // this.printer.generateOrderId((this.paymentAmount * 100)).subscribe(
+    //   data => {
+    //     this.payWithRazor(data);
+    //   },
+    //   err => {}
+    // );
   }
 
   payWithRazor(val) {
@@ -85,6 +87,10 @@ export class RazorpaymentsComponent implements OnInit {
             // });
           },
           err => {
+            this.transactionStatus.emit({
+              status: "Failure",
+              tranId: null
+            });
             console.log(err);
           }
         );

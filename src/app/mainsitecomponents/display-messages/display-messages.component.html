@@ -1,7 +1,22 @@
 <div
   style="height: 580px;background-color: white;
 text-align: center;color:green;font-size: x-large;"
+  *ngIf="!displayError"
 >
   Your Transaction is successful.Please use this Transaction Id
   {{ transactionsId }} for your future reference.
+</div>
+<div
+  style="height: 580px;background-color: white;
+text-align: center;color:red;font-size: large;"
+  *ngIf="displayError"
+>
+  <p>Your Last Transaction Failed or Cancelled.</p>
+  <p>
+    If any amount is deducted from your card/account,it will be reverted back in
+    3-5 Business days.
+  </p>
+  <p>
+    <a href="#" (click)="back($event)">Click here</a> to go back to order page
+  </p>
 </div>

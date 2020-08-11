@@ -5,6 +5,8 @@ import { ProductsFormsComponent } from "../products-forms/products-forms.compone
 import { ProductListsComponent } from "../product-lists/product-lists.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgxSpinnerService } from "ngx-spinner";
+import { Discounts } from "src/app/Models/discounts";
+import { DiscountFormComponent } from "../discount-form/discount-form.component";
 @Component({
   selector: "app-products",
   templateUrl: "./products.component.html",
@@ -14,6 +16,7 @@ export class ProductsComponent implements OnInit {
   private gridApi;
   frameworkComponents: any;
   productLists: any;
+  discountLists: Discounts;
   columnDefs = [
     {
       headerName: "Id",
@@ -153,6 +156,18 @@ export class ProductsComponent implements OnInit {
       filter: true
     },
     {
+      headerName: "Icon",
+      field: "productIcon",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "Image",
+      field: "productImage",
+      sortable: true,
+      filter: true
+    },
+    {
       headerName: "Category",
       field: "category",
       sortable: true,
@@ -167,7 +182,42 @@ export class ProductsComponent implements OnInit {
       }
     }
   ];
-
+  colDefDisList = [
+    {
+      headerName: "Discount Id",
+      field: "DiscountId",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "CartAmount",
+      field: "CartAmount",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "DiscountPercentage",
+      field: "DiscountPercentage",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "Edit",
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        onClick: this.editdiscountPrice.bind(this),
+        label: "Edit"
+      }
+    },
+    {
+      headerName: "Delete",
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        onClick: this.deleteDiscout.bind(this),
+        label: "Delete"
+      }
+    }
+  ];
   rowData: any;
   printPrice: any;
   constructor(
@@ -199,6 +249,7 @@ export class ProductsComponent implements OnInit {
         this.rowData = data["productList"];
         this.productLists = data["products"];
         this.printPrice = data["printPrice"];
+        this.discountLists = data["discountList"];
       },
       err => {
         this.spinner.hide();
@@ -255,5 +306,38 @@ export class ProductsComponent implements OnInit {
     //this.modalService.editForm
     //alert()
   }
-  editprintPrice(e) {}
+  deleteDiscout(e) {
+    let result = confirm("Do you want to delete the product");
+    if (result) {
+      this.admin.deleteDiscounts(e.rowData.DiscountId).subscribe(item => {
+        console.log(item);
+        this.fetchProductsData();
+      });
+    }
+    //DiscountId
+  }
+  creatediscountPrice() {
+    const modelRef = this.modalService.open(DiscountFormComponent, {
+      backdrop: "static"
+    });
+
+    modelRef.componentInstance.editForm = false;
+    modelRef.componentInstance.item = null;
+
+    modelRef.result.then(data => {
+      this.fetchProductsData();
+    });
+  }
+  editdiscountPrice(e) {
+    const modelRef = this.modalService.open(DiscountFormComponent, {
+      backdrop: "static"
+    });
+
+    modelRef.componentInstance.editForm = true;
+    modelRef.componentInstance.item = e.rowData;
+
+    modelRef.result.then(data => {
+      this.fetchProductsData();
+    });
+  }
 }

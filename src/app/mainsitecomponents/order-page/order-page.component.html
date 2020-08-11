@@ -51,7 +51,7 @@
             </h3>
           </div>
           <div class="or-formcontrol flex-container">
-            <div class="flex-control-radio" *ngFor="let item of selectedCategory">
+            <!-- <div class="flex-control-radio" *ngFor="let item of selectedCategory">
               <input
                 class=""
                 type="radio"
@@ -64,7 +64,25 @@
               <label class="form-check-label" for="category">{{
                 item.value
               }}</label>
-            </div>
+            </div> -->
+            <div class="flex-control-radio" *ngFor="let item of selectedCategory;let i=index">
+                <input
+                  class=""
+                  type="radio"
+                  
+                  id="inlineRadio1"
+                  [value]="item.value"
+                  (change)="selectedProduct(item.value,specs)"
+                  formControlName="category"
+                  style="visibility: hidden;"
+                />
+                <label class="form-check-label" style="cursor: pointer"  [for]="i">
+                    <img [src]="item.productIcon" (click)="selectedProduct(item.value,specs)" [alt]="item.value" [ngClass]="{'selectedprod':item.isSelected}"/>
+                  </label>
+                <!-- <label class="form-check-label" [for]="i">
+                  <img src="../../../assets/img/DIcon.PNG" (click)="selectedProduct(item.value,specs)"/>
+                </label> -->
+              </div>
           </div>
         </div>
 
@@ -115,7 +133,7 @@
                               <input
                                 type="text"
                                 class="form-control"
-                                placeholder="orientation"                   formControlName="disableCat"                  disabled                                                        
+                                placeholder=""                   formControlName="disableCat"                  disabled                                                        
                               />                           
                              
                             </div>
@@ -144,7 +162,7 @@
                               class="form-control"
                               placeholder="state"                         formControlName="subCategory"             (change)="selectedSubcategory($event)"     [ngClass]="{'displayError': (this.orderForm.controls['subCategory'].touched && this.orderForm.controls['subCategory'].invalid)}"                                                  
                             >
-                            <option>Select</option>
+                            <option disabled value="">Select</option>
                             <option *ngFor="let item of proSpec.subcat" [value]="item.subcat">
                               {{item.subcat}}
                             </option>
@@ -161,7 +179,7 @@
                               class="form-control"
                               placeholder="orientation"                   formControlName="orientation"               [ngClass]="{'displayError': (this.orderForm.controls['orientation'].touched && this.orderForm.controls['orientation'].invalid)}"                                                           
                             >
-                            <option>Select</option>
+                            <option disabled value="">Select</option>
                             <option *ngFor="let item of proSpec.displayOrientation" [value]="item">
                               {{item}}
                             </option>
@@ -177,7 +195,7 @@
                               class="form-control"
                               placeholder="Sub Category"                   (change)="selectedSize($event)"              formControlName="size"                       [ngClass]="{'displayError': (this.orderForm.controls['size'].touched && this.orderForm.controls['size'].invalid)}"                                         
                             >
-                            <option>Select</option>
+                            <option disabled value="">Select</option>
                             <option *ngFor="let item of proSpec.size" [value]="item">
                               {{item}}
                             </option>
@@ -193,7 +211,7 @@
                             class="form-control"
                             placeholder="Sub Category"                  formControlName="length"                       [ngClass]="{'displayError': (this.orderForm.controls['length'].touched && this.orderForm.controls['length'].invalid)}"                                           
                           >
-                          <option>Select</option>
+                          <option disabled value="">Select</option>
                           <option *ngFor="let item of arrLnW" [value]="item">
                             {{item}}
                           </option>
@@ -209,7 +227,7 @@
                           class="form-control"
                           placeholder="Sub Category"                    formControlName="width"                        [ngClass]="{'displayError': (this.orderForm.controls['width'].touched && this.orderForm.controls['width'].invalid)}"                                       
                         >
-                        <option>Select</option>
+                        <option disabled value="">Select</option>
                         <option *ngFor="let item of arrLnW" [value]="item">
                           {{item}}
                         </option>
@@ -225,7 +243,7 @@
                         class="form-control"
                         placeholder="quantities"                    formControlName="GSM"                            [ngClass]="{'displayError': (this.orderForm.controls['GSM'].touched && this.orderForm.controls['GSM'].invalid)}"                                           
                       >
-                      <option>Select</option>
+                      <option disabled value="">Select</option>
                       <option *ngFor="let item of proSpec.dsiplaygsm" [value]="item.gsm">
                         {{item.gsm}}
                       </option>
@@ -242,7 +260,7 @@
                         class="form-control"
                         placeholder="quantities"                   formControlName="quantities"                      [ngClass]="{'displayError': (this.orderForm.controls['quantities'].touched && this.orderForm.controls['quantities'].invalid)}"                                                        
                       >
-                      <option>Select</option>
+                      <option disabled value="">Select</option>
                       <option *ngFor="let item of proSpec.displayQuant" [value]="item">
                         {{item}}
                       </option>
@@ -331,8 +349,8 @@
                     <div class=" form-group">
                       <div style="display: flex;">
                         <div>
-                            <label>Reference Image </label>
-                            <label for="productUpload" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
+                            <label [ngClass]="{'displayImageError': uploadedFileNames.displayErrororbutton}">Reference Image* </label>
+                            <label for="productUpload" class="btn btn-primary btn-block btn-outlined" style="width:400px" [ngClass]="{'displayBorderError': uploadedFileNames.displayErrororbutton}">UPLOAD</label>
                             <input
                             type="file"
                             accept="image/*"
@@ -361,6 +379,9 @@
                       > -->
                       <a href="#" (click)="stopDefault($event)"    *ngIf="uploadedFileNames.IsproductRefUploaded"
                       >{{uploadedFileNames.product}}</a>
+                      <!-- <div *ngIf="uploadedFileNames.displayErrororbutton" class="displayImageError">
+                        "Please Upload the reference Image"
+                      </div> -->
                     </div>
                    
                   </div>
@@ -420,7 +441,7 @@
                   
                   <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
                     <div class="custom-file form-group">
-                        <label style="margin-bottom: 80px;color:green;font-style: italic;">*For more files or format, you can send directly to allotted designer on e-mail </label>
+                        <label style="margin-bottom: 80px;color:green;font-style: italic;">*For more files or formats, please email to allotted graphic designer </label>
                      
                      
                     </div>
@@ -435,7 +456,7 @@
                     <div class="flex-control-50">
                         <div class="form-group" >
                         
-                            <label>Content</label>
+                            <label>Content*</label>
                          
                          <textarea formControlName='designcontent'  class="form-control" maxlength="250" placeholder="Description" (blur)="contextValidation()"  [ngClass]="{'displayError': (this.orderForm.controls['designcontent'].touched && uploadedFileNames.contentValidation == false)}">
   
@@ -449,7 +470,7 @@
                       
                      
                     </div>
-                    <div class="row" style="padding-left: 25%;">
+                    <div class="row" style="padding-left: 25%;" *ngIf="displayDesigner">
                       OR
                     </div>
                 <div class="row" *ngIf="displayDesigner">
@@ -466,14 +487,21 @@
                             
                             (change)="uploadGSTCertificate($event.target.files,'content')"
                           /> 
+                         
                     </div>
                     <div style="width: 40px;" *ngIf="uploadedFileNames.displayLoadingContentGif">
                         <img src="../../../assets/img/loading.gif"/>
                       </div>
-                   
+                   <div>
+                      <button class="btn btn-outlined" (click)="clearContentImage()">-</button>
+                   </div>
                   </div>
-                  <a  href="#" (click)="stopDefault($event)" *ngIf="uploadedFileNames.IscontentUploaded" style="margin-bottom: 40px;"
-                  >{{uploadedFileNames.content}}</a>
+                  <div class="input-group col-md-8">
+                      <a  href="#" (click)="stopDefault($event)" *ngIf="uploadedFileNames.IscontentUploaded" style="margin-bottom: 40px;"
+                      >{{uploadedFileNames.content}}</a>
+                     
+                  </div>
+                 
                   <div class="input-group col-md-4" *ngIf="fileError"></div>
                   <div class="input-group col-md-8" *ngIf="fileError">
                     <span class="errorMessage" >File should of type doc,docx,pdf format.</span>
@@ -493,14 +521,28 @@
                         </div>
                     
                   </div>
+                  <div style="width: 5%;
+                  margin-top: -17px;
+                  margin-left: -65px;">
+                      <button type="button" class="btn btn-outline-secondary mr-2" placement="top" ngbTooltip="Source files are original files that can be edited or resized for future use. Without source file, it will be an image for current use">
+                          <i class="fa fa-question-circle fa-lg"></i>
+                        </button>
+                  </div>
                   <div class="flex-control5" >
                       <div class="form-group">
                           <input type="checkbox" formControlName="professionDesigner" />
                          
-                         <label style="margin-left: 20px;">Illustration Design</label>
+                         <label style="margin-left: 20px;">I want Illustration Design</label>
                         </div>
+                        
                     
                   </div>
+                  <div style="width:2%;margin-top: -15px;
+                        margin-left: -15px;">
+                            <button type="button" class="btn btn-outline-secondary mr-2" placement="top" ngbTooltip="Illustration designs are visual explanation of your concept specially made on Adobe Illustrator which will definitely shoutout your product.">
+                                <i class="fa fa-question-circle fa-lg"></i>
+                              </button>
+                        </div>
                  
                  
               </div>
@@ -627,7 +669,7 @@
                       </div>
                       <div class="flex-control3 price-margin" >
                           <div class="form-group">
-                              <label style="font-size: 18px;font-weight:700;">Price Details</label>                   
+                              <label style="font-size: 18px;font-weight:700;">Price Summary</label>                   
                               <hr/>        
                              
                               
@@ -675,21 +717,23 @@
                           
                     </div>
 
+                   
                     <div class="flex-control3 price-margin">
-                        <div class="form-group" style="display: flex;">
-                            <div class="flex-controllabel">
-                                <label style="font-size: 14px;font-weight:bold;">Delivery Fees: </label> 
-                            </div>
-                              <div class="flex-controlPrice">
-                                  <label>
-                                      &#x20B9; {{this.orderPrice.deliveryFee}}
-                                  </label>
-                              </div>
-                           
+                      <div class="form-group" style="display: flex;">
+                        <div class="flex-controllabel">
+                            <label style="font-size: 14px;font-weight:bold;">GST: </label> 
+                        </div>
+                          <div class="flex-controlPrice">
+                              <label>
+                                  &#x20B9; {{this.orderPrice.GST}}
+                              </label>
                           </div>
-                          <hr>
-                          
-                    </div>
+                        
+                         
+                        </div>
+                        <hr/>
+                        
+                  </div>
                 </div>
                 <div class="row">
                     <div class="flex-control-50">
@@ -704,25 +748,28 @@
                           </div>
                          
                     </div>
-                    <div class="flex-control3 price-margin">
-                        <div class="form-group" style="display: flex;">
-                          <div class="flex-controllabel">
-                              <label style="font-size: 14px;font-weight:bold;">GST: </label> 
+                    
+                   <!-- Deliver fees add here -->
+                   <div class="flex-control3 price-margin">
+                    <div class="form-group" style="display: flex;">
+                        <div class="flex-controllabel">
+                            <label style="font-size: 14px;font-weight:bold;">Discount: </label> 
+                        </div>
+                          <div class="flex-controlPrice">
+                              <label>
+                                -  &#x20B9; {{this.orderPrice.discount}}
+                              </label>
                           </div>
-                            <div class="flex-controlPrice">
-                                <label>
-                                    &#x20B9; {{this.orderPrice.GST}}
-                                </label>
-                            </div>
-                          
-                           
-                          </div>
-                          <hr/>
-                          
-                    </div>
+                       
+                      </div>
+                      <hr/>
+                      
+                </div>
 
                    
+                   
                 </div>
+                
                 <div class="row">
                     <div class="flex-control-50">
                         <div class="form-group">
@@ -742,47 +789,104 @@
                           </div>
                          
                     </div>
-                    
                     <div class="flex-control3 price-margin">
-                        <div class="form-group" style="display: flex;">
-                            <div class="flex-controllabel">
-                                <label style="font-size: 14px;font-weight:bold;">Total: </label> 
+                      <div class="form-group" style="display: flex;">
+                          <div class="flex-controllabel">
+                              <label style="font-size: 14px;font-weight:bold;">Delivery Fees: </label> 
+                          </div>
+                            <div class="flex-controlPrice">
+                                <label>
+                                    &#x20B9; {{this.orderPrice.deliveryFee}}
+                                </label>
                             </div>
-                              <div class="flex-controlPrice">
-                                  <label>
-                                      &#x20B9; {{this.orderPrice.Total}}
-                                  </label>
-                              </div>
-                           
-                          </div>
-                          <hr/>
-                          
-                    </div>
-
-                   
-                </div>
-                <div class="row" >
-                    <div class="flex-control-50">
-                        <div class="form-group" style="color:green" *ngIf="orderPrice.deliveryDays>0">
-                            Post design, Expected Delivery in {{orderPrice.deliveryDays}} Days
-                            
-                           
-                          </div>
                          
-                    </div>
-                    <div class="flex-control-3" style="margin-left: 3%;">
-                        <div class="form-group" style="color:green;">
-                            <button type="button" class="btn btn-link" (click)="openPriceDescription($event)">Detailed Pricing</button>
-                           <!-- <a herf="#" (click)="openPriceDescription($event)">Detailed Pricing</a> -->
-                            
-                           
-                          </div>
-                         
-                    </div>
+                        </div>
+                        <hr>
+                        
+                  </div>
                     
 
                    
                 </div>
+                <div class="row">
+                  <div class="flex-control-50" style="visibility:hidden;">
+                      <div class="form-group">
+                      Fake data
+                         
+                        </div>
+                       
+                  </div>
+                  <!-- Discoutnt Goes Here -->
+                  <div class="flex-control3 price-margin">
+                    <div class="form-group" style="display: flex;">
+                        <div class="flex-controllabel">
+                            <label style="font-size: 14px;font-weight:bold;">Total: </label> 
+                        </div>
+                          <div class="flex-controlPrice">
+                              <label>
+                                  &#x20B9; {{this.orderPrice.discountedTotal}}
+                              </label>
+                          </div>
+                       
+                      </div>
+                      <hr/>
+                      
+                </div>
+
+                 
+              </div>
+                <!-- Detailed pricing -->
+                <div class="row" >
+                  <div class="flex-control-50">
+                      <div class="form-group" style="color:green" *ngIf="orderPrice.deliveryDays>0">
+                          Post design, Expected Delivery in {{orderPrice.deliveryDays}} Days
+                          
+                         
+                        </div>
+                       
+                  </div>
+                  <div class="flex-control-3" style="margin-left: 3%;">
+                      <div class="form-group" style="color:green;">
+                          <!-- <button type="button" class="btn btn-link" (click)="openPriceDescription()">Detailed Pricing</button> -->
+                         <a href="#" (click)="openPriceDescription($event)"><span ><u style="color:blue">Detailed Pricing</u></span></a>
+                          
+                          
+                         
+                        </div>
+                       
+                  </div>
+                  
+
+                 
+              </div>
+               <!-- Terms and conditions -->
+               <div class="row" >
+                <div class="flex-control-50">
+                  <div class="" *ngIf="displayDesigner">
+                    <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tDesign">
+                    <label for="checkbox1" class="checkboxLabel" style="font-size: large;color: black;padding-left: 20px;">
+                   Designer <a href="#" (click)="openTermCondition('designer',$event)">
+                     <span ><u style="color:blue">Terms and Conditons</u></span> 
+                   </a>
+                  </label>
+                </div>
+                     
+                </div>
+                <div class="flex-control-3" style="margin-left: 3%;">
+                  <div class="" *ngIf="displayprinter">
+                    <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tPrinter">
+                    <label for="checkbox1" class="checkboxLabel" style="font-size: large;color: black;padding-left: 20px;">
+                   Printer <a href="#" (click)="openTermCondition('Printer',$event)">
+                     <span ><u style="color:blue">Terms and Conditons</u></span> 
+                   </a>
+                  </label>
+                </div>
+                     
+                </div>
+                
+
+               
+            </div>
                 <div class="row">
                     <div class="flex-control-50">
                         <div class="form-group">

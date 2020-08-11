@@ -86,7 +86,7 @@ export class BookMeetingComponent implements OnInit {
       month: date.getMonth() + 1,
       day: date.getUTCDate()
     };
-    this.maxDate={
+    this.maxDate = {
       year: date.getFullYear(),
       month: date.getMonth() + 1,
       day: date.getUTCDate() + 1
@@ -122,10 +122,23 @@ export class BookMeetingComponent implements OnInit {
 
   validateDate() {
     debugger;
-    let val = this.productform.controls["meetingSlot"].value();
-  }
-  slot(){
-    this.activeModal.close(this.productform.controls['meetingSlot'].value);
+    //let val = this.productform.controls["meetingSlot"].value.minute;
+    this.time.minute = 30;
+    this.productform.patchValue({
+      meetingSlot: this.time
+    });
 
+    alert(
+      "Slots are only avaliable as the intreval of 30 mins.Please use button only to choose the slot"
+    );
+  }
+  slot() {
+    let meetingDetails = {
+      mDate: this.model,
+      mSlot: this.productform.controls["meetingSlot"].value,
+      duration: this.meetingInfo.duration
+    };
+    this.activeModal.close(meetingDetails);
+    // this.activeModal.close(this.productform.controls['meetingSlot'].value);
   }
 }

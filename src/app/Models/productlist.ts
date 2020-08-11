@@ -11,6 +11,8 @@ export class Productlist {
   public quantities: string;
   public productPrice: string;
   public productImage: any;
+  public productIcon: any;
+
   public price: string;
   public productDescription: string;
   public producPreference: number;

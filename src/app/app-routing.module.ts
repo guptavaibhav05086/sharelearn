@@ -75,7 +75,7 @@ const routes: Routes = [
         component: ReviewOrderComponent
       },
       {
-        path: "ordersuccess",
+        path: "orderstatus",
         component: DisplayMessagesComponent
       },
       {
