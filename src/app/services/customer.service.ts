@@ -36,8 +36,28 @@ export class CustomerService {
     ]
   };
   itemsList = [];
+  discountedPrice;
+  cartpriceDetails;
   constructor(private _httpclient: HttpClient, private login: LoginService) {}
 
+  getDiscountPriceDetails(){
+    return this.discountedPrice;
+  }
+  getDiscountPercentage(cartValue){
+    let discountPer=0;
+    let max=0;
+    this.discountedPrice.forEach(element => {
+      let cVal=parseFloat(element.CartAmount);
+      if(cartValue >= cVal && cVal > max ){
+        discountPer=parseFloat( element.DiscountPercentage);
+        max=cVal;
+
+      }
+    });
+    return discountPer;
+    //this.dis
+
+  }
   updateAddressRequest(updateAddress) {
     return this._httpclient.post(
       `${environment.baseUrl}${environment.addUserAddress}`,

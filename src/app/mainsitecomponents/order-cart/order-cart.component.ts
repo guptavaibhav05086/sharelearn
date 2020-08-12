@@ -4,6 +4,7 @@ import { HelperService } from "../../services/helper.service";
 import { Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
+import { AdminService } from "src/app/services/admin.service";
 
 @Component({
   selector: "app-order-cart",
@@ -22,7 +23,9 @@ export class OrderCartComponent implements OnInit {
       calPrice: 0,
       calDelivery: 0,
       calGST: 0,
-      calFinalTotal: 0
+      calFinalTotal: 0,
+      calDiscount: 0,
+      calDiscountedTotal: 0
     },
     totalItems: 0
   };
@@ -30,11 +33,23 @@ export class OrderCartComponent implements OnInit {
     private custService: CustomerService,
     private router: Router,
     private modalService: NgbModal,
-    private helper: HelperService
+    private helper: HelperService,
+    private admin: AdminService
   ) {}
 
   ngOnInit(): void {
-    this.loadCart();
+    this.admin.getProducts().subscribe(
+      data => {
+        //this.discountPrice=data["discountList"];
+        this.custService.discountedPrice = data["discountList"];
+        console.log(this.custService.discountedPrice);
+        debugger;
+        this.loadCart();
+        //debugger;
+      },
+      err => {}
+    );
+    // this.loadCart();
   }
   resetCart() {
     this.userCart = {
@@ -48,7 +63,9 @@ export class OrderCartComponent implements OnInit {
         calPrice: 0,
         calDelivery: 0,
         calGST: 0,
-        calFinalTotal: 0
+        calFinalTotal: 0,
+        calDiscount:0,
+        calDiscountedTotal:0
       },
       totalItems: 0
     };
@@ -126,7 +143,26 @@ export class OrderCartComponent implements OnInit {
         this.userCart.displayPrint = true;
       }
     }
+    this.calculateDiscounts();
     console.log(this.userCart);
+  }
+  calculateDiscounts() {
+    let totalpriceWithoutDelivery =
+      this.userCart.finalPrice.calPrice + this.userCart.finalPrice.calGST;
+    let perc = this.custService.getDiscountPercentage(
+      totalpriceWithoutDelivery
+    );
+    if (perc > 0) {
+      let discount = Math.round(totalpriceWithoutDelivery * (perc / 100));
+      this.userCart.finalPrice.calDiscount = discount;
+      this.userCart.finalPrice.calDiscountedTotal =
+        this.userCart.finalPrice.calPrice +
+        this.userCart.finalPrice.calGST -
+        discount +
+        this.userCart.finalPrice.calDelivery;
+    } else {
+      this.userCart.finalPrice.calDiscountedTotal = this.userCart.finalPrice.calFinalTotal;
+    }
   }
   placeOrder() {
     this.helper.navigateToPath("/selectAddress");

@@ -6,24 +6,24 @@
             <div class="rowCart">
                   
               <div class="col-shp-7">
-                  <div class="categoryTitle">Meeting Details
+                  <div class="categoryTitle" *ngIf="userCart.displayDesignNPrint == true || userCart.displayDesign == true">Meeting Details
                       <span style="margin-left:3%;font-size: small;">
                         <a href="#" (click)="changeSlot($event)">Change Slot</a>
                     </span>  
                     </div>
-                    <div class="rowCart itemCart col-shp-8" style="padding-left: 5%;display:block">
+                    <div class="rowCart itemCart col-shp-8" style="padding-left: 5%;display:block" *ngIf="userCart.displayDesignNPrint == true || userCart.displayDesign == true">
                             <div>Date : <b> {{selectedSlot.selectedDate}}</b></div>
         
                            <div>Time :<b> {{selectedSlot.selectedTime}}</b></div> 
                             
                            <div>Duration:<b> {{selectedSlot.duration}} Mins</b> </div>  
                     </div>
-                <div class="categoryTitle">Delivery Address 
+                <div class="categoryTitle" *ngIf="userCart.displayDesignNPrint == true || userCart.displayPrint == true">Delivery Address 
                   <span style="margin-left:3%;font-size: small;">
                     <a routerLink="/selectAddress">Change Address</a>
                 </span>  
                 </div>
-                <div class="rowCart itemCart col-shp-8" style="padding-left: 5%;">
+                <div class="rowCart itemCart col-shp-8" *ngIf="userCart.displayDesignNPrint == true || userCart.displayPrint == true" style="padding-left: 5%;">
                         <p>{{selectedAddress.userName}},</p>
     
                        <p>{{selectedAddress.address}}</p> 
@@ -45,7 +45,7 @@
                                     />
                                   </div>
                                   <div class="col-shp-7 mobCard" style="padding-left: 1%;">
-                                    <p class="productTitle">{{ item.name }}</p>
+                                    <p class="productTitle">{{ item.specs.subCategory }}</p>
                                     <p class="productDetails">
                                       <span class="detailsHeading">Orientation:</span> {{item.specs.orientation}},
                                       <span class="detailsHeading">Size:</span> {{item.specs.size}}
@@ -69,7 +69,7 @@
                                     />
                                   </div>
                                   <div class="col-shp-7 mobCard" style="padding-left: 1%;">
-                                    <p class="productTitle">{{ item.name }}</p>
+                                    <p class="productTitle">{{ item.specs.subCategory }}</p>
                                     <p class="productDetails">
                                       <span class="detailsHeading">Orientation:</span> {{item.specs.orientation}},
                                       <span class="detailsHeading">Size:</span> {{item.specs.size}}
@@ -97,7 +97,7 @@
                                     />
                                   </div>
                                   <div class="col-shp-7 mobCard" style="padding-left: 1%;">
-                                    <p class="productTitle">{{ item.name }}</p>
+                                    <p class="productTitle">{{ item.specs.subCategory }}</p>
                                     <p class="productDetails">
                                       <span class="detailsHeading">Orientation:</span> {{item.specs.orientation}},
                                       <span class="detailsHeading">Size:</span> {{item.specs.size}}
@@ -166,18 +166,25 @@
                     <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calPrice}}</div>
                   </div>
                   <div class="rowCart" style="margin-top: 30px;">
-                    <div class="col-shp-6 priceTitle">Delivery Fees:</div>
-                    <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDelivery}}</div>
-                  </div>
-                  <hr />
-                  <div class="rowCart">
                     <div class="col-shp-6 priceTitle">GST:</div>
                     <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calGST}}</div>
                   </div>
                   <hr />
+                  <div class="rowCart" style="margin-top: 30px;">
+                    <div class="col-shp-6 priceTitle">Discount :</div>
+                    <div class="col-shp-4 priceAmount"> - &#x20B9; {{userCart.finalPrice.calDiscount}}</div>
+                  </div>
+                  <hr />
+                  <div class="rowCart">
+                    <div class="col-shp-6 priceTitle">Delivery Fees:</div>
+                    <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDelivery}}</div>
+                  </div>
+                 
+                  
+                  <hr />
                   <div class="rowCart">
                     <div class="col-shp-6 priceTitle">Total Price:</div>
-                    <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calFinalTotal}}</div>
+                    <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDiscountedTotal}}</div>
                   </div>
                   <hr />
                   <div class="rowCart">

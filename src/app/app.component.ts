@@ -11,6 +11,8 @@ import {
 } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { delay } from "rxjs/operators";
+import { AdminService } from "./services/admin.service";
+import { CustomerService } from "./services/customer.service";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -20,12 +22,15 @@ export class AppComponent {
   title = "mLearnApp";
   loading = false;
 
-  ngOnInit() {}
+  ngOnInit() {
+   
+  }
 
   constructor(
     private router: Router,
     private spinnerService: NgxSpinnerService,
     private route: ActivatedRoute
+    
   ) {
     this.router.events.subscribe((event: Event) => {
       switch (true) {

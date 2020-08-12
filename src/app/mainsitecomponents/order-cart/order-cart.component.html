@@ -13,7 +13,7 @@
           />
         </div>
         <div class="col-shp-7 mobCard" style="padding-left: 1%;">
-          <p class="productTitle">{{ item.name }}</p>
+          <p class="productTitle">{{ item.specs.subCategory }}</p>
           <p class="productDetails">
             <span class="detailsHeading">Orientation:</span> {{item.specs.orientation}},
             <span class="detailsHeading">Size:</span> {{item.specs.size}}
@@ -60,7 +60,7 @@
           />
         </div>
         <div class="col-shp-7 mobCard" style="padding-left: 1%;">
-          <p class="productTitle">{{ item.name }}</p>
+          <p class="productTitle">{{ item.specs.subCategory }}</p>
           <p class="productDetails">
             <span class="detailsHeading">Orientation:</span> {{item.specs.orientation}},
             <span class="detailsHeading">Size:</span> {{item.specs.size}}
@@ -88,7 +88,7 @@
           />
         </div>
         <div class="col-shp-7 mobCard" style="padding-left: 1%;">
-          <p class="productTitle">{{ item.name }}</p>
+          <p class="productTitle">{{ item.specs.subCategory }}</p>
           <p class="productDetails">
             <span class="detailsHeading">Orientation:</span> {{item.specs.orientation}},
             <span class="detailsHeading">Size:</span> {{item.specs.size}}
@@ -135,23 +135,34 @@
         <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calPrice}}</div>
       </div>
       <div class="rowCart" style="margin-top: 30px;">
-        <div class="col-shp-6 priceTitle">Delivery Fees:</div>
-        <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDelivery}}</div>
-      </div>
-      <hr />
-      <div class="rowCart">
         <div class="col-shp-6 priceTitle">GST:</div>
         <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calGST}}</div>
       </div>
       <hr />
+      <div class="rowCart" style="margin-top: 30px;">
+        <div class="col-shp-6 priceTitle">Discount :</div>
+        <div class="col-shp-4 priceAmount"> - &#x20B9; {{userCart.finalPrice.calDiscount}}</div>
+      </div>
+      <hr />
+      <div class="rowCart">
+        <div class="col-shp-6 priceTitle">Delivery Fees:</div>
+        <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDelivery}}</div>
+      </div>
+     
+      
+      <hr />
       <div class="rowCart">
         <div class="col-shp-6 priceTitle">Total Price:</div>
-        <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calFinalTotal}}</div>
+        <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDiscountedTotal}}</div>
       </div>
       <hr />
       <div class="rowCart">
         <div class="col-shp-12 btnAling">
-          <button class="btn btn-primary" [disabled]="userCart.totalItems == 0" (click)="placeOrder()">Proceed</button>
+          <app-razorpayments [paymentAmount]="userCart.finalPrice.calFinalTotal" [orderId]="razorPayOrderId" 
+          (transactionStatus)="transactionUpdate($event)">
+        </app-razorpayments>
+          <span style="color:red" *ngIf="displayTranFail">Last Transaction is failed/Cancelled.Please retry Payment.</span>
+          <!-- <button class="btn btn-primary">Pay Now</button> -->
         </div>
       </div>
     </div>

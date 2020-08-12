@@ -406,7 +406,9 @@ export class OrderPageComponent implements OnInit {
             price: this.orderPrice.price,
             deliveryFee: this.orderPrice.deliveryFee,
             GST: this.orderPrice.GST,
-            Total: this.orderPrice.Total
+            Total: this.orderPrice.Total,
+            discount:this.orderPrice.discount,
+            discountedTotal:this.orderPrice.discountedTotal
           },
           professionalDesigner: this.orderForm.controls["professionDesigner"]
             .value,
@@ -496,13 +498,19 @@ return true;
       const control = this.orderForm.get(field);            // {2}
       control.markAsTouched({ onlySelf: true });       // {3}
     });
-    if(!this.orderForm.valid || this.Servicable == false || this.uploadedFileNames.contentValidation == false || ( this.displayDesigner && this.uploadedFileNames.IsproductRefUploaded == false)){
+    if(!this.orderForm.valid || this.Servicable == false || this.uploadedFileNames.contentValidation == false || ( this.displayDesigner && this.uploadedFileNames.IsproductRefUploaded == false) ||( this.orderForm.controls['type'].value == 'Print Only' && this.imageUpload[0].fileName == '') ){
       if(this.uploadedFileNames.IsproductRefUploaded == false){
         this.uploadedFileNames.displayErrororbutton = true;
       }
       else{
         this.uploadedFileNames.displayErrororbutton = false;
       }
+      // if(this.orderForm.controls['type'].value == 'Print Only'){
+      //   this.uploadedFileNames.displayErrororbutton = true;
+      // }
+      // else{
+      //   this.uploadedFileNames.displayErrororbutton = false;
+      // }
 
       console.log(this.uploadedFileNames);
       return;
@@ -559,7 +567,7 @@ return true;
     if(!this.acceptTerms()){
       return;
     }
-    this.addToCart();
+    //this.addToCart();
     if(this.orderForm.controls["type"].value =="Design Only"){
       this._helper.navigateToPath("/cart");
     }else{
@@ -767,6 +775,7 @@ return true;
         this.printPrice = data["printPrice"];
         this.maxGap = data["maxGap"];
         this.discountPrice=data["discountList"];
+        this.custService.discountedPrice=this.discountPrice;
         debugger;
         this.products.forEach(item=>{
           item.isSelected=false;
@@ -1141,7 +1150,7 @@ return true;
     let quant = this.orderForm.controls["quantities"].value;
     let selectedSqft =
       this.orderForm.controls["length"].value *
-      this.orderForm.controls["width"].value;
+      this.orderForm.controls["width"].value * quant;
     this.orderForm.patchValue({
       size: selectedSqft
     });
@@ -1159,11 +1168,16 @@ return true;
         .sort((a, b) => a.quantity - b.quantity);
       if (pricesdata != null) {
         let itemPrice = pricesdata[0];
+        // let pCost =
+        //   (itemPrice.pricePerUnit +
+        //     (itemPrice.printCommission / 100) * itemPrice.pricePerUnit) *
+        //   selectedSqft *
+        //   quant;
         let pCost =
           (itemPrice.pricePerUnit +
             (itemPrice.printCommission / 100) * itemPrice.pricePerUnit) *
-          selectedSqft *
-          quant;
+          selectedSqft 
+          ;
         let gstPercentage = item[0].PrintGST / 100;
         let pGST = pCost * gstPercentage;
         let totalPrintCost = pCost + pGST;
