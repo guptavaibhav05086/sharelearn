@@ -30,7 +30,7 @@ export class BookMeetingComponent implements OnInit {
     meetingDate: new FormControl({}),
     meetingTill: new FormControl(""),
     meetingSlot: new FormControl("", (control: FormControl) => {
-      debugger;
+      //debugger;
       const value = control.value;
       if (
         this.initialDate != undefined &&
@@ -62,7 +62,7 @@ export class BookMeetingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+    //debugger;
     this.meetingInfo = this.checkTimeGap();
     let date = new Date();
     date.setHours(date.getHours() + this.meetingInfo.gap);
@@ -100,7 +100,7 @@ export class BookMeetingComponent implements OnInit {
     });
   }
   checkTimeGap() {
-    debugger;
+    //debugger;
     let cartList = this.custService.getLocalStorageCart();
     let calGap = 0;
     let meetingDuration = 0;
@@ -121,7 +121,7 @@ export class BookMeetingComponent implements OnInit {
   calculateSlots(avaDate) {}
 
   validateDate() {
-    debugger;
+    //debugger;
     //let val = this.productform.controls["meetingSlot"].value.minute;
     this.time.minute = 30;
     this.productform.patchValue({

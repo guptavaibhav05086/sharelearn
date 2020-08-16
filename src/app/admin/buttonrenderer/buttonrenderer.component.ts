@@ -16,8 +16,16 @@ export class ButtonrendererComponent implements ICellRendererAngularComp {
   label: string;
 
   agInit(params): void {
+    debugger;
     this.params = params;
     this.label = this.params.label || null;
+    if (this.params.label == "ProdDelete") {
+      if (this.params.data.IsDisabled == false) {
+        this.label = "Disable";
+      } else {
+        this.label = "Enable";
+      }
+    }
   }
 
   refresh(params?: any): boolean {

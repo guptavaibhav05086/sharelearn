@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ElementRef, Inject } from "@angular/core";
 import { AdminService } from "../../services/admin.service";
 import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
 import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
@@ -11,6 +11,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import {PriceDescriptionComponent } from '../price-description/price-description.component'
 import { TermsConditionsComponent} from '../terms-conditions/terms-conditions.component'
 import { Discounts } from 'src/app/Models/discounts';
+import { DOCUMENT } from '@angular/common';
 @Component({
   selector: "app-order-page",
   templateUrl: "./order-page.component.html",
@@ -57,7 +58,8 @@ export class OrderPageComponent implements OnInit {
     displayErrororbutton:false,
     displayLoadingProductGif:false,
     displayLoadingContentGif:false,
-    IscontentUploaded:false
+    IscontentUploaded:false,
+    displayReadOnlyError:false
 
   };
   imageUpload=[{
@@ -146,9 +148,9 @@ export class OrderPageComponent implements OnInit {
       } else {
         this.isPhotoUrlValid = true;
       }
-      if (file.size > 5000000) {
+      if (file.size > 20000000) {
         this.isPhotoUrlValid = false;
-
+        alert('File size is more than 20MB');
         return false;
       } else {
         this.isPhotoUrlValid = true;
@@ -162,8 +164,9 @@ export class OrderPageComponent implements OnInit {
       } else {
         this.isPhotoUrlValid = true;
       }
-      if (file.size > 5000000) {
+      if (file.size > 20000000) {
         this.isPhotoUrlValid = false;
+        alert('file size is more than 20 MB')
 
         return false;
       } else {
@@ -186,7 +189,7 @@ export class OrderPageComponent implements OnInit {
     for (var i = 0; (file = images[i]); i++) {
       //if the file is not an image, continue
       if (!this.validateFiles(name, file)) {
-        alert("Not a Valid Image File");
+        //alert("Not a Valid Image File");
         return;
       }
       let reader = new FileReader();
@@ -206,9 +209,15 @@ export class OrderPageComponent implements OnInit {
       totalSize += item.fileSize
     })
     if(totalSize > 25000000){
-      alert('Total Size exceeds more then 25MB.Please upload smaller files')
+      alert('Total Size exceeds more then 25MB.Please upload smaller files');
+      item.displayLoadingGif=false;
+      return;
     }
-    
+    debugger;
+    let elm = this.document.getElementById(name);
+     elm['value'] =null;
+    // let elm =this.elRef.nativeElement.querySelector(name);
+    // elm.val(null);
     this.custService.uploadUserImage(formData).subscribe(
       data => {
         //this.spinner.hide();
@@ -217,10 +226,10 @@ export class OrderPageComponent implements OnInit {
         item.displayFileName=true;
         console.log(data);
         //alert("File Uploaded Successfully");
-        this.uploadedFileNames[name] = data;
+        this.uploadedFileNames[name] = item;
         this.fileError = false;
         this.uploadedFileNames.IsImageUploaded = true;
-        
+        this.uploadedFileNames.displayReadOnlyError=false;
         item.fileError=false;
         //this.selectedFileName = userImage.name;
       },
@@ -246,7 +255,7 @@ export class OrderPageComponent implements OnInit {
     for (var i = 0; (file = images[i]); i++) {
       //if the file is not an image, continue
       if (!this.validateFiles(name, file)) {
-        alert("Not a Valid Image File");
+        //alert("Not a Valid Image File");
         return;
       }
       let reader = new FileReader();
@@ -341,7 +350,7 @@ export class OrderPageComponent implements OnInit {
   });
 
   addToCart() {
-    //debugger;
+    debugger;
     if(!this.acceptTerms()){
       return;
     }
@@ -373,7 +382,7 @@ export class OrderPageComponent implements OnInit {
       let cartLastItems = this.custService.getLocalStorageCart()[
         this.custService.getLocalStorageCart().length - 1
       ];
-      id = cartLastItems.id + 1;
+      id = parseInt(cartLastItems.id) + 1;
     }
     
 
@@ -383,6 +392,7 @@ export class OrderPageComponent implements OnInit {
       GSTNumber: this.orderForm.controls["GSTNumber"].value,
       BillingName: this.orderForm.controls["BillingName"].value,
       uploadedimages: this.uploadedFileNames,
+      logoImage:this.imageUpload,
       content: this.orderForm.controls["designcontent"].value,
       industry: this.orderForm.controls["purpose"].value,
       category: [
@@ -407,12 +417,23 @@ export class OrderPageComponent implements OnInit {
             deliveryFee: this.orderPrice.deliveryFee,
             GST: this.orderPrice.GST,
             Total: this.orderPrice.Total,
+            baseDesignPrice:this.orderPrice.baseDesignPrice,
+            designGST: this.orderPrice.designGST,
+            printGST: this.orderPrice.printGST,
+            totalDesignCost: this.orderPrice.totalDesignCost,
+            totalPrintCost: this.orderPrice.totalPrintCost,
+            deliveryDays: this.orderPrice.deliveryDays,
+            professiondesignerFees: this.orderPrice.professiondesignerFees,
+            sourceFileFees: this.orderPrice.sourceFileFees,
+           
+            discountPerc:this.orderPrice.discountPerc,
+           
             discount:this.orderPrice.discount,
             discountedTotal:this.orderPrice.discountedTotal
           },
           professionalDesigner: this.orderForm.controls["professionDesigner"]
             .value,
-          sourceFile: this.orderForm.controls["sourceFile"].value,
+          sourceFile: this.orderForm.controls["sourceFileSpecs"].value,
           purpose: this.orderForm.controls["purpose"].value
         }
       ]
@@ -446,7 +467,9 @@ export class OrderPageComponent implements OnInit {
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private _validator: ValidatorsService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private elRef:ElementRef,
+    @Inject(DOCUMENT) private document: Document
   ) {}
 
   acceptTerms(){
@@ -498,19 +521,19 @@ return true;
       const control = this.orderForm.get(field);            // {2}
       control.markAsTouched({ onlySelf: true });       // {3}
     });
-    if(!this.orderForm.valid || this.Servicable == false || this.uploadedFileNames.contentValidation == false || ( this.displayDesigner && this.uploadedFileNames.IsproductRefUploaded == false) ||( this.orderForm.controls['type'].value == 'Print Only' && this.imageUpload[0].fileName == '') ){
+    if(!this.orderForm.valid || this.Servicable == false || (this.orderForm.controls['type'].value != 'Print Only' && this.uploadedFileNames.contentValidation == false) || ( this.displayDesigner && this.uploadedFileNames.IsproductRefUploaded == false) ||( this.orderForm.controls['type'].value == 'Print Only' && this.imageUpload[0].fileName == '') ){
       if(this.uploadedFileNames.IsproductRefUploaded == false){
         this.uploadedFileNames.displayErrororbutton = true;
       }
       else{
         this.uploadedFileNames.displayErrororbutton = false;
       }
-      // if(this.orderForm.controls['type'].value == 'Print Only'){
-      //   this.uploadedFileNames.displayErrororbutton = true;
-      // }
-      // else{
-      //   this.uploadedFileNames.displayErrororbutton = false;
-      // }
+      if(this.orderForm.controls['type'].value == 'Print Only' && this.imageUpload[0].fileName == ''){
+        this.uploadedFileNames.displayReadOnlyError = true;
+      }
+      else{
+        this.uploadedFileNames.displayReadOnlyError = false;
+      }
 
       console.log(this.uploadedFileNames);
       return;
@@ -568,14 +591,41 @@ return true;
       return;
     }
     //this.addToCart();
-    if(this.orderForm.controls["type"].value =="Design Only"){
-      this._helper.navigateToPath("/cart");
-    }else{
-      this._helper.navigateToPath("/selectAddress");
-    }
+    this._helper.navigateToPath("/cart");
+    // if(this.orderForm.controls["type"].value =="Design Only"){
+    //   this._helper.navigateToPath("/cart");
+    // }else{
+    //   this._helper.navigateToPath("/selectAddress");
+    // }
     
   }
   resetControls() {
+    this.uploadedFileNames = {
+      product: ".jpg,.png,.jpeg,pdf format",
+      image1: ".jpg,.png,.jpeg,pdf format",
+      image2: ".jpg,.png,.jpeg,pdf format",
+      image3: ".jpg,.png,.jpeg,pdf format",
+      image4: ".jpg,.png,.jpeg,pdf format",
+      content: "Content File in .doc,docx,.pdf format",
+      IsImageUploaded: false,
+      contentValidation:false,
+      IsproductRefUploaded:false,
+      displayErrororbutton:false,
+      displayLoadingProductGif:false,
+      displayLoadingContentGif:false,
+      IscontentUploaded:false,
+      displayReadOnlyError:false
+  
+    };
+    this.imageUpload=[{
+      id:1,
+      name:'image1',
+      displayLoadingGif:false,
+      displayFileName:false,
+      fileName:'',
+      fileSize:0,
+      fileError:false
+    }];
     this.orderPrice = {
       price: 0,
       deliveryFee: 0,
@@ -771,7 +821,9 @@ return true;
     this.admin.getProducts().subscribe(
       data => {
         this.productList = data["productList"];
+        this.productList = this.productList.filter(item=>item.IsDisabled == false);
         this.products = data["products"];
+        this.products = this.products.filter(item=>item.IsDisabled == false);
         this.printPrice = data["printPrice"];
         this.maxGap = data["maxGap"];
         this.discountPrice=data["discountList"];
@@ -809,10 +861,15 @@ return true;
     debugger;
     let cart = this.custService.getLocalStorageCart();
     let editItem = cart.filter(item => item.id == id);
+    
+    
     if (editItem != null) {
       this.showCategory(editItem[0].type);
+      let elemTime = this.document.getElementById("specs");
+      // if(elemTime !=null){
 
-      this.selectedProduct(editItem[0].category[0].name, null);
+      // }
+      this.selectedProduct(editItem[0].category[0].name, elemTime);
 
       let e = {
         target: {
@@ -824,7 +881,7 @@ return true;
         type: editItem[0].type,
         category: editItem[0].category[0].name,
         professionDesigner: editItem[0].category[0].professionalDesigner,
-        sourceFile: editItem[0].category[0].sourceFile,
+        sourceFileSpecs: editItem[0].category[0].sourceFile,
         GSTNumber: editItem[0].GSTNumber,
         BillingName: editItem[0].BillingName,
         subCategory: editItem[0].category[0].specs.subCategory,
@@ -843,6 +900,10 @@ return true;
       this.Servicable = true;
       this.uploadedFileNames.contentValidation=true;
     }
+    console.log(this.orderForm);
+    this.imageUpload=editItem[0].logoImage;
+    this.imageUpload.forEach(img=>img.displayFileName = true);
+    this.uploadedFileNames=editItem[0].uploadedimages;
   }
   selectedProduct(value, $element) {
     if(this.displayeproceed == false){
@@ -926,9 +987,15 @@ return true;
     console.log(this.proSpec);
     //delay(5000);
     //this.proSpec.displayQuant=this.proSpec.quantities.sp
-    if (!this.isEditOrder) {
+    // if (!this.isEditOrder ) {
+    //   this.scrollToElement($element);
+    // }
+    try{
       this.scrollToElement($element);
+    }catch(err){
+
     }
+    
   }
   selectedCustomizedSize() {}
   selectedSubcategory(event) {
@@ -1059,8 +1126,7 @@ return true;
     }
     this.orderPrice.Total = Math.round(
       this.orderPrice.totalDesignCost +
-        this.orderPrice.totalPrintCost +
-        this.orderPrice.deliveryFee
+        this.orderPrice.totalPrintCost 
     );
     this.orderPrice.GST = Math.round(
       this.orderPrice.printGST + this.orderPrice.designGST
@@ -1073,7 +1139,7 @@ return true;
       this.orderPrice.totalPrintCost);
     this.orderPrice.discountPerc=this.getDiscountDetails(totalWithoutDeliveryFees);
       this.orderPrice.discount=Math.round((totalWithoutDeliveryFees) * (this.orderPrice.discountPerc/100)) ;
-        this.orderPrice.discountedTotal=totalWithoutDeliveryFees-this.orderPrice.discount + this.orderPrice.deliveryFee;
+        this.orderPrice.discountedTotal=totalWithoutDeliveryFees-this.orderPrice.discount;
 
         console.log(this.orderPrice);
   }
@@ -1181,9 +1247,9 @@ return true;
         let gstPercentage = item[0].PrintGST / 100;
         let pGST = pCost * gstPercentage;
         let totalPrintCost = pCost + pGST;
-        this.orderPrice.printGST = pGST;
-        this.orderPrice.printCost = pCost;
-        this.orderPrice.totalPrintCost = totalPrintCost;
+        this.orderPrice.printGST = Math.round(pGST);
+        this.orderPrice.printCost =Math.round(pCost);
+        this.orderPrice.totalPrintCost = Math.round(totalPrintCost) ;
         this.orderPrice.deliveryDays = itemPrice.deliveryDays;
       }
     } else {

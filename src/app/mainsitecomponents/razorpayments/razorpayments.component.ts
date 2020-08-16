@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import { WindowRefService } from "src/app/services/window-ref.service";
 import { PrinterService } from "src/app/services/printer.service";
+import {CustomerService } from "src/app/services/customer.service"
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Router } from "@angular/router";
 @Component({
@@ -19,7 +20,8 @@ export class RazorpaymentsComponent implements OnInit {
     private winRef: WindowRefService,
     private printer: PrinterService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private custService:CustomerService
   ) {}
 
   ngOnInit() {}
@@ -27,7 +29,24 @@ export class RazorpaymentsComponent implements OnInit {
   createRzpayOrder(amount) {
     debugger;
     console.log(amount);
-    this.payWithRazor(this.orderId);
+    if(this.orderId !=null && this.orderId !=undefined){
+      this.payWithRazor(this.orderId);
+    }
+    else{
+      this.custService.generateOrderId((this.paymentAmount * 100)).subscribe(data=>{
+        if(this.orderId !=null && this.orderId !=undefined){
+          this.payWithRazor(data);
+        }
+        else{
+          alert('Issue in initiating the payment.Please referesh the page or try after some time')
+        }
+        
+      },err=>{
+
+      })
+
+    }
+    
     // this.printer.generateOrderId((this.paymentAmount * 100)).subscribe(
     //   data => {
     //     this.payWithRazor(data);
@@ -39,11 +58,11 @@ export class RazorpaymentsComponent implements OnInit {
   payWithRazor(val) {
     const options: any = {
       key: "rzp_test_mz10cbdFCEOGCL",
-      amount: 125500, // amount should be in paise format to display Rs 1255 without decimal point
+      amount: this.paymentAmount * 100, // amount should be in paise format to display Rs 1255 without decimal point
       currency: "INR",
       name: "RJB Internation", // company name or product name
-      description: "Share and print", // product description
-      image: "./assets/logo.png", // company logo or product image
+      description: "ShapeNPrint", // product description
+      image: "../../../assets/img/logo.png", // company logo or product image
       order_id: val, // order_id created by you in backend
       modal: {
         // We should prevent closing of the form when esc key is pressed.

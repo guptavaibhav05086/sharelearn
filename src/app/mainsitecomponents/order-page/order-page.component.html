@@ -87,7 +87,7 @@
         </div>
 
         <!-- Container for Product Specification -->
-        <div [style.visibility]="displaySpecs ? 'visible': 'hidden'" #specs>
+        <div [style.visibility]="displaySpecs ? 'visible': 'hidden'" #specs id="specs">
           <div class="container shadow p-3 mb-5 bg-white rounded" >
             <div class="or-formcontrol">
               <h3 class="display-label">
@@ -386,16 +386,16 @@
                    
                   </div>
                   <div class="input-group col-md-4" *ngIf="fileError"></div>
-                  <div class="input-group col-md-8" *ngIf="fileError">
+                  <!-- <div class="input-group col-md-8" *ngIf="fileError">
                     <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
-                  </div> 
+                  </div>  -->
                 </div>
                 <div class="row" *ngFor="let item of imageUpload;let  i=index">
                   <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
                     <div class="form-group">
                       <div *ngIf="i == 0">
                           <label *ngIf="orderForm.controls['type'].value != 'Print Only'">Logo/Image </label>
-                          <label *ngIf="orderForm.controls['type'].value == 'Print Only'">Print Ready File* </label>
+                          <label *ngIf="orderForm.controls['type'].value == 'Print Only'"  [ngClass]="{'displayImageError': uploadedFileNames.displayReadOnlyError}">Print Ready File* </label>
                       </div>
                        <div style="display: flex;">
                          <div>
@@ -434,9 +434,9 @@
                   </div>
                  
                   <div class="input-group col-md-4" *ngIf="fileError"></div>
-                  <div class="input-group col-md-8" *ngIf="fileError">
+                  <!-- <div class="input-group col-md-8" *ngIf="fileError">
                     <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
-                  </div> 
+                  </div>  -->
                 </div>                            
                 <div class="row">
                   
@@ -449,9 +449,9 @@
                    
                   </div>
                   <div class="input-group col-md-4" *ngIf="fileError"></div>
-                  <div class="input-group col-md-8" *ngIf="fileError">
+                  <!-- <div class="input-group col-md-8" *ngIf="fileError">
                     <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
-                  </div> 
+                  </div>  -->
                 </div>
                 <div class="row" *ngIf="displayDesigner">
                     <div class="flex-control-50">
@@ -481,8 +481,7 @@
                       <label for="contentUpload" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
                             <input
                             type="file"
-                            accept="application/pdf,application/msword,
-                        application/vnd.openxmlformats-officedocument.wordprocessingml.document,image.*"
+                            
                             style="display: none"
                             id="contentUpload"
                             
@@ -504,13 +503,13 @@
                   </div>
                  
                   <div class="input-group col-md-4" *ngIf="fileError"></div>
-                  <div class="input-group col-md-8" *ngIf="fileError">
+                  <!-- <div class="input-group col-md-8" *ngIf="fileError">
                     <span class="errorMessage" >File should of type doc,docx,pdf format.</span>
-                  </div> 
+                  </div>  -->
                   <div class="input-group col-md-4" *ngIf="fileError"></div>
-                  <div class="input-group col-md-8" *ngIf="fileError">
+                  <!-- <div class="input-group col-md-8" *ngIf="fileError">
                     <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
-                  </div> 
+                  </div>  -->
                 </div>
                 
                 <div class="row" *ngIf="displayDesigner">
@@ -642,8 +641,9 @@
               </div>
             </div>
           </div>
-        <!-- Container for Order Review -->
-        <div [style.visibility]="displaysummary ? 'visible': 'hidden'"  >
+        <!-- Container for Order Review Desgin and Design and Print-->
+        <div [style.visibility]="displaysummary ? 'visible': 'hidden'"
+        *ngIf="orderForm.controls['type'].value != 'Print Only'"  >
           <div class="container shadow p-3 mb-5 bg-white rounded" >
             <div class="or-formcontrol">
               <h3 class="display-label">
@@ -697,7 +697,7 @@
                             </div>
                               <div class="flex-controlPrice">
                                   <label>
-                                      &#x20B9;  {{this.orderPrice.price}}
+                                      &#x20B9;  {{this.orderPrice.price -(this.orderPrice.sourceFileFees + this.orderPrice.professiondesignerFees)}}
                                   </label>
                               </div>
                            
@@ -719,20 +719,20 @@
                     </div>
 
                    
-                    <div class="flex-control3 price-margin">
-                      <div class="form-group" style="display: flex;">
+                    <div class="flex-control3 price-margin" >
+                      <div class="form-group" style="display: flex;" >
                         <div class="flex-controllabel">
-                            <label style="font-size: 14px;font-weight:bold;">GST: </label> 
+                            <label style="font-size: 14px;font-weight:bold;">Source File: </label> 
                         </div>
                           <div class="flex-controlPrice">
                               <label>
-                                  &#x20B9; {{this.orderPrice.GST}}
+                                  &#x20B9; {{this.orderPrice.sourceFileFees}}
                               </label>
                           </div>
                         
                          
                         </div>
-                        <hr/>
+                       
                         
                   </div>
                 </div>
@@ -750,15 +750,15 @@
                          
                     </div>
                     
-                   <!-- Deliver fees add here -->
+                   <!-- Illustration fees add here -->
                    <div class="flex-control3 price-margin">
-                    <div class="form-group" style="display: flex;">
+                    <div class="form-group" style="display: flex;" >
                         <div class="flex-controllabel">
-                            <label style="font-size: 14px;font-weight:bold;">Discount: </label> 
+                            <label style="font-size: 14px;font-weight:bold;">Illustartion Design : </label> 
                         </div>
                           <div class="flex-controlPrice">
                               <label>
-                                -  &#x20B9; {{this.orderPrice.discount}}
+                                  &#x20B9; {{this.orderPrice.professiondesignerFees}}
                               </label>
                           </div>
                        
@@ -793,11 +793,11 @@
                     <div class="flex-control3 price-margin">
                       <div class="form-group" style="display: flex;">
                           <div class="flex-controllabel">
-                              <label style="font-size: 14px;font-weight:bold;">Delivery Fees: </label> 
+                              <label style="font-size: 14px;font-weight:bold;">GST: </label> 
                           </div>
                             <div class="flex-controlPrice">
                                 <label>
-                                    &#x20B9; {{this.orderPrice.deliveryFee}}
+                                    &#x20B9; {{this.orderPrice.GST}}
                                 </label>
                             </div>
                          
@@ -825,7 +825,7 @@
                         </div>
                           <div class="flex-controlPrice">
                               <label>
-                                  &#x20B9; {{this.orderPrice.discountedTotal}}
+                                  &#x20B9; {{orderPrice.Total}}
                               </label>
                           </div>
                        
@@ -882,6 +882,296 @@
                    </a>
                   </label>
                 </div>
+                     
+                </div>
+                
+
+               
+            </div>
+                <div class="row">
+                    <div class="flex-control-50">
+                        <div class="form-group">
+                           <button class="btn btn-primary" (click)="checkout()">Proceed</button>
+                            
+                           
+                          </div>
+                         
+                    </div>
+                    <div class="flex-control3 price-margin">
+                        <div class="form-group">
+                           <button class="btn btn-primary" style="margin-left: 18%;" (click)="addToCart()">Add to Cart</button>
+                            
+                           
+                          </div>
+                         <span style="color:green" *ngIf="displaycartMessage">Item Added to Cart</span>
+                    </div>
+
+                   
+                </div>
+                
+                
+  
+               
+               
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Container for Order Review Print Only-->
+        <div [style.visibility]="displaysummary ? 'visible': 'hidden'" 
+        *ngIf="orderForm.controls['type'].value == 'Print Only'" >
+          <div class="container shadow p-3 mb-5 bg-white rounded" >
+            <div class="or-formcontrol">
+              <h3 class="display-label">
+                 Order Summary
+              </h3>
+              
+          
+            </div>
+            <div class="or-formcontrol flex-container">
+              <div class="flex-control2">
+                <img src="../../../assets/StudentDashboard/img/download.jpg" />
+              </div>
+              <div class="flex-control8" >
+                  <div class="row">
+                      <div class="flex-control-50" >
+                          <div class="form-group">
+                              <label style="font-size: 18px;font-weight:700;">{{orderForm.controls['type'].value}} - {{orderForm.controls['category'].value}}</label>                   
+                              <hr/>        
+                             
+                              
+                             
+                            </div>
+                        
+                      </div>
+                      <div class="flex-control3 price-margin" >
+                          <div class="form-group">
+                              <label style="font-size: 18px;font-weight:700;">Price Summary</label>                   
+                              <hr/>        
+                             
+                              
+                             
+                            </div>
+                        
+                      </div>
+                    
+                     
+                  </div>
+                <div class="row">
+                    <div class="flex-control-50" >
+                        <div class="form-group">
+                            <label style="font-size: 16px;font-weight:500;">({{orderForm.controls['subCategory'].value}}) - ({{orderForm.controls['orientation'].value}})</label> 
+                            
+                           
+                          </div>
+                      
+                    </div>
+                    <div class="flex-control3 price-margin" >
+                        <div class="form-group" style="display: flex;">
+                            <div class="flex-controllabel">
+                                <label style="font-size: 14px;font-weight:bold;">Price: </label> 
+                            </div>
+                              <div class="flex-controlPrice">
+                                  <label>
+                                      &#x20B9;  {{this.orderPrice.price -(this.orderPrice.sourceFileFees + this.orderPrice.professiondesignerFees)}}
+                                  </label>
+                              </div>
+                           
+                          </div>
+                         
+                      
+                    </div>
+                   
+                   
+                </div>
+                <div class="row" >
+                    <div class="flex-control-50">
+                        <div class="form-group">
+                            <label style="font-size: 14px;font-weight:bold;">Size: {{orderForm.controls['size'].value}},   Quantitiy:  {{orderForm.controls['quantities'].value}}, GSM: {{orderForm.controls['GSM'].value}}</label> 
+                            
+                           
+                          </div>
+                          
+                    </div>
+
+                   <!-- replace with GST -->
+                   <div class="flex-control3 price-margin">
+                    <div class="form-group" style="display: flex;">
+                        <div class="flex-controllabel">
+                            <label style="font-size: 14px;font-weight:bold;">GST: </label> 
+                        </div>
+                          <div class="flex-controlPrice">
+                              <label>
+                                  &#x20B9; {{this.orderPrice.GST}}
+                              </label>
+                          </div>
+                       
+                      </div>
+                      <hr>
+                      
+                </div>
+                </div>
+                <div class="row">
+                    <div class="flex-control-50">
+                        <div class="form-group">
+                          <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Billing Name(optional)" formControlName="BillingName" />
+                               
+                              
+                             </div>
+                            
+                           
+                          </div>
+                         
+                    </div>
+                    
+                   <!-- Replace with Total -->
+                   <div class="flex-control3 price-margin">
+                    <div class="form-group" style="display: flex;">
+                        <div class="flex-controllabel">
+                            <label style="font-size: 14px;font-weight:bold;">Total: </label> 
+                        </div>
+                          <div class="flex-controlPrice">
+                              <label>
+                                  &#x20B9; {{orderPrice.Total}}
+                              </label>
+                          </div>
+                       
+                      </div>
+                      <hr/>
+                      
+                </div>
+
+                   
+                   
+                </div>
+                
+                <div class="row">
+                    <div class="flex-control-50">
+                        <div class="form-group">
+                         <input type="text" class="form-control" placeholder="GST Number(optional)" formControlName="GSTNumber" style="text-transform:uppercase;" maxlength="15"/>
+                         <span
+                         class="errorMessage"
+                         *ngIf="
+                           (orderForm.controls['GSTNumber'].dirty ||
+                           orderForm.controls['GSTNumber'].touched) &&
+                           orderForm.controls['GSTNumber'].invalid &&
+                           orderForm.controls['GSTNumber'].errors.invalidPattern
+                         "
+                       >
+                         *GST# is incorrect.
+                       </span>
+                           
+                          </div>
+                         
+                    </div>
+                    <div class="flex-control3 price-margin">
+                        <div class="form-group" style="color:green;">
+                            <!-- <button type="button" class="btn btn-link" (click)="openPriceDescription()">Detailed Pricing</button> -->
+                           <a href="#" (click)="openPriceDescription($event)"><span ><u style="color:blue">Detailed Pricing</u></span></a>
+                            
+                            
+                           
+                          </div>
+                      <!-- <div class="form-group" style="display: flex;">
+                          <div class="flex-controllabel">
+                              <label style="font-size: 14px;font-weight:bold;">GST: </label> 
+                          </div>
+                            <div class="flex-controlPrice">
+                                <label>
+                                    &#x20B9; {{this.orderPrice.GST}}
+                                </label>
+                            </div>
+                         
+                        </div>
+                        <hr> -->
+                        
+                  </div>
+                    
+
+                   
+                </div>
+                <div class="row" style="display:none">
+                  <div class="flex-control-50" style="visibility:hidden;">
+                      <div class="form-group">
+                      Fake data
+                         
+                        </div>
+                       
+                  </div>
+                  
+                  <div class="flex-control3 price-margin">
+                    <div class="form-group" style="display: flex;">
+                        <div class="flex-controllabel">
+                            <label style="font-size: 14px;font-weight:bold;">Total: </label> 
+                        </div>
+                          <div class="flex-controlPrice">
+                              <label>
+                                  &#x20B9; {{orderPrice.Total}}
+                              </label>
+                          </div>
+                       
+                      </div>
+                      <hr/>
+                      
+                </div>
+
+                 
+              </div>
+                <!-- Detailed pricing -->
+                <div class="row" >
+                  <div class="flex-control-50">
+                      <div class="form-group" style="color:green" *ngIf="orderPrice.deliveryDays>0">
+                          Post design, Expected Delivery in {{orderPrice.deliveryDays}} Days
+                          
+                         
+                        </div>
+                       
+                  </div>
+                  <div class="flex-control-3" style="margin-left: 3%;">
+                      <div class="" *ngIf="displayprinter">
+                          <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tPrinter">
+                          <label for="checkbox1" class="checkboxLabel" style="font-size: large;color: black;padding-left: 20px;">
+                         Printer <a href="#" (click)="openTermCondition('Printer',$event)">
+                           <span ><u style="color:blue">Terms and Conditons</u></span> 
+                         </a>
+                        </label>
+                      </div>
+                      <!-- <div class="form-group" style="color:green;">
+                          
+                         <a href="#" (click)="openPriceDescription($event)"><span ><u style="color:blue">Detailed Pricing</u></span></a>
+                          
+                          
+                         
+                        </div> -->
+                       
+                  </div>
+                  
+
+                 
+              </div>
+               <!-- Terms and conditions -->
+               <div class="row" >
+                <div class="flex-control-50">
+                  <div class="" *ngIf="displayDesigner">
+                    <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tDesign">
+                    <label for="checkbox1" class="checkboxLabel" style="font-size: large;color: black;padding-left: 20px;">
+                   Designer <a href="#" (click)="openTermCondition('designer',$event)">
+                     <span ><u style="color:blue">Terms and Conditons</u></span> 
+                   </a>
+                  </label>
+                </div>
+                     
+                </div>
+                <div class="flex-control-3" style="margin-left: 3%;">
+                  <!-- <div class="" *ngIf="displayprinter">
+                    <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tPrinter">
+                    <label for="checkbox1" class="checkboxLabel" style="font-size: large;color: black;padding-left: 20px;">
+                   Printer <a href="#" (click)="openTermCondition('Printer',$event)">
+                     <span ><u style="color:blue">Terms and Conditons</u></span> 
+                   </a>
+                  </label>
+                </div> -->
                      
                 </div>
                 

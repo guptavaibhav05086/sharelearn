@@ -74,6 +74,24 @@ export class AdminService {
     );
 
   }
+  deleteProduct(id){
+    let url = `${environment.baseUrl}${environment.deleteProd}`.replace("$Id",id);
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+
+  }
+  deleteProductList(id){
+    let url = `${environment.baseUrl}${environment.deleteProdList}`.replace("$Id",id);
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+
+  }
   setDiscounts(discount){
     let url = `${environment.baseUrl}${environment.updateDiscounts}`;
     return this._httpclient.post(

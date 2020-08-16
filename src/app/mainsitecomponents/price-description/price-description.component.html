@@ -9,35 +9,35 @@
           <!-- Designer Price -->
           <div *ngIf="disDesig">
               <div class="priceflex">
-                  <div style="font-weight: bold;" class="price">Base Design Cost</div>
+                  <div style="font-weight: bold;" class="price">Base Design</div>
                   <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.baseDesignPrice}}</div>
               </div>
               <hr/>
               <div class="priceflex">
-                      <div style="font-weight: bold;" class="price">Professional Design Fees</div>
+                      <div style="font-weight: bold;" class="price">Illustration Design</div>
                       <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.professiondesignerFees}}</div>
                   </div>
                   <hr/>
                   <div class="priceflex">
-                          <div style="font-weight: bold;" class="price">Source File Fees</div>
+                          <div style="font-weight: bold;" class="price">Source File</div>
                           <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.sourceFileFees}}</div>
                       </div>
                       <hr/>
                       <div class="priceflex">
-                              <div style="font-weight: bold;" class="price">Total Design Fees</div>
+                              <div style="font-weight: bold;" class="price">Total Design Cost</div>
                               <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.designCost}}</div>
                           </div>
                           <hr/>
                           <div class="priceflex">
-                                  <div style="font-weight: bold;" class="price"> Design GST</div>
+                                  <div style="font-weight: bold;" class="price"> Design GST(18%)</div>
                                   <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.designGST}}</div>
                               </div>
                               <hr/>
-                              <div class="priceflex">
+                              <div class="priceflex" style="display:none">
                                       <div style="font-weight: bold;" class="price">Design Cost +  GST</div>
                                       <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.totalDesignCost}}</div>
                                   </div>
-                                  <hr/>
+                                  
           </div>
      <!-- Print Cost description -->        
 <div *ngIf="disPrinter">
@@ -47,42 +47,42 @@
     </div>
     <hr/>
     <div class="priceflex">
-            <div style="font-weight: bold;" class="price">Print GST </div>
+            <div style="font-weight: bold;" class="price">Print GST(12%) </div>
             <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.printGST}}</div>
         </div>
         <hr/>
-        <div class="priceflex">
+        <div class="priceflex" style="display:none">
                 <div style="font-weight: bold;" class="price">Total Print +  GST Cost</div>
                 <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.totalPrintCost}}</div>
             </div>
-            <hr/>
+           
             
 </div>
  <!-- Final Price -->                              
-<div class="priceflex">
+<div class="priceflex" style="display:none">
     <div style="font-weight: bold;" class="price">Total  Cost</div>
     <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.price}}</div>
 </div>
 
-<hr/>
-<div class="priceflex">
-        <div style="font-weight: bold;" class="price">Total  GST</div>
+
+<div class="priceflex" style="display:none">
+        <div style="font-weight: bold;" class="price" >Total  GST</div>
         <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.GST}}</div>
     </div>
-    <hr/>
-    <div class="priceflex">
-        <div style="font-weight: bold;" class="price">Delivery Fees</div>
+   
+    <div class="priceflex" style="display:none">
+        <div style="font-weight: bold;" class="price">Delivery Charges</div>
         <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.deliveryFee}}</div>
     </div>
-    <hr/>
-    <div class="priceflex">
+    
+    <div class="priceflex" style="display:none">
         <div style="font-weight: bold;" class="price">Discount</div>
         <div style="padding-left: 100px;">- &#x20B9; {{orderPrice.discount}}</div>
     </div>
-    <hr/>
+    
     <div class="priceflex">
-            <div style="font-weight: bold;" class="price">Final Price + GST</div>
-            <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.discountedTotal}}</div>
+            <div style="font-weight: bold;" class="price">Total</div>
+            <div style="padding-left: 100px;"> &#x20B9; {{orderPrice.Total}}</div>
         </div>
         <hr/>                       
         </div>

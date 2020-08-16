@@ -135,4 +135,36 @@ export class CustomerService {
     console.log(this.itemsList);
     this.updateLocalStorageCart();
   }
+  generateOrderId(amount) {
+    let url = `${environment.baseUrl}${environment.generateOrderUser}`.replace(
+      "$amount",
+      amount
+    );
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
+  generateOrderIdPost(orderCart) {
+    let url = `${environment.baseUrl}${environment.generateOrderUser}`;
+    return this._httpclient.post(
+      url,
+      orderCart,
+      this.login.getAuthHeader()
+    );
+  }
+  validateTransaction(paymentId,orderId,signature){
+    let url = `${environment.baseUrl}${environment.transactionValidateUser}`.replace(
+      "$paymentId",
+      paymentId
+    ).replace("$orderId",
+    orderId).replace("$signature",
+    signature);
+    return this._httpclient.get(
+      url,
+      this.login.getAuthHeader()
+    );
+
+  }
 }

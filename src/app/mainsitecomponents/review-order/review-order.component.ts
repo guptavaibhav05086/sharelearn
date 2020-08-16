@@ -62,29 +62,29 @@ export class ReviewOrderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.bookMeeting();
     this.admin.getProducts().subscribe(
       data => {
         //this.discountPrice=data["discountList"];
         this.custService.discountedPrice = data["discountList"];
         console.log(this.custService.discountedPrice);
-        debugger;
+        //debugger;
         this.loadCart();
+       
         //debugger;
       },
       err => {}
     );
-
-    this.generateOrderId();
   }
   transactionUpdate(event) {
-    debugger;
+    //debugger;
     if (event.tranId == null) {
       this.displayTranFail = true;
       let origin = this.document.location.origin;
       let url = origin + "/orderstatus?tranId=" + null;
       window.location.href = url;
     } else {
-      debugger;
+      //debugger;
       this.displayTranFail = false;
       let origin = this.document.location.origin;
       let url = origin + "/orderstatus?tranId=" + event.tranId;
@@ -105,7 +105,7 @@ export class ReviewOrderComponent implements OnInit {
     console.log(event);
   }
   loadCart() {
-    debugger;
+    //debugger;
     this.selectedAddress = JSON.parse(localStorage.getItem("selectedAddess"));
 
     let cartItems = JSON.parse(localStorage.getItem("cart"));
@@ -117,7 +117,7 @@ export class ReviewOrderComponent implements OnInit {
           this.userCart.designNprint.push(item.category[0]);
           this.userCart.finalPrice.calPrice += item.category[0].price.price;
           this.userCart.finalPrice.calGST += item.category[0].price.GST;
-          this.userCart.finalPrice.calDelivery +=
+          this.userCart.finalPrice.calDelivery =
             item.category[0].price.deliveryFee;
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
@@ -127,8 +127,8 @@ export class ReviewOrderComponent implements OnInit {
           this.userCart.design.push(item.category[0]);
           this.userCart.finalPrice.calPrice += item.category[0].price.price;
           this.userCart.finalPrice.calGST += item.category[0].price.GST;
-          this.userCart.finalPrice.calDelivery +=
-            item.category[0].price.deliveryFee;
+          // this.userCart.finalPrice.calDelivery =
+          //   item.category[0].price.deliveryFee;
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
         } else if (item.type == "Print Only") {
@@ -136,7 +136,7 @@ export class ReviewOrderComponent implements OnInit {
           this.userCart.print.push(item.category[0]);
           this.userCart.finalPrice.calPrice += item.category[0].price.price;
           this.userCart.finalPrice.calGST += item.category[0].price.GST;
-          this.userCart.finalPrice.calDelivery +=
+          this.userCart.finalPrice.calDelivery =
             item.category[0].price.deliveryFee;
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
@@ -178,17 +178,27 @@ export class ReviewOrderComponent implements OnInit {
     }
   }
   generateOrderId() {
-    this.bookMeeting();
-    this.printer
-      .generateOrderId(this.userCart.finalPrice.calFinalTotal * 100)
-      .subscribe(
-        data => {
-          this.razorPayOrderId = data;
+    debugger;
+    let addresss = JSON.parse(localStorage.getItem("selectedAddess"));
+    let FinalOrder = {
+      cart: {},
+      orderPrice: {},
+      deliveryAddress: addresss["addId"],
 
-          //this.payWithRazor(data);
-        },
-        err => {}
-      );
+      //localStorage.getItem("userId")
+      userId: "5541713c-e1b5-4ed4-9e36-a92f0eab91d3"
+    };
+    FinalOrder.cart = this.custService.getLocalStorageCart();
+    FinalOrder.orderPrice = this.userCart.finalPrice;
+    console.log(JSON.stringify(FinalOrder));
+    this.custService.generateOrderIdPost(FinalOrder).subscribe(
+      data => {
+        this.razorPayOrderId = data;
+
+        //this.payWithRazor(data);
+      },
+      err => {}
+    );
   }
   changeSlot(e) {
     e.preventDefault();
@@ -200,9 +210,10 @@ export class ReviewOrderComponent implements OnInit {
       keyboard: false
     });
     modelRef.result.then(data => {
-      debugger;
+      //debugger;
       console.log(data);
       this.custService.setMeetingSlot(data);
+      this.generateOrderId();
       this.selectedSlot.data = data;
       this.selectedSlot.selectedDate =
         data.mDate.day + "/" + data.mDate.month + "/" + data.mDate.year;
@@ -228,7 +239,7 @@ export class ReviewOrderComponent implements OnInit {
     }
   }
   editItem(id) {
-    debugger;
+    //debugger;
     this.router.navigate(["/createorder"], { queryParams: { itemId: id } });
   }
   resetCart() {
@@ -244,8 +255,8 @@ export class ReviewOrderComponent implements OnInit {
         calDelivery: 0,
         calGST: 0,
         calFinalTotal: 0,
-        calDiscountedTotal:0,
-        calDiscount:0
+        calDiscountedTotal: 0,
+        calDiscount: 0
       },
       totalItems: 0
     };

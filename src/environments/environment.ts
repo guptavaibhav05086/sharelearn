@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: "https://www.shapenprint.in",
-  //baseUrl: "http://localhost:39117",
+  //baseUrl: "https://www.shapenprint.in",
+  baseUrl: "http://localhost:39117",
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
   tokenUrl: "/Token",
@@ -19,7 +19,7 @@ export const environment = {
   uploadImage: "/api/designer/uploadimage",
   updatePrinter: "/api/printer/updateprofile",
   uploadPrinterImage: "/api/printer/uploadimage",
-  generateOrder: "/api/printer/generateorder?amount=$amount",
+  generateOrder: "/api/customer/generateorder?amount=$amount",
   transactionValidate:
     "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature",
   getDesignerProfile: "/api/designer/getProfile?userId=$userId",
@@ -42,7 +42,12 @@ export const environment = {
   getRegisteredprofiles: "/api/admin/getregisteredprofiles",
   getDiscounts: "/api/admin/getDisountList",
   updateDiscounts: "/api/admin/setDisountList",
-  deleteDiscounts: "/api/admin/deleteDisountList?Id=$Id"
+  deleteDiscounts: "/api/admin/deleteDisountList?Id=$Id",
+  deleteProd: "/api/admin/deleteProduct?Id=$Id",
+  deleteProdList: "/api/admin/deleteProducttList?Id=$Id",
+  generateOrderUser: "/api/customer/generateorder?amount=$amount",
+  transactionValidateUser:
+    "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature"
 };
 
 /*

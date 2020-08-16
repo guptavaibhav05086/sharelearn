@@ -158,13 +158,20 @@
       <hr />
       <div class="rowCart">
         <div class="col-shp-12 btnAling">
-          <app-razorpayments [paymentAmount]="userCart.finalPrice.calFinalTotal" [orderId]="razorPayOrderId" 
+          <!-- <app-razorpayments [paymentAmount]="userCart.finalPrice.calFinalTotal" [orderId]="razorPayOrderId" 
           (transactionStatus)="transactionUpdate($event)">
-        </app-razorpayments>
-          <span style="color:red" *ngIf="displayTranFail">Last Transaction is failed/Cancelled.Please retry Payment.</span>
-          <!-- <button class="btn btn-primary">Pay Now</button> -->
+        </app-razorpayments> -->
+          
+          <button class="btn btn-primary" (click)="placeOrder()">Proceed</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+<ngx-spinner
+  bdColor="rgba(51, 51, 51, 0.8)"
+  size="default"
+  type="ball-spin-clockwise"
+>
+  <p style="color: white">Please Wait.</p>
+</ngx-spinner>

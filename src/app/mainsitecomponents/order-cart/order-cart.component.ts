@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
 import { AdminService } from "src/app/services/admin.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-order-cart",
@@ -34,20 +35,30 @@ export class OrderCartComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private helper: HelperService,
-    private admin: AdminService
+    private admin: AdminService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
+    this.spinner.show();
     this.admin.getProducts().subscribe(
       data => {
         //this.discountPrice=data["discountList"];
         this.custService.discountedPrice = data["discountList"];
         console.log(this.custService.discountedPrice);
         debugger;
-        this.loadCart();
+        try {
+          this.loadCart();
+        } catch (error) {
+          this.spinner.hide();
+        }
+
+        this.spinner.hide();
         //debugger;
       },
-      err => {}
+      err => {
+        this.spinner.hide();
+      }
     );
     // this.loadCart();
   }
@@ -64,8 +75,8 @@ export class OrderCartComponent implements OnInit {
         calDelivery: 0,
         calGST: 0,
         calFinalTotal: 0,
-        calDiscount:0,
-        calDiscountedTotal:0
+        calDiscount: 0,
+        calDiscountedTotal: 0
       },
       totalItems: 0
     };
@@ -92,7 +103,7 @@ export class OrderCartComponent implements OnInit {
           this.userCart.designNprint.push(item.category[0]);
           this.userCart.finalPrice.calPrice += item.category[0].price.price;
           this.userCart.finalPrice.calGST += item.category[0].price.GST;
-          this.userCart.finalPrice.calDelivery +=
+          this.userCart.finalPrice.calDelivery =
             item.category[0].price.deliveryFee;
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
@@ -102,8 +113,8 @@ export class OrderCartComponent implements OnInit {
           this.userCart.design.push(item.category[0]);
           this.userCart.finalPrice.calPrice += item.category[0].price.price;
           this.userCart.finalPrice.calGST += item.category[0].price.GST;
-          this.userCart.finalPrice.calDelivery +=
-            item.category[0].price.deliveryFee;
+          // this.userCart.finalPrice.calDelivery +=
+          //   item.category[0].price.deliveryFee;
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
         } else if (item.type == "Print Only") {
@@ -111,7 +122,7 @@ export class OrderCartComponent implements OnInit {
           this.userCart.print.push(item.category[0]);
           this.userCart.finalPrice.calPrice += item.category[0].price.price;
           this.userCart.finalPrice.calGST += item.category[0].price.GST;
-          this.userCart.finalPrice.calDelivery +=
+          this.userCart.finalPrice.calDelivery =
             item.category[0].price.deliveryFee;
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
@@ -165,7 +176,13 @@ export class OrderCartComponent implements OnInit {
     }
   }
   placeOrder() {
-    this.helper.navigateToPath("/selectAddress");
+    if(this.userCart.displayDesignNPrint == true || this.userCart.displayPrint == true){
+      this.helper.navigateToPath("/selectAddress");
+    }
+    else{
+      this.helper.navigateToPath("/revieworder");
+    }
+    
     // let modelRef = this.modalService.open(BookMeetingComponent, {
     //   backdrop: "static"
     // });

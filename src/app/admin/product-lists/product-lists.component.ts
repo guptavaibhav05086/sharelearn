@@ -15,11 +15,11 @@ export class ProductListsComponent implements OnInit {
   isPhotoUrlValid: boolean;
   fileError = false;
   uploadedFileNames = {
-    product: ".jpg,.png,.jpeg,pdf format",
+    product: "",
     image1: "",
-    image2: ".jpg,.png,.jpeg,pdf format",
-    image3: ".jpg,.png,.jpeg,pdf format",
-    image4: ".jpg,.png,.jpeg,pdf format",
+    image2: "",
+    image3: "",
+    image4: "",
     content: "Content File in .doc,docx,.pdf format",
     IsImageUploaded: false,
     contentValidation: false,
@@ -32,7 +32,7 @@ export class ProductListsComponent implements OnInit {
   productform = new FormGroup({
     Pname: new FormControl("", [Validators.required]),
 
-    preferenece: new FormControl("", [Validators.required]),
+    preferenece: new FormControl(0, [Validators.required]),
     classification: new FormControl("", [Validators.required])
   });
   constructor(
@@ -51,6 +51,8 @@ export class ProductListsComponent implements OnInit {
       });
       this.uploadedFileNames.product = this.selProduct["productImage"];
       this.uploadedFileNames.image1 = this.selProduct["productIcon"];
+      this.uploadedFileNames.IscontentUploaded = true;
+      this.uploadedFileNames.IsproductRefUploaded = true;
     }
   }
   stopDefault(e) {
@@ -131,7 +133,7 @@ export class ProductListsComponent implements OnInit {
       data => {
         debugger;
         console.log(data);
-        alert("File Uploaded Successfully");
+        //alert("File Uploaded Successfully");
         this.uploadedFileNames[name] = data;
         this.fileError = false;
         this.uploadedFileNames.IsImageUploaded = true;
@@ -170,14 +172,16 @@ export class ProductListsComponent implements OnInit {
   updateNewproduct() {
     if (this.isEdit) {
       this.product.productId = this.selProduct["key"];
+      this.product.producPreference = this.productform.controls[
+        "preferenece"
+      ].value;
     } else {
       this.product.productId = 0;
+      this.product.producPreference = 0;
     }
 
     this.product.productName = this.productform.controls["Pname"].value;
-    this.product.producPreference = this.productform.controls[
-      "preferenece"
-    ].value;
+
     this.product.productCategory = this.productform.controls[
       "classification"
     ].value;
