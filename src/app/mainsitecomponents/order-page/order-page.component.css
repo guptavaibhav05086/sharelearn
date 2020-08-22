@@ -210,3 +210,6 @@ button.calendar:active {
 .displayBorderError {
   color: 1px solid #a94442;
 }
+.overflowBody{
+  overflow-y: hidden;
+}

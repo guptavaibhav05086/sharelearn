@@ -92,6 +92,9 @@ export class OrderCartComponent implements OnInit {
   editItem(id) {
     this.router.navigate(["/createorder"], { queryParams: { itemId: id } });
   }
+  createItem(){
+    this.router.navigate(["/createorder"]);
+  }
   loadCart() {
     debugger;
     let cartItems = JSON.parse(localStorage.getItem("cart"));

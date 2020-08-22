@@ -116,7 +116,10 @@
                     type="text"
                     class="form-control"
                     placeholder="First Name"
-                    
+                    [ngClass]="{'displayError': ((profileform.controls['fName'].dirty ||
+                    profileform.controls['fName'].touched) &&
+                    profileform.controls['fName'].invalid &&
+                    profileform.controls['fName'].errors.required)}"
                     [disabled]="isDisabled"
                     formControlName="fName"  
                     required
@@ -141,7 +144,10 @@
                     type="text"
                     class="form-control"
                     placeholder="Last Name"
-                    
+                    [ngClass]="{'displayError': ((profileform.controls['lName'].dirty ||
+                    profileform.controls['lName'].touched) &&
+                    profileform.controls['lName'].invalid &&
+                    profileform.controls['lName'].errors.required)}"
                     formControlName="lName"  
                     required
                   />
@@ -162,7 +168,11 @@
                 <div class="form-group">
                   <label>Gender *</label>
                   <select class="form-control" [disabled]="isDisabled" 
-                  formControlName="gender"  
+                  formControlName="gender"
+                  [ngClass]="{'displayError': ((profileform.controls['gender'].dirty ||
+                  profileform.controls['gender'].touched) &&
+                  profileform.controls['gender'].invalid &&
+                  profileform.controls['gender'].errors.required)}"  
                   required>
                     <option selected></option>
                     <option>Male</option>
@@ -193,6 +203,14 @@
                     placeholder="+91"
                     [disabled]="isDisabled"
                     
+                    [ngClass]="{'displayError': ((profileform.controls['mobileNumber'].dirty ||
+                    profileform.controls['mobileNumber'].touched) &&
+                    profileform.controls['mobileNumber'].invalid &&
+                    profileform.controls['mobileNumber'].errors.invalidPattern)|| ( (profileform.controls['mobileNumber'].dirty ||
+                    profileform.controls['mobileNumber'].touched) &&
+                    profileform.controls['mobileNumber'].invalid &&
+                    profileform.controls['mobileNumber'].errors.required) || ((verifyClicked &&
+                    !(isPhoneVerified)))}"
                     formControlName="mobileNumber"  
                     required
                   />
@@ -216,7 +234,7 @@
                     profileform.controls['mobileNumber'].errors.required
                   "
                 >
-                  *Invalid Mobile number.
+                  * Mobile number is required
                 </span>
                 <span
                   class="errorMessage"
@@ -250,6 +268,10 @@
                       <label class="control-label" for="datepicker">Date Of Birth *</label>
                       <input type="date" class="form-control" id="datepicker" 
                       formControlName="dob"  
+                      [ngClass]="{'displayError': ((profileform.controls['dob'].dirty ||
+                      profileform.controls['dob'].touched) &&
+                      profileform.controls['dob'].invalid &&
+                      profileform.controls['dob'].errors.required)}"
                       required>
                     </div>
                     <span
@@ -281,6 +303,13 @@
                     required
                         [disabled]="isDisabled"
                         style="text-transform:uppercase;"
+                        [ngClass]="{'displayError': ((profileform.controls['gst'].dirty ||
+                        profileform.controls['gst'].touched) &&
+                        profileform.controls['gst'].invalid &&
+                        profileform.controls['gst'].errors.required) ||((profileform.controls['gst'].dirty ||
+                        profileform.controls['gst'].touched) &&
+                        profileform.controls['gst'].invalid &&
+                        profileform.controls['gst'].errors.invalidPattern)}"
                       />
                       <span
                       class="errorMessage"
@@ -339,7 +368,14 @@
                         placeholder="PAN "
                         maxlength="10"
                         [disabled]="isDisabled"
-                        formControlName="pan"  
+                        formControlName="pan" 
+                        [ngClass]="{'displayError': ((profileform.controls['pan'].dirty ||
+                        profileform.controls['pan'].touched) &&
+                        profileform.controls['pan'].invalid &&
+                        profileform.controls['pan'].errors.required) ||((profileform.controls['pan'].dirty ||
+                        profileform.controls['pan'].touched) &&
+                        profileform.controls['pan'].invalid &&
+                        profileform.controls['pan'].errors.invalidPattern)}" 
                         required
                         style="text-transform:uppercase;"
                       />
@@ -376,7 +412,13 @@
                     placeholder="Website, Social Media, etc"
                     
                     formControlName="profile"  
-                    
+                    [ngClass]="{'displayError': ((profileform.controls['aadhar'].dirty ||
+                    profileform.controls['aadhar'].touched) &&
+                    profileform.controls['aadhar'].invalid &&
+                    profileform.controls['aadhar'].errors.required) ||((profileform.controls['aadhar'].dirty ||
+                    profileform.controls['aadhar'].touched) &&
+                    profileform.controls['aadhar'].invalid &&
+                    profileform.controls['aadhar'].errors.invalidPattern)}"
                     [disabled]="isDisabled"
                   />
                 </div>
@@ -500,11 +542,16 @@
               </div>
             <div class="row" >
               <!-- {{profileform.valid && isTermsAccepted}} -->
-              <div class="update ml-auto mr-auto">
+              <!-- <div class="update ml-auto mr-auto">
                 <button type="button" (click)="createProfile()" [disabled]= "!(profileform.valid && isTermsAccepted &&isPhoneVerified)" class="btn btn-primary btn-round">
                   Submit
                 </button>
-              </div>
+              </div> -->
+              <div class="update ml-auto mr-auto">
+                  <button type="button" (click)="createProfile()"  class="btn btn-primary btn-round">
+                    Submit
+                  </button>
+                </div>
             </div>
            
           </form>

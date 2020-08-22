@@ -49,7 +49,7 @@ export class PrinterprofileComponent implements OnInit {
       )
     ]),
 
-    profile: new FormControl("", [Validators.required]),
+    profile: new FormControl(""),
     pan: new FormControl("", [
       Validators.required,
       this._validator.patternValidation(
@@ -63,6 +63,7 @@ export class PrinterprofileComponent implements OnInit {
       this._validator.patternValidation(/^\d{4}\d{4}\d{4}$/)
     ])
   });
+  oldNumber: any;
   constructor(
     private modalService: NgbModal,
     private helper: HelperService,
@@ -148,8 +149,20 @@ export class PrinterprofileComponent implements OnInit {
   }
 
   changeNumber() {
-    this.isPhoneVerified = false;
+    debugger;
+    //this.oldNumber=this.profileform.controls['mobileNumber'].value;
     this.profileform.get("mobileNumber").enable();
+    this.isPhoneVerified = false;
+    // if (this.oldNumber != this.profileform.controls["mobileNumber"].value) {
+    //   this.isPhoneVerified = false;
+    //   this.profileform.get("mobileNumber").disable();
+    // } else {
+    //   this.isPhoneVerified = true;
+    //   this.profileform.get("mobileNumber").enable();
+    // }
+    // if (!this.verifyClicked) {
+    //   this.profileform.get("mobileNumber").enable();
+    // }
   }
   ngOnInit() {
     this.request = new PrinterProfileRequest();
@@ -187,6 +200,7 @@ export class PrinterprofileComponent implements OnInit {
           if (data["mobileNumber"] != null && data["mobileNumber"] != "") {
             this.isPhoneVerified = data["isMobileVerified"];
             this.profileform.get("mobileNumber").disable();
+            this.oldNumber = this.profileform.controls["mobileNumber"].value;
           }
           //this.isPhoneVerified = data["isMobileVerified"];
           this.selectedFileName = data["gstFileName"];
@@ -245,7 +259,30 @@ export class PrinterprofileComponent implements OnInit {
   }
   createProfile() {
     debugger;
-
+    if (
+      !(this.profileform.valid && this.isTermsAccepted && this.isPhoneVerified)
+    ) {
+      let invalidControls = "";
+      Object.keys(this.profileform.controls).forEach(field => {
+        // {1}
+        const control = this.profileform.get(field); // {2}
+        if (control.status.toLowerCase() == "invalid") {
+          invalidControls = invalidControls + " [" + field.toUpperCase() + "] ";
+        }
+        control.markAsTouched({ onlySelf: true }); // {3}
+      });
+      if (!this.isPhoneVerified) {
+        alert("Phone Number is not verified");
+        return;
+      } else if (!this.isTermsAccepted) {
+        alert("Accept Terms and Conditions");
+      } else {
+        alert(
+          `Please provide correct value in these controls ${invalidControls}`
+        );
+      }
+      return;
+    }
     //this.request.softwares = "";
     this.request.firstName = this.profileform.controls["fName"].value;
     this.request.lastName = this.profileform.controls["lName"].value;

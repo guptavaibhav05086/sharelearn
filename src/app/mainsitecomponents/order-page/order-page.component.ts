@@ -395,6 +395,9 @@ export class OrderPageComponent implements OnInit {
       logoImage:this.imageUpload,
       content: this.orderForm.controls["designcontent"].value,
       industry: this.orderForm.controls["purpose"].value,
+      IsPriceInSqFt:selItem.IsPriceInSqFt,
+      selLength:this.orderForm.controls["length"].value,
+      selWidth:this.orderForm.controls["width"].value,
       category: [
         {
           name: this.orderForm.controls["category"].value,
@@ -439,6 +442,7 @@ export class OrderPageComponent implements OnInit {
       ]
     };
     this.custService.addItemUserOrdersList(cartItem);
+    this._helper.navigateToPath("/cart");
     this.displaycartMessage = true;
   }
   scrollToElement($element): void {
@@ -756,6 +760,7 @@ return true;
     return true;
   }
   showCategory(category) {
+    this.addRemoveOverflow(false);
     if(this.displayeproceed == false){
       return;
     }
@@ -801,6 +806,7 @@ return true;
     // this.selectedCategory.sort((a, b) => a.value.localeCompare(b.value));
   }
   ngOnInit(): void {
+   
     for (let i = 1; i < 101; i++) {
       this.arrLnW.push(i);
     }
@@ -838,7 +844,11 @@ return true;
           this.openEditForm(this.cartItemId);
           this.spinner.hide();
         }
+        else{
+          this.addRemoveOverflow(true);
+        }
         this.spinner.hide();
+        
       },
       err => {
         this.spinner.hide();
@@ -857,6 +867,18 @@ return true;
     // });
   }
 
+  addRemoveOverflow(toggle){
+    if(toggle){
+      // this.document.getElementsByTagName("body")[0].classList.add('overflowBody');
+      this.document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y: hidden;");
+
+    }
+    else{
+// this.document.getElementsByTagName("body")[0].classList.remove('overflowBody');
+this.document.getElementsByTagName("body")[0].removeAttribute("style");
+    }
+
+  }
   openEditForm(id) {
     debugger;
     let cart = this.custService.getLocalStorageCart();
@@ -870,12 +892,25 @@ return true;
 
       // }
       this.selectedProduct(editItem[0].category[0].name, elemTime);
+      let e={
 
-      let e = {
-        target: {
-          value: editItem[0].category[0].specs.size
-        }
       };
+      if(editItem[0].IsPriceInSqFt){
+        e = {
+          target: {
+            value: "L x W (cutomised)"
+          }
+        };
+      }
+      else{
+
+        e = {
+          target: {
+            value: editItem[0].category[0].specs.size
+          }
+        };
+      }
+      
       this.selectedSize(e);
       this.orderForm.patchValue({
         type: editItem[0].type,
@@ -891,7 +926,9 @@ return true;
         quantities: editItem[0].category[0].specs.quantity,
         pinCode: editItem[0].category[0].specs.pinCode,
         designcontent: editItem[0].content,
-        purpose: editItem[0].industry
+        purpose: editItem[0].industry,
+        length: editItem[0].selLength,
+        width:editItem[0].selWidth,   
       });
       this.selectedSubcategory(null);
       this.orderForm.patchValue({
@@ -1047,7 +1084,7 @@ return true;
     }
   }
   selectedSize(e) {
-    //debugger;
+    debugger;
     let val = e.target.value;
     if (this.proSpec.quantities != null) {
       let quant = this.proSpec.quantities.filter(item => item.size == val)[0];

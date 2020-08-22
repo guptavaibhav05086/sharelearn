@@ -54,6 +54,7 @@ export class DesignerprofileComponent implements OnInit {
       )
     ])
   });
+  oldNumber: any;
   constructor(
     private modalService: NgbModal,
     private helper: HelperService,
@@ -132,6 +133,7 @@ export class DesignerprofileComponent implements OnInit {
           if (data["mobileNumber"] != null && data["mobileNumber"] != "") {
             this.isPhoneVerified = data["isMobileVerified"];
             this.profileform.get("mobileNumber").disable();
+            this.oldNumber = this.profileform.controls["mobileNumber"].value;
           }
 
           if (data["profileImage"] != null) {
@@ -197,6 +199,36 @@ export class DesignerprofileComponent implements OnInit {
     } catch {}
   }
   createProfile() {
+    if (
+      !(this.profileform.valid && this.isTermsAccepted && this.isPhoneVerified)
+    ) {
+      let invalidControls = "";
+      Object.keys(this.profileform.controls).forEach(field => {
+        // {1}
+        const control = this.profileform.get(field); // {2}
+        if (control.status.toLowerCase() == "invalid") {
+          if(field=="qualification"){
+            invalidControls = invalidControls + " [ Aadhar ] ";
+          }
+          else{
+            invalidControls = invalidControls + " [" + field.toUpperCase() + " ] ";
+          }
+          
+        }
+        control.markAsTouched({ onlySelf: true }); // {3}
+      });
+      if (!this.isPhoneVerified) {
+        alert("Phone Number is not verified");
+        return;
+      } else if (!this.isTermsAccepted) {
+        alert("Accept Terms and Conditions");
+      } else {
+        alert(
+          `Please provide correct value in these controls ${invalidControls}`
+        );
+      }
+      return;
+    }
     this.request = new DesignerProfileRequest();
     this.request.softwares = "";
     this.request.firstName = this.profileform.controls["fName"].value;
@@ -258,8 +290,20 @@ export class DesignerprofileComponent implements OnInit {
     else this.isDisableProfession = true;
   }
   changeNumber() {
+    debugger;
     this.isPhoneVerified = false;
     this.profileform.get("mobileNumber").enable();
+    // //this.oldNumber=this.profileform.controls['mobileNumber'].value;
+    // if (this.oldNumber != this.profileform.controls["mobileNumber"].value) {
+    //   this.isPhoneVerified = false;
+    //   this.profileform.get("mobileNumber").disable();
+    // } else {
+    //   this.isPhoneVerified = true;
+    //   this.profileform.get("mobileNumber").enable();
+    // }
+    // if (!this.verifyClicked) {
+    //   this.profileform.get("mobileNumber").enable();
+    // }
   }
   openVerifyOTP() {
     if (this.isPhoneVerified == false) {

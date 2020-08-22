@@ -184,7 +184,8 @@
                     type="text"
                     class="form-control"
                     placeholder="+91"                                
-                    formControlName="mobileNumber"  
+                    formControlName="mobileNumber" 
+                   
                     required
                   />
                   <span
@@ -366,7 +367,7 @@
                   profileform.controls['pan'].errors.required
                 "
               >
-                *PAN# Link is required.
+                *PAN#  is required.
               </span>
               <span
               class="errorMessage"
@@ -532,9 +533,12 @@
             <div class="row" >
               <!-- {{profileform.valid && isTermsAccepted}} -->
               <div class="update ml-auto mr-auto">
-                <button type="button" (click)="createProfile()" [disabled]= "!(profileform.valid && isTermsAccepted && isPhoneVerified)" class="btn btn-primary btn-round">
+                <!-- <button type="button" (click)="createProfile()" [disabled]= "!(profileform.valid && isTermsAccepted && isPhoneVerified)" class="btn btn-primary btn-round">
                   Submit
-                </button>
+                </button> -->
+                <button type="button" (click)="createProfile()"  class="btn btn-primary btn-round">
+                    Submit
+                  </button>
               </div>
             </div>
           </form>

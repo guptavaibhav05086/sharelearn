@@ -40,7 +40,7 @@ export class HomelinkPageComponent implements OnInit {
     this.selectCors();
   }
 
-  socialLink(name,event) {
+  socialLink(name, event) {
     if (name == "fb") {
       window.open("https://www.facebook.com/shapenprint/", "_blank");
     }
@@ -61,39 +61,61 @@ export class HomelinkPageComponent implements OnInit {
 
   @HostListener("window:load")
   calculateCordsOnload() {
-    this.winSize.nWidth = this.winRef.nativeWindow.visualViewport.width + "px";
-    this.winSize.nHeigth =
-      this.winRef.nativeWindow.visualViewport.height + "px";
-    console.log(this.winSize);
-    if (this.winRef.nativeWindow.visualViewport.width < 768) {
-      this.imgUrl = this.homePageMobileUrl;
-    } else {
+    try {
+      this.winSize.nWidth =
+        this.winRef.nativeWindow.visualViewport.width + "px";
+      this.winSize.nHeigth =
+        this.winRef.nativeWindow.visualViewport.height + "px";
+      console.log(this.winSize);
+      if (this.winRef.nativeWindow.visualViewport.width < 768) {
+        this.imgUrl = this.homePageMobileUrl;
+      } else {
+        this.imgUrl = this.homepageImgUrl;
+      }
+    } catch (Exception) {
+      // this.winSize.nWidth = "100%";
+      // this.winSize.nHeigth = "100%";
       this.imgUrl = this.homepageImgUrl;
     }
+
     //alert("w: " + this.winSize.nWidth + " h: " + this.winSize.nHeigth);
   }
   @HostListener("window:resize")
   calculateCordsOnresize() {
-    this.winSize.nWidth = this.winRef.nativeWindow.visualViewport.width + "px";
-    this.winSize.nHeigth =
-      this.winRef.nativeWindow.visualViewport.height + "px";
-    console.log(this.winSize);
-    if (this.winRef.nativeWindow.visualViewport.width < 768) {
-      this.imgUrl = this.homePageMobileUrl;
-    } else {
+    try {
+      this.winSize.nWidth =
+        this.winRef.nativeWindow.visualViewport.width + "px";
+      this.winSize.nHeigth =
+        this.winRef.nativeWindow.visualViewport.height + "px";
+      console.log(this.winSize);
+      if (this.winRef.nativeWindow.visualViewport.width < 768) {
+        this.imgUrl = this.homePageMobileUrl;
+      } else {
+        this.imgUrl = this.homepageImgUrl;
+      }
+    } catch (Exception) {
+      // this.winSize.nWidth = "100%";
+      // this.winSize.nHeigth = "100%";
       this.imgUrl = this.homepageImgUrl;
     }
     //alert("w: " + this.winSize.nWidth + " h: " + this.winSize.nHeigth);
   }
 
   selectCors() {
-    this.winSize.nWidth = this.winRef.nativeWindow.visualViewport.width + "px";
-    this.winSize.nHeigth =
-      this.winRef.nativeWindow.visualViewport.height + "px";
-    console.log(this.winSize);
-    if (this.winRef.nativeWindow.visualViewport.width < 768) {
-      this.imgUrl = this.homePageMobileUrl;
-    } else {
+    try {
+      this.winSize.nWidth =
+        this.winRef.nativeWindow.visualViewport.width + "px";
+      this.winSize.nHeigth =
+        this.winRef.nativeWindow.visualViewport.height + "px";
+      console.log(this.winSize);
+      if (this.winRef.nativeWindow.visualViewport.width < 768) {
+        this.imgUrl = this.homePageMobileUrl;
+      } else {
+        this.imgUrl = this.homepageImgUrl;
+      }
+    } catch (Exception) {
+      // this.winSize.nWidth = "100%";
+      // this.winSize.nHeigth = "100%";
       this.imgUrl = this.homepageImgUrl;
     }
     // alert(this.cordinate);
