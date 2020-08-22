@@ -87,7 +87,7 @@ export class ReviewOrderComponent implements OnInit {
       //debugger;
       this.displayTranFail = false;
       let origin = this.document.location.origin;
-      let url = origin + "/orderstatus?tranId=" + event.tranId;
+      let url = origin + "/orderstatus?tranId=" + event.tranId + "&orderId=" + this.razorPayOrderId;
       window.location.href = url;
 
       // this.router.navigate(["/ordersuccess"], {

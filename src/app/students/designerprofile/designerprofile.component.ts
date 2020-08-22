@@ -25,6 +25,7 @@ export class DesignerprofileComponent implements OnInit {
   isEdit = false;
   isPhoneVerified = false;
   verifyClicked = false;
+  displayControls=false;
   profileform = new FormGroup({
     fName: new FormControl("", [Validators.required]),
     lName: new FormControl("", [Validators.required]),
@@ -36,10 +37,10 @@ export class DesignerprofileComponent implements OnInit {
       )
     ]),
     dob: new FormControl("", [Validators.required]),
-    qualification: new FormControl("", [
-      Validators.required,
-      this._validator.patternValidation(/^\d{4}\d{4}\d{4}$/)
-    ]),
+    // qualification: new FormControl("", [
+    //   Validators.required,
+    //   this._validator.patternValidation(/^\d{4}\d{4}\d{4}$/)
+    // ]),
     exp: new FormControl("", [Validators.required]),
     profile: new FormControl("", [Validators.required]),
     city: new FormControl("", [Validators.required]),
@@ -47,12 +48,12 @@ export class DesignerprofileComponent implements OnInit {
     postalCode: new FormControl("", [Validators.required]),
     softwares: new FormArray([]),
     others: new FormControl("", []),
-    pan: new FormControl("", [
-      Validators.required,
-      this._validator.patternValidation(
-        /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/
-      )
-    ])
+    // pan: new FormControl("", [
+    //   Validators.required,
+    //   this._validator.patternValidation(
+    //     /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/
+    //   )
+    // ])
   });
   oldNumber: any;
   constructor(
@@ -123,12 +124,12 @@ export class DesignerprofileComponent implements OnInit {
             dob: data["dob"],
             profile: data["profileUrl"],
             address: data["address"],
-            qualification: data["qualification"],
+            //qualification: data["qualification"],
             exp: data["exp"],
             postalCode: data["postalCode"],
             state: data["state"],
             city: data["city"],
-            pan: data["pan"]
+            //pan: data["pan"]
           });
           if (data["mobileNumber"] != null && data["mobileNumber"] != "") {
             this.isPhoneVerified = data["isMobileVerified"];
@@ -236,9 +237,9 @@ export class DesignerprofileComponent implements OnInit {
     this.request.gender = this.profileform.controls["gender"].value;
     this.request.postalCode = this.profileform.controls["postalCode"].value;
     this.request.profileUrl = this.profileform.controls["profile"].value;
-    this.request.qualification = this.profileform.controls[
-      "qualification"
-    ].value;
+    // this.request.qualification = this.profileform.controls[
+    //   "qualification"
+    // ].value;
     this.request.mobileNumber = this.profileform.controls["mobileNumber"].value;
     this.request.dob = this.profileform.controls["dob"].value;
     this.request.exp = this.profileform.controls["exp"].value;
@@ -246,7 +247,7 @@ export class DesignerprofileComponent implements OnInit {
     this.request.state = this.profileform.controls["state"].value;
     this.request.userId = localStorage.getItem("userId");
     this.request.emailId = localStorage.getItem("email");
-    this.request.pan = this.profileform.controls["pan"].value;
+    //this.request.pan = this.profileform.controls["pan"].value;
     let selSoft = this.softwares.filter(item => item.selected == true);
     selSoft.forEach(item => (this.request.softwares += item.name + ";"));
 

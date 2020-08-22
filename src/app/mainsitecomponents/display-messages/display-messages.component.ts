@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { DOCUMENT } from "@angular/common";
+import { CustomerService } from "src/app/services/customer.service";
 @Component({
   selector: "app-display-messages",
   templateUrl: "./display-messages.component.html",
@@ -11,7 +12,8 @@ export class DisplayMessagesComponent implements OnInit {
   displayError = false;
   constructor(
     private route: ActivatedRoute,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private custService: CustomerService
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +27,18 @@ export class DisplayMessagesComponent implements OnInit {
       } else {
         this.displayError = true;
       }
+      if (params.orderId != undefined && params.orderId != "null") {
+        this.custService.sendNotification(params.orderId).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      } else {
+      }
+      //orderId
 
       // popular
     });

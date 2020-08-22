@@ -42,5 +42,6 @@ export const environment = {
   deleteProdList: "/api/admin/deleteProduct?Id=$Id",
   generateOrderUser: "/api/customer/generateorder?amount=$amount",
   transactionValidateUser:
-    "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature"
+    "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature",
+  sendNotification: "/api/customer/sendNotification?orderId=$orderId"
 };

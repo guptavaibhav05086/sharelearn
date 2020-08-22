@@ -268,7 +268,7 @@
                      
                     </div>
               </div>
-              <div class="flex-control5">
+              <div class="flex-control5" *ngIf="orderForm.controls['type'].value != 'Print Only'" >
                   <div class="form-group">
                       <label>Industry * </label>
                       <input
@@ -277,7 +277,7 @@
                         placeholder="School, IT, Gym, etc."               formControlName="purpose"
                           
                         [ngClass]="{'displayError': (this.orderForm.controls['purpose'].touched && this.orderForm.controls['purpose'].invalid)}" 
-                                                                                     
+                                                                                   
                       />                           
                      
                     </div>

@@ -605,12 +605,12 @@ return true;
   }
   resetControls() {
     this.uploadedFileNames = {
-      product: ".jpg,.png,.jpeg,pdf format",
-      image1: ".jpg,.png,.jpeg,pdf format",
-      image2: ".jpg,.png,.jpeg,pdf format",
-      image3: ".jpg,.png,.jpeg,pdf format",
-      image4: ".jpg,.png,.jpeg,pdf format",
-      content: "Content File in .doc,docx,.pdf format",
+      product: "",
+      image1: "",
+      image2: "",
+      image3: "",
+      image4: "",
+      content: "",
       IsImageUploaded: false,
       contentValidation:false,
       IsproductRefUploaded:false,
@@ -661,7 +661,7 @@ return true;
       meetingSlot: "",
       professionDesigner: false,
       sourceFile: false,
-      purpose:"",
+      purpose:this.orderForm.controls['type'].value == 'Print Only' ?'Print Only':"",
       designcontent:""
     });
 
@@ -782,19 +782,24 @@ return true;
       this.displayDesigner = false;
       this.Servicable = false;
       this.uploadedFileNames.contentValidation=true;
-      
+      this.orderForm.patchValue({
+        pinCode: "",
+        purpose:"Print Only"
+      });
       if (category == "Design And Print") {
         this.displayDesigner = true;
         this.uploadedFileNames.contentValidation=false;
+        this.orderForm.patchValue({         
+          purpose:""
+        });
       }
-      this.orderForm.patchValue({
-        pinCode: ""
-      });
+      
     } else {
       this.displayprinter = false;
       this.displayDesigner = true;
       this.orderForm.patchValue({
-        pinCode: "0"
+        pinCode: "0",
+        purpose:""
       });
       this.Servicable = true;
     }
