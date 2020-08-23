@@ -30,6 +30,7 @@ export class OrderCartComponent implements OnInit {
     },
     totalItems: 0
   };
+  disableProceed: boolean=false;
   constructor(
     private custService: CustomerService,
     private router: Router,
@@ -156,6 +157,9 @@ export class OrderCartComponent implements OnInit {
       if (this.userCart.print.length > 0) {
         this.userCart.displayPrint = true;
       }
+    }
+    else{
+      this.disableProceed = true;
     }
     this.calculateDiscounts();
     console.log(this.userCart);

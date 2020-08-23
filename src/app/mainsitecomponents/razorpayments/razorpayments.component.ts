@@ -60,8 +60,8 @@ export class RazorpaymentsComponent implements OnInit {
       key: "rzp_test_mz10cbdFCEOGCL",
       amount: this.paymentAmount * 100, // amount should be in paise format to display Rs 1255 without decimal point
       currency: "INR",
-      name: "ShapeNPrint", // company name or product name
-      description: "ShapeNPrint", // product description
+      name: "shapeNprint", // company name or product name
+      description: "shapeNprint", // product description
       image: "../../../assets/img/logo.png", // company logo or product image
       order_id: val, // order_id created by you in backend
       modal: {

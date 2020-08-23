@@ -5,7 +5,7 @@ import { PrintersComponent } from "./printers.component";
 
 import { PrinterprofileComponent } from "./printerprofile/printerprofile.component";
 import { PrintersGuard } from "./auth/printers.guard";
-
+import { NotificationsComponent } from "./notifications/notifications.component";
 const routes: Routes = [
   {
     path: "",
@@ -15,6 +15,10 @@ const routes: Routes = [
       {
         path: "profile",
         component: PrinterprofileComponent
+      },
+      {
+        path: "notifications",
+        component: NotificationsComponent
       }
     ]
   }

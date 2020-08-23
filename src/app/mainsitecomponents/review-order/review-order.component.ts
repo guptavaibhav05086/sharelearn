@@ -7,6 +7,7 @@ import { CustomerService } from "src/app/services/customer.service";
 import { HelperService } from "src/app/services/helper.service";
 import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
 import { AdminService } from "src/app/services/admin.service";
+import { HostListener } from '@angular/core';
 @Component({
   selector: "app-review-order",
   templateUrl: "./review-order.component.html",
@@ -76,6 +77,10 @@ export class ReviewOrderComponent implements OnInit {
       err => {}
     );
   }
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    console.log('Back button pressed');
+  }
   transactionUpdate(event) {
     //debugger;
     if (event.tranId == null) {
@@ -85,6 +90,15 @@ export class ReviewOrderComponent implements OnInit {
       window.location.href = url;
     } else {
       //debugger;
+      try {
+        let cart = this.custService.getLocalStorageCart();
+        cart.forEach(element => {
+          this.custService.deletItemFromCart(element.id)
+          
+        });
+      } catch (error) {
+        
+      }
       this.displayTranFail = false;
       let origin = this.document.location.origin;
       let url = origin + "/orderstatus?tranId=" + event.tranId + "&orderId=" + this.razorPayOrderId;

@@ -2,7 +2,7 @@
   <div class="rowCart">
     <div class="col-shp-7">
         <div class="categoryTitle">
-           <button class="btn btn-primary" (click)="createItem()">Create New Item</button>
+           <button class="btn btn-primary" style="text-transform: none;" (click)="createItem()">Create Another Order</button>
         </div>
         
       <div class="categoryTitle">My Cart ({{userCart.totalItems}} Items)</div>
@@ -166,7 +166,7 @@
           (transactionStatus)="transactionUpdate($event)">
         </app-razorpayments> -->
           
-          <button class="btn btn-primary" (click)="placeOrder()">Proceed</button>
+          <button class="btn btn-primary" [disabled]="disableProceed" (click)="placeOrder()">Proceed</button>
         </div>
       </div>
     </div>

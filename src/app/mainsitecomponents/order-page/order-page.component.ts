@@ -88,7 +88,9 @@ export class OrderPageComponent implements OnInit {
     sourceFileFees: 0,
     discount:0,
     discountPerc:0,
-    discountedTotal:0
+    discountedTotal:0,
+    designerCost:0,
+    printerCost:0
   };
   trackCartOrderCount = {
     design: 0,
@@ -430,7 +432,8 @@ export class OrderPageComponent implements OnInit {
             sourceFileFees: this.orderPrice.sourceFileFees,
            
             discountPerc:this.orderPrice.discountPerc,
-           
+            designerCost:this.orderPrice.designerCost,
+            printerCost:this.orderPrice.printerCost,
             discount:this.orderPrice.discount,
             discountedTotal:this.orderPrice.discountedTotal
           },
@@ -647,7 +650,9 @@ return true;
       baseDesignPrice:0,
       discount:0,
       discountPerc:0,
-      discountedTotal:0
+      discountedTotal:0,
+      designerCost:0,
+      printerCost:0
     };
     this.orderForm.patchValue({
       category: "",
@@ -1219,6 +1224,7 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
       this.orderPrice.professiondesignerFees 
       +
       this.orderPrice.sourceFileFees;
+      this.orderPrice.designerCost=item.DesignPrice;
     let designGST = designCost * (item.DesignGST / 100);
     let totalDesignCost = designCost + designGST;
     this.orderPrice.designCost = designCost;
@@ -1242,6 +1248,7 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
         let gstPercentage = item[0].PrintGST / 100;
         let pGST = pCost * gstPercentage;
         let totalPrintCost = pCost + pGST;
+        this.orderPrice.printerCost=(itemPrice.pricePerUnit *quant) + (itemPrice.pricePerUnit *quant) * gstPercentage;
         this.orderPrice.printGST = Math.round(pGST);
         this.orderPrice.printCost = Math.round(pCost);
         this.orderPrice.totalPrintCost = Math.round(totalPrintCost);
@@ -1286,7 +1293,9 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
             (itemPrice.printCommission / 100) * itemPrice.pricePerUnit) *
           selectedSqft 
           ;
+          
         let gstPercentage = item[0].PrintGST / 100;
+        this.orderPrice.printerCost=(itemPrice.pricePerUnit *  selectedSqft) + (itemPrice.pricePerUnit *  selectedSqft) * gstPercentage;
         let pGST = pCost * gstPercentage;
         let totalPrintCost = pCost + pGST;
         this.orderPrice.printGST = Math.round(pGST);

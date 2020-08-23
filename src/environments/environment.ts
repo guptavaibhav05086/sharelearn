@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //baseUrl: "https://www.shapenprint.in",
-  baseUrl: "http://localhost:39117",
+  baseUrl: "https://www.shapenprint.in",
+  //baseUrl: "http://localhost:39117",
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
   tokenUrl: "/Token",
@@ -48,7 +48,9 @@ export const environment = {
   generateOrderUser: "/api/customer/generateorder?amount=$amount",
   transactionValidateUser:
     "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature",
-  sendNotification: "/api/customer/sendNotification?orderId=$orderId"
+  sendNotification: "/api/customer/sendNotification?orderId=$orderId",
+  fetchNotiPrinter: "/api/printer/getNotificationDetails",
+  fetchNotiDesigner: "/api/designer/getNotificationDetails"
 };
 
 /*

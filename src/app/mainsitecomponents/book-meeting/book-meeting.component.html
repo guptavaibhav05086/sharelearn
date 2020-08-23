@@ -40,8 +40,8 @@
                                         <input class="form-control" placeholder="yyyy-mm-dd"
                                                name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
                                                formControlName="meetingDate"
-                                               (blur)="d.close()"
-                                               
+                                               (blur)="d.close();dateControlValidation()"
+                                                (change)="dateControlValidation()"
                                                [minDate]="minDate"
                                                [maxDate]="maxDate"
                                                 
