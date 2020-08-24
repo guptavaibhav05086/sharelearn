@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h4 class="modal-title">Detail Component</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.close('Close click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table>
+      <tr>
+        <td>{{data["ProductSubcategory"]}}</td>
+        <td>{{data["Industry"]}}</td>
+        <td>{{data["MeetingSlot"]}}</td>
+        <td>{{data["Amount"]}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light" (click)="activeModal.dismiss('Cross click')"> Close </button>
+  </div>
+  

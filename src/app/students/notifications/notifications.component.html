@@ -1,1 +1,33 @@
-<p>notifications works!</p>
+<div class="container">
+    <div class="row">
+     <div class="col-md-12 py-4 text-center">
+      <h1>List of Notifications</h1>
+     </div>
+    </div>
+    <div class="row justify-content-center">
+     <div class="col-md-12 py-4">
+      <table class="table table-striped">
+       <thead>
+        <tr>
+            <th >Product Subcategory</th>
+            <th>Industry</th>
+            <th>Meeting Slot</th>
+            <th>Amount </th>
+            <th>Action</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr *ngFor="let user of userList">
+         <th scope="row">{{ user.ProductSubcategory }}</th>
+         <td>{{ user.Industry }}</td>
+         <td>{{ user.MeetingSlot }}</td>
+         <td>{{ user.Amount }}</td>
+         <td>
+          <button type="button" class="btn btn-primary" (click)="openModal(user)">Accept</button>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
