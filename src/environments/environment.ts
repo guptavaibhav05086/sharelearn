@@ -48,6 +48,9 @@ export const environment = {
   generateOrderUser: "/api/customer/generateorder?amount=$amount",
   transactionValidateUser:
     "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature",
+
+    getDesignerNotification :'/api/designer/getNotificationDetails?isProfessional=true' 
+
   sendNotification: "/api/customer/sendNotification?orderId=$orderId",
   fetchNotiPrinter: "/api/printer/getNotificationDetails",
   fetchNotiDesigner: "/api/designer/getNotificationDetails"

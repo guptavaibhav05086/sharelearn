@@ -19,6 +19,10 @@ import { TermsconditionsComponent } from "./termsconditions/termsconditions.comp
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { NgxSpinnerModule } from "ngx-spinner";
+import { DetailsComponentComponent } from './details-component/details-component.component';
+
+
+
 @NgModule({
   declarations: [
     StudentsComponent,
@@ -34,7 +38,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     HelpComponent,
     DesignerprofileComponent,
     VerifyOTPComponent,
-    TermsconditionsComponent
+    TermsconditionsComponent,
+    DetailsComponentComponent
   ],
   imports: [
     CommonModule,
