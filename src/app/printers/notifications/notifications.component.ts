@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { DetailsComponentComponent } from "../details-component/details-component.component"
-import { PrinterService } from "../../services/printer.service"
+import { DetailsComponentComponent } from "../details-component/details-component.component";
+import { PrinterService } from "../../services/printer.service";
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
@@ -14,7 +14,7 @@ export class NotificationsComponent implements OnInit {
     {
       orderId :101,
       notificationDate: '02/09/2020' 
-    },
+    }
   ]
   constructor(private modalService: NgbModal, private printer: PrinterService) { }
 
