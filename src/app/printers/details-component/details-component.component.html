@@ -1,0 +1,47 @@
+<div class="modal-header">
+    <h2 class="modal-title">Order Details</h2>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.close('Close click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    
+    <table class="table table-striped">
+      <thead>
+       <tr>
+           <th>#</th>
+           <th >Product Subcategory</th>
+           <th>No. of Copies</th>
+           <th>Paper GSM</th>
+           <th>Delivery Time</th>
+           <th>Amount</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr *ngFor="let d of data;let i=index">
+        <th scope="row">{{i +1 }}</th>
+        <td>{{ d["ProductSubcategory"] }}</td>
+        <td>{{ d["Industry"] }}</td>
+        <td>{{ d["MeetingSlot"] }}</td>
+        <td>{{ d["Amount"] }}</td>
+        <td>{{ d["Amount"] }}</td>
+       </tr>
+      </tbody>
+     </table>
+     <div>
+       <h4>Total Amount: {{totalamount}}</h4>
+     </div>
+  </div>
+  <div class="modal-footer">
+    <button
+    type="button" class="btn btn-primary mx-auto">Accept</button>
+    <button
+      type="button"
+      class="btn btn-light" (click)="activeModal.dismiss('Cross click')"> Close </button>
+  </div>
+  

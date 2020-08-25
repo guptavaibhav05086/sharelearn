@@ -10,6 +10,11 @@ import { DesignerProfileRequest } from "../Models/designer-profile-request";
 export class DesignerService {
   constructor(private _httpclient: HttpClient, private login: LoginService) {}
 
+  getDesignersNotification(){
+    let url = `${environment.baseUrl}${environment.getDesignerNotification}`;
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
+
   updateProfileRequest(updateProfile: DesignerProfileRequest) {
     return this._httpclient.post(
       `${environment.baseUrl}${environment.updateDesigner}`,
