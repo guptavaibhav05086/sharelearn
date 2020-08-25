@@ -47,7 +47,8 @@ export const environment = {
   deleteProdList: "/api/admin/deleteProducttList?Id=$Id",
   generateOrderUser: "/api/customer/generateorder?amount=$amount",
   transactionValidateUser:
-    "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature"
+    "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature",
+    getDesignerNotification :'/api/designer/getNotificationDetails?isProfessional=true' 
 };
 
 /*

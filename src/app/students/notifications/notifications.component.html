@@ -9,21 +9,17 @@
       <table class="table table-striped">
        <thead>
         <tr>
-            <th >Product Subcategory</th>
-            <th>Industry</th>
-            <th>Meeting Slot</th>
-            <th>Amount </th>
+            <th >Order Id</th>
+            <th>Notification Date</th>
             <th>Action</th>
         </tr>
        </thead>
        <tbody>
-        <tr *ngFor="let user of userList">
-         <th scope="row">{{ user.ProductSubcategory }}</th>
-         <td>{{ user.Industry }}</td>
-         <td>{{ user.MeetingSlot }}</td>
-         <td>{{ user.Amount }}</td>
+        <tr *ngFor="let order of orderList">
+         <th scope="row">{{ order.orderId }}</th>
+         <td>{{ order.notificationDate }}</td>
          <td>
-          <button type="button" class="btn btn-primary" (click)="openModal(user)">Accept</button>
+          <button type="button" class="btn btn-primary" (click)="openModal(order.orderDetails)">Accept</button>
          </td>
         </tr>
        </tbody>

@@ -20,6 +20,7 @@ import { RazorpaymentsComponent } from "./razorpayments/razorpayments.component"
 import { TransactionsuccessdetailsComponent } from "./transactionsuccessdetails/transactionsuccessdetails.component";
 import { GoogleplacesComponent } from "./googleplaces/googleplaces.component";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { DetailsComponentComponent } from './details-component/details-component.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     TermsconditionsComponent,
     RazorpaymentsComponent,
     TransactionsuccessdetailsComponent,
-    GoogleplacesComponent
+    GoogleplacesComponent,
+    DetailsComponentComponent
   ],
   imports: [
     CommonModule,

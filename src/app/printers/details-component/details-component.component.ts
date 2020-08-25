@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit ,Input} from '@angular/core';
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -11,12 +11,11 @@ export class DetailsComponentComponent implements OnInit {
   totalamount=0;
   constructor(public activeModal: NgbActiveModal) { }
   ngOnInit(): void {
-    this.totaling();
+    //this.totaling();
   }
-totaling(){
-  this.data.forEach(element => {
-    this.totalamount += element["Amount"]; 
-  });
-}
-
+  // totaling(){
+  //   this.data.forEach(element => {
+  //     this.totalamount += element["Amount"]; 
+  //   });
+  // }
 }
