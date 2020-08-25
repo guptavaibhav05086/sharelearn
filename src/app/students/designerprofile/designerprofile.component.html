@@ -257,7 +257,7 @@
                   </span>
                
               </div>
-              <div class="col-md-4 pl-1">
+              <div class="col-md-4 pl-1" *ngIf="displayControls">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Aadhar Number *</label>
                   <input type="text" class="form-control" 
@@ -291,34 +291,35 @@
                 </span>
                 </div>
               </div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Experience *</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="# of years"
+                    
+                formControlName="exp"  
+                required
+                    [disabled]="isDisabled"
+                  />
+                  <span
+                  class="errorMessage"
+                  *ngIf="
+                    (profileform.controls['exp'].dirty ||
+                    profileform.controls['exp'].touched) &&
+                    profileform.controls['exp'].invalid &&
+                    profileform.controls['exp'].errors.required
+                  "
+                >
+                  *Experience is required.
+                </span>
+                </div>
+              </div>
             </div>
 
             <div class="row">
-                <div class="col-md-4 pr-1">
-                    <div class="form-group">
-                      <label>Experience *</label>
-                      <input
-                        type="number"
-                        class="form-control"
-                        placeholder="# of years"
-                        
-                    formControlName="exp"  
-                    required
-                        [disabled]="isDisabled"
-                      />
-                      <span
-                      class="errorMessage"
-                      *ngIf="
-                        (profileform.controls['exp'].dirty ||
-                        profileform.controls['exp'].touched) &&
-                        profileform.controls['exp'].invalid &&
-                        profileform.controls['exp'].errors.required
-                      "
-                    >
-                      *Experience is required.
-                    </span>
-                    </div>
-                  </div>
+               
               <div class="col-md-4">
                 <div class="form-group">
                   <label> Portfolio Link *  </label>
@@ -344,7 +345,7 @@
                 *Profile Link is required.
               </span>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4" *ngIf="displayControls">
                 <div class="form-group">
                   <label> PAN*  </label>
                   <input
@@ -381,69 +382,70 @@
               *PAN# is incorrect.
             </span>
               </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 pr-1">
-                    <div class="form-group">
-                      <label>State *</label>
-                      <select
-                        type="text"
-                        class="form-control"
-                        placeholder="state"
-                       
-                        formControlName="state"  
-                        required
-                        [disabled]="isDisabled"
-                        (change)="filterDistricts($event.target.value)"
-                      >
-                      <option *ngFor="let item of distinctStates">
-                        {{item.stateName}}
-                      </option>
-                      </select>
-                      <span
-                      class="errorMessage"
-                      *ngIf="
-                        (profileform.controls['state'].dirty ||
-                        profileform.controls['state'].touched) &&
-                        profileform.controls['state'].invalid &&
-                        profileform.controls['state'].errors.required
-                      "
-                    >
-                      *State is required.
-                    </span>
-                    </div>
-                  </div>
-              <div class="col-md-4 px-1">
+              <div class="col-md-4 pr-1">
                 <div class="form-group">
-                  <label>City *</label>
-                  <select *ngIf="!isEdit"
+                  <label>State *</label>
+                  <select
                     type="text"
                     class="form-control"
-                    placeholder="City"
-                    
-                    formControlName="city"  
+                    placeholder="state"
+                   
+                    formControlName="state"  
                     required
                     [disabled]="isDisabled"
-
+                    (change)="filterDistricts($event.target.value)"
                   >
-                  <option *ngFor="let item of filteredCities">
-                      {{item.cityName}}
-                    </option>
-                </select>
-                <input type="text" class="form-control" formControlName="city" disabled *ngIf="isEdit">
-                <span
-                class="errorMessage"
-                *ngIf="
-                  (profileform.controls['city'].dirty ||
-                  profileform.controls['city'].touched) &&
-                  profileform.controls['city'].invalid &&
-                  profileform.controls['city'].errors.required
-                "
-              >
-                *City is required.
-              </span>
+                  <option *ngFor="let item of distinctStates">
+                    {{item.stateName}}
+                  </option>
+                  </select>
+                  <span
+                  class="errorMessage"
+                  *ngIf="
+                    (profileform.controls['state'].dirty ||
+                    profileform.controls['state'].touched) &&
+                    profileform.controls['state'].invalid &&
+                    profileform.controls['state'].errors.required
+                  "
+                >
+                  *State is required.
+                </span>
                 </div>
               </div>
+          <div class="col-md-4 px-1">
+            <div class="form-group">
+              <label>City *</label>
+              <select *ngIf="!isEdit"
+                type="text"
+                class="form-control"
+                placeholder="City"
+                
+                formControlName="city"  
+                required
+                [disabled]="isDisabled"
+
+              >
+              <option *ngFor="let item of filteredCities">
+                  {{item.cityName}}
+                </option>
+            </select>
+            <input type="text" class="form-control" formControlName="city" disabled *ngIf="isEdit">
+            <span
+            class="errorMessage"
+            *ngIf="
+              (profileform.controls['city'].dirty ||
+              profileform.controls['city'].touched) &&
+              profileform.controls['city'].invalid &&
+              profileform.controls['city'].errors.required
+            "
+          >
+            *City is required.
+          </span>
+            </div>
+          </div>
+            </div>
+            <div class="row">
+              
               
               <div class="col-md-4 pl-1">
                 <div class="form-group">

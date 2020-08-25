@@ -47,17 +47,19 @@ export class PrinterService {
       this.login.getAuthHeader()
     );
   }
-  validateTransaction(paymentId,orderId,signature){
-    let url = `${environment.baseUrl}${environment.transactionValidate}`.replace(
-      "$paymentId",
-      paymentId
-    ).replace("$orderId",
-    orderId).replace("$signature",
-    signature);
+  validateTransaction(paymentId, orderId, signature) {
+    let url = `${environment.baseUrl}${environment.transactionValidate}`
+      .replace("$paymentId", paymentId)
+      .replace("$orderId", orderId)
+      .replace("$signature", signature);
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
+  fetchNotifications() {
+    let url = `${environment.baseUrl}${environment.fetchNotiPrinter}`;
     return this._httpclient.get(
       url,
+
       this.login.getAuthHeader()
     );
-
   }
 }

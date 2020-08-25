@@ -359,7 +359,7 @@
                   </div> 
             </div>
             <div class="row">
-                <div class="col-md-4 pr-1">
+                <div class="col-md-4 pr-1" *ngIf="isDisplay">
                     <div class="form-group">
                       <label>PAN *</label>
                       <input
@@ -403,7 +403,7 @@
       </span>
                     </div>
                   </div>
-              <div class="col-md-4">
+              <div class="col-md-8">
                 <div class="form-group">
                   <label>Online Presence</label>
                   <input
@@ -412,18 +412,12 @@
                     placeholder="Website, Social Media, etc"
                     
                     formControlName="profile"  
-                    [ngClass]="{'displayError': ((profileform.controls['aadhar'].dirty ||
-                    profileform.controls['aadhar'].touched) &&
-                    profileform.controls['aadhar'].invalid &&
-                    profileform.controls['aadhar'].errors.required) ||((profileform.controls['aadhar'].dirty ||
-                    profileform.controls['aadhar'].touched) &&
-                    profileform.controls['aadhar'].invalid &&
-                    profileform.controls['aadhar'].errors.invalidPattern)}"
+                    
                     [disabled]="isDisabled"
                   />
                 </div>
               </div>
-              <div class="col-md-4 pr-1">
+              <div class="col-md-4 pr-1" *ngIf="isDisplay">
                   <div class="form-group">
                     <label>Aadhar *</label>
                     <input
@@ -460,6 +454,7 @@
       </span>
                   </div>
                 </div>
+                
             </div>
           <div class="row">
               

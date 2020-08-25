@@ -40,23 +40,21 @@ export class CustomerService {
   cartpriceDetails;
   constructor(private _httpclient: HttpClient, private login: LoginService) {}
 
-  getDiscountPriceDetails(){
+  getDiscountPriceDetails() {
     return this.discountedPrice;
   }
-  getDiscountPercentage(cartValue){
-    let discountPer=0;
-    let max=0;
+  getDiscountPercentage(cartValue) {
+    let discountPer = 0;
+    let max = 0;
     this.discountedPrice.forEach(element => {
-      let cVal=parseFloat(element.CartAmount);
-      if(cartValue >= cVal && cVal > max ){
-        discountPer=parseFloat( element.DiscountPercentage);
-        max=cVal;
-
+      let cVal = parseFloat(element.CartAmount);
+      if (cartValue >= cVal && cVal > max) {
+        discountPer = parseFloat(element.DiscountPercentage);
+        max = cVal;
       }
     });
     return discountPer;
     //this.dis
-
   }
   updateAddressRequest(updateAddress) {
     return this._httpclient.post(
@@ -129,7 +127,6 @@ export class CustomerService {
     existnCart.forEach(item => {
       item.category[0].meetingDetails.slot = meetingSlot.mSlot;
       item.category[0].meetingDetails.day = meetingSlot.mDate;
-
     });
     this.itemsList = existnCart;
     console.log(this.itemsList);
@@ -146,25 +143,26 @@ export class CustomerService {
       this.login.getAuthHeader()
     );
   }
-  generateOrderIdPost(orderCart) {
-    let url = `${environment.baseUrl}${environment.generateOrderUser}`;
-    return this._httpclient.post(
+  sendNotification(orderId) {
+    let url = `${environment.baseUrl}${environment.sendNotification}`.replace(
+      "$orderId",
+      orderId
+    );
+    return this._httpclient.get(
       url,
-      orderCart,
+
       this.login.getAuthHeader()
     );
   }
-  validateTransaction(paymentId,orderId,signature){
-    let url = `${environment.baseUrl}${environment.transactionValidateUser}`.replace(
-      "$paymentId",
-      paymentId
-    ).replace("$orderId",
-    orderId).replace("$signature",
-    signature);
-    return this._httpclient.get(
-      url,
-      this.login.getAuthHeader()
-    );
-
+  generateOrderIdPost(orderCart) {
+    let url = `${environment.baseUrl}${environment.generateOrderUser}`;
+    return this._httpclient.post(url, orderCart, this.login.getAuthHeader());
+  }
+  validateTransaction(paymentId, orderId, signature) {
+    let url = `${environment.baseUrl}${environment.transactionValidateUser}`
+      .replace("$paymentId", paymentId)
+      .replace("$orderId", orderId)
+      .replace("$signature", signature);
+    return this._httpclient.get(url, this.login.getAuthHeader());
   }
 }

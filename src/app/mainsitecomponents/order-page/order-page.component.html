@@ -268,7 +268,7 @@
                      
                     </div>
               </div>
-              <div class="flex-control5">
+              <div class="flex-control5" *ngIf="orderForm.controls['type'].value != 'Print Only'" >
                   <div class="form-group">
                       <label>Industry * </label>
                       <input
@@ -277,7 +277,7 @@
                         placeholder="School, IT, Gym, etc."               formControlName="purpose"
                           
                         [ngClass]="{'displayError': (this.orderForm.controls['purpose'].touched && this.orderForm.controls['purpose'].invalid)}" 
-                                                                                     
+                                                                                   
                       />                           
                      
                     </div>
@@ -1181,7 +1181,7 @@
                 <div class="row">
                     <div class="flex-control-50">
                         <div class="form-group">
-                           <button class="btn btn-primary" (click)="checkout()">Proceed</button>
+                           <button class="btn btn-primary" (click)="checkout()" style="display: none;">Proceed</button>
                             
                            
                           </div>
@@ -1189,7 +1189,7 @@
                     </div>
                     <div class="flex-control3 price-margin">
                         <div class="form-group">
-                           <button class="btn btn-primary" style="margin-left: 18%;" (click)="addToCart()">Add to Cart</button>
+                           <button class="btn btn-primary" style="margin-left: 18%;" (click)="addToCart()">Proceed</button>
                             
                            
                           </div>

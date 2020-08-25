@@ -31,6 +31,7 @@ export class PrinterprofileComponent implements OnInit {
   selectedFileName = "Choose GST Certificate";
   verifyClicked = false;
   isPhoneVerified = false;
+  isDisplay=false;
   profileform = new FormGroup({
     fName: new FormControl("", [Validators.required]),
     lName: new FormControl("", [Validators.required]),
@@ -50,18 +51,18 @@ export class PrinterprofileComponent implements OnInit {
     ]),
 
     profile: new FormControl(""),
-    pan: new FormControl("", [
-      Validators.required,
-      this._validator.patternValidation(
-        /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/
-      )
-    ]),
+    // pan: new FormControl("", [
+    //   Validators.required,
+    //   this._validator.patternValidation(
+    //     /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/
+    //   )
+    // ]),
     address: new FormControl(""),
-    softwares: new FormArray([]),
-    aadhar: new FormControl("", [
-      Validators.required,
-      this._validator.patternValidation(/^\d{4}\d{4}\d{4}$/)
-    ])
+    // softwares: new FormArray([]),
+    // aadhar: new FormControl("", [
+    //   Validators.required,
+    //   this._validator.patternValidation(/^\d{4}\d{4}\d{4}$/)
+    // ])
   });
   oldNumber: any;
   constructor(
@@ -194,8 +195,8 @@ export class PrinterprofileComponent implements OnInit {
             profile: data["profileUrl"],
             address: data["address"],
             gst: data["gst"],
-            aadhar: data["aadhar"],
-            pan: data["pan"]
+            //aadhar: data["aadhar"],
+            //pan: data["pan"]
           });
           if (data["mobileNumber"] != null && data["mobileNumber"] != "") {
             this.isPhoneVerified = data["isMobileVerified"];
@@ -289,8 +290,8 @@ export class PrinterprofileComponent implements OnInit {
     this.request.gender = this.profileform.controls["gender"].value;
     this.request.address = this.profileform.controls["address"].value;
     this.request.profileUrl = this.profileform.controls["profile"].value;
-    this.request.aadhar = this.profileform.controls["aadhar"].value;
-    this.request.pan = this.profileform.controls["pan"].value;
+    //this.request.aadhar = this.profileform.controls["aadhar"].value;
+    //this.request.pan = this.profileform.controls["pan"].value;
     this.request.gst = this.profileform.controls["gst"].value;
     //
     this.request.mobileNumber = this.profileform.controls["mobileNumber"].value;

@@ -1,11 +1,13 @@
+
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DetailsComponentComponent } from "../details-component/details-component.component";
+
 import { PrinterService } from "../../services/printer.service";
 @Component({
-  selector: 'app-notifications',
-  templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.css']
+  selector: "app-notifications",
+  templateUrl: "./notifications.component.html",
+  styleUrls: ["./notifications.component.css"]
 })
 export class NotificationsComponent implements OnInit {
   orderList=[
@@ -36,4 +38,5 @@ onSubmit() {
   this.modalService.dismissAll();
  
  }
+
 }

@@ -29,6 +29,14 @@ export class DesignerService {
       this.login.getAuthHeader()
     );
   }
+  fetchNotifications() {
+    let url = `${environment.baseUrl}${environment.fetchNotiDesigner}`;
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
   getProfile(userId) {
     let url = `${environment.baseUrl}${environment.getDesignerProfile}`.replace(
       "$userId",

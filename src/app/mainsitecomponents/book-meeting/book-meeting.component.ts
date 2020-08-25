@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
 import { NgbDateStruct, NgbTimeStruct } from "@ng-bootstrap/ng-bootstrap";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { CustomerService } from "src/app/services/customer.service";
+
 @Component({
   selector: "app-book-meeting",
   templateUrl: "./book-meeting.component.html",
@@ -99,16 +100,24 @@ export class BookMeetingComponent implements OnInit {
       meetingTill: this.timeTill
     });
   }
+  @HostListener("window:popstate", ["$event"])
+  onPopState(event) {
+    debugger;
+    console.log("Back button pressed");
+    this.activeModal.close();
+  }
   checkTimeGap() {
-    //debugger;
+    debugger;
     let cartList = this.custService.getLocalStorageCart();
     let calGap = 0;
     let meetingDuration = 0;
     if (cartList != null) {
       cartList.forEach(item => {
-        let mD = item.category[0].meetingDetails;
-        calGap = calGap + mD.timeGap;
-        meetingDuration = meetingDuration + mD.meetingDuration;
+        if (item.type != "Print Only") {
+          let mD = item.category[0].meetingDetails;
+          calGap = calGap + mD.timeGap;
+          meetingDuration = meetingDuration + mD.meetingDuration;
+        }
       });
     }
 
@@ -120,6 +129,9 @@ export class BookMeetingComponent implements OnInit {
   }
   calculateSlots(avaDate) {}
 
+  dateControlValidation() {
+    debugger;
+  }
   validateDate() {
     //debugger;
     //let val = this.productform.controls["meetingSlot"].value.minute;

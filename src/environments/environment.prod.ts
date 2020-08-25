@@ -38,9 +38,12 @@ export const environment = {
   getDiscounts: "/api/admin/getDisountList",
   updateDiscounts: "/api/admin/setDisountList",
   deleteDiscounts: "/api/admin/deleteDisountList?Id=$Id",
-  deleteProd: "/api/admin/deleteProducttList?Id=$Id",
-  deleteProdList: "/api/admin/deleteProduct?Id=$Id",
+  deleteProd: "/api/admin/deleteProduct?Id=$Id",
+  deleteProdList: "/api/admin/deleteProducttList?Id=$Id",
   generateOrderUser: "/api/customer/generateorder?amount=$amount",
   transactionValidateUser:
-    "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature"
+    "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature",
+  sendNotification: "/api/customer/sendNotification?orderId=$orderId",
+  fetchNotiPrinter: "/api/printer/getNotificationDetails",
+  fetchNotiDesigner: "/api/designer/getNotificationDetails"
 };
