@@ -1,0 +1,80 @@
+<div class='modal-dialog modal-xl'>
+  <div class="modal-header">
+    <h2 class="modal-title">Order Details</h2>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.close('Close click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+
+  <div class="modal-body">
+    <div class="container">
+        <div class="row">
+          <div class="col-md-2">
+            Image
+          </div>
+          <div class="col-md-10">
+          <div class="card card-user">
+            <div class="card-body">
+              <form ngNoForm >
+                  <div class="form-group">
+                    <span><label><b class="heads">Order Id:</b>&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" value="{{data.orderid}}" disabled=true></span>
+                  </div>
+                  <div class="form-group">
+                    <span><label><b class="heads">User Name:</b>&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" value="John Carter" disabled=true></span>
+                  </div>
+                  <div class="form-group">
+                    <span><label><b class="heads"> Start Meeting </b>&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" value="{{data.meetingslot}}" disabled=true></span>
+                  </div>
+                 <b class="heads" style="font-size: medium;">Order Specification</b> 
+                  <div class="form-group" style="border-radius: 1px 20px; border: 1.5px solid #000000;">
+                    <span> <label><b class="heads">Order type:</b>&nbsp;&nbsp;&nbsp;</label> 
+                      <input type="text" value="Design" disabled=true>
+                      <br><label><b class="heads">Order category:</b>&nbsp;&nbsp;&nbsp;</label> 
+                      <input type="text" value="{{data.subcategory}}" disabled=true>
+                      <br><label><b class="heads">Pin Code:</b>&nbsp;&nbsp;&nbsp;</label> 
+                      <input type="text" value="123456" disabled=true>
+                      <br><label><b class="heads">Sub-Category:</b>&nbsp;&nbsp;&nbsp;</label> 
+                      <input type="text" value="{{data.subcategory}}" disabled=true>
+                      <br><label><b class="heads">Orientation:</b>&nbsp;&nbsp;&nbsp;</label> 
+                      <input type="text" value="Landscape" disabled=true>
+                      <br><label><b class="heads">Size:</b>&nbsp;&nbsp;&nbsp;</label> 
+                      <input type="text" value="2x3.5" disabled=true>
+                      <br><label><b class="heads"> Paper GSM:</b>&nbsp;&nbsp;&nbsp;</label> 
+                      <input type="text" value="" disabled=true>
+                      <br><label><b class="heads">Quantity:</b>&nbsp;&nbsp;&nbsp;</label> 
+                      <input type="text" value="2" disabled=true>
+                      <br><label><b class="heads">Industry:</b>&nbsp;&nbsp;&nbsp;</label> 
+                      <input type="text" value="School" disabled=true>
+                    </span>
+                  </div>
+                  <div class="form-group">
+                    <span><label><b class="heads">Order Id:</b>&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" value="{{data.orderid}}" disabled=true></span>
+                  </div>
+                  
+
+              </form>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+  <div class="modal-footer">
+    <!-- <button
+    type="button" class="btn btn-primary mx-auto">Accept</button> -->
+    <button
+      type="button"
+      class="btn btn-light" (click)="activeModal.dismiss('Cross click')"> Close </button>
+  </div>
+</div>
