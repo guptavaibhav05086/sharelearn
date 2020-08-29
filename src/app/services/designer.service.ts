@@ -48,4 +48,18 @@ export class DesignerService {
       this.login.getAuthHeader()
     );
   }
+  acceptDesignerOrder(email,orderId){
+    let url = `${environment.baseUrl}${environment.acceptDesignerOrder}`.replace(
+      "$email",
+      email
+    ).replace(
+      "$orderId",
+      orderId
+    );
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
 }
