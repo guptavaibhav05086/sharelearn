@@ -47,11 +47,13 @@ export class OrderPageComponent implements OnInit {
   disableCart=false;
   uploadedFileNames = {
     product: ".jpg,.png,.jpeg,pdf format",
+    productServerFile:"",
     image1: ".jpg,.png,.jpeg,pdf format",
     image2: ".jpg,.png,.jpeg,pdf format",
     image3: ".jpg,.png,.jpeg,pdf format",
     image4: ".jpg,.png,.jpeg,pdf format",
     content: "Content File in .doc,docx,.pdf format",
+    contentServerFile:"",
     IsImageUploaded: false,
     contentValidation:false,
     IsproductRefUploaded:false,
@@ -69,7 +71,8 @@ export class OrderPageComponent implements OnInit {
     displayFileName:false,
     fileName:'',
     fileSize:0,
-    fileError:false
+    fileError:false,
+    serverFileName:''
   }];
   orderPrice = {
     price: 0,
@@ -122,7 +125,8 @@ export class OrderPageComponent implements OnInit {
       displayFileName:false,
       fileName:'',
       fileSize:0,
-      fileError:false
+      fileError:false,
+      serverFileName:''
     })
     }
     
@@ -227,6 +231,7 @@ export class OrderPageComponent implements OnInit {
         item.displayLoadingGif=false;
         item.displayFileName=true;
         console.log(data);
+        item.serverFileName=(data).toString();
         //alert("File Uploaded Successfully");
         this.uploadedFileNames[name] = item;
         this.fileError = false;
@@ -293,12 +298,14 @@ export class OrderPageComponent implements OnInit {
           this.uploadedFileNames.contentValidation=true;
           this.uploadedFileNames.displayLoadingContentGif=false;
           this.uploadedFileNames.IscontentUploaded=true;
+          this.uploadedFileNames.contentServerFile=data.toString();
         }
         if(name=="product"){
           this.uploadedFileNames.IsproductRefUploaded=true;
           this.uploadedFileNames.displayErrororbutton=false;
+          this.uploadedFileNames.productServerFile=data.toString();
         }else{
-          this.uploadedFileNames.IsproductRefUploaded=false;
+          //this.uploadedFileNames.IsproductRefUploaded=false;
         }
         this.uploadedFileNames.displayLoadingProductGif=false;
       },
@@ -621,7 +628,10 @@ return true;
       displayLoadingProductGif:false,
       displayLoadingContentGif:false,
       IscontentUploaded:false,
-      displayReadOnlyError:false
+      displayReadOnlyError:false,
+      productServerFile:'',
+      contentServerFile:''
+      
   
     };
     this.imageUpload=[{
@@ -631,7 +641,8 @@ return true;
       displayFileName:false,
       fileName:'',
       fileSize:0,
-      fileError:false
+      fileError:false,
+      serverFileName:''
     }];
     this.orderPrice = {
       price: 0,

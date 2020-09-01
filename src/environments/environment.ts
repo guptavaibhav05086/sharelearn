@@ -55,7 +55,15 @@ export const environment = {
   sendNotification: "/api/customer/sendNotification?orderId=$orderId",
   fetchNotiPrinter: "/api/printer/getNotificationDetails",
   fetchNotiDesigner: "/api/designer/getNotificationDetails",
-  acceptDesignerOrder: "/api/designer/AcceptOrder?email=$email&orderId=$orderId"
+  acceptDesignerOrder:
+    "/api/designer/AcceptOrder?email=$email&orderId=$orderId",
+  fetchOngoingOrdersDesigners:
+    "/api/designer/getOngoingOrder?email=$email&isAllOrdersRequired=$isAllOrdersRequired",
+  fetchongoingorderfilesDesigner:
+    "/api/designer/downloadOngoingOrderFiles?filename=$filename",
+  getDesignerDashBoard: "/api/designer/getdesignerDashboard?email=$email",
+  updateBankDetails: "/api/designer/updateBankDetails",
+  getBankDetails: "/api/designer/getBankDetails"
 };
 
 /*

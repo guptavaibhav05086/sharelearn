@@ -34,6 +34,9 @@ export class NotificationsComponent implements OnInit {
     });
     modelref.componentInstance.data = orderDeatils;
     modelref.componentInstance.orderId = orderId;
+    modelref.result.then(data => {
+      this.DisplayDesignersOrderNoti();
+    });
   }
   onSubmit() {
     this.modalService.dismissAll();

@@ -11,7 +11,9 @@ import { NotificationsComponent } from "./notifications/notifications.component"
 import { SettingsComponent } from "./settings/settings.component";
 import { HelpComponent } from "./help/help.component";
 import { DesignerprofileComponent } from "./designerprofile/designerprofile.component";
-
+import { OnGoingOrderComponent } from "./on-going-order/on-going-order.component";
+import { AllOrdersComponent } from "./all-orders/all-orders.component";
+import { PaymentDetailsComponent } from "./payment-details/payment-details.component";
 const routes: Routes = [
   {
     path: "",
@@ -27,7 +29,10 @@ const routes: Routes = [
       { path: "notifications", component: NotificationsComponent },
       { path: "settings", component: SettingsComponent },
       { path: "designerprofile", component: DesignerprofileComponent },
-      { path: "help", component: HelpComponent }
+      { path: "help", component: HelpComponent },
+      { path: "activeorder", component: OnGoingOrderComponent },
+      { path: "allOrders", component: AllOrdersComponent },
+      { path: "paymentdetails", component: PaymentDetailsComponent }
     ]
   }
 ];

@@ -17,9 +17,15 @@ import { DesignerprofileComponent } from "./designerprofile/designerprofile.comp
 import { VerifyOTPComponent } from "./verify-otp/verify-otp.component";
 import { TermsconditionsComponent } from "./termsconditions/termsconditions.component";
 import { ReactiveFormsModule } from "@angular/forms";
-
+import { AgGridModule } from 'ag-grid-angular';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DetailsComponentComponent } from './details-component/details-component.component';
+import { OnGoingOrderComponent } from './on-going-order/on-going-order.component';
+import { ButtonrendererComponent } from './buttonrenderer/buttonrenderer.component';
+import { ActiveOrderDetailsComponent } from './active-order-details/active-order-details.component';
+import { AllOrdersComponent } from './all-orders/all-orders.component';
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+import { PaymentSummaryComponent } from './payment-summary/payment-summary.component';
 
 
 
@@ -39,15 +45,23 @@ import { DetailsComponentComponent } from './details-component/details-component
     DesignerprofileComponent,
     VerifyOTPComponent,
     TermsconditionsComponent,
-    DetailsComponentComponent
+    DetailsComponentComponent,
+    OnGoingOrderComponent,
+    ButtonrendererComponent,
+    ActiveOrderDetailsComponent,
+    AllOrdersComponent,
+    PaymentDetailsComponent,
+    PaymentSummaryComponent
   ],
   imports: [
     CommonModule,
     StudentsRoutingModule,
     ReactiveFormsModule,
     PublicModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AgGridModule.withComponents([OnGoingOrderComponent])
   ],
+  entryComponents:[ButtonrendererComponent],
   exports: [DesignerprofileComponent]
 })
 export class StudentsModule {}
