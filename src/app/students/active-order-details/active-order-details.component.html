@@ -137,64 +137,9 @@
                   </div>                 
                  
                   
-                   <div class="row">
-                     
-                    <div class="input-group col-md-4" style="position: relative !important">
-                      <div class=" form-group">
-                        <div style="display: flex;">
-                          <div>
-                              <label>Source File </label>
-                              <label for="productUpload" class="btn btn-primary btn-block btn-outlined" style="width:150px" >UPLOAD</label>
-                              <input
-                              type="file"
-                              accept="image/*"
-                              style="display: none"
-                              id="productUpload"
-                              (change)="uploadGSTCertificate($event.target.files,item.id,'source')"
-                              
-                            /> 
-                          </div>
-                          <div style="width: 40px;margin-top: 40px;" *ngIf="uploadedFileNames.displayLoadingProductGif">
-                              <img src="../../../assets/img/loading.gif"/>
-                            </div>
-                        </div>                                                                                                       
-                        <a href="#" (click)="stopDefault($event)"    
-                        >{{uploadedFileNames.product}}</a>
-                       
-                      </div>
-                     
-                    </div>
-                    
-                    <div class="input-group col-md-4" style="position: relative !important;margin-left: 10%;">
-                      <div class=" form-group">
-                        <div style="display: flex;">
-                          <div>
-                              <label>Normal File  </label>
-                              <label for="productUpload" class="btn btn-primary btn-block btn-outlined" style="width:150px" >UPLOAD</label>
-                              <input
-                              type="file"
-                              accept="image/*"
-                              style="display: none"
-                              id="productUpload"
-                              (change)="uploadGSTCertificate($event.target.files,item.id,'normal')"
-                              
-                            /> 
-                          </div>
-                          <div style="width: 40px;margin-top: 40px;" *ngIf="uploadedFileNames.displayLoadingProductGif">
-                              <img src="../../../assets/img/loading.gif"/>
-                            </div>
-                        </div>                                                                                                       
-                        <a href="#" (click)="stopDefault($event)"    
-                        >{{uploadedFileNames.product}}</a>
-                       
-                      </div>
-                     
-                    </div>
-                    
-                    
-                  </div>
+                  
 
-                  <div class="row" *ngFor="let itemImg of imageUpload;let  i=index">
+                  <div class="row" *ngFor="let itemImg of item.SourceUploads;let  i=index">
                     <div class="input-group col-md-3" style="padding-top: 30px;position: relative !important">
                       <div class="form-group">
                         <div *ngIf="i == 0">
@@ -202,8 +147,8 @@
                            
                         </div>
                          <div style="display: flex;">
-                           <div>
-                              <label [for]="item.name" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
+                           <div *ngIf="!isAllOrders">
+                              <label [for]="itemImg.name" class="btn btn-primary btn-block btn-outlined" style="width:250px">UPLOAD</label>
                               <input
                               type="file"
                               accept="image/*"
@@ -213,21 +158,78 @@
                               (change)="uploadGSTCertificate($event.target.files,item.id,'source',itemImg.id)"
                             /> 
                            </div>
-                           <div style="width: 40px;" *ngIf="item.displayLoadingGif">
+                           <div style="width: 40px;" *ngIf="itemImg.displayLoadingGif">
                               <img src="../../../assets/img/loading.gif"/>
                             </div>
-                           <div>
-                              <button class="btn btn-outlined" (click)="addImage(itemImg.id)" *ngIf="i<3">+</button>
-                           </div> 
-                           <div>
-                              <button class="btn btn-outlined"  (click)="removeImage(itemImg.id)">-</button>
-                           </div> 
+                            <div *ngIf="!isAllOrders" style="display:flex">
+                                <div *ngIf="itemImg.id == item.SourceUploads.length">
+                                    <button class="btn btn-outlined" (click)="addImage(itemImg.id,item.id,'source')">+</button>
+                                 </div> 
+                                 <div>
+                                    <button class="btn btn-outlined"  (click)="removeImage(itemImg.id,item.id,'source')">-</button>
+                                 </div> 
+                            </div>
+                          
                           
                          </div>
-                         <div *ngIf="item.displayFileName">
-                            <a href="#" (click)="stopDefault($event)" >{{item.fileName}}</a> 
+                         <div *ngIf="itemImg.displayFileName">
+                            <a href="#" (click)="stopDefault($event)" >{{itemImg.fileName}}</a> 
                             
-                                <!-- <button class="btn btn-outlined" *ngIf="i == 0" (click)="removeImage(item.id)">-</button> -->
+                               
+                             
+                         </div>
+                        
+                          
+                       
+                      </div>
+                     
+                    </div>
+                   
+                    <div class="input-group col-md-4" *ngIf="fileError"></div>
+                    <!-- <div class="input-group col-md-8" *ngIf="fileError">
+                      <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                    </div>  -->
+                  </div> 
+
+                  <div class="row" *ngFor="let itemNImg of item.NormalUploads;let  j=index">
+                    <div class="input-group col-md-3" style="padding-top: 30px;position: relative !important">
+                      <div class="form-group">
+                        <div *ngIf="j == 0">
+                            <label >Normal File </label>
+                           
+                        </div>
+                         <div style="display: flex;">
+                           <div *ngIf="!isAllOrders">
+                              <label [for]="itemNImg.name" class="btn btn-primary btn-block btn-outlined" style="width:250px">UPLOAD</label>
+                              <input
+                              type="file"
+                              accept="image/*"
+                              style="display: none"
+                              [id]="itemNImg.name"
+                              
+                              (change)="uploadGSTCertificate($event.target.files,item.id,'normal',itemNImg.id)"
+                            /> 
+                           </div>
+                           <div style="width: 40px;" *ngIf="itemNImg.displayLoadingGif">
+                              <img src="../../../assets/img/loading.gif"/>
+                            </div>
+                            <div *ngIf="!isAllOrders" style="display:flex">
+
+                                <div *ngIf="itemNImg.id == item.NormalUploads.length">
+                                    <button class="btn btn-outlined" (click)="addImage(itemNImg.id,item.id,'normal')" >+</button>
+                                 </div> 
+                                 <div>
+                                    <button class="btn btn-outlined"  (click)="removeImage(itemNImg.id,item.id,'normal')">-</button>
+                                 </div> 
+                            </div>
+                          
+                          
+                         </div>
+                         <div *ngIf="itemNImg.displayFileName">
+                            <a href="#" (click)="stopDefault($event)">
+                              {{itemNImg.fileName}}</a> 
+                            
+                               
                              
                          </div>
                         
@@ -249,7 +251,7 @@
           </div>
         </div>
       </div>
-      <p>
+      <p *ngIf="!isAllOrders">
           <button class="btn" (click)="startMeeting()">
             Start Meeting
           </button>
@@ -264,7 +266,7 @@
     <button
       type="button"
       class="btn btn-light"
-      (click)="activeModal.dismiss('Cross click')"
+      (click)="activeModal.close('Cross click')"
     >
       Close
     </button>

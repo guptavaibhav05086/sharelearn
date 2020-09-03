@@ -79,6 +79,7 @@ export class OnGoingOrderComponent implements OnInit {
       size: "lg"
     });
     modelref.componentInstance.data = e.rowData;
+    modelref.componentInstance.isAllOrders=false;
     modelref.result.then(data => {
       this.fetchOngoingOrder();
     });

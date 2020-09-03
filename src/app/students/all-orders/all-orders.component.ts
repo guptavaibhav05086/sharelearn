@@ -80,7 +80,9 @@ export class AllOrdersComponent implements OnInit {
       size: "lg"
     });
     modelref.componentInstance.data = e.rowData;
+    modelref.componentInstance.isAllOrders = true;
     modelref.result.then(data => {
+      debugger;
       this.fetchOngoingOrder();
     });
   }
