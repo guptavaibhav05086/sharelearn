@@ -150,7 +150,7 @@
                               accept="image/*"
                               style="display: none"
                               id="productUpload"
-                              
+                              (change)="uploadGSTCertificate($event.target.files,item.id,'source')"
                               
                             /> 
                           </div>
@@ -164,7 +164,7 @@
                       </div>
                      
                     </div>
-                    <div class="input-group col-md-4" *ngIf="fileError"></div>
+                    
                     <div class="input-group col-md-4" style="position: relative !important;margin-left: 10%;">
                       <div class=" form-group">
                         <div style="display: flex;">
@@ -176,7 +176,7 @@
                               accept="image/*"
                               style="display: none"
                               id="productUpload"
-                              
+                              (change)="uploadGSTCertificate($event.target.files,item.id,'normal')"
                               
                             /> 
                           </div>
@@ -190,15 +190,58 @@
                       </div>
                      
                     </div>
-                    <div class="input-group col-md-4" *ngIf="fileError"></div>
+                    
                     
                   </div>
 
-                  <div class="row">
+                  <div class="row" *ngFor="let itemImg of imageUpload;let  i=index">
+                    <div class="input-group col-md-3" style="padding-top: 30px;position: relative !important">
+                      <div class="form-group">
+                        <div *ngIf="i == 0">
+                            <label >Source File </label>
+                           
+                        </div>
+                         <div style="display: flex;">
+                           <div>
+                              <label [for]="item.name" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
+                              <input
+                              type="file"
+                              accept="image/*"
+                              style="display: none"
+                              [id]="itemImg.name"
+                              
+                              (change)="uploadGSTCertificate($event.target.files,item.id,'source',itemImg.id)"
+                            /> 
+                           </div>
+                           <div style="width: 40px;" *ngIf="item.displayLoadingGif">
+                              <img src="../../../assets/img/loading.gif"/>
+                            </div>
+                           <div>
+                              <button class="btn btn-outlined" (click)="addImage(itemImg.id)" *ngIf="i<3">+</button>
+                           </div> 
+                           <div>
+                              <button class="btn btn-outlined"  (click)="removeImage(itemImg.id)">-</button>
+                           </div> 
+                          
+                         </div>
+                         <div *ngIf="item.displayFileName">
+                            <a href="#" (click)="stopDefault($event)" >{{item.fileName}}</a> 
+                            
+                                <!-- <button class="btn btn-outlined" *ngIf="i == 0" (click)="removeImage(item.id)">-</button> -->
+                             
+                         </div>
+                        
+                          
+                       
+                      </div>
                      
-                  
-                    
-                  </div>
+                    </div>
+                   
+                    <div class="input-group col-md-4" *ngIf="fileError"></div>
+                    <!-- <div class="input-group col-md-8" *ngIf="fileError">
+                      <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                    </div>  -->
+                  </div> 
                 </div>
               </div>
               

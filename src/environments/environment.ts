@@ -63,7 +63,9 @@ export const environment = {
     "/api/designer/downloadOngoingOrderFiles?filename=$filename",
   getDesignerDashBoard: "/api/designer/getdesignerDashboard?email=$email",
   updateBankDetails: "/api/designer/updateBankDetails",
-  getBankDetails: "/api/designer/getBankDetails"
+  getBankDetails: "/api/designer/getBankDetails",
+  postFinalFilesDesigner:
+    "/api/designer/postDesignerFinalFolder?orderId=$orderId&type=$type"
 };
 
 /*

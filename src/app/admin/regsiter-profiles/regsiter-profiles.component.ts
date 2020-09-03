@@ -37,6 +37,13 @@ export class RegsiterProfilesComponent implements OnInit {
     this.gridApiprinter.exportDataAsCsv();
   }
   columnDefs = [
+    //Registrationnumber
+    {
+      headerName: "Registration Id",
+      field: "Registrationnumber",
+      sortable: true,
+      filter: true
+    },
     {
       headerName: "FirstName",
       field: "firstName",
@@ -120,6 +127,12 @@ export class RegsiterProfilesComponent implements OnInit {
     }
   ];
   columnDefPrinter = [
+    {
+      headerName: "Registration Id",
+      field: "Registrationnumber",
+      sortable: true,
+      filter: true
+    },
     {
       headerName: "FirstName",
       field: "firstName",

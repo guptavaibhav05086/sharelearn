@@ -39,7 +39,7 @@ export class PrinterprofileComponent implements OnInit {
     mobileNumber: new FormControl("", [
       Validators.required,
       this._validator.patternValidation(
-        /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/
+        /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/
       )
     ]),
     dob: new FormControl("", [Validators.required]),
@@ -282,6 +282,10 @@ export class PrinterprofileComponent implements OnInit {
           `Please provide correct value in these controls ${invalidControls}`
         );
       }
+      return;
+    }
+    if( this.profileform.controls["address"].value == '' ||  this.profileform.controls["address"].value ==null){
+      alert('Updating the Address Field.Please try again in few moments');
       return;
     }
     //this.request.softwares = "";

@@ -1,6 +1,7 @@
 export const environment = {
-  production: true,
+  production: false,
   baseUrl: "https://www.shapenprint.in",
+  //baseUrl: "http://localhost:39117",
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
   tokenUrl: "/Token",
@@ -43,7 +44,22 @@ export const environment = {
   generateOrderUser: "/api/customer/generateorder?amount=$amount",
   transactionValidateUser:
     "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature",
+
+  getDesignerNotification:
+    "/api/designer/getNotificationDetails?isProfessional=true",
+
   sendNotification: "/api/customer/sendNotification?orderId=$orderId",
   fetchNotiPrinter: "/api/printer/getNotificationDetails",
-  fetchNotiDesigner: "/api/designer/getNotificationDetails"
+  fetchNotiDesigner: "/api/designer/getNotificationDetails",
+  acceptDesignerOrder:
+    "/api/designer/AcceptOrder?email=$email&orderId=$orderId",
+  fetchOngoingOrdersDesigners:
+    "/api/designer/getOngoingOrder?email=$email&isAllOrdersRequired=$isAllOrdersRequired",
+  fetchongoingorderfilesDesigner:
+    "/api/designer/downloadOngoingOrderFiles?filename=$filename",
+  getDesignerDashBoard: "/api/designer/getdesignerDashboard?email=$email",
+  updateBankDetails: "/api/designer/updateBankDetails",
+  getBankDetails: "/api/designer/getBankDetails",
+  postFinalFilesDesigner:
+    "/api/designer/postDesignerFinalFolder?orderId=$orderId&type=$type"
 };

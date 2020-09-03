@@ -33,7 +33,7 @@ export class DesignerprofileComponent implements OnInit {
     mobileNumber: new FormControl("", [
       Validators.required,
       this._validator.patternValidation(
-        /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/
+        /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/
       )
     ]),
     dob: new FormControl("", [Validators.required]),

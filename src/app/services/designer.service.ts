@@ -30,6 +30,15 @@ export class DesignerService {
       this.login.getAuthHeader()
     );
   }
+  uploadFinalSourceImage(file, orderId, type) {
+    return this._httpclient.post(
+      `${environment.baseUrl}${environment.postFinalFilesDesigner}`
+        .replace("$orderId", orderId)
+        .replace("$type", type),
+      file,
+      this.login.getAuthHeader()
+    );
+  }
   fetchNotifications() {
     let url = `${environment.baseUrl}${environment.fetchNotiDesigner}`;
     return this._httpclient.get(
@@ -110,7 +119,7 @@ export class DesignerService {
     //isAllOrdersRequired
     return this._httpclient.post(url, model, this.login.getAuthHeader());
   }
-  GetBankDetails():Observable<Array<BankAccountModel>>{
+  GetBankDetails(): Observable<Array<BankAccountModel>> {
     debugger;
     let url = `${environment.baseUrl}${environment.getBankDetails}`;
     //isAllOrdersRequired
