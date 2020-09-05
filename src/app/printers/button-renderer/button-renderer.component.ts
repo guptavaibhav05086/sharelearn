@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 import { ICellRendererAngularComp } from "ag-grid-angular";
 
 @Component({
-  selector: "app-buttonrenderer",
-  templateUrl: "./buttonrenderer.component.html",
-  styleUrls: ["./buttonrenderer.component.css"]
+  selector: 'app-button-renderer',
+  templateUrl: './button-renderer.component.html',
+  styleUrls: ['./button-renderer.component.css']
 })
 export class ButtonrendererComponent implements ICellRendererAngularComp {
   params;

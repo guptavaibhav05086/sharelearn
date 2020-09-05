@@ -21,6 +21,11 @@ import { TransactionsuccessdetailsComponent } from "./transactionsuccessdetails/
 import { GoogleplacesComponent } from "./googleplaces/googleplaces.component";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DetailsComponentComponent } from './details-component/details-component.component';
+import { DeliveryDetailsComponent } from './delivery-details/delivery-details.component';
+import { AllOrdersComponent } from './all-orders/all-orders.component';
+import { ActiveOrderDetailsComponent } from './active-order-details/active-order-details.component';
+import { ButtonrendererComponent } from './button-renderer/button-renderer.component';
+import { OnGoingOrderComponent } from './on-going-order/on-going-order.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,12 @@ import { DetailsComponentComponent } from './details-component/details-component
     RazorpaymentsComponent,
     TransactionsuccessdetailsComponent,
     GoogleplacesComponent,
-    DetailsComponentComponent
+    DetailsComponentComponent,
+    DeliveryDetailsComponent,
+    AllOrdersComponent,
+    ActiveOrderDetailsComponent,
+    ButtonrendererComponent,
+    OnGoingOrderComponent
   ],
   imports: [
     CommonModule,
