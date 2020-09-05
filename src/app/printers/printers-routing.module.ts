@@ -5,8 +5,10 @@ import { PrintersComponent } from "./printers.component";
 
 import { PrinterprofileComponent } from "./printerprofile/printerprofile.component";
 import { PrintersGuard } from "./auth/printers.guard";
-
+import { AllOrdersComponent } from "./all-orders/all-orders.component"
 import { NotificationsComponent } from './notifications/notifications.component';
+import { DeliveryDetailsComponent } from './delivery-details/delivery-details.component';
+import { OnGoingOrderComponent } from "./on-going-order/on-going-order.component"
 
 
 const routes: Routes = [
@@ -22,7 +24,20 @@ const routes: Routes = [
       {
         path: "notifications",
         component: NotificationsComponent
+      },
+      {
+        path: "deliverydetails",
+        component: DeliveryDetailsComponent
+      },
+      {
+        path: "allorders",
+        component:AllOrdersComponent
+      },
+      {
+        path: "activeorders",
+      component:OnGoingOrderComponent
       }
+      
     ]
   }
 ];
