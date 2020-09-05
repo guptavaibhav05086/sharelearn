@@ -64,10 +64,18 @@ export class OnGoingOrderComponent implements OnInit {
   }
 
   checkRow(params) {
-    //debugger;
-    if (params.data.meetingslot < new Date()) {
+    debugger;
+    var todayDate = new Date();
+    var meetingTime = new Date(Date.parse(params.data.meetingTime));
+    var differenceinMins = -1;
+    if (meetingTime > todayDate) {
+      var diff = meetingTime.valueOf() - todayDate.valueOf();
+      differenceinMins = Math.floor(diff / 1000 / 60);
+    }
+
+    if (differenceinMins > 0 && differenceinMins <= 60) {
       return {
-        "background-color": "#455A64",
+        "background-color": "#7C0A02",
         color: "#FFFFFF"
       };
     }
@@ -79,7 +87,7 @@ export class OnGoingOrderComponent implements OnInit {
       size: "lg"
     });
     modelref.componentInstance.data = e.rowData;
-    modelref.componentInstance.isAllOrders=false;
+    modelref.componentInstance.isAllOrders = false;
     modelref.result.then(data => {
       this.fetchOngoingOrder();
     });

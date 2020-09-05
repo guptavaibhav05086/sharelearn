@@ -26,6 +26,7 @@ import { ActiveOrderDetailsComponent } from './active-order-details/active-order
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { PaymentSummaryComponent } from './payment-summary/payment-summary.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -51,7 +52,8 @@ import { PaymentSummaryComponent } from './payment-summary/payment-summary.compo
     ActiveOrderDetailsComponent,
     AllOrdersComponent,
     PaymentDetailsComponent,
-    PaymentSummaryComponent
+    PaymentSummaryComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,

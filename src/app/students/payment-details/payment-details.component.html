@@ -1,601 +1,226 @@
-<div class="row" style="margin-left: 20%;display: none;" *ngIf="displayEditForm">
-  <div class="col-md-8">
-    <div class="card ">
-      <div class="card-header ">
-        <h5 class="card-title">Account Details</h5>
-      </div>
-      <div class="card-body ">
-        <div class="content" style="margin-top:0px">
-          <form
-            class="form-horizontal form-material"
-            id="trainerform"
-            [formGroup]="studentForm"
-            
-          >
-            <div class="form-group mt-4">
-              <label for="username" class="label text-uppercase"
-                >Account Holder Name *</label
-              >
-              <input
-                class="form-control"
-                type="text"
-                required=""
-                placeholder="*"
-                formControlName="email"
-              />
-              <span
-                class="errorMessage"
-                *ngIf="
-                  (studentForm.controls['email'].dirty ||
-                    studentForm.controls['email'].touched) &&
-                  studentForm.controls['email'].invalid &&
-                  studentForm.controls['email'].errors.required
-                "
-              >
-                *Name is required.
-              </span>
-            </div>
-            <div class="form-group">
-              <label for="username" class="label text-uppercase"
-                >Bank Account Number *</label
-              >
-              <input
-                class="form-control"
-                type="password"
-                required
-                placeholder="*"
-                formControlName="password"
-              />
-              <span
-                class="errorMessage"
-                *ngIf="
-                  (studentForm.controls['password'].dirty ||
-                    studentForm.controls['password'].touched) &&
-                  studentForm.controls['password'].invalid &&
-                  studentForm.controls['password'].errors.required
-                "
-              >
-                *Account Number is required.
-              </span>
-            </div>
-            <div class="form-group">
-              <label for="username" class="label text-uppercase"
-                >Confirm Account*</label
-              >
-              <input
-                class="form-control"
-                type="text"
-                required=""
-                placeholder="*"
-                formControlName="confirmPassword"
-              />
-              <span
-                class="errorMessage"
-                *ngIf="
-                  (studentForm.controls['confirmPassword'].dirty ||
-                    studentForm.controls['confirmPassword'].touched) &&
-                  studentForm.controls['confirmPassword'].invalid &&
-                  studentForm.controls['confirmPassword'].errors.required
-                "
-              >
-                *Confrim Account is required.
-              </span>
-              <span
-                class="errorMessage"
-                *ngIf="
-                  (studentForm.controls['confirmPassword'].dirty ||
-                    studentForm.controls['confirmPassword'].touched) &&
-                  studentForm.errors?.invalidPattern?.confirmPasswordValidation
-                "
-              >
-                *Account and Confrim Account Number doesnot match.
-              </span>
-            </div>
-
-            <div class="form-group">
-              <label for="username" class="label text-uppercase">IFSC*</label>
-              <input
-                class="form-control"
-                type="text"
-                required=""
-                placeholder="IFSC Code"
-                formControlName="IFSC"
-              />
-              <span
-                class="errorMessage"
-                *ngIf="
-                  (studentForm.controls['IFSC'].dirty ||
-                    studentForm.controls['IFSC'].touched) &&
-                  studentForm.controls['IFSC'].invalid &&
-                  studentForm.controls['IFSC'].errors.required
-                "
-              >
-                *IFSC is required.
-              </span>
-            </div>
-            <div class="form-group">
-              <label for="username" class="label text-uppercase">PAN*</label>
-              <input
-                class="form-control"
-                type="text"
-                required=""
-                placeholder="PAN"
-                formControlName="PAN"
-              />
-              <span
-                class="errorMessage"
-                *ngIf="
-                  (studentForm.controls['PAN'].dirty ||
-                    studentForm.controls['PAN'].touched) &&
-                  studentForm.controls['PAN'].invalid &&
-                  studentForm.controls['PAN'].errors.required
-                "
-              >
-                *PAN is required.
-              </span>
-              <span
-                class="errorMessage"
-                *ngIf="
-                  (studentForm.controls['PAN'].dirty ||
-                    studentForm.controls['PAN'].touched) &&
-                  studentForm.controls['PAN'].invalid &&
-                  studentForm.controls['PAN'].errors.invalidPattern
-                "
-              >
-                *PAN# is incorrect.
-              </span>
-            </div>
-            <div class="form-group">
-                    <label for="username" class="label text-uppercase">UPI Id (optional)</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      required=""
-                      placeholder="UPI"
-                      formControlName="UPI"
-                    />
-                    <span
-                      class="errorMessage"
-                      *ngIf="
-                        (studentForm.controls['UPI'].dirty ||
-                          studentForm.controls['UPI'].touched) &&
-                        studentForm.controls['UPI'].invalid &&
-                        studentForm.controls['UPI'].errors.required
-                      "
-                    >
-                      *PAN is required.
-                    </span>
-                    <span
-                      class="errorMessage"
-                      *ngIf="
-                        (studentForm.controls['PAN'].dirty ||
-                          studentForm.controls['PAN'].touched) &&
-                        studentForm.controls['PAN'].invalid &&
-                        studentForm.controls['PAN'].errors.invalidPattern
-                      "
-                    >
-                      *PAN# is incorrect.
-                    </span>
-                  </div>
-            <div *ngIf="serverError">
-              <span class="errorMessage" *ngFor="let item of error">
-                {{ item }}
-              </span>
-            </div>
-            <div *ngIf="registered">
-              <span class="successMessage">
-                User Registered Successfully
-              </span>
-            </div>
-            <div class="form-group text-center mt-4">
-              <button
-                class="btn btn-info btn-lg btn-block text-uppercase "
-                type="submit"
-                (click)="submitAccountDetails()"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
-          <ngx-spinner
-            bdColor="rgba(51, 51, 51, 0.8)"
-            size="default"
-            type="ball-spin-clockwise"
-          >
-            <p style="color: white">Please Wait.</p>
-          </ngx-spinner>
-        </div>
-      </div>
-     
-    </div>
-  </div>
-</div>
-<div *ngIf="!hideView" style="margin-left: 20%;display: none;" >
-        <div class="row" style="margin-left: 5%;" *ngIf="displayCreateForm">
-                <div class="col-md-3">
-                  <div class="card ">
-                    <div class="card-header ">
-                      <h5 class="card-title">Account Details</h5>
-                    </div>
-                    <div class="card-body ">
-                      <div class="content" style="margin-top:0px">
-                        <p>No Account Details Present.</p>
-                        <p>Click on Create button to add one</p>
-                        <div class="form-group text-center mt-4">
-                                <button
-                                  class="btn btn-info btn-lg btn-block text-uppercase "
-                                  type="submit"
-                                  (click)="EditAccountDetails(0)"
-                                >
-                                  Add Account +
-                                </button>
-                              </div>
-                       
-                      </div>
-                    </div>
-                    
-                  </div>
-                </div>
-              </div>
-              <div class="row" style="margin-left: 5%;" *ngIf="!displayCreateForm">
-                    <div class="col-md-3" *ngFor="let item of bankdetails">
-                      <div class="card ">
-                        <div class="card-header ">
-                          <h5 class="card-title">Account Details</h5>
-                        </div>
-                        <div class="card-body ">
-                          <div class="content" style="margin-top:0px">
-                            <form
-                              class="form-horizontal form-material"
-                              id="trainerform"
-                              [formGroup]="studentForm"
-                             
-                            >
-                              <div class="form-group mt-3">
-                                <label for="username" class="label text-uppercase"
-                                  >Account Holder Name: {{item.AccountHolderName}}</label
-                                >
-                               
-                              </div>
-                              <div class="form-group">
-                                <label for="username" class="label text-uppercase"
-                                  >{{item.BankAccountNumber}}</label
-                                >
-                                
-                              </div>
-                              
-                  
-                              <div class="form-group">
-                                <label for="username" class="label text-uppercase">{{item.IFSC}}</label>
-                                
-                              </div>
-                              <div class="form-group">
-                                <label for="username" class="label text-uppercase">{{item.PAN}}</label>
-                                
-                              </div>
-                              <div class="form-group text-center mt-4">
-                                    <button
-                                      class="btn btn-info btn-lg btn-block text-uppercase "
-                                      type="submit"
-                                      (click)="EditAccountDetails(item.ID)"
-                                    >
-                                      Edit
-                                    </button>
-                                  </div>
-                              
-                            </form>
-                           
-                          </div>
-                        </div>
-                        <div class="card-footer ">
-                          <hr />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-</div>
-
 <div class="row" class="col-md-10" style="margin-left: 5%">
 
-        <div class="card ">
-                <div class="card-header ">
-                        <h5 class="card-title" style="text-align: center;
-                        margin-bottom: 50px;">Payment Information</h5></div>
-                <div class="card-body ">
-                        <div class="row" style="margin-left: 20%;" *ngIf="displayEditForm">
-                                <div class="col-md-8">
-                                  <div class="card ">
-                                    <div class="card-header ">
-                                      <h5 class="card-title">Account Details</h5>
-                                    </div>
-                                    <div class="card-body ">
-                                      <div class="content" style="margin-top:0px">
-                                        <form
-                                          class="form-horizontal form-material"
-                                          id="trainerform"
-                                          [formGroup]="studentForm"
-                                          
-                                        >
-                                          <div class="form-group mt-4">
-                                            <label for="username" class="label text-uppercase"
-                                              >Account Holder Name *</label
-                                            >
-                                            <input
-                                              class="form-control"
-                                              type="text"
-                                              required=""
-                                              placeholder="*"
-                                              formControlName="email"
-                                            />
-                                            <span
-                                              class="errorMessage"
-                                              *ngIf="
+  <div class="card ">
+    <div class="card-header ">
+      <h5 class="card-title" style="text-align: center;
+                        margin-bottom: 50px;">Payment Information</h5>
+    </div>
+    <div class="card-body ">
+      <!-- Account EditForm -->
+      <div class="row" style="margin-left: 20%;" *ngIf="displayEditForm">
+        <div class="col-md-8">
+          <div class="card ">
+            <div class="card-header ">
+              <h5 class="card-title">Account Details</h5>
+            </div>
+            <div class="card-body ">
+              <div class="content" style="margin-top:0px">
+                <form class="form-horizontal form-material" id="trainerform" [formGroup]="studentForm">
+                  <div class="form-group mt-4">
+                    <label for="username" class="label text-uppercase">Account Holder Name *</label>
+                    <input class="form-control" type="text" required="" placeholder="*" formControlName="email" />
+                    <span class="errorMessage" *ngIf="
                                                 (studentForm.controls['email'].dirty ||
                                                   studentForm.controls['email'].touched) &&
                                                 studentForm.controls['email'].invalid &&
                                                 studentForm.controls['email'].errors.required
-                                              "
-                                            >
-                                              *Name is required.
-                                            </span>
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="username" class="label text-uppercase"
-                                              >Bank Account Number *</label
-                                            >
-                                            <input
-                                              class="form-control"
-                                              type="password"
-                                              required
-                                              placeholder="*"
-                                              formControlName="password"
-                                            />
-                                            <span
-                                              class="errorMessage"
-                                              *ngIf="
+                                              ">
+                      *Name is required.
+                    </span>
+                  </div>
+                  <div class="form-group">
+                    <label for="username" class="label text-uppercase">Bank Account Number *</label>
+                    <input class="form-control" type="password" required placeholder="*" formControlName="password" />
+                    <span class="errorMessage" *ngIf="
                                                 (studentForm.controls['password'].dirty ||
                                                   studentForm.controls['password'].touched) &&
                                                 studentForm.controls['password'].invalid &&
                                                 studentForm.controls['password'].errors.required
-                                              "
-                                            >
-                                              *Account Number is required.
-                                            </span>
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="username" class="label text-uppercase"
-                                              >Confirm Account*</label
-                                            >
-                                            <input
-                                              class="form-control"
-                                              type="text"
-                                              required=""
-                                              placeholder="*"
-                                              formControlName="confirmPassword"
-                                            />
-                                            <span
-                                              class="errorMessage"
-                                              *ngIf="
+                                              ">
+                      *Account Number is required.
+                    </span>
+                  </div>
+                  <div class="form-group">
+                    <label for="username" class="label text-uppercase">Confirm Account*</label>
+                    <input class="form-control" type="text" required="" placeholder="*"
+                      formControlName="confirmPassword" />
+                    <span class="errorMessage" *ngIf="
                                                 (studentForm.controls['confirmPassword'].dirty ||
                                                   studentForm.controls['confirmPassword'].touched) &&
                                                 studentForm.controls['confirmPassword'].invalid &&
                                                 studentForm.controls['confirmPassword'].errors.required
-                                              "
-                                            >
-                                              *Confrim Account is required.
-                                            </span>
-                                            <span
-                                              class="errorMessage"
-                                              *ngIf="
+                                              ">
+                      *Confrim Account is required.
+                    </span>
+                    <span class="errorMessage" *ngIf="
                                                 (studentForm.controls['confirmPassword'].dirty ||
                                                   studentForm.controls['confirmPassword'].touched) &&
                                                 studentForm.errors?.invalidPattern?.confirmPasswordValidation
-                                              "
-                                            >
-                                              *Account and Confrim Account Number doesnot match.
-                                            </span>
-                                          </div>
-                              
-                                          <div class="form-group">
-                                            <label for="username" class="label text-uppercase">IFSC*</label>
-                                            <input
-                                              class="form-control"
-                                              type="text"
-                                              required=""
-                                              placeholder="IFSC Code"
-                                              formControlName="IFSC"
-                                            />
-                                            <span
-                                              class="errorMessage"
-                                              *ngIf="
+                                              ">
+                      *Account and Confrim Account Number doesnot match.
+                    </span>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="username" class="label text-uppercase">IFSC*</label>
+                    <input class="form-control" type="text" required="" placeholder="IFSC Code"
+                      formControlName="IFSC" />
+                    <span class="errorMessage" *ngIf="
                                                 (studentForm.controls['IFSC'].dirty ||
                                                   studentForm.controls['IFSC'].touched) &&
                                                 studentForm.controls['IFSC'].invalid &&
                                                 studentForm.controls['IFSC'].errors.required
-                                              "
-                                            >
-                                              *IFSC is required.
-                                            </span>
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="username" class="label text-uppercase">PAN*</label>
-                                            <input
-                                              class="form-control"
-                                              type="text"
-                                              required=""
-                                              placeholder="PAN"
-                                              formControlName="PAN"
-                                            />
-                                            <span
-                                              class="errorMessage"
-                                              *ngIf="
+                                              ">
+                      *IFSC is required.
+                    </span>
+                  </div>
+                  <div class="form-group">
+                    <label for="username" class="label text-uppercase">PAN*</label>
+                    <input class="form-control" type="text" required="" placeholder="PAN" formControlName="PAN" />
+                    <span class="errorMessage" *ngIf="
                                                 (studentForm.controls['PAN'].dirty ||
                                                   studentForm.controls['PAN'].touched) &&
                                                 studentForm.controls['PAN'].invalid &&
                                                 studentForm.controls['PAN'].errors.required
-                                              "
-                                            >
-                                              *PAN is required.
-                                            </span>
-                                            <span
-                                              class="errorMessage"
-                                              *ngIf="
+                                              ">
+                      *PAN is required.
+                    </span>
+                    <span class="errorMessage" *ngIf="
                                                 (studentForm.controls['PAN'].dirty ||
                                                   studentForm.controls['PAN'].touched) &&
                                                 studentForm.controls['PAN'].invalid &&
                                                 studentForm.controls['PAN'].errors.invalidPattern
-                                              "
-                                            >
-                                              *PAN# is incorrect.
-                                            </span>
-                                          </div>
-                                          <div class="form-group">
-                                                  <label for="username" class="label text-uppercase">UPI Id (optional)</label>
-                                                  <input
-                                                    class="form-control"
-                                                    type="text"
-                                                    required=""
-                                                    placeholder="UPI"
-                                                    formControlName="UPI"
-                                                  />
-                                                  <span
-                                                    class="errorMessage"
-                                                    *ngIf="
+                                              ">
+                      *PAN# is incorrect.
+                    </span>
+                  </div>
+                  <div class="form-group">
+                    <label for="username" class="label text-uppercase">UPI Id (optional)</label>
+                    <input class="form-control" type="text" required="" placeholder="UPI" formControlName="UPI" />
+                    <!-- <span class="errorMessage" *ngIf="
                                                       (studentForm.controls['UPI'].dirty ||
                                                         studentForm.controls['UPI'].touched) &&
                                                       studentForm.controls['UPI'].invalid &&
                                                       studentForm.controls['UPI'].errors.required
-                                                    "
-                                                  >
-                                                    *PAN is required.
-                                                  </span>
-                                                  <span
-                                                    class="errorMessage"
-                                                    *ngIf="
-                                                      (studentForm.controls['PAN'].dirty ||
-                                                        studentForm.controls['PAN'].touched) &&
-                                                      studentForm.controls['PAN'].invalid &&
-                                                      studentForm.controls['PAN'].errors.invalidPattern
-                                                    "
-                                                  >
-                                                    *PAN# is incorrect.
-                                                  </span>
-                                                </div>
-                                          <div *ngIf="serverError">
-                                            <span class="errorMessage" *ngFor="let item of error">
-                                              {{ item }}
-                                            </span>
-                                          </div>
-                                          <div *ngIf="registered">
-                                            <span class="successMessage">
-                                              User Registered Successfully
-                                            </span>
-                                          </div>
-                                          <div class="form-group text-center mt-4">
-                                            <button
-                                              class="btn btn-info btn-lg btn-block text-uppercase "
-                                              type="submit"
-                                              (click)="submitAccountDetails()"
-                                            >
-                                              Submit
-                                            </button>
-                                          </div>
-                                        </form>
-                                        <ngx-spinner
-                                          bdColor="rgba(51, 51, 51, 0.8)"
-                                          size="default"
-                                          type="ball-spin-clockwise"
-                                        >
-                                          <p style="color: white">Please Wait.</p>
-                                        </ngx-spinner>
-                                      </div>
-                                    </div>
-                                   
-                                  </div>
-                                </div>
-                              </div>
-                              <div *ngIf="!hideView" >
-                                      <div class="row" style="margin-left: 5%;" *ngIf="displayCreateForm">
-                                              <div class="col-md-5">
-                                                <div class="card ">
-                                                  <div class="card-header ">
-                                                    <h5 class="card-title">Account Details</h5>
-                                                  </div>
-                                                  <div class="card-body ">
-                                                    <div class="content" style="margin-top:0px">
-                                                      <p>No Account Details Present.</p>
-                                                      <p>Click on Create button to add one</p>
-                                                      <div class="form-group text-center mt-4">
-                                                              <button
-                                                                class="btn btn-info btn-lg btn-block text-uppercase "
-                                                                type="submit"
-                                                                (click)="EditAccountDetails(0)"
-                                                              >
-                                                                Add Account +
-                                                              </button>
-                                                            </div>
-                                                     
-                                                    </div>
-                                                  </div>
-                                                  
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="row" style="margin-left: 5%;" *ngIf="!displayCreateForm">
-                                                  <div class="col-md-5" *ngFor="let item of bankdetails">
-                                                    <div class="card ">
-                                                      <div class="card-header ">
-                                                        <h5 class="card-title">Account Details</h5>
-                                                      </div>
-                                                      <div class="card-body ">
-                                                        <div class="content" style="margin-top:0px">
-                                                          <form
-                                                            class="form-horizontal form-material"
-                                                            id="trainerform"
-                                                            [formGroup]="studentForm"
-                                                           
-                                                          >
-                                                            <div class="form-group mt-3">
-                                                              <label for="username" class="label text-uppercase"
-                                                                >Account Holder Name: {{item.AccountHolderName}}</label
-                                                              >
-                                                             
-                                                            </div>
-                                                            <div class="form-group">
-                                                              <label for="username" class="label text-uppercase"
-                                                                >{{item.BankAccountNumber}}</label
-                                                              >
-                                                              
-                                                            </div>
-                                                            
-                                                
-                                                            <div class="form-group">
-                                                              <label for="username" class="label text-uppercase">{{item.IFSC}}</label>
-                                                              
-                                                            </div>
-                                                            <div class="form-group">
-                                                              <label for="username" class="label text-uppercase">{{item.PAN}}</label>
-                                                              
-                                                            </div>
-                                                            <div class="form-group text-center mt-4">
-                                                                  <button
-                                                                    class="btn btn-info btn-lg btn-block text-uppercase "
-                                                                    type="submit"
-                                                                    (click)="EditAccountDetails(item.ID)"
-                                                                  >
-                                                                    Edit
-                                                                  </button>
-                                                                </div>
-                                                            
-                                                          </form>
-                                                         
-                                                        </div>
-                                                      </div>
-                                                      
-                                                    </div>
-                                                  </div>
-                                                </div>
-                              </div>
-                </div>
+                                                    ">
+                      *PAN is required.
+                    </span>
+                    <span class="errorMessage" *ngIf="
+                                                      (studentForm.controls['UPI'].dirty ||
+                                                        studentForm.controls['UPI'].touched) &&
+                                                      studentForm.controls['UPI'].invalid &&
+                                                      studentForm.controls['UPI'].errors.invalidPattern
+                                                    ">
+                      *PAN# is incorrect.
+                    </span> -->
+                  </div>
+                  <div *ngIf="serverError">
+                    <span class="errorMessage" *ngFor="let item of error">
+                      {{ item }}
+                    </span>
+                  </div>
+                  <div *ngIf="registered">
+                    <span class="successMessage">
+                      User Registered Successfully
+                    </span>
+                  </div>
+                  <div class="form-group text-center mt-4" style="display:flex">
+                    <button class="btn btn-info btn-lg btn-block text-uppercase " type="submit"
+                      (click)="submitAccountDetails()">
+                      Submit
+                    </button>
+                    <button class="btn btn-info btn-lg btn-block text-uppercase " type="submit" (click)="GoBack()">
+                      Back
+                    </button>
+                  </div>
+                </form>
+                <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+                  <p style="color: white">Please Wait.</p>
+                </ngx-spinner>
+              </div>
+            </div>
+
+          </div>
         </div>
+      </div>
+      <!-- Account View -->
+      <div *ngIf="!hideView">
+        <!-- No Account Details View -->
+        <div class="row" style="margin-left: 5%;" *ngIf="displayCreateForm">
+          <div class="col-md-5">
+            <div class="card ">
+              <div class="card-header ">
+                <h5 class="card-title">Account Details</h5>
+              </div>
+              <div class="card-body ">
+                <div class="content" style="margin-top:0px">
+                  <p>No Account Details Present.</p>
+                  <p>Click on Create button to add one</p>
+                  <div class="form-group text-center mt-4">
+                    <button class="btn btn-info btn-lg btn-block text-uppercase " type="submit"
+                      (click)="EditAccountDetails(0)">
+                      Add Account +
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- Account Details View -->
+        <div class="row" style="margin-left: 5%;" *ngIf="!displayCreateForm">
+          <div class="col-md-5" *ngFor="let item of bankdetails">
+            <div class="card ">
+              <div class="card-header ">
+                <h5 class="card-title">Account Details</h5>
+              </div>
+              <div class="card-body ">
+                <div class="content" style="margin-top:0px">
+                  <form class="form-horizontal form-material" id="trainerform" [formGroup]="studentForm">
+                    <div class="form-group mt-3">
+                      <label for="username" class="label text-uppercase">Name:
+                        {{item.AccountHolderName}}</label>
+
+                    </div>
+                    <div class="form-group">
+                      <label for="username" class="label text-uppercase">A/C: {{item.BankAccountNumber}}</label>
+
+                    </div>
+
+
+                    <div class="form-group">
+                      <label for="username" class="label text-uppercase">IFSC: {{item.IFSC}}</label>
+
+                    </div>
+                    <div class="form-group">
+                      <label for="username" class="label text-uppercase">PAN: {{item.PAN}}</label>
+
+                    </div>
+                    <div class="form-group">
+                      <label for="username" class="label text-uppercase">UPI Id: {{item.UPI}}</label>
+
+                    </div>
+                    <div class="form-group text-center mt-4">
+                      <button class="btn btn-info btn-lg btn-block text-uppercase " type="submit"
+                        (click)="EditAccountDetails(item.ID)">
+                        Edit
+                      </button>
+                    </div>
+
+                  </form>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
 </div>

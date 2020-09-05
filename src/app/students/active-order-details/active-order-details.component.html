@@ -1,12 +1,7 @@
 <div class="modal-dialog modal-xl">
   <div class="modal-header">
     <h2 class="modal-title">Order Details</h2>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="activeModal.close('Close click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -22,10 +17,7 @@
             <div class="">
               <div class="rowCart itemCart">
                 <div class="col-shp-3 mobCard">
-                  <img
-                    src="../../../assets/StudentDashboard/img/download.jpg"
-                    class="productImage"
-                  />
+                  <img src="../../../assets/StudentDashboard/img/download.jpg" class="productImage" />
                 </div>
                 <div class="col-shp-7 mobCard" style="padding-left: 1%;">
                   <p class="productTitle">{{ data.subcategory }}</p>
@@ -38,35 +30,25 @@
                     <span class="detailsHeading">Price: &#x20B9;</span> 1000
                   </p>
                   <div>
-                    <a href="www.google.com" target="_blank"
-                      >Download Reference Image</a
-                    >
+                    <a href="www.google.com" target="_blank">Download Reference Image</a>
                   </div>
                   <div style="display: flex;">
                     <div style="width:50%">
-                      <a href="www.google.com" target="_blank"
-                        >Download Logo/Image1</a
-                      >
+                      <a href="www.google.com" target="_blank">Download Logo/Image1</a>
                     </div>
 
                     <div style="width:50%">
-                      <a href="www.google.com" target="_blank"
-                        >Download Logo/Image2</a
-                      >
+                      <a href="www.google.com" target="_blank">Download Logo/Image2</a>
                     </div>
                   </div>
 
                   <div style="display: flex;">
                     <div style="width:50%">
-                      <a href="www.google.com" target="_blank"
-                        >Download Logo/Image3</a
-                      >
+                      <a href="www.google.com" target="_blank">Download Logo/Image3</a>
                     </div>
 
                     <div style="width:50%">
-                      <a href="www.google.com" target="_blank"
-                        >Download Logo/Image4</a
-                      >
+                      <a href="www.google.com" target="_blank">Download Logo/Image4</a>
                     </div>
                   </div>
 
@@ -81,19 +63,19 @@
                     <button class="btn">
                       Start Meeting
                     </button>
-                    
+
                   </p>
-                  
-                  
+
+
 
                   <div class="row">
-                     
-                  
-                    
+
+
+
                   </div>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>
@@ -107,10 +89,7 @@
             <div class="">
               <div class="rowCart itemCart">
                 <div class="col-shp-3 mobCard">
-                  <img
-                    src="../../../assets/StudentDashboard/img/download.jpg"
-                    class="productImage"
-                  />
+                  <img src="../../../assets/StudentDashboard/img/download.jpg" class="productImage" />
                 </div>
                 <div class="col-shp-7 mobCard" style="padding-left: 1%;">
                   <p class="productTitle">{{ item.subcategory }}</p>
@@ -123,151 +102,138 @@
                     <span class="detailsHeading">Price: &#x20B9;</span> {{ item.designerCost }}
                   </p>
                   <div>
-                      <a (click)="downloadFile(item.referenceImageURL,$event)" href="#"
-                        >Download Reference Image</a
-                      >
-                    </div>
+                    <a (click)="downloadFile(item.referenceImageURL,$event)" href="#">Download Reference Image</a>
+                  </div>
                   <div *ngFor="let filekey of item.sourceLogoFile;let j=index" style="display: flex;flex-wrap: wrap;">
                     <div>
-                        <a *ngIf="filekey !=''" (click)="downloadFile(filekey,$event)" href="#"
-                        >Download Logo/Image {{j+1}} </a
-                      >
+                      <a *ngIf="filekey !=''" (click)="downloadFile(filekey,$event)" href="#">Download Logo/Image
+                        {{j+1}} </a>
                     </div>
-                   
-                  </div>                 
-                 
-                  
-                  
+
+                  </div>
+
+
+
 
                   <div class="row" *ngFor="let itemImg of item.SourceUploads;let  i=index">
-                    <div class="input-group col-md-3" style="padding-top: 30px;position: relative !important">
+                    <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
                       <div class="form-group">
                         <div *ngIf="i == 0">
-                            <label >Source File </label>
-                           
+                          <label>Source File </label>
+
                         </div>
-                         <div style="display: flex;">
-                           <div *ngIf="!isAllOrders">
-                              <label [for]="itemImg.name" class="btn btn-primary btn-block btn-outlined" style="width:250px">UPLOAD</label>
-                              <input
-                              type="file"
-                              accept="image/*"
-                              style="display: none"
-                              [id]="itemImg.name"
-                              
-                              (change)="uploadGSTCertificate($event.target.files,item.id,'source',itemImg.id)"
-                            /> 
-                           </div>
-                           <div style="width: 40px;" *ngIf="itemImg.displayLoadingGif">
-                              <img src="../../../assets/img/loading.gif"/>
+                        <div style="display: flex;">
+                          <div *ngIf="!isAllOrders">
+                            <label [for]="itemImg.name" class="btn btn-primary btn-block btn-outlined"
+                              style="width:250px">UPLOAD</label>
+                            <input type="file" accept="image/*" style="display: none" [id]="itemImg.name"
+                              (change)="uploadGSTCertificate($event.target.files,item.id,'source',itemImg.id)" />
+                          </div>
+                          <div style="width: 40px;" *ngIf="itemImg.displayLoadingGif">
+                            <img src="../../../assets/img/loading.gif" />
+                          </div>
+                          <div *ngIf="!isAllOrders" style="display:flex">
+                            <div *ngIf="itemImg.id == item.SourceUploads.length">
+                              <button class="btn btn-outlined"
+                                (click)="addImage(itemImg.id,item.id,'source')">+</button>
                             </div>
-                            <div *ngIf="!isAllOrders" style="display:flex">
-                                <div *ngIf="itemImg.id == item.SourceUploads.length">
-                                    <button class="btn btn-outlined" (click)="addImage(itemImg.id,item.id,'source')">+</button>
-                                 </div> 
-                                 <div>
-                                    <button class="btn btn-outlined"  (click)="removeImage(itemImg.id,item.id,'source')">-</button>
-                                 </div> 
+                            <div>
+                              <button class="btn btn-outlined"
+                                (click)="removeImage(itemImg.id,item.id,'source')">-</button>
                             </div>
-                          
-                          
-                         </div>
-                         <div *ngIf="itemImg.displayFileName">
-                            <a href="#" (click)="stopDefault($event)" >{{itemImg.fileName}}</a> 
-                            
-                               
-                             
-                         </div>
-                        
-                          
-                       
+                          </div>
+
+
+                        </div>
+                        <div *ngIf="itemImg.displayFileName">
+                          <a href="#" (click)="stopDefault($event)">{{itemImg.fileName}}</a>
+
+
+
+                        </div>
+
+
+
                       </div>
-                     
+
                     </div>
-                   
-                    <div class="input-group col-md-4" *ngIf="fileError"></div>
+
+                    <!-- <div class="input-group col-md-4" *ngIf="fileError"></div> -->
                     <!-- <div class="input-group col-md-8" *ngIf="fileError">
                       <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
                     </div>  -->
-                  </div> 
+                  </div>
 
                   <div class="row" *ngFor="let itemNImg of item.NormalUploads;let  j=index">
-                    <div class="input-group col-md-3" style="padding-top: 30px;position: relative !important">
+                    <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
                       <div class="form-group">
                         <div *ngIf="j == 0">
-                            <label >Normal File </label>
-                           
-                        </div>
-                         <div style="display: flex;">
-                           <div *ngIf="!isAllOrders">
-                              <label [for]="itemNImg.name" class="btn btn-primary btn-block btn-outlined" style="width:250px">UPLOAD</label>
-                              <input
-                              type="file"
-                              accept="image/*"
-                              style="display: none"
-                              [id]="itemNImg.name"
-                              
-                              (change)="uploadGSTCertificate($event.target.files,item.id,'normal',itemNImg.id)"
-                            /> 
-                           </div>
-                           <div style="width: 40px;" *ngIf="itemNImg.displayLoadingGif">
-                              <img src="../../../assets/img/loading.gif"/>
-                            </div>
-                            <div *ngIf="!isAllOrders" style="display:flex">
+                          <label>Normal File </label>
 
-                                <div *ngIf="itemNImg.id == item.NormalUploads.length">
-                                    <button class="btn btn-outlined" (click)="addImage(itemNImg.id,item.id,'normal')" >+</button>
-                                 </div> 
-                                 <div>
-                                    <button class="btn btn-outlined"  (click)="removeImage(itemNImg.id,item.id,'normal')">-</button>
-                                 </div> 
+                        </div>
+                        <div style="display: flex;">
+                          <div *ngIf="!isAllOrders">
+                            <label [for]="itemNImg.name" class="btn btn-primary btn-block btn-outlined"
+                              style="width:250px">UPLOAD</label>
+                            <input type="file" accept="image/*" style="display: none" [id]="itemNImg.name"
+                              (change)="uploadGSTCertificate($event.target.files,item.id,'normal',itemNImg.id)" />
+                          </div>
+                          <div style="width: 40px;" *ngIf="itemNImg.displayLoadingGif">
+                            <img src="../../../assets/img/loading.gif" />
+                          </div>
+                          <div *ngIf="!isAllOrders" style="display:flex">
+
+                            <div *ngIf="itemNImg.id == item.NormalUploads.length">
+                              <button class="btn btn-outlined"
+                                (click)="addImage(itemNImg.id,item.id,'normal')">+</button>
                             </div>
-                          
-                          
-                         </div>
-                         <div *ngIf="itemNImg.displayFileName">
-                            <a href="#" (click)="stopDefault($event)">
-                              {{itemNImg.fileName}}</a> 
-                            
-                               
-                             
-                         </div>
-                        
-                          
-                       
+                            <div>
+                              <button class="btn btn-outlined"
+                                (click)="removeImage(itemNImg.id,item.id,'normal')">-</button>
+                            </div>
+                          </div>
+
+
+                        </div>
+                        <div *ngIf="itemNImg.displayFileName">
+                          <a href="#" (click)="stopDefault($event)">
+                            {{itemNImg.fileName}}</a>
+
+
+
+                        </div>
+
+
+
                       </div>
-                     
+
                     </div>
-                   
-                    <div class="input-group col-md-4" *ngIf="fileError"></div>
+
+                    <!-- <div class="input-group col-md-4" *ngIf="fileError"></div> -->
                     <!-- <div class="input-group col-md-8" *ngIf="fileError">
                       <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
                     </div>  -->
-                  </div> 
+                  </div>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>
       </div>
       <p *ngIf="!isAllOrders">
-          <button class="btn" (click)="startMeeting()">
-            Start Meeting
-          </button>
-          
-        </p>
+        <button class="btn" (click)="startMeeting()">
+          Start Meeting
+        </button>
+
+      </p>
     </div>
   </div>
 
   <div class="modal-footer">
     <!-- <button
     type="button" class="btn btn-primary mx-auto">Accept</button> -->
-    <button
-      type="button"
-      class="btn btn-light"
-      (click)="activeModal.close('Cross click')"
-    >
+    <button type="button" class="btn btn-light" (click)="activeModal.close('Cross click')">
       Close
     </button>
   </div>

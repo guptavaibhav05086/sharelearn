@@ -71,4 +71,11 @@ export class RegisterService {
       this.login.getAuthHeader()
     );
   }
+  changePasswordRequest(resetPassword: ResetPassword) {
+    return this._httpclient.post(
+      `${environment.baseUrl}${environment.changePassword}`,
+      resetPassword,
+      this.login.getAuthHeader()
+    );
+  }
 }

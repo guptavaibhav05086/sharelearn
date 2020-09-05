@@ -3,4 +3,5 @@ export class ResetPassword {
   Guid: string;
   NewPassword: string;
   ConfirmPassword: string;
+  OldPassword:string;
 }

@@ -28,11 +28,7 @@
         </a>
       </li>
       <li>
-        <a
-          href="#"
-          (click)="toggleItemsOrders($event)"
-          routerLinkActive="active"
-        >
+        <a href="#" (click)="toggleItemsOrders($event)" routerLinkActive="active">
           <i class="nc-icon nc-briefcase-24"></i>
           <p>Orders</p>
         </a>
@@ -64,11 +60,7 @@
       </li>
 
       <li>
-        <a
-          href="#"
-          (click)="toggleItemsSettings($event)"
-          routerLinkActive="active"
-        >
+        <a href="#" (click)="toggleItemsSettings($event)" routerLinkActive="active">
           <i class="nc-icon nc-settings-gear-65"></i>
           <p>Settings</p>
         </a>
@@ -83,6 +75,12 @@
         <a routerLink="/designer/paymentdetails" routerLinkActive="active">
           <i class="nc-icon nc-bank"></i>
           <p style="font-size: 10px;">Payments Details</p>
+        </a>
+      </li>
+      <li *ngIf="toggleSettings" style="margin-left: 15%;">
+        <a routerLink="/designer/changepassword" routerLinkActive="active">
+          <i class="nc-icon nc-bank"></i>
+          <p style="font-size: 10px;">Change Password</p>
         </a>
       </li>
       <li style="display:none">

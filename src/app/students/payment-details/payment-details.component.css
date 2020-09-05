@@ -1,4 +1,6 @@
 .errorMessage {
     color: red;
   }
-  
+  .label{
+    color:black !important;
+  }

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //baseUrl: "https://www.shapenprint.in",
-  baseUrl: "http://localhost:39117",
+  baseUrl: "https://www.shapenprint.in",
+  //baseUrl: "http://localhost:39117",
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
   tokenUrl: "/Token",
@@ -14,6 +14,7 @@ export const environment = {
   getFeedback: "/api/Public/getuserfeedback?courseId=$courseId",
   forgotPassword: "/api/Public/resetPassword?email=$email",
   resetPassword: "/api/Account/ResetPassword",
+  changePassword: "/api/Account/ChangePassword",
   getState: "/api/Public/GetStates",
   updateDesigner: "/api/designer/updateprofile",
   uploadImage: "/api/designer/uploadimage",

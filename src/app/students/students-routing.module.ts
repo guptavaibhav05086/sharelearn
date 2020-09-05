@@ -14,6 +14,7 @@ import { DesignerprofileComponent } from "./designerprofile/designerprofile.comp
 import { OnGoingOrderComponent } from "./on-going-order/on-going-order.component";
 import { AllOrdersComponent } from "./all-orders/all-orders.component";
 import { PaymentDetailsComponent } from "./payment-details/payment-details.component";
+import { ChangePasswordComponent } from "./change-password/change-password.component";
 const routes: Routes = [
   {
     path: "",
@@ -32,7 +33,8 @@ const routes: Routes = [
       { path: "help", component: HelpComponent },
       { path: "activeorder", component: OnGoingOrderComponent },
       { path: "allOrders", component: AllOrdersComponent },
-      { path: "paymentdetails", component: PaymentDetailsComponent }
+      { path: "paymentdetails", component: PaymentDetailsComponent },
+      { path: "changepassword", component: ChangePasswordComponent }
     ]
   }
 ];

@@ -10,6 +10,7 @@ export const environment = {
   getFeedback: "/api/Public/getuserfeedback?courseId=$courseId",
   forgotPassword: "/api/Public/resetPassword?email=$email",
   resetPassword: "/api/Account/ResetPassword",
+  changePassword: "/api/Account/ChangePassword",
   getState: "/api/Public/GetStates",
   updateDesigner: "/api/designer/updateprofile",
   uploadImage: "/api/designer/uploadimage",

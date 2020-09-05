@@ -23,6 +23,7 @@ export class PaymentDetailsComponent implements OnInit {
   error: any;
   registered = false;
   bankdetails: Array<BankAccountModel>;
+  fileError = false;
   studentForm = new FormGroup(
     {
       ID: new FormControl(0),
@@ -47,6 +48,10 @@ export class PaymentDetailsComponent implements OnInit {
     private spinnerService: NgxSpinnerService
   ) {}
   submitAccountDetails() {
+    if (this.studentForm.invalid) {
+      alert("Please Provide data in all fields ");
+      return;
+    }
     this.spinnerService.show();
 
     this.accountDetails.AccountHolderName = this.studentForm.controls[
@@ -59,6 +64,8 @@ export class PaymentDetailsComponent implements OnInit {
     this.accountDetails.IFSC = this.studentForm.controls["IFSC"].value;
     this.accountDetails.PAN = this.studentForm.controls["PAN"].value;
     this.accountDetails.UserEmail = localStorage.getItem("email");
+    this.accountDetails.UPI = this.studentForm.controls["UPI"].value;
+
     this._designerService.UpdateBankDetails(this.accountDetails).subscribe(
       data => {
         this.spinnerService.hide();
@@ -96,11 +103,17 @@ export class PaymentDetailsComponent implements OnInit {
   fetchAccountDetails() {
     this._designerService.GetBankDetails().subscribe(data => {
       this.bankdetails = data;
+      console.log(this.bankdetails);
       if (this.bankdetails.length > 0) {
         this.displayCreateForm = false;
       } else {
         this.displayCreateForm = true;
       }
     });
+  }
+  GoBack() {
+    this.hideView = false;
+    this.displayEditForm = false;
+    //this.fetchAccountDetails();
   }
 }
