@@ -4,6 +4,7 @@ import { environment } from "src/environments/environment";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { LoginService } from "./login.service";
 import { PrinterProfileRequest } from "../Models/printer-profile-request";
+import { BankAccountModel } from "../Models/bank-account-model";
 @Injectable({
   providedIn: "root"
 })
@@ -59,6 +60,84 @@ export class PrinterService {
     return this._httpclient.get(
       url,
 
+      this.login.getAuthHeader()
+    );
+  }
+  FetchDashboard(email) {
+    debugger;
+    let url = `${environment.baseUrl}${environment.getPrinterDashboard}`.replace(
+      "$email",
+      email
+    );
+    //isAllOrdersRequired
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
+  FetchOngoingOrder(email, allOrdersflag) {
+    debugger;
+    let url = `${environment.baseUrl}${environment.fetchOngoingOrdersPrinter}`
+      .replace("$email", email)
+      .replace("$isAllOrdersRequired", allOrdersflag);
+    //isAllOrdersRequired
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
+  acceptPrintOrder(email, orderId) {
+    let url = `${environment.baseUrl}${environment.acceptPrintOrder}`
+      .replace("$email", email)
+      .replace("$orderId", orderId);
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
+  uploadFinalInvoice(file, orderId) {
+    return this._httpclient.post(
+      `${environment.baseUrl}${environment.postPrinterInvoice}`.replace(
+        "$orderId",
+        orderId
+      ),
+      file,
+      this.login.getAuthHeader()
+    );
+  }
+  downloadOrderFiles(filename, type) {
+    let url = `${environment.baseUrl}${environment.fetchongoingorderfilesPrinter}`
+      .replace("$filename", filename)
+      .replace("$type", type);
+    let authHeaders = new HttpHeaders({
+      Authorization: "Bearer " + this.login.getUserToken().Token
+    });
+
+    const options = {
+      headers: authHeaders,
+      responseType: "blob" as "json"
+    };
+    return this._httpclient.get(
+      url,
+
+      options
+    );
+  }
+  UpdateBankDetails(model: BankAccountModel) {
+    debugger;
+    let url = `${environment.baseUrl}${environment.updateBankDetailsPrinter}`;
+    //isAllOrdersRequired
+    return this._httpclient.post(url, model, this.login.getAuthHeader());
+  }
+  GetBankDetails(): Observable<Array<BankAccountModel>> {
+    debugger;
+    let url = `${environment.baseUrl}${environment.getPrinterBankDetails}`;
+    //isAllOrdersRequired
+    return this._httpclient.get<Array<BankAccountModel>>(
+      url,
       this.login.getAuthHeader()
     );
   }

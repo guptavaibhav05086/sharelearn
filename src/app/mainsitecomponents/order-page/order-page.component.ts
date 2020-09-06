@@ -531,6 +531,13 @@ return true;
   
   proceedOrder($element: any) {
     debugger;
+    if(this.orderForm.controls['type'].value == 'Design Only'){
+      this.orderForm.patchValue({
+        quantities:0,
+        GSM:0
+
+      });
+    }
     Object.keys(this.orderForm.controls).forEach(field => { // {1}
       const control = this.orderForm.get(field);            // {2}
       control.markAsTouched({ onlySelf: true });       // {3}

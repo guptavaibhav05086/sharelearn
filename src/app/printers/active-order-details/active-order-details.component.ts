@@ -1,17 +1,27 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { PrinterService } from "../../services/printer.service";
 @Component({
-  selector: 'app-active-order-details',
-  templateUrl: './active-order-details.component.html',
-  styleUrls: ['./active-order-details.component.css']
+  selector: "app-active-order-details",
+  templateUrl: "./active-order-details.component.html",
+  styleUrls: ["./active-order-details.component.css"]
 })
 export class ActiveOrderDetailsComponent implements OnInit {
   @Input() data;
-  constructor(public activeModal: NgbActiveModal,
-    private service: PrinterService) { }
+  orderItems: any;
+  @Input() isAllOrders;
+  constructor(
+    public activeModal: NgbActiveModal,
+    private service: PrinterService
+  ) {}
 
   ngOnInit(): void {
+    debugger;
+    this.isAllOrders = true;
+    this.orderItems = this.data.ongoingOrders;
+
+    this.initializeFiles();
+    console.log(this.data.ongoingOrders);
   }
   uploadedFileNames = {
     product: "",
@@ -25,152 +35,217 @@ export class ActiveOrderDetailsComponent implements OnInit {
     displayReadOnlyError: false
   };
   stopDefault(event) {}
-  imageUpload=[{
-    id:1,
-    name:'image1',
-    displayLoadingGif:false,
-    displayFileName:false,
-    fileName:'',
-    fileSize:0,
-    fileError:false,
-    serverFileName:''
-  }];
-  addImage(i){
+  imageUpload = [
+    {
+      id: 1,
+      name: "image1",
+      displayLoadingGif: false,
+      displayFileName: false,
+      fileName: "",
+      fileSize: 0,
+      fileError: false,
+      serverFileName: ""
+    }
+  ];
+  imageUploadNormal = [
+    {
+      id: 1,
+      name: "imageNormal1",
+      displayLoadingGif: false,
+      displayFileName: false,
+      fileName: "",
+      fileSize: 0,
+      fileError: false,
+      serverFileName: ""
+    }
+  ];
+  initializeFiles() {
+    this.imageUpload = [];
+    for (let index = 0; index < this.data.ongoingOrders.length; index++) {
+      const FinalNormalDesignFile = this.data.ongoingOrders[index]
+        .FinalNormalDesignFile;
+      const sourcecodeFinalDesignFile = this.data.ongoingOrders[index]
+        .sourcecodeFinalDesignFile;
+      let imageUploadDataNormal = [];
+      let imageUploadDataSource = [];
+      if (FinalNormalDesignFile != null) {
+        FinalNormalDesignFile.forEach((element, index) => {
+          if (element != "") {
+            imageUploadDataNormal.push({
+              id: index + 1,
+              name: "imageNormal" + (index + 1),
+              displayLoadingGif: false,
+              displayFileName: true,
+              fileName: element,
+              fileSize: 0,
+              fileError: false,
+              serverFileName: element
+            });
+          }
+        });
+      }
+
+      this.orderItems[index].NormalUploads = imageUploadDataNormal;
+
+      if (sourcecodeFinalDesignFile != null) {
+        sourcecodeFinalDesignFile.forEach((element, index) => {
+          if (element != "") {
+            imageUploadDataSource.push({
+              id: index + 1,
+              name: "image" + (index + 1),
+              displayLoadingGif: false,
+              displayFileName: true,
+              fileName: element,
+              fileSize: 0,
+              fileError: false,
+              serverFileName: element
+            });
+          }
+        });
+      }
+
+      this.orderItems[index].SourceUploads = imageUploadDataSource;
+      if (this.orderItems[index].SourceUploads.length == 0) {
+        this.orderItems[index].SourceUploads = [
+          {
+            id: 1,
+            name: "image1",
+            displayLoadingGif: false,
+            displayFileName: false,
+            fileName: "",
+            fileSize: 0,
+            fileError: false,
+            serverFileName: ""
+          }
+        ];
+      }
+      if (this.orderItems[index].NormalUploads.length == 0) {
+        this.orderItems[index].NormalUploads = [
+          {
+            id: 1,
+            name: "imageNormal",
+            displayLoadingGif: false,
+            displayFileName: false,
+            fileName: "",
+            fileSize: 0,
+            fileError: false,
+            serverFileName: ""
+          }
+        ];
+      }
+    }
+    if(this.data.PrinterInvoiceURL !=null){
+      this.uploadedFileNames.product = this.data.PrinterInvoiceURL;
+      this.uploadedFileNames.displayLoadingProductGif=false;
+    }
+  }
+  addImage(i, orderId, type) {
     debugger;
-    if(this.imageUpload.length < 4){
-
-      let imgname = 'image' + (i+1);
-    this.imageUpload.push({
-      id:i+1,
-      name:imgname,
-      displayLoadingGif:false,
-      displayFileName:false,
-      fileName:'',
-      fileSize:0,
-      fileError:false,
-      serverFileName:''
-    })
+    //if(this.imageUpload.length < 4){
+    //let imgname = "image" + (i + 1);
+    let selItem = this.orderItems.filter(i => i.id == orderId)[0];
+    if (type == "source") {
+      let imgname = "image" + (i + 1);
+      selItem.SourceUploads.push({
+        id: i + 1,
+        name: imgname,
+        displayLoadingGif: false,
+        displayFileName: false,
+        fileName: "",
+        fileSize: 0,
+        fileError: false,
+        serverFileName: ""
+      });
+    } else if (type == "normal") {
+      let imgname = "imageNormal" + (i + 1);
+      selItem.NormalUploads.push({
+        id: i + 1,
+        name: imgname,
+        displayLoadingGif: false,
+        displayFileName: false,
+        fileName: "",
+        fileSize: 0,
+        fileError: false,
+        serverFileName: ""
+      });
     }
-    
   }
-  removeImage(i){
-    if(i ==1){
-      let item = this.imageUpload.filter(item=>item.id == i)[0];
-      item.displayFileName=false;
-    }
-    else{
-      this.imageUpload=this.imageUpload.filter(item=>item.id != i);
-    }
-    
+  removeImage(i, orderId, type) {
+    debugger;
+    let selItem = this.orderItems.filter(i => i.id == orderId)[0];
 
+    if (type == "source") {
+      if (i == 1 && selItem.SourceUploads.length == 1) {
+        selItem.SourceUploads[0].displayFileName = false;
+        return;
+      }
+      selItem.SourceUploads = selItem.SourceUploads.filter(
+        item => item.id != i
+      );
+    }
+    if (type == "normal") {
+      if (i == 1 && selItem.NormalUploads.length == 1) {
+        selItem.NormalUploads[0].displayFileName = false;
+        return;
+      }
+      selItem.NormalUploads = selItem.NormalUploads.filter(
+        item => item.id != i
+      );
+    }
   }
-  
-  uploadGSTCertificate(images: FileList, id, name: string,uploadImageId) {
+
+  uploadGSTCertificate(images: FileList, name: string) {
     debugger;
     var result = "";
     var file;
+   
+   
     const formData = new FormData();
     var userImage = images.item(0);
     //debugger;
     for (var i = 0; (file = images[i]); i++) {
-      //if the file is not an image, continue
-      // if (!this.validateFiles(name, file)) {
-      //   //alert("Not a Valid Image File");
-      //   return;
-      // }
       let reader = new FileReader();
 
       reader.readAsDataURL(file);
     }
+
     formData.append(name, userImage, userImage.name);
-
-    let uplImg;
-    if (name == "source") {
-      uplImg= this.imageUpload.filter(item=>item.id==uploadImageId)[0];
-      uplImg.displayLoadingGif=true;
-      uplImg.fileName=userImage.name;
-      //this.uploadedFileNames.displayLoadingProductGif = true;
-    } else {
-      //this.uploadedFileNames.displayLoadingProductGif = false;
-    }
-    if (name == "normal") {
-      this.uploadedFileNames.displayLoadingContentGif = true;
-    } else {
-      this.uploadedFileNames.displayLoadingContentGif = false;
-    }
-    //this.service.uploadFinalSourceImage(formData, id, name).subscribe(
-    //  data => {
-        //this.spinner.hide();
-        //debugger;
-     //   console.log(data);
-        //alert("File Uploaded Successfully");
-        //this.uploadedFileNames[name] = data;
-        
-     //   this.uploadedFileNames[name] = userImage.name;
-        //this.fileError = false;
-     //   this.uploadedFileNames.IsImageUploaded = true;
-        //this.selectedFileName = userImage.name;
-     //   if (name == "source") {
-        //  uplImg.displayLoadingGif=false;
-        //  uplImg.displayFileName=true;
-          // this.uploadedFileNames.contentValidation = true;
-          // this.uploadedFileNames.displayLoadingContentGif = false;
-          // this.uploadedFileNames.IscontentUploaded = true;
-          //this.uploadedFileNames.contentServerFile=data.toString();
-     //   }
-        // if (name == "normal") {
-        //   this.uploadedFileNames.IsproductRefUploaded = true;
-        //   this.uploadedFileNames.displayErrororbutton = false;
-         //this.uploadedFileNames.productServerFile=data.toString();
-      //  } else {
-          //this.uploadedFileNames.IsproductRefUploaded=false;
-     //   }
-     //   this.uploadedFileNames.displayLoadingProductGif = false;
-     // },
-    //  err => {
-        //this.spinner.hide();
-        //debugger;
-        //this.fileError = true;
-        // alert("Issue in file upload please contact admin");
-        // if (name == "source") {
-        //   uplImg.displayLoadingGif=false;
-        //   uplImg.displayFileName=false;
-          // this.uploadedFileNames.contentValidation = false;
-          // this.uploadedFileNames.displayLoadingContentGif = false;
-          // this.uploadedFileNames.IscontentUploaded = false;
-  //       }
-  //       if ((name = "normal")) {
-  //         this.uploadedFileNames.IsproductRefUploaded = false;
-  //       } else {
-  //         this.uploadedFileNames.IsproductRefUploaded = true;
-  //       }
-  //       this.uploadedFileNames.displayLoadingProductGif = false;
-  //     }
-  //   );
-  // }
-  // downloadFile(filename, e) {
-  //   debugger;
-  //   e.preventDefault();
-  //   this.service.downloadOrderFiles(filename).subscribe(
-  //     (response: any) => {
-  //       let dataType = response.type;
-  //       let binaryData = [];
-  //       binaryData.push(response);
-  //       let downloadLink = document.createElement("a");
-  //       downloadLink.href = window.URL.createObjectURL(
-  //         new Blob(binaryData, { type: dataType })
-  //       );
-  //       if (filename) downloadLink.setAttribute("download", filename);
-  //       document.body.appendChild(downloadLink);
-  //       downloadLink.click();
-  //     },
-  //     err => {
-  //       console.log(err);
-  //     }
-  //   );
-  // }
-  // startMeeting() {
-  //   window.open(this.data.MeetingUrl, "_blank");
-   }
+    //formData.append("FileNames", keys);
+    this.service.uploadFinalInvoice(formData, this.data.OrderId).subscribe(
+      data => {
+        debugger;
+        console.log(data);
+        this.uploadedFileNames.product=userImage.name;
+        this.uploadedFileNames.displayLoadingProductGif = false;
+      },
+      err => {
+        this.uploadedFileNames.displayLoadingProductGif = false;
+        alert("Issue in file upload please contact admin");
+      }
+    );
+  }
+  downloadFile(filename, e, type) {
+    debugger;
+    e.preventDefault();
+    this.service.downloadOrderFiles(filename, type).subscribe(
+      (response: any) => {
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement("a");
+        downloadLink.href = window.URL.createObjectURL(
+          new Blob(binaryData, { type: dataType })
+        );
+        if (filename) downloadLink.setAttribute("download", filename);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+  startMeeting() {
+    window.open(this.data.MeetingUrl, "_blank");
+  }
 }
-

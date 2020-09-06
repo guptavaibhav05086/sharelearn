@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: "https://www.shapenprint.in",
-  //baseUrl: "http://localhost:39117",
+  //baseUrl: "https://www.shapenprint.in",
+  baseUrl: "http://localhost:39117",
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
   tokenUrl: "/Token",
@@ -66,7 +66,16 @@ export const environment = {
   updateBankDetails: "/api/designer/updateBankDetails",
   getBankDetails: "/api/designer/getBankDetails",
   postFinalFilesDesigner:
-    "/api/designer/postDesignerFinalFolder?orderId=$orderId&type=$type"
+    "/api/designer/postDesignerFinalFolder?orderId=$orderId&type=$type",
+  getPrinterDashboard: "/api/printer/getprinterDashboard?email=$email",
+  fetchOngoingOrdersPrinter:
+    "/api/printer/getOngoingOrder?email=$email&isAllOrdersRequired=$isAllOrdersRequired",
+  acceptPrintOrder: "/api/printer/AcceptOrder?email=$email&orderId=$orderId",
+  fetchongoingorderfilesPrinter:
+    "/api/printer/downloadOngoingOrderFiles?filename=$filename&type=$type",
+  postPrinterInvoice: "/api/printer/postPrinterInvoice?orderId=$orderId",
+  updateBankDetailsPrinter: "/api/printer/updateBankDetails",
+  getPrinterBankDetails: "/api/printer/getBankDetails",
 };
 
 /*

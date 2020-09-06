@@ -1,56 +1,90 @@
 <div class="sidebar" data-color="white" data-active-color="danger">
   <!--
-            Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
-        -->
+      Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+  -->
   <div class="logo">
-    <a routerLink="/" class="simple-text">
+    <a routerLink="/" class="simple-text ">
       <div class="logo-image-small">
         <img src="../../../assets/img/logonew.svg" style="max-width: 80%;" />
       </div>
     </a>
+    <!-- <a routerLink="/" class="simple-text logo-normal">
+      SHAPENPRINT
+    
+    </a> -->
   </div>
-  <div class="sidebar-wrapper" *ngIf="displaySideBar">
+  <div class="sidebar-wrapper" *ngIf="displayLeftNav">
     <ul class="nav">
       <li>
-        <a routerLink="/students/dashboard" routerLinkActive="active">
+        <a routerLink="/printers/dashboard" routerLinkActive="active">
           <i class="nc-icon nc-bank"></i>
           <p>Dashboard</p>
         </a>
       </li>
-
       <li>
-        <a routerLink="/students/orders" routerLinkActive="active">
+        <a routerLink="/printers/notifications" routerLinkActive="active">
+          <i class="nc-icon nc-support-17"></i>
+          <p>Accept New Orders</p>
+        </a>
+      </li>
+      <li>
+        <a href="#" (click)="toggleItemsOrders($event)" routerLinkActive="active">
           <i class="nc-icon nc-briefcase-24"></i>
           <p>Orders</p>
         </a>
       </li>
-
+      <li *ngIf="toggleOrders" style="margin-left: 15%;">
+        <a routerLink="/printers/activeorders" routerLinkActive="active">
+          <i class="nc-icon nc-briefcase-24"></i>
+          <p style="font-size: 10px;">Ongoing Orders</p>
+        </a>
+      </li>
+      <li *ngIf="toggleOrders" style="margin-left: 15%;">
+        <a routerLink="/printers/allorders" routerLinkActive="active">
+          <i class="nc-icon nc-briefcase-24"></i>
+          <p style="font-size: 10px;">All Orders</p>
+        </a>
+      </li>
+      <!-- 
       <li>
-        <a routerLink="/students/profile" routerLinkActive="active">
+        <a routerLink="/designer/designerprofile" routerLinkActive="active">
           <i class="nc-icon nc-single-02"></i>
           <p>User Profile</p>
         </a>
-      </li>
+      </li> -->
       <li>
-        <a routerLink="/students/payments" routerLinkActive="active">
+        <a routerLink="/printers/payments" routerLinkActive="active">
           <i class="nc-icon nc-bank"></i>
           <p>Payments</p>
         </a>
       </li>
+
       <li>
-        <a routerLink="/students/help" routerLinkActive="active">
-          <i class="nc-icon nc-support-17"></i>
-          <p>Help</p>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/students/settings" routerLinkActive="active">
+        <a href="#" (click)="toggleItemsSettings($event)" routerLinkActive="active">
           <i class="nc-icon nc-settings-gear-65"></i>
           <p>Settings</p>
         </a>
       </li>
-      <li>
-        <a routerLink="/students/notifications" routerLinkActive="active">
+      <li *ngIf="toggleSettings" style="margin-left: 15%;">
+        <a routerLink="/printers/profile" routerLinkActive="active">
+          <i class="nc-icon nc-single-02"></i>
+          <p style="font-size: 10px;">User Profile</p>
+        </a>
+      </li>
+      <li *ngIf="toggleSettings" style="margin-left: 15%;">
+        <a routerLink="/printers/paymentdetails" routerLinkActive="active">
+          <i class="nc-icon nc-bank"></i>
+          <p style="font-size: 10px;">Payments Details</p>
+        </a>
+      </li>
+      <li *ngIf="toggleSettings" style="margin-left: 15%;">
+        <a routerLink="/printers/changepassword" routerLinkActive="active">
+          <i class="nc-icon nc-bank"></i>
+          <p style="font-size: 10px;">Change Password</p>
+        </a>
+      </li>
+      <li style="display:none">
+        <a routerLink="/printers/notifications" routerLinkActive="active">
           <i class="nc-icon nc-email-85"></i>
           <p>Notifications</p>
         </a>

@@ -20,12 +20,15 @@ import { RazorpaymentsComponent } from "./razorpayments/razorpayments.component"
 import { TransactionsuccessdetailsComponent } from "./transactionsuccessdetails/transactionsuccessdetails.component";
 import { GoogleplacesComponent } from "./googleplaces/googleplaces.component";
 import { NgxSpinnerModule } from "ngx-spinner";
-import { DetailsComponentComponent } from './details-component/details-component.component';
-import { DeliveryDetailsComponent } from './delivery-details/delivery-details.component';
-import { AllOrdersComponent } from './all-orders/all-orders.component';
-import { ActiveOrderDetailsComponent } from './active-order-details/active-order-details.component';
-import { ButtonrendererComponent } from './button-renderer/button-renderer.component';
-import { OnGoingOrderComponent } from './on-going-order/on-going-order.component';
+import { DetailsComponentComponent } from "./details-component/details-component.component";
+import { DeliveryDetailsComponent } from "./delivery-details/delivery-details.component";
+import { AllOrdersComponent } from "./all-orders/all-orders.component";
+import { ActiveOrderDetailsComponent } from "./active-order-details/active-order-details.component";
+import { ButtonrendererComponent } from "./button-renderer/button-renderer.component";
+import { OnGoingOrderComponent } from "./on-going-order/on-going-order.component";
+import { AgGridModule } from "ag-grid-angular";
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,9 @@ import { OnGoingOrderComponent } from './on-going-order/on-going-order.component
     AllOrdersComponent,
     ActiveOrderDetailsComponent,
     ButtonrendererComponent,
-    OnGoingOrderComponent
+    OnGoingOrderComponent,
+    PaymentDetailsComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +62,8 @@ import { OnGoingOrderComponent } from './on-going-order/on-going-order.component
     ReactiveFormsModule,
     FormsModule,
     PublicModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AgGridModule
   ]
 })
 export class PrintersModule {}
