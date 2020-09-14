@@ -57,7 +57,8 @@ export class ProductsFormsComponent implements OnInit {
     private _validator: ValidatorsService,
     private spinnerService: NgxSpinnerService,
     public activeModal: NgbActiveModal,
-    public admin: AdminService
+    public admin: AdminService,
+    
   ) {}
 
   ngOnInit(): void {

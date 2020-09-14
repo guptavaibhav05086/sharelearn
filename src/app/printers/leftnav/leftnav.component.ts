@@ -8,7 +8,7 @@ import { Subject } from "rxjs";
 })
 export class LeftnavComponent implements OnInit {
   displaySideBar = true;
-  displayLeftNav = true;
+  displayLeftNav = false;
   toggleSettings = false;
   toggleOrders = false;
   @Input() resetFormSubject: Subject<any> = new Subject<any>();

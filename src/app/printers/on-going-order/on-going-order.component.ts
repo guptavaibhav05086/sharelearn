@@ -41,6 +41,15 @@ export class OnGoingOrderComponent implements OnInit {
         label: "Order Details",
         onClick: this.openOrderDetails.bind(this)
       }
+    },
+    {
+      headerName: "Deliver",
+
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        label: "Initiate Delivery",
+        onClick: this.initiateDelivery.bind(this)
+      }
     }
   ];
 
@@ -75,9 +84,22 @@ export class OnGoingOrderComponent implements OnInit {
     });
     modelref.componentInstance.data = e.rowData;
     modelref.componentInstance.isAllOrders = false;
-    
+
     // modelref.result.then(data => {
     //   this.fetchOngoingOrder();
     // });
+  }
+  initiateDelivery(e) {
+    debugger;
+    this.service
+      .initiateDelivery(e.rowData.OrderId, e.rowData.CustomerId)
+      .subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 }

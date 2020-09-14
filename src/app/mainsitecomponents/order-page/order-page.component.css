@@ -1,35 +1,71 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 400px) {
+/* @media only screen and (max-width: 400px) {
   .flex-control-radio {
     width: 50%;
+  }
+  [class*="flex-"] {
+    width: 100% !important;
   }
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (max-width: 600px) {
+  [class*="flex-"] {
+    width: 100% !important;
+  }
   .flex-control-radio {
     width: 50%;
   }
-}
+} */
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
   .flex-control-radio {
-    width: 33%;
+    width: 50%;
+  }
+  [class*="flex-"] {
+    width: 100% !important;
   }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
   .flex-control-radio {
     width: 25%;
+  }
+  .fullpageView {
+    height: 50vh;
+  }
+  .labelCreateOrder {
+    margin-top: 80px;
+    font-weight: bolder;
+  }
+  .form-group .form-control,
+  .input-group .form-control {
+    padding: 1px 1px 1px 1px !important;
+  }
+  .form-control {
+    border: 3px solid lightblue !important;
+    border-radius: 0px !important;
+  }
+  .lableOR {
+    padding-top: 40px;
+  }
+  .contentUploadBtn {
+    padding-top: 15px;
   }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
+/* @media only screen and (max-width: 1200px) {
   .flex-control-radio {
     width: 25%;
   }
+  .fullpageView {
+    height: 50vh;
+  }
+} */
+.hrColor {
+  background-color: lightblue;
 }
 .checkbox-profession {
   width: 100%;
@@ -58,6 +94,10 @@
 
 .flex-control8 {
   width: 80%;
+}
+.flex-control-40 {
+  width: 40%;
+  padding-left: 25px;
 }
 .flex-control6 {
   width: 60%;
@@ -195,7 +235,7 @@ button.calendar:active {
   border-left: 5px solid #a94442; 
 } */
 .displayError {
-  border-left: 5px solid #a94442;
+  border-left: 5px solid #a94442 !important;
 }
 .sideBorder {
   border-left: 1px solid #dddddd;
@@ -210,6 +250,6 @@ button.calendar:active {
 .displayBorderError {
   color: 1px solid #a94442;
 }
-.overflowBody{
+.overflowBody {
   overflow-y: hidden;
 }

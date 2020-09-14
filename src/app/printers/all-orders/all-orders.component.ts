@@ -81,4 +81,5 @@ export class AllOrdersComponent implements OnInit {
     //   this.fetchOngoingOrder();
     // });
   }
+  
 }

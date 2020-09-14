@@ -782,7 +782,8 @@ return true;
     }
     return true;
   }
-  showCategory(category) {
+  showCategory(category,$element) {
+    debugger;
     this.addRemoveOverflow(false);
     if(this.displayeproceed == false){
       return;
@@ -830,6 +831,12 @@ return true;
     this.orderForm.patchValue({
       type: category
     });
+    try{
+      debugger;
+      this.scrollToElement($element);
+    }catch(err){
+
+    }
     console.log(this.selectedCategory);
     // this.selectedCategory.sort((a, b) => a.value.localeCompare(b.value));
   }
@@ -893,6 +900,7 @@ return true;
     // this.orderForm.patchValue({
     //   meetingDate: initialDate
     // });
+    
   }
 
   addRemoveOverflow(toggle){
@@ -914,7 +922,7 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
     
     
     if (editItem != null) {
-      this.showCategory(editItem[0].type);
+      this.showCategory(editItem[0].type,null);
       let elemTime = this.document.getElementById("specs");
       // if(elemTime !=null){
 

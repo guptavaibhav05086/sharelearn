@@ -62,5 +62,28 @@ export const environment = {
   updateBankDetails: "/api/designer/updateBankDetails",
   getBankDetails: "/api/designer/getBankDetails",
   postFinalFilesDesigner:
-    "/api/designer/postDesignerFinalFolder?orderId=$orderId&type=$type"
+    "/api/designer/postDesignerFinalFolder?orderId=$orderId&type=$type",
+  getPrinterDashboard: "/api/printer/getprinterDashboard?email=$email",
+  fetchOngoingOrdersPrinter:
+    "/api/printer/getOngoingOrder?email=$email&isAllOrdersRequired=$isAllOrdersRequired",
+  acceptPrintOrder: "/api/printer/AcceptOrder?email=$email&orderId=$orderId",
+  fetchongoingorderfilesPrinter:
+    "/api/printer/downloadOngoingOrderFiles?filename=$filename&type=$type",
+  postPrinterInvoice: "/api/printer/postPrinterInvoice?orderId=$orderId",
+  updateBankDetailsPrinter: "/api/printer/updateBankDetails",
+  getPrinterBankDetails: "/api/printer/getBankDetails",
+  initiateDelivery:
+    "/api/printer/SendDelivery?orderId=$orderId&customerId=$customerId",
+  getDesignerPayoutDetails: "/api/admin/getDesignerpayouts",
+  getPrinterPayoutDetails: "/api/admin/getPrinterpayouts",
+  getAccountDetailsVendor:
+    "/api/admin/getAccountDetailsVendor?type=$type&vendorEmail=$vendorEmail",
+  printerVpaPay:
+    "/api/admin/makePrinterPaymentVPA?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
+  printerBankAccountPay:
+    "/api/admin/makePrinterPayment?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
+  designerVpaPay:
+    "/api/admin/makeDesignerPaymentVPA?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
+  designerBankAccountPay:
+    "/api/admin/makeDesignerPayment?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount"
 };

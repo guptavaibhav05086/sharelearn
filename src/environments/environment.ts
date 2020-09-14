@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  //baseUrl: "https://www.shapenprint.in",
-  baseUrl: "http://localhost:39117",
+  baseUrl: "https://www.shapenprint.in",
+  //baseUrl: "http://localhost:39117",
+
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
   tokenUrl: "/Token",
@@ -76,6 +77,20 @@ export const environment = {
   postPrinterInvoice: "/api/printer/postPrinterInvoice?orderId=$orderId",
   updateBankDetailsPrinter: "/api/printer/updateBankDetails",
   getPrinterBankDetails: "/api/printer/getBankDetails",
+  initiateDelivery:
+    "/api/printer/SendDelivery?orderId=$orderId&customerId=$customerId",
+  getDesignerPayoutDetails: "/api/admin/getDesignerpayouts",
+  getPrinterPayoutDetails: "/api/admin/getPrinterpayouts",
+  getAccountDetailsVendor:
+    "/api/admin/getAccountDetailsVendor?type=$type&vendorEmail=$vendorEmail",
+  printerVpaPay:
+    "/api/admin/makePrinterPaymentVPA?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
+  printerBankAccountPay:
+    "/api/admin/makePrinterPayment?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
+  designerVpaPay:
+    "/api/admin/makeDesignerPaymentVPA?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
+  designerBankAccountPay:
+    "/api/admin/makeDesignerPayment?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount"
 };
 
 /*

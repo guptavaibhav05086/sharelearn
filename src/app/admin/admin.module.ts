@@ -15,6 +15,8 @@ import { ProductListsComponent } from './product-lists/product-lists.component';
 import { PrintRatesComponent } from './print-rates/print-rates.component';
 import { RegsiterProfilesComponent } from './regsiter-profiles/regsiter-profiles.component';
 import { DiscountFormComponent } from './discount-form/discount-form.component';
+import { VendorPayoutsComponent } from './vendor-payouts/vendor-payouts.component';
+import { PayoutFormComponent } from './payout-form/payout-form.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -27,7 +29,9 @@ import { DiscountFormComponent } from './discount-form/discount-form.component';
     ProductListsComponent,
     PrintRatesComponent,
     RegsiterProfilesComponent,
-    DiscountFormComponent
+    DiscountFormComponent,
+    VendorPayoutsComponent,
+    PayoutFormComponent
   ],
   imports: [
     CommonModule,

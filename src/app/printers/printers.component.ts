@@ -62,7 +62,8 @@ export class PrintersComponent implements OnInit {
             this.resetFormSubject.next(this.data);
           } else if (
             event["url"] == "/printers/profile" ||
-            event["url"] == "/printers/paymentdetails"
+            event["url"] == "/printers/paymentdetails" ||
+            event["url"] == "/printers/changepassword" 
           ) {
             //this.displayOrders == true;
             this.data.display = true;

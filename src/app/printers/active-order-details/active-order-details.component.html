@@ -9,78 +9,11 @@
   <div class="modal-body" style="width:80%">
     <div class="container" style="margin-left: 10%;">
       <div class="row">
-        <!-- <div class="col-md-2">
-          <img src="../../../assets/StudentDashboard/img/download.jpg" />
-        </div> -->
-        <div class="col-md-12" style="display:none">
-          <div class="">
-            <div class="">
-              <div class="rowCart itemCart">
-                <div class="col-shp-3 mobCard">
-                  <img src="../../../assets/StudentDashboard/img/download.jpg" class="productImage" />
-                </div>
-                <div class="col-shp-7 mobCard" style="padding-left: 1%;">
-                  <p class="productTitle">{{ data.subcategory }}</p>
-                  <p class="productDetails">
-                    <span class="detailsHeading">Orientation:</span> Vertical,
-                    <span class="detailsHeading">Size:</span> A4
-                    <span class="detailsHeading">Quantity:</span> A4
-                    <span class="detailsHeading">Size:</span> A4
-                  </p>
-
-                  <p class="productDetails">
-                    <span class="detailsHeading">Price: &#x20B9;</span> 1000
-                  </p>
-                  <div>
-                    <a href="www.google.com" target="_blank">Download Reference Image</a>
-                  </div>
-                  <div style="display: flex;">
-                    <div style="width:50%">
-                      <a href="www.google.com" target="_blank">Download Logo/Image1</a>
-                    </div>
-
-                    <div style="width:50%">
-                      <a href="www.google.com" target="_blank">Download Logo/Image2</a>
-                    </div>
-                  </div>
-
-                  <div style="display: flex;">
-                    <div style="width:50%">
-                      <a href="www.google.com" target="_blank">Download Logo/Image3</a>
-                    </div>
-
-                    <div style="width:50%">
-                      <a href="www.google.com" target="_blank">Download Logo/Image4</a>
-                    </div>
-                  </div>
-
-                  <!-- <button class="btn" (click)="removeItem(item.id)">
-                      Remove
-                    </button>
-                    <button class="btn btn-primary" (click)="editItem(item.id)">
-                      Edit
-                    </button> -->
 
 
-
-
-
-                  <div class="row">
-
-
-
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
       </div>
       <div class="row" *ngFor="let item of orderItems">
-        <!-- <div class="col-md-2">
-          <img src="../../../assets/StudentDashboard/img/download.jpg" />
-        </div> -->
+
         <div class="col-md-12">
           <div class="">
             <div class="">
@@ -125,22 +58,12 @@
                             <label [for]="itemNImg.name" class="btn btn-primary btn-block btn-outlined"
                               style="width:250px">UPLOAD</label>
                             <input type="file" accept="image/*" style="display: none" [id]="itemNImg.name"
-                              (change)="uploadGSTCertificate($event.target.files,item.id,'normal',itemNImg.id)" />
+                              (change)="uploadGSTCertificate($event.target.files,'normal')" />
                           </div>
                           <div style="width: 40px;" *ngIf="itemNImg.displayLoadingGif">
                             <img src="../../../assets/img/loading.gif" />
                           </div>
-                          <div *ngIf="!isAllOrders" style="display:flex">
 
-                            <div *ngIf="itemNImg.id == item.NormalUploads.length">
-                              <button class="btn btn-outlined"
-                                (click)="addImage(itemNImg.id,item.id,'normal')">+</button>
-                            </div>
-                            <div>
-                              <button class="btn btn-outlined"
-                                (click)="removeImage(itemNImg.id,item.id,'normal')">-</button>
-                            </div>
-                          </div>
 
 
                         </div>
@@ -164,15 +87,16 @@
                     <div class="input-group col-md-10" style="position: relative !important">
                       <div class="form-group">
                         <div *ngIf="i == 0">
-                          <label>Upload Invoice </label>
+                          <label *ngIf="!isAllOrders">Upload Invoice </label>
+                          <label *ngIf="isAllOrders">Uploaded Invoice </label>
 
                         </div>
                         <div style="display: flex;">
-                          <div>
+                          <div *ngIf="!isAllOrders">
                             <label [for]="itemImg.name" class="btn btn-primary btn-block btn-outlined"
                               style="width:250px">UPLOAD</label>
                             <input type="file" accept="image/*" style="display: none" [id]="itemImg.name"
-                              (change)="uploadGSTCertificate($event.target.files,item.id,'source',itemImg.id)" />
+                              (change)="uploadGSTCertificate($event.target.files,'source')" />
                           </div>
                           <div style="width: 40px;" *ngIf="itemImg.displayLoadingGif">
                             <img src="../../../assets/img/loading.gif" />
@@ -204,16 +128,18 @@
           </div>
         </div>
       </div>
-      <div class="input-group col-md-10" style="position: relative !important">
+      <div class="input-group col-md-10" style="position: relative !important;margin-left: 30%;">
         <div class="form-group">
 
-          <label>Upload Invoice </label>
+          <label *ngIf="!toggleUploadInvoiceButton" style="margin-left: 30%;">Upload Invoice </label>
+          <label *ngIf="toggleUploadInvoiceButton" style="margin-left: 30%;">Uploaded Invoice </label>
 
 
           <div style="display: flex;">
             <div>
-              <label [for]="invoice" class="btn btn-primary btn-block btn-outlined" style="width:250px">UPLOAD</label>
-              <input type="file" accept="image/*" style="display: none" [id]="invoice"
+              <label for="invoice" class="btn btn-primary btn-block btn-outlined" style="width:250px"
+                *ngIf="!toggleUploadInvoiceButton">UPLOAD</label>
+              <input type="file" accept="image/*" style="display: none" id="invoice"
                 (change)="uploadGSTCertificate($event.target.files,'source')" />
             </div>
             <div style="width: 40px;" *ngIf="uploadedFileNames.displayLoadingProductGif ">

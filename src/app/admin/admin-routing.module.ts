@@ -4,17 +4,19 @@ import { Routes, RouterModule } from "@angular/router";
 import { AdminComponent } from "./admin.component";
 import { ProductsComponent } from "./products/products.component";
 import { ProductsFormsComponent } from "./products-forms/products-forms.component";
-import { RegsiterProfilesComponent } from './regsiter-profiles/regsiter-profiles.component';
-import { AdminGuard } from './admin.guard';
+import { RegsiterProfilesComponent } from "./regsiter-profiles/regsiter-profiles.component";
+import { AdminGuard } from "./admin.guard";
+import { VendorPayoutsComponent } from "./vendor-payouts/vendor-payouts.component";
 const routes: Routes = [
   {
     path: "",
     component: AdminComponent,
-    canActivate:[AdminGuard],
+    canActivate: [AdminGuard],
     children: [
       { path: "products", component: ProductsComponent },
       { path: "productsform", component: ProductsFormsComponent },
-      { path: "registeredprofiles", component: RegsiterProfilesComponent }
+      { path: "registeredprofiles", component: RegsiterProfilesComponent },
+      { path: "vendorPayouts", component: VendorPayoutsComponent }
     ]
   }
 ];

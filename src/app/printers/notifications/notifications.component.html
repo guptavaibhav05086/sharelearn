@@ -20,7 +20,7 @@
                         <td>{{ order.notificationDate }}</td>
                         <td>
                             <button type="button" class="btn btn-primary"
-                                (click)="openModal(order.orderDetails)">Accept</button>
+                                (click)="openModal(order.orderDetails,order.orderId)">Accept</button>
                         </td>
                     </tr>
                 </tbody>

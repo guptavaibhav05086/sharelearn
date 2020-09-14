@@ -10,6 +10,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
   @Input() data;
   orderItems: any;
   @Input() isAllOrders;
+  toggleUploadInvoiceButton:boolean;
   constructor(
     public activeModal: NgbActiveModal,
     private service: PrinterService
@@ -17,6 +18,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     debugger;
+    this.toggleUploadInvoiceButton=this.isAllOrders;
     this.isAllOrders = true;
     this.orderItems = this.data.ongoingOrders;
 
@@ -134,9 +136,9 @@ export class ActiveOrderDetailsComponent implements OnInit {
         ];
       }
     }
-    if(this.data.PrinterInvoiceURL !=null){
+    if (this.data.PrinterInvoiceURL != null) {
       this.uploadedFileNames.product = this.data.PrinterInvoiceURL;
-      this.uploadedFileNames.displayLoadingProductGif=false;
+      this.uploadedFileNames.displayLoadingProductGif = false;
     }
   }
   addImage(i, orderId, type) {
@@ -198,8 +200,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
     debugger;
     var result = "";
     var file;
-   
-   
+
     const formData = new FormData();
     var userImage = images.item(0);
     //debugger;
@@ -215,7 +216,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
       data => {
         debugger;
         console.log(data);
-        this.uploadedFileNames.product=userImage.name;
+        this.uploadedFileNames.product = userImage.name;
         this.uploadedFileNames.displayLoadingProductGif = false;
       },
       err => {

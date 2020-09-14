@@ -49,10 +49,10 @@ const routes: Routes = [
         path: "home",
         component: HomelinkPageComponent
       },
-      {
-        path: "about",
-        component: AboutComponent
-      },
+      // {
+      //   path: "about",
+      //   component: AboutComponent
+      // },
 
       {
         path: "login",
@@ -82,18 +82,18 @@ const routes: Routes = [
         path: "selectAddress",
         component: SelectAddressComponent
       },
-      {
-        path: "cart",
-        component: OrderCartComponent
-      },
-      {
-        path: "registerCourse",
-        component: RegistercoursComponent
-      },
-      {
-        path: "contact",
-        component: ContactusComponent
-      },
+      // {
+      //   path: "cart",
+      //   component: OrderCartComponent
+      // },
+      // {
+      //   path: "registerCourse",
+      //   component: RegistercoursComponent
+      // },
+      // {
+      //   path: "contact",
+      //   component: ContactusComponent
+      // },
 
       {
         path: "logout",

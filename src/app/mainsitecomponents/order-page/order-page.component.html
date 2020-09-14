@@ -3,9 +3,9 @@
     <div>
       <form [formGroup]="orderForm">
         <!-- Container for Order Type Selection -->
-        <div class="container shadow p-3 mb-5 bg-white rounded">
+        <div class="container shadow p-3 mb-5 bg-white rounded fullpageView">
           <div class="or-formcontrol">
-            <h3 class="display-label">
+            <h3 class="display-label labelCreateOrder">
               Create Order
             </h3>
           </div>
@@ -14,7 +14,7 @@
               <button
                 class="btn btn-primary or-btn"
                 type="button"
-                (click)="showCategory('Design Only')"
+                (click)="showCategory('Design Only',categoryselect)"
               >
                 Design
               </button>
@@ -23,7 +23,7 @@
               <button
                 class="btn btn-primary or-btn"
                 type="button"
-                (click)="showCategory('Design And Print')"
+                (click)="showCategory('Design And Print',categoryselect)"
               >
                 Design & Print
               </button>
@@ -32,7 +32,7 @@
               <button
                 class="btn btn-primary or-btn"
                 type="button"
-                (click)="showCategory('Print Only')"
+                (click)="showCategory('Print Only',categoryselect)"
               >
                 Print
               </button>
@@ -40,31 +40,19 @@
           </div>
         </div>
 
+        <div #categoryselect id="categoryselect"></div>
          <!-- Container for Category Selection -->
         <div
           class="container shadow p-3 mb-5 bg-white rounded"
-          *ngIf="displayCategory"
+          *ngIf="displayCategory" 
         >
           <div class="or-formcontrol">
             <h3 class="display-label">
               Please Select Category
             </h3>
           </div>
-          <div class="or-formcontrol flex-container">
-            <!-- <div class="flex-control-radio" *ngFor="let item of selectedCategory">
-              <input
-                class=""
-                type="radio"
-                name="category"
-                id="inlineRadio1"
-                [value]="item.value"
-                (change)="selectedProduct(item.value,specs)"
-                formControlName="category"
-              />
-              <label class="form-check-label" for="category">{{
-                item.value
-              }}</label>
-            </div> -->
+          <div class="or-formcontrol flex-container" >
+            
             <div class="flex-control-radio" *ngFor="let item of selectedCategory;let i=index">
                 <input
                   class=""
@@ -77,15 +65,14 @@
                   style="visibility: hidden;"
                 />
                 <label class="form-check-label" style="cursor: pointer"  [for]="i">
-                    <img [src]="item.productIcon" (click)="selectedProduct(item.value,specs)" [alt]="item.value" [ngClass]="{'selectedprod':item.isSelected}"/>
+                    <img [src]="item.productIcon" (click)="selectedProduct(item.value,specs)" [alt]="item.value" [ngClass]="{'selectedprod':item.isSelected}" style="width:90px;height:140px;"/>
                   </label>
-                <!-- <label class="form-check-label" [for]="i">
-                  <img src="../../../assets/img/DIcon.PNG" (click)="selectedProduct(item.value,specs)"/>
-                </label> -->
+               
               </div>
+              
           </div>
         </div>
-
+        
         <!-- Container for Product Specification -->
         <div [style.visibility]="displaySpecs ? 'visible': 'hidden'" #specs id="specs">
           <div class="container shadow p-3 mb-5 bg-white rounded" >
@@ -332,25 +319,73 @@
                     </div>
                    
                 </div> -->
-                <div class="row">
-                   <!-- <div class="input-group flex-control5">
-                          <div class="form-group">
-                              <label>Industry Purpose * </label>
+                
+                   <!-- Content Upload Code -->
+                <div class="row" *ngIf="displayDesigner" style="padding-top: 40px;">
+                  <div class="flex-control-40">
+                      <div class="form-group" >
+                      
+                          <label>Content*</label>
+                       
+                       <textarea formControlName='designcontent'  class="form-control" maxlength="250" placeholder="Description" (blur)="contextValidation()"  [ngClass]="{'displayError': (this.orderForm.controls['designcontent'].touched && uploadedFileNames.contentValidation == false)}">
+
+                       </textarea>
+                        
+                       
+                      
+                     
+                    </div>
+                  </div>
+                  <div class="col-md-1 lableOR" style="padding-left: 2%;" *ngIf="displayDesigner">
+                    OR
+                  </div>
+                  <div class=" col-md-5 contentUploadBtn" *ngIf="displayDesigner">
+                    <div class="input-group" style="padding-top: 30px;position: relative !important" style="display: flex;">
+                      <div class="form-group">
+                          
+                        <label for="contentUpload" class="btn btn-primary btn-block btn-outlined" style="width:200px">UPLOAD</label>
                               <input
-                                type="text"
-                                class="form-control"
-                                placeholder="purpose"               formControlName="purpose"
-                                style="border-left:1px solid #DDDDDD"                                                                         
-                              />                           
-                             
-                            </div>
-                      </div> -->
-                  <div class="input-group col-md-6" style="padding-top: 30px;position: relative !important" *ngIf="displayDesigner">
+                              type="file"
+                              
+                              style="display: none"
+                              id="contentUpload"
+                              
+                              (change)="uploadGSTCertificate($event.target.files,'content')"
+                            /> 
+                           
+                      </div>
+                      <div style="width: 40px;" *ngIf="uploadedFileNames.displayLoadingContentGif">
+                          <img src="../../../assets/img/loading.gif"/>
+                        </div>
+                     <div>
+                        <button class="btn btn-outlined" (click)="clearContentImage()">-</button>
+                     </div>
+                    </div>
+                    <div class="input-group col-md-8">
+                        <a  href="#" (click)="stopDefault($event)" *ngIf="uploadedFileNames.IscontentUploaded" style="margin-bottom: 40px;"
+                        >{{uploadedFileNames.content}}</a>
+                       
+                    </div>
+                   
+                    <div class="input-group col-md-4" *ngIf="fileError"></div>
+                    <!-- <div class="input-group col-md-8" *ngIf="fileError">
+                      <span class="errorMessage" >File should of type doc,docx,pdf format.</span>
+                    </div>  -->
+                    <div class="input-group col-md-4" *ngIf="fileError"></div>
+                    <!-- <div class="input-group col-md-8" *ngIf="fileError">
+                      <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                    </div>  -->
+                  </div>
+                  </div>
+                   
+                <div class="row">   
+                  <!-- Reference Image Upload -->              
+                  <div class="input-group col-md-4" style="padding-top: 30px;position: relative !important" *ngIf="displayDesigner">
                     <div class=" form-group">
                       <div style="display: flex;">
                         <div>
                             <label [ngClass]="{'displayImageError': uploadedFileNames.displayErrororbutton}">Reference Image* </label>
-                            <label for="productUpload" class="btn btn-primary btn-block btn-outlined" style="width:400px" [ngClass]="{'displayBorderError': uploadedFileNames.displayErrororbutton}">UPLOAD</label>
+                            <label for="productUpload" class="btn btn-primary btn-block btn-outlined" style="width:250px" [ngClass]="{'displayBorderError': uploadedFileNames.displayErrororbutton}">UPLOAD</label>
                             <input
                             type="file"
                             accept="image/*"
@@ -385,12 +420,65 @@
                     </div>
                    
                   </div>
+                  <!-- Logo Image Upload --> 
+                  <div class="input-group col-md-4">
+                    <div class="" *ngFor="let item of imageUpload;let  i=index">
+                      <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
+                        <div class="form-group">
+                          <div *ngIf="i == 0">
+                              <label *ngIf="orderForm.controls['type'].value != 'Print Only'">Logo/Image </label>
+                              <label *ngIf="orderForm.controls['type'].value == 'Print Only'"  [ngClass]="{'displayImageError': uploadedFileNames.displayReadOnlyError}">Print Ready File* </label>
+                          </div>
+                           <div style="display: flex;">
+                             <div>
+                                <label [for]="item.name" class="btn btn-primary btn-block btn-outlined" style="width:250px">UPLOAD</label>
+                                <input
+                                type="file"
+                                accept="image/*"
+                                style="display: none"
+                                [id]="item.name"
+                                
+                                (change)="uploadLogoImage($event.target.files,item.name,item.id)"
+                              /> 
+                             </div>
+                             <div style="width: 40px;" *ngIf="item.displayLoadingGif">
+                                <img src="../../../assets/img/loading.gif"/>
+                              </div>
+                             <div>
+                                <button class="btn btn-outlined" (click)="addImage(item.id)" *ngIf="i<3">+</button>
+                             </div> 
+                             <div>
+                                <button class="btn btn-outlined"  (click)="removeImage(item.id)">-</button>
+                             </div> 
+                            
+                           </div>
+                           <div *ngIf="item.displayFileName">
+                              <a href="#" (click)="stopDefault($event)" >{{item.fileName}}</a> 
+                              
+                                
+                               
+                           </div>
+                          
+                            
+                         
+                        </div>
+                       
+                      </div>
+                     
+                      <div class="input-group col-md-4" *ngIf="fileError"></div>
+                      <!-- <div class="input-group col-md-8" *ngIf="fileError">
+                        <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                      </div>  -->
+                    </div>    
+                  </div>
+
                   <div class="input-group col-md-4" *ngIf="fileError"></div>
                   <!-- <div class="input-group col-md-8" *ngIf="fileError">
                     <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
                   </div>  -->
                 </div>
-                <div class="row" *ngFor="let item of imageUpload;let  i=index">
+                <!-- Logo Image Upload not Visible -->
+                <div class="row" *ngFor="let item of imageUpload;let  i=index" style="display: none;">
                   <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
                     <div class="form-group">
                       <div *ngIf="i == 0">
@@ -453,28 +541,11 @@
                     <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
                   </div>  -->
                 </div>
-                <div class="row" *ngIf="displayDesigner">
-                    <div class="flex-control-50">
-                        <div class="form-group" >
-                        
-                            <label>Content*</label>
-                         
-                         <textarea formControlName='designcontent'  class="form-control" maxlength="250" placeholder="Description" (blur)="contextValidation()"  [ngClass]="{'displayError': (this.orderForm.controls['designcontent'].touched && uploadedFileNames.contentValidation == false)}">
-  
-                         </textarea>
-                          
-                         
-                        
-                       
-                      </div>
-                    </div>
-                      
-                     
-                    </div>
-                    <div class="row" style="padding-left: 25%;" *ngIf="displayDesigner">
+               
+                    <!-- <div class="row" style="padding-left: 25%;" *ngIf="displayDesigner" style="display: none;">
                       OR
-                    </div>
-                <div class="row" *ngIf="displayDesigner">
+                    </div> -->
+                <!-- <div class="row" *ngIf="displayDesigner">
                   <div class="input-group col-md-8" style="padding-top: 30px;position: relative !important" style="display: flex;">
                     <div class="form-group">
                         
@@ -503,14 +574,10 @@
                   </div>
                  
                   <div class="input-group col-md-4" *ngIf="fileError"></div>
-                  <!-- <div class="input-group col-md-8" *ngIf="fileError">
-                    <span class="errorMessage" >File should of type doc,docx,pdf format.</span>
-                  </div>  -->
+                  
                   <div class="input-group col-md-4" *ngIf="fileError"></div>
-                  <!-- <div class="input-group col-md-8" *ngIf="fileError">
-                    <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
-                  </div>  -->
-                </div>
+                 
+                </div> -->
                 
                 <div class="row" *ngIf="displayDesigner">
                   <div class="flex-control5" >
@@ -661,7 +728,7 @@
                       <div class="flex-control-50" >
                           <div class="form-group">
                               <label style="font-size: 18px;font-weight:700;">{{orderForm.controls['type'].value}} - {{orderForm.controls['category'].value}}</label>                   
-                              <hr/>        
+                              <hr class="hrColor"/>        
                              
                               
                              
@@ -671,7 +738,7 @@
                       <div class="flex-control3 price-margin" >
                           <div class="form-group">
                               <label style="font-size: 18px;font-weight:700;">Price Summary</label>                   
-                              <hr/>        
+                              <hr class="hrColor"/>        
                              
                               
                              
@@ -763,7 +830,7 @@
                           </div>
                        
                       </div>
-                      <hr/>
+                      <hr class="hrColor"/>
                       
                 </div>
 
@@ -802,7 +869,7 @@
                             </div>
                          
                         </div>
-                        <hr>
+                        <hr class="hrColor">
                         
                   </div>
                     
@@ -830,7 +897,7 @@
                           </div>
                        
                       </div>
-                      <hr/>
+                      <hr class="hrColor"/>
                       
                 </div>
 
@@ -937,7 +1004,7 @@
                       <div class="flex-control-50" >
                           <div class="form-group">
                               <label style="font-size: 18px;font-weight:700;">{{orderForm.controls['type'].value}} - {{orderForm.controls['category'].value}}</label>                   
-                              <hr/>        
+                              <hr class="hrColor"/>        
                              
                               
                              
@@ -947,7 +1014,7 @@
                       <div class="flex-control3 price-margin" >
                           <div class="form-group">
                               <label style="font-size: 18px;font-weight:700;">Price Summary</label>                   
-                              <hr/>        
+                              <hr class="hrColor"/>        
                              
                               
                              
@@ -1007,7 +1074,7 @@
                           </div>
                        
                       </div>
-                      <hr>
+                      <hr class="hrColor">
                       
                 </div>
                 </div>
@@ -1038,7 +1105,7 @@
                           </div>
                        
                       </div>
-                      <hr/>
+                      <hr class="hrColor"/>
                       
                 </div>
 
@@ -1121,7 +1188,7 @@
                 <!-- Detailed pricing -->
                 <div class="row" >
                   <div class="flex-control-50">
-                      <div class="form-group" style="color:green" *ngIf="orderPrice.deliveryDays>0">
+                      <div class="form-group" style="color:lightblue" *ngIf="orderPrice.deliveryDays>0">
                           Post design, Expected Delivery in {{orderPrice.deliveryDays}} Days
                           
                          

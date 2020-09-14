@@ -141,4 +141,14 @@ export class PrinterService {
       this.login.getAuthHeader()
     );
   }
+  initiateDelivery(orderId,customerId){
+    let url = `${environment.baseUrl}${environment.initiateDelivery}`
+      .replace("$orderId", orderId)
+      .replace("$customerId", customerId);
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
 }
