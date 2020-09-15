@@ -39,14 +39,14 @@
     margin-top: 80px;
     font-weight: bolder;
   }
-  .form-group .form-control,
+  /* .form-group .form-control,
   .input-group .form-control {
     padding: 1px 1px 1px 1px !important;
   }
   .form-control {
     border: 3px solid lightblue !important;
     border-radius: 0px !important;
-  }
+  } */
   .lableOR {
     padding-top: 40px;
   }

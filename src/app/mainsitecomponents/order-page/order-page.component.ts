@@ -472,7 +472,9 @@ export class OrderPageComponent implements OnInit {
     subcat: [],
     displayQuant: [],
     dsiplaygsm: [],
-    displayOrientation: []
+    displayOrientation: [],
+    displaySubcat:[],
+    displaySize:[]
   };
   constructor(
     private admin: AdminService,
@@ -691,6 +693,7 @@ return true;
     this.displaySpecs = false;
     this.displayMeetings = false;
     this.displaysummary = false;
+    this.displayLenghtWidth=false;
     
     Object.keys(this.orderForm.controls).forEach(field => { // {1}
       const control = this.orderForm.get(field);   
@@ -982,7 +985,7 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
     if(this.displayeproceed == false){
       return;
     }
-    debugger;
+   
     //disableCat:new FormControl(""),
     this.orderForm.patchValue({
       disableCat : value,
@@ -1019,6 +1022,8 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
     this.proSpec.quantities = [];
     this.proSpec.gsm = [];
     this.proSpec.dsiplaygsm = [];
+    this.proSpec.displaySize=[];
+    this.proSpec.displaySubcat=[];
     this.description = "";
     this.displaycartMessage = false;
     this.checkedProduct.forEach((element, index) => {
@@ -1046,13 +1051,24 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
         gsm: element.paperGSM,
         subcat: element.productSubcategory
       });
+      
+    let checkSubCat=this.proSpec.displaySubcat.filter(item=>
+      item['subcat'] == element.productSubcategory
+    )
+    if(checkSubCat.length ==0){
+      this.proSpec.displaySubcat.push({
+        subcat: element.productSubcategory
+      });
+    }
+    
     });
-
+    debugger;
     this.proSpec.gsm = [...new Set(this.proSpec.gsm)];
     this.proSpec.orientation = [...new Set(this.proSpec.orientation)];
     this.proSpec.quantities = [...new Set(this.proSpec.quantities)];
     this.proSpec.size = [...new Set(this.proSpec.size)];
     this.proSpec.subcat = [...new Set(this.proSpec.subcat)];
+    this.proSpec.displaySubcat=[...new Set(this.proSpec.displaySubcat)]
 
     this.orderForm.patchValue({
       category: value
@@ -1073,20 +1089,33 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
   selectedCustomizedSize() {}
   selectedSubcategory(event) {
     debugger;
-    let selproduct = this.productList.filter(
+   
+    let selproducts = this.productList.filter(
       item =>
         item.productSubcategory == this.orderForm.controls["subCategory"].value
-    )[0];
+    );
     if (
       !this.isEditOrder &&
-      this.checkTimeGapValidation(this.maxGap, selproduct.SlotTimeGap) == false
+      this.checkTimeGapValidation(this.maxGap, selproducts[0].SlotTimeGap) == false
     ) {
       return;
     }
+    this.proSpec.displaySize=[];
+    this.proSpec.dsiplaygsm=[];
+    selproducts.forEach(element => {
+      let checkGSM=this.proSpec.dsiplaygsm.filter(item=> item.gsm == element.paperGSM);
+      if(checkGSM.length == 0){
+        this.proSpec.dsiplaygsm.push({gsm: element.paperGSM});
+      }
+      let checkSize=this.proSpec.displaySize.filter(item=>item == element.productSize)
+      if(checkSize.length == 0){
+        this.proSpec.displaySize.push(element.productSize);
+      }
+    });
     console.log(this.proSpec.quantities);
-    this.proSpec.dsiplaygsm = this.proSpec.gsm.filter(
-      item => item.subcat == this.orderForm.controls["subCategory"].value
-    );
+    // this.proSpec.dsiplaygsm = this.proSpec.gsm.filter(
+    //   item => item.subcat == this.orderForm.controls["subCategory"].value
+    // );
     let selItem = this.proSpec.subcat.filter(
       item => item.subcat == this.orderForm.controls["subCategory"].value
     )[0];

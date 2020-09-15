@@ -150,7 +150,7 @@
                               placeholder="state"                         formControlName="subCategory"             (change)="selectedSubcategory($event)"     [ngClass]="{'displayError': (this.orderForm.controls['subCategory'].touched && this.orderForm.controls['subCategory'].invalid)}"                                                  
                             >
                             <option disabled value="">Select</option>
-                            <option *ngFor="let item of proSpec.subcat" [value]="item.subcat">
+                            <option *ngFor="let item of proSpec.displaySubcat" [value]="item.subcat">
                               {{item.subcat}}
                             </option>
                             </select>
@@ -183,7 +183,7 @@
                               placeholder="Sub Category"                   (change)="selectedSize($event)"              formControlName="size"                       [ngClass]="{'displayError': (this.orderForm.controls['size'].touched && this.orderForm.controls['size'].invalid)}"                                         
                             >
                             <option disabled value="">Select</option>
-                            <option *ngFor="let item of proSpec.size" [value]="item">
+                            <option *ngFor="let item of proSpec.displaySize" [value]="item">
                               {{item}}
                             </option>
                             </select>
@@ -599,7 +599,7 @@
                       <div class="form-group">
                           <input type="checkbox" formControlName="professionDesigner" />
                          
-                         <label style="margin-left: 20px;">I want Illustration Design</label>
+                         <label style="margin-left: 20px;">I want Professional Design</label>
                         </div>
                         
                     
@@ -778,7 +778,14 @@
                 <div class="row" >
                     <div class="flex-control-50">
                         <div class="form-group">
-                            <label style="font-size: 14px;font-weight:bold;">Size: {{orderForm.controls['size'].value}},   Quantitiy:  {{orderForm.controls['quantities'].value}}, GSM: {{orderForm.controls['GSM'].value}}</label> 
+                            <label style="font-size: 14px;font-weight:bold;" *ngIf="orderForm.controls['quantities'].value == 0">Size: {{orderForm.controls['size'].value}}
+
+                           
+                            </label> 
+                            <label style="font-size: 14px;font-weight:bold;" *ngIf="orderForm.controls['quantities'].value > 0">Size: {{orderForm.controls['size'].value}},   Quantity:  {{orderForm.controls['quantities'].value}}, GSM: {{orderForm.controls['GSM'].value}}
+
+                            
+                            </label> 
                             
                            
                           </div>
@@ -1027,7 +1034,8 @@
                 <div class="row">
                     <div class="flex-control-50" >
                         <div class="form-group">
-                            <label style="font-size: 16px;font-weight:500;">({{orderForm.controls['subCategory'].value}}) - ({{orderForm.controls['orientation'].value}})</label> 
+                            <label style="font-size: 16px;font-weight:500;">({{orderForm.controls['subCategory'].value}})
+                            </label> 
                             
                            
                           </div>
@@ -1054,7 +1062,7 @@
                 <div class="row" >
                     <div class="flex-control-50">
                         <div class="form-group">
-                            <label style="font-size: 14px;font-weight:bold;">Size: {{orderForm.controls['size'].value}},   Quantitiy:  {{orderForm.controls['quantities'].value}}, GSM: {{orderForm.controls['GSM'].value}}</label> 
+                            <label style="font-size: 14px;font-weight:bold;">Size: {{orderForm.controls['size'].value}},   Quantity:  {{orderForm.controls['quantities'].value}}, GSM: {{orderForm.controls['GSM'].value}}</label> 
                             
                            
                           </div>
@@ -1189,7 +1197,7 @@
                 <div class="row" >
                   <div class="flex-control-50">
                       <div class="form-group" style="color:lightblue" *ngIf="orderPrice.deliveryDays>0">
-                          Post design, Expected Delivery in {{orderPrice.deliveryDays}} Days
+                           Expected Delivery in {{orderPrice.deliveryDays}} Days
                           
                          
                         </div>
