@@ -10,9 +10,21 @@ import { CustomerService } from "src/app/services/customer.service";
   styleUrls: ["./book-meeting.component.css"]
 })
 export class BookMeetingComponent implements OnInit {
+  minDatecontrol: any;
+  maxDatecontrol: any;
+  meetingSlotBookingTimeStart = {
+    day: 0,
+    month: 0,
+    year: 0,
+    hour: 0,
+    minute: 0,
+    second: 0
+  };
+
   minDate: NgbDateStruct;
   maxDate: NgbDateStruct;
   model: NgbDateStruct;
+
   meetingInfo: any;
   time: NgbTimeStruct;
   timeTill: NgbTimeStruct;
@@ -29,6 +41,7 @@ export class BookMeetingComponent implements OnInit {
   };
   productform = new FormGroup({
     meetingDate: new FormControl({}),
+    meetingDateContol: new FormControl(),
     meetingTill: new FormControl(""),
     meetingSlot: new FormControl("", (control: FormControl) => {
       //debugger;
@@ -65,6 +78,7 @@ export class BookMeetingComponent implements OnInit {
   ngOnInit(): void {
     //debugger;
     this.meetingInfo = this.checkTimeGap();
+    this.calculateSlots();
     let date = new Date();
     date.setHours(date.getHours() + this.meetingInfo.gap);
     this.slotsData.starHours = date.getHours() + 1;
@@ -85,19 +99,22 @@ export class BookMeetingComponent implements OnInit {
     this.initialDate = {
       year: date.getFullYear(),
       month: date.getMonth() + 1,
-      day: date.getUTCDate()
+      day: date.getDate()
     };
     this.maxDate = {
       year: date.getFullYear(),
       month: date.getMonth() + 1,
-      day: date.getUTCDate() + 1
+      day: date.getDate() + 1
     };
+    // this.minDatecontrol = this.convertDate(this.initialDate);
+    // this.maxDatecontrol = this.convertDate(this.maxDate);
     this.minDate = this.initialDate;
     this.model = this.initialDate;
     this.productform.patchValue({
       meetingDate: this.initialDate,
       meetingSlot: this.time,
-      meetingTill: this.timeTill
+      meetingTill: this.timeTill,
+      meetingDateContol: this.convertDate(this.initialDate)
     });
   }
   @HostListener("window:popstate", ["$event"])
@@ -120,17 +137,88 @@ export class BookMeetingComponent implements OnInit {
         }
       });
     }
-
-    // if(calGap > maxGap){
-    //   alert("This Item can not be added to Cart because of meeting slot time constraints");
-    //   return false
-    // }
     return { gap: calGap, duration: meetingDuration };
   }
-  calculateSlots(avaDate) {}
-
-  dateControlValidation() {
+  calculateSlots() {
     debugger;
+    var date = new Date();
+    let gap = this.meetingInfo.gap;
+    let gapTobeAddedInNextWrkingDay = gap;
+    let currentTime = new Date().getHours();
+    let remainingWorkingHoursInDay = 0;
+    if (currentTime >= 10 && currentTime <= 22) {
+      remainingWorkingHoursInDay = 22 - currentTime + 1;
+      if (gap > remainingWorkingHoursInDay) {
+        gapTobeAddedInNextWrkingDay = gap - remainingWorkingHoursInDay;
+      } else {
+        this.meetingSlotBookingTimeStart.day = new Date().getDate();
+        this.meetingSlotBookingTimeStart.month = new Date().getMonth() + 1;
+        this.meetingSlotBookingTimeStart.year = new Date().getFullYear();
+        this.meetingSlotBookingTimeStart.hour = currentTime + gap;
+        this.setSlots(this.meetingSlotBookingTimeStart);
+
+        return;
+      }
+    }
+
+    if (
+      (currentTime >= 0 && currentTime <= 10) ||
+      (currentTime >= 22 && currentTime <= 24)
+    ) {
+      if (currentTime >= 22 && currentTime <= 24) {
+        let initialDate = new Date(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate() + 1,
+          10
+        );
+        initialDate.setHours(
+          initialDate.getHours() + gapTobeAddedInNextWrkingDay
+        );
+        this.meetingSlotBookingTimeStart.day = initialDate.getDate();
+        this.meetingSlotBookingTimeStart.month = initialDate.getMonth() + 1;
+        this.meetingSlotBookingTimeStart.year = initialDate.getFullYear();
+        this.meetingSlotBookingTimeStart.hour = initialDate.getHours();
+        this.setSlots(this.meetingSlotBookingTimeStart);
+      } else {
+        let initialDate = new Date(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate(),
+          10
+        );
+        initialDate.setHours(
+          initialDate.getHours() + gapTobeAddedInNextWrkingDay
+        );
+        this.meetingSlotBookingTimeStart.day = initialDate.getDate();
+        this.meetingSlotBookingTimeStart.month = initialDate.getMonth() + 1;
+        this.meetingSlotBookingTimeStart.year = initialDate.getFullYear();
+        this.meetingSlotBookingTimeStart.hour = initialDate.getHours();
+        this.setSlots(this.meetingSlotBookingTimeStart);
+      }
+    }
+
+    // if(remainingWorkingHoursInDay < gap  ){
+
+    // }
+    //if(currentTime + gap)
+    //let startTime=
+  }
+  setSlots(date) {
+    this.minDatecontrol = this.convertDate(date);
+    let maxDate = {
+      day: date.day + 1,
+      month: date.month,
+      year: date.year
+    };
+    this.maxDatecontrol = this.convertDate(maxDate);
+    this.productform.patchValue({
+      meetingSlot: this.meetingSlotBookingTimeStart.hour
+    });
+  }
+  dateControlValidation() {
+    // alert("Date value Changes");
+    //debugger;
   }
   validateDate() {
     //debugger;
@@ -152,5 +240,12 @@ export class BookMeetingComponent implements OnInit {
     };
     this.activeModal.close(meetingDetails);
     // this.activeModal.close(this.productform.controls['meetingSlot'].value);
+  }
+  convertDate(date: any) {
+    debugger;
+    let validDate = `${date.year}-${
+      date.month < 10 ? "0" + date.month : date.month
+    }-${date.day}`;
+    return validDate;
   }
 }

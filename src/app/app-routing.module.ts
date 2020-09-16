@@ -82,10 +82,10 @@ const routes: Routes = [
         path: "selectAddress",
         component: SelectAddressComponent
       },
-      // {
-      //   path: "cart",
-      //   component: OrderCartComponent
-      // },
+      {
+        path: "cart",
+        component: OrderCartComponent
+      },
       // {
       //   path: "registerCourse",
       //   component: RegistercoursComponent
