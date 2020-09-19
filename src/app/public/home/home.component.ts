@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
         case event instanceof NavigationError: {
           console.log("Navigation End");
           console.log(this.router.url);
-          if (this.router.url == "/") {
+          if (this.router.url == "/" || this.router.url == "/homePage") {
             this.displayNavigation = false;
             //this._document.body.classList.add("home");
           } else {
@@ -76,22 +76,19 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  getStyle(){
-
-    let style ={ 'padding-top': '0px'  }
-    if(this.displayNavigation == false){
+  getStyle() {
+    let style = { "padding-top": "0px" };
+    if (this.displayNavigation == false) {
       return style;
     }
-    if(this.displayUserNavbar == true){
-     return style={
-        'padding-top': '200px'
-      }
+    if (this.displayUserNavbar == true) {
+      return (style = {
+        "padding-top": "200px"
+      });
+    } else {
+      return (style = {
+        "padding-top": "120px"
+      });
     }
-    else{
-     return style={
-        'padding-top': '120px'
-      }
-    }
-
   }
 }

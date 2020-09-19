@@ -27,7 +27,7 @@ export class BookMeetingComponent implements OnInit {
 
   meetingInfo: any;
   time: NgbTimeStruct;
-  timeTill: NgbTimeStruct;
+  // timeTill: NgbTimeStruct;
   hourStep = 1;
   minuteStep = 30;
   secondStep = 30;
@@ -44,15 +44,13 @@ export class BookMeetingComponent implements OnInit {
     meetingDateContol: new FormControl(),
     meetingTill: new FormControl(""),
     meetingSlot: new FormControl("", (control: FormControl) => {
-      //debugger;
+      debugger;
       const value = control.value;
       if (
-        this.initialDate != undefined &&
-        this.model != undefined &&
-        this.model.day == this.initialDate.day &&
-        this.model.month == this.initialDate.month
+        this.meetingSlotBookingTimeStart != undefined &&
+        this.checkSelectedDateIsTodaysDate() == true
       ) {
-        if (value.hour < this.slotsData.starHours) {
+        if (value.hour < this.meetingSlotBookingTimeStart.hour) {
           return { beforeTimegap: true };
         }
       }
@@ -77,30 +75,31 @@ export class BookMeetingComponent implements OnInit {
 
   ngOnInit(): void {
     //debugger;
+    this.time = {
+      hour: 0,
+      minute: 0,
+      second: 0
+    };
     this.meetingInfo = this.checkTimeGap();
     this.calculateSlots();
     let date = new Date();
-    date.setHours(date.getHours() + this.meetingInfo.gap);
-    this.slotsData.starHours = date.getHours() + 1;
-    if (this.slotsData.starHours > 22 || this.slotsData.starHours < 10) {
-      this.slotsData.starHours = 10;
-    }
+    // date.setHours(date.getHours() + this.meetingInfo.gap);
+    // this.slotsData.starHours = date.getHours() + 1;
+    // if (this.slotsData.starHours > 22 || this.slotsData.starHours < 10) {
+    //   this.slotsData.starHours = 10;
+    // }
     //this.time.hour = this.slotsData.starHours;
-    this.time = {
-      hour: this.slotsData.starHours,
-      minute: 0,
-      second: 0
-    };
-    this.timeTill = {
-      hour: this.slotsData.starHours,
-      minute: 0,
-      second: 0
-    };
-    this.initialDate = {
-      year: date.getFullYear(),
-      month: date.getMonth() + 1,
-      day: date.getDate()
-    };
+
+    // this.timeTill = {
+    //   hour: this.slotsData.starHours,
+    //   minute: 0,
+    //   second: 0
+    // };
+    // this.initialDate = {
+    //   year: date.getFullYear(),
+    //   month: date.getMonth() + 1,
+    //   day: date.getDate()
+    // };
     this.maxDate = {
       year: date.getFullYear(),
       month: date.getMonth() + 1,
@@ -112,9 +111,7 @@ export class BookMeetingComponent implements OnInit {
     this.model = this.initialDate;
     this.productform.patchValue({
       meetingDate: this.initialDate,
-      meetingSlot: this.time,
-      meetingTill: this.timeTill,
-      meetingDateContol: this.convertDate(this.initialDate)
+      meetingSlot: this.time
     });
   }
   @HostListener("window:popstate", ["$event"])
@@ -147,7 +144,7 @@ export class BookMeetingComponent implements OnInit {
     let currentTime = new Date().getHours();
     let remainingWorkingHoursInDay = 0;
     if (currentTime >= 10 && currentTime <= 22) {
-      remainingWorkingHoursInDay = 22 - currentTime + 1;
+      remainingWorkingHoursInDay = 22 - (currentTime + 1);
       if (gap > remainingWorkingHoursInDay) {
         gapTobeAddedInNextWrkingDay = gap - remainingWorkingHoursInDay;
       } else {
@@ -166,20 +163,7 @@ export class BookMeetingComponent implements OnInit {
       (currentTime >= 22 && currentTime <= 24)
     ) {
       if (currentTime >= 22 && currentTime <= 24) {
-        let initialDate = new Date(
-          date.getFullYear(),
-          date.getMonth(),
-          date.getDate() + 1,
-          10
-        );
-        initialDate.setHours(
-          initialDate.getHours() + gapTobeAddedInNextWrkingDay
-        );
-        this.meetingSlotBookingTimeStart.day = initialDate.getDate();
-        this.meetingSlotBookingTimeStart.month = initialDate.getMonth() + 1;
-        this.meetingSlotBookingTimeStart.year = initialDate.getFullYear();
-        this.meetingSlotBookingTimeStart.hour = initialDate.getHours();
-        this.setSlots(this.meetingSlotBookingTimeStart);
+        this.settIntialMeetingDetailsForSameDay(gapTobeAddedInNextWrkingDay);
       } else {
         let initialDate = new Date(
           date.getFullYear(),
@@ -196,13 +180,27 @@ export class BookMeetingComponent implements OnInit {
         this.meetingSlotBookingTimeStart.hour = initialDate.getHours();
         this.setSlots(this.meetingSlotBookingTimeStart);
       }
+    } else {
+      this.settIntialMeetingDetailsForSameDay(gapTobeAddedInNextWrkingDay);
     }
-
-    // if(remainingWorkingHoursInDay < gap  ){
-
-    // }
-    //if(currentTime + gap)
-    //let startTime=
+    this.productform.patchValue({
+      meetingDateContol: this.convertDate(this.meetingSlotBookingTimeStart)
+    });
+  }
+  settIntialMeetingDetailsForSameDay(gapTobeAddedInNextWrkingDay) {
+    let date = new Date();
+    let initialDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate() + 1,
+      10
+    );
+    initialDate.setHours(initialDate.getHours() + gapTobeAddedInNextWrkingDay);
+    this.meetingSlotBookingTimeStart.day = initialDate.getDate();
+    this.meetingSlotBookingTimeStart.month = initialDate.getMonth() + 1;
+    this.meetingSlotBookingTimeStart.year = initialDate.getFullYear();
+    this.meetingSlotBookingTimeStart.hour = initialDate.getHours();
+    this.setSlots(this.meetingSlotBookingTimeStart);
   }
   setSlots(date) {
     this.minDatecontrol = this.convertDate(date);
@@ -212,16 +210,38 @@ export class BookMeetingComponent implements OnInit {
       year: date.year
     };
     this.maxDatecontrol = this.convertDate(maxDate);
+    this.time.hour = this.meetingSlotBookingTimeStart.hour;
     this.productform.patchValue({
-      meetingSlot: this.meetingSlotBookingTimeStart.hour
+      meetingSlot: this.time.hour
     });
   }
   dateControlValidation() {
-    // alert("Date value Changes");
-    //debugger;
+    debugger;
+    if (this.checkSelectedDateIsTodaysDate() == true) {
+      this.time.hour = this.meetingSlotBookingTimeStart.hour;
+      this.productform.patchValue({
+        meetingSlot: this.time
+      });
+    } else {
+      this.productform.patchValue({
+        meetingSlot: this.time
+      });
+    }
+  }
+  checkSelectedDateIsTodaysDate() {
+    try {
+      let selectedDate = this.productform.controls["meetingDateContol"].value;
+      let d = new Date(selectedDate);
+
+      if (d.getDate() == this.meetingSlotBookingTimeStart.day) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {}
   }
   validateDate() {
-    //debugger;
+    debugger;
     //let val = this.productform.controls["meetingSlot"].value.minute;
     this.time.minute = 30;
     this.productform.patchValue({
@@ -231,10 +251,33 @@ export class BookMeetingComponent implements OnInit {
     alert(
       "Slots are only avaliable as the intreval of 30 mins.Please use button only to choose the slot"
     );
+    if (this.checkSelectedDateIsTodaysDate() == true) {
+      let selMeetingSlot = this.productform.controls["meetingSlot"].value;
+      if (selMeetingSlot.hours < this.meetingSlotBookingTimeStart.hour) {
+        alert(
+          `Slots are avaliable only after ${this.meetingSlotBookingTimeStart.hour} for date ${this.meetingSlotBookingTimeStart.day}`
+        );
+      }
+    }
   }
   slot() {
+    debugger;
+    if (this.productform.controls["meetingSlot"].status == "INVALID") {
+      alert("Please choose the valid slot to proceed");
+      return;
+    }
+    console.log(this.productform.controls["meetingSlot"].errors);
+    let selectedDate = new Date(
+      this.productform.controls["meetingDateContol"].value
+    );
+
+    let selModel = {
+      day: selectedDate.getDate(),
+      month: selectedDate.getMonth(),
+      year: selectedDate.getFullYear()
+    };
     let meetingDetails = {
-      mDate: this.model,
+      mDate: selModel,
       mSlot: this.productform.controls["meetingSlot"].value,
       duration: this.meetingInfo.duration
     };

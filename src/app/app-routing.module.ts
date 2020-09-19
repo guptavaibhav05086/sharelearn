@@ -30,7 +30,9 @@ import { HomelinkPageComponent } from "./mainsitecomponents/homelink-page/homeli
 import { SelectAddressComponent } from "./mainsitecomponents/select-address/select-address.component";
 import { OrderCartComponent } from "./mainsitecomponents/order-cart/order-cart.component";
 import { ReviewOrderComponent } from "./mainsitecomponents/review-order/review-order.component";
-import { DisplayMessagesComponent } from './mainsitecomponents/display-messages/display-messages.component'
+import { DisplayMessagesComponent } from "./mainsitecomponents/display-messages/display-messages.component";
+import { HomeContainerComponent } from "./mainsitecomponents/ApplicationHomePageComponents/home-container/home-container.component";
+
 const routes: Routes = [
   {
     path: "designer",
@@ -48,6 +50,10 @@ const routes: Routes = [
       {
         path: "home",
         component: HomelinkPageComponent
+      },
+      {
+        path: "homePage",
+        component: HomeContainerComponent
       },
       // {
       //   path: "about",

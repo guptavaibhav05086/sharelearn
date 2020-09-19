@@ -55,6 +55,15 @@ import { RazorpaymentsComponent } from './mainsitecomponents/razorpayments/razor
 import { DisplayMessagesComponent } from './mainsitecomponents/display-messages/display-messages.component';
 import { PriceDescriptionComponent } from './mainsitecomponents/price-description/price-description.component';
 import { TermsConditionsComponent } from './mainsitecomponents/terms-conditions/terms-conditions.component';
+import { SectionTopComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-top/section-top.component';
+import { SectionDescriptionComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-description/section-description.component';
+import { SectionProductDescriptionComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-product-description/section-product-description.component';
+import { SectionProductsComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-products/section-products.component';
+import { SectionFooterComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-footer/section-footer.component';
+import { HomeContainerComponent } from './mainsitecomponents/ApplicationHomePageComponents/home-container/home-container.component';
+import { HowItWorkComponent } from './mainsitecomponents/ApplicationHomePageComponents/how-it-work/how-it-work.component';
+import { HowWeDesignComponent } from './mainsitecomponents/ApplicationHomePageComponents/how-we-design/how-we-design.component';
+import { SectionTopNavComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-top-nav/section-top-nav.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +109,15 @@ import { TermsConditionsComponent } from './mainsitecomponents/terms-conditions/
     DisplayMessagesComponent,
     PriceDescriptionComponent,
     TermsConditionsComponent,
+    SectionTopComponent,
+    SectionDescriptionComponent,
+    SectionProductDescriptionComponent,
+    SectionProductsComponent,
+    SectionFooterComponent,
+    HomeContainerComponent,
+    HowItWorkComponent,
+    HowWeDesignComponent,
+    SectionTopNavComponent,
     
   ],
   imports: [

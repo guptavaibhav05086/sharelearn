@@ -1,0 +1,13 @@
+.navbar a:not(.btn):not(.dropdown-item) {
+  color: lightgrey;
+}
+.searchBtn {
+  border-radius: 5px;
+  border: 1px solid lightblue;
+}
+.borderNav {
+  padding-top: 10px;
+}
+.topsearchhide {
+  display: none;
+}

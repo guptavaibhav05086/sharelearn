@@ -1,0 +1,63 @@
+.navbar a:not(.btn):not(.dropdown-item) {
+  color: lightgrey;
+}
+.bg-light {
+  background-color: white !important;
+}
+
+@media (min-width: 778px) {
+  .borderNav {
+    border-right: 0x solid;
+  }
+}
+@media (max-width: 778px) {
+  .borderNav {
+    border-right: 0px solid;
+  }
+  .navbar-toggler span {
+    height: 30px !important;
+  }
+}
+.sticky {
+  background: #fff;
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  height: 70px;
+  width: 100%;
+}
+.dropdown-menu {
+  width: 100%;
+}
+.dropdown {
+  position: static !important;
+}
+
+.dropdown-menu {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  margin-top: 0px !important;
+  width: 100% !important;
+  margin-left: -4%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.vLine {
+  border-right: 2px solid lightblue;
+  height: 3px;
+  margin-top: 13px;
+  height: 13px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.menuItemDD {
+  width: 15%;
+}
+.topNavhide {
+  display: none;
+}
+.productNavMarginLeft {
+  margin-left: 5%;
+}
+.productNavMarginTop {
+  margin-top: -30px;
+}
