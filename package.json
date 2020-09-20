@@ -30,6 +30,7 @@
     "angular2-multiselect-dropdown": "^4.6.3",
     "ng-multiselect-dropdown": "^0.2.10",
     "ng2-sticky-nav": "^9.0.0",
+    "ngx-bootstrap": "^6.1.0",
     "ngx-owl-carousel-o": "^3.0.1",
     "ngx-spinner": "^9.0.2",
     "ngx-star-rating": "0.0.1",

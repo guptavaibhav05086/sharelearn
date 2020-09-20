@@ -9,5 +9,30 @@
   padding-top: 10px;
 }
 .topsearchhide {
-  display: none;
+  visibility: hidden;
+}
+.vLine {
+  border-right: 2px solid lightblue;
+  height: 3px;
+  margin-top: 13px;
+  height: 13px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.navbar .navbar-collapse .nav-item a {
+  color: black !important;
+  font-weight: 200;
+  font-family: "Maven Pro";
+}
+.navbar {
+  position: initial !important;
+}
+.dropdown.show .dropdown-menu,
+.dropup.show .dropdown-menu,
+.bootstrap-select.show .dropdown-menu {
+  position: static;
+  margin-bottom: 10px;
+}
+.dropdown-menu {
+  min-width: 5rem !important;
 }

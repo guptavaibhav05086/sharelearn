@@ -25,7 +25,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { AngularMultiSelectModule } from "angular2-multiselect-dropdown";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ContactusComponent } from "../../src/app/public/contactus/contactus.component";
-import { CarouselModule } from "ngx-owl-carousel-o";
+// import { CarouselModule } from "ngx-owl-carousel-o";
 import { MeanComponent } from "./courseComponets/mean/mean.component";
 import { MernComponent } from "./courseComponets/mern/mern.component";
 import { CarouselholderComponent } from "../app/public/carouselholder/carouselholder.component";
@@ -50,21 +50,23 @@ import { AddressFormComponent } from "./mainsitecomponents/address-form/address-
 import { GoogleplacesComponent } from "./mainsitecomponents/googleplaces/googleplaces.component";
 import { OrderCartComponent } from "./mainsitecomponents/order-cart/order-cart.component";
 import { ReviewOrderComponent } from "./mainsitecomponents/review-order/review-order.component";
-import { BookMeetingComponent } from './mainsitecomponents/book-meeting/book-meeting.component';
-import { RazorpaymentsComponent } from './mainsitecomponents/razorpayments/razorpayments.component';
-import { DisplayMessagesComponent } from './mainsitecomponents/display-messages/display-messages.component';
-import { PriceDescriptionComponent } from './mainsitecomponents/price-description/price-description.component';
-import { TermsConditionsComponent } from './mainsitecomponents/terms-conditions/terms-conditions.component';
-import { SectionTopComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-top/section-top.component';
-import { SectionDescriptionComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-description/section-description.component';
-import { SectionProductDescriptionComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-product-description/section-product-description.component';
-import { SectionProductsComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-products/section-products.component';
-import { SectionFooterComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-footer/section-footer.component';
-import { HomeContainerComponent } from './mainsitecomponents/ApplicationHomePageComponents/home-container/home-container.component';
-import { HowItWorkComponent } from './mainsitecomponents/ApplicationHomePageComponents/how-it-work/how-it-work.component';
-import { HowWeDesignComponent } from './mainsitecomponents/ApplicationHomePageComponents/how-we-design/how-we-design.component';
-import { SectionTopNavComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-top-nav/section-top-nav.component';
+import { BookMeetingComponent } from "./mainsitecomponents/book-meeting/book-meeting.component";
+import { RazorpaymentsComponent } from "./mainsitecomponents/razorpayments/razorpayments.component";
+import { DisplayMessagesComponent } from "./mainsitecomponents/display-messages/display-messages.component";
+import { PriceDescriptionComponent } from "./mainsitecomponents/price-description/price-description.component";
+import { TermsConditionsComponent } from "./mainsitecomponents/terms-conditions/terms-conditions.component";
+import { SectionTopComponent } from "./mainsitecomponents/ApplicationHomePageComponents/section-top/section-top.component";
+import { SectionDescriptionComponent } from "./mainsitecomponents/ApplicationHomePageComponents/section-description/section-description.component";
+import { SectionProductDescriptionComponent } from "./mainsitecomponents/ApplicationHomePageComponents/section-product-description/section-product-description.component";
+import { SectionProductsComponent } from "./mainsitecomponents/ApplicationHomePageComponents/section-products/section-products.component";
+import { SectionFooterComponent } from "./mainsitecomponents/ApplicationHomePageComponents/section-footer/section-footer.component";
+import { HomeContainerComponent } from "./mainsitecomponents/ApplicationHomePageComponents/home-container/home-container.component";
+import { HowItWorkComponent } from "./mainsitecomponents/ApplicationHomePageComponents/how-it-work/how-it-work.component";
+import { HowWeDesignComponent } from "./mainsitecomponents/ApplicationHomePageComponents/how-we-design/how-we-design.component";
+import { SectionTopNavComponent } from "./mainsitecomponents/ApplicationHomePageComponents/section-top-nav/section-top-nav.component";
 
+import { PproductsCarouselComponent } from "./mainsitecomponents/ApplicationHomePageComponents/pproducts-carousel/pproducts-carousel.component";
+import { CarouselModule } from "ngx-bootstrap/carousel";
 @NgModule({
   declarations: [
     AppComponent,
@@ -118,7 +120,7 @@ import { SectionTopNavComponent } from './mainsitecomponents/ApplicationHomePage
     HowItWorkComponent,
     HowWeDesignComponent,
     SectionTopNavComponent,
-    
+    PproductsCarouselComponent
   ],
   imports: [
     BrowserModule,

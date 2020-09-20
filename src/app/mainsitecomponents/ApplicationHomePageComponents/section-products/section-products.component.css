@@ -36,8 +36,8 @@
 .dropdown-menu {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
   margin-top: 0px !important;
-  width: 100% !important;
-  margin-left: -4%;
+  width: 75% !important;
+  margin-left: 5%;
   display: flex;
   flex-wrap: wrap;
 }
@@ -61,3 +61,11 @@
 .productNavMarginTop {
   margin-top: -30px;
 }
+.navbar .navbar-collapse .nav-item a {
+  color: black !important;
+  font-weight: 200;
+  font-family: "Maven Pro";
+}
+/* .navbar {
+  position: initial !important;
+} */

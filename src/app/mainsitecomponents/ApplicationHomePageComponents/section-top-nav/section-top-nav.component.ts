@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-section-top-nav',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SectionTopNavComponent implements OnInit {
 
+  @Output() componentLoaded = new EventEmitter<boolean>();
   constructor() { }
 
   ngOnInit(): void {
+    this.componentLoaded.emit(true);
   }
 
 }

@@ -20,13 +20,15 @@ import { DOCUMENT } from "@angular/common";
   ]
 })
 export class HomeContainerComponent implements OnInit {
+  displayTopNav = true;
   constructor(@Inject(DOCUMENT) document) {}
 
   ngOnInit(): void {}
   @HostListener("window:scroll", ["$event"])
   onWindowScroll(e) {
-    if (window.pageYOffset > 550) {
+    if (window.pageYOffset > 400) {
       debugger;
+      this.displayTopNav = false;
       let element = document.getElementById("navbar");
       let elementTop = document.getElementById("topNav");
       let elementnavbarinner = document.getElementById("searchBarButton");
@@ -38,6 +40,7 @@ export class HomeContainerComponent implements OnInit {
       //navbarinner
     } else {
       debugger;
+      this.displayTopNav = true;
       let element = document.getElementById("navbar");
       let elementTop = document.getElementById("topNav");
       elementTop.classList.add("topNavhide");

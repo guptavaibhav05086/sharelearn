@@ -178,6 +178,13 @@ export class BookMeetingComponent implements OnInit {
         this.meetingSlotBookingTimeStart.month = initialDate.getMonth() + 1;
         this.meetingSlotBookingTimeStart.year = initialDate.getFullYear();
         this.meetingSlotBookingTimeStart.hour = initialDate.getHours();
+        if (
+          this.meetingSlotBookingTimeStart.hour < 10 ||
+          (this.meetingSlotBookingTimeStart.hour >= 22 &&
+            this.meetingSlotBookingTimeStart.hour <= 24)
+        ) {
+          this.meetingSlotBookingTimeStart.hour = 10;
+        }
         this.setSlots(this.meetingSlotBookingTimeStart);
       }
     } else {
@@ -200,6 +207,13 @@ export class BookMeetingComponent implements OnInit {
     this.meetingSlotBookingTimeStart.month = initialDate.getMonth() + 1;
     this.meetingSlotBookingTimeStart.year = initialDate.getFullYear();
     this.meetingSlotBookingTimeStart.hour = initialDate.getHours();
+    if (
+      this.meetingSlotBookingTimeStart.hour < 10 ||
+      (this.meetingSlotBookingTimeStart.hour >= 22 &&
+        this.meetingSlotBookingTimeStart.hour <= 24)
+    ) {
+      this.meetingSlotBookingTimeStart.hour = 10;
+    }
     this.setSlots(this.meetingSlotBookingTimeStart);
   }
   setSlots(date) {

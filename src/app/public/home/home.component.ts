@@ -16,12 +16,21 @@ import {
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
+  displayTopNav = false;
   displayUserNavbar = false;
   displayNavigation = false;
   cordinate = {
     X: 0,
     Y: 0
   };
+  topNavLoaded(value){
+    debugger;
+    if(value==true){
+         let elementnavbarinner = document.getElementById("searchBarButton");
+      elementnavbarinner.classList.remove("topsearchhide");
+    }
+
+  }
   constructor(
     private login: LoginService,
     private router: Router,
@@ -48,9 +57,13 @@ export class HomeComponent implements OnInit {
           console.log(this.router.url);
           if (this.router.url == "/" || this.router.url == "/homePage") {
             this.displayNavigation = false;
+            this.displayTopNav = false;
             //this._document.body.classList.add("home");
           } else {
+            debugger;
             this.displayNavigation = true;
+            this.displayTopNav = true;
+            
             //this._document.body.classList.remove("home");
           }
           break;
@@ -90,5 +103,31 @@ export class HomeComponent implements OnInit {
         "padding-top": "120px"
       });
     }
+  }
+
+  @HostListener("window:scroll", ["$event"])
+  onWindowScroll(e) {
+    // if (window.pageYOffset > 200) {
+    //   debugger;
+    //   this.displayTopNav = false;
+    //   let element = document.getElementById("navbar");
+    //   let elementTop = document.getElementById("topNav");
+    //   let elementnavbarinner = document.getElementById("searchBarButton");
+    //   elementnavbarinner.classList.remove("topsearchhide");
+    //   // elementnavbarinner.classList.add("productNavMarginTop");
+    //   element.classList.add("sticky");
+    //   elementTop.classList.remove("topNavhide");
+    //   //navbarinner
+    // } else {
+    //   debugger;
+    //   this.displayTopNav = true;
+    //   let element = document.getElementById("navbar");
+    //   let elementTop = document.getElementById("topNav");
+    //   elementTop.classList.add("topNavhide");
+    //   element.classList.remove("sticky");
+    //   let elementnavbarinner = document.getElementById("searchBarButton");
+    //   elementnavbarinner.classList.add("topsearchhide");
+    //   // elementnavbarinner.classList.remove("productNavMarginTop");
+    // }
   }
 }
