@@ -1,0 +1,74 @@
+@media (min-width: 768px) {
+  .container {
+    width: 100%;
+    display: flex;
+    flex-wrap: unset;
+  }
+  .dcol-3 {
+    flex-wrap: nowrap;
+    width: 33%;
+  }
+  .searchBtnStyle {
+    border-radius: 10px;
+    /* border-color: lightblue; */
+    border: 1px solid lightblue;
+  }
+  .txtFreelance {
+    font-weight: bold;
+    font-family: "Maven Pro";
+  }
+  .alingdiv {
+    padding-top: 100px;
+  }
+  .imgEditpenposition {
+    padding-top: 30px;
+  }
+  .imgEditPenSize {
+    width: 20px;
+    height: 40px;
+  }
+  .textStyle {
+    font-family: Maven pro;
+    font-size: 12px;
+    font-weight: 300;
+  }
+  .positioncontainerRight {
+    padding-top: 40px;
+    padding-left: 60px;
+  }
+  .imgEditPrintSize {
+    height: 30px;
+    padding-top: 5px;
+    width: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .imgEditPrintSize {
+    height: 30px;
+    padding-top: 5px;
+    width: 20px;
+  }
+  .txtFreelance {
+    font-weight: 700;
+  }
+  .alingdiv {
+    padding-top: 100px;
+  }
+  .searchBtnStyle {
+    border-radius: 10px;
+    /* border-color: lightblue; */
+    border: 1px solid lightblue;
+  }
+  .imgEditpenposition {
+    padding-top: 30px;
+  }
+  .imgEditPenSize {
+    width: 30px;
+    height: 30px;
+  }
+  .textStyle {
+    font-family: Maven pro;
+    font-size: 12px;
+    font-weight: 300;
+  }
+}
