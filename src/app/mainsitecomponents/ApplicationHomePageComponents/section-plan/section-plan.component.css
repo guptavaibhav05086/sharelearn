@@ -10,23 +10,7 @@
   }
   .dcol-2 {
     flex-wrap: nowrap;
-    width: 75%;
-  }
-  .dcol-4 {
-    flex-wrap: nowrap;
-    width: 25%;
-  }
-  .dcol-5 {
-    flex-wrap: nowrap;
-    width: 20%;
-  }
-  .dcol-6 {
-    flex-wrap: nowrap;
-    width: 15%;
-  }
-  .alingDesingImg {
-    padding-top: 60px;
-    margin-left: 6%;
+    width: 45%;
   }
   .searchBtnStyle {
     border-radius: 10px;
@@ -34,12 +18,12 @@
     border: 1px solid lightblue;
   }
   .txtFreelance {
-    font-weight: bold;
+    font-weight: 900;
     font-family: "Maven Pro";
+    font-size: 35px;
   }
   .alingdiv {
-    padding-top: 60px;
-    padding-left: 9%;
+    padding-top: 100px;
   }
   .imgEditpenposition {
     padding-top: 30px;
@@ -51,7 +35,7 @@
   .textStyle {
     font-family: Maven pro;
     font-size: 12px;
-    font-weight: 300;
+    font-weight: 200;
   }
   .positioncontainerRight {
     padding-top: 40px;

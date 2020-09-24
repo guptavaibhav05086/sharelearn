@@ -11,20 +11,23 @@ export class PproductsCarouselComponent implements OnInit {
   products: any;
 
   images = [];
-
+  displayC = false;
   constructor(private admin: AdminService) {}
 
   ngOnInit(): void {
     this.admin.getProducts().subscribe(
       data => {
+        debugger;
         this.products = data["products"];
         this.products.map(item => {
           this.images.push({
             image:
               item.productImage == ""
                 ? "../../../assets/StudentDashboard/img/download.jpg"
-                : item.productImage
+                : item.productImage,
+            name: item.value
           });
+          this.displayC = true;
         });
         console.log(this.products);
       },

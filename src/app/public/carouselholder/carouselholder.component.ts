@@ -8,23 +8,23 @@ import { SliderData } from "src/app/Models/slider-data";
 })
 export class CarouselholderComponent implements OnInit {
   @Input()
-  slidesData: [];
+  slidesData;
   itemsPerSlide = 4;
-  singleSlideOffset = false;
+  singleSlideOffset = true;
   noWrap = false;
-
+  showIndicators = false;
   slidesChangeMessage = "";
 
   slides = [
-    { image: "../../../assets/StudentDashboard/img/download.jpg" },
-    { image: "../../../assets/StudentDashboard/img/download.jpg" },
-    { image: "../../../assets/StudentDashboard/img/download.jpg" },
-    { image: "../../../assets/StudentDashboard/img/download.jpg" },
-    { image: "../../../assets/StudentDashboard/img/download.jpg" },
-    { image: "../../../assets/StudentDashboard/img/download.jpg" },
-    { image: "../../../assets/StudentDashboard/img/download.jpg" },
-    { image: "../../../assets/StudentDashboard/img/download.jpg" },
     { image: "../../../assets/StudentDashboard/img/download.jpg" }
+    // { image: "../../../assets/StudentDashboard/img/download.jpg" },
+    // { image: "../../../assets/StudentDashboard/img/download.jpg" },
+    // { image: "../../../assets/StudentDashboard/img/download.jpg" },
+    // { image: "../../../assets/StudentDashboard/img/download.jpg" },
+    // { image: "../../../assets/StudentDashboard/img/download.jpg" },
+    // { image: "../../../assets/StudentDashboard/img/download.jpg" },
+    // { image: "../../../assets/StudentDashboard/img/download.jpg" },
+    // { image: "../../../assets/StudentDashboard/img/download.jpg" }
   ];
 
   onSlideRangeChange(indexes: number[]): void {
@@ -63,5 +63,10 @@ export class CarouselholderComponent implements OnInit {
   ngOnInit() {
     debugger;
     console.log(this.slidesData);
+    console.log(this.slides);
+    this.slidesData.forEach(item => {
+      let obj = { image: item.image };
+      this.slides.push(obj);
+    });
   }
 }

@@ -10,7 +10,7 @@
   }
   .dcol-2 {
     flex-wrap: nowrap;
-    width: 75%;
+    width: 60%;
   }
   .dcol-4 {
     flex-wrap: nowrap;
@@ -25,8 +25,8 @@
     width: 15%;
   }
   .alingDesingImg {
-    padding-top: 60px;
-    margin-left: 6%;
+    padding-top: 25px;
+    margin-left: 15%;
   }
   .searchBtnStyle {
     border-radius: 10px;
@@ -36,10 +36,11 @@
   .txtFreelance {
     font-weight: bold;
     font-family: "Maven Pro";
+    text-align: right;
   }
   .alingdiv {
     padding-top: 60px;
-    padding-left: 9%;
+    margin-left: 10%;
   }
   .imgEditpenposition {
     padding-top: 30px;

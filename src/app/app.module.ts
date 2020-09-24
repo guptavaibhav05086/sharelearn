@@ -67,6 +67,9 @@ import { SectionTopNavComponent } from "./mainsitecomponents/ApplicationHomePage
 
 import { PproductsCarouselComponent } from "./mainsitecomponents/ApplicationHomePageComponents/pproducts-carousel/pproducts-carousel.component";
 import { CarouselModule } from "ngx-bootstrap/carousel";
+import { HowWePrintComponent } from './mainsitecomponents/ApplicationHomePageComponents/how-we-print/how-we-print.component';
+import { SectionPlanComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-plan/section-plan.component';
+import { SectionBrandComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-brand/section-brand.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,7 +123,10 @@ import { CarouselModule } from "ngx-bootstrap/carousel";
     HowItWorkComponent,
     HowWeDesignComponent,
     SectionTopNavComponent,
-    PproductsCarouselComponent
+    PproductsCarouselComponent,
+    HowWePrintComponent,
+    SectionPlanComponent,
+    SectionBrandComponent
   ],
   imports: [
     BrowserModule,
