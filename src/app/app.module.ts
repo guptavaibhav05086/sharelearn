@@ -70,6 +70,7 @@ import { CarouselModule } from "ngx-bootstrap/carousel";
 import { HowWePrintComponent } from './mainsitecomponents/ApplicationHomePageComponents/how-we-print/how-we-print.component';
 import { SectionPlanComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-plan/section-plan.component';
 import { SectionBrandComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-brand/section-brand.component';
+import { SectionSocialMediaComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-social-media/section-social-media.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -126,7 +127,8 @@ import { SectionBrandComponent } from './mainsitecomponents/ApplicationHomePageC
     PproductsCarouselComponent,
     HowWePrintComponent,
     SectionPlanComponent,
-    SectionBrandComponent
+    SectionBrandComponent,
+    SectionSocialMediaComponent
   ],
   imports: [
     BrowserModule,

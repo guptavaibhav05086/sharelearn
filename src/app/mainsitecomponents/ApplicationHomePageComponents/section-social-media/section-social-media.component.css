@@ -2,39 +2,20 @@
   .container {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
-  }
-  .vLine {
-    border-right: 2px solid lightblue;
-    /* height: 3px; */
-    /* margin-top: 13px; */
-    height: 53px;
-    margin-left: 15px;
+    flex-wrap: unset;
   }
   .dcol-3 {
     flex-wrap: nowrap;
     width: 33%;
-  }
-  .dcol-2 {
-    flex-wrap: nowrap;
-    width: 75%;
+    padding-top: 250px !important;
   }
   .dcol-4 {
     flex-wrap: nowrap;
     width: 20%;
-    text-align: center;
   }
   .dcol-5 {
     flex-wrap: nowrap;
-    width: 50%;
-  }
-  .dcol-6 {
-    flex-wrap: nowrap;
     width: 15%;
-  }
-  .alingDesingImg {
-    padding-top: 60px;
-    margin-left: 6%;
   }
   .searchBtnStyle {
     border-radius: 10px;
@@ -46,15 +27,14 @@
     font-family: "Maven Pro";
   }
   .alingdiv {
-    padding-top: 60px;
-    padding-left: 9%;
+    padding-top: 30px;
   }
   .imgEditpenposition {
     padding-top: 30px;
   }
   .imgEditPenSize {
-    width: 20px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
   }
   .textStyle {
     font-family: Maven pro;
