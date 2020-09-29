@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { HelperService } from "src/app/services/helper.service";
 import { ValidatorsService } from "src/app/services/validators.service";
@@ -20,6 +20,7 @@ export class DesignersignupComponent implements OnInit {
   serverError = false;
   error: any;
   registered = false;
+  @Input() isCustomerSignUp=false;
   studentForm = new FormGroup(
     {
       email: new FormControl("", [
@@ -84,7 +85,13 @@ export class DesignersignupComponent implements OnInit {
       "confirmPassword"
     ].value;
     // newUser.MobileNumber = this.studentForm.controls["mobileNumber"].value;
-    newUser.Role = "Designer";
+    if(this.isCustomerSignUp ===true){
+      newUser.Role = "Customer";
+    }
+    else{
+      newUser.Role = "Designer";
+    }
+    
     this._login.registerUser(newUser).subscribe(
       data => {
         this.spinnerService.hide();

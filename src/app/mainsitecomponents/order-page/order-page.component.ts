@@ -195,7 +195,7 @@ export class OrderPageComponent implements OnInit {
     for (var i = 0; (file = images[i]); i++) {
       //if the file is not an image, continue
       if (!this.validateFiles(name, file)) {
-        //alert("Not a Valid Image File");
+        alert("Not a Valid Image File");
         return;
       }
       let reader = new FileReader();
@@ -253,7 +253,7 @@ export class OrderPageComponent implements OnInit {
     );
   }
   uploadGSTCertificate(images: FileList, name: string) {
-    //debugger;
+    debugger;
     var result = "";
     var file;
     const formData = new FormData();
@@ -262,7 +262,7 @@ export class OrderPageComponent implements OnInit {
     for (var i = 0; (file = images[i]); i++) {
       //if the file is not an image, continue
       if (!this.validateFiles(name, file)) {
-        //alert("Not a Valid Image File");
+        alert("Not a Valid Image File");
         return;
       }
       let reader = new FileReader();
@@ -1137,16 +1137,19 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
     } else {
       this.displayLenghtWidth = false;
     }
-    //debugger;
-    if (this.displayprinter == true) {
-      this.orderForm.patchValue({
-        orientation: "NA"
-      });
-    } else {
-      this.orderForm.patchValue({
-        orientation: ""
-      });
-    }
+     debugger;
+     this.orderForm.patchValue({
+      orientation: ""
+    });
+    // if (this.displayprinter == true) {
+    //   this.orderForm.patchValue({
+    //     orientation: "NA"
+    //   });
+    // } else {
+    //   this.orderForm.patchValue({
+    //     orientation: ""
+    //   });
+    // }
   }
   selectedSize(e) {
     debugger;

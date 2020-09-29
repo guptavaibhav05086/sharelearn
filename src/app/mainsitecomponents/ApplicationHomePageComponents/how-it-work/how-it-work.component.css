@@ -3,25 +3,26 @@
     width: 100%;
     display: flex;
     flex-wrap: unset;
+    /* max-width: 1300px !important; */
   }
   .dcol-3 {
     flex-wrap: nowrap;
-    width: 30%;
+    width: 33%;
   }
 
   .txtFreelance {
     font-weight: bolder;
-    font-size: 20px;
+    font-size: 24px;
 
-    font-family: "Maven Pro";
+    font-family: "Maven Pro Black";
   }
   .alingdiv {
     padding-top: 100px;
   }
 
   .textStyle {
-    font-family: Maven pro;
-    font-size: 12px;
+    font-family: Maven pro black;
+    font-size: 15px;
     font-weight: 300;
   }
 
@@ -32,7 +33,8 @@
     font-size: 8px;
   }
   .imgtop {
-    height: 146px;
+    height: 120px;
+    width: 360px;
   }
 }
 @media (max-width: 768px) {

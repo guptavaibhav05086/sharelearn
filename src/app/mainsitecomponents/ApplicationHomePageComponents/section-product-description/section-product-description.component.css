@@ -3,10 +3,19 @@
     width: 100%;
     display: flex;
     flex-wrap: unset;
+    /* max-width: 1300px; */
   }
   .dcol-3 {
     flex-wrap: nowrap;
-    width: 33%;
+    width: 20%;
+  }
+  .dcol-4 {
+    flex-wrap: nowrap;
+    width: 40%;
+  }
+  .dcol-5 {
+    flex-wrap: nowrap;
+    width: 35%;
   }
   .searchBtnStyle {
     border-radius: 10px;
@@ -17,14 +26,14 @@
     font-weight: 900;
     font-family: "Maven Pro";
     font-size: 30px;
-    padding-left: 55px;
+    padding-left: 105px;
     margin-top: 5px;
   }
   .txtSample {
     font-weight: 200;
     font-family: "Maven Pro";
     font-size: 14px;
-    padding-left: 55px;
+    padding-left: 105px;
     margin-top: 15px;
   }
   .alingdiv {

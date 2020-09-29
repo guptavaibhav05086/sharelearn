@@ -1,4 +1,11 @@
 @media (min-width: 768px) {
+  .points {
+    margin-top: 20px;
+    margin-left: 2em;
+  }
+  .indentSecond {
+    text-indent: -2em;
+  }
   .container {
     width: 100%;
     display: flex;
@@ -33,9 +40,9 @@
     height: 40px;
   }
   .textStyle {
-    font-family: Maven pro;
-    font-size: 12px;
-    font-weight: 200;
+    font-family: Maven pro black;
+    font-size: 16px;
+    font-weight: 300;
   }
   .positioncontainerRight {
     padding-top: 40px;

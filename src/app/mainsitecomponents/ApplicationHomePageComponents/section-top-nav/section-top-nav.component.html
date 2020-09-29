@@ -4,7 +4,7 @@
 </div> -->
 <header class="animated fadeInDown">
     <nav class="navbar navbar-expand-lg navbar-light bg-light"
-        style="background-color: white !important;background-image: url('../../../../assets/HomePageImg/Home Page _ Images/Top_Background_Design Element1200.png') !important;background-size: cover;">
+        style="background-color: white !important;background-image: url('../../../../assets/HomePageImg/Home Page _ Images/Top Background1200.png') !important;background-size: cover;height :120px;">
 
         <!-- <a class="navbar-brand" href="#">Navbar</a> -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdownTop"
@@ -18,9 +18,9 @@
                             alt="" style="height: 40px;"></a>
                 </li>
 
-                <li class="nav-item borderNav topsearchhide" style="padding-top: 5px;" id="searchBarButton">
-                    <input type="text" class="searchBtn" />
-                    <button class="btn btn-primary">Design/Print</button>
+                <li class="nav-item borderNav topsearchhide" style="padding-top: 10px;" id="searchBarButton">
+                    <input type="text" class="searchBtn" style="height: 35px;" />
+                    <button class="btn btn-primary" style="height: 35px;">Design/Print</button>
                 </li>
                 <li class="nav-item borderNav">
                     <a class="nav-link" href="#">Home</a>
@@ -40,18 +40,39 @@
                 <li class="nav-item active borderNav">
                     <div class="vLine"></div>
                 </li>
-                <li class="nav-item dropdown borderNav">
+                <li class="nav-item dropdown borderNav" *ngIf="!displayUserNav">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Sign In
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Customer</a>
+                            <a class="dropdown-item" href="#" (click)="openLogin($event)">Customer</a>
                         </div>
 
                         <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Vendor</a>
+                            <a class="dropdown-item" routerLink="/login">Vendor</a>
+                        </div>
+
+
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown borderNav" *ngIf="displayUserNav" style="padding-top:0px !important">
+                    <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link">
+                            <img _ngcontent-bjd-c124=""
+                                src="../../../../assets/HomePageImg/Home Page _ Images/Sign in Icon1200.png" alt=""
+                                style="height: 30px;"></a>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="menuItemDD">
+                            <a class="dropdown-item" (click)="navigateprofile($event)">Profile</a>
+                        </div>
+
+                        <div class="menuItemDD">
+                            <a class="dropdown-item" routerLink="/logout">Log Out</a>
                         </div>
 
 
@@ -62,8 +83,15 @@
                     <div class="vLine"></div>
                 </li>
 
-                <li class="nav-item">
-                    <button class="btn btn-primary">Create an Account</button>
+                <li class="nav-item" *ngIf="!displayUserNav">
+                    <button class="btn btn-primary" (click)="navigateSignUp()">Create an Account</button>
+                </li>
+                <li class="nav-item" *ngIf="displayUserNav" style="padding-top:0px !important">
+                    <a class="nav-link" href="#">
+                        <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png" alt=""
+                            style="height: 30px;">
+                    </a>
+
                 </li>
 
 

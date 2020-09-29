@@ -3,6 +3,7 @@
     width: 100%;
     display: flex;
     flex-wrap: unset;
+    /* max-width: 1300px !important; */
   }
   .dcol-3 {
     flex-wrap: nowrap;
@@ -39,7 +40,7 @@
   }
   .alingdiv {
     padding-top: 60px;
-    padding-left: 9%;
+    /* padding-left: 9%; */
   }
   .imgEditpenposition {
     padding-top: 30px;

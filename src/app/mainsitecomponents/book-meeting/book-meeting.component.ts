@@ -302,7 +302,7 @@ export class BookMeetingComponent implements OnInit {
     debugger;
     let validDate = `${date.year}-${
       date.month < 10 ? "0" + date.month : date.month
-    }-${date.day}`;
+    }-${date.day < 10 ? "0" + date.day : date.day}`;
     return validDate;
   }
 }

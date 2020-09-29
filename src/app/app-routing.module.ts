@@ -8,14 +8,7 @@ import { AngularComponent } from "./courseComponets/angular/angular.component";
 import { NodeComponent } from "./courseComponets/node/node.component";
 import { LoginComponent } from "./auth/login/login.component";
 import { RegisterComponent } from "./auth/register/register.component";
-import { JavascriptComponent } from "./courseComponets/javascript/javascript.component";
-import { DotnetComponent } from "./courseComponets/dotnet/dotnet.component";
-import { JavaComponent } from "./courseComponets/java/java.component";
-import { AllcoursesComponent } from "./courseComponets/allcourses/allcourses.component";
-import { RegistercoursComponent } from "./otherComponents/registercours/registercours.component";
-import { ContactusComponent } from "../../src/app/public/contactus/contactus.component";
-import { MeanComponent } from "./courseComponets/mean/mean.component";
-import { MernComponent } from "./courseComponets/mern/mern.component";
+
 import { LogoutComponent } from "./auth/logout/logout.component";
 import { ResetpasswordComponent } from "./auth/resetpassword/resetpassword.component";
 import { UsersignupComponent } from "./auth/usersignup/usersignup.component";
@@ -122,6 +115,11 @@ const routes: Routes = [
   {
     path: "admin",
     loadChildren: () => import("./admin/admin.module").then(m => m.AdminModule)
+  },
+  {
+    path: "customers",
+    loadChildren: () =>
+      import("./customers/customers.module").then(m => m.CustomersModule)
   },
   { path: "**", component: PageNotFoundComponent }
 ];

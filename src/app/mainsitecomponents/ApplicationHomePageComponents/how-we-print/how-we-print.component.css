@@ -3,14 +3,15 @@
     width: 100%;
     display: flex;
     flex-wrap: unset;
+    /* max-width: 1300px !important; */
   }
   .dcol-3 {
     flex-wrap: nowrap;
-    width: 33%;
+    width: 23%;
   }
   .dcol-2 {
     flex-wrap: nowrap;
-    width: 60%;
+    width: 70%;
   }
   .dcol-4 {
     flex-wrap: nowrap;
@@ -22,11 +23,12 @@
   }
   .dcol-6 {
     flex-wrap: nowrap;
-    width: 15%;
+    width: 20%;
+    margin-left: 15%;
   }
   .alingDesingImg {
     padding-top: 25px;
-    margin-left: 15%;
+    /* margin-left: 10%; */
   }
   .searchBtnStyle {
     border-radius: 10px;

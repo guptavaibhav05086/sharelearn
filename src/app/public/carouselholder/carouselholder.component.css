@@ -3,5 +3,12 @@
 }
 .itemSize {
   height: 200px;
-  width: 200px;
+  width: 200px !important;
 }
+/* .carousel-control-next-icon {
+  background-image: url("../../../assets/HomePageImg/Home Page _ Images/Left Arrow1200.png") !important;
+}
+.carousel-control-prev-icon {
+  background-image: url("../../../assets/HomePageImg/Home Page _ Images/Left Arrow1200.png") !important;
+  margin-left: -200%;
+} */

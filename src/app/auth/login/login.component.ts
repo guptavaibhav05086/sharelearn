@@ -9,6 +9,14 @@ import { delay } from "rxjs/operators";
 import { TokenRequest } from "src/app/Models/token-request";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ForgetpasswordComponent } from "../forgetpassword/forgetpassword.component";
+// import { SocialLoginModule, AuthServiceConfig } from "angular-6-social-login";
+// import {
+//   GoogleLoginProvider,
+//   FacebookLoginProvider,
+//   AuthService
+// } from "angular-6-social-login";
+import { Socialusers } from "../../Models/socialusers";
+
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -21,6 +29,7 @@ import { ForgetpasswordComponent } from "../forgetpassword/forgetpassword.compon
 export class LoginComponent implements OnInit {
   displayLoginError = false;
   loginError = "";
+  socialusers = new Socialusers();
   constructor(
     private _helper: HelperService,
     private _validator: ValidatorsService,
@@ -78,5 +87,30 @@ export class LoginComponent implements OnInit {
   openForgetPassword() {
     const modalRef = this.modalService.open(ForgetpasswordComponent);
     modalRef.componentInstance.name = "World";
+  }
+  // public socialSignIn(socialProvider: string) {
+  //   debugger;
+  //   let socialPlatformProvider;
+  //   if (socialProvider === "facebook") {
+  //     socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+  //   } else if (socialProvider === "google") {
+  //     socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+  //   }
+  //   this.OAuth.signIn(socialPlatformProvider).then(socialusers => {
+  //     console.log(socialProvider, socialusers);
+  //     console.log(socialusers);
+  //     this.Savesresponse(socialusers);
+  //   });
+  // }
+  Savesresponse(socialusers: Socialusers) {
+    // this.SocialloginService.Savesresponse(socialusers).subscribe((res: any) => {
+    //   debugger;
+    //   console.log(res);
+    //   this.socialusers=res;
+    //   this.response = res.userDetail;
+    //   localStorage.setItem('socialusers', JSON.stringify( this.socialusers));
+    //   console.log(localStorage.setItem('socialusers', JSON.stringify(this.socialusers)));
+    //   this.router.navigate([`/Dashboard`]);
+    // })
   }
 }

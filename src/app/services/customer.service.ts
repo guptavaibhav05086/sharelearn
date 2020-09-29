@@ -165,4 +165,14 @@ export class CustomerService {
       .replace("$signature", signature);
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
+  getExternalLogins() {
+    let url = `${environment.baseUrl}${environment.externalLogins}`;
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
+  initiateGoogleLogin(urlBase) {
+    debugger;
+    let url = `${environment.baseUrl}${urlBase}`;
+    window.location.href = url;
+    return this._httpclient.get(url);
+  }
 }

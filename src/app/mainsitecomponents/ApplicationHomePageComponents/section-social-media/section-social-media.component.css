@@ -3,11 +3,18 @@
     width: 100%;
     display: flex;
     flex-wrap: unset;
+    margin-right: inherit;
+    max-width: 1300px;
+  }
+  .containerFooter {
+    width: 100%;
+    display: flex;
+    flex-wrap: unset;
   }
   .dcol-3 {
     flex-wrap: nowrap;
     width: 33%;
-    padding-top: 250px !important;
+    padding-top: 400px !important;
   }
   .dcol-4 {
     flex-wrap: nowrap;

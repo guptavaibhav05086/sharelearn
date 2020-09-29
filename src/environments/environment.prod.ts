@@ -2,6 +2,7 @@ export const environment = {
   production: false,
   baseUrl: "https://www.shapenprint.in",
   //baseUrl: "http://localhost:39117",
+
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
   tokenUrl: "/Token",
@@ -85,5 +86,6 @@ export const environment = {
   designerVpaPay:
     "/api/admin/makeDesignerPaymentVPA?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
   designerBankAccountPay:
-    "/api/admin/makeDesignerPayment?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount"
+    "/api/admin/makeDesignerPayment?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
+  externalLogins: "/api/Account/ExternalLogins?returnUrl=%2F&generateState=true"
 };

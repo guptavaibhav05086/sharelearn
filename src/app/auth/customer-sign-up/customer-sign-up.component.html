@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h4 class="modal-title">Register</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<!-- For Printer -->
+<div class="modal-body">
+    <app-designersignup [isCustomerSignUp]="isCustomerSignUp"></app-designersignup>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="activeModal.dismiss('Cross click')">
+        Close
+    </button>
+</div>

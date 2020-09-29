@@ -67,10 +67,13 @@ import { SectionTopNavComponent } from "./mainsitecomponents/ApplicationHomePage
 
 import { PproductsCarouselComponent } from "./mainsitecomponents/ApplicationHomePageComponents/pproducts-carousel/pproducts-carousel.component";
 import { CarouselModule } from "ngx-bootstrap/carousel";
-import { HowWePrintComponent } from './mainsitecomponents/ApplicationHomePageComponents/how-we-print/how-we-print.component';
-import { SectionPlanComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-plan/section-plan.component';
-import { SectionBrandComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-brand/section-brand.component';
-import { SectionSocialMediaComponent } from './mainsitecomponents/ApplicationHomePageComponents/section-social-media/section-social-media.component';
+import { HowWePrintComponent } from "./mainsitecomponents/ApplicationHomePageComponents/how-we-print/how-we-print.component";
+import { SectionPlanComponent } from "./mainsitecomponents/ApplicationHomePageComponents/section-plan/section-plan.component";
+import { SectionBrandComponent } from "./mainsitecomponents/ApplicationHomePageComponents/section-brand/section-brand.component";
+import { SectionSocialMediaComponent } from "./mainsitecomponents/ApplicationHomePageComponents/section-social-media/section-social-media.component";
+import { CustomerSignUpComponent } from "./auth/customer-sign-up/customer-sign-up.component";
+import { CustomerLoginComponent } from "./auth/customer-login/customer-login.component";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -128,7 +131,9 @@ import { SectionSocialMediaComponent } from './mainsitecomponents/ApplicationHom
     HowWePrintComponent,
     SectionPlanComponent,
     SectionBrandComponent,
-    SectionSocialMediaComponent
+    SectionSocialMediaComponent,
+    CustomerSignUpComponent,
+    CustomerLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -145,7 +150,13 @@ import { SectionSocialMediaComponent } from './mainsitecomponents/ApplicationHom
     NgbModule,
     AgGridModule
   ],
-  providers: [],
+  providers: [
+    // AuthService,
+    // {
+    //   provide: AuthServiceConfig,
+    //   useFactory: socialConfigs
+    // }
+  ],
   bootstrap: [AppComponent],
   exports: [NavbaruserComponent],
   entryComponents: [ForgetpasswordComponent]
