@@ -39,6 +39,7 @@ export class OrderPageComponent implements OnInit {
   cartItemId = 0;
   fileError = false;
   displayeproceed=true;
+  disableAllUploadButtons=false;
   isPhotoUrlValid: boolean;
   discountPrice:Array<Discounts>;
   arrLnW = new Array<number>();
@@ -580,6 +581,7 @@ return true;
     console.log(this.orderPrice);
     this.scrollToElement($element);
     this.orderForm.disable();
+    this.disableAllUploadButtons=true;
     this.orderForm.controls["BillingName"].enable();
     this.orderForm.controls["GSTNumber"].enable();
     this.orderForm.controls['tPrinter'].enable();
@@ -589,6 +591,7 @@ return true;
   }
   editSpecification(){
     this.orderForm.enable();
+    this.disableAllUploadButtons=false;
     this.displayeproceed=true;
     this.displaysummary=false;
     this.orderForm.controls['disableCat'].disable();

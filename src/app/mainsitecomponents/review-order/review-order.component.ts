@@ -7,7 +7,8 @@ import { CustomerService } from "src/app/services/customer.service";
 import { HelperService } from "src/app/services/helper.service";
 import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
 import { AdminService } from "src/app/services/admin.service";
-import { HostListener } from '@angular/core';
+import { HostListener } from "@angular/core";
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: "app-review-order",
   templateUrl: "./review-order.component.html",
@@ -59,7 +60,8 @@ export class ReviewOrderComponent implements OnInit {
     private printer: PrinterService,
     private custService: CustomerService,
     private modalService: NgbModal,
-    private admin: AdminService
+    private admin: AdminService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -71,15 +73,15 @@ export class ReviewOrderComponent implements OnInit {
         console.log(this.custService.discountedPrice);
         //debugger;
         this.loadCart();
-       
+
         //debugger;
       },
       err => {}
     );
   }
-  @HostListener('window:popstate', ['$event'])
+  @HostListener("window:popstate", ["$event"])
   onPopState(event) {
-    console.log('Back button pressed');
+    console.log("Back button pressed");
   }
   transactionUpdate(event) {
     //debugger;
@@ -93,15 +95,17 @@ export class ReviewOrderComponent implements OnInit {
       try {
         let cart = this.custService.getLocalStorageCart();
         cart.forEach(element => {
-          this.custService.deletItemFromCart(element.id)
-          
+          this.custService.deletItemFromCart(element.id);
         });
-      } catch (error) {
-        
-      }
+      } catch (error) {}
       this.displayTranFail = false;
       let origin = this.document.location.origin;
-      let url = origin + "/orderstatus?tranId=" + event.tranId + "&orderId=" + this.razorPayOrderId;
+      let url =
+        origin +
+        "/orderstatus?tranId=" +
+        event.tranId +
+        "&orderId=" +
+        this.razorPayOrderId;
       window.location.href = url;
 
       // this.router.navigate(["/ordersuccess"], {
@@ -193,6 +197,7 @@ export class ReviewOrderComponent implements OnInit {
   }
   generateOrderId() {
     debugger;
+    this.spinner.show();
     let addresss = JSON.parse(localStorage.getItem("selectedAddess"));
     let FinalOrder = {
       cart: {},
@@ -208,10 +213,12 @@ export class ReviewOrderComponent implements OnInit {
     this.custService.generateOrderIdPost(FinalOrder).subscribe(
       data => {
         this.razorPayOrderId = data;
-
+        this.spinner.hide();
         //this.payWithRazor(data);
       },
-      err => {}
+      err => {
+        this.spinner.hide();
+      }
     );
   }
   changeSlot(e) {
@@ -240,9 +247,21 @@ export class ReviewOrderComponent implements OnInit {
         "  " +
         (data.mSlot.hour >= 12 ? "PM" : "AM");
       this.selectedSlot.duration = data.duration;
-
+      let timer = setInterval(() => {
+        debugger;
+        alert("Your Meeting Slot is expired.Please choose the New slot");
+        clearInterval(timer);
+        this.bookMeeting();
+      }, 900000);
       //this.helper.navigateToPath("/revieworder");
     });
+  }
+  setOrderTimer() {
+    var now = new Date().getMinutes();
+    var mins = now + 15;
+    var setDate = new Date().setMinutes(mins);
+    var timerEndTime = new Date(setDate);
+    console.log(new Date(setDate));
   }
   removeItem(id) {
     var result = confirm("Do you want to delete the item from the cart");

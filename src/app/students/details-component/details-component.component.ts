@@ -29,6 +29,8 @@ export class DetailsComponentComponent implements OnInit {
     let email = localStorage.getItem("email");
     this.service.acceptDesignerOrder(email, this.orderId).subscribe(data => {
       console.log(data);
+      alert("Order Accepted.Please Check Ongoing Order Section");
+      this.activeModal.close();
     });
   }
 }

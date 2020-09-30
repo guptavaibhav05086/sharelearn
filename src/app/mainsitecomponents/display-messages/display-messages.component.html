@@ -1,16 +1,14 @@
-<div
-  style="height: 580px;background-color: white;
-text-align: center;color:green;font-size: x-large;"
-  *ngIf="!displayError"
->
-  Your Transaction is successful.Please use this Transaction Id
-  {{ transactionsId }} for your future reference.
+<div style="height: 580px;background-color: white;
+text-align: center;color:green;font-size: x-large;" *ngIf="!displayError">
+  <div>Thank You! Your order id {{orderId}} is successfully placed.</div>
+  <div style="margin-top: 30px;">Please use Transaction Id {{transactionsId}} for your
+    future reference.</div>
+
+  <!-- Your Transaction is successful.Please use this Transaction Id
+  {{ transactionsId }} for your future reference. -->
 </div>
-<div
-  style="height: 580px;background-color: white;
-text-align: center;color:red;font-size: large;"
-  *ngIf="displayError"
->
+<div style="height: 580px;background-color: white;
+text-align: center;color:red;font-size: large;" *ngIf="displayError">
   <p>Your Last Transaction Failed or Cancelled.</p>
   <p>
     If any amount is deducted from your card/account,it will be reverted back in

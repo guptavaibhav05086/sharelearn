@@ -349,7 +349,7 @@
                               
                               style="display: none"
                               id="contentUpload"
-                              
+                              [disabled]="disableAllUploadButtons"
                               (change)="uploadGSTCertificate($event.target.files,'content')"
                             /> 
                            
@@ -391,7 +391,7 @@
                             accept="image/*"
                             style="display: none"
                             id="productUpload"
-                            
+                            [disabled]="disableAllUploadButtons"
                             (change)="uploadGSTCertificate($event.target.files,'product')"
                           /> 
                         </div>
@@ -437,7 +437,7 @@
                                 accept="image/*"
                                 style="display: none"
                                 [id]="item.name"
-                                
+                                [disabled]="disableAllUploadButtons"
                                 (change)="uploadLogoImage($event.target.files,item.name,item.id)"
                               /> 
                              </div>

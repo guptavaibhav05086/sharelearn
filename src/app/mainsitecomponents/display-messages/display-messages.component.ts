@@ -10,6 +10,7 @@ import { CustomerService } from "src/app/services/customer.service";
 export class DisplayMessagesComponent implements OnInit {
   transactionsId: any;
   displayError = false;
+  orderId: any;
   constructor(
     private route: ActivatedRoute,
     @Inject(DOCUMENT) private document: Document,
@@ -28,6 +29,7 @@ export class DisplayMessagesComponent implements OnInit {
         this.displayError = true;
       }
       if (params.orderId != undefined && params.orderId != "null") {
+        this.orderId = params.orderId;
         this.custService.sendNotification(params.orderId).subscribe(
           data => {
             console.log(data);
