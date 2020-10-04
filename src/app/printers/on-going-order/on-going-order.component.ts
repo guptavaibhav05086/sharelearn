@@ -32,7 +32,7 @@ export class OnGoingOrderComponent implements OnInit {
   columnDefs = [
     { headerName: "Order Id", field: "OrderId" },
     { headerName: "Sub-Category", field: "productSubcategory" },
-    { headerName: "Meeting Slot", field: "meetingTime", sortable: true },
+    // { headerName: "Meeting Slot", field: "meetingTime", sortable: true },
     {
       headerName: "Actions",
 
@@ -85,9 +85,9 @@ export class OnGoingOrderComponent implements OnInit {
     modelref.componentInstance.data = e.rowData;
     modelref.componentInstance.isAllOrders = false;
 
-    // modelref.result.then(data => {
-    //   this.fetchOngoingOrder();
-    // });
+    modelref.result.then(data => {
+      this.fetchOngoingOrder();
+    });
   }
   initiateDelivery(e) {
     debugger;

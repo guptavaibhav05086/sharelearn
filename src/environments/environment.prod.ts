@@ -87,5 +87,6 @@ export const environment = {
     "/api/admin/makeDesignerPaymentVPA?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
   designerBankAccountPay:
     "/api/admin/makeDesignerPayment?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
-  externalLogins: "/api/Account/ExternalLogins?returnUrl=%2F&generateState=true"
+  externalLogins: "/api/Account/ExternalLogins?returnUrl=%2F&generateState=true",
+  finishDesignerOrder:"/api/designer/finishDesignerOrder?orderId=$orderId"
 };

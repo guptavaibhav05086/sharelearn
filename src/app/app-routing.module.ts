@@ -25,6 +25,8 @@ import { OrderCartComponent } from "./mainsitecomponents/order-cart/order-cart.c
 import { ReviewOrderComponent } from "./mainsitecomponents/review-order/review-order.component";
 import { DisplayMessagesComponent } from "./mainsitecomponents/display-messages/display-messages.component";
 import { HomeContainerComponent } from "./mainsitecomponents/ApplicationHomePageComponents/home-container/home-container.component";
+import { OngoingOrdersComponent } from "./mainsitecomponents/ongoing-orders/ongoing-orders.component";
+import { AllOrdersComponent } from "./mainsitecomponents/all-orders/all-orders.component";
 
 const routes: Routes = [
   {
@@ -104,7 +106,9 @@ const routes: Routes = [
       },
       { path: "designerprofile", component: DesignerprofileComponent },
       { path: "verifyemail", component: VerifyEmailComponent },
-      { path: "verifyvendors", component: ErrorMessageComponent }
+      { path: "verifyvendors", component: ErrorMessageComponent },
+      { path: "user/ongoingorders", component: OngoingOrdersComponent },
+      { path: "user/allorders", component: AllOrdersComponent }
     ]
   },
   {

@@ -89,6 +89,7 @@ export class OrderPageComponent implements OnInit {
     totalPrintCost: 0,
     deliveryDays: 0,
     professiondesignerFees: 0,
+    professiondesignerFeesAfterCommision:0,
     sourceFileFees: 0,
     discount:0,
     discountPerc:0,
@@ -437,6 +438,7 @@ export class OrderPageComponent implements OnInit {
             totalPrintCost: this.orderPrice.totalPrintCost,
             deliveryDays: this.orderPrice.deliveryDays,
             professiondesignerFees: this.orderPrice.professiondesignerFees,
+            professiondesignerFeesAfterCommision:this.orderPrice.professiondesignerFeesAfterCommision,
             sourceFileFees: this.orderPrice.sourceFileFees,
            
             discountPerc:this.orderPrice.discountPerc,
@@ -669,6 +671,7 @@ return true;
       totalPrintCost: 0,
       deliveryDays: 0,
       professiondesignerFees: 0,
+      professiondesignerFeesAfterCommision:0,
       sourceFileFees: 0,
       baseDesignPrice:0,
       discount:0,
@@ -1141,18 +1144,18 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
       this.displayLenghtWidth = false;
     }
      debugger;
-     this.orderForm.patchValue({
-      orientation: ""
-    });
-    // if (this.displayprinter == true) {
-    //   this.orderForm.patchValue({
-    //     orientation: "NA"
-    //   });
-    // } else {
-    //   this.orderForm.patchValue({
-    //     orientation: ""
-    //   });
-    // }
+    //  this.orderForm.patchValue({
+    //   orientation: ""
+    // });
+    if (this.orderForm.controls['disableType'].value == "Print Only") {
+      this.orderForm.patchValue({
+        orientation: "NA"
+      });
+    } else {
+      this.orderForm.patchValue({
+        orientation: ""
+      });
+    }
   }
   selectedSize(e) {
     debugger;
@@ -1270,8 +1273,10 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
     debugger;
     if (this.orderForm.controls["professionDesigner"].value == true) {
       this.orderPrice.professiondesignerFees = item.profDesignerFee;
+      this.orderPrice.professiondesignerFeesAfterCommision=(item.profDesignerFee)-(item.profDesignerFee * (item.DesignCommision/100));
     } else {
       this.orderPrice.professiondesignerFees = 0;
+      this.orderPrice.professiondesignerFeesAfterCommision=0;
     }
     if (this.orderForm.controls["sourceFileSpecs"].value == true) {
       this.orderPrice.sourceFileFees = item.sourceFileFees;

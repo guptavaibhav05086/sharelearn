@@ -47,6 +47,14 @@ export class DesignerService {
       this.login.getAuthHeader()
     );
   }
+  finishDesignerOrder(orderId) {
+    let url = `${environment.baseUrl}${environment.finishDesignerOrder}`.replace("$orderId",orderId);
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
   downloadOrderFiles(filename) {
     let url = `${environment.baseUrl}${environment.fetchongoingorderfilesDesigner}`.replace(
       "$filename",

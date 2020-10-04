@@ -31,7 +31,7 @@
 .dropdown.show .dropdown-menu,
 .dropup.show .dropdown-menu,
 .bootstrap-select.show .dropdown-menu {
-  position: static;
+  /* position: static; */
   margin-bottom: 10px;
 }
 .dropdown-menu {

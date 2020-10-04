@@ -6,10 +6,162 @@
 </div>
 <!-- For Printer -->
 <div class="modal-body">
-    <app-designersignup [isCustomerSignUp]="isCustomerSignUp"></app-designersignup>
+    <form class="form-horizontal form-material" id="loginform" [formGroup]="studentForm" *ngIf="!verifyUser">
+        <div class="form-group mt-4">
+            <label for="username" class="label text-uppercase">Name</label>
+            <input class="form-control" type="text" required formControlName="name" placeholder="Name" />
+            <span class="errorMessage" *ngIf="
+        (studentForm.controls['name'].dirty ||
+          studentForm.controls['name'].touched) &&
+        studentForm.controls['name'].invalid &&
+        studentForm.controls['name'].errors.required
+      ">
+                *Name is required.
+            </span>
+
+        </div>
+        <div class="form-group mt-4">
+            <label for="username" class="label text-uppercase">Email</label>
+            <input class="form-control" type="text" required formControlName="email" placeholder="Username" />
+            <span class="errorMessage" *ngIf="
+        (studentForm.controls['email'].dirty ||
+          studentForm.controls['email'].touched) &&
+        studentForm.controls['email'].invalid &&
+        studentForm.controls['email'].errors.required
+      ">
+                *Email is required.
+            </span>
+            <span class="errorMessage" *ngIf="
+        (studentForm.controls['email'].dirty ||
+          studentForm.controls['email'].touched) &&
+        studentForm.controls['email'].invalid &&
+        studentForm.controls['email'].errors.invalidPattern
+      ">
+                *Email is incorrect.
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="username" class="label text-uppercase">Password</label>
+            <input class="form-control" type="password" required formControlName="password" placeholder="Password" />
+            <span class="errorMessage" *ngIf="
+        (studentForm.controls['password'].dirty ||
+          studentForm.controls['password'].touched) &&
+        studentForm.controls['password'].invalid &&
+        studentForm.controls['password'].errors.required
+      ">
+                *Password is required.
+            </span>
+            <span class="errorMessage" *ngIf="
+        (studentForm.controls['password'].dirty ||
+          studentForm.controls['password'].touched) &&
+        studentForm.controls['password'].invalid &&
+        studentForm.controls['password'].errors.invalidPattern
+      ">
+                *Password must be of 6 to 15 characters and consist of 1 lower,upper case
+                1 digit and 1 special character .
+            </span>
+        </div>
+
+
+        <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="text" class="form-control" placeholder="+91" formControlName="mobileNumber" required />
+            <span class="errorMessage" *ngIf="
+  (studentForm.controls['mobileNumber'].dirty ||
+  studentForm.controls['mobileNumber'].touched) &&
+  studentForm.controls['mobileNumber'].invalid &&
+  studentForm.controls['mobileNumber'].errors.invalidPattern
+">
+                *Mobile# is incorrect.
+            </span>
+            <span class="errorMessage" *ngIf="
+              (studentForm.controls['mobileNumber'].dirty ||
+              studentForm.controls['mobileNumber'].touched) &&
+              studentForm.controls['mobileNumber'].invalid &&
+              studentForm.controls['mobileNumber'].errors.required
+            ">
+                *Invalid Mobile number.
+            </span>
+
+        </div>
+        <div>
+            <!-- {{ studentForm.controls["mobileNumber"].errors | json }}
+  Check Invalid: {{ studentForm.controls["mobileNumber"].invalid }} Total
+  Condition:
+  {{
+    (studentForm.controls["mobileNumber"].dirty ||
+      studentForm.controls["mobileNumber"].touched) &&
+      studentForm.controls["mobileNumber"].invalid &&
+      !studentForm.controls["mobileNumber"].errors.invalidPattern.valid
+  }} -->
+        </div>
+        <div *ngIf="serverError">
+            <span class="errorMessage" *ngFor="let item of error">
+                {{ item }}
+            </span>
+        </div>
+        <div *ngIf="registered">
+            <span class="successMessage">
+                User Registered Successfully
+            </span>
+        </div>
+
+        <div class="form-group text-center mt-4">
+            <button class="btn btn-info btn-lg btn-block text-uppercase " type="submit" [disabled]="!studentForm.valid"
+                (click)="registerUser()">
+                Sign Up
+            </button>
+        </div>
+        <!--  -->
+        <div class="form-group m-b-0">
+            <div class="col-sm-12 text-center">
+                <p>
+                    I Have an Accont?
+                    <a routerLink="/login" class="text-primary m-l-5"><b>Login</b></a>
+                </p>
+            </div>
+        </div>
+    </form>
+
+    <div class="" *ngIf="verifyUser">
+        <div>
+            <label class="label text-uppercase">Verify Mobile : {{studentForm.controls['mobileNumber'].value}}</label>
+        </div>
+        <div>
+
+            <button (click)="GenerateOTP()" class="btn btn-primary">Generate OTP</button>
+
+        </div>
+        <div *ngIf="displayVerifyOTPM">
+            <input type="text" class="form-control" [(ngModel)]="mOTP" />
+
+        </div>
+        <div *ngIf="displayVerifyOTPM">
+            <button (click)="verifyOTP()" class="btn btn-primary">Verify OTP</button>
+        </div>
+        <div>
+            <label>Verify Email : {{studentForm.controls['email'].value}}</label>
+        </div>
+        <div>
+
+            <button (click)="GenerateOTPEmail()" class="btn btn-primary">Generate OTP</button>
+
+        </div>
+        <div *ngIf="displayVerifyOTPE">
+            <input type="text" [(ngModel)]="eOTP" />
+
+        </div>
+        <div *ngIf="displayVerifyOTPE">
+            <button (click)="verifyOTPEmail()" class="btn btn-primary">Verify OTP</button>
+        </div>
+    </div>
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+        <p style="color: white">Please Wait.</p>
+    </ngx-spinner>
+
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="activeModal.dismiss('Cross click')">
+    <button type="button" class="btn btn-light" (click)="activeModal.close('Cross click')">
         Close
     </button>
 </div>

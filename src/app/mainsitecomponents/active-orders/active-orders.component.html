@@ -1,0 +1,192 @@
+<div class="modal-dialog modal-xl">
+  <div class="modal-header">
+    <h2 class="modal-title">Order Details</h2>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body" style="width:80%">
+    <div class="container" style="margin-left: 10%;">
+      <div class="row" style="text-align: center;">
+        <div class="col-md-12">
+          <p>Designer Name: <span style="font-weight: 300;">{{data.CustomerName}}</span></p>
+          <p>Contact Details: +91 {{data.CustomerNumber}} <span
+              style="font-weight: 300;font-style: italic;">{{data.CustomerEmail}}</span> </p>
+
+        </div>
+      </div>
+
+      <div class="row" *ngFor="let item of orderItems">
+        <!-- <div class="col-md-2">
+            <img src="../../../assets/StudentDashboard/img/download.jpg" />
+          </div> -->
+        <div class="col-md-12">
+          <div class="">
+            <div class="">
+              <div class="rowCart itemCart">
+                <div class="col-shp-3 mobCard">
+                  <img src="../../../assets/StudentDashboard/img/download.jpg" class="productImage" />
+                </div>
+                <div class="col-shp-7 mobCard" style="padding-left: 1%;">
+                  <p class="productTitle">{{ item.subcategory }}</p>
+                  <p class="productDetails">
+                    <span class="detailsHeading">Orientation:</span> {{ item.orientation }},
+                    <span class="detailsHeading">Size:</span> {{ item.size }},
+                  </p>
+                  <p class="productDetails">
+                    <span class="detailsHeading">Order Type:</span> {{ item.orderType }},
+
+                  </p>
+
+                  <p class="productDetails" *ngIf="item.TotalDesignCost > 0">
+                    <span class="detailsHeading">Total Design Price: &#x20B9;</span> {{ item.TotalDesignCost }}
+                  </p>
+                  <p class="productDetails" *ngIf="item.TotalPrintCost > 0">
+                    <span class="detailsHeading">Total Print Price: &#x20B9;</span> {{ item.TotalPrintCost }}
+                  </p>
+                  <p class="productDetails">
+                    <span class="detailsHeading">Order Content</span> {{ item.content }}
+                  </p>
+
+                  <div>
+                    <a (click)="downloadFile(item.referenceImageURL,$event)" href="#">Download Reference Image</a>
+                  </div>
+                  <div>
+                    <a (click)="downloadFile(item.contentpath,$event)" href="#">Download Content File</a>
+                  </div>
+                  <div *ngFor="let filekey of item.sourceLogoFile;let j=index" style="display: flex;flex-wrap: wrap;">
+                    <div>
+                      <a *ngIf="filekey !=''" (click)="downloadFile(filekey,$event)" href="#">Download Logo/Image
+                        {{j+1}} </a>
+                    </div>
+
+                  </div>
+
+                  <!-- Only display source File Upload if User choosen for source File upload -->
+                  <div *ngIf="item.isDesignerFinishedOrder && item.selectedSourceFile">
+                    <div class="row" *ngFor="let itemImg of item.SourceUploads;let  i=index">
+                      <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
+                        <div class="form-group">
+                          <div *ngIf="i == 0">
+                            <label>Source Files </label>
+
+                          </div>
+                          <div style="display: flex;">
+                            <div *ngIf="!isAllOrders">
+                              <label [for]="itemImg.name" class="btn btn-primary btn-block btn-outlined"
+                                style="width:250px">UPLOAD</label>
+                              <input type="file" accept="image/*" style="display: none" [id]="itemImg.name"
+                                (change)="uploadGSTCertificate($event.target.files,item.id,'source',itemImg.id)" />
+                            </div>
+                            <div style="width: 40px;" *ngIf="itemImg.displayLoadingGif">
+                              <img src="../../../assets/img/loading.gif" />
+                            </div>
+                            <div *ngIf="!isAllOrders" style="display:flex">
+                              <!-- *ngIf="itemImg.id == item.SourceUploads.length" -->
+                              <div *ngIf="i == (item.SourceUploads.length - 1)">
+                                <button class="btn btn-outlined"
+                                  (click)="addImage(itemImg.id,item.id,'source')">+</button>
+                                <!-- index->{{i}}
+                                  length-> {{item.SourceUploads.length}} -->
+                              </div>
+                              <div>
+                                <button class="btn btn-outlined"
+                                  (click)="removeImage(itemImg.id,item.id,'source')">-</button>
+                              </div>
+                            </div>
+
+
+                          </div>
+                          <div *ngIf="itemImg.displayFileName">
+                            <a href="#" (click)="downloadFile(itemImg.fileName,$event)">{{itemImg.fileName}}</a>
+
+
+
+                          </div>
+
+
+
+                        </div>
+
+                      </div>
+
+
+                    </div>
+                  </div>
+
+                  <div *ngIf="item.isDesignerFinishedOrder">
+                    <div class="row" *ngFor="let itemNImg of item.NormalUploads;let  j=index">
+                      <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
+                        <div class="form-group">
+                          <div *ngIf="j == 0">
+                            <label>Normal Files </label>
+
+                          </div>
+                          <div style="display: flex;">
+                            <div *ngIf="!isAllOrders">
+                              <label [for]="itemNImg.name" class="btn btn-primary btn-block btn-outlined"
+                                style="width:250px">UPLOAD</label>
+                              <input type="file" accept="image/*" style="display: none" [id]="itemNImg.name"
+                                (change)="uploadGSTCertificate($event.target.files,item.id,'normal',itemNImg.id)" />
+                            </div>
+                            <div style="width: 40px;" *ngIf="itemNImg.displayLoadingGif">
+                              <img src="../../../assets/img/loading.gif" />
+                            </div>
+                            <div *ngIf="!isAllOrders" style="display:flex">
+
+                              <div *ngIf="j == (item.NormalUploads.length-1)">
+                                <button class="btn btn-outlined"
+                                  (click)="addImage(itemNImg.id,item.id,'normal')">+</button>
+                              </div>
+                              <div>
+                                <button class="btn btn-outlined"
+                                  (click)="removeImage(itemNImg.id,item.id,'normal')">-</button>
+                              </div>
+                            </div>
+
+
+                          </div>
+                          <div *ngIf="itemNImg.displayFileName">
+                            <a href="#" (click)="downloadFile(itemNImg.fileName,$event)">
+                              {{itemNImg.fileName}}</a>
+
+
+
+                          </div>
+
+
+
+                        </div>
+
+                      </div>
+
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <p *ngIf="displayFinishButton">
+        <button class="btn" (click)="startMeeting()">
+          Join Meeting
+        </button>
+        <button class="btn" (click)="FinishOrder()" [disabled]="disableFinishButton">Accept Design</button>
+
+      </p>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <!-- <button
+      type="button" class="btn btn-primary mx-auto">Accept</button> -->
+    <button type="button" class="btn btn-light" (click)="activeModal.close('Cross click')">
+      Close
+    </button>
+  </div>
+</div>

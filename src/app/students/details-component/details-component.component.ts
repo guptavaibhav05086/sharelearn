@@ -11,6 +11,7 @@ export class DetailsComponentComponent implements OnInit {
   @Input() data;
   @Input() orderId;
   totalamount = 0;
+  displayLoadingContentGif;
   constructor(
     public activeModal: NgbActiveModal,
     private service: DesignerService
@@ -21,16 +22,23 @@ export class DetailsComponentComponent implements OnInit {
   }
   totaling() {
     this.data.forEach(element => {
-      this.totalamount += element["Amount"];
+      this.totalamount += element["Amount"] + element["professionalFeesAmount"];
     });
   }
   AcceptOrder() {
     debugger;
+    this.displayLoadingContentGif = true;
     let email = localStorage.getItem("email");
-    this.service.acceptDesignerOrder(email, this.orderId).subscribe(data => {
-      console.log(data);
-      alert("Order Accepted.Please Check Ongoing Order Section");
-      this.activeModal.close();
-    });
+    this.service.acceptDesignerOrder(email, this.orderId).subscribe(
+      data => {
+        console.log(data);
+        this.displayLoadingContentGif = false;
+        alert("Order Accepted.Please Check Ongoing Order Section");
+        this.activeModal.close();
+      },
+      err => {
+        this.displayLoadingContentGif = false;
+      }
+    );
   }
 }

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: "https://www.shapenprint.in",
-  //baseUrl: "http://localhost:39117",
+  //baseUrl: "https://www.shapenprint.in",
+  baseUrl: "http://localhost:39117",
 
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
@@ -91,7 +91,19 @@ export const environment = {
     "/api/admin/makeDesignerPaymentVPA?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
   designerBankAccountPay:
     "/api/admin/makeDesignerPayment?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
-  externalLogins: "/api/Account/ExternalLogins?returnUrl=%2F&generateState=true"
+  externalLogins:
+    "/api/Account/ExternalLogins?returnUrl=%2F&generateState=true",
+  finishDesignerOrder: "/api/designer/finishDesignerOrder?orderId=$orderId",
+  getOngoingOrderCustomer:
+    "/api/customer/getongoingorder?email=$email&isAllOrdersRequired=$isAllOrdersRequired",
+  fetchongoingorderfilesCustomer:
+    "/api/customer/downloadOngoingOrderFiles?filename=$filename",
+  acceptDesign: "/api/customer/acceptDesign?orderId=$orderId",
+  generateOTPCustomer:
+    "/api/customer/GenerateOTP?email=$email&phoneNumber=$phoneNumber",
+  verifyOTPCustomer: "/api/customer/ValidateOTP?email=$email&OTP=$OTP",
+  generateOTPCustomerEmail: "/api/customer/GenerateOTPEmail?email=$email",
+  verifyOTPCustomerEmail: "/api/customer/ValidateOTPEmail?email=$email&OTP=$OTP"
 };
 
 /*

@@ -12,14 +12,14 @@
                                       <thead>
                                        <tr>
                                            <th >Order Id</th>
-                                           <th>Notification Date</th>
+                                           <th>Meeting Slot</th>
                                            <th>Action</th>
                                        </tr>
                                       </thead>
                                       <tbody>
                                        <tr *ngFor="let order of orderList">
                                         <th scope="row">{{ order.orderId }}</th>
-                                        <td>{{ order.notificationDate }}</td>
+                                        <td>{{ order.MeetingSlot }}</td>
                                         <td>
                                          <button type="button" class="btn btn-primary" (click)="openModal(order.orderDetails,order.orderId)">Open Details</button>
                                         </td>

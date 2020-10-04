@@ -8,10 +8,16 @@
 
   <div class="modal-body" style="width:80%">
     <div class="container" style="margin-left: 10%;">
+      <div class="row" style="text-align: center;">
+        <div class="col-md-12">
+          <p>Customer Name: <span style="font-weight: 300;">{{data.CustomerName}}</span></p>
+          <p>Contact Details: +91 {{data.CustomerNumber}} <span
+              style="font-weight: 300;font-style: italic;">{{data.CustomerEmail}}</span> </p>
+
+        </div>
+      </div>
       <div class="row">
-        <!-- <div class="col-md-2">
-          <img src="../../../assets/StudentDashboard/img/download.jpg" />
-        </div> -->
+
         <div class="col-md-12" style="display:none">
           <div class="">
             <div class="">
@@ -101,8 +107,15 @@
                   <p class="productDetails">
                     <span class="detailsHeading">Price: &#x20B9;</span> {{ item.designerCost }}
                   </p>
+                  <p class="productDetails">
+                    <span class="detailsHeading">Order Content</span> {{ item.content }}
+                  </p>
+
                   <div>
                     <a (click)="downloadFile(item.referenceImageURL,$event)" href="#">Download Reference Image</a>
+                  </div>
+                  <div>
+                    <a (click)="downloadFile(item.contentpath,$event)" href="#">Download Content File</a>
                   </div>
                   <div *ngFor="let filekey of item.sourceLogoFile;let j=index" style="display: flex;flex-wrap: wrap;">
                     <div>
@@ -112,57 +125,61 @@
 
                   </div>
 
+                  <!-- Only display source File Upload if User choosen for source File upload -->
+                  <div>
+                    <div class="row" *ngFor="let itemImg of item.SourceUploads;let  i=index">
+                      <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
+                        <div class="form-group">
+                          <div *ngIf="i == 0">
+                            <label>Source File </label>
 
-
-
-                  <div class="row" *ngFor="let itemImg of item.SourceUploads;let  i=index">
-                    <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
-                      <div class="form-group">
-                        <div *ngIf="i == 0">
-                          <label>Source File </label>
-
-                        </div>
-                        <div style="display: flex;">
-                          <div *ngIf="!isAllOrders">
-                            <label [for]="itemImg.name" class="btn btn-primary btn-block btn-outlined"
-                              style="width:250px">UPLOAD</label>
-                            <input type="file" accept="image/*" style="display: none" [id]="itemImg.name"
-                              (change)="uploadGSTCertificate($event.target.files,item.id,'source',itemImg.id)" />
                           </div>
-                          <div style="width: 40px;" *ngIf="itemImg.displayLoadingGif">
-                            <img src="../../../assets/img/loading.gif" />
-                          </div>
-                          <div *ngIf="!isAllOrders" style="display:flex">
-                            <div *ngIf="itemImg.id == item.SourceUploads.length">
-                              <button class="btn btn-outlined"
-                                (click)="addImage(itemImg.id,item.id,'source')">+</button>
+                          <div style="display: flex;">
+                            <div *ngIf="!isAllOrders">
+                              <label [for]="itemImg.name" class="btn btn-primary btn-block btn-outlined"
+                                style="width:250px">UPLOAD</label>
+                              <input type="file" accept="image/*" style="display: none" [id]="itemImg.name"
+                                (change)="uploadGSTCertificate($event.target.files,item.id,'source',itemImg.id)" />
                             </div>
-                            <div>
-                              <button class="btn btn-outlined"
-                                (click)="removeImage(itemImg.id,item.id,'source')">-</button>
+                            <div style="width: 40px;" *ngIf="itemImg.displayLoadingGif">
+                              <img src="../../../assets/img/loading.gif" />
                             </div>
+                            <div *ngIf="!isAllOrders" style="display:flex">
+                              <!-- *ngIf="itemImg.id == item.SourceUploads.length" -->
+                              <div *ngIf="i == (item.SourceUploads.length - 1)">
+                                <button class="btn btn-outlined"
+                                  (click)="addImage(itemImg.id,item.id,'source')">+</button>
+                                <!-- index->{{i}}
+                                length-> {{item.SourceUploads.length}} -->
+                              </div>
+                              <div>
+                                <button class="btn btn-outlined"
+                                  (click)="removeImage(itemImg.id,item.id,'source')">-</button>
+                              </div>
+                            </div>
+
+
+                          </div>
+                          <div *ngIf="itemImg.displayFileName">
+                            <a href="#" (click)="stopDefault($event)">{{itemImg.fileName}}</a>
+
+
+
                           </div>
 
 
-                        </div>
-                        <div *ngIf="itemImg.displayFileName">
-                          <a href="#" (click)="stopDefault($event)">{{itemImg.fileName}}</a>
-
-
 
                         </div>
-
-
 
                       </div>
 
+                      <!-- <div class="input-group col-md-4" *ngIf="fileError"></div> -->
+                      <!-- <div class="input-group col-md-8" *ngIf="fileError">
+                        <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                      </div>  -->
                     </div>
-
-                    <!-- <div class="input-group col-md-4" *ngIf="fileError"></div> -->
-                    <!-- <div class="input-group col-md-8" *ngIf="fileError">
-                      <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
-                    </div>  -->
                   </div>
+
 
                   <div class="row" *ngFor="let itemNImg of item.NormalUploads;let  j=index">
                     <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
@@ -183,7 +200,7 @@
                           </div>
                           <div *ngIf="!isAllOrders" style="display:flex">
 
-                            <div *ngIf="itemNImg.id == item.NormalUploads.length">
+                            <div *ngIf="j == (item.NormalUploads.length-1)">
                               <button class="btn btn-outlined"
                                 (click)="addImage(itemNImg.id,item.id,'normal')">+</button>
                             </div>
@@ -225,6 +242,7 @@
         <button class="btn" (click)="startMeeting()">
           Start Meeting
         </button>
+        <button class="btn" (click)="FinishOrder()" [disabled]="disableFinishButton">Finish</button>
 
       </p>
     </div>

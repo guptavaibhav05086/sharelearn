@@ -64,6 +64,9 @@ export class LoginService {
   public resetToken() {
     localStorage.setItem("Token", "");
     localStorage.setItem("type", "");
+    localStorage.setItem("userId", "");
+    localStorage.setItem("email", "");
+    localStorage.setItem("selectedAddess", "");
   }
 
   public getUserToken() {
@@ -83,5 +86,4 @@ export class LoginService {
 
     return options;
   }
-  
 }

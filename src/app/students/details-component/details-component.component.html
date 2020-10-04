@@ -9,10 +9,12 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Product Subcategory</th>
+        <th>Product</th>
         <th>Industry</th>
-        <th>Meeting Slot</th>
+        <th>Slot</th>
         <th>Amount</th>
+        <th>Prof.Design</th>
+        <th>Prof.Fees</th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +24,8 @@
         <td>{{ d["Industry"] }}</td>
         <td>{{ d["MeetingSlot"] }}</td>
         <td>{{ d["Amount"] }}</td>
+        <td>{{ d["isProfessionalDesigner"] }}</td>
+        <td>{{ d["professionalFeesAmount"] }}</td>
       </tr>
     </tbody>
   </table>
@@ -33,5 +37,8 @@
   <button type="button" class="btn btn-primary" (click)="AcceptOrder()">
     Accept
   </button>
-  <!-- <button type="button" class="btn btn-light">Close</button> -->
+  <div style="width: 40px;" *ngIf="displayLoadingContentGif">
+    <img src="../.../../../../assets/img/loading.gif" />
+  </div>
+
 </div>

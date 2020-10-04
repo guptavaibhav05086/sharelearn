@@ -34,5 +34,8 @@
 </div>
 <div class="modal-footer">
   <button type="button" (click)="AcceptOrder()" class="btn btn-primary mx-auto">Accept</button>
-  <button type="button" class="btn btn-light" (click)="activeModal.dismiss('Cross click')"> Close </button>
+  <div style="width: 40px;" *ngIf="displayLoadingContentGif">
+    <img src="../.../../../../assets/img/loading.gif" />
+  </div>
+  <button type="button" class="btn btn-light" (click)="activeModal.close('Cross click')"> Close </button>
 </div>

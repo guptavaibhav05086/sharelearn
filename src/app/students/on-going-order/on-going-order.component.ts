@@ -64,7 +64,7 @@ export class OnGoingOrderComponent implements OnInit {
   }
 
   checkRow(params) {
-    debugger;
+    //debugger;
     var todayDate = new Date();
     var meetingTime = new Date(Date.parse(params.data.meetingTime));
     var differenceinMins = -1;

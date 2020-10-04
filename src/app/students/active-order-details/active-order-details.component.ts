@@ -10,6 +10,8 @@ export class ActiveOrderDetailsComponent implements OnInit {
   @Input() data;
   orderItems: any;
   @Input() isAllOrders;
+  disableFinishButton = false;
+  //@Input() orderId;
   constructor(
     public activeModal: NgbActiveModal,
     private service: DesignerService
@@ -20,6 +22,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
     this.orderItems = this.data.ongoingOrders;
 
     this.initializeFiles();
+    this.validateMeetingStartTime();
     console.log(this.data.ongoingOrders);
   }
   uploadedFileNames = {
@@ -60,19 +63,20 @@ export class ActiveOrderDetailsComponent implements OnInit {
   ];
   initializeFiles() {
     this.imageUpload = [];
-    for (let index = 0; index < this.data.ongoingOrders.length; index++) {
-      const FinalNormalDesignFile = this.data.ongoingOrders[index]
+    for (let i = 0; i < this.data.ongoingOrders.length; i++) {
+      const FinalNormalDesignFile = this.data.ongoingOrders[i]
         .FinalNormalDesignFile;
-      const sourcecodeFinalDesignFile = this.data.ongoingOrders[index]
+      const sourcecodeFinalDesignFile = this.data.ongoingOrders[i]
         .sourcecodeFinalDesignFile;
       let imageUploadDataNormal = [];
       let imageUploadDataSource = [];
       if (FinalNormalDesignFile != null) {
         FinalNormalDesignFile.forEach((element, index) => {
           if (element != "") {
+            let itemId = i * 100 + (index + 1);
             imageUploadDataNormal.push({
-              id: index + 1,
-              name: "imageNormal" + (index + 1),
+              id: itemId,
+              name: "imageNormal" + itemId,
               displayLoadingGif: false,
               displayFileName: true,
               fileName: element,
@@ -84,14 +88,15 @@ export class ActiveOrderDetailsComponent implements OnInit {
         });
       }
 
-      this.orderItems[index].NormalUploads = imageUploadDataNormal;
+      this.orderItems[i].NormalUploads = imageUploadDataNormal;
 
       if (sourcecodeFinalDesignFile != null) {
         sourcecodeFinalDesignFile.forEach((element, index) => {
           if (element != "") {
+            let itemId = i * 100 + (index + 1);
             imageUploadDataSource.push({
-              id: index + 1,
-              name: "image" + (index + 1),
+              id: itemId,
+              name: "image" + itemId,
               displayLoadingGif: false,
               displayFileName: true,
               fileName: element,
@@ -103,12 +108,12 @@ export class ActiveOrderDetailsComponent implements OnInit {
         });
       }
 
-      this.orderItems[index].SourceUploads = imageUploadDataSource;
-      if (this.orderItems[index].SourceUploads.length == 0) {
-        this.orderItems[index].SourceUploads = [
+      this.orderItems[i].SourceUploads = imageUploadDataSource;
+      if (this.orderItems[i].SourceUploads.length == 0) {
+        this.orderItems[i].SourceUploads = [
           {
-            id: 1,
-            name: "image1",
+            id: i * 100 + 1,
+            name: "image1" + (i * 100 + 1),
             displayLoadingGif: false,
             displayFileName: false,
             fileName: "",
@@ -118,11 +123,11 @@ export class ActiveOrderDetailsComponent implements OnInit {
           }
         ];
       }
-      if (this.orderItems[index].NormalUploads.length == 0) {
-        this.orderItems[index].NormalUploads = [
+      if (this.orderItems[i].NormalUploads.length == 0) {
+        this.orderItems[i].NormalUploads = [
           {
-            id: 1,
-            name: "imageNormal",
+            id: i * 100 + 1,
+            name: "imageNormal" + (i * 100 + 1),
             displayLoadingGif: false,
             displayFileName: false,
             fileName: "",
@@ -140,6 +145,10 @@ export class ActiveOrderDetailsComponent implements OnInit {
     //let imgname = "image" + (i + 1);
     let selItem = this.orderItems.filter(i => i.id == orderId)[0];
     if (type == "source") {
+      if (selItem.SourceUploads[0].fileName == "") {
+        alert("Select File in element first");
+        return;
+      }
       let imgname = "image" + (i + 1);
       selItem.SourceUploads.push({
         id: i + 1,
@@ -152,6 +161,10 @@ export class ActiveOrderDetailsComponent implements OnInit {
         serverFileName: ""
       });
     } else if (type == "normal") {
+      if (selItem.NormalUploads[0].fileName == "") {
+        alert("Select File in element first");
+        return;
+      }
       let imgname = "imageNormal" + (i + 1);
       selItem.NormalUploads.push({
         id: i + 1,
@@ -170,7 +183,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
     let selItem = this.orderItems.filter(i => i.id == orderId)[0];
 
     if (type == "source") {
-      if (i == 1 && selItem.SourceUploads.length == 1) {
+      if (selItem.SourceUploads.length == 1) {
         selItem.SourceUploads[0].displayFileName = false;
         return;
       }
@@ -179,7 +192,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
       );
     }
     if (type == "normal") {
-      if (i == 1 && selItem.NormalUploads.length == 1) {
+      if (selItem.NormalUploads.length == 1) {
         selItem.NormalUploads[0].displayFileName = false;
         return;
       }
@@ -188,9 +201,19 @@ export class ActiveOrderDetailsComponent implements OnInit {
       );
     }
   }
-
+  validateMeetingStartTime() {
+    var mT = new Date(this.data.meetingTime);
+    var cuD = new Date();
+    if (cuD > mT) {
+      this.disableFinishButton = false;
+      console.log("Meeting Started");
+    } else {
+      this.disableFinishButton = true;
+    }
+  }
   uploadGSTCertificate(images: FileList, id, name: string, uploadImageId) {
     debugger;
+    console.log(this.orderItems);
     var result = "";
     var file;
     const formData = new FormData();
@@ -293,5 +316,35 @@ export class ActiveOrderDetailsComponent implements OnInit {
   }
   startMeeting() {
     window.open(this.data.MeetingUrl, "_blank");
+  }
+  FinishOrder() {
+    let eligibleForFinish = true;
+    this.orderItems.forEach(element => {
+      // element.NormalUploads.forEach(itemN => {
+      //   if(itemN.fileName !=""){
+      //     eligibleForFinish=true;
+      //   }
+      // });
+      // element.SourceUploads.forEach(itemS => {
+
+      // });
+      if (element.NormalUploads[0].fileName == "") {
+        eligibleForFinish = false;
+      }
+      if (
+        element.selectedSourceFile == true &&
+        element.SourceUploads[0].fileName == ""
+      ) {
+        eligibleForFinish = false;
+      }
+    });
+    if (eligibleForFinish == true) {
+      this.service.finishDesignerOrder(this.data.OrderId).subscribe(data => {
+        alert("Order Completed Successfully");
+        this.activeModal.close();
+      });
+    } else {
+      alert("Upload All required Files to Finish the Order");
+    }
   }
 }

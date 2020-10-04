@@ -73,10 +73,18 @@ import { SectionBrandComponent } from "./mainsitecomponents/ApplicationHomePageC
 import { SectionSocialMediaComponent } from "./mainsitecomponents/ApplicationHomePageComponents/section-social-media/section-social-media.component";
 import { CustomerSignUpComponent } from "./auth/customer-sign-up/customer-sign-up.component";
 import { CustomerLoginComponent } from "./auth/customer-login/customer-login.component";
+import { AllOrdersComponent } from "../app/mainsitecomponents/all-orders/all-orders.component";
+import { ActiveOrdersComponent } from "../app/mainsitecomponents/active-orders/active-orders.component";
+import { ButtonrendererComponent } from "../app/mainsitecomponents/buttonrenderer/buttonrenderer.component";
+import { OngoingOrdersComponent } from "../app/mainsitecomponents/ongoing-orders/ongoing-orders.component";
 
 @NgModule({
   declarations: [
     AppComponent,
+    AllOrdersComponent,
+    ActiveOrdersComponent,
+    ButtonrendererComponent,
+    OngoingOrdersComponent,
     NavbarcommonComponent,
     HomeComponent,
     HomecontentComponent,

@@ -81,6 +81,44 @@ export class CustomerService {
       this.login.getAuthHeader()
     );
   }
+  FetchOngoingCustomerOrder(email, allOrdersflag) {
+    debugger;
+    let url = `${environment.baseUrl}${environment.getOngoingOrderCustomer}`
+      .replace("$email", email)
+      .replace("$isAllOrdersRequired", allOrdersflag);
+    //isAllOrdersRequired
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
+  downloadOrderFiles(filename) {
+    let url = `${environment.baseUrl}${environment.fetchongoingorderfilesCustomer}`.replace(
+      "$filename",
+      filename
+    );
+    let authHeaders = new HttpHeaders({
+      Authorization: "Bearer " + this.login.getUserToken().Token
+    });
+
+    const options = {
+      headers: authHeaders,
+      responseType: "blob" as "json"
+    };
+    return this._httpclient.get(
+      url,
+
+      options
+    );
+  }
+  acceptDesign(orderId) {
+    let url = `${environment.baseUrl}${environment.acceptDesign}`.replace(
+      "$orderId",
+      orderId
+    );
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   deleteUserAddress(userId, addId): Observable<Array<AddressRequest>> {
     let url = `${environment.baseUrl}${environment.deleteAddress}`
       .replace("$userId", userId)
@@ -174,5 +212,29 @@ export class CustomerService {
     let url = `${environment.baseUrl}${urlBase}`;
     window.location.href = url;
     return this._httpclient.get(url);
+  }
+  generateOTP(email, phoneNumber) {
+    let url = `${environment.baseUrl}${environment.generateOTPCustomer}`
+      .replace("$email", email)
+      .replace("$phoneNumber", phoneNumber);
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
+  verifyOTP(email, OTP) {
+    let url = `${environment.baseUrl}${environment.verifyOTPCustomer}`
+      .replace("$email", email)
+      .replace("$OTP", OTP);
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
+  generateOTPEmail(email) {
+    let url = `${environment.baseUrl}${environment.generateOTPCustomerEmail}`
+      .replace("$email", email)
+      ;
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
+  verifyOTPEmail(email, OTP) {
+    let url = `${environment.baseUrl}${environment.verifyOTPCustomerEmail}`
+      .replace("$email", email)
+      .replace("$OTP", OTP);
+    return this._httpclient.get(url, this.login.getAuthHeader());
   }
 }

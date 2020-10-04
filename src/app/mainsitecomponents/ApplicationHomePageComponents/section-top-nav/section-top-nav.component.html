@@ -58,26 +58,13 @@
 
                     </div>
                 </li>
-                <li class="nav-item dropdown borderNav" *ngIf="displayUserNav" style="padding-top:0px !important">
-                    <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <a class="nav-link">
-                            <img _ngcontent-bjd-c124=""
-                                src="../../../../assets/HomePageImg/Home Page _ Images/Sign in Icon1200.png" alt=""
-                                style="height: 30px;"></a>
+                <!-- User Cart Menu -->
+                <li class="nav-item" *ngIf="displayUserNav" style="padding-top:0px !important">
+                    <a class="nav-link" href="#">
+                        <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png" alt=""
+                            style="height: 30px;">
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" (click)="navigateprofile($event)">Profile</a>
-                        </div>
 
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" routerLink="/logout">Log Out</a>
-                        </div>
-
-
-
-                    </div>
                 </li>
                 <li class="nav-item active borderNav">
                     <div class="vLine"></div>
@@ -86,15 +73,40 @@
                 <li class="nav-item" *ngIf="!displayUserNav">
                     <button class="btn btn-primary" (click)="navigateSignUp()">Create an Account</button>
                 </li>
-                <li class="nav-item" *ngIf="displayUserNav" style="padding-top:0px !important">
-                    <a class="nav-link" href="#">
-                        <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png" alt=""
-                            style="height: 30px;">
+
+                <!-- After User Sign Up Menu -->
+                <li class="nav-item dropdown borderNav" *ngIf="displayUserNav" style="padding-top:0px !important">
+                    <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link">
+                            <img _ngcontent-bjd-c124=""
+                                src="../../../../assets/HomePageImg/Home Page _ Images/Sign in Icon1200.png" alt=""
+                                style="height: 30px;"></a>
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="display: -webkit-box;
+                    margin-left: -520px;
+                    margin-top: -10px;">
+                        <div class="menuItemDD">
+                            <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Profile</a>
+                        </div>
+                        <div class="menuItemDD">
+                            <a class="dropdown-item" href="#" (click)="navigateprofile($event)">On Going Order</a>
+                        </div>
+                        <div class="menuItemDD">
+                            <a class="dropdown-item" href="#" (click)="navigateprofile($event)">All Orders</a>
+                        </div>
+                        <div class="menuItemDD">
+                            <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Settings</a>
+                        </div>
 
+                        <div class="menuItemDD">
+                            <a class="dropdown-item" href="#" routerLink="/logout">Help & Support</a>
+                        </div>
+
+
+
+                    </div>
                 </li>
-
-
                 <!-- 9415191978 -->
 
             </ul>
