@@ -6,6 +6,7 @@ import { CustomerService } from "src/app/services/customer.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CustomerLoginComponent } from "../../../auth/customer-login/customer-login.component";
 import { CustomerSignUpComponent } from "../../../auth/customer-sign-up/customer-sign-up.component";
+import { debug } from "util";
 
 @Component({
   selector: "app-section-top-nav",
@@ -39,6 +40,7 @@ export class SectionTopNavComponent implements OnInit {
       backdrop: "static",
       keyboard: false
     });
+    modelRef.componentInstance.isCustomerSignUpButton = true;
   }
   navigateprofile(event) {
     //debugger;
@@ -59,8 +61,16 @@ export class SectionTopNavComponent implements OnInit {
     event.preventDefault();
     let modelRef = this.modalService.open(CustomerLoginComponent, {
       backdrop: "static",
-      keyboard: false,
-      size: "lg"
+      keyboard: false
+    });
+    modelRef.result.then(data => {
+      debugger;
+      if (data == "OpenVerify") {
+        this.navigateSignUp();
+      } else {
+        //this.helper.navigateToPath("/homePage");
+        window.location.reload();
+      }
     });
   }
   openRegister(event) {
@@ -90,5 +100,8 @@ export class SectionTopNavComponent implements OnInit {
       //   err => console.log(data)
       // );
     });
+  }
+  stopEvent(event) {
+    event.preventDefault();
   }
 }

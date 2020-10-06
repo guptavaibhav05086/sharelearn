@@ -88,5 +88,15 @@ export const environment = {
   designerBankAccountPay:
     "/api/admin/makeDesignerPayment?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
   externalLogins: "/api/Account/ExternalLogins?returnUrl=%2F&generateState=true",
-  finishDesignerOrder:"/api/designer/finishDesignerOrder?orderId=$orderId"
+  finishDesignerOrder:"/api/designer/finishDesignerOrder?orderId=$orderId",
+  getOngoingOrderCustomer:
+    "/api/customer/getongoingorder?email=$email&isAllOrdersRequired=$isAllOrdersRequired",
+  fetchongoingorderfilesCustomer:
+    "/api/customer/downloadOngoingOrderFiles?filename=$filename",
+  acceptDesign: "/api/customer/acceptDesign?orderId=$orderId",
+  generateOTPCustomer:
+    "/api/customer/GenerateOTP?email=$email&phoneNumber=$phoneNumber",
+  verifyOTPCustomer: "/api/customer/ValidateOTP?email=$email&OTP=$OTP",
+  generateOTPCustomerEmail: "/api/customer/GenerateOTPEmail?email=$email",
+  verifyOTPCustomerEmail: "/api/customer/ValidateOTPEmail?email=$email&OTP=$OTP"
 };

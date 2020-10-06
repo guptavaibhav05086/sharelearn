@@ -156,7 +156,7 @@ import { OngoingOrdersComponent } from "../app/mainsitecomponents/ongoing-orders
     NgxSpinnerModule,
     NgxStarRatingModule,
     NgbModule,
-    AgGridModule
+    AgGridModule.withComponents([])
   ],
   providers: [
     // AuthService,

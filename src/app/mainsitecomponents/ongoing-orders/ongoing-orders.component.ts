@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ButtonrendererComponent } from "../buttonrenderer/buttonrenderer.component";
+import { AgGridAngular } from "ag-grid-angular";
 import { GridOptions } from "ag-grid-community";
 import { DesignerService } from "../../services/designer.service";
 import { CustomerService } from "../../services/customer.service";

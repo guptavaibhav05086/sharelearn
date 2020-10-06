@@ -31,7 +31,7 @@
                                         [gridOptions]="gridOptions" class="ag-theme-alpine"
                                         (gridReady)="OngridReady($event)" [rowData]="ongoingOrderData"
                                         [columnDefs]="columnDefs" [frameworkComponents]="frameworkComponents"
-                                        [pagination]="true">
+                                        [paginationPageSize]="50" [pagination]="true">
                                     </ag-grid-angular>
                                 </div>
                             </div>

@@ -8,4 +8,6 @@ export class TokenResponse {
   role: string;
   userId: string;
   emailVerified: string;
+  phoneVerified:string;
+  phoneNumber:string;
 }

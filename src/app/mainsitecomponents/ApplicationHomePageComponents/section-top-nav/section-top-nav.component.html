@@ -45,7 +45,9 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Sign In
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="display: -webkit-box;
+                    margin-left: -110px;
+                    margin-top: -20px;">
                         <div class="menuItemDD">
                             <a class="dropdown-item" href="#" (click)="openLogin($event)">Customer</a>
                         </div>
@@ -58,22 +60,6 @@
 
                     </div>
                 </li>
-                <!-- User Cart Menu -->
-                <li class="nav-item" *ngIf="displayUserNav" style="padding-top:0px !important">
-                    <a class="nav-link" href="#">
-                        <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png" alt=""
-                            style="height: 30px;">
-                    </a>
-
-                </li>
-                <li class="nav-item active borderNav">
-                    <div class="vLine"></div>
-                </li>
-
-                <li class="nav-item" *ngIf="!displayUserNav">
-                    <button class="btn btn-primary" (click)="navigateSignUp()">Create an Account</button>
-                </li>
-
                 <!-- After User Sign Up Menu -->
                 <li class="nav-item dropdown borderNav" *ngIf="displayUserNav" style="padding-top:0px !important">
                     <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
@@ -106,6 +92,23 @@
 
 
                     </div>
+                </li>
+
+                <li class="nav-item active borderNav">
+                    <div class="vLine"></div>
+                </li>
+
+                <li class="nav-item" *ngIf="!displayUserNav">
+                    <button class="btn btn-primary" (click)="navigateSignUp()">Create an Account</button>
+                </li>
+
+                <!-- User Cart Menu -->
+                <li class="nav-item" *ngIf="displayUserNav" style="padding-top:10px !important">
+                    <a class="nav-link" href="#">
+                        <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png" alt=""
+                            style="height: 30px;">
+                    </a>
+
                 </li>
                 <!-- 9415191978 -->
 

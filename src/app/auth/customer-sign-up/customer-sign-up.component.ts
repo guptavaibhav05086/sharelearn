@@ -14,6 +14,14 @@ import { TokenRequest } from "src/app/Models/token-request";
   styleUrls: ["./customer-sign-up.component.css"]
 })
 export class CustomerSignUpComponent implements OnInit {
+  userVerificationDetails = {
+    isEmailVerified: "False",
+    isPhoneVerified: "False",
+    phoneNumber: "",
+    email: "",
+    userId: "",
+    role: ""
+  };
   isCustomerSignUp = true;
   flag = false;
   dropdownList = [];
@@ -27,7 +35,7 @@ export class CustomerSignUpComponent implements OnInit {
   displayVerifyOTPE = false;
   mOTP = 0;
   eOTP = 0;
-  //@Input() isCustomerSignUp=false;
+  @Input() isCustomerSignUpButton=false;
   studentForm = new FormGroup({
     name: new FormControl("", [Validators.required]),
     email: new FormControl("", [
@@ -55,7 +63,7 @@ export class CustomerSignUpComponent implements OnInit {
     private _validator: ValidatorsService,
     private _login: LoginService,
     private spinnerService: NgxSpinnerService,
-    private activeModal: NgbActiveModal,
+    public activeModal: NgbActiveModal,
     private customer: CustomerService
   ) {}
 
@@ -72,6 +80,38 @@ export class CustomerSignUpComponent implements OnInit {
       labelKey: "courseName",
       primaryKey: "courseId"
     };
+    if(this.isCustomerSignUpButton == false){
+      this.checkDetailsVerification();
+    }
+    
+  }
+  checkDetailsVerification() {
+    debugger;
+    let email = localStorage.getItem("unverifiedEmail");
+    let phoneNum = localStorage.getItem("unverifiedMobile").trim();
+    let data = localStorage.getItem("isEmailVerified").split(";");
+    this.userVerificationDetails.isEmailVerified = data[0];
+
+    this.userVerificationDetails.isPhoneVerified = data[1];
+    this.userVerificationDetails.phoneNumber = data[2];
+    this.userVerificationDetails.email = localStorage.getItem(
+      "unverifiedEmail"
+    );
+    this.userVerificationDetails.role = localStorage.getItem("unverifiedRole");
+    if (this.userVerificationDetails.isEmailVerified.trim() == "False") {
+      debugger;
+      this.verifyUser = true;
+      this.studentForm.patchValue({
+        email: email
+      });
+    }
+    if (this.userVerificationDetails.isPhoneVerified.trim() == "False") {
+      debugger;
+      this.verifyUser = true;
+      this.studentForm.patchValue({
+        mobileNumber: phoneNum
+      });
+    }
   }
   onItemSelect(item: any) {
     console.log(item);
@@ -111,6 +151,8 @@ export class CustomerSignUpComponent implements OnInit {
         this.registered = true;
         this.serverError = false;
         this.verifyUser = true;
+        this.userVerificationDetails.isEmailVerified = "False";
+        this.userVerificationDetails.isPhoneVerified = "False";
       },
       err => {
         this.spinnerService.hide();
@@ -140,7 +182,16 @@ export class CustomerSignUpComponent implements OnInit {
     this.customer.verifyOTP(email, this.mOTP).subscribe(
       data => {
         if (data == true) {
-          alert("Mobile number is verified");
+          this.userVerificationDetails.isPhoneVerified = "True";
+          if (
+            this.userVerificationDetails.isPhoneVerified == "True" &&
+            this.userVerificationDetails.isEmailVerified == "True"
+          ) {
+            alert("Account is verified.Please Login Again to continue.");
+            this.activeModal.close();
+          } else {
+            alert("Mobile number is verified");
+          }
         } else {
           alert("InCorrect OTP");
         }
@@ -164,7 +215,16 @@ export class CustomerSignUpComponent implements OnInit {
     this.customer.verifyOTPEmail(email, this.eOTP).subscribe(
       data => {
         if (data == true) {
-          alert("Email number is verified");
+          this.userVerificationDetails.isEmailVerified = "True";
+          if (
+            this.userVerificationDetails.isPhoneVerified == "True" &&
+            this.userVerificationDetails.isEmailVerified == "True"
+          ) {
+            alert("Account is verified.Please Login Again to continue.");
+            this.activeModal.close();
+          } else {
+            alert("Mobile number is verified");
+          }
         } else {
           alert("InCorrect OTP");
         }

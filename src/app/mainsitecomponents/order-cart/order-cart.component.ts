@@ -6,6 +6,9 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
 import { AdminService } from "src/app/services/admin.service";
 import { NgxSpinnerService } from "ngx-spinner";
+import { LoginService } from 'src/app/services/login.service';
+import { CustomerLoginComponent } from 'src/app/auth/customer-login/customer-login.component';
+import { CustomerSignUpComponent } from 'src/app/auth/customer-sign-up/customer-sign-up.component';
 
 @Component({
   selector: "app-order-cart",
@@ -37,11 +40,16 @@ export class OrderCartComponent implements OnInit {
     private modalService: NgbModal,
     private helper: HelperService,
     private admin: AdminService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private login: LoginService
   ) {}
 
   ngOnInit(): void {
     this.spinner.show();
+    let token = this.login.getUserToken();
+    if (token.Token == null || token.Token == "") {
+      this.openLogin();
+    } 
     this.admin.getProducts().subscribe(
       data => {
         //this.discountPrice=data["discountList"];
@@ -81,6 +89,25 @@ export class OrderCartComponent implements OnInit {
       },
       totalItems: 0
     };
+  }
+  openLogin() {
+    //event.preventDefault();
+    let modelRef = this.modalService.open(CustomerLoginComponent, {
+      backdrop: "static",
+      keyboard: false
+    });
+    modelRef.result.then(data => {
+      debugger;
+      if (data == "OpenVerify") {
+        this.navigateSignUp();
+      }
+    });
+  }
+  navigateSignUp() {
+    let modelRef = this.modalService.open(CustomerSignUpComponent, {
+      backdrop: "static",
+      keyboard: false
+    });
   }
   removeItem(id) {
     var result = confirm("Do you want to delete the item from the cart");

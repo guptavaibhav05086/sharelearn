@@ -2,7 +2,7 @@
   color: lightgrey;
 }
 .bg-light {
-  background-color: transparent !important;
+  background-color: white !important;
 }
 
 @media (min-width: 778px) {
