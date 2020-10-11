@@ -87,8 +87,9 @@ export const environment = {
     "/api/admin/makeDesignerPaymentVPA?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
   designerBankAccountPay:
     "/api/admin/makeDesignerPayment?orderId=$orderId&vendorEmail=$vendorEmail&amount=$amount",
-  externalLogins: "/api/Account/ExternalLogins?returnUrl=%2F&generateState=true",
-  finishDesignerOrder:"/api/designer/finishDesignerOrder?orderId=$orderId",
+  externalLogins:
+    "/api/Account/ExternalLogins?returnUrl=%2F&generateState=true",
+  finishDesignerOrder: "/api/designer/finishDesignerOrder?orderId=$orderId",
   getOngoingOrderCustomer:
     "/api/customer/getongoingorder?email=$email&isAllOrdersRequired=$isAllOrdersRequired",
   fetchongoingorderfilesCustomer:
@@ -98,5 +99,7 @@ export const environment = {
     "/api/customer/GenerateOTP?email=$email&phoneNumber=$phoneNumber",
   verifyOTPCustomer: "/api/customer/ValidateOTP?email=$email&OTP=$OTP",
   generateOTPCustomerEmail: "/api/customer/GenerateOTPEmail?email=$email",
-  verifyOTPCustomerEmail: "/api/customer/ValidateOTPEmail?email=$email&OTP=$OTP"
+  verifyOTPCustomerEmail:
+    "/api/customer/ValidateOTPEmail?email=$email&OTP=$OTP",
+  trackDelivery: "/api/printer/GetDeliveryStatus?taskId=$taskId"
 };

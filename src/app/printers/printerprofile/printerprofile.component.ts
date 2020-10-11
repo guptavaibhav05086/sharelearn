@@ -20,6 +20,7 @@ import { TransactionsuccessdetailsComponent } from "../transactionsuccessdetails
   styleUrls: ["./printerprofile.component.css"]
 })
 export class PrinterprofileComponent implements OnInit {
+  isEdit=true;
   isDisabled: boolean = false;
   isDisableProfession: boolean = false;
   request: PrinterProfileRequest;
@@ -33,6 +34,9 @@ export class PrinterprofileComponent implements OnInit {
   isPhoneVerified = false;
   isDisplay=false;
   profileform = new FormGroup({
+    city:new FormControl("", [Validators.required]),
+    state:new FormControl("", [Validators.required]),
+    postalCode:new FormControl("", [Validators.required]),
     fName: new FormControl("", [Validators.required]),
     lName: new FormControl("", [Validators.required]),
     gender: new FormControl("", [Validators.required]),
@@ -174,6 +178,7 @@ export class PrinterprofileComponent implements OnInit {
         });
 
         this.statesData = data;
+        this.filterDistricts(this.profileform.controls["state"].value);
         console.log(data);
       },
       err => {}
@@ -184,6 +189,7 @@ export class PrinterprofileComponent implements OnInit {
       this.printer.getProfile(userId).subscribe(
         data => {
           debugger;
+          this.filterDistricts(data["state"]);
           console.log(data);
           this.modfyAdd = true;
           this.profileform.patchValue({
@@ -195,9 +201,15 @@ export class PrinterprofileComponent implements OnInit {
             profile: data["profileUrl"],
             address: data["address"],
             gst: data["gst"],
+            postalCode: data["postalCode"],
+            state: data["state"],
+            city: data["city"]
             //aadhar: data["aadhar"],
             //pan: data["pan"]
           });
+          this.isEdit = true;
+
+          
           if (data["mobileNumber"] != null && data["mobileNumber"] != "") {
             this.isPhoneVerified = data["isMobileVerified"];
             this.profileform.get("mobileNumber").disable();
@@ -245,12 +257,7 @@ export class PrinterprofileComponent implements OnInit {
     console.log(place.geometry.location.lat());
     console.log(place.geometry.location.lng());
   }
-  filterDistricts(stateId) {
-    debugger;
-    this.filteredCities = this.statesData.filter(
-      item => item.stateName == stateId
-    );
-  }
+  
   modifyAddress() {
     if (this.modfyAdd) {
       this.modfyAdd = false;
@@ -294,6 +301,9 @@ export class PrinterprofileComponent implements OnInit {
     this.request.gender = this.profileform.controls["gender"].value;
     this.request.address = this.profileform.controls["address"].value;
     this.request.profileUrl = this.profileform.controls["profile"].value;
+    this.request.city = this.profileform.controls["city"].value;
+    this.request.state = this.profileform.controls["state"].value;
+    this.request.pinCode = this.profileform.controls["postalCode"].value;
     //this.request.aadhar = this.profileform.controls["aadhar"].value;
     //this.request.pan = this.profileform.controls["pan"].value;
     this.request.gst = this.profileform.controls["gst"].value;
@@ -407,6 +417,16 @@ export class PrinterprofileComponent implements OnInit {
         alert("Issue in file upload please contact admin");
       }
     );
+  }
+  filterDistricts(stateId) {
+    debugger;
+    try {
+      this.filteredCities = this.statesData.filter(
+        item => item.stateName == stateId
+      );
+      this.isEdit = false;
+      console.log(this.filteredCities);
+    } catch {}
   }
   fileSelect(images: FileList, name: string) {
     debugger;

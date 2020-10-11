@@ -61,8 +61,14 @@ export class CustomerLoginComponent implements OnInit {
           //localStorage.setItem("isPhoneVerified", data.phoneVerified);
           this.activeModal.close("OpenVerify");
         } else {
-          this._login.setToken(data);
-          this.activeModal.close();
+          if(data.role == "Customer"){
+            this._login.setToken(data);
+            this.activeModal.close();
+          }
+          else{
+            alert('Invalid User Name password');
+          }
+          
         }
       },
       err => {

@@ -47,9 +47,13 @@ export class OrderCartComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
     let token = this.login.getUserToken();
-    if (token.Token == null || token.Token == "") {
+    //let roe
+    if (token.Token == null || token.Token == "" || token.type !="Customer") {
       this.openLogin();
     } 
+    // else if(){
+
+    // }
     this.admin.getProducts().subscribe(
       data => {
         //this.discountPrice=data["discountList"];

@@ -36,6 +36,16 @@ export class PrinterService {
       this.login.getAuthHeader()
     );
   }
+  trackDelivery(taskId) {
+    let url = `${environment.baseUrl}${environment.trackDelivery}`.replace(
+      "$taskId",
+      taskId    );
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
 
   generateOrderId(amount) {
     let url = `${environment.baseUrl}${environment.generateOrder}`.replace(

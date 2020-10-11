@@ -64,7 +64,12 @@ export class SelectAddressComponent implements OnInit {
         breakUp: disList,
         userName: this.addressList[i].userName,
         phoneNumber: this.addressList[i].phoneNumber,
-        displayForm: false
+        displayForm: false,
+        city: this.addressList[i].city,
+        state: this.addressList[i].state,
+        postalCode: this.addressList[i].postalCode,
+        lat:this.addressList[i].lattitude,
+        lon:this.addressList[i].longitude
       };
       this.displayAddressList.push(item);
     }

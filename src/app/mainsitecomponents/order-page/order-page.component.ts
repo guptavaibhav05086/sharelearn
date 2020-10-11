@@ -20,6 +20,7 @@ import { DOCUMENT } from '@angular/common';
 export class OrderPageComponent implements OnInit {
   minDate: NgbDateStruct;
   model: NgbDateStruct;
+  selectedProductImage:string;
   productList;
   products;
   printPrice;
@@ -991,7 +992,14 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
     if(this.displayeproceed == false){
       return;
     }
-   
+   let selItem= this.selectedCategory.filter(item=>item.value == value)[0];
+   if(selItem !=null){
+     this.selectedProductImage = selItem.productImage;
+   }
+   else{
+    this.selectedProductImage = "../../../assets/StudentDashboard/img/download.jpg";
+   }
+
     //disableCat:new FormControl(""),
     this.orderForm.patchValue({
       disableCat : value,

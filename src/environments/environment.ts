@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: "https://www.shapenprint.in",
-  //baseUrl: "http://localhost:39117",
+  //baseUrl: "https://www.shapenprint.in",
+  baseUrl: "http://localhost:39117",
 
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
@@ -103,7 +103,9 @@ export const environment = {
     "/api/customer/GenerateOTP?email=$email&phoneNumber=$phoneNumber",
   verifyOTPCustomer: "/api/customer/ValidateOTP?email=$email&OTP=$OTP",
   generateOTPCustomerEmail: "/api/customer/GenerateOTPEmail?email=$email",
-  verifyOTPCustomerEmail: "/api/customer/ValidateOTPEmail?email=$email&OTP=$OTP"
+  verifyOTPCustomerEmail:
+    "/api/customer/ValidateOTPEmail?email=$email&OTP=$OTP",
+  trackDelivery: "/api/printer/GetDeliveryStatus?taskId=$taskId"
 };
 
 /*

@@ -123,8 +123,13 @@ export class ReviewOrderComponent implements OnInit {
     console.log(event);
   }
   loadCart() {
-    //debugger;
-    this.selectedAddress = JSON.parse(localStorage.getItem("selectedAddess"));
+    debugger;
+    if (
+      localStorage.getItem("selectedAddess") != null &&
+      localStorage.getItem("selectedAddess") != ""
+    ) {
+      this.selectedAddress = JSON.parse(localStorage.getItem("selectedAddess"));
+    }
 
     let cartItems = JSON.parse(localStorage.getItem("cart"));
     this.userCart.totalItems = cartItems.length;
@@ -198,11 +203,16 @@ export class ReviewOrderComponent implements OnInit {
   generateOrderId() {
     debugger;
     this.spinner.show();
-    let addresss = JSON.parse(localStorage.getItem("selectedAddess"));
+    let seladd = localStorage.getItem("selectedAddess");
+    let addresss = null;
+    if (seladd != null && seladd != "") {
+      addresss = JSON.parse(seladd);
+    }
+
     let FinalOrder = {
       cart: {},
       orderPrice: {},
-      deliveryAddress: addresss["addId"],
+      deliveryAddress: addresss == null ? 0 : addresss["addId"],
 
       //localStorage.getItem("userId")
       userId: "5541713c-e1b5-4ed4-9e36-a92f0eab91d3"

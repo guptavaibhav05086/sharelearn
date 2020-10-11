@@ -173,10 +173,10 @@
         </div>
       </div>
       <p *ngIf="displayFinishButton">
-        <button class="btn" (click)="startMeeting()">
+        <button class="btn" (click)="startMeeting()" *ngIf="displayOnGoingOrdersElement">
           Join Meeting
         </button>
-        <button class="btn" (click)="FinishOrder()">Accept Design</button>
+        <button class="btn" (click)="FinishOrder()" *ngIf="displayOnGoingOrdersElement">Accept Design</button>
 
       </p>
     </div>

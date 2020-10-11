@@ -29,6 +29,7 @@ import { OnGoingOrderComponent } from "./on-going-order/on-going-order.component
 import { AgGridModule } from "ag-grid-angular";
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { DeliveryStatusComponent } from './delivery-status/delivery-status.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ButtonrendererComponent,
     OnGoingOrderComponent,
     PaymentDetailsComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    DeliveryStatusComponent
   ],
   imports: [
     CommonModule,

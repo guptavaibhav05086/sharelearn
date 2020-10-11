@@ -11,6 +11,7 @@ export class ActiveOrdersComponent implements OnInit {
   orderItems: any;
   @Input() isAllOrders;
   displayFinishButton = false;
+  @Input() displayOnGoingOrdersElement=true;
   //@Input() orderId;
   constructor(
     public activeModal: NgbActiveModal,

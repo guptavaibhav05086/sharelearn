@@ -1,0 +1,43 @@
+<div class="modal-dialog modal-xl">
+    <div class="modal-header">
+        <h2 class="modal-title">Delivery Status</h2>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body" style="width:80%">
+        <div class="container" style="margin-left: 10%;">
+            <div class="row">
+                <div>Delivery Initiation Time : <span class="infoDisplay">{{eventStartDate}}</span></div>
+
+            </div>
+            <div class="row">
+                <div>Delivery Status : <span class="infoDisplay">{{trackingData.state}}</span> </div>
+
+            </div>
+            <div class="row">
+                <div>Estimated Pick Up Time : {{trackingData.eta.pickup}} Mins</div>
+
+            </div>
+            <div class="row">
+                <div>Estimated Drop Time :{{trackingData.eta.dropoff}} Mins</div>
+
+            </div>
+            <div class="row">
+                <div>Dunzo Task Id : {{trackingData.task_id}}</div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <!-- <button
+      type="button" class="btn btn-primary mx-auto">Accept</button> -->
+        <button type="button" class="btn btn-light" (click)="activeModal.close('Cross click')">
+            Close
+        </button>
+    </div>
+</div>

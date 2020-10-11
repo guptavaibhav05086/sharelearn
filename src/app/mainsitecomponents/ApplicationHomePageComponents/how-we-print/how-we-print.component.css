@@ -38,7 +38,8 @@
   .txtFreelance {
     font-weight: bold;
     font-family: "Maven Pro";
-    text-align: right;
+    /* text-align: right; */
+    padding-left: 55%;
   }
   .alingdiv {
     padding-top: 60px;

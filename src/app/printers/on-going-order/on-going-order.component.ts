@@ -4,6 +4,7 @@ import { GridOptions } from "ag-grid-community";
 import { PrinterService } from "../../services/printer.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ActiveOrderDetailsComponent } from "../active-order-details/active-order-details.component";
+import { DeliveryStatusComponent } from "../delivery-status/delivery-status.component";
 @Component({
   selector: "app-on-going-order",
   templateUrl: "./on-going-order.component.html",
@@ -50,6 +51,15 @@ export class OnGoingOrderComponent implements OnInit {
         label: "Initiate Delivery",
         onClick: this.initiateDelivery.bind(this)
       }
+    },
+    {
+      headerName: "Track Delivery",
+
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        label: "Track",
+        onClick: this.trackDelivery.bind(this)
+      }
     }
   ];
 
@@ -68,6 +78,10 @@ export class OnGoingOrderComponent implements OnInit {
 
   checkRow(params) {
     //debugger;
+    let deliveryStatus = params.data.DunzoTaskId;
+    if (deliveryStatus != null) {
+      //this.gridOptions.columnApi.setColumnVisible()
+    }
     if (params.data.meetingslot < new Date()) {
       return {
         "background-color": "#455A64",
@@ -91,15 +105,27 @@ export class OnGoingOrderComponent implements OnInit {
   }
   initiateDelivery(e) {
     debugger;
-    this.service
-      .initiateDelivery(e.rowData.OrderId, e.rowData.CustomerId)
-      .subscribe(
-        data => {
-          console.log(data);
-        },
-        err => {
-          console.log(err);
-        }
-      );
+    let result = confirm(
+      "This will start the deilvery Process.Please confirm to continue"
+    );
+    if (result) {
+      this.service
+        .initiateDelivery(e.rowData.OrderId, e.rowData.CustomerId)
+        .subscribe(
+          data => {
+            console.log(data);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+    }
+  }
+  trackDelivery(e) {
+    debugger;
+    let modelref = this.modalService.open(DeliveryStatusComponent, {
+      centered: true
+    });
+    modelref.componentInstance.data = e.rowData;
   }
 }

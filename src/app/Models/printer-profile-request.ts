@@ -15,4 +15,7 @@ export class PrinterProfileRequest {
   public aadhar: string;
   public pan: string;
   public isMobileVerified: boolean;
+  public city:string;
+  public state:string;
+  public pinCode:string;
 }

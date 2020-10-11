@@ -15,13 +15,7 @@
   <div class="form-group">
     <label>Enter Address *</label>
     <div>
-      <textarea
-        cols="18"
-        rows="4"
-        [(ngModel)]="userAddress"
-        style="width:100%"
-        placeholder="Enter or Modify Address"
-      >
+      <textarea cols="18" rows="4" [(ngModel)]="userAddress" style="width:100%" placeholder="Enter or Modify Address">
       </textarea>
     </div>
   </div>
@@ -30,12 +24,7 @@
   <div class="form-group">
     <label>Name *</label>
     <div>
-      <input
-        type="text"
-        [(ngModel)]="contactPerson"
-        placeholder=""
-        style="width:100%"
-      />
+      <input type="text" [(ngModel)]="contactPerson" placeholder="" style="width:100%" />
     </div>
   </div>
 </div>
@@ -43,25 +32,52 @@
   <div class="form-group">
     <label>Mobile Number *</label>
     <div>
-      <input
-        type="text"
-        [(ngModel)]="userPhone"
-        placeholder=""
-        style="width:100%"
-        (change)="validateMobile()"
-      />
+      <input type="text" [(ngModel)]="userPhone" placeholder="" style="width:100%" (change)="validateMobile()" />
     </div>
     <span style="color:red" *ngIf="invalidMobile">*Invalid Mobile Number</span>
   </div>
 </div>
 <div class="col-md-10">
   <div class="form-group">
-    <button
-      type="button"
-      class="btn btn-primary"
-      [disabled]="displaySaveButton"
-      (click)="saveAddress()"
-    >
+    <label>State *</label>
+    <select type="text" class="form-control" placeholder="state" [(ngModel)]="state" required
+      (change)="filterDistricts($event.target.value)">
+      <option *ngFor="let item of distinctStates" [ngValue]="item.stateName">
+        {{item.stateName}}
+      </option>
+    </select>
+
+  </div>
+  <span style="color:red" *ngIf="invalidMobile">*Invalid Mobile Number</span>
+
+</div>
+<div class="col-md-10">
+  <div class="form-group">
+    <label>City *</label>
+    <select *ngIf="!isEdit" type="text" class="form-control" placeholder="City" [(ngModel)]="city" required>
+      <option *ngFor="let item of filteredCities" [ngValue]="item.cityName">
+        {{item.cityName}}
+      </option>
+    </select>
+    <input type="text" class="form-control" formControlName="city" disabled *ngIf="isEdit">
+    <!-- <span class="errorMessage">
+      *City is required.
+    </span> -->
+  </div>
+</div>
+<div class="col-md-10">
+  <div class="form-group">
+    <label>Postal Code *</label>
+    <div>
+      <input type="text" [(ngModel)]="postalCode" placeholder="" style="width:100%" (change)="validateMobile()" />
+    </div>
+    <span style="color:red" *ngIf="invalidMobile">*Invalid Mobile Number</span>
+  </div>
+</div>
+
+<div class="col-md-10">
+  <div class="form-group">
+    <button type="button" class="btn btn-primary" [disabled]="displaySaveButton" (click)="saveAddress()">
       Save
     </button>
     <button type="button" class="btn btn-light" (click)="Back()">
