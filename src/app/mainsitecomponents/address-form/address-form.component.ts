@@ -123,7 +123,7 @@ export class AddressFormComponent implements OnInit {
       alert("Please enter correct values for fields");
       return;
     }
-    this.addressRequest.userId = "5541713c-e1b5-4ed4-9e36-a92f0eab91d3";
+    this.addressRequest.userId = localStorage.getItem("userId");
     this.addressRequest.phoneNumber = this.userPhone;
     this.addressRequest.userName = this.contactPerson;
     this.displaySaveButton = true;

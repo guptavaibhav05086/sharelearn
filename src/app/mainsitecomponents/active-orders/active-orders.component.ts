@@ -11,7 +11,10 @@ export class ActiveOrdersComponent implements OnInit {
   orderItems: any;
   @Input() isAllOrders;
   displayFinishButton = false;
-  @Input() displayOnGoingOrdersElement=true;
+  @Input() displayOnGoingOrdersElement = true;
+  designConfirm = false;
+  userFinishedOrders = false;
+  containsDesignOrders=false;
   //@Input() orderId;
   constructor(
     public activeModal: NgbActiveModal,
@@ -21,7 +24,13 @@ export class ActiveOrdersComponent implements OnInit {
   ngOnInit(): void {
     debugger;
     this.orderItems = this.data.ongoingOrders;
+    this.orderItems.forEach(item=> {
+      if(item.orderType == "Design Only" ||item.orderType == "Design And Print"){
+        this.containsDesignOrders=true;
+      }
 
+    });
+    this.userFinishedOrders = this.orderItems[0].isDesignCompleted;
     this.initializeFiles();
     this.validateMeetingStartTime();
     console.log(this.data);
@@ -312,8 +321,16 @@ export class ActiveOrdersComponent implements OnInit {
   }
   FinishOrder() {
     this.service.acceptDesign(this.data.OrderId).subscribe(data => {
-      alert("Order Completed Successfully");
-      this.activeModal.close();
+      debugger;
+      this.userFinishedOrders = true;
+      alert("Order Completed Successfully.Now You can download the Files");
+      this.service.sendPrintNotifications(this.data.orderId).subscribe(data => {
+        console.log("Notification Send");
+      });
+      //this.activeModal.close();
     });
   }
+  // AcceptDesign(){
+  //   console()
+  // }
 }

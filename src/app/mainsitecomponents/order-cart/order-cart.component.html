@@ -1,20 +1,18 @@
 <div class="container-cart">
   <div class="rowCart">
     <div class="col-shp-7">
-        <div class="categoryTitle">
-           <button class="btn btn-primary" style="text-transform: none;" (click)="createItem()">Create Another Order</button>
-        </div>
-        
+      <div class="categoryTitle">
+        <button class="btn btn-primary" style="text-transform: none;" (click)="createItem()">Create Another
+          Order</button>
+      </div>
+
       <div class="categoryTitle">My Cart ({{userCart.totalItems}} Items)</div>
       <hr />
       <div class="categoryTitle" *ngIf="userCart.displayDesign">Design Only ({{userCart.design.length}} items)</div>
 
       <div class="rowCart itemCart" *ngFor="let item of userCart.design">
         <div class="col-shp-3 mobCard">
-          <img
-            src="../../../assets/StudentDashboard/img/download.jpg"
-            class="productImage"
-          />
+          <img [src]="item.prodImage" class="productImage" />
         </div>
         <div class="col-shp-7 mobCard" style="padding-left: 1%;">
           <p class="productTitle">{{ item.specs.subCategory }}</p>
@@ -23,11 +21,12 @@
             <span class="detailsHeading">Size:</span> {{item.specs.size}}
           </p>
 
-          
+
           <p class="productDetails">
-            <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total}}
+            <span class="detailsHeading">Price: &#x20B9;</span> {{item.price.Total}}
           </p>
-          <p><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary" (click)="editItem(item.id)">Edit</button></p>
+          <p><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary"
+              (click)="editItem(item.id)">Edit</button></p>
         </div>
       </div>
       <!-- <div class="rowCart itemCart">
@@ -54,14 +53,12 @@
           <p><button class="btn">Remove</button></p>
         </div>
       </div> -->
-      <div class="categoryTitle" *ngIf="userCart.displayDesignNPrint">Design and Print ({{userCart.designNprint.length}} items)</div>
+      <div class="categoryTitle" *ngIf="userCart.displayDesignNPrint">Design and Print ({{userCart.designNprint.length}}
+        items)</div>
 
       <div class="rowCart itemCart" *ngFor="let item of userCart.designNprint">
         <div class="col-shp-3 mobCard">
-          <img
-            src="../../../assets/StudentDashboard/img/download.jpg"
-            class="productImage"
-          />
+          <img [src]="item.prodImage" class="productImage" />
         </div>
         <div class="col-shp-7 mobCard" style="padding-left: 1%;">
           <p class="productTitle">{{ item.specs.subCategory }}</p>
@@ -75,21 +72,19 @@
             <span class="detailsHeading">GSM:</span> {{item.specs.paperGSM}}
           </p>
           <p class="productDetails">
-            <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total}}
+            <span class="detailsHeading">Price: &#x20B9;</span> {{item.price.Total}}
           </p>
-          
-         
-          <p><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary" (click)="editItem(item.id)">Edit</button></p>
+
+
+          <p><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary"
+              (click)="editItem(item.id)">Edit</button></p>
         </div>
       </div>
 
       <div class="categoryTitle" *ngIf="userCart.displayPrint"> Print Only ({{userCart.print.length}} items)</div>
       <div class="rowCart itemCart" *ngFor="let item of userCart.print">
         <div class="col-shp-3 mobCard">
-          <img
-            src="../../../assets/StudentDashboard/img/download.jpg"
-            class="productImage"
-          />
+          <img [src]="item.prodImage" class="productImage" />
         </div>
         <div class="col-shp-7 mobCard" style="padding-left: 1%;">
           <p class="productTitle">{{ item.specs.subCategory }}</p>
@@ -103,11 +98,12 @@
             <span class="detailsHeading">GSM:</span> {{item.specs.paperGSM}}
           </p>
           <p class="productDetails">
-            <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total}}
+            <span class="detailsHeading">Price: &#x20B9;</span> {{item.price.Total}}
           </p>
-          
-         
-          <p><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary" (click)="editItem(item.id)">Edit</button></p>
+
+
+          <p><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary"
+              (click)="editItem(item.id)">Edit</button></p>
         </div>
       </div>
       <!-- <div class="rowCart itemCart">
@@ -139,21 +135,27 @@
         <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calPrice}}</div>
       </div>
       <div class="rowCart" style="margin-top: 30px;">
-        <div class="col-shp-6 priceTitle">GST:</div>
-        <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calGST}}</div>
-      </div>
-      <hr />
-      <div class="rowCart" style="margin-top: 30px;">
         <div class="col-shp-6 priceTitle">Discount :</div>
         <div class="col-shp-4 priceAmount"> - &#x20B9; {{userCart.finalPrice.calDiscount}}</div>
       </div>
+
+      <hr />
+      <div class="rowCart" style="margin-top: 30px;">
+        <div class="col-shp-6 priceTitle">Design GST (18%):</div>
+        <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDiscountedDesignGST}}</div>
+      </div>
+      <div class="rowCart" style="margin-top: 30px;">
+        <div class="col-shp-6 priceTitle">Print GST (12%):</div>
+        <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDiscountedPrintGST}}</div>
+      </div>
+
       <hr />
       <div class="rowCart">
         <div class="col-shp-6 priceTitle">Delivery Fees:</div>
         <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDelivery}}</div>
       </div>
-     
-      
+
+
       <hr />
       <div class="rowCart">
         <div class="col-shp-6 priceTitle">Total Price:</div>
@@ -165,17 +167,13 @@
           <!-- <app-razorpayments [paymentAmount]="userCart.finalPrice.calFinalTotal" [orderId]="razorPayOrderId" 
           (transactionStatus)="transactionUpdate($event)">
         </app-razorpayments> -->
-          
+
           <button class="btn btn-primary" [disabled]="disableProceed" (click)="placeOrder()">Proceed</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<ngx-spinner
-  bdColor="rgba(51, 51, 51, 0.8)"
-  size="default"
-  type="ball-spin-clockwise"
->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
   <p style="color: white">Please Wait.</p>
 </ngx-spinner>

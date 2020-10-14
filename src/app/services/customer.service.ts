@@ -119,6 +119,13 @@ export class CustomerService {
     );
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
+  sendPrintNotifications(orderId) {
+    let url = `${environment.baseUrl}${environment.sendNotificationPrinter}`.replace(
+      "$orderId",
+      orderId
+    );
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   deleteUserAddress(userId, addId): Observable<Array<AddressRequest>> {
     let url = `${environment.baseUrl}${environment.deleteAddress}`
       .replace("$userId", userId)

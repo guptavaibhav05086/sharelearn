@@ -40,7 +40,7 @@
                               <div class="rowCart itemCart" *ngFor="let item of userCart.design">
                                   <div class="col-shp-3 mobCard">
                                     <img
-                                      src="../../../assets/StudentDashboard/img/download.jpg"
+                                    [src]="item.prodImage"
                                       class="productImage"
                                     />
                                   </div>
@@ -64,7 +64,7 @@
                                 <div class="rowCart itemCart" *ngFor="let item of userCart.designNprint">
                                   <div class="col-shp-3 mobCard">
                                     <img
-                                      src="../../../assets/StudentDashboard/img/download.jpg"
+                                    [src]="item.prodImage"
                                       class="productImage"
                                     />
                                   </div>
@@ -92,7 +92,7 @@
                                 <div class="rowCart itemCart" *ngFor="let item of userCart.print">
                                   <div class="col-shp-3 mobCard">
                                     <img
-                                      src="../../../assets/StudentDashboard/img/download.jpg"
+                                    [src]="item.prodImage"
                                       class="productImage"
                                     />
                                   </div>

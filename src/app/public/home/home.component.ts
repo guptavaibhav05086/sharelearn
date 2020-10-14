@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
     Y: 0
   };
   topNavLoaded(value){
-    debugger;
+    //;
     if(value==true){
          let elementnavbarinner = document.getElementById("searchBarButton");
       elementnavbarinner.classList.remove("topsearchhide");
@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
-          debugger;
+          ;
           console.log(this.router.url);
           let token = localStorage.getItem("Token");
           if (token == "" || token == null) {
@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
             this.displayTopNav = false;
             //this._document.body.classList.add("home");
           } else {
-            debugger;
+           // ;
             this.displayNavigation = true;
             this.displayTopNav = true;
             
@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
   }
   onClickBody() {}
   ngOnInit() {
-    debugger;
+    //;
     let userLogin = this.login.getUserToken();
     if (userLogin.Token != null && userLogin.Token != "") {
       this.displayUserNavbar = true;
@@ -108,7 +108,7 @@ export class HomeComponent implements OnInit {
   @HostListener("window:scroll", ["$event"])
   onWindowScroll(e) {
     // if (window.pageYOffset > 200) {
-    //   debugger;
+    //   ;
     //   this.displayTopNav = false;
     //   let element = document.getElementById("navbar");
     //   let elementTop = document.getElementById("topNav");
@@ -119,7 +119,7 @@ export class HomeComponent implements OnInit {
     //   elementTop.classList.remove("topNavhide");
     //   //navbarinner
     // } else {
-    //   debugger;
+    //   ;
     //   this.displayTopNav = true;
     //   let element = document.getElementById("navbar");
     //   let elementTop = document.getElementById("topNav");

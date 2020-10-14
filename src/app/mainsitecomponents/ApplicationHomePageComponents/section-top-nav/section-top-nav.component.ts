@@ -25,7 +25,7 @@ export class SectionTopNavComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+    //debugger;
     this.componentLoaded.emit(true);
     let token = this.login.getUserToken();
     if (token.Token == null || token.Token == "") {
@@ -35,12 +35,14 @@ export class SectionTopNavComponent implements OnInit {
       this.username = localStorage.getItem("email");
     }
   }
-  navigateSignUp() {
+  navigateSignUp(validation) {
     let modelRef = this.modalService.open(CustomerSignUpComponent, {
       backdrop: "static",
       keyboard: false
     });
-    modelRef.componentInstance.isCustomerSignUpButton = true;
+    modelRef.componentInstance.verifyUser = validation;
+    modelRef.componentInstance.isCustomerSignUpButton = !validation;
+   modelRef.componentInstance.isComingFromCartPage=false;
   }
   navigateprofile(event) {
     //debugger;
@@ -66,7 +68,7 @@ export class SectionTopNavComponent implements OnInit {
     modelRef.result.then(data => {
       debugger;
       if (data == "OpenVerify") {
-        this.navigateSignUp();
+        this.navigateSignUp(true);
       } else {
         //this.helper.navigateToPath("/homePage");
         window.location.reload();

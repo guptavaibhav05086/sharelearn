@@ -320,6 +320,9 @@ export class HelperService {
   navigateToPath(path: string) {
     this.router.navigate([path]);
   }
+  navigateToPathWithparams(path: string,params) {
+    this.router.navigate([path],params);
+  }
   getStates(): Observable<Array<Cities>> {
     let url = `${environment.baseUrl}${environment.getState}`;
     return this._httpclient.get<Array<Cities>>(url);

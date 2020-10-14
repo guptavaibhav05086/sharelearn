@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
@@ -18,6 +18,7 @@ import { ForgetpasswordComponent } from "../forgetpassword/forgetpassword.compon
 export class CustomerLoginComponent implements OnInit {
   displayLoginError = false;
   loginError = "";
+  @Input() isComingFromCartPage=false;
   //socialusers = new Socialusers();
   constructor(
     private _validator: ValidatorsService,
@@ -52,23 +53,36 @@ export class CustomerLoginComponent implements OnInit {
         debugger;
         this.spinnerService.hide();
         let verification = data.emailVerified.split(";");
-        if (verification[0] == "False" || verification[1] == "False") {
+        if (
+          verification[0].trim() == "False" ||
+          verification[1].trim() == "False"
+        ) {
           localStorage.setItem("unverifiedRole", data.role);
           localStorage.setItem("unverifiedEmail", data.userName);
           localStorage.setItem("unverifiedUserId", data.userId);
           localStorage.setItem("unverifiedMobile", verification[2]);
           localStorage.setItem("isEmailVerified", data.emailVerified);
-          //localStorage.setItem("isPhoneVerified", data.phoneVerified);
-          this.activeModal.close("OpenVerify");
+          localStorage.setItem("emailVerificationDone", verification[0].trim());
+          localStorage.setItem(
+            "mobileVerificationDone",
+            verification[1].trim()
+          );
+          if (verification[0].trim() == "True") {
+            if (data.role == "Customer") {
+              this._login.setToken(data);
+              this.activeModal.close();
+            }
+          } else {
+            this._login.setUnverifiedToken(data);
+            this.activeModal.close("OpenVerify");
+          }
         } else {
-          if(data.role == "Customer"){
+          if (data.role == "Customer") {
             this._login.setToken(data);
             this.activeModal.close();
+          } else {
+            alert("Invalid User Name password");
           }
-          else{
-            alert('Invalid User Name password');
-          }
-          
         }
       },
       err => {

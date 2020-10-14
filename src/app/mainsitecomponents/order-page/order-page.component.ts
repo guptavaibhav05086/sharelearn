@@ -96,7 +96,9 @@ export class OrderPageComponent implements OnInit {
     discountPerc:0,
     discountedTotal:0,
     designerCost:0,
-    printerCost:0
+    printerCost:0,
+    printGSTPct:0,
+    DesignGSTPct:0
   };
   trackCartOrderCount = {
     design: 0,
@@ -401,6 +403,7 @@ export class OrderPageComponent implements OnInit {
     let cartItem = {
       id: id,
       type: this.orderForm.controls["type"].value,
+      
       GSTNumber: this.orderForm.controls["GSTNumber"].value,
       BillingName: this.orderForm.controls["BillingName"].value,
       uploadedimages: this.uploadedFileNames,
@@ -413,6 +416,7 @@ export class OrderPageComponent implements OnInit {
       category: [
         {
           name: this.orderForm.controls["category"].value,
+          prodImage:this.selectedProductImage,
           specs: {
             subCategory: this.orderForm.controls["subCategory"].value,
             orientation: this.orderForm.controls["orientation"].value,
@@ -435,6 +439,8 @@ export class OrderPageComponent implements OnInit {
             baseDesignPrice:this.orderPrice.baseDesignPrice,
             designGST: this.orderPrice.designGST,
             printGST: this.orderPrice.printGST,
+            printGSTPct:this.orderPrice.printGSTPct,
+            designGSTPct:this.orderPrice.DesignGSTPct,
             totalDesignCost: this.orderPrice.totalDesignCost,
             totalPrintCost: this.orderPrice.totalPrintCost,
             deliveryDays: this.orderPrice.deliveryDays,
@@ -445,6 +451,7 @@ export class OrderPageComponent implements OnInit {
             discountPerc:this.orderPrice.discountPerc,
             designerCost:this.orderPrice.designerCost,
             printerCost:this.orderPrice.printerCost,
+            printCost:this.orderPrice.printCost,
             discount:this.orderPrice.discount,
             discountedTotal:this.orderPrice.discountedTotal
           },
@@ -679,7 +686,9 @@ return true;
       discountPerc:0,
       discountedTotal:0,
       designerCost:0,
-      printerCost:0
+      printerCost:0,
+      printGSTPct:0,
+    DesignGSTPct:0
     };
     this.orderForm.patchValue({
       category: "",
@@ -1304,6 +1313,7 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
     this.orderPrice.designCost = designCost;
     this.orderPrice.designGST =Math.round(designGST) ;
     this.orderPrice.totalDesignCost = Math.round(totalDesignCost);
+    this.orderPrice.DesignGSTPct=(item.DesignGST / 100);
   }
   calculatepriceprint(item) {
     //debugger;
@@ -1327,6 +1337,7 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
         this.orderPrice.printCost = Math.round(pCost);
         this.orderPrice.totalPrintCost = Math.round(totalPrintCost);
         this.orderPrice.deliveryDays = itemPrice.deliveryDays;
+        this.orderPrice.printGSTPct=gstPercentage;
       }
     } else {
       this.orderPrice.printGST = 0;
@@ -1376,6 +1387,7 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
         this.orderPrice.printCost =Math.round(pCost);
         this.orderPrice.totalPrintCost = Math.round(totalPrintCost) ;
         this.orderPrice.deliveryDays = itemPrice.deliveryDays;
+        this.orderPrice.printGSTPct=gstPercentage;
       }
     } else {
       this.orderPrice.printGST = 0;

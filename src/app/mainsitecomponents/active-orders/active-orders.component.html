@@ -25,17 +25,25 @@
           <div class="">
             <div class="">
               <div class="rowCart itemCart">
-                <div class="col-shp-3 mobCard">
-                  <img src="../../../assets/StudentDashboard/img/download.jpg" class="productImage" />
+                <div class="col-shp-4 mobCard">
+                  <img [src]="item.ProductImageURL" class="productImage" />
                 </div>
                 <div class="col-shp-7 mobCard" style="padding-left: 1%;">
                   <p class="productTitle">{{ item.subcategory }}</p>
                   <p class="productDetails">
-                    <span class="detailsHeading">Orientation:</span> {{ item.orientation }},
+                    <span class="detailsHeading" *ngIf="item.orderType !='Print Only'">Orientation:</span> <span
+                      *ngIf="item.orderType !='Print Only'">{{ item.orientation }},</span>
                     <span class="detailsHeading">Size:</span> {{ item.size }},
+                    <span class="detailsHeading">Industry:</span> {{ item.industry }}
                   </p>
+                  <p class="productDetails" *ngIf="item.orderType =='Print Only'">
+                    <span class="detailsHeading">PaperGSM:</span> {{ item.paperGSM }},
+                    <span class="detailsHeading">Quantity:</span> {{ item.quantity }}
+
+                  </p>
+
                   <p class="productDetails">
-                    <span class="detailsHeading">Order Type:</span> {{ item.orderType }},
+                    <span class="detailsHeading">Order Type:</span> {{ item.orderType }}
 
                   </p>
 
@@ -45,125 +53,133 @@
                   <p class="productDetails" *ngIf="item.TotalPrintCost > 0">
                     <span class="detailsHeading">Total Print Price: &#x20B9;</span> {{ item.TotalPrintCost }}
                   </p>
-                  <p class="productDetails">
+                  <p class="productDetails" *ngIf="item.orderType !='Print Only'">
                     <span class="detailsHeading">Order Content</span> {{ item.content }}
                   </p>
 
-                  <div>
+                  <div *ngIf="item.orderType !='Print Only'">
                     <a (click)="downloadFile(item.referenceImageURL,$event)" href="#">Download Reference Image</a>
                   </div>
-                  <div>
+                  <div *ngIf="item.orderType !='Print Only'">
                     <a (click)="downloadFile(item.contentpath,$event)" href="#">Download Content File</a>
                   </div>
                   <div *ngFor="let filekey of item.sourceLogoFile;let j=index" style="display: flex;flex-wrap: wrap;">
-                    <div>
+                    <div *ngIf="item.orderType !='Print Only'">
                       <a *ngIf="filekey !=''" (click)="downloadFile(filekey,$event)" href="#">Download Logo/Image
+                        {{j+1}} </a>
+                    </div>
+                    <div *ngIf="item.orderType =='Print Only'">
+                      <a *ngIf="filekey !=''" (click)="downloadFile(filekey,$event)" href="#">Download Print Ready Files
                         {{j+1}} </a>
                     </div>
 
                   </div>
 
-                  <!-- Only display source File Upload if User choosen for source File upload -->
-                  <div *ngIf="item.isDesignerFinishedOrder && item.selectedSourceFile">
-                    <div class="row" *ngFor="let itemImg of item.SourceUploads;let  i=index">
-                      <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
-                        <div class="form-group">
-                          <div *ngIf="i == 0">
-                            <label>Source Files </label>
+                  <!-- User will only be able to download the files if the order is finished by the user -->
+                  <div *ngIf="userFinishedOrders && item.orderType !='Print Only'">
+                    <!-- Only display source File Upload if User choosen for source File upload -->
+                    <div *ngIf="item.isDesignerFinishedOrder && item.selectedSourceFile">
+                      <div class="row" *ngFor="let itemImg of item.SourceUploads;let  i=index">
+                        <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
+                          <div class="form-group">
+                            <div *ngIf="i == 0">
+                              <label>Source Files </label>
 
-                          </div>
-                          <div style="display: flex;">
-                            <div *ngIf="!isAllOrders">
-                              <label [for]="itemImg.name" class="btn btn-primary btn-block btn-outlined"
-                                style="width:250px">UPLOAD</label>
-                              <input type="file" accept="image/*" style="display: none" [id]="itemImg.name"
-                                (change)="uploadGSTCertificate($event.target.files,item.id,'source',itemImg.id)" />
                             </div>
-                            <div style="width: 40px;" *ngIf="itemImg.displayLoadingGif">
-                              <img src="../../../assets/img/loading.gif" />
-                            </div>
-                            <div *ngIf="!isAllOrders" style="display:flex">
-                              <!-- *ngIf="itemImg.id == item.SourceUploads.length" -->
-                              <div *ngIf="i == (item.SourceUploads.length - 1)">
-                                <button class="btn btn-outlined"
-                                  (click)="addImage(itemImg.id,item.id,'source')">+</button>
-                                <!-- index->{{i}}
-                                  length-> {{item.SourceUploads.length}} -->
+                            <div style="display: flex;">
+                              <div *ngIf="!isAllOrders">
+                                <label [for]="itemImg.name" class="btn btn-primary btn-block btn-outlined"
+                                  style="width:250px">UPLOAD</label>
+                                <input type="file" accept="image/*" style="display: none" [id]="itemImg.name"
+                                  (change)="uploadGSTCertificate($event.target.files,item.id,'source',itemImg.id)" />
                               </div>
-                              <div>
-                                <button class="btn btn-outlined"
-                                  (click)="removeImage(itemImg.id,item.id,'source')">-</button>
+                              <div style="width: 40px;" *ngIf="itemImg.displayLoadingGif">
+                                <img src="../../../assets/img/loading.gif" />
                               </div>
+                              <div *ngIf="!isAllOrders" style="display:flex">
+                                <!-- *ngIf="itemImg.id == item.SourceUploads.length" -->
+                                <div *ngIf="i == (item.SourceUploads.length - 1)">
+                                  <button class="btn btn-outlined"
+                                    (click)="addImage(itemImg.id,item.id,'source')">+</button>
+                                  <!-- index->{{i}}
+                  length-> {{item.SourceUploads.length}} -->
+                                </div>
+                                <div>
+                                  <button class="btn btn-outlined"
+                                    (click)="removeImage(itemImg.id,item.id,'source')">-</button>
+                                </div>
+                              </div>
+
+
+                            </div>
+                            <div *ngIf="itemImg.displayFileName">
+                              <a href="#" (click)="downloadFile(itemImg.fileName,$event)">{{itemImg.fileName}}</a>
+
+
+
                             </div>
 
 
-                          </div>
-                          <div *ngIf="itemImg.displayFileName">
-                            <a href="#" (click)="downloadFile(itemImg.fileName,$event)">{{itemImg.fileName}}</a>
-
-
 
                           </div>
-
-
 
                         </div>
 
+
                       </div>
-
-
                     </div>
-                  </div>
 
-                  <div *ngIf="item.isDesignerFinishedOrder">
-                    <div class="row" *ngFor="let itemNImg of item.NormalUploads;let  j=index">
-                      <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
-                        <div class="form-group">
-                          <div *ngIf="j == 0">
-                            <label>Normal Files </label>
+                    <div *ngIf="item.isDesignerFinishedOrder">
+                      <div class="row" *ngFor="let itemNImg of item.NormalUploads;let  j=index">
+                        <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
+                          <div class="form-group">
+                            <div *ngIf="j == 0">
+                              <label>Normal Files </label>
 
-                          </div>
-                          <div style="display: flex;">
-                            <div *ngIf="!isAllOrders">
-                              <label [for]="itemNImg.name" class="btn btn-primary btn-block btn-outlined"
-                                style="width:250px">UPLOAD</label>
-                              <input type="file" accept="image/*" style="display: none" [id]="itemNImg.name"
-                                (change)="uploadGSTCertificate($event.target.files,item.id,'normal',itemNImg.id)" />
                             </div>
-                            <div style="width: 40px;" *ngIf="itemNImg.displayLoadingGif">
-                              <img src="../../../assets/img/loading.gif" />
-                            </div>
-                            <div *ngIf="!isAllOrders" style="display:flex">
-
-                              <div *ngIf="j == (item.NormalUploads.length-1)">
-                                <button class="btn btn-outlined"
-                                  (click)="addImage(itemNImg.id,item.id,'normal')">+</button>
+                            <div style="display: flex;">
+                              <div *ngIf="!isAllOrders">
+                                <label [for]="itemNImg.name" class="btn btn-primary btn-block btn-outlined"
+                                  style="width:250px">UPLOAD</label>
+                                <input type="file" accept="image/*" style="display: none" [id]="itemNImg.name"
+                                  (change)="uploadGSTCertificate($event.target.files,item.id,'normal',itemNImg.id)" />
                               </div>
-                              <div>
-                                <button class="btn btn-outlined"
-                                  (click)="removeImage(itemNImg.id,item.id,'normal')">-</button>
+                              <div style="width: 40px;" *ngIf="itemNImg.displayLoadingGif">
+                                <img src="../../../assets/img/loading.gif" />
                               </div>
+                              <div *ngIf="!isAllOrders" style="display:flex">
+
+                                <div *ngIf="j == (item.NormalUploads.length-1)">
+                                  <button class="btn btn-outlined"
+                                    (click)="addImage(itemNImg.id,item.id,'normal')">+</button>
+                                </div>
+                                <div>
+                                  <button class="btn btn-outlined"
+                                    (click)="removeImage(itemNImg.id,item.id,'normal')">-</button>
+                                </div>
+                              </div>
+
+
+                            </div>
+                            <div *ngIf="itemNImg.displayFileName">
+                              <a href="#" (click)="downloadFile(itemNImg.fileName,$event)">
+                                {{itemNImg.fileName}}</a>
+
+
+
                             </div>
 
 
-                          </div>
-                          <div *ngIf="itemNImg.displayFileName">
-                            <a href="#" (click)="downloadFile(itemNImg.fileName,$event)">
-                              {{itemNImg.fileName}}</a>
-
-
 
                           </div>
-
-
 
                         </div>
 
+
                       </div>
-
-
                     </div>
                   </div>
+
 
                 </div>
               </div>
@@ -172,11 +188,30 @@
           </div>
         </div>
       </div>
-      <p *ngIf="displayFinishButton">
+
+      <div *ngIf="containsDesignOrders">
+        <!-- If order Design is already finished by the User -->
+        <div class="row" *ngIf="!userFinishedOrders && displayOnGoingOrdersElement">
+          <label class="checkbox checkbox-primary">
+            <input type="checkbox" [(ngModel)]="designConfirm">
+            <span class="check-mark"></span> I accept the design
+          </label>
+          <!-- {{designConfirm}} -->
+        </div>
+      </div>
+
+      <p *ngIf="displayFinishButton && containsDesignOrders">
         <button class="btn" (click)="startMeeting()" *ngIf="displayOnGoingOrdersElement">
           Join Meeting
         </button>
-        <button class="btn" (click)="FinishOrder()" *ngIf="displayOnGoingOrdersElement">Accept Design</button>
+        <button class="btn" (click)="FinishOrder()" *ngIf="displayOnGoingOrdersElement"
+          [disabled]="!designConfirm">Finish</button>
+
+      </p>
+      <!-- Print only orders -->
+      <p *ngIf="!containsDesignOrders">
+
+        <button class="btn" (click)="FinishOrder()" *ngIf="displayOnGoingOrdersElement">Finish</button>
 
       </p>
     </div>

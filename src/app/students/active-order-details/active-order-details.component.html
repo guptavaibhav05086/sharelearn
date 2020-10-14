@@ -22,7 +22,7 @@
           <div class="">
             <div class="">
               <div class="rowCart itemCart">
-                <div class="col-shp-3 mobCard">
+                <div class="col-shp-4 mobCard">
                   <img src="../../../assets/StudentDashboard/img/download.jpg" class="productImage" />
                 </div>
                 <div class="col-shp-7 mobCard" style="padding-left: 1%;">
@@ -94,10 +94,10 @@
           <div class="">
             <div class="">
               <div class="rowCart itemCart">
-                <div class="col-shp-3 mobCard">
-                  <img src="../../../assets/StudentDashboard/img/download.jpg" class="productImage" />
+                <div class="col-shp-4 mobCard">
+                  <img [src]="item.ProductImageURL" class="productImage" />
                 </div>
-                <div class="col-shp-7 mobCard" style="padding-left: 1%;">
+                <div class="col-shp-8 mobCard" style="padding-left: 1%;">
                   <p class="productTitle">{{ item.subcategory }}</p>
                   <p class="productDetails">
                     <span class="detailsHeading">Orientation:</span> {{ item.orientation }},

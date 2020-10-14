@@ -33,9 +33,12 @@ export class CustomerSignUpComponent implements OnInit {
   @Input() verifyUser = false;
   displayVerifyOTPM = false;
   displayVerifyOTPE = false;
-  mOTP = 0;
-  eOTP = 0;
-  @Input() isCustomerSignUpButton=false;
+  displayLoadingContentGifM = false;
+  displayLoadingContentGifEmail = false;
+  mOTP;
+  eOTP;
+  @Input() isCustomerSignUpButton = false;
+  @Input() isComingFromCartPage = false;
   studentForm = new FormGroup({
     name: new FormControl("", [Validators.required]),
     email: new FormControl("", [
@@ -80,19 +83,22 @@ export class CustomerSignUpComponent implements OnInit {
       labelKey: "courseName",
       primaryKey: "courseId"
     };
-    if(this.isCustomerSignUpButton == false){
+    if (this.isCustomerSignUpButton == false) {
       this.checkDetailsVerification();
     }
-    
   }
   checkDetailsVerification() {
     debugger;
     let email = localStorage.getItem("unverifiedEmail");
     let phoneNum = localStorage.getItem("unverifiedMobile").trim();
     let data = localStorage.getItem("isEmailVerified").split(";");
-    this.userVerificationDetails.isEmailVerified = data[0];
+    this.userVerificationDetails.isEmailVerified = localStorage.getItem(
+      "emailVerificationDone"
+    );
 
-    this.userVerificationDetails.isPhoneVerified = data[1];
+    this.userVerificationDetails.isPhoneVerified = localStorage.getItem(
+      "mobileVerificationDone"
+    );
     this.userVerificationDetails.phoneNumber = data[2];
     this.userVerificationDetails.email = localStorage.getItem(
       "unverifiedEmail"
@@ -153,6 +159,12 @@ export class CustomerSignUpComponent implements OnInit {
         this.verifyUser = true;
         this.userVerificationDetails.isEmailVerified = "False";
         this.userVerificationDetails.isPhoneVerified = "False";
+        let loginRequest = new TokenRequest();
+        loginRequest.username = this.studentForm.controls["email"].value;
+        loginRequest.password = this.studentForm.controls["password"].value;
+        this._login.getToken(loginRequest).subscribe(data => {
+          this._login.setUnverifiedToken(data);
+        });
       },
       err => {
         this.spinnerService.hide();
@@ -170,27 +182,39 @@ export class CustomerSignUpComponent implements OnInit {
   }
 
   GenerateOTP() {
+    this.displayLoadingContentGifM = true;
     let phoneNumber = this.studentForm.controls["mobileNumber"].value;
     let email = this.studentForm.controls["email"].value;
+    if (email == null || email == "") {
+      email = localStorage.getItem("email");
+    }
 
     this.customer.generateOTP(email, phoneNumber).subscribe(data => {
       this.displayVerifyOTPM = true;
+      this.displayLoadingContentGifM = false;
     });
   }
   verifyOTP() {
     let email = this.studentForm.controls["email"].value;
+    if (email == null || email == "") {
+      email = localStorage.getItem("email");
+    }
     this.customer.verifyOTP(email, this.mOTP).subscribe(
       data => {
         if (data == true) {
           this.userVerificationDetails.isPhoneVerified = "True";
+          alert("Mobile number is verified");
+          localStorage.setItem("mobileVerificationDone", "True");
+          //this.activeModal.close();
+
           if (
-            this.userVerificationDetails.isPhoneVerified == "True" &&
-            this.userVerificationDetails.isEmailVerified == "True"
+            this.userVerificationDetails.isEmailVerified == "True" &&
+            this.userVerificationDetails.isPhoneVerified == "True"
           ) {
-            alert("Account is verified.Please Login Again to continue.");
-            this.activeModal.close();
+            alert("Account is verified.");
+            this.activeModal.close("AccountVerified");
           } else {
-            alert("Mobile number is verified");
+            alert("Mobile is verified.");
           }
         } else {
           alert("InCorrect OTP");
@@ -199,15 +223,17 @@ export class CustomerSignUpComponent implements OnInit {
         //this.activeModal.close();
       },
       err => {
-        alert("Error in OTP Generation");
+        alert("Error in OTP Verification Try after some time");
       }
     );
   }
   GenerateOTPEmail() {
     let email = this.studentForm.controls["email"].value;
+    this.displayLoadingContentGifEmail = true;
 
     this.customer.generateOTPEmail(email).subscribe(data => {
       this.displayVerifyOTPE = true;
+      this.displayLoadingContentGifEmail = false;
     });
   }
   verifyOTPEmail() {
@@ -216,15 +242,23 @@ export class CustomerSignUpComponent implements OnInit {
       data => {
         if (data == true) {
           this.userVerificationDetails.isEmailVerified = "True";
+
+          let Token = localStorage.getItem("UnVerifiedToken");
+          localStorage.setItem("Token", Token);
+          this.userVerificationDetails.isEmailVerified = "True";
+          localStorage.setItem("emailVerificationDone", "True");
+
+          //window.location.reload();
           if (
-            this.userVerificationDetails.isPhoneVerified == "True" &&
-            this.userVerificationDetails.isEmailVerified == "True"
+            this.userVerificationDetails.isEmailVerified == "True" &&
+            this.userVerificationDetails.isPhoneVerified == "True"
           ) {
-            alert("Account is verified.Please Login Again to continue.");
-            this.activeModal.close();
+            alert("Account is verified.");
+            this.activeModal.close("AccountVerified");
           } else {
-            alert("Mobile number is verified");
+            alert("Email is verified.");
           }
+          //
         } else {
           alert("InCorrect OTP");
         }

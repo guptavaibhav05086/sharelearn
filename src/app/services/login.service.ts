@@ -61,12 +61,24 @@ export class LoginService {
     localStorage.setItem("userId", this.Tokens.userId);
     localStorage.setItem("email", this.Tokens.email);
   }
+  public setUnverifiedToken(token: TokenResponse) {
+    this.Tokens.Token = token.access_token;
+    this.Tokens.type = token.role;
+    this.Tokens.userId = token.userId;
+    this.Tokens.email = token.userName;
+    localStorage.setItem("UnVerifiedToken", this.Tokens.Token);
+    localStorage.setItem("type", this.Tokens.type);
+    localStorage.setItem("userId", this.Tokens.userId);
+    localStorage.setItem("email", this.Tokens.email);
+  }
   public resetToken() {
     localStorage.setItem("Token", "");
     localStorage.setItem("type", "");
     localStorage.setItem("userId", "");
-    localStorage.setItem("email", "");
-    localStorage.setItem("selectedAddess", "");
+    localStorage.setItem("unverifiedEmail", "");
+    localStorage.setItem("isEmailVerified", "");
+    localStorage.setItem("unverifiedRole", "");
+    //
   }
 
   public getUserToken() {

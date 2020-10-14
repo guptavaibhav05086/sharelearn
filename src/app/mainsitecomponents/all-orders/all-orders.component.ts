@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from "@angular/core";
 import { ButtonrendererComponent } from "../buttonrenderer/buttonrenderer.component";
 import { AgGridAngular } from "ag-grid-angular";
 import { GridOptions } from "ag-grid-community";
@@ -6,12 +6,12 @@ import { DesignerService } from "../../services/designer.service";
 import { CustomerService } from "../../services/customer.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ActiveOrdersComponent } from "../active-orders/active-orders.component";
-import { HelperService } from 'src/app/services/helper.service';
+import { HelperService } from "src/app/services/helper.service";
 
 @Component({
-  selector: 'app-all-orders',
-  templateUrl: './all-orders.component.html',
-  styleUrls: ['./all-orders.component.css']
+  selector: "app-all-orders",
+  templateUrl: "./all-orders.component.html",
+  styleUrls: ["./all-orders.component.css"]
 })
 export class AllOrdersComponent implements OnInit {
   ongoingOrderData: any;
@@ -19,16 +19,16 @@ export class AllOrdersComponent implements OnInit {
   ngOnInit(): void {
     //debugger;
     let token = localStorage.getItem("Token");
-    if(token == null || token==""){
+    if (token == null || token == "") {
       this._helper.navigateToPath("/homePage");
     }
     this.fetchOngoingOrder();
   }
   fetchOngoingOrder() {
-    //let designerEmail = localStorage.getItem("email");
-    let designerEmail = "guptavaibhav.05086@gmail.com";
+    let customerEmail = localStorage.getItem("email");
+    //let designerEmail = "guptavaibhav.05086@gmail.com";
     this.customerService
-      .FetchOngoingCustomerOrder(designerEmail, true)
+      .FetchOngoingCustomerOrder(customerEmail, true)
       .subscribe(data => {
         //debugger;
         this.ongoingOrderData = data;
@@ -97,10 +97,10 @@ export class AllOrdersComponent implements OnInit {
     });
     modelref.componentInstance.data = e.rowData;
     modelref.componentInstance.isAllOrders = true;
-    modelref.componentInstance.displayOnGoingOrdersElement=false;
+    modelref.componentInstance.displayOnGoingOrdersElement = false;
+    //modelref.componentInstance.userFinishedOrders=
     modelref.result.then(data => {
       this.fetchOngoingOrder();
     });
   }
-
 }

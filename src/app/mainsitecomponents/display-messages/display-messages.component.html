@@ -1,9 +1,12 @@
 <div style="height: 580px;background-color: white;
 text-align: center;color:green;font-size: x-large;" *ngIf="!displayError">
-  <div>Thank You! Your order id {{orderId}} is successfully placed.</div>
+  <div>Thank You! Your order id {{orderId}} /{{internalId}} is successfully placed.</div>
   <div style="margin-top: 30px;">Please use Transaction Id {{transactionsId}} for your
     future reference.</div>
-
+    <div>
+      <button class="btn btn-primary" (click)="GotoOrderPage()">Create Another Order</button>
+    </div>
+  
   <!-- Your Transaction is successful.Please use this Transaction Id
   {{ transactionsId }} for your future reference. -->
 </div>

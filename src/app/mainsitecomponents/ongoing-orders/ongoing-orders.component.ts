@@ -20,10 +20,10 @@ export class OngoingOrdersComponent implements OnInit {
     this.fetchOngoingOrder();
   }
   fetchOngoingOrder() {
-    //let designerEmail = localStorage.getItem("email");
-    let designerEmail = "guptavaibhav.05086@gmail.com";
+    let customerEmail = localStorage.getItem("email");
+    //let designerEmail = "guptavaibhav.05086@gmail.com";
     this.customerService
-      .FetchOngoingCustomerOrder(designerEmail, false)
+      .FetchOngoingCustomerOrder(customerEmail, false)
       .subscribe(data => {
         //debugger;
         this.ongoingOrderData = data;

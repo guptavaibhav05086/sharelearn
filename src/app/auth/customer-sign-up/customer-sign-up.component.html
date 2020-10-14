@@ -1,6 +1,7 @@
 <div class="modal-header">
     <h4 class="modal-title">Register</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')"
+        *ngIf="!isComingFromCartPage">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
@@ -132,11 +133,15 @@
             </div>
             <div>
 
-                <button (click)="GenerateOTP()" class="btn btn-primary">Generate OTP</button>
+                <button (click)="GenerateOTP()" class="btn btn-primary" [disabled]="displayLoadingContentGifM">Generate
+                    OTP</button>
+                <img src="../.../../../../assets/img/loading.gif" *ngIf="displayLoadingContentGifM"
+                    style="width:40px" />
 
             </div>
             <div *ngIf="displayVerifyOTPM">
-                <input type="text" class="form-control" [(ngModel)]="mOTP" />
+                <input type="text" class="form-control" placeholder="OTP" [(ngModel)]="mOTP" />
+
 
             </div>
             <div *ngIf="displayVerifyOTPM">
@@ -151,11 +156,16 @@
             </div>
             <div>
 
-                <button (click)="GenerateOTPEmail()" class="btn btn-primary">Generate OTP</button>
+                <button (click)="GenerateOTPEmail()" class="btn btn-primary"
+                    [disabled]="displayLoadingContentGifEmail">Generate OTP</button>
+                <img src="../.../../../../assets/img/loading.gif" *ngIf="displayLoadingContentGifEmail"
+                    style="width:40px" />
+
+
 
             </div>
             <div *ngIf="displayVerifyOTPE">
-                <input type="text" [(ngModel)]="eOTP" />
+                <input type="text" placeholder="OTP" [(ngModel)]="eOTP" />
 
             </div>
             <div *ngIf="displayVerifyOTPE">
@@ -170,7 +180,8 @@
 
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="activeModal.close('Cross click')">
+    <button type="button" class="btn btn-light" (click)="activeModal.close('Cross click')"
+        *ngIf="!isComingFromCartPage">
         Close
     </button>
 </div>

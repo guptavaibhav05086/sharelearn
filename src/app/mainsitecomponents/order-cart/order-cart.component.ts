@@ -6,9 +6,9 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
 import { AdminService } from "src/app/services/admin.service";
 import { NgxSpinnerService } from "ngx-spinner";
-import { LoginService } from 'src/app/services/login.service';
-import { CustomerLoginComponent } from 'src/app/auth/customer-login/customer-login.component';
-import { CustomerSignUpComponent } from 'src/app/auth/customer-sign-up/customer-sign-up.component';
+import { LoginService } from "src/app/services/login.service";
+import { CustomerLoginComponent } from "src/app/auth/customer-login/customer-login.component";
+import { CustomerSignUpComponent } from "src/app/auth/customer-sign-up/customer-sign-up.component";
 
 @Component({
   selector: "app-order-cart",
@@ -29,11 +29,20 @@ export class OrderCartComponent implements OnInit {
       calGST: 0,
       calFinalTotal: 0,
       calDiscount: 0,
-      calDiscountedTotal: 0
+      calDiscountedTotal: 0,
+      calDiscountedGST: 0,
+      calPrintPrice: 0,
+      calDesignPrice: 0,
+      calDiscountedPrintPrice: 0,
+      calDiscountedDesignPrice: 0,
+      calDiscountedPrintGST: 0,
+      calDiscountedDesignGST: 0,
+      printGSTPct: 0,
+      designGSTPct: 0
     },
     totalItems: 0
   };
-  disableProceed: boolean=false;
+  disableProceed: boolean = false;
   constructor(
     private custService: CustomerService,
     private router: Router,
@@ -48,9 +57,9 @@ export class OrderCartComponent implements OnInit {
     this.spinner.show();
     let token = this.login.getUserToken();
     //let roe
-    if (token.Token == null || token.Token == "" || token.type !="Customer") {
+    if (token.Token == null || token.Token == "" || token.type != "Customer") {
       this.openLogin();
-    } 
+    }
     // else if(){
 
     // }
@@ -89,7 +98,16 @@ export class OrderCartComponent implements OnInit {
         calGST: 0,
         calFinalTotal: 0,
         calDiscount: 0,
-        calDiscountedTotal: 0
+        calDiscountedTotal: 0,
+        calDiscountedGST: 0,
+        calPrintPrice: 0,
+        calDesignPrice: 0,
+        calDiscountedPrintPrice: 0,
+        calDiscountedDesignPrice: 0,
+        calDiscountedPrintGST: 0,
+        calDiscountedDesignGST: 0,
+        printGSTPct: 0,
+        designGSTPct: 0
       },
       totalItems: 0
     };
@@ -100,10 +118,13 @@ export class OrderCartComponent implements OnInit {
       backdrop: "static",
       keyboard: false
     });
+    modelRef.componentInstance.isComingFromCartPage = true;
     modelRef.result.then(data => {
       debugger;
       if (data == "OpenVerify") {
         this.navigateSignUp();
+      } else {
+        window.location.reload();
       }
     });
   }
@@ -111,6 +132,14 @@ export class OrderCartComponent implements OnInit {
     let modelRef = this.modalService.open(CustomerSignUpComponent, {
       backdrop: "static",
       keyboard: false
+    });
+    modelRef.componentInstance.isComingFromCartPage = true;
+    modelRef.result.then(data => {
+      debugger;
+      if (data == "AccountVerified") {
+        window.location.reload();
+        //this.placeOrder();
+      }
     });
   }
   removeItem(id) {
@@ -124,7 +153,7 @@ export class OrderCartComponent implements OnInit {
   editItem(id) {
     this.router.navigate(["/createorder"], { queryParams: { itemId: id } });
   }
-  createItem(){
+  createItem() {
     this.router.navigate(["/createorder"]);
   }
   loadCart() {
@@ -142,6 +171,15 @@ export class OrderCartComponent implements OnInit {
             item.category[0].price.deliveryFee;
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
+          this.userCart.finalPrice.calPrintPrice +=
+            item.category[0].price.printCost;
+          this.userCart.finalPrice.calDesignPrice +=
+            item.category[0].price.totalDesignCost -
+            item.category[0].price.designGST;
+          this.userCart.finalPrice.printGSTPct =
+            item.category[0].price.printGSTPct;
+          this.userCart.finalPrice.designGSTPct =
+            item.category[0].price.designGSTPct;
         } else if (item.type == "Design Only") {
           item.category[0].id = item.id;
           console.log(item.category[0]);
@@ -152,6 +190,13 @@ export class OrderCartComponent implements OnInit {
           //   item.category[0].price.deliveryFee;
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
+
+          this.userCart.finalPrice.calDesignPrice +=
+            item.category[0].price.totalDesignCost -
+            item.category[0].price.designGST;
+
+          this.userCart.finalPrice.designGSTPct =
+            item.category[0].price.designGSTPct;
         } else if (item.type == "Print Only") {
           item.category[0].id = item.id;
           this.userCart.print.push(item.category[0]);
@@ -161,6 +206,11 @@ export class OrderCartComponent implements OnInit {
             item.category[0].price.deliveryFee;
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
+          this.userCart.finalPrice.calPrintPrice +=
+            item.category[0].price.printCost;
+          this.userCart.finalPrice.printGSTPct =
+            item.category[0].price.printGSTPct;
+
           //return ;
         }
       });
@@ -188,39 +238,104 @@ export class OrderCartComponent implements OnInit {
       if (this.userCart.print.length > 0) {
         this.userCart.displayPrint = true;
       }
-    }
-    else{
+    } else {
       this.disableProceed = true;
     }
     this.calculateDiscounts();
+    console.log("User cart Data");
     console.log(this.userCart);
   }
   calculateDiscounts() {
     let totalpriceWithoutDelivery =
       this.userCart.finalPrice.calPrice + this.userCart.finalPrice.calGST;
     let perc = this.custService.getDiscountPercentage(
-      totalpriceWithoutDelivery
+      this.userCart.finalPrice.calPrice
     );
     if (perc > 0) {
       let discount = Math.round(totalpriceWithoutDelivery * (perc / 100));
-      this.userCart.finalPrice.calDiscount = discount;
+
+      //Old Calculation
+      // this.userCart.finalPrice.calDiscount = discount;
+      // this.userCart.finalPrice.calDiscountedTotal =
+      //   this.userCart.finalPrice.calPrice +
+      //   this.userCart.finalPrice.calGST -
+      //   discount +
+      //   this.userCart.finalPrice.calDelivery;
+      // //this.userCart.finalPrice.calDiscountedGST=discountedGST;
+      // this.userCart.finalPrice.calDiscountedGST = this.userCart.finalPrice.calGST;
+
+      //New Calculation
+      //let checkPer=this.custService.getDiscountPercentage();
+      this.userCart.finalPrice.calDiscount = Math.round(
+        this.userCart.finalPrice.calPrintPrice * (perc / 100) +
+          this.userCart.finalPrice.calDesignPrice * (perc / 100)
+      );
+
+      this.userCart.finalPrice.calDiscountedPrintPrice =
+        this.userCart.finalPrice.calPrintPrice -
+        this.userCart.finalPrice.calPrintPrice * (perc / 100);
+
+      this.userCart.finalPrice.calDiscountedDesignPrice =
+        this.userCart.finalPrice.calDesignPrice -
+        this.userCart.finalPrice.calDesignPrice * (perc / 100);
+
       this.userCart.finalPrice.calDiscountedTotal =
-        this.userCart.finalPrice.calPrice +
-        this.userCart.finalPrice.calGST -
-        discount +
-        this.userCart.finalPrice.calDelivery;
+        this.userCart.finalPrice.calDiscountedPrintPrice +
+        this.userCart.finalPrice.calDiscountedDesignPrice;
+
+      this.userCart.finalPrice.calDiscountedPrintGST = Math.round(
+        this.userCart.finalPrice.calDiscountedPrintPrice *
+          this.userCart.finalPrice.printGSTPct
+      );
+
+      this.userCart.finalPrice.calDiscountedDesignGST = Math.round(
+        this.userCart.finalPrice.calDiscountedDesignPrice *
+          this.userCart.finalPrice.designGSTPct
+      );
+
+      this.userCart.finalPrice.calDiscountedGST = Math.round(
+        this.userCart.finalPrice.calDiscountedPrintPrice *
+          this.userCart.finalPrice.printGSTPct +
+          this.userCart.finalPrice.calDiscountedDesignPrice *
+            this.userCart.finalPrice.designGSTPct
+      );
+
+      this.userCart.finalPrice.calDiscountedTotal = Math.round(
+        this.userCart.finalPrice.calDiscountedTotal +
+          this.userCart.finalPrice.calDiscountedGST +
+          this.userCart.finalPrice.calDelivery
+      );
     } else {
       this.userCart.finalPrice.calDiscountedTotal = this.userCart.finalPrice.calFinalTotal;
+      this.userCart.finalPrice.calDiscountedGST = this.userCart.finalPrice.calGST;
     }
   }
   placeOrder() {
-    if(this.userCart.displayDesignNPrint == true || this.userCart.displayPrint == true){
-      this.helper.navigateToPath("/selectAddress");
+    let param = null;
+    let checkMobileVerification = localStorage.getItem(
+      "mobileVerificationDone"
+    );
+    if (checkMobileVerification == "False") {
+      this.navigateSignUp();
+      return;
     }
-    else{
+    if (
+      this.userCart.displayDesignNPrint == true ||
+      this.userCart.displayPrint == true
+    ) {
+      if (
+        this.userCart.design.length == 0 &&
+        this.userCart.designNprint.length == 0
+      ) {
+        param = { queryParams: { isPrintOrder: true } };
+      } else {
+        param = { queryParams: { isPrintOrder: false } };
+      }
+      this.helper.navigateToPathWithparams("/selectAddress", param);
+    } else {
       this.helper.navigateToPath("/revieworder");
     }
-    
+
     // let modelRef = this.modalService.open(BookMeetingComponent, {
     //   backdrop: "static"
     // });
@@ -231,4 +346,6 @@ export class OrderCartComponent implements OnInit {
     //   this.helper.navigateToPath("/revieworder");
     // });
   }
+  calculatePrintPrice() {}
+  calculateDesignPrice() {}
 }

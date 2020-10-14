@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AddressFormComponent } from "../address-form/address-form.component";
-
+import { ActivatedRoute } from "@angular/router";
 import { CustomerService } from "src/app/services/customer.service";
 import { AddressRequest } from "src/app/Models/address-request";
 import { NgxSpinnerService } from "ngx-spinner";
@@ -16,19 +16,31 @@ export class SelectAddressComponent implements OnInit {
   displayAddressList = [];
   addFormName = "Add Address";
   displayCreateForm = false;
+  isPrintOrder: boolean;
   constructor(
     private modalService: NgbModal,
     private custService: CustomerService,
     private spinnerService: NgxSpinnerService,
-    private helper: HelperService
+    private helper: HelperService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.addressList = new Array<AddressRequest>();
+    this.route.queryParams.subscribe(params => {
+      debugger;
+      console.log(params); // { order: "popular" }
+      //this.cartItemId = params.itemId;
+      if (params.isPrintOrder != undefined) {
+        this.isPrintOrder = params.isPrintOrder;
+      }
+
+      // popular
+    });
     this.fetchAddress();
   }
   fetchAddress() {
-    let userId = "5541713c-e1b5-4ed4-9e36-a92f0eab91d3";
+    let userId =localStorage.getItem("userId");
     this.spinnerService.show();
     this.custService.getUserAddress(userId).subscribe(
       data => {
@@ -68,8 +80,8 @@ export class SelectAddressComponent implements OnInit {
         city: this.addressList[i].city,
         state: this.addressList[i].state,
         postalCode: this.addressList[i].postalCode,
-        lat:this.addressList[i].lattitude,
-        lon:this.addressList[i].longitude
+        lat: this.addressList[i].lattitude,
+        lon: this.addressList[i].longitude
       };
       this.displayAddressList.push(item);
     }
@@ -100,7 +112,9 @@ export class SelectAddressComponent implements OnInit {
   deleteAddress(item) {
     var r = confirm("Press a button!");
     if (r == true) {
-      let userId = "5541713c-e1b5-4ed4-9e36-a92f0eab91d3";
+      //
+      
+      let userId = localStorage.getItem("userId");
       this.custService.deleteUserAddress(userId, item.addId).subscribe(
         data => {
           this.formatAddressResponse(data);
@@ -133,6 +147,8 @@ export class SelectAddressComponent implements OnInit {
   }
   setAddress(item) {
     localStorage.setItem("selectedAddess", JSON.stringify(item));
-    this.helper.navigateToPath("/revieworder");
+    let param = { queryParams: { isPrintOrder: this.isPrintOrder } };
+    this.helper.navigateToPathWithparams("/revieworder", param);
+    //this.helper.navigateToPath("/revieworder");
   }
 }

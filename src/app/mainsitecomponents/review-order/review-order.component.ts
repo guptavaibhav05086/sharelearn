@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { DOCUMENT } from "@angular/common";
 import { PrinterService } from "src/app/services/printer.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -16,6 +16,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class ReviewOrderComponent implements OnInit {
   razorPayOrderId: any;
+  interOrderId: any;
+  isPrintOrder = "false";
   selectedSlot = {
     data: {},
     selectedDate: "",
@@ -61,18 +63,37 @@ export class ReviewOrderComponent implements OnInit {
     private custService: CustomerService,
     private modalService: NgbModal,
     private admin: AdminService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.bookMeeting();
+    debugger;
+    this.route.queryParams.subscribe(params => {
+      debugger;
+      console.log(params); // { order: "popular" }
+      //this.cartItemId = params.itemId;
+      if (params.isPrintOrder != undefined) {
+        this.isPrintOrder = params.isPrintOrder;
+      }
+      if (this.isPrintOrder != "true") {
+        this.bookMeeting();
+        
+      } 
+      // popular
+    });
+    
     this.admin.getProducts().subscribe(
       data => {
         //this.discountPrice=data["discountList"];
         this.custService.discountedPrice = data["discountList"];
         console.log(this.custService.discountedPrice);
         //debugger;
+        
         this.loadCart();
+        if(this.isPrintOrder == "true"){
+          this.generateOrderId();
+        }
 
         //debugger;
       },
@@ -105,7 +126,7 @@ export class ReviewOrderComponent implements OnInit {
         "/orderstatus?tranId=" +
         event.tranId +
         "&orderId=" +
-        this.razorPayOrderId;
+        this.razorPayOrderId  + "&internalId=" + this.interOrderId;
       window.location.href = url;
 
       // this.router.navigate(["/ordersuccess"], {
@@ -213,16 +234,15 @@ export class ReviewOrderComponent implements OnInit {
       cart: {},
       orderPrice: {},
       deliveryAddress: addresss == null ? 0 : addresss["addId"],
-
-      //localStorage.getItem("userId")
-      userId: "5541713c-e1b5-4ed4-9e36-a92f0eab91d3"
+      userId: localStorage.getItem("userId")
     };
     FinalOrder.cart = this.custService.getLocalStorageCart();
     FinalOrder.orderPrice = this.userCart.finalPrice;
     console.log(JSON.stringify(FinalOrder));
     this.custService.generateOrderIdPost(FinalOrder).subscribe(
       data => {
-        this.razorPayOrderId = data;
+        this.razorPayOrderId = data[0];
+        this.interOrderId = data[1];
         this.spinner.hide();
         //this.payWithRazor(data);
       },
