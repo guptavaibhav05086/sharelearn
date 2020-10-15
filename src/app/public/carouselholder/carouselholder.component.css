@@ -2,8 +2,8 @@
   display: flex !important;
 }
 .itemSize {
-  height: 200px;
-  width: 200px !important;
+  height: 200px; 
+   /* width: 200px !important; */
 }
 /* .carousel-control-next-icon {
   background-image: url("../../../assets/HomePageImg/Home Page _ Images/Left Arrow1200.png") !important;
@@ -12,3 +12,9 @@
   background-image: url("../../../assets/HomePageImg/Home Page _ Images/Left Arrow1200.png") !important;
   margin-left: -200%;
 } */
+@media (max-width: 768px) {
+  .itemSize {
+    height: auto; 
+     /* width: 200px !important; */
+  }
+}

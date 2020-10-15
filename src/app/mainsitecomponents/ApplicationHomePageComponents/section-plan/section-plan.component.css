@@ -1,3 +1,9 @@
+.iframe{
+  width: 420px;
+}
+.dcol-2{
+  margin-left: 15%;
+}
 @media (min-width: 768px) {
   .points {
     margin-top: 20px;
@@ -28,6 +34,7 @@
     font-weight: 900;
     font-family: "Maven Pro";
     font-size: 35px;
+    line-height: 40px;
   }
   .alingdiv {
     padding-top: 100px;
@@ -40,7 +47,7 @@
     height: 40px;
   }
   .textStyle {
-    font-family: Maven pro black;
+    font-family:'Maven Pro', sans-serif;
     font-size: 16px;
     font-weight: 300;
   }
@@ -62,7 +69,10 @@
   }
   .txtFreelance {
     font-weight: 700;
+    font-size: 30px;
+    line-height: 35px;
   }
+  
   .alingdiv {
     padding-top: 100px;
   }
@@ -80,7 +90,13 @@
   }
   .textStyle {
     font-family: Maven pro;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
+  }
+  .dcol-2{
+    margin-left: 0;
+  }
+  .iframe{
+    width: 100%;
   }
 }

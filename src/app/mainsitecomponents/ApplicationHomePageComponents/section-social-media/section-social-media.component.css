@@ -1,3 +1,9 @@
+.vis-mob{
+  display: none;
+}
+.hide-mob{
+  display: block;
+}
 @media (min-width: 768px) {
   .container {
     width: 100%;
@@ -8,13 +14,14 @@
   }
   .containerFooter {
     width: 100%;
-    display: flex;
+    /* display: flex; */
     flex-wrap: unset;
   }
   .dcol-3 {
     flex-wrap: nowrap;
     width: 33%;
-    padding-top: 400px !important;
+    margin-top: 100px;
+    margin-bottom: 20px;
   }
   .dcol-4 {
     flex-wrap: nowrap;
@@ -58,7 +65,10 @@
     width: 20px;
   }
 }
+
 @media (max-width: 768px) {
+ 
+
   .imgEditPrintSize {
     height: 30px;
     padding-top: 5px;
@@ -83,8 +93,32 @@
     height: 30px;
   }
   .textStyle {
-    font-family: Maven pro;
+    font-family: 'Maven pro';
     font-size: 12px;
     font-weight: 300;
   }
+  .doc-cust1{
+    padding-top: 28px;
+  }
+  .social-icon{
+    display: flex;
+  }
+  .dcol-5{
+    margin: 2px;
+  }
+  .vis-mob{
+    display: block;
+  }
+  .hide-mob{
+    display: none;
+  }
+  .doc-cust1{
+    padding-top: 0px;
+  }
+}
+
+
+  .dcol-5{
+    flex-wrap: nowrap;
+    width: 35px;
 }

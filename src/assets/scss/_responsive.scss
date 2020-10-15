@@ -53,13 +53,13 @@
     opacity: 0;
   }
   .navbar-toggler[aria-expanded="true"] span:first-child {
-    transform: rotate(-45deg);
+    // transform: rotate(-45deg);
     position: relative;
     top: 7.5px;
   }
   .navbar-toggler[aria-expanded="true"] span:last-child {
-    transform: rotate(45deg);
-    bottom: 6px;
+    // transform: rotate(45deg);
+    // bottom: 6px;
     position: relative;
   }
   .navbar-toggler span {
