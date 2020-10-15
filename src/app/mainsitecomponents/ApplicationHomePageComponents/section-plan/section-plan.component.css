@@ -69,7 +69,10 @@
   }
   .txtFreelance {
     font-weight: 700;
+    font-size: 30px;
+    line-height: 35px;
   }
+  
   .alingdiv {
     padding-top: 100px;
   }
@@ -87,7 +90,7 @@
   }
   .textStyle {
     font-family: Maven pro;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
   }
   .dcol-2{

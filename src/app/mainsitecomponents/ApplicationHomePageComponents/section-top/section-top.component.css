@@ -95,7 +95,7 @@
     font-family: 'Maven Pro', sans-serif;
   }
   .alingdiv {
-    padding-top: 100px;
+    /* padding-top: 100px; */
   }
   .searchBtnStyle {
     border-radius: 10px;
@@ -114,4 +114,12 @@
     font-size: 12px;
     font-weight: 300;
   }
+  .txtMainHeading{
+    font-size: 24px;
+    font-weight: 900;
+  }
+  .dcol-2{ text-align: center; margin-top: 40px;}
+  .dcol-2 img{ max-width: 90%;}
+  .positioncontainerRight{ width: 100%;}
+  .mt-mob-0 { margin-top: 0 !important;}
 }
