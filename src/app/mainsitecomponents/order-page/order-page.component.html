@@ -616,7 +616,7 @@
                 <div class="row" >
                     <div class="flex-control8" >
                         <div class="form-group">
-                            <a href="#" style="margin-left: 3%;">Click here for {{ orderForm.controls['category'].value}} Blog</a>                                                 
+                            <a style="margin-left: 3%;color:blue" disabled>Click here for {{ orderForm.controls['category'].value}} Blog</a>                                                 
                           </div>
                       
                     </div>
@@ -721,7 +721,7 @@
             </div>
             <div class="or-formcontrol flex-container">
               <div class="flex-control2">
-                <img src="../../../assets/StudentDashboard/img/download.jpg" />
+                <img [src]="selectedProductImage" />
               </div>
               <div class="flex-control8" >
                   <div class="row">
@@ -937,24 +937,43 @@
                <!-- Terms and conditions -->
                <div class="row" >
                 <div class="flex-control-50">
-                  <div class="" *ngIf="displayDesigner">
-                    <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tDesign">
-                    <label for="checkbox1" class="checkboxLabel" style="font-size: large;color: black;padding-left: 20px;">
-                   Designer <a href="#" (click)="openTermCondition('designer',$event)">
-                     <span ><u style="color:blue">Terms and Conditons</u></span> 
-                   </a>
-                  </label>
+                  <div style="display: flex;" *ngIf="displayDesigner">
+                    <div>
+                        <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tDesign">
+                    </div>
+                   <div>
+                      <label for="checkbox1" class="checkboxLabel" style="color: black;padding-left: 20px;">
+                          I have read and agree to the <a href="#" (click)="openTermCondition('designer',$event)">
+                              <span ><u style="color:blue">Terms and Conditons</u></span> 
+                            </a>Designers 
+                    </label>
+                   </div>
+                  
                 </div>
                      
                 </div>
-                <div class="flex-control-3" style="margin-left: 3%;">
+                <div class="flex-control-3" style="margin-left: 3%;width:30%">
                   <div class="" *ngIf="displayprinter">
-                    <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tPrinter">
-                    <label for="checkbox1" class="checkboxLabel" style="font-size: large;color: black;padding-left: 20px;">
-                   Printer <a href="#" (click)="openTermCondition('Printer',$event)">
-                     <span ><u style="color:blue">Terms and Conditons</u></span> 
-                   </a>
-                  </label>
+                      <div style="display: flex;">
+                          <div >
+                              <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tPrinter">
+                          </div>
+                          <div>
+                              <label for="checkbox1" class="checkboxLabel" style="padding-left: 20px;">
+                                  I have read and agree to the  <a href="#" (click)="openTermCondition('Printer',$event)">
+                                      <span ><u style="color:blue">Terms and Conditons</u></span> 
+                                    </a> Printers
+                            </label>
+                          </div>
+                        </div>
+                    <div>   Colors of images on screen and their printed output may vary from 5% to 10%</div>
+                    <div>
+                        Thickness (GSM) of paper may vary by 5%
+                    </div>
+                   
+
+                 
+                   
                 </div>
                      
                 </div>
@@ -1004,7 +1023,7 @@
             </div>
             <div class="or-formcontrol flex-container">
               <div class="flex-control2">
-                <img src="../../../assets/StudentDashboard/img/download.jpg" />
+                <img [src]="selectedProductImage" />
               </div>
               <div class="flex-control8" >
                   <div class="row">
@@ -1203,14 +1222,21 @@
                         </div>
                        
                   </div>
-                  <div class="flex-control-3" style="margin-left: 3%;">
+                  <div class="flex-control-3" style="margin-left: 3%;width:30%">
                       <div class="" *ngIf="displayprinter">
-                          <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tPrinter">
-                          <label for="checkbox1" class="checkboxLabel" style="font-size: large;color: black;padding-left: 20px;">
-                         Printer <a href="#" (click)="openTermCondition('Printer',$event)">
-                           <span ><u style="color:blue">Terms and Conditons</u></span> 
-                         </a>
-                        </label>
+                        <div>
+                            <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tPrinter">
+                        </div>
+                        <div>
+                            <label for="checkbox1" class="checkboxLabel" style="font-size: large;color: black;padding-left: 20px;">
+                                Printer <a href="#" (click)="openTermCondition('Printer',$event)">
+                                  <span ><u style="color:blue">Terms and Conditons</u></span> 
+                                </a>
+                               </label>
+                        </div>
+
+                        
+                         
                       </div>
                       <!-- <div class="form-group" style="color:green;">
                           
@@ -1229,12 +1255,17 @@
                <div class="row" >
                 <div class="flex-control-50">
                   <div class="" *ngIf="displayDesigner">
-                    <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tDesign">
-                    <label for="checkbox1" class="checkboxLabel" style="font-size: large;color: black;padding-left: 20px;">
-                   Designer <a href="#" (click)="openTermCondition('designer',$event)">
-                     <span ><u style="color:blue">Terms and Conditons</u></span> 
-                   </a>
-                  </label>
+                    <div>
+                        <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tDesign">
+                    </div>
+                   <div>
+                      <label for="checkbox1" class="checkboxLabel" style="font-size: large;color: black;padding-left: 20px;">
+                          Designer <a href="#" (click)="openTermCondition('designer',$event)">
+                            <span ><u style="color:blue">Terms and Conditons</u></span> 
+                          </a>
+                         </label>
+                   </div>
+                   
                 </div>
                      
                 </div>

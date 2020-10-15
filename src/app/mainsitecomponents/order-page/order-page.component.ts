@@ -860,12 +860,12 @@ return true;
     // this.selectedCategory.sort((a, b) => a.value.localeCompare(b.value));
   }
   ngOnInit(): void {
-   
+    this.spinner.show();
     for (let i = 1; i < 101; i++) {
       this.arrLnW.push(i);
     }
     this.route.queryParams.subscribe(params => {
-      //debugger;
+      debugger;
       console.log(params); // { order: "popular" }
       //this.cartItemId = params.itemId;
       if (params.itemId != undefined) {
@@ -877,7 +877,7 @@ return true;
 
       // popular
     });
-    this.spinner.show();
+   
     this.admin.getProducts().subscribe(
       data => {
         this.productList = data["productList"];
