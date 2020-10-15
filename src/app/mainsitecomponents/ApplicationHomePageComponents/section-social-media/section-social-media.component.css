@@ -108,6 +108,10 @@
   }
   .vis-mob{
     display: block;
+    margin: 15px 0;
+  }
+  .w-100{
+    margin-top: 15px;
   }
   .hide-mob{
     display: none;

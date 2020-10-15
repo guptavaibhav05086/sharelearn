@@ -16,8 +16,8 @@
           </button>
         </div>
       </div>
-      <div class="rowAddress" *ngIf="displayCreateForm" style="margin-left: 30%;">
-        <div class="editForm" style="width:50%">
+      <div class="rowAddress" *ngIf="displayCreateForm" >
+        <div class="editForm" >
           <app-address-form
             (addSave)="addressCallBack($event, null)"
             [formName]="addFormName"

@@ -112,8 +112,11 @@
   }
   .dcol-4 {
     
-    width: 50%;
+    float: left;
     width: 50%;
     text-align: left;
+}
+.dcol-5{
+  clear: both;
 }
 }

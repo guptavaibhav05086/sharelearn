@@ -119,7 +119,6 @@
   margin-left: 5%;
 }
 .container {
-  margin-left: 12%;
   box-shadow: 20px grey;
   margin-top: 30px;
 }
@@ -141,7 +140,7 @@
   position: inherit;
 }
 .row {
-  margin-left: 3%;
+  /* margin-left: 3%; */
 }
 button.calendar,
 button.calendar:active {
@@ -252,4 +251,14 @@ button.calendar:active {
 }
 .overflowBody {
   overflow-y: hidden;
+}
+@media (max-width: 778px) {
+  .flex-container{
+    margin: 15px;
+  }
+.or-btn{
+  height: 50px;
+  width: 86%;
+}
+
 }
