@@ -23,7 +23,7 @@
                     <button class="btn btn-primary" style="height: 35px;">Design/Print</button>
                 </li>
                 <li class="nav-item borderNav">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" routerLink="/">Home</a>
                 </li>
                 <li class="nav-item active borderNav">
                     <div class="vLine"></div>
@@ -35,7 +35,7 @@
                     <div class="vLine"></div>
                 </li>
                 <li class="nav-item borderNav">
-                    <a class="nav-link" href="#">Become a Service Provider</a>
+                    <a class="nav-link" routerLink="/register">Become a Service Provider</a>
                 </li>
                 <li class="nav-item active borderNav">
                     <div class="vLine"></div>
@@ -64,7 +64,7 @@
                 <li class="nav-item dropdown borderNav" *ngIf="displayUserNav" style="padding-top:0px !important">
                     <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        <a class="nav-link">
+                        <a class="nav-link" routerLink="/cart">
                             <img _ngcontent-bjd-c124=""
                                 src="../../../../assets/HomePageImg/Home Page _ Images/Sign in Icon1200.png" alt=""
                                 style="height: 30px;"></a>
@@ -76,10 +76,10 @@
                             <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Profile</a>
                         </div> -->
                         <div class="menuItemDD">
-                            <a class="dropdown-item" routerLink="/user/ongoingorders">On Going Order</a>
+                            <a class="dropdown-item" routerLink="/user/ongoingorders" >On Going Order</a>
                         </div>
                         <div class="menuItemDD">
-                            <a class="dropdown-item" routerLink="/user/ongoingorders">All Orders</a>
+                            <a class="dropdown-item" routerLink="/user/allorders" >All Orders</a>
                         </div>
                         <div class="menuItemDD">
                             <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Settings</a>
@@ -87,6 +87,9 @@
 
                         <div class="menuItemDD">
                             <a class="dropdown-item" href="#" routerLink="/logout">Help & Support</a>
+                        </div>
+                         <div class="menuItemDD">
+                            <a class="dropdown-item" href="#" routerLink="/logout">Log out</a>
                         </div>
 
 

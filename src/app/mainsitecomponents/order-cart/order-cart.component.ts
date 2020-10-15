@@ -122,23 +122,31 @@ export class OrderCartComponent implements OnInit {
     modelRef.result.then(data => {
       debugger;
       if (data == "OpenVerify") {
-        this.navigateSignUp();
-      } else {
+        this.navigateSignUp(true);
+      } 
+      else if(data == "OpenSignUp"){
+        this.navigateSignUp(false);
+
+      }
+      else {
         window.location.reload();
       }
     });
   }
-  navigateSignUp() {
+  navigateSignUp(flag) {
     let modelRef = this.modalService.open(CustomerSignUpComponent, {
       backdrop: "static",
       keyboard: false
     });
-    modelRef.componentInstance.isComingFromCartPage = true;
+    modelRef.componentInstance.isComingFromCartPage = flag;
     modelRef.result.then(data => {
       debugger;
       if (data == "AccountVerified") {
         window.location.reload();
         //this.placeOrder();
+      }
+      else if(data=="openLogin"){
+        this.openLogin();
       }
     });
   }
@@ -316,7 +324,7 @@ export class OrderCartComponent implements OnInit {
       "mobileVerificationDone"
     );
     if (checkMobileVerification == "False") {
-      this.navigateSignUp();
+      this.navigateSignUp(true);
       return;
     }
     if (
@@ -348,4 +356,5 @@ export class OrderCartComponent implements OnInit {
   }
   calculatePrintPrice() {}
   calculateDesignPrice() {}
+  
 }

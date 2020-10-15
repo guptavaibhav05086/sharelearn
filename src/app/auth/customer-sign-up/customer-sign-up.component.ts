@@ -49,9 +49,7 @@ export class CustomerSignUpComponent implements OnInit {
     ]),
     password: new FormControl("", [
       Validators.required,
-      this._validator.patternValidation(
-        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,15}$/
-      )
+      this._validator.patternValidation(/^([a-zA-Z0-9]{6,15})$/)
     ]),
     mobileNumber: new FormControl("", [
       Validators.required,
@@ -269,5 +267,9 @@ export class CustomerSignUpComponent implements OnInit {
         alert("Error in OTP Generation");
       }
     );
+  }
+  openloginPage(e) {
+    e.preventDefault();
+    this.activeModal.close("openLogin");
   }
 }

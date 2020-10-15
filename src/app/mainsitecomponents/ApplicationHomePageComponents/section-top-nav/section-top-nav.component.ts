@@ -42,7 +42,13 @@ export class SectionTopNavComponent implements OnInit {
     });
     modelRef.componentInstance.verifyUser = validation;
     modelRef.componentInstance.isCustomerSignUpButton = !validation;
-   modelRef.componentInstance.isComingFromCartPage=false;
+    modelRef.componentInstance.isComingFromCartPage = false;
+
+    modelRef.result.then(data=>{
+      if(data=="openLogin"){
+        this.openLogin(null);
+      }
+    })
   }
   navigateprofile(event) {
     //debugger;
@@ -60,7 +66,10 @@ export class SectionTopNavComponent implements OnInit {
     }
   }
   openLogin(event) {
-    event.preventDefault();
+    if(event !=null){
+      event.preventDefault();
+    }
+   
     let modelRef = this.modalService.open(CustomerLoginComponent, {
       backdrop: "static",
       keyboard: false
@@ -69,6 +78,8 @@ export class SectionTopNavComponent implements OnInit {
       debugger;
       if (data == "OpenVerify") {
         this.navigateSignUp(true);
+      } else if (data == "OpenSignUp") {
+        this.navigateSignUp(false);
       } else {
         //this.helper.navigateToPath("/homePage");
         window.location.reload();
