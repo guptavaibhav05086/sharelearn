@@ -17,7 +17,7 @@ export class PproductsCarouselComponent implements OnInit {
   ngOnInit(): void {
     this.admin.getProducts().subscribe(
       data => {
-        debugger;
+        //debugger;
         this.products = data["products"];
         this.products.map(item => {
           this.images.push({

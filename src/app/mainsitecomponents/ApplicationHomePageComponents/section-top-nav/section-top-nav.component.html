@@ -4,23 +4,24 @@
 </div> -->
 <header class="animated fadeInDown">
     <nav class="navbar navbar-expand-lg navbar-light bg-light"
-        style="background-color: white !important;background-image: url('../../../../assets/HomePageImg/Home Page _ Images/Top Background1200.png') !important;background-size: cover;height :120px;">
-
+    style="background-color: white !important;background-image: url('../../../../assets/HomePageImg/Home Page _ Images/Top Background1200.png') !important;background-size: cover;height :120px;">
+            <div class="container-fluid p-0">
+        <a class="nav-link" href="#"><img _ngcontent-bjd-c124="" src="../../../assets/img/logonew.svg"
+            alt="" style="height: 40px;"></a>
         <!-- <a class="navbar-brand" href="#">Navbar</a> -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdownTop"
             aria-controls="navbarNavDropdownTop" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon" style="height: 30px;background: lightgrey;"></span>
+            <span class="navbar-toggler-icon" style="height: 25px;background-color:transparent;"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdownTop" style="">
+        <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNavDropdownTop" style="">
             <ul class="navbar-nav">
-                <li class="nav-item active borderNav">
-                    <a class="nav-link" href="#"><img _ngcontent-bjd-c124="" src="../../../assets/img/logonew.svg"
-                            alt="" style="height: 40px;"></a>
-                </li>
+                <!-- <li class="nav-item active borderNav">
+               
+                </li> -->
 
                 <li class="nav-item borderNav topsearchhide" style="padding-top: 10px;" id="searchBarButton">
                     <input type="text" class="searchBtn" style="height: 35px;" />
-                    <button class="btn btn-primary" style="height: 35px;">Design/Print</button>
+                    <button class="btn btn-primary" style="height: 35px; margin-top: 7px;">Design/Print</button>
                 </li>
                 <li class="nav-item borderNav">
                     <a class="nav-link" href="#">Home</a>
@@ -45,7 +46,7 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Sign In
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="display: -webkit-box;
+                    <div class="dropdown-menu dropdown-menu-sun-one" aria-labelledby="navbarDropdownMenuLink" style="display: -webkit-box;
                     margin-left: -110px;
                     margin-top: -20px;">
                         <div class="menuItemDD">
@@ -99,7 +100,7 @@
                 </li>
 
                 <li class="nav-item" *ngIf="!displayUserNav">
-                    <button class="btn btn-primary" (click)="navigateSignUp(false)">Create an Account</button>
+                    <button class="btn btn-primary" (click)="navigateSignUp()">Create an Account</button>
                 </li>
 
                 <!-- User Cart Menu -->
@@ -114,5 +115,6 @@
 
             </ul>
         </div>
+    </div>
     </nav>
 </header>

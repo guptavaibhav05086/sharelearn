@@ -15,7 +15,7 @@
     border-right: 0px solid;
   }
   .navbar-toggler span {
-    height: 30px !important;
+    height: 27px !important;
   }
 }
 .sticky {
@@ -25,6 +25,7 @@
   top: 0;
   height: 70px;
   width: 100%;
+  z-index: 99;
 }
 .dropdown-menu {
   width: 100%;
@@ -70,3 +71,28 @@
 /* .navbar {
   position: initial !important;
 } */
+
+
+@media only screen and (max-width: 768px){
+  .navbar .navbar-nav .nav-item:not(:last-child){
+    padding-top: 0;
+    margin-bottom: 0px;
+  }
+ 
+  .navbar-nav{
+  background: rgb(231 239 245);
+  }
+  .bg-light {
+    /* background-color: transparent !important; */
+    margin-top: -65px !important;
+}
+  .nav-item.active.borderNav{
+    display: none;
+  }
+  #navbarNavDropdown{
+    margin-left: 0 !important;
+  }
+  .navbar-two{
+    display: none;
+  }
+}
