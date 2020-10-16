@@ -40,11 +40,11 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        component: HomelinkPageComponent
+        component: HomeContainerComponent
       },
       {
         path: "home",
-        component: HomelinkPageComponent
+        component: HomeContainerComponent
       },
       {
         path: "homePage",

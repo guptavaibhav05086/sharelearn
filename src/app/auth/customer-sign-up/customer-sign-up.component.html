@@ -1,6 +1,6 @@
 <div class="modal-header">
     <h4 class="modal-title">Register</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')"
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close')"
         *ngIf="!isComingFromCartPage">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -58,8 +58,7 @@
         studentForm.controls['password'].invalid &&
         studentForm.controls['password'].errors.invalidPattern
       ">
-                *Password must be of 6 to 15 characters and consist of 1 lower,upper case
-                1 digit and 1 special character .
+                *Password must be of 6 to 15 characters and should not consist of any special characters .
             </span>
         </div>
 
@@ -118,7 +117,7 @@
             <div class="col-sm-12 text-center">
                 <p>
                     I Have an Accont?
-                    <a routerLink="/login" class="text-primary m-l-5"><b>Login</b></a>
+                    <a (click)="openloginPage($event)" class="text-primary m-l-5"><b>Login</b></a>
                 </p>
             </div>
         </div>
@@ -180,7 +179,7 @@
 
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="activeModal.close('Cross click')"
+    <button type="button" class="btn btn-light" (click)="activeModal.close('Cross')"
         *ngIf="!isComingFromCartPage">
         Close
     </button>
