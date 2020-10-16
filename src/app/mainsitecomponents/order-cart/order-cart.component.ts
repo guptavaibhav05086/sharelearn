@@ -122,37 +122,23 @@ export class OrderCartComponent implements OnInit {
     modelRef.result.then(data => {
       debugger;
       if (data == "OpenVerify") {
-        this.navigateSignUp(true);
-      } 
-      else if(data == "OpenSignUp"){
-        this.navigateSignUp(false);
-
-      }
-      else {
+        this.navigateSignUp();
+      } else {
         window.location.reload();
       }
     });
   }
-  navigateSignUp(flag) {
+  navigateSignUp() {
     let modelRef = this.modalService.open(CustomerSignUpComponent, {
       backdrop: "static",
       keyboard: false
     });
-    modelRef.componentInstance.isComingFromCartPage = flag;
+    modelRef.componentInstance.isComingFromCartPage = true;
     modelRef.result.then(data => {
       debugger;
       if (data == "AccountVerified") {
         window.location.reload();
         //this.placeOrder();
-      }
-      else if(data=="openLogin"){
-        this.openLogin();
-      }
-      else if(data=="Close"){
-        let ver= localStorage.getItem("emailVerificationDone");
-        if(ver == "True"){
-          window.location.reload();
-        }
       }
     });
   }
@@ -173,9 +159,8 @@ export class OrderCartComponent implements OnInit {
   loadCart() {
     debugger;
     let cartItems = JSON.parse(localStorage.getItem("cart"));
-   
+    this.userCart.totalItems = cartItems.length;
     if (cartItems != null && cartItems.length > 0) {
-      this.userCart.totalItems = cartItems.length;
       cartItems.forEach(item => {
         if (item.type == "Design And Print") {
           item.category[0].id = item.id;
@@ -331,7 +316,7 @@ export class OrderCartComponent implements OnInit {
       "mobileVerificationDone"
     );
     if (checkMobileVerification == "False") {
-      this.navigateSignUp(true);
+      this.navigateSignUp();
       return;
     }
     if (
@@ -363,5 +348,4 @@ export class OrderCartComponent implements OnInit {
   }
   calculatePrintPrice() {}
   calculateDesignPrice() {}
-  
 }

@@ -49,7 +49,9 @@ export class CustomerSignUpComponent implements OnInit {
     ]),
     password: new FormControl("", [
       Validators.required,
-      this._validator.patternValidation(/^([a-zA-Z0-9]{6,15})$/)
+      this._validator.patternValidation(
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,15}$/
+      )
     ]),
     mobileNumber: new FormControl("", [
       Validators.required,
@@ -88,8 +90,8 @@ export class CustomerSignUpComponent implements OnInit {
   checkDetailsVerification() {
     debugger;
     let email = localStorage.getItem("unverifiedEmail");
-    let phoneNum = localStorage.getItem("unverifiedMobile") == null ?localStorage.getItem("unverifiedMobile") : localStorage.getItem("unverifiedMobile").trim();
-    let data = localStorage.getItem("isEmailVerified") ==null ?null : localStorage.getItem("isEmailVerified").split(";");
+    let phoneNum = localStorage.getItem("unverifiedMobile").trim();
+    let data = localStorage.getItem("isEmailVerified").split(";");
     this.userVerificationDetails.isEmailVerified = localStorage.getItem(
       "emailVerificationDone"
     );
@@ -97,22 +99,19 @@ export class CustomerSignUpComponent implements OnInit {
     this.userVerificationDetails.isPhoneVerified = localStorage.getItem(
       "mobileVerificationDone"
     );
-    if(data != null){
-      this.userVerificationDetails.phoneNumber = data[2];
-    }
-    
+    this.userVerificationDetails.phoneNumber = data[2];
     this.userVerificationDetails.email = localStorage.getItem(
       "unverifiedEmail"
     );
     this.userVerificationDetails.role = localStorage.getItem("unverifiedRole");
-    if (this.userVerificationDetails.isEmailVerified !=null && this.userVerificationDetails.isEmailVerified.trim() == "False") {
+    if (this.userVerificationDetails.isEmailVerified.trim() == "False") {
       debugger;
       this.verifyUser = true;
       this.studentForm.patchValue({
         email: email
       });
     }
-    if (this.userVerificationDetails.isPhoneVerified !=null &&this.userVerificationDetails.isPhoneVerified.trim() == "False") {
+    if (this.userVerificationDetails.isPhoneVerified.trim() == "False") {
       debugger;
       this.verifyUser = true;
       this.studentForm.patchValue({
@@ -270,9 +269,5 @@ export class CustomerSignUpComponent implements OnInit {
         alert("Error in OTP Generation");
       }
     );
-  }
-  openloginPage(e) {
-    e.preventDefault();
-    this.activeModal.close("openLogin");
   }
 }

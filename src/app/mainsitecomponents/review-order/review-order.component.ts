@@ -37,16 +37,7 @@ export class ReviewOrderComponent implements OnInit {
       calGST: 0,
       calFinalTotal: 0,
       calDiscount: 0,
-      calDiscountedTotal: 0,
-      calDiscountedGST: 0,
-      calPrintPrice: 0,
-      calDesignPrice: 0,
-      calDiscountedPrintPrice: 0,
-      calDiscountedDesignPrice: 0,
-      calDiscountedPrintGST: 0,
-      calDiscountedDesignGST: 0,
-      printGSTPct: 0,
-      designGSTPct: 0
+      calDiscountedTotal: 0
     },
     totalItems: 0
   };
@@ -87,19 +78,20 @@ export class ReviewOrderComponent implements OnInit {
       }
       if (this.isPrintOrder != "true") {
         this.bookMeeting();
-      }
+        
+      } 
       // popular
     });
-
+    
     this.admin.getProducts().subscribe(
       data => {
         //this.discountPrice=data["discountList"];
         this.custService.discountedPrice = data["discountList"];
         console.log(this.custService.discountedPrice);
         //debugger;
-
+        
         this.loadCart();
-        if (this.isPrintOrder == "true") {
+        if(this.isPrintOrder == "true"){
           this.generateOrderId();
         }
 
@@ -134,9 +126,7 @@ export class ReviewOrderComponent implements OnInit {
         "/orderstatus?tranId=" +
         event.tranId +
         "&orderId=" +
-        this.razorPayOrderId +
-        "&internalId=" +
-        this.interOrderId;
+        this.razorPayOrderId  + "&internalId=" + this.interOrderId;
       window.location.href = url;
 
       // this.router.navigate(["/ordersuccess"], {
@@ -161,10 +151,10 @@ export class ReviewOrderComponent implements OnInit {
     ) {
       this.selectedAddress = JSON.parse(localStorage.getItem("selectedAddess"));
     }
-    let cartItems = JSON.parse(localStorage.getItem("cart"));
 
+    let cartItems = JSON.parse(localStorage.getItem("cart"));
+    this.userCart.totalItems = cartItems.length;
     if (cartItems != null && cartItems.length > 0) {
-      this.userCart.totalItems = cartItems.length;
       cartItems.forEach(item => {
         if (item.type == "Design And Print") {
           item.category[0].id = item.id;
@@ -175,32 +165,16 @@ export class ReviewOrderComponent implements OnInit {
             item.category[0].price.deliveryFee;
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
-          this.userCart.finalPrice.calPrintPrice +=
-            item.category[0].price.printCost;
-          this.userCart.finalPrice.calDesignPrice +=
-            item.category[0].price.totalDesignCost -
-            item.category[0].price.designGST;
-          this.userCart.finalPrice.printGSTPct =
-            item.category[0].price.printGSTPct;
-          this.userCart.finalPrice.designGSTPct =
-            item.category[0].price.designGSTPct;
         } else if (item.type == "Design Only") {
           item.category[0].id = item.id;
           console.log(item.category[0]);
           this.userCart.design.push(item.category[0]);
           this.userCart.finalPrice.calPrice += item.category[0].price.price;
           this.userCart.finalPrice.calGST += item.category[0].price.GST;
-          // this.userCart.finalPrice.calDelivery +=
+          // this.userCart.finalPrice.calDelivery =
           //   item.category[0].price.deliveryFee;
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
-
-          this.userCart.finalPrice.calDesignPrice +=
-            item.category[0].price.totalDesignCost -
-            item.category[0].price.designGST;
-
-          this.userCart.finalPrice.designGSTPct =
-            item.category[0].price.designGSTPct;
         } else if (item.type == "Print Only") {
           item.category[0].id = item.id;
           this.userCart.print.push(item.category[0]);
@@ -210,11 +184,6 @@ export class ReviewOrderComponent implements OnInit {
             item.category[0].price.deliveryFee;
           this.userCart.finalPrice.calFinalTotal +=
             item.category[0].price.Total;
-          this.userCart.finalPrice.calPrintPrice +=
-            item.category[0].price.printCost;
-          this.userCart.finalPrice.printGSTPct =
-            item.category[0].price.printGSTPct;
-
           //return ;
         }
       });
@@ -222,97 +191,34 @@ export class ReviewOrderComponent implements OnInit {
       if (this.userCart.designNprint.length > 0) {
         this.userCart.displayDesignNPrint = true;
       }
-      // cartItems.forEach(item => {
-      //   if (item.type == "Design Only") {
-      //     console.log(item.category[0]);
-      //     this.userCart.design.push(item.category[0]);
-      //   }
-      // });
 
       if (this.userCart.design.length > 0) {
         this.userCart.displayDesign = true;
       }
-      // cartItems.forEach(item => {
-      //   if (item.type == "Print Only") {
-      //     this.userCart.print.push(item.category[0]);
-      //     //return ;
-      //   }
-      // });
 
       if (this.userCart.print.length > 0) {
         this.userCart.displayPrint = true;
       }
-    } else {
-      //this.disableProceed = true;
     }
-    this.calculateDiscounts();
-    console.log("User cart Data");
     console.log(this.userCart);
+    this.calculateDiscounts();
   }
   calculateDiscounts() {
-    debugger;
     let totalpriceWithoutDelivery =
       this.userCart.finalPrice.calPrice + this.userCart.finalPrice.calGST;
     let perc = this.custService.getDiscountPercentage(
-      this.userCart.finalPrice.calPrice
+      totalpriceWithoutDelivery
     );
     if (perc > 0) {
       let discount = Math.round(totalpriceWithoutDelivery * (perc / 100));
-
-      //Old Calculation
-      // this.userCart.finalPrice.calDiscount = discount;
-      // this.userCart.finalPrice.calDiscountedTotal =
-      //   this.userCart.finalPrice.calPrice +
-      //   this.userCart.finalPrice.calGST -
-      //   discount +
-      //   this.userCart.finalPrice.calDelivery;
-      // //this.userCart.finalPrice.calDiscountedGST=discountedGST;
-      // this.userCart.finalPrice.calDiscountedGST = this.userCart.finalPrice.calGST;
-
-      //New Calculation
-      //let checkPer=this.custService.getDiscountPercentage();
-      this.userCart.finalPrice.calDiscount = Math.round(
-        this.userCart.finalPrice.calPrintPrice * (perc / 100) +
-          this.userCart.finalPrice.calDesignPrice * (perc / 100)
-      );
-
-      this.userCart.finalPrice.calDiscountedPrintPrice =
-        this.userCart.finalPrice.calPrintPrice -
-        this.userCart.finalPrice.calPrintPrice * (perc / 100);
-
-      this.userCart.finalPrice.calDiscountedDesignPrice =
-        this.userCart.finalPrice.calDesignPrice -
-        this.userCart.finalPrice.calDesignPrice * (perc / 100);
-
+      this.userCart.finalPrice.calDiscount = discount;
       this.userCart.finalPrice.calDiscountedTotal =
-        this.userCart.finalPrice.calDiscountedPrintPrice +
-        this.userCart.finalPrice.calDiscountedDesignPrice;
-
-      this.userCart.finalPrice.calDiscountedPrintGST = Math.round(
-        this.userCart.finalPrice.calDiscountedPrintPrice *
-          this.userCart.finalPrice.printGSTPct
-      );
-
-      this.userCart.finalPrice.calDiscountedDesignGST = Math.round(
-        this.userCart.finalPrice.calDiscountedDesignPrice *
-          this.userCart.finalPrice.designGSTPct
-      );
-
-      this.userCart.finalPrice.calDiscountedGST = Math.round(
-        this.userCart.finalPrice.calDiscountedPrintPrice *
-          this.userCart.finalPrice.printGSTPct +
-          this.userCart.finalPrice.calDiscountedDesignPrice *
-            this.userCart.finalPrice.designGSTPct
-      );
-
-      this.userCart.finalPrice.calDiscountedTotal = Math.round(
-        this.userCart.finalPrice.calDiscountedTotal +
-          this.userCart.finalPrice.calDiscountedGST +
-          this.userCart.finalPrice.calDelivery
-      );
+        this.userCart.finalPrice.calPrice +
+        this.userCart.finalPrice.calGST -
+        discount +
+        this.userCart.finalPrice.calDelivery;
     } else {
       this.userCart.finalPrice.calDiscountedTotal = this.userCart.finalPrice.calFinalTotal;
-      this.userCart.finalPrice.calDiscountedGST = this.userCart.finalPrice.calGST;
     }
   }
   generateOrderId() {
@@ -375,10 +281,8 @@ export class ReviewOrderComponent implements OnInit {
         debugger;
         alert("Your Meeting Slot is expired.Please choose the New slot");
         clearInterval(timer);
-        //this.bookMeeting();
-        window.location.reload();
+        this.bookMeeting();
       }, 900000);
-
       //this.helper.navigateToPath("/revieworder");
     });
   }
@@ -414,17 +318,8 @@ export class ReviewOrderComponent implements OnInit {
         calDelivery: 0,
         calGST: 0,
         calFinalTotal: 0,
-        calDiscount: 0,
         calDiscountedTotal: 0,
-        calDiscountedGST: 0,
-        calPrintPrice: 0,
-        calDesignPrice: 0,
-        calDiscountedPrintPrice: 0,
-        calDiscountedDesignPrice: 0,
-        calDiscountedPrintGST: 0,
-        calDiscountedDesignGST: 0,
-        printGSTPct: 0,
-        designGSTPct: 0
+        calDiscount: 0
       },
       totalItems: 0
     };

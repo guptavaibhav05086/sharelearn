@@ -18,7 +18,7 @@ import { ForgetpasswordComponent } from "../forgetpassword/forgetpassword.compon
 export class CustomerLoginComponent implements OnInit {
   displayLoginError = false;
   loginError = "";
-  @Input() isComingFromCartPage = false;
+  @Input() isComingFromCartPage=false;
   //socialusers = new Socialusers();
   constructor(
     private _validator: ValidatorsService,
@@ -36,7 +36,9 @@ export class CustomerLoginComponent implements OnInit {
     ]),
     password: new FormControl("", [
       Validators.required,
-      this._validator.patternValidation(/^([a-zA-Z0-9]{6,15})$/)
+      this._validator.patternValidation(
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,15}$/
+      )
     ])
   });
   ngOnInit() {}
@@ -94,9 +96,5 @@ export class CustomerLoginComponent implements OnInit {
   openForgetPassword() {
     const modalRef = this.modalService.open(ForgetpasswordComponent);
     modalRef.componentInstance.name = "World";
-  }
-  openSignUpPage(e) {
-    e.preventDefault();
-    this.activeModal.close("OpenSignUp");
   }
 }
