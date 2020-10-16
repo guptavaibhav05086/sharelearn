@@ -1,3 +1,6 @@
+
+ .vis-mob{ display: none;}
+ .hide-mob{display: block;}
 .navbar a:not(.btn):not(.dropdown-item) {
   color: lightgrey;
 }
@@ -38,6 +41,11 @@
 .dropdown-menu {
   min-width: 5rem !important;
 }
+.drop-sub{
+  display: -webkit-box;
+   margin-left: -520px;
+   margin-top: -10px;
+}
 @media only screen and (max-width: 768px){
   .navbar .navbar-nav .nav-item:not(:last-child){
     padding-top: 0;
@@ -58,4 +66,20 @@
     margin-top: 0 !important;
     
   }
+  .vis-mob{ display: block;}
+  .vis-mob .btn-primary {
+    font-size: 10px;
+    padding: 10px;
+}
+  .hide-mob{display: none;}
+  .drop-sub{
+    margin-left: 5px ;
+    margin-top: -10px ;
+    flex-direction: column;
+    display: flex ;
+  }
+  .navbar-nav .dropdown-menu.drop-sub:after {
+    right: 22px;
+    top: 53px;
+}
 }

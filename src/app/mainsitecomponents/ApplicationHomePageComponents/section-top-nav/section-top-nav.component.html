@@ -9,6 +9,16 @@
         <a class="nav-link" href="#"><img _ngcontent-bjd-c124="" src="../../../assets/img/logonew.svg"
             alt="" style="height: 40px;"></a>
         <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+        <div class="nav-item vis-mob" *ngIf="!displayUserNav">
+            <button class="btn btn-primary" (click)="navigateSignUp()">Create an Account</button>
+        </div>
+        <div class="nav-item vis-mob" *ngIf="displayUserNav" style="margin-left:50px ">
+            <a class="nav-link" href="#">
+                <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png" alt=""
+                    style="height: 30px;">
+            </a>
+
+        </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdownTop"
             aria-controls="navbarNavDropdownTop" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" style="height: 25px;background-color:transparent;"></span>
@@ -70,9 +80,7 @@
                                 src="../../../../assets/HomePageImg/Home Page _ Images/Sign in Icon1200.png" alt=""
                                 style="height: 30px;"></a>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="display: -webkit-box;
-                    margin-left: -520px;
-                    margin-top: -10px;">
+                    <div class="dropdown-menu drop-sub" aria-labelledby="navbarDropdownMenuLink"> 
                         <!-- <div class="menuItemDD">
                             <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Profile</a>
                         </div> -->
@@ -99,12 +107,12 @@
                     <div class="vLine"></div>
                 </li>
 
-                <li class="nav-item" *ngIf="!displayUserNav">
+                <li class="nav-item hide-mob" *ngIf="!displayUserNav">
                     <button class="btn btn-primary" (click)="navigateSignUp()">Create an Account</button>
                 </li>
 
                 <!-- User Cart Menu -->
-                <li class="nav-item" *ngIf="displayUserNav" style="padding-top:10px !important">
+                <li class="nav-item hide-mob" *ngIf="displayUserNav" style="padding-top:10px !important">
                     <a class="nav-link" href="#">
                         <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png" alt=""
                             style="height: 30px;">

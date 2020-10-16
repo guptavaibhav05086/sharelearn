@@ -23,7 +23,7 @@
     width: 50%;
   }
   [class*="flex-"] {
-    width: 100% !important;
+    /* width: 100% !important; */
   }
 }
 
@@ -31,6 +31,7 @@
 @media only screen and (min-width: 768px) {
   .flex-control-radio {
     width: 25%;
+    margin-bottom: 20px;
   }
   .fullpageView {
     height: 50vh;
@@ -93,7 +94,7 @@
 }
 
 .flex-control8 {
-  width: 80%;
+  width: calc(100% - 260px);
 }
 .flex-control-40 {
   width: 40%;
@@ -103,7 +104,8 @@
   width: 60%;
 }
 .flex-control2 {
-  width: 20%;
+  width: 246px;
+  margin-right: 10px;
 }
 .flex-control-l {
   width: 15%;
@@ -252,13 +254,46 @@ button.calendar:active {
 .overflowBody {
   overflow-y: hidden;
 }
+.flex-control5-mob{ width: 30%;}
 @media (max-width: 778px) {
+  .flex-control-radio {
+    margin-bottom: 25px;
+}
+  .or-formcontrol-colum {
+    flex-direction: column;
+  }
+  .flex-control3{
+    width: 90%;
+  }
+  .flex-control2{
+width: 100%;
+margin-right:0 ;
+  }
+  .flex-control8 {
+    width: 100%;
+}
+.flex-control5{
+width: 40%;
+}
+.flex-control-40 {
+  width: 86%;
+  padding-left: 10px;
+}
   .flex-container{
     margin: 15px;
   }
 .or-btn{
   height: 50px;
   width: 86%;
+}
+.uploard-one {
+  padding-left: 0;
+}
+.uploard-one label{
+  max-width: 200px;
+}
+.flex-control5-mob{
+  width: 80%;
 }
 
 }

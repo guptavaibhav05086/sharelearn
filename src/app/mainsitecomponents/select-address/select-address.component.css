@@ -1,6 +1,6 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
 .editForm{
-  width: 50%;
+  /* width: 50%; */
   margin: 0 auto;
 }
 
@@ -107,6 +107,7 @@ body > div.pac-container.pac-logo {
   border: 1px solid;
   padding: 10px;
   box-shadow: 5px 10px #888888;
+  margin-bottom: 20px;
 }
 .container {
   margin-left: 5%;
