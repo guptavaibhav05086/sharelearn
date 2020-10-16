@@ -14,6 +14,7 @@ export class CarouselholderComponent implements OnInit {
   noWrap = false;
   showIndicators = false;
   slidesChangeMessage = "";
+
  
   slides = [
     { image: "../../../assets/StudentDashboard/img/download.jpg" }
@@ -48,7 +49,7 @@ export class CarouselholderComponent implements OnInit {
       },
       400: {
         items: 2
-      },
+      }, 
       740: {
         items: 3
       },
@@ -56,12 +57,15 @@ export class CarouselholderComponent implements OnInit {
         items: 5
       }
     },
+  
     nav: false
   };
   constructor() {}
 
   ngOnInit() {
    // debugger;
+
+
     console.log(this.slidesData);
     console.log(this.slides);
     this.slidesData.forEach(item => {
