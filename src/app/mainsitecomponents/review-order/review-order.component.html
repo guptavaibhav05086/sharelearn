@@ -159,44 +159,50 @@
                
               </div>
               <div class="col-shp-3 priceContainer">
-                  <div class="categoryTitle">Price Details</div>
-                  <hr />
-                  <div class="rowCart">
-                    <div class="col-shp-6 priceTitle">Price ({{userCart.totalItems}} Items):</div>
-                    <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calPrice}}</div>
-                  </div>
-                  <div class="rowCart" style="margin-top: 30px;">
-                    <div class="col-shp-6 priceTitle">GST:</div>
-                    <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calGST}}</div>
-                  </div>
-                  <hr />
-                  <div class="rowCart" style="margin-top: 30px;">
-                    <div class="col-shp-6 priceTitle">Discount :</div>
-                    <div class="col-shp-4 priceAmount"> - &#x20B9; {{userCart.finalPrice.calDiscount}}</div>
-                  </div>
-                  <hr />
-                  <div class="rowCart">
-                    <div class="col-shp-6 priceTitle">Delivery Fees:</div>
-                    <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDelivery}}</div>
-                  </div>
-                 
-                  
-                  <hr />
-                  <div class="rowCart">
-                    <div class="col-shp-6 priceTitle">Total Price:</div>
-                    <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDiscountedTotal}}</div>
-                  </div>
-                  <hr />
-                  <div class="rowCart">
-                    <div class="col-shp-12 btnAling">
-                      <app-razorpayments [paymentAmount]="userCart.finalPrice.calFinalTotal" [orderId]="razorPayOrderId" 
-                      (transactionStatus)="transactionUpdate($event)">
-                    </app-razorpayments>
-                      <span style="color:red" *ngIf="displayTranFail">Last Transaction is failed/Cancelled.Please retry Payment.</span>
-                      <!-- <button class="btn btn-primary">Pay Now</button> -->
-                    </div>
+                <div class="categoryTitle">Price Details</div>
+                <hr />
+                <div class="rowCart">
+                  <div class="col-shp-6 priceTitle">Price ({{userCart.totalItems}} Items):</div>
+                  <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calPrice}}</div>
+                </div>
+                <div class="rowCart" style="margin-top: 30px;">
+                  <div class="col-shp-6 priceTitle">Discount :</div>
+                  <div class="col-shp-4 priceAmount"> - &#x20B9; {{userCart.finalPrice.calDiscount}}</div>
+                </div>
+          
+                <hr />
+                <div class="rowCart" style="margin-top: 30px;" *ngIf="userCart.finalPrice.calDiscountedDesignGST > 0">
+                  <div class="col-shp-6 priceTitle">Design GST (18%):</div>
+                  <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDiscountedDesignGST}}</div>
+                </div>
+                <div class="rowCart" style="margin-top: 30px;" *ngIf="userCart.finalPrice.calDiscountedPrintGST > 0">
+                  <div class="col-shp-6 priceTitle">Print GST (12%):</div>
+                  <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDiscountedPrintGST}}</div>
+                </div>
+          
+                <hr />
+                <div class="rowCart">
+                  <div class="col-shp-6 priceTitle">Delivery Fees:</div>
+                  <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDelivery}}</div>
+                </div>
+          
+          
+                <hr />
+                <div class="rowCart">
+                  <div class="col-shp-6 priceTitle">Total Price:</div>
+                  <div class="col-shp-4 priceAmount">&#x20B9; {{userCart.finalPrice.calDiscountedTotal}}</div>
+                </div>
+                <hr />
+                <div class="rowCart">
+                  <div class="col-shp-12 btnAling">
+                    <!-- <app-razorpayments [paymentAmount]="userCart.finalPrice.calFinalTotal" [orderId]="razorPayOrderId" 
+                    (transactionStatus)="transactionUpdate($event)">
+                  </app-razorpayments> -->
+          
+                    <button class="btn btn-primary" [disabled]="disableProceed" (click)="placeOrder()">Proceed</button>
                   </div>
                 </div>
+              </div>
             </div>
           </div>
 

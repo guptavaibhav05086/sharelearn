@@ -4,120 +4,121 @@
 </div> -->
 <header class="animated fadeInDown">
     <nav class="navbar navbar-expand-lg navbar-light bg-light"
-    style="background-color: white !important;background-image: url('../../../../assets/HomePageImg/Home Page _ Images/Top Background1200.png') !important;background-size: cover;height :120px;">
-            <div class="container-fluid p-0">
-        <a class="nav-link" href="#"><img _ngcontent-bjd-c124="" src="../../../assets/img/logonew.svg"
-            alt="" style="height: 40px;"></a>
-        <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdownTop"
-            aria-controls="navbarNavDropdownTop" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon" style="height: 25px;background-color:transparent;"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNavDropdownTop" style="">
-            <ul class="navbar-nav">
-                <!-- <li class="nav-item active borderNav">
+        style="background-color: white !important;background-image: url('../../../../assets/HomePageImg/Home Page _ Images/Top Background1200.png') !important;background-size: cover;height :120px;">
+        <div class="container-fluid p-0">
+            <a class="nav-link" href="#"><img _ngcontent-bjd-c124="" src="../../../assets/img/logonew.svg" alt=""
+                    style="height: 40px;"></a>
+            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdownTop"
+                aria-controls="navbarNavDropdownTop" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="height: 25px;background-color:transparent;"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNavDropdownTop"
+                style="">
+                <ul class="navbar-nav">
+                    <!-- <li class="nav-item active borderNav">
                
                 </li> -->
 
-                <li class="nav-item borderNav topsearchhide" style="padding-top: 10px;" id="searchBarButton">
-                    <input type="text" class="searchBtn" style="height: 35px;" />
-                    <button class="btn btn-primary" style="height: 35px; margin-top: 7px;">Design/Print</button>
-                </li>
-                <li class="nav-item borderNav">
-                    <a class="nav-link" routerLink="/">Home</a>
-                </li>
-                <li class="nav-item active borderNav">
-                    <div class="vLine"></div>
-                </li>
-                <li class="nav-item borderNav">
-                    <a class="nav-link" href="#">About Us</a>
-                </li>
-                <li class="nav-item active borderNav">
-                    <div class="vLine"></div>
-                </li>
-                <li class="nav-item borderNav">
-                    <a class="nav-link" routerLink="/register">Become a Service Provider</a>
-                </li>
-                <li class="nav-item active borderNav">
-                    <div class="vLine"></div>
-                </li>
-                <li class="nav-item dropdown borderNav" *ngIf="!displayUserNav">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sign In
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-sun-one" aria-labelledby="navbarDropdownMenuLink" style="display: -webkit-box;
+                    <li class="nav-item borderNav topsearchhide" style="padding-top: 10px;" id="searchBarButton">
+                        <input type="text" class="searchBtn" style="height: 35px;" />
+                        <button class="btn btn-primary" style="height: 35px; margin-top: 7px;">Design/Print</button>
+                    </li>
+                    <li class="nav-item borderNav">
+                        <a class="nav-link" routerLink="/">Home</a>
+                    </li>
+                    <li class="nav-item active borderNav">
+                        <div class="vLine"></div>
+                    </li>
+                    <li class="nav-item borderNav">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item active borderNav">
+                        <div class="vLine"></div>
+                    </li>
+                    <li class="nav-item borderNav">
+                        <a class="nav-link" routerLink="/register">Become a Service Provider</a>
+                    </li>
+                    <li class="nav-item active borderNav">
+                        <div class="vLine"></div>
+                    </li>
+                    <li class="nav-item dropdown borderNav" *ngIf="!displayUserNav">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sign In
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-sun-one" aria-labelledby="navbarDropdownMenuLink" style="display: -webkit-box;
                     margin-left: -110px;
                     margin-top: -20px;">
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#" (click)="openLogin($event)">Customer</a>
+                            <div class="menuItemDD">
+                                <a class="dropdown-item" href="#" (click)="openLogin($event)">Customer</a>
+                            </div>
+
+                            <div class="menuItemDD">
+                                <a class="dropdown-item" routerLink="/login">Vendor</a>
+                            </div>
+
+
+
                         </div>
-
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" routerLink="/login">Vendor</a>
-                        </div>
-
-
-
-                    </div>
-                </li>
-                <!-- After User Sign Up Menu -->
-                <li class="nav-item dropdown borderNav" *ngIf="displayUserNav" style="padding-top:0px !important">
-                    <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <a class="nav-link" routerLink="/cart">
-                            <img _ngcontent-bjd-c124=""
-                                src="../../../../assets/HomePageImg/Home Page _ Images/Sign in Icon1200.png" alt=""
-                                style="height: 30px;"></a>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="display: -webkit-box;
+                    </li>
+                    <!-- After User Sign Up Menu -->
+                    <li class="nav-item dropdown borderNav" *ngIf="displayUserNav" style="padding-top:0px !important">
+                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" routerLink="/cart">
+                                <img _ngcontent-bjd-c124=""
+                                    src="../../../../assets/HomePageImg/Home Page _ Images/Sign in Icon1200.png" alt=""
+                                    style="height: 30px;"></a>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="display: -webkit-box;
                     margin-left: -520px;
                     margin-top: -10px;">
-                        <!-- <div class="menuItemDD">
+                            <!-- <div class="menuItemDD">
                             <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Profile</a>
                         </div> -->
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" routerLink="/user/ongoingorders" >On Going Order</a>
+                            <div class="menuItemDD">
+                                <a class="dropdown-item" routerLink="/user/ongoingorders">On Going Order</a>
+                            </div>
+                            <div class="menuItemDD">
+                                <a class="dropdown-item" routerLink="/user/allorders">All Orders</a>
+                            </div>
+                            <div class="menuItemDD">
+                                <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Settings</a>
+                            </div>
+
+                            <div class="menuItemDD">
+                                <a class="dropdown-item" href="#" routerLink="/logout">Help & Support</a>
+                            </div>
+                            <div class="menuItemDD">
+                                <a class="dropdown-item" href="#" routerLink="/logout">Log out</a>
+                            </div>
+
+
+
                         </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" routerLink="/user/allorders" >All Orders</a>
-                        </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Settings</a>
-                        </div>
+                    </li>
 
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#" routerLink="/logout">Help & Support</a>
-                        </div>
-                         <div class="menuItemDD">
-                            <a class="dropdown-item" href="#" routerLink="/logout">Log out</a>
-                        </div>
+                    <li class="nav-item active borderNav">
+                        <div class="vLine"></div>
+                    </li>
 
+                    <li class="nav-item" *ngIf="!displayUserNav">
+                        <button class="btn btn-primary" (click)="navigateSignUp(false)">Create an Account</button>
+                    </li>
 
+                    <!-- User Cart Menu -->
+                    <li class="nav-item" *ngIf="displayUserNav" style="padding-top:10px !important">
+                        <a class="nav-link" href="#">
+                            <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png"
+                                alt="" style="height: 30px;">
+                        </a>
 
-                    </div>
-                </li>
+                    </li>
+                    <!-- 9415191978 -->
 
-                <li class="nav-item active borderNav">
-                    <div class="vLine"></div>
-                </li>
-
-                <li class="nav-item" *ngIf="!displayUserNav">
-                    <button class="btn btn-primary" (click)="navigateSignUp()">Create an Account</button>
-                </li>
-
-                <!-- User Cart Menu -->
-                <li class="nav-item" *ngIf="displayUserNav" style="padding-top:10px !important">
-                    <a class="nav-link" href="#">
-                        <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png" alt=""
-                            style="height: 30px;">
-                    </a>
-
-                </li>
-                <!-- 9415191978 -->
-
-            </ul>
+                </ul>
+            </div>
         </div>
-    </div>
     </nav>
 </header>

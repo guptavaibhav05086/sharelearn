@@ -148,6 +148,12 @@ export class OrderCartComponent implements OnInit {
       else if(data=="openLogin"){
         this.openLogin();
       }
+      else if(data=="Close"){
+        let ver= localStorage.getItem("emailVerificationDone");
+        if(ver == "True"){
+          window.location.reload();
+        }
+      }
     });
   }
   removeItem(id) {
@@ -167,8 +173,9 @@ export class OrderCartComponent implements OnInit {
   loadCart() {
     debugger;
     let cartItems = JSON.parse(localStorage.getItem("cart"));
-    this.userCart.totalItems = cartItems.length;
+   
     if (cartItems != null && cartItems.length > 0) {
+      this.userCart.totalItems = cartItems.length;
       cartItems.forEach(item => {
         if (item.type == "Design And Print") {
           item.category[0].id = item.id;

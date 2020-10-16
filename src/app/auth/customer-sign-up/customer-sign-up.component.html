@@ -1,6 +1,6 @@
 <div class="modal-header">
     <h4 class="modal-title">Register</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')"
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close')"
         *ngIf="!isComingFromCartPage">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -179,7 +179,7 @@
 
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="activeModal.close('Cross click')"
+    <button type="button" class="btn btn-light" (click)="activeModal.close('Cross')"
         *ngIf="!isComingFromCartPage">
         Close
     </button>
