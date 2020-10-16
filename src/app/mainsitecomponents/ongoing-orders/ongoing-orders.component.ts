@@ -6,6 +6,7 @@ import { DesignerService } from "../../services/designer.service";
 import { CustomerService } from "../../services/customer.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ActiveOrdersComponent } from "../active-orders/active-orders.component";
+import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
 @Component({
   selector: "app-ongoing-orders",
   templateUrl: "./ongoing-orders.component.html",
@@ -39,6 +40,20 @@ export class OngoingOrdersComponent implements OnInit {
     { headerName: "Sub-Category", field: "productSubcategory" },
     { headerName: "Meeting Slot", field: "meetingTime", sortable: true },
     {
+      headerName: "Meeting Cancelled",
+      field: "eligibleForReschedule",
+      sortable: true
+    },
+    {
+      headerName: "Book Slot",
+
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        label: "Book Slot",
+        onClick: this.bookMeeting.bind(this)
+      }
+    },
+    {
       headerName: "Actions",
 
       cellRenderer: "buttonRenderer",
@@ -67,7 +82,7 @@ export class OngoingOrdersComponent implements OnInit {
   }
 
   checkRow(params) {
-    debugger;
+    //debugger;
     var todayDate = new Date();
     var meetingTime = new Date(Date.parse(params.data.meetingTime));
 
@@ -94,6 +109,40 @@ export class OngoingOrdersComponent implements OnInit {
     modelref.componentInstance.isAllOrders = true;
     modelref.result.then(data => {
       this.fetchOngoingOrder();
+    });
+  }
+  bookMeeting(e) {
+    debugger;
+    let modelRef = this.modalService.open(BookMeetingComponent, {
+      backdrop: "static",
+      keyboard: false
+    });
+    let gapDetails = { gap: e.rowData.gap, duration: e.rowData.duration };
+    modelRef.componentInstance.comingFromOrderPage = true;
+    modelRef.componentInstance.gapDetails = gapDetails;
+    modelRef.result.then(data => {
+      let meet={
+        day:{
+          year:data.mDate.year,
+          day:data.mDate.day,
+          month:data.mDate.month
+        },
+        slot:{
+          hour:data.mSlot.hour,
+          minute:data.mSlot.minute,
+          second:data.mSlot.second
+        },
+        meetingDuration:data.duration
+      }
+      //debugger;
+      console.log(data);
+      this.customerService.rescheduleMeetRequest(meet,e.rowData.OrderId).subscribe(data=>{
+        this.customerService.rescheduleMeetNotify(meet,e.rowData.OrderId).subscribe(data=>{
+          console.log('notifications sending Done')
+        })
+      })
+
+      //this.helper.navigateToPath("/revieworder");
     });
   }
 }

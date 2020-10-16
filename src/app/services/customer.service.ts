@@ -63,6 +63,26 @@ export class CustomerService {
       this.login.getAuthHeader()
     );
   }
+  rescheduleMeetRequest(meetingDetails, orderId) {
+    return this._httpclient.post(
+      `${environment.baseUrl}${environment.rescheduleMeet}`.replace(
+        "$orderId",
+        orderId
+      ),
+      meetingDetails,
+      this.login.getAuthHeader()
+    );
+  }
+  rescheduleMeetNotify(meetingDetails, orderId) {
+    return this._httpclient.post(
+      `${environment.baseUrl}${environment.reschuleMeetNoti}`.replace(
+        "$orderId",
+        orderId
+      ),
+      meetingDetails,
+      this.login.getAuthHeader()
+    );
+  }
   getUserAddress(userId): Observable<Array<AddressRequest>> {
     let url = `${environment.baseUrl}${environment.getUserAddress}`.replace(
       "$userId",
@@ -233,9 +253,10 @@ export class CustomerService {
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
   generateOTPEmail(email) {
-    let url = `${environment.baseUrl}${environment.generateOTPCustomerEmail}`
-      .replace("$email", email)
-      ;
+    let url = `${environment.baseUrl}${environment.generateOTPCustomerEmail}`.replace(
+      "$email",
+      email
+    );
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
   verifyOTPEmail(email, OTP) {

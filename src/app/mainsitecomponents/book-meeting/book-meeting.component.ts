@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from "@angular/core";
+import { Component, OnInit, HostListener, Input } from "@angular/core";
 import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
 import { NgbDateStruct, NgbTimeStruct } from "@ng-bootstrap/ng-bootstrap";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
@@ -10,6 +10,8 @@ import { CustomerService } from "src/app/services/customer.service";
   styleUrls: ["./book-meeting.component.css"]
 })
 export class BookMeetingComponent implements OnInit {
+  @Input() comingFromOrderPage=false;
+  @Input() gapDetails;
   minDatecontrol: any;
   maxDatecontrol: any;
   meetingSlotBookingTimeStart = {
@@ -80,7 +82,13 @@ export class BookMeetingComponent implements OnInit {
       minute: 0,
       second: 0
     };
-    this.meetingInfo = this.checkTimeGap();
+    if(this.comingFromOrderPage){
+      this.meetingInfo = this.gapDetails;
+    }
+    else{
+      this.meetingInfo = this.checkTimeGap();
+    }
+   
     this.calculateSlots();
     let date = new Date();
     // date.setHours(date.getHours() + this.meetingInfo.gap);
