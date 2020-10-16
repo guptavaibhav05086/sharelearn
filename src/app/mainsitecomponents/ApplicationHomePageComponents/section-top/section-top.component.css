@@ -122,4 +122,12 @@
   .dcol-2 img{ max-width: 90%;}
   .positioncontainerRight{ width: 100%;}
   .mt-mob-0 { margin-top: 0 !important;}
+  .positioncontainerRight {
+    background: url("../../../../assets/HomePageImg/Home Page _ Images/Find and hire1200.png");
+    background-size: contain;
+    height: 210px;
+    background-position: 74px 66px;
+    background-repeat: no-repeat;
+  }
+  .mob-pad{ padding: 0;}
 }

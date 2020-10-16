@@ -1,5 +1,5 @@
 <div class="row" style="padding-top:50px">
-  <div class="col-md-10">
+  <div class="col-md-10 mx-auto ">
     <div>
       <form [formGroup]="orderForm">
         <!-- Container for Order Type Selection -->
@@ -9,7 +9,7 @@
               Create Order
             </h3>
           </div>
-          <div class="or-formcontrol flex-container" style="margin-left: 10%;">
+          <div class="or-formcontrol or-formcontrol-colum flex-container">
             <div class="flex-control3">
               <button
                 class="btn btn-primary or-btn"
@@ -423,7 +423,7 @@
                   <!-- Logo Image Upload --> 
                   <div class="input-group col-md-4">
                     <div class="" *ngFor="let item of imageUpload;let  i=index">
-                      <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
+                      <div class="input-group uploard-one col-md-5" style="padding-top: 30px;position: relative !important">
                         <div class="form-group">
                           <div *ngIf="i == 0">
                               <label *ngIf="orderForm.controls['type'].value != 'Print Only'">Logo/Image </label>
@@ -580,7 +580,7 @@
                 </div> -->
                 
                 <div class="row" *ngIf="displayDesigner">
-                  <div class="flex-control5" >
+                  <div class="flex-control5 flex-control5-mob" >
                       <div class="form-group">
                           <input type="checkbox" formControlName="sourceFileSpecs" />
                          
@@ -595,7 +595,7 @@
                           <i class="fa fa-question-circle fa-lg"></i>
                         </button>
                   </div>
-                  <div class="flex-control5" >
+                  <div class="flex-control5 flex-control5-mob" >
                       <div class="form-group">
                           <input type="checkbox" formControlName="professionDesigner" />
                          

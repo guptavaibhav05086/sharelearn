@@ -112,8 +112,19 @@
   }
   .dcol-4 {
     
-    width: 50%;
-    width: 50%;
+    float: left;
+    width: 46%;
     text-align: left;
 }
+ .dcol-4{
+  border-right: 2px solid lightblue;
+  margin-right: 10px;
+}
+.mob-no-border{
+  border: none;
+}
+.dcol-5{
+  clear: both;
+}
+
 }

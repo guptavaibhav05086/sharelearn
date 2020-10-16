@@ -1,4 +1,9 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
+.editForm{
+  /* width: 50%; */
+  margin: 0 auto;
+}
+
 @media only screen and (min-width: 400px) {
   .colAddress {
     width: 100%;
@@ -9,6 +14,7 @@
 }
 
 @media only screen and (min-width: 600px) {
+
   .colAddress {
     width: 40%;
     margin-left: 3%;
@@ -101,7 +107,14 @@ body > div.pac-container.pac-logo {
   border: 1px solid;
   padding: 10px;
   box-shadow: 5px 10px #888888;
+  margin-bottom: 20px;
 }
 .container {
   margin-left: 5%;
 }
+@media (max-width: 778px) {
+.editForm{
+  width: 100%;
+  margin: 0 auto;
+}
+} 

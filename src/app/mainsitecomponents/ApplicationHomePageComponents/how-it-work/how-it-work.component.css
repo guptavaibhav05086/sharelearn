@@ -20,6 +20,7 @@
   background-size: contain;
   background-repeat: no-repeat;
 }
+.alingdiv2{ padding-top: 100px;}
 @media (min-width: 768px) {
   .container {
     width: 100%;
