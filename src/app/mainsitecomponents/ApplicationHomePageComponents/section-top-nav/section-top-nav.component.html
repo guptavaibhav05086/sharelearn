@@ -10,7 +10,7 @@
                     style="height: 40px;"></a>
             <!-- <a class="navbar-brand" href="#">Navbar</a> -->
             <div class="nav-item vis-mob" *ngIf="!displayUserNav">
-                <button class="btn btn-primary" (click)="navigateSignUp()">Create an Account</button>
+                <button class="btn btn-primary" (click)="navigateSignUp(false)">Create an Account</button>
             </div>
             <div class="nav-item vis-mob" *ngIf="displayUserNav" style="margin-left:50px ">
                 <a class="nav-link" href="#">
@@ -31,8 +31,10 @@
                 </li> -->
 
                     <li class="nav-item borderNav topsearchhide" style="padding-top: 10px;" id="searchBarButton">
-                        <input type="text" class="searchBtn" style="height: 35px;" />
-                        <button class="btn btn-primary" style="height: 35px; margin-top: 7px;">Design/Print</button>
+                        <input type="text" class="searchBtn" style="height: 35px;" [(ngModel)]="selected"
+                            [typeahead]="products" [isAnimated]="true" />
+                        <button class="btn btn-primary" style="height: 35px; margin-top: 7px;"
+                            (click)="NavigateToOrder()">Design/Print</button>
                     </li>
                     <li class="nav-item borderNav">
                         <a class="nav-link" href="#">Home</a>
@@ -109,7 +111,7 @@
                     </li>
 
                     <li class="nav-item hide-mob" *ngIf="!displayUserNav">
-                        <button class="btn btn-primary" (click)="navigateSignUp()">Create an Account</button>
+                        <button class="btn btn-primary" (click)="navigateSignUp(false)">Create an Account</button>
                     </li>
 
                     <!-- User Cart Menu -->

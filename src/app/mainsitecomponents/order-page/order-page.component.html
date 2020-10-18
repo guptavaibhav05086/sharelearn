@@ -724,7 +724,7 @@
                 <img [src]="selectedProductImage" />
                
               </div>
-              <div class="flex-control8" >
+              <div class="flex-control8" style="margin-left: 2%;">
                   <div class="row">
                       <div class="flex-control-50" >
                           <div class="form-group">
@@ -865,7 +865,7 @@
                           </div>
                          
                     </div>
-                    <div class="flex-control3 price-margin">
+                    <div class="flex-control3 price-margin" style="display:none">
                       <div class="form-group" style="display: flex;">
                           <div class="flex-controllabel">
                               <label style="font-size: 14px;font-weight:bold;">GST: </label> 
@@ -882,9 +882,27 @@
                   </div>
                     
 
+                  
+
+                <!-- Total price Goes Here -->
+                <div class="flex-control3 price-margin">
+                  <div class="form-group" style="display: flex;">
+                      <div class="flex-controllabel">
+                          <label style="font-size: 14px;font-weight:bold;">Total: </label> 
+                      </div>
+                        <div class="flex-controlPrice">
+                            <label>
+                                &#x20B9; {{orderPrice.Total-this.orderPrice.GST}} 
+                            </label>
+                        </div>
+                     
+                    </div>
+                    <hr class="hrColor"/>
+                    
+              </div>
                    
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                   <div class="flex-control-50" style="visibility:hidden;">
                       <div class="form-group">
                       Fake data
@@ -892,25 +910,10 @@
                         </div>
                        
                   </div>
-                  <!-- Discoutnt Goes Here -->
-                  <div class="flex-control3 price-margin">
-                    <div class="form-group" style="display: flex;">
-                        <div class="flex-controllabel">
-                            <label style="font-size: 14px;font-weight:bold;">Total: </label> 
-                        </div>
-                          <div class="flex-controlPrice">
-                              <label>
-                                  &#x20B9; {{orderPrice.Total}}
-                              </label>
-                          </div>
-                       
-                      </div>
-                      <hr class="hrColor"/>
-                      
-                </div>
+                  
 
                  
-              </div>
+              </div> -->
                 <!-- Detailed pricing -->
                 <div class="row" >
                   <div class="flex-control-50">
@@ -1074,7 +1077,7 @@
                               </div>
                            
                           </div>
-                         
+                          <hr class="hrColor"/>
                       
                     </div>
                    
@@ -1090,8 +1093,8 @@
                           
                     </div>
 
-                   <!-- replace with GST -->
-                   <div class="flex-control3 price-margin">
+                   <!--  GST Is hidden -->
+                   <div class="flex-control3 price-margin" style="display:none">
                     <div class="form-group" style="display: flex;">
                         <div class="flex-controllabel">
                             <label style="font-size: 14px;font-weight:bold;">GST: </label> 
@@ -1106,6 +1109,22 @@
                       <hr class="hrColor">
                       
                 </div>
+                <!-- Replace with Total -->
+                <div class="flex-control3 price-margin">
+                  <div class="form-group" style="display: flex;">
+                      <div class="flex-controllabel">
+                          <label style="font-size: 14px;font-weight:bold;">Total: </label> 
+                      </div>
+                        <div class="flex-controlPrice">
+                            <label>
+                                &#x20B9; {{orderPrice.Total - this.orderPrice.GST}} 
+                            </label>
+                        </div>
+                     
+                    </div>
+                    <hr class="hrColor"/>
+                    
+              </div>
                 </div>
                 <div class="row">
                     <div class="flex-control-50">
@@ -1120,21 +1139,16 @@
                           </div>
                          
                     </div>
-                    
-                   <!-- Replace with Total -->
-                   <div class="flex-control3 price-margin">
-                    <div class="form-group" style="display: flex;">
-                        <div class="flex-controllabel">
-                            <label style="font-size: 14px;font-weight:bold;">Total: </label> 
+                      <!-- Detailed pricing -->
+                    <div class="flex-control3 price-margin">
+                      <div class="form-group" style="color:green;">
+                          <!-- <button type="button" class="btn btn-link" (click)="openPriceDescription()">Detailed Pricing</button> -->
+                         <a href="#" (click)="openPriceDescription($event)"><span ><u style="color:blue">Detailed Pricing</u></span></a>
+                          
+                          
+                         
                         </div>
-                          <div class="flex-controlPrice">
-                              <label>
-                                  &#x20B9; {{orderPrice.Total}}
-                              </label>
-                          </div>
-                       
-                      </div>
-                      <hr class="hrColor"/>
+                    
                       
                 </div>
 
@@ -1161,29 +1175,32 @@
                           </div>
                          
                     </div>
-                    <div class="flex-control3 price-margin">
-                        <div class="form-group" style="color:green;">
-                            <!-- <button type="button" class="btn btn-link" (click)="openPriceDescription()">Detailed Pricing</button> -->
-                           <a href="#" (click)="openPriceDescription($event)"><span ><u style="color:blue">Detailed Pricing</u></span></a>
-                            
-                            
-                           
-                          </div>
-                      <!-- <div class="form-group" style="display: flex;">
-                          <div class="flex-controllabel">
-                              <label style="font-size: 14px;font-weight:bold;">GST: </label> 
-                          </div>
-                            <div class="flex-controlPrice">
-                                <label>
-                                    &#x20B9; {{this.orderPrice.GST}}
-                                </label>
-                            </div>
-                         
-                        </div>
-                        <hr> -->
-                        
-                  </div>
                     
+                    <div class="flex-control-3" style="margin-left: 3%;width:30%">
+                      <div class="" *ngIf="displayprinter">
+                          <div style="display: flex;">
+                              <div >
+                                  <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tPrinter">
+                              </div>
+                              <div>
+                                  <label for="checkbox1" class="checkboxLabel" style="padding-left: 20px;">
+                                      I have read and agree to the  <a href="#" (click)="openTermCondition('Printer',$event)">
+                                          <span ><u style="color:blue">Terms and Conditons</u></span> 
+                                        </a> Printers
+                                </label>
+                              </div>
+                            </div>
+                        <div style="display:none">   Colors of images on screen and their printed output may vary from 5% to 10%</div>
+                        <div style="display:none">
+                            Thickness (GSM) of paper may vary by 5%
+                        </div>
+                       
+    
+                     
+                       
+                    </div>
+                         
+                    </div>
 
                    
                 </div>
@@ -1214,7 +1231,7 @@
 
                  
               </div>
-                <!-- Detailed pricing -->
+              
                 <div class="row" >
                   <div class="flex-control-50">
                       <div class="form-group" style="color:lightblue" *ngIf="orderPrice.deliveryDays>0">
@@ -1225,30 +1242,20 @@
                        
                   </div>
                   <div class="flex-control-3" style="margin-left: 3%;width:30%">
-                      <div class="" *ngIf="displayprinter">
-                          <div style="display: flex;">
-                              <div >
-                                  <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tPrinter">
-                              </div>
-                              <div>
-                                  <label for="checkbox1" class="checkboxLabel" style="padding-left: 20px;">
-                                      I have read and agree to the  <a href="#" (click)="openTermCondition('Printer',$event)">
-                                          <span ><u style="color:blue">Terms and Conditons</u></span> 
-                                        </a> Printers
-                                </label>
-                              </div>
-                            </div>
-                        <div>   Colors of images on screen and their printed output may vary from 5% to 10%</div>
-                        <div>
-                            Thickness (GSM) of paper may vary by 5%
-                        </div>
-                       
-    
+                    <div class="" *ngIf="displayprinter">
+                        
+                      <div>   Colors of images on screen and their printed output may vary from 5% to 10%</div>
+                      <div>
+                          Thickness (GSM) of paper may vary by 5%
+                      </div>
                      
+  
+                   
+                     
+                  </div>
                        
-                    </div>
-                         
-                    </div>
+                  </div>
+                  
                 
               </div>
                <!-- Terms and conditions -->

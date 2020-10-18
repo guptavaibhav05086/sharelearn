@@ -77,7 +77,7 @@ import { AllOrdersComponent } from "../app/mainsitecomponents/all-orders/all-ord
 import { ActiveOrdersComponent } from "../app/mainsitecomponents/active-orders/active-orders.component";
 import { ButtonrendererComponent } from "../app/mainsitecomponents/buttonrenderer/buttonrenderer.component";
 import { OngoingOrdersComponent } from "../app/mainsitecomponents/ongoing-orders/ongoing-orders.component";
-
+import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 @NgModule({
   declarations: [
     AppComponent,
@@ -156,7 +156,8 @@ import { OngoingOrdersComponent } from "../app/mainsitecomponents/ongoing-orders
     NgxSpinnerModule,
     NgxStarRatingModule,
     NgbModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    TypeaheadModule.forRoot()
   ],
   providers: [
     // AuthService,

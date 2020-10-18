@@ -7,6 +7,8 @@ import {
   transition
 } from "@angular/animations";
 import { DOCUMENT } from "@angular/common";
+import { AdminService } from 'src/app/services/admin.service';
+import { CustomerService } from 'src/app/services/customer.service';
 @Component({
   selector: "app-home-container",
   templateUrl: "./home-container.component.html",
@@ -21,9 +23,15 @@ import { DOCUMENT } from "@angular/common";
 })
 export class HomeContainerComponent implements OnInit {
   displayTopNav = true;
-  constructor(@Inject(DOCUMENT) document) {}
+  constructor(@Inject(DOCUMENT) document,
+  private adminService: AdminService,
+  private customerService:CustomerService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.adminService.getProducts().subscribe(data => {
+      this.customerService.setProductsData(data);
+    });
+  }
   @HostListener("window:scroll", ["$event"])
   onWindowScroll(e) {
     if (window.pageYOffset > 400) {

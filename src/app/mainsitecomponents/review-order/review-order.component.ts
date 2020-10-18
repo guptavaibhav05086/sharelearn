@@ -18,6 +18,7 @@ export class ReviewOrderComponent implements OnInit {
   razorPayOrderId: any;
   interOrderId: any;
   isPrintOrder = "false";
+  isCartLoaded = false;
   selectedSlot = {
     data: {},
     selectedDate: "",
@@ -77,9 +78,10 @@ export class ReviewOrderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+    //debugger;
+
     this.route.queryParams.subscribe(params => {
-      debugger;
+      //debugger;
       console.log(params); // { order: "popular" }
       //this.cartItemId = params.itemId;
       if (params.isPrintOrder != undefined) {
@@ -90,7 +92,7 @@ export class ReviewOrderComponent implements OnInit {
       }
       // popular
     });
-
+    //this.spinner.show();
     this.admin.getProducts().subscribe(
       data => {
         //this.discountPrice=data["discountList"];
@@ -99,13 +101,20 @@ export class ReviewOrderComponent implements OnInit {
         //debugger;
 
         this.loadCart();
+        this.isCartLoaded = true;
+        //this.spinner.hide();
+        // if (this.isPrintOrder != "true") {
+        //   this.bookMeeting();
+        // }
         if (this.isPrintOrder == "true") {
           this.generateOrderId();
         }
 
         //debugger;
       },
-      err => {}
+      err => {
+        this.spinner.hide();
+      }
     );
   }
   @HostListener("window:popstate", ["$event"])
@@ -154,7 +163,9 @@ export class ReviewOrderComponent implements OnInit {
     console.log(event);
   }
   loadCart() {
-    debugger;
+    //debugger;
+    //this.spinner.getSpinner()
+    //this.spinner.show("loadcart");
     if (
       localStorage.getItem("selectedAddess") != null &&
       localStorage.getItem("selectedAddess") != ""
@@ -248,9 +259,10 @@ export class ReviewOrderComponent implements OnInit {
     this.calculateDiscounts();
     console.log("User cart Data");
     console.log(this.userCart);
+    //this.spinner.hide("loadcart");
   }
   calculateDiscounts() {
-    debugger;
+    //debugger;
     let totalpriceWithoutDelivery =
       this.userCart.finalPrice.calPrice + this.userCart.finalPrice.calGST;
     let perc = this.custService.getDiscountPercentage(
@@ -316,8 +328,13 @@ export class ReviewOrderComponent implements OnInit {
     }
   }
   generateOrderId() {
-    debugger;
+    //debugger;
     this.spinner.show();
+    if (this.userCart.finalPrice.calDiscountedTotal == 0) {
+      // this.resetCart();
+      // this.loadCart();
+    }
+
     let seladd = localStorage.getItem("selectedAddess");
     let addresss = null;
     if (seladd != null && seladd != "") {
@@ -332,6 +349,7 @@ export class ReviewOrderComponent implements OnInit {
     };
     FinalOrder.cart = this.custService.getLocalStorageCart();
     FinalOrder.orderPrice = this.userCart.finalPrice;
+
     console.log(JSON.stringify(FinalOrder));
     this.custService.generateOrderIdPost(FinalOrder).subscribe(
       data => {
@@ -358,7 +376,22 @@ export class ReviewOrderComponent implements OnInit {
       //debugger;
       console.log(data);
       this.custService.setMeetingSlot(data);
-      this.generateOrderId();
+      if (this.userCart.finalPrice.calDiscountedTotal == 0) {
+        let timer = setInterval(() => {
+          debugger;
+
+          if (this.userCart.finalPrice.calDiscountedTotal > 0) {
+            this.generateOrderId();
+            clearInterval(timer);
+          }
+
+          //this.bookMeeting();
+          window.location.reload();
+        }, 1000);
+      } else {
+        this.generateOrderId();
+      }
+
       this.selectedSlot.data = data;
       this.selectedSlot.selectedDate =
         data.mDate.day + "/" + data.mDate.month + "/" + data.mDate.year;

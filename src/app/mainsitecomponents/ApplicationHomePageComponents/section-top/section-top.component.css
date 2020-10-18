@@ -27,7 +27,7 @@
     margin-top: 15px;
   }
   .txtMainHeading {
-    font-family: 'Maven Pro', sans-serif;
+    font-family: "Maven Pro", sans-serif;
     font-size: 24px;
     font-weight: 900;
   }
@@ -36,7 +36,7 @@
     color: #ffffff;
   }
   .txtSearchBar {
-    font-family: 'Maven Pro', sans-serif;
+    font-family: "Maven Pro", sans-serif;
     font-size: 15px;
   }
   .alingdiv {
@@ -50,7 +50,7 @@
     height: 35px;
   }
   .textStyle {
-    font-family: 'Maven Pro', sans-serif;
+    font-family: "Maven Pro", sans-serif;
     font-size: 16px;
     font-weight: 300;
   }
@@ -64,17 +64,16 @@
     width: 20px;
   }
 }
-@media only screen and (max-width: 575px){
-  .dcol-2{
+@media only screen and (max-width: 575px) {
+  .dcol-2 {
     margin-top: 0px;
   }
 }
 @media (max-width: 768px) {
   .dcol-3 {
-   
     width: 50%;
   }
-  .dcol-2{
+  .dcol-2 {
     margin-top: 113px;
   }
   .imgEditPrintSize {
@@ -84,7 +83,7 @@
   }
   .txtFreelance {
     font-weight: 900;
-    font-family: 'Maven Pro', sans-serif;
+    font-family: "Maven Pro", sans-serif;
     font-size: 44px;
     margin-top: 5px;
     line-height: 45px;
@@ -92,7 +91,7 @@
   .btn-primary {
     background-color: #51cbce;
     color: #ffffff;
-    font-family: 'Maven Pro', sans-serif;
+    font-family: "Maven Pro", sans-serif;
   }
   .alingdiv {
     /* padding-top: 100px; */
@@ -110,18 +109,27 @@
     height: 30px;
   }
   .textStyle {
-    font-family: 'Maven Pro', sans-serif;
+    font-family: "Maven Pro", sans-serif;
     font-size: 12px;
     font-weight: 300;
   }
-  .txtMainHeading{
+  .txtMainHeading {
     font-size: 24px;
     font-weight: 900;
   }
-  .dcol-2{ text-align: center; margin-top: 40px;}
-  .dcol-2 img{ max-width: 90%;}
-  .positioncontainerRight{ width: 100%;}
-  .mt-mob-0 { margin-top: 0 !important;}
+  .dcol-2 {
+    text-align: center;
+    margin-top: 40px;
+  }
+  .dcol-2 img {
+    max-width: 90%;
+  }
+  .positioncontainerRight {
+    width: 100%;
+  }
+  .mt-mob-0 {
+    margin-top: 0 !important;
+  }
   .positioncontainerRight {
     background: url("../../../../assets/HomePageImg/Home Page _ Images/Find and hire1200.png");
     background-size: contain;
@@ -129,5 +137,7 @@
     background-position: 74px 66px;
     background-repeat: no-repeat;
   }
-  .mob-pad{ padding: 0;}
+  .mob-pad {
+    padding: 0;
+  }
 }

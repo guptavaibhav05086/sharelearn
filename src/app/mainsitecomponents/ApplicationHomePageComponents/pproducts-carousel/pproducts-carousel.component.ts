@@ -15,6 +15,11 @@ export class PproductsCarouselComponent implements OnInit {
   constructor(private admin: AdminService) {}
 
   ngOnInit(): void {
+    //let data = this.customerService.getproductsData();
+    // while (data == undefined) {
+    //   data = this.customerService.getproductsData();
+    // }
+    //this.initiateCarousel(data);
     this.admin.getProducts().subscribe(
       data => {
         //debugger;
@@ -33,5 +38,20 @@ export class PproductsCarouselComponent implements OnInit {
       },
       err => {}
     );
+  }
+
+  initiateCarousel(data) {
+    this.products = data["products"];
+    this.products.map(item => {
+      this.images.push({
+        image:
+          item.productImage == ""
+            ? "../../../assets/StudentDashboard/img/download.jpg"
+            : item.productImage,
+        name: item.value
+      });
+      this.displayC = true;
+    });
+    console.log(this.products);
   }
 }

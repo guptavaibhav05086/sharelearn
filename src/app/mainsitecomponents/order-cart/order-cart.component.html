@@ -23,7 +23,7 @@
 
 
           <p class="productDetails">
-            <span class="detailsHeading">Price: &#x20B9;</span> {{item.price.Total}}
+            <span class="detailsHeading">Price: &#x20B9;</span> {{item.price.Total - item.price.GST}}
           </p>
           <p><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary"
               (click)="editItem(item.id)">Edit</button></p>
@@ -72,7 +72,7 @@
             <span class="detailsHeading">GSM:</span> {{item.specs.paperGSM}}
           </p>
           <p class="productDetails">
-            <span class="detailsHeading">Price: &#x20B9;</span> {{item.price.Total}}
+            <span class="detailsHeading">Price: &#x20B9;</span> {{item.price.Total - item.price.GST}}
           </p>
 
 
@@ -98,7 +98,7 @@
             <span class="detailsHeading">GSM:</span> {{item.specs.paperGSM}}
           </p>
           <p class="productDetails">
-            <span class="detailsHeading">Price: &#x20B9;</span> {{item.price.Total}}
+            <span class="detailsHeading">Price: &#x20B9;</span> {{item.price.Total - item.price.GST}}
           </p>
 
 

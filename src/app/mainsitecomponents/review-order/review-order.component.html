@@ -1,4 +1,4 @@
-<div class="container-cart">
+<div class="container-cart" >
         <div class="rowCart">
                 <div class="col-shp-12 pageTitle">Review Order</div>
         </div>
@@ -53,7 +53,7 @@
                           
                                     
                                     <p class="productDetails">
-                                      <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total}}
+                                      <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total-item.price.GST}}
                                     </p>
                                     
                                     <p style="display:none"><button class="btn" (click)="removeItem(item.id)">Remove</button> <button class="btn btn-primary" (click)="editItem(item.id)">Edit</button></p>
@@ -80,7 +80,7 @@
                                       <span class="detailsHeading">GSM:</span> {{item.specs.paperGSM}}
                                     </p>
                                     <p class="productDetails">
-                                      <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total}}
+                                      <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total - item.price.GST}}
                                     </p>
                                     
                                    
@@ -108,7 +108,7 @@
                                       <span class="detailsHeading">GSM:</span> {{item.specs.paperGSM}}
                                     </p>
                                     <p class="productDetails">
-                                      <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total}}
+                                      <span class="detailsHeading">Price: &#x20B9;</span>  {{item.price.Total - item.price.GST}}
                                     </p>
                                     
                                    
@@ -195,11 +195,11 @@
                 <hr />
                 <div class="rowCart">
                   <div class="col-shp-12 btnAling">
-                    <!-- <app-razorpayments [paymentAmount]="userCart.finalPrice.calFinalTotal" [orderId]="razorPayOrderId" 
+                    <app-razorpayments [paymentAmount]="userCart.finalPrice.calFinalTotal" [orderId]="razorPayOrderId" 
                     (transactionStatus)="transactionUpdate($event)">
-                  </app-razorpayments> -->
+                  </app-razorpayments>
           
-                    <button class="btn btn-primary" [disabled]="disableProceed" (click)="placeOrder()">Proceed</button>
+                    <!-- <button class="btn btn-primary" [disabled]="disableProceed" (click)="placeOrder()">Proceed</button> -->
                   </div>
                 </div>
               </div>
@@ -210,6 +210,15 @@
   bdColor="rgba(51, 51, 51, 0.8)"
   size="default"
   type="ball-spin-clockwise"
+  
 >
   <p style="color: white">Please Wait.</p>
 </ngx-spinner>
+<!-- <ngx-spinner
+bdColor="rgba(51, 51, 51, 0.8)"
+size="default"
+type="ball-spin-clockwise"
+[name]="orderid"
+>
+<p style="color: white">Please Wait.</p>
+</ngx-spinner> -->

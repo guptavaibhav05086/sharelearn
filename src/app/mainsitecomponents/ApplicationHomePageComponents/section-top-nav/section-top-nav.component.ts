@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { LoginService } from "src/app/services/login.service";
 import { HelperService } from "src/app/services/helper.service";
 import { CustomerService } from "src/app/services/customer.service";
-
+import { AdminService } from "src/app/services/admin.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CustomerLoginComponent } from "../../../auth/customer-login/customer-login.component";
 import { CustomerSignUpComponent } from "../../../auth/customer-sign-up/customer-sign-up.component";
@@ -17,11 +17,15 @@ export class SectionTopNavComponent implements OnInit {
   @Output() componentLoaded = new EventEmitter<boolean>();
   username = "";
   displayUserNav = false;
+  selected: string;
+  products: Array<string> = new Array<string>();
+
   constructor(
     private login: LoginService,
     private helper: HelperService,
     private modalService: NgbModal,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private adminService: AdminService
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +38,14 @@ export class SectionTopNavComponent implements OnInit {
       this.displayUserNav = true;
       this.username = localStorage.getItem("email");
     }
+    this.adminService.getProducts().subscribe(data => {
+      data["products"].forEach(element => {
+        this.products.push(element.value);
+      });
+      data["productList"].forEach(element => {
+        this.products.push(element.productSubcategory);
+      });
+    });
   }
   navigateSignUp(validation) {
     let modelRef = this.modalService.open(CustomerSignUpComponent, {
@@ -44,11 +56,11 @@ export class SectionTopNavComponent implements OnInit {
     modelRef.componentInstance.isCustomerSignUpButton = !validation;
     modelRef.componentInstance.isComingFromCartPage = false;
 
-    modelRef.result.then(data=>{
-      if(data=="openLogin"){
+    modelRef.result.then(data => {
+      if (data == "openLogin") {
         this.openLogin(null);
       }
-    })
+    });
   }
   navigateprofile(event) {
     //debugger;
@@ -66,10 +78,10 @@ export class SectionTopNavComponent implements OnInit {
     }
   }
   openLogin(event) {
-    if(event !=null){
+    if (event != null) {
       event.preventDefault();
     }
-   
+
     let modelRef = this.modalService.open(CustomerLoginComponent, {
       backdrop: "static",
       keyboard: false
@@ -116,5 +128,9 @@ export class SectionTopNavComponent implements OnInit {
   }
   stopEvent(event) {
     event.preventDefault();
+  }
+  NavigateToOrder() {
+    let param = { queryParams: { selectedProduct: this.selected } };
+    this.helper.navigateToPathWithparams("/createorder", param);
   }
 }

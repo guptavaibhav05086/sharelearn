@@ -16,6 +16,11 @@
     width: 50%;
   }
 } */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1340px;
+  }
+}
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
@@ -81,6 +86,7 @@
 }
 .flex-control3 {
   width: 33%;
+  padding-left: 4%;
 }
 .flex-control4 {
   width: 25%;
@@ -94,7 +100,7 @@
 }
 
 .flex-control8 {
-  width: calc(100% - 260px);
+  width: calc(100% - 360px);
 }
 .flex-control-40 {
   width: 40%;
@@ -254,46 +260,47 @@ button.calendar:active {
 .overflowBody {
   overflow-y: hidden;
 }
-.flex-control5-mob{ width: 30%;}
+.flex-control5-mob {
+  width: 30%;
+}
 @media (max-width: 778px) {
   .flex-control-radio {
     margin-bottom: 25px;
-}
+  }
   .or-formcontrol-colum {
     flex-direction: column;
   }
-  .flex-control3{
+  .flex-control3 {
     width: 90%;
   }
-  .flex-control2{
-width: 100%;
-margin-right:0 ;
+  .flex-control2 {
+    width: 100%;
+    margin-right: 0;
   }
   .flex-control8 {
     width: 100%;
-}
-.flex-control5{
-width: 40%;
-}
-.flex-control-40 {
-  width: 86%;
-  padding-left: 10px;
-}
-  .flex-container{
+  }
+  .flex-control5 {
+    width: 40%;
+  }
+  .flex-control-40 {
+    width: 86%;
+    padding-left: 10px;
+  }
+  .flex-container {
     margin: 15px;
   }
-.or-btn{
-  height: 50px;
-  width: 86%;
-}
-.uploard-one {
-  padding-left: 0;
-}
-.uploard-one label{
-  max-width: 200px;
-}
-.flex-control5-mob{
-  width: 80%;
-}
-
+  .or-btn {
+    height: 50px;
+    width: 86%;
+  }
+  .uploard-one {
+    padding-left: 0;
+  }
+  .uploard-one label {
+    max-width: 200px;
+  }
+  .flex-control5-mob {
+    width: 80%;
+  }
 }

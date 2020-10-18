@@ -102,5 +102,8 @@ export const environment = {
   verifyOTPCustomerEmail:
     "/api/customer/ValidateOTPEmail?email=$email&OTP=$OTP",
   trackDelivery: "/api/printer/GetDeliveryStatus?taskId=$taskId",
-  sendNotificationPrinter: "/api/customer/sendNotificationPrinter"
+  sendNotificationPrinter: "/api/customer/sendNotificationPrinter",
+  rescheduleMeet: "/api/customer/rescheduleMeeting?orderId=$orderId",
+  reschuleMeetNoti:
+    "/api/customer/rescheduleMeetingNotifications?orderId=$orderId"
 };

@@ -8,6 +8,7 @@ import { AddressRequest } from "../Models/address-request";
   providedIn: "root"
 })
 export class CustomerService {
+   productsData:any;
   item = {
     type: "",
     category: [
@@ -40,6 +41,12 @@ export class CustomerService {
   cartpriceDetails;
   constructor(private _httpclient: HttpClient, private login: LoginService) {}
 
+  getproductsData(){
+    return this.productsData;
+  }
+  setProductsData(data){
+    this.productsData=data;
+  }
   getDiscountPriceDetails() {
     return this.discountedPrice;
   }
