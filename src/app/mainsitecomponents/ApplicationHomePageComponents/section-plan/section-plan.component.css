@@ -1,5 +1,8 @@
+.container {
+  max-width: 1300px;
+}
 .iframe{
-  width: 420px;
+  width: 450px;
 }
 .dcol-2{
   /* margin-left: 15%; */
