@@ -62,10 +62,12 @@ export class LoginComponent implements OnInit {
       data => {
         debugger;
         this.spinnerService.hide();
-        if (data.emailVerified == "False") {
+        let verification = data.emailVerified.split(";");
+        if (verification[0] != null && verification[0].trim() == "False") {
           localStorage.setItem("unverifiedRole", data.role);
           localStorage.setItem("unverifiedEmail", data.userName);
           localStorage.setItem("unverifiedUserId", data.userId);
+          localStorage.setItem("isEmailVerified", verification[0].trim());
           this._helper.navigateToPath("/verifyvendors");
         } else {
           this._login.setToken(data);

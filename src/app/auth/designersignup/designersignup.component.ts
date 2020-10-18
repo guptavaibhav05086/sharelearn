@@ -20,7 +20,7 @@ export class DesignersignupComponent implements OnInit {
   serverError = false;
   error: any;
   registered = false;
-  @Input() isCustomerSignUp=false;
+  @Input() isCustomerSignUp = false;
   studentForm = new FormGroup(
     {
       email: new FormControl("", [
@@ -85,18 +85,21 @@ export class DesignersignupComponent implements OnInit {
       "confirmPassword"
     ].value;
     // newUser.MobileNumber = this.studentForm.controls["mobileNumber"].value;
-    if(this.isCustomerSignUp ===true){
+    if (this.isCustomerSignUp === true) {
       newUser.Role = "Customer";
-    }
-    else{
+    } else {
       newUser.Role = "Designer";
     }
-    
+
     this._login.registerUser(newUser).subscribe(
       data => {
         this.spinnerService.hide();
         this.registered = true;
         this.serverError = false;
+        localStorage.setItem("unverifiedRole", "Designer");
+        localStorage.setItem("unverifiedEmail", newUser.Email);
+        localStorage.setItem("isEmailVerified", "False");
+        //localStorage.setItem("unverifiedUserId", data.userId);
         this._helper.navigateToPath("/verifyvendors");
         // let tokenRequest = new TokenRequest();
         // tokenRequest.password = newUser.Password;

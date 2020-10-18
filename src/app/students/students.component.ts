@@ -50,7 +50,7 @@ export class StudentsComponent implements OnInit {
         case event instanceof NavigationEnd:
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
-          debugger;
+          //debugger;
           console.log(event);
           console.log("Navigation End");
           let path = this.route.url;
@@ -79,7 +79,7 @@ export class StudentsComponent implements OnInit {
           break;
         }
         case event instanceof NavigationStart: {
-          debugger;
+          //debugger;
           console.log(event);
 
           let path = this.route.url;

@@ -24,8 +24,13 @@ export class StudentGuard implements CanActivate {
     | UrlTree {
     debugger;
     let token = this.service.getUserToken();
+    let isUserVerified = false;
     if (token.type.toLocaleLowerCase() == "designer") {
-      return true;
+      if (isUserVerified) {
+        return true;
+      } else {
+        this.router.navigate(["profile"]);
+      }
     }
     this.router.navigate(["/login"]);
   }

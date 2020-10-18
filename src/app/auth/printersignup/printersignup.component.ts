@@ -71,6 +71,10 @@ export class PrintersignupComponent implements OnInit {
         debugger;
         this.spinnerService.hide();
         this.registered = true;
+        localStorage.setItem("unverifiedRole", "Printer");
+        localStorage.setItem("unverifiedEmail", newUser.Email);
+        localStorage.setItem("isEmailVerified", "False");
+        //isEmailVerified
         delay(20000);
         this._helper.navigateToPath("/verifyvendors");
       },
