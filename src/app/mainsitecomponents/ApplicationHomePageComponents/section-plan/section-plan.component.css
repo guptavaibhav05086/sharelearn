@@ -2,7 +2,7 @@
   width: 420px;
 }
 .dcol-2{
-  margin-left: 15%;
+  /* margin-left: 15%; */
 }
 @media (min-width: 768px) {
   .points {
@@ -16,6 +16,7 @@
     width: 100%;
     display: flex;
     flex-wrap: unset;
+    justify-content: space-between;
   }
   .dcol-3 {
     flex-wrap: nowrap;
