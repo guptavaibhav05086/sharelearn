@@ -1,4 +1,6 @@
-
+.container {
+  max-width: 1300px;
+}
 .image-1{
   background: url("../../../../assets/HomePageImg/Home Page _ Images/Live Design1200.png");
   width: 100%;

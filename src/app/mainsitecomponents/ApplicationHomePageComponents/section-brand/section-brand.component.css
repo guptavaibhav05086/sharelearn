@@ -3,6 +3,10 @@
 }
 .hide-mob{
   display: block;
+  position: absolute;
+  right: 0;
+    top: -35px;
+    width: 14% !important;
 }
 @media (min-width: 768px) {
   .container {
@@ -97,6 +101,7 @@
     display: block;
     position: absolute;
     right: 20px;
+    margin-top: -25px;
   }
   .hide-mob{
     display: none;

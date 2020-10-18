@@ -82,7 +82,8 @@
     display: flex ;
   }
   .navbar-nav .dropdown-menu.drop-sub:after {
-    right: 22px;
+    left: 24px;
     top: 53px;
+    right: inherit;
 }
 }
