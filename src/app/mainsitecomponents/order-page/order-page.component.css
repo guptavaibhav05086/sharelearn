@@ -261,7 +261,7 @@ button.calendar:active {
   overflow-y: hidden;
 }
 .flex-control5-mob {
-  width: 30%;
+  width: 35%;
 }
 @media (max-width: 778px) {
   .flex-control-radio {
@@ -303,4 +303,8 @@ button.calendar:active {
   .flex-control5-mob {
     width: 80%;
   }
+  .price-margin,.flex-control3 {
+    margin-left: 0%;
+  }
 }
+ 

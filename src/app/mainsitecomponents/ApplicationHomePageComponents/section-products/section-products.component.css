@@ -4,7 +4,14 @@
 .bg-light {
   background-color: white !important;
 }
-
+.navbar-two{
+  z-index: -1;
+}
+ .nav-bar-two{
+   position: relative;
+   z-index: 1;
+   width: 100%;
+ }
 @media (min-width: 778px) {
   .borderNav {
     border-right: 0x solid;
@@ -38,7 +45,7 @@
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
   margin-top: 0px !important;
   width: 75% !important;
-  margin-left: 5%;
+  margin-left: 10%;
   display: flex;
   flex-wrap: wrap;
 }

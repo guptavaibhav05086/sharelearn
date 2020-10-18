@@ -52,8 +52,9 @@
     margin-bottom: 0px;
   }
   .navbar-nav .dropdown-menu:after{
-    right: 22px;
+    right: inherit;
     top: 33px;
+    left: 22px;
   }
   .navbar-nav{
   background: rgb(27, 117, 179);
