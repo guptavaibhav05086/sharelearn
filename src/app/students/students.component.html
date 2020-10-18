@@ -1,14 +1,10 @@
 <div class="wrapper ">
-  <app-leftnav
-    [resetFormSubject]="resetFormSubject.asObservable()"
-  ></app-leftnav>
+  <app-leftnav [resetFormSubject]="resetFormSubject.asObservable()"></app-leftnav>
   <div class="main-panel">
     <!-- Navbar -->
     <!-- <app-topnavuserlogin></app-topnavuserlogin> -->
     <app-topnav></app-topnav>
-    <app-studentnavbarcommon
-      *ngIf="isDesignerVerified"
-    ></app-studentnavbarcommon>
+    <app-studentnavbarcommon *ngIf="isDesignerVerified"></app-studentnavbarcommon>
     <!-- End Navbar -->
     <!-- <div class="panel-header panel-header-sm">
 
@@ -18,3 +14,6 @@
     <app-footer style="display: none;"></app-footer>
   </div>
 </div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+  <p style="color: white">Please Wait.</p>
+</ngx-spinner>

@@ -26,11 +26,13 @@ export class StudentGuard implements CanActivate {
     let token = this.service.getUserToken();
     let isUserVerified = false;
     if (token.type.toLocaleLowerCase() == "designer") {
-      if (isUserVerified) {
-        return true;
-      } else {
-        this.router.navigate(["profile"]);
-      }
+      return true;
+      // let emailVerfied = localStorage.getItem("emailVerificationDone");
+      // if (emailVerfied == "True") {
+      //   return true;
+      // } else {
+      //   this.router.navigate(["/designer/dashboard"]);
+      // }
     }
     this.router.navigate(["/login"]);
   }

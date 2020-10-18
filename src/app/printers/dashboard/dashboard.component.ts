@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { PrinterService } from "src/app/services/printer.service";
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: "app-dashboard",
@@ -8,7 +9,9 @@ import { PrinterService } from "src/app/services/printer.service";
 })
 export class DashboardComponent implements OnInit {
   dashboardData: any;
-  constructor(private service: PrinterService) {}
+  constructor(
+    private service: PrinterService, 
+    private helper: HelperService) {}
 
   ngOnInit() {
     let email = localStorage.getItem("email");
@@ -16,6 +19,10 @@ export class DashboardComponent implements OnInit {
       data => {
         console.log(data);
         this.dashboardData = data;
+        let isUserVerifiedByAdmin = data["isVendorAdminVerified"];
+        if (isUserVerifiedByAdmin == false) {
+          this.helper.navigateToPath("/printers/profile");
+        }
       },
       err => {
         console.log(err);

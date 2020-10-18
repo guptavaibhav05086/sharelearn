@@ -11,6 +11,14 @@ import { BankAccountModel } from "../Models/bank-account-model";
 export class DesignerService {
   constructor(private _httpclient: HttpClient, private login: LoginService) {}
 
+  private isDesignerAdminApproved:boolean;
+
+  getDesignerApproveStatus(){
+    return this.isDesignerAdminApproved;
+  }
+  setDesignerApproveStatus(status:boolean){
+    this.isDesignerAdminApproved=status;
+  }
   getDesignersNotification() {
     let url = `${environment.baseUrl}${environment.getDesignerNotification}`;
     return this._httpclient.get(url, this.login.getAuthHeader());

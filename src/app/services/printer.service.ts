@@ -10,7 +10,14 @@ import { BankAccountModel } from "../Models/bank-account-model";
 })
 export class PrinterService {
   constructor(private _httpclient: HttpClient, private login: LoginService) {}
+  private isPrinterAdminApproved:boolean;
 
+  getPrinterApproveStatus(){
+    return this.isPrinterAdminApproved;
+  }
+  setPrinterApproveStatus(status:boolean){
+    this.isPrinterAdminApproved=status;
+  }
   updateProfileRequest(updateProfile) {
     return this._httpclient.post(
       `${environment.baseUrl}${environment.updatePrinter}`,

@@ -39,6 +39,8 @@ export class LeftnavComponent implements OnInit {
       } else if (response.type == "settings") {
         this.toggleSettings = response.display;
         this.toggleOrders = false;
+      } else if (response.type == "leftNav") {
+        this.displayLeftNav = response.display;
       } else {
         this.toggleSettings = false;
         this.toggleOrders = false;
