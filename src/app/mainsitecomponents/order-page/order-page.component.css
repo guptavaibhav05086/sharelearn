@@ -304,7 +304,7 @@ button.calendar:active {
     width: 80%;
   }
   .price-margin,.flex-control3 {
-    margin-left: 0%;
+    margin-left: 0% !important;
   }
 }
  
