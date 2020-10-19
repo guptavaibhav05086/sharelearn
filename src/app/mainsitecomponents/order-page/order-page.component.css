@@ -84,10 +84,15 @@
   width: 50%;
   text-align: left;
 }
+.flex-control33 {
+  width: 33%;
+   padding-left: 4%; 
+}
+/*
 .flex-control3 {
   width: 33%;
-  /* padding-left: 4%; */
-}
+   padding-left: 4%; 
+}*/
 .flex-control4 {
   width: 25%;
 }
@@ -95,10 +100,24 @@
   width: 25%;
   margin-left: 3%;
 }
+/*
 .flex-control-50 {
   width: 55%;
 }
+*/
 
+.flex-control4 {
+  width: 25%;
+}
+.flex-control5 {
+  width: 25%;
+  margin-left: 3%;
+}
+/*
+.flex-control-50 {
+  width: 55%;
+}
+*/
 .flex-control8 {
   width: calc(100% - 360px);
 }

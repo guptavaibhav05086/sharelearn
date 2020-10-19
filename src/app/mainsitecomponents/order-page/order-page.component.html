@@ -10,7 +10,7 @@
             </h3>
           </div>
           <div class="or-formcontrol or-formcontrol-colum flex-container">
-            <div class="flex-control3">
+            <div class="flex-control3 flex-control33">
               <button
                 class="btn btn-primary or-btn"
                 type="button"
@@ -19,7 +19,7 @@
                 Design
               </button>
             </div>
-            <div class="flex-control3">
+            <div class="flex-control3 flex-control33">
               <button
                 class="btn btn-primary or-btn"
                 type="button"
@@ -28,7 +28,7 @@
                 Design & Print
               </button>
             </div>
-            <div class="flex-control3">
+            <div class="flex-control3 flex-control33">
               <button
                 class="btn btn-primary or-btn"
                 type="button"
@@ -726,107 +726,148 @@
               </div>
               <div class="flex-control8" style="margin-left: 2%;">
                   <div class="row">
+                    <div class="col-md-6">
                       <div class="flex-control-50" >
-                          <div class="form-group">
-                              <label style="font-size: 18px;font-weight:700;">{{orderForm.controls['type'].value}} - {{orderForm.controls['category'].value}}</label>                   
-                              <hr class="hrColor"/>        
-                             
-                              
-                             
-                            </div>
-                        
-                      </div>
-                      <div class="flex-control3 price-margin" >
-                          <div class="form-group">
-                              <label style="font-size: 18px;font-weight:700;">Price Summary</label>                   
-                              <hr class="hrColor"/>        
-                             
-                              
-                             
-                            </div>
-                        
-                      </div>
-                    
-                     
-                  </div>
-                <div class="row">
+                        <div class="form-group">
+                            <label style="font-size: 18px;font-weight:700;">{{orderForm.controls['type'].value}} - {{orderForm.controls['category'].value}}</label>                   
+                            <hr class="hrColor"/>        
+                           
+                            
+                           
+                          </div>
+                      
+                    </div>
                     <div class="flex-control-50" >
-                        <div class="form-group">
-                            <label style="font-size: 16px;font-weight:500;">({{orderForm.controls['subCategory'].value}}) - ({{orderForm.controls['orientation'].value}})</label> 
-                            
-                           
-                          </div>
-                      
-                    </div>
-                    <div class="flex-control3 price-margin" >
-                        <div class="form-group" style="display: flex;">
-                            <div class="flex-controllabel">
-                                <label style="font-size: 14px;font-weight:bold;">Price: </label> 
-                            </div>
-                              <div class="flex-controlPrice">
-                                  <label>
-                                      &#x20B9;  {{this.orderPrice.price -(this.orderPrice.sourceFileFees + this.orderPrice.professiondesignerFees)}}
-                                  </label>
-                              </div>
-                           
-                          </div>
-                         
-                      
-                    </div>
-                   
-                   
-                </div>
-                <div class="row" >
-                    <div class="flex-control-50">
-                        <div class="form-group">
-                            <label style="font-size: 14px;font-weight:bold;" *ngIf="orderForm.controls['quantities'].value == 0">Size: {{orderForm.controls['size'].value}}
-
-                           
-                            </label> 
-                            <label style="font-size: 14px;font-weight:bold;" *ngIf="orderForm.controls['quantities'].value > 0">Size: {{orderForm.controls['size'].value}},   Quantity:  {{orderForm.controls['quantities'].value}}, GSM: {{orderForm.controls['GSM'].value}}
-
-                            
-                            </label> 
-                            
-                           
-                          </div>
+                      <div class="form-group">
+                          <label style="font-size: 16px;font-weight:500;">({{orderForm.controls['subCategory'].value}}) - ({{orderForm.controls['orientation'].value}})</label> 
                           
-                    </div>
-
-                   
-                    <div class="flex-control3 price-margin" >
-                      <div class="form-group" style="display: flex;" >
-                        <div class="flex-controllabel">
-                            <label style="font-size: 14px;font-weight:bold;">Source File: </label> 
+                         
                         </div>
-                          <div class="flex-controlPrice">
-                              <label>
-                                  &#x20B9; {{this.orderPrice.sourceFileFees}}
-                              </label>
-                          </div>
+                    
+                  </div>
+                  <div class="flex-control-50">
+                    <div class="form-group">
+                        <label style="font-size: 14px;font-weight:bold;" *ngIf="orderForm.controls['quantities'].value == 0">Size: {{orderForm.controls['size'].value}}
+
+                       
+                        </label> 
+                        <label style="font-size: 14px;font-weight:bold;" *ngIf="orderForm.controls['quantities'].value > 0">Size: {{orderForm.controls['size'].value}},   Quantity:  {{orderForm.controls['quantities'].value}}, GSM: {{orderForm.controls['GSM'].value}}
+
                         
+                        </label> 
+                        
+                       
+                      </div>
+                      
+                </div>
+                <div class="flex-control-50">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Billing Name(optional)" formControlName="BillingName" />
+                         
+                        
+                       </div>
+                      
+                     
+                    </div>
+                   
+              </div>
+              <div class="flex-control-50">
+                <div class="form-group">
+                 <input type="text" class="form-control" placeholder="GST Number(optional)" formControlName="GSTNumber" style="text-transform:uppercase;" maxlength="15"/>
+                 <span
+                 class="errorMessage"
+                 *ngIf="
+                   (orderForm.controls['GSTNumber'].dirty ||
+                   orderForm.controls['GSTNumber'].touched) &&
+                   orderForm.controls['GSTNumber'].invalid &&
+                   orderForm.controls['GSTNumber'].errors.invalidPattern
+                 "
+               >
+                 *GST# is incorrect.
+               </span>
+                   
+                  </div>
+                 
+            </div>
+            <div class="flex-control-50">
+              <div class="form-group" style="color:green" *ngIf="orderPrice.deliveryDays>0">
+                  Post design, Expected Delivery in {{orderPrice.deliveryDays}} Days
+                  
+                 
+                </div>
+               
+          </div>
+          <div class="flex-control-50">
+            <div style="display: flex;" *ngIf="displayDesigner">
+              <div>
+                  <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tDesign">
+              </div>
+             <div>
+                <label for="checkbox1" class="checkboxLabel" style="color: black;padding-left: 20px;">
+                    I have read and agree to the <a href="#" (click)="openTermCondition('designer',$event)">
+                        <span ><u style="color:blue">Terms and Conditons</u></span> 
+                      </a> Designers 
+              </label>
+             </div>
+            
+          </div>
+               
+          </div>
+          <div class="flex-control-50">
+            <div class="form-group">
+               <button class="btn btn-primary" (click)="checkout()" style="display: none;">Proceed</button>
+                
+               
+              </div>
+             
+                       
+                    </div>
+                  </div>
+                    <div class="col-md-6">
+                      <div class="flex-control3 price-margin" >
+                        <div class="form-group">
+                            <label style="font-size: 18px;font-weight:700;">Price Summary</label>                   
+                            <hr class="hrColor"/>        
+                           
+                            
+                           
+                          </div>
+                      
+                    </div>
+                    <div class="flex-control3 price-margin" >
+                      <div class="form-group" style="display: flex;">
+                          <div class="flex-controllabel">
+                              <label style="font-size: 14px;font-weight:bold;">Price: </label> 
+                          </div>
+                            <div class="flex-controlPrice">
+                                <label>
+                                    &#x20B9;  {{this.orderPrice.price -(this.orderPrice.sourceFileFees + this.orderPrice.professiondesignerFees)}}
+                                </label>
+                            </div>
                          
                         </div>
                        
-                        
-                  </div>
-                </div>
-                <div class="row">
-                    <div class="flex-control-50">
-                        <div class="form-group">
-                          <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Billing Name(optional)" formControlName="BillingName" />
-                               
-                              
-                             </div>
-                            
-                           
-                          </div>
-                         
-                    </div>
                     
-                   <!-- Illustration fees add here -->
-                   <div class="flex-control3 price-margin">
+                  </div>
+                  <div class="flex-control3 price-margin" >
+                    <div class="form-group" style="display: flex;" >
+                      <div class="flex-controllabel">
+                          <label style="font-size: 14px;font-weight:bold;">Source File: </label> 
+                      </div>
+                        <div class="flex-controlPrice">
+                            <label>
+                                &#x20B9; {{this.orderPrice.sourceFileFees}}
+                            </label>
+                        </div>
+                      
+                       
+                      </div>
+                     
+                      
+                </div>
+                  <!-- Illustration fees add here -->
+                  <div class="flex-control3 price-margin">
                     <div class="form-group" style="display: flex;" >
                         <div class="flex-controllabel">
                             <label style="font-size: 14px;font-weight:bold;">Professional Design : </label> 
@@ -841,49 +882,21 @@
                       <hr class="hrColor"/>
                       
                 </div>
-
-                   
-                   
-                </div>
-                
-                <div class="row">
-                    <div class="flex-control-50">
-                        <div class="form-group">
-                         <input type="text" class="form-control" placeholder="GST Number(optional)" formControlName="GSTNumber" style="text-transform:uppercase;" maxlength="15"/>
-                         <span
-                         class="errorMessage"
-                         *ngIf="
-                           (orderForm.controls['GSTNumber'].dirty ||
-                           orderForm.controls['GSTNumber'].touched) &&
-                           orderForm.controls['GSTNumber'].invalid &&
-                           orderForm.controls['GSTNumber'].errors.invalidPattern
-                         "
-                       >
-                         *GST# is incorrect.
-                       </span>
-                           
-                          </div>
-                         
-                    </div>
-                    <div class="flex-control3 price-margin" style="display:none">
-                      <div class="form-group" style="display: flex;">
-                          <div class="flex-controllabel">
-                              <label style="font-size: 14px;font-weight:bold;">GST: </label> 
-                          </div>
-                            <div class="flex-controlPrice">
-                                <label>
-                                    &#x20B9; {{this.orderPrice.GST}}
-                                </label>
-                            </div>
-                         
+                <div class="flex-control3 price-margin" style="display:none">
+                  <div class="form-group" style="display: flex;">
+                      <div class="flex-controllabel">
+                          <label style="font-size: 14px;font-weight:bold;">GST: </label> 
+                      </div>
+                        <div class="flex-controlPrice">
+                            <label>
+                                &#x20B9; {{this.orderPrice.GST}}
+                            </label>
                         </div>
-                        <hr class="hrColor">
-                        
-                  </div>
+                     
+                    </div>
+                    <hr class="hrColor">
                     
-
-                  
-
+              </div>
                 <!-- Total price Goes Here -->
                 <div class="flex-control3 price-margin">
                   <div class="form-group" style="display: flex;">
@@ -900,8 +913,62 @@
                     <hr class="hrColor"/>
                     
               </div>
+                 <!-- Detailed pricing -->
+                 <div class="flex-control-3" style="margin-left: 3%;">
+                  <div class="form-group" style="color:green;">
+                      <!-- <button type="button" class="btn btn-link" (click)="openPriceDescription()">Detailed Pricing</button> -->
+                     <a href="#" (click)="openPriceDescription($event)"><span ><u style="color:blue">Detailed Pricing</u></span></a>
+                      
+                      
+                     
+                    </div>
                    
-                </div>
+              </div>
+              <div class="flex-control-3" style="margin-left: 3%;width:30%">
+                <div class="" *ngIf="displayprinter">
+                    <div style="display: flex;">
+                        <div >
+                            <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tPrinter">
+                        </div>
+                        <div>
+                            <label for="checkbox1" class="checkboxLabel" style="padding-left: 20px;">
+                                I have read and agree to the  <a href="#" (click)="openTermCondition('Printer',$event)">
+                                    <span ><u style="color:blue">Terms and Conditons</u></span> 
+                                  </a> Printers
+                          </label>
+                        </div>
+                      </div>
+                  <div>   Colors of images on screen and their printed output may vary from 5% to 10%</div>
+                  <div>
+                      Thickness (GSM) of paper may vary by 5%
+                  </div>
+                 
+
+               
+                 
+              </div>
+                   
+              </div>
+              <div class="flex-control3 price-margin">
+                <div class="form-group">
+                   <button class="btn btn-primary" style="margin-left: 18%;" (click)="addToCart()">Proceed</button>
+                    
+                   
+                  </div>
+                 <span style="color:green" *ngIf="displaycartMessage">Item Added to Cart</span>
+            </div>
+              
+                      
+                    </div>
+                   
+                     
+                    
+                     
+                
+              
+             
+                
+             
                 <!-- <div class="row">
                   <div class="flex-control-50" style="visibility:hidden;">
                       <div class="form-group">
@@ -914,94 +981,10 @@
 
                  
               </div> -->
-                <!-- Detailed pricing -->
-                <div class="row" >
-                  <div class="flex-control-50">
-                      <div class="form-group" style="color:green" *ngIf="orderPrice.deliveryDays>0">
-                          Post design, Expected Delivery in {{orderPrice.deliveryDays}} Days
-                          
-                         
-                        </div>
-                       
-                  </div>
-                  <div class="flex-control-3" style="margin-left: 3%;">
-                      <div class="form-group" style="color:green;">
-                          <!-- <button type="button" class="btn btn-link" (click)="openPriceDescription()">Detailed Pricing</button> -->
-                         <a href="#" (click)="openPriceDescription($event)"><span ><u style="color:blue">Detailed Pricing</u></span></a>
-                          
-                          
-                         
-                        </div>
-                       
-                  </div>
-                  
-
-                 
-              </div>
+             
                <!-- Terms and conditions -->
-               <div class="row" >
-                <div class="flex-control-50">
-                  <div style="display: flex;" *ngIf="displayDesigner">
-                    <div>
-                        <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tDesign">
-                    </div>
-                   <div>
-                      <label for="checkbox1" class="checkboxLabel" style="color: black;padding-left: 20px;">
-                          I have read and agree to the <a href="#" (click)="openTermCondition('designer',$event)">
-                              <span ><u style="color:blue">Terms and Conditons</u></span> 
-                            </a> Designers 
-                    </label>
-                   </div>
+             
                   
-                </div>
-                     
-                </div>
-                <div class="flex-control-3" style="margin-left: 3%;width:30%">
-                  <div class="" *ngIf="displayprinter">
-                      <div style="display: flex;">
-                          <div >
-                              <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tPrinter">
-                          </div>
-                          <div>
-                              <label for="checkbox1" class="checkboxLabel" style="padding-left: 20px;">
-                                  I have read and agree to the  <a href="#" (click)="openTermCondition('Printer',$event)">
-                                      <span ><u style="color:blue">Terms and Conditons</u></span> 
-                                    </a> Printers
-                            </label>
-                          </div>
-                        </div>
-                    <div>   Colors of images on screen and their printed output may vary from 5% to 10%</div>
-                    <div>
-                        Thickness (GSM) of paper may vary by 5%
-                    </div>
-                   
-
-                 
-                   
-                </div>
-                     
-                </div>
-                
-
-               
-            </div>
-                <div class="row">
-                    <div class="flex-control-50">
-                        <div class="form-group">
-                           <button class="btn btn-primary" (click)="checkout()" style="display: none;">Proceed</button>
-                            
-                           
-                          </div>
-                         
-                    </div>
-                    <div class="flex-control3 price-margin">
-                        <div class="form-group">
-                           <button class="btn btn-primary" style="margin-left: 18%;" (click)="addToCart()">Proceed</button>
-                            
-                           
-                          </div>
-                         <span style="color:green" *ngIf="displaycartMessage">Item Added to Cart</span>
-                    </div>
 
                    
                 </div>
