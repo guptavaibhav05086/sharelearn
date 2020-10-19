@@ -14,7 +14,7 @@ import {
 export class ButtonrendererComponent implements ICellRendererAngularComp {
   params;
   label: string;
-
+  disableBtn=false;
   agInit(params): void {
     debugger;
     this.params = params;
@@ -24,6 +24,13 @@ export class ButtonrendererComponent implements ICellRendererAngularComp {
         this.label = "Disable";
       } else {
         this.label = "Enable";
+      }
+    }
+    if (this.params.label == "Book Slot") {
+      if (this.params.data.eligibleForReschedule == false) {
+        this.disableBtn =true;
+      } else {
+        this.disableBtn =false;
       }
     }
   }

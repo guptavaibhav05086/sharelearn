@@ -1,0 +1,120 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="modal-basic-title" style="PADDING-LEFT: 8%;font-size: 20px;"> Book a Meeting Slot for
+        Live
+        Designing</h5>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="content">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="">
+                    <div class="">
+
+                        <!-- <button class="btn btn-primary"  (click)="editForm('personal')">Edit Profile</button> -->
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="productform" id="productform">
+                            <div class="container  p-3 mb-5 bg-white rounded">
+                                <div class="or-formcontrol">
+
+
+
+                                </div>
+                                <div class="or-formcontrol flex-container">
+
+                                    <div class="flex-control8" style="margin-left: 10%;">
+                                        <div class="row">
+                                            <!-- <p><span style="color:green;font-style: italic;">Next Slot is Avaliable after:</span> <span style="font-weight: bold;">{{meetingInfo.gap}} Hours</span></p> -->
+                                            <p><span style="color:green;font-style: italic;">Meeting Duration is
+                                                    :</span> <span style="font-weight: bold;">{{meetingInfo.duration}}
+                                                    Mins</span></p>
+                                        </div>
+                                        <div class="row">
+
+                                            <div>
+                                                <div class="form-group">
+                                                    <label>Meeting Slot Day</label>
+                                                    <div class="input-group" style="display: none;">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                                                            [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
+                                                            formControlName="meetingDate"
+                                                            (blur)="dateControlValidation()" [minDate]="minDate"
+                                                            [maxDate]="maxDate">
+                                                        <div class="input-group-append" style="border: 1px solid rgb(221, 221, 221);
+                                              height: 38px;">
+                                                            <button class="btn btn-outline-secondary calendar"
+                                                                (click)="d.toggle()" style="height: 38px;
+                                                margin: 0px 0px !important;background-color: transparent;"
+                                                                type="button"></button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <input type="date" id="start" name="trip-start"
+                                                formControlName="meetingDateContol" [min]="minDatecontrol"
+                                                [max]="maxDatecontrol" (change)="dateControlValidation()">
+                                        </div>
+                                        <div class="row" style="margin-top: 30px;">
+                                            <div class="flex-control3">
+                                                <label>Meeting From</label>
+                                                <ngb-timepicker [seconds]="false" [hourStep]="hourStep"
+                                                    [minuteStep]="minuteStep" formControlName="meetingSlot"
+                                                    (change)="validateDate()"></ngb-timepicker>
+
+                                                <div *ngIf="productform.controls['meetingSlot'].errors"
+                                                    class="small form-text text-danger">
+                                                    <div *ngIf="productform.controls['meetingSlot'].errors['required']">
+                                                        Select some time during
+                                                        lunchtime</div>
+                                                    <div *ngIf="productform.controls['meetingSlot'].errors['tooLate']">
+                                                        Oh No, it’s too late.
+                                                        Please select other date</div>
+                                                    <div *ngIf="productform.controls['meetingSlot'].errors['tooEarly']">
+                                                        It's a bit too early</div>
+                                                    <div
+                                                        *ngIf="productform.controls['meetingSlot'].errors['beforeTimegap']">
+                                                        Before the Minimum
+                                                        Time Gap</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="flex-control3 mx-auto">
+                                                <button class="btn btn-primary" (click)="slot()">Book
+                                                    Slot</button>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+    <p style="color: white">Please Wait.</p>
+</ngx-spinner>

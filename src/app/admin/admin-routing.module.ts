@@ -7,6 +7,7 @@ import { ProductsFormsComponent } from "./products-forms/products-forms.componen
 import { RegsiterProfilesComponent } from "./regsiter-profiles/regsiter-profiles.component";
 import { AdminGuard } from "./admin.guard";
 import { VendorPayoutsComponent } from "./vendor-payouts/vendor-payouts.component";
+import { AllOrdersComponent } from "./all-orders/all-orders.component";
 const routes: Routes = [
   {
     path: "",
@@ -16,7 +17,8 @@ const routes: Routes = [
       { path: "products", component: ProductsComponent },
       { path: "productsform", component: ProductsFormsComponent },
       { path: "registeredprofiles", component: RegsiterProfilesComponent },
-      { path: "vendorPayouts", component: VendorPayoutsComponent }
+      { path: "vendorPayouts", component: VendorPayoutsComponent },
+      { path: "orders", component: AllOrdersComponent }
     ]
   }
 ];

@@ -105,5 +105,8 @@ export const environment = {
   sendNotificationPrinter: "/api/customer/sendNotificationPrinter",
   rescheduleMeet: "/api/customer/rescheduleMeeting?orderId=$orderId",
   reschuleMeetNoti:
-    "/api/customer/rescheduleMeetingNotifications?orderId=$orderId"
+    "/api/customer/rescheduleMeetingNotifications?orderId=$orderId",
+  adminVerifyVendor:
+    "/api/admin/adminVerifyVendor?type=$type&email=$email&isProf=$isProf&isAdminVerified=$isAdminVerified",
+  adminGetFiles: "/api/admin/downloaFiles?filename=$filename&location=$location"
 };

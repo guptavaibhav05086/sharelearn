@@ -19,6 +19,9 @@ import { VendorPayoutsComponent } from './vendor-payouts/vendor-payouts.componen
 import { PayoutFormComponent } from './payout-form/payout-form.component';
 import { ViewDesignerProfileComponent } from './view-designer-profile/view-designer-profile.component';
 import { ViewPrinterProfileComponent } from './view-printer-profile/view-printer-profile.component';
+import { AllOrdersComponent } from './all-orders/all-orders.component';
+import { ActiveOrdersComponent } from './active-orders/active-orders.component';
+import { BookMeetingComponent } from './book-meeting/book-meeting.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -35,7 +38,10 @@ import { ViewPrinterProfileComponent } from './view-printer-profile/view-printer
     VendorPayoutsComponent,
     PayoutFormComponent,
     ViewDesignerProfileComponent,
-    ViewPrinterProfileComponent
+    ViewPrinterProfileComponent,
+    AllOrdersComponent,
+    ActiveOrdersComponent,
+    BookMeetingComponent
   ],
   imports: [
     CommonModule,

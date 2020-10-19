@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: "https://www.shapenprint.in",
-  //baseUrl: "http://localhost:39117",
+  //baseUrl: "https://www.shapenprint.in",
+  baseUrl: "http://localhost:39117",
 
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
@@ -112,7 +112,10 @@ export const environment = {
     "/api/customer/rescheduleMeetingNotifications?orderId=$orderId",
   adminVerifyVendor:
     "/api/admin/adminVerifyVendor?type=$type&email=$email&isProf=$isProf&isAdminVerified=$isAdminVerified",
-  adminGetFiles: "/api/admin/downloaFiles?filename=$filename&location=$location"
+  adminGetFiles:
+    "/api/admin/downloaFiles?filename=$filename&location=$location",
+  getOngoingAdmin:
+    "/api/admin/getongoingorder?email=$email&isAllOrdersRequired=$isAllOrdersRequired"
 };
 
 /*

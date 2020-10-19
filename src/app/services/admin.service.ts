@@ -24,6 +24,18 @@ export class AdminService {
       this.login.getAuthHeader()
     );
   }
+  FetchOngoingAllOrder(email, allOrdersflag) {
+    debugger;
+    let url = `${environment.baseUrl}${environment.getOngoingAdmin}`
+      .replace("$email", email)
+      .replace("$isAllOrdersRequired", allOrdersflag);
+    //isAllOrdersRequired
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
   getFiles(filename, location) {
     let url = `${environment.baseUrl}${environment.adminGetFiles}`
       .replace("$filename", filename)
