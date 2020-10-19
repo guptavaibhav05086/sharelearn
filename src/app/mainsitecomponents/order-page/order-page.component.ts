@@ -18,6 +18,8 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ["./order-page.component.css"]
 })
 export class OrderPageComponent implements OnInit {
+  paramSelProduct="";
+  paramSelSubCat="";
   minDate: NgbDateStruct;
   model: NgbDateStruct;
   selectedProductImage:string;
@@ -848,15 +850,49 @@ return true;
     }
     this.displayCategory = true;
     this.orderForm.patchValue({
-      type: category
+      type: category,
+      category:this.paramSelProduct
     });
-    try{
-      debugger;
-      this.scrollToElement($element);
-    }catch(err){
+    // try{
+    //   debugger;
+    //   this.scrollToElement($element);
+    // }catch(err){
 
-    }
+    // }
     console.log(this.selectedCategory);
+    //subCategory
+    if(this.paramSelProduct !=null && this.paramSelProduct !=""){
+      let item = this.selectedCategory.filter(a=>a.value == this.paramSelProduct);
+      if(item.length !=0){
+        item[0].isSelected = true;
+         let elemTime = this.document.getElementById("productselect");
+        this.selectedProduct(item[0].value,elemTime);
+        this.scrollToElement(elemTime);
+        if(this.paramSelSubCat !=null && this.paramSelSubCat !=""){
+          this.orderForm.patchValue({
+            subCategory:this.paramSelSubCat
+          })
+          this.selectedSubcategory(null);
+         
+        }
+      }
+      else{
+        try{
+          debugger;
+          this.scrollToElement($element);
+        }catch(err){
+    
+        }
+      }
+    }
+    else{
+      try{
+        debugger;
+        this.scrollToElement($element);
+      }catch(err){
+  
+      }
+    }
     // this.selectedCategory.sort((a, b) => a.value.localeCompare(b.value));
   }
   ngOnInit(): void {
@@ -873,6 +909,12 @@ return true;
         this.isEditOrder = true;
       } else {
         this.isEditOrder = false;
+      }
+      if (params.selectedProduct != undefined){
+        this.paramSelProduct=params.selectedProduct;
+      }
+      if (params.selSubCat != undefined){
+        this.paramSelSubCat=params.selSubCat;
       }
 
       // popular

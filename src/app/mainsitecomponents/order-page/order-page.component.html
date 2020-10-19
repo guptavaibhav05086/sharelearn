@@ -83,10 +83,12 @@
              
           
             </div>
+            
             <div class="or-formcontrol flex-container">
               <div class="flex-control2">
                 <img [src]="selectedProductImage" style="width:252px;height: 246px;"/>
               </div>
+              
               <div class="flex-control8" >
                   <div class="row">
                       <div style="width:80%;margin-left: 3%;">
@@ -139,7 +141,7 @@
                       </div>
                      
                   </div>
-                  
+                  <div style="visibility: hidden;" #productselect id="productselect"></div>
                 <div class="row">
                     <div class="flex-control5" >
                         <div class="form-group">
@@ -319,7 +321,7 @@
                     </div>
                    
                 </div> -->
-                
+               
                    <!-- Content Upload Code -->
                 <div class="row" *ngIf="displayDesigner" style="padding-top: 40px;">
                   <div class="flex-control-40">
@@ -335,6 +337,7 @@
                       
                      
                     </div>
+                    
                   </div>
                   <div class="col-md-1 lableOR" style="padding-left: 2%;" *ngIf="displayDesigner">
                     OR
@@ -650,7 +653,7 @@
        
         <!-- Container for Meeting Slot -->
         <!-- <div class="container shadow p-3 mb-5 bg-white rounded" *ngIf="displayMeetings"> -->
-        <div class="container shadow p-3 mb-5 bg-white rounded" style="display:none" >
+        <div class="container shadow p-3 mb-5 bg-white rounded" style="visibility:hidden" #mslot id="mslot">
             <div class="or-formcontrol">
               <h3 class="display-label">
                 Book a Meeting Slot

@@ -18,8 +18,9 @@ export class SectionTopNavComponent implements OnInit {
   username = "";
   displayUserNav = false;
   selected: string;
-  products: Array<string> = new Array<string>();
-
+  products: Array<any> = new Array<any>();
+  dproducts: Array<any> = new Array<any>();
+  productsdata: any;
   constructor(
     private login: LoginService,
     private helper: HelperService,
@@ -29,7 +30,7 @@ export class SectionTopNavComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //debugger;
+    debugger;
     this.componentLoaded.emit(true);
     let token = this.login.getUserToken();
     if (token.Token == null || token.Token == "") {
@@ -39,12 +40,24 @@ export class SectionTopNavComponent implements OnInit {
       this.username = localStorage.getItem("email");
     }
     this.adminService.getProducts().subscribe(data => {
+      debugger;
       data["products"].forEach(element => {
-        this.products.push(element.value);
+        let item = {
+          pName: element.value,
+          pSub: null,
+          displayN: element.value
+        };
+        this.products.push(element.value.trim());
       });
       data["productList"].forEach(element => {
-        this.products.push(element.productSubcategory);
+        let item = {
+          pName: element.value,
+          pSub: element.productSubcategory,
+          displayN: element.productSubcategory
+        };
+        this.products.push(element.productSubcategory.trim());
       });
+      this.dproducts = [...new Set(this.products)];
     });
   }
   navigateSignUp(validation) {
@@ -130,7 +143,17 @@ export class SectionTopNavComponent implements OnInit {
     event.preventDefault();
   }
   NavigateToOrder() {
-    let param = { queryParams: { selectedProduct: this.selected } };
+    let params = { selectedProduct: null, selSubCat: null };
+    let filteredData = this.productsdata["productList"].filter(
+      item => item.productSubcategory == this.selected
+    );
+    if (filteredData.length > 0) {
+      params.selSubCat = filteredData[0].productSubcategory;
+      params.selectedProduct = filteredData[0].productName;
+    } else {
+      params.selectedProduct = this.selected;
+    }
+    let param = { queryParams: params };
     this.helper.navigateToPathWithparams("/createorder", param);
   }
 }
