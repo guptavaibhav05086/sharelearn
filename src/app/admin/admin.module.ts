@@ -17,6 +17,8 @@ import { RegsiterProfilesComponent } from './regsiter-profiles/regsiter-profiles
 import { DiscountFormComponent } from './discount-form/discount-form.component';
 import { VendorPayoutsComponent } from './vendor-payouts/vendor-payouts.component';
 import { PayoutFormComponent } from './payout-form/payout-form.component';
+import { ViewDesignerProfileComponent } from './view-designer-profile/view-designer-profile.component';
+import { ViewPrinterProfileComponent } from './view-printer-profile/view-printer-profile.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -31,7 +33,9 @@ import { PayoutFormComponent } from './payout-form/payout-form.component';
     RegsiterProfilesComponent,
     DiscountFormComponent,
     VendorPayoutsComponent,
-    PayoutFormComponent
+    PayoutFormComponent,
+    ViewDesignerProfileComponent,
+    ViewPrinterProfileComponent
   ],
   imports: [
     CommonModule,

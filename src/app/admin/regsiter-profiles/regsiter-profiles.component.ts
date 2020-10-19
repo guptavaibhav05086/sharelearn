@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { AdminService } from "../../services/admin.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ViewDesignerProfileComponent } from "../view-designer-profile/view-designer-profile.component";
+import { ViewPrinterProfileComponent } from "../view-printer-profile/view-printer-profile.component";
+import { ButtonrendererComponent } from "../buttonrenderer/buttonrenderer.component";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-regsiter-profiles",
@@ -7,19 +12,35 @@ import { AdminService } from "../../services/admin.service";
   styleUrls: ["./regsiter-profiles.component.css"]
 })
 export class RegsiterProfilesComponent implements OnInit {
-  constructor(private admin: AdminService) {}
+  constructor(
+    private admin: AdminService,
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService
+  ) {
+    this.frameworkComponents = {
+      buttonRenderer: ButtonrendererComponent
+    };
+  }
   rowDataprinter;
   rowDatadesigner;
   gridApi;
   gridApiprinter;
+  frameworkComponents: any;
   ngOnInit(): void {
+    this.getAdminProfile();
+  }
+
+  getAdminProfile() {
+    this.spinner.show();
     this.admin.getProflies().subscribe(
       data => {
         this.rowDatadesigner = data["dprofile"];
         this.rowDataprinter = data["pprofile"];
         console.log(data);
+        this.spinner.hide();
       },
       err => {
+        this.spinner.hide();
         console.log(err);
       }
     );
@@ -124,6 +145,14 @@ export class RegsiterProfilesComponent implements OnInit {
       field: "exp",
       sortable: true,
       filter: true
+    },
+    {
+      headerName: "Verify",
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        onClick: this.VerifyDesigner.bind(this),
+        label: "Verify"
+      }
     }
   ];
   columnDefPrinter = [
@@ -195,6 +224,38 @@ export class RegsiterProfilesComponent implements OnInit {
       field: "gst",
       sortable: true,
       filter: true
+    },
+    {
+      headerName: "Verify",
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        onClick: this.VerifyPrinter.bind(this),
+        label: "Verify"
+      }
     }
   ];
+
+  VerifyDesigner(e) {
+    debugger;
+    let modelRef = this.modalService.open(ViewDesignerProfileComponent, {
+      size: "lg"
+    });
+    modelRef.componentInstance.profile = e.rowData;
+
+    console.log(e.rowData);
+    modelRef.result.then(data => {
+      //this.getAdminProfile();
+    });
+  }
+  VerifyPrinter(e) {
+    debugger;
+    let modelRef = this.modalService.open(ViewPrinterProfileComponent, {
+      size: "lg"
+    });
+    modelRef.componentInstance.profile = e.rowData;
+    console.log(e.rowData);
+    modelRef.result.then(data => {
+      //this.getAdminProfile();
+    });
+  }
 }

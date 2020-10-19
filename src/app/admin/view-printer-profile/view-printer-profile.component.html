@@ -1,0 +1,148 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="PADDING-LEFT: 35%;">Verification Form</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="content">
+        <div class="row" *ngIf="profile.profileImage !=null">
+            <div class="col-md-12 pr-1">
+                <div class="form-group">
+                    <img [src]="profile.profileImage" style="width:200px;height: 200px;">
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4 pr-1">
+                <div class="form-group">
+                    <label>Vendor Name</label>
+                    <label class="form-control">{{profile.firstName}} {{profile.lastName}}</label>
+                </div>
+            </div>
+            <div class="col-md-4 pr-1">
+                <div class="form-group">
+                    <label>Vendor Email</label>
+                    <label class="form-control">{{profile.email}}</label>
+                </div>
+            </div>
+            <div class="col-md-4 pr-1">
+                <div class="form-group">
+                    <label>Vendor Phone Number</label>
+                    <label class="form-control">{{profile.mobileNumber}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 pr-1">
+                <div class="form-group">
+                    <label>DOB</label>
+                    <label class="form-control">{{profile.dob}}</label>
+                </div>
+            </div>
+            <div class="col-md-4 pr-1">
+                <div class="form-group">
+                    <label>AAadhar</label>
+                    <label class="form-control">{{profile.aadhar}}</label>
+                </div>
+            </div>
+            <div class="col-md-4 pr-1">
+                <div class="form-group">
+                    <label>Gender</label>
+                    <label class="form-control">{{profile.gender}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 pr-1">
+                <div class="form-group">
+                    <label>State</label>
+                    <label class="form-control">{{profile.state}}</label>
+                </div>
+            </div>
+            <div class="col-md-4 pr-1">
+                <div class="form-group">
+                    <label>City</label>
+                    <label class="form-control">{{profile.city}}</label>
+                </div>
+            </div>
+            <div class="col-md-4 pr-1">
+                <div class="form-group">
+                    <label>Postal Code</label>
+                    <label class="form-control">{{profile.postalCode}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 pr-1">
+                <div class="form-group">
+                    <label>GST</label>
+                    <label class="form-control">{{profile.gst}}</label>
+                </div>
+            </div>
+            <div class="col-md-4 pr-1">
+                <div class="form-group">
+                    <label>PAN</label>
+                    <label class="form-control">{{profile.pan}}</label>
+                </div>
+            </div>
+            <div class="col-md-4 pr-1">
+                <div class="form-group">
+                    <label>GST File</label>
+                    <button class="form-control" (click)="downloadFiles(profile.gstFileName)"
+                        class="btn btn-primray">Download</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 pr-1">
+                <div class="form-group">
+                    <label>Portfolio Link</label>
+                    <label class="form-control">{{profile.profileUrl}}</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12 pr-1">
+                <div class="form-group">
+                    <label>Address</label>
+                    <label class="form-control">{{profile.address}}</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <!-- <div class="col-md-6 pr-1">
+                <div class="form-group">
+                    <input type="checkbox" class="checkboxelement" [(ngModel)]="IsProfDesi">
+                    <label for="checkbox1" class="checkboxLabel">
+                        Is Professional Designer
+                    </label>
+                </div>
+            </div> -->
+            <div class="col-md-6 pr-1">
+                <div class="form-group">
+                    <div class="form-group">
+                        <input type="checkbox" class="checkboxelement" [(ngModel)]="verifyDes">
+                        <label for="checkbox1" class="checkboxLabel">
+                            Verify Profile
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12 pr-1">
+                <div class="form-group" style="text-align: center;">
+                    <button class="btn btn-primary" (click)="approveProfile()">Save</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

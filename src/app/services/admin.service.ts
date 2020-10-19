@@ -8,12 +8,43 @@ import { LoginService } from "./login.service";
 export class AdminService {
   constructor(private _httpclient: HttpClient, private login: LoginService) {}
 
+  adminVerifyVendor(type, email, isProf, isAdminVerified) {
+    let url = `${environment.baseUrl}${environment.adminVerifyVendor}`
+      .replace("$type", type)
+      .replace("$email", email)
+      .replace("$isProf", isProf)
+      .replace("$isAdminVerified", isAdminVerified);
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   getProducts() {
     let url = `${environment.baseUrl}${environment.getProducts}`;
     return this._httpclient.get(
       url,
 
       this.login.getAuthHeader()
+    );
+  }
+  getFiles(filename, location) {
+    let url = `${environment.baseUrl}${environment.adminGetFiles}`
+      .replace("$filename", filename)
+      .replace("$location", location);
+   
+
+    // let url = `${environment.baseUrl}${environment.fetchongoingorderfilesPrinter}`
+    //   .replace("$filename", filename)
+    //   .replace("$type", type);
+    let authHeaders = new HttpHeaders({
+      Authorization: "Bearer " + this.login.getUserToken().Token
+    });
+
+    const options = {
+      headers: authHeaders,
+      responseType: "blob" as "json"
+    };
+    return this._httpclient.get(
+      url,
+
+      options
     );
   }
   checkPincodes(pincode) {
