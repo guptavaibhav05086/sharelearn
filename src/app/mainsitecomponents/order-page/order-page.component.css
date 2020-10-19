@@ -86,7 +86,7 @@
 }
 .flex-control3 {
   width: 33%;
-  padding-left: 4%;
+  /* padding-left: 4%; */
 }
 .flex-control4 {
   width: 25%;
@@ -304,7 +304,7 @@ button.calendar:active {
     width: 80%;
   }
   .price-margin,.flex-control3 {
-    margin-left: 0%;
+    margin-left: 0% !important;
   }
 }
  
