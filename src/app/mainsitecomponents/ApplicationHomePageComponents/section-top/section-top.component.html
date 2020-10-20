@@ -1,17 +1,17 @@
 <!-- <img [src]="imgUrl" alt="Snow" /> -->
 <div class="container">
     <div class="dcol-3 alingdiv">
-        <div class="txtFreelance">FREELANCING
-        </div>
-        <div class="txtFreelance">
-            REDEFINED</div>
-        <div style="margin-top: 15px;">
+        <div class="txtFreelance">FREELANCING REDEFINED
+       
+            </div>
+        <div style="margin-top: 10px;">
 
             <input type="text" placeholder="SEARCH" class="searchBtnStyle searchBtnStyle" [(ngModel)]="selected"
                 [typeahead]="products" [isAnimated]="true" />
+                <button class="btn btn-primary txtSearchBar"
+                (click)="NavigateToOrder()">Design/Print</button>
         </div>
-        <div ><button class="btn btn-primary txtSearchBar"
-                (click)="NavigateToOrder()">Design/Print</button></div>
+        <div ></div>
     </div>
 
 
@@ -20,7 +20,7 @@
     </div>
     <div class="dcol-3 positioncontainerRight">
         <div class="row">
-            <div class="col-md-12  pl-4 col-6 d-flex ">
+            <div class="col-md-12   col-6 d-flex ">
 
                 <div class="imgEditpenposition mr-2">
                     <img src="../../../../assets/HomePageImg/Home Page _ Images/Verified Designer Pencil1200.png"
@@ -49,22 +49,26 @@
                 </div>
             </div>
 
-        </div>
+     
 
 
-        <div class="col-md-12 mt-3">
-
+        <div class="col-md-12 col-6 d-flex mt-mob-0 mt-5">
+            <div class="imgEditpenpositiontwo mr-2">
+                <img src="../../../../assets/HomePageImg/Home Page _ Images/Magnifying Glass1200.png"
+                    class="imgEditPenSize">
+            </div>
             <div>
                 <span style="text-decoration: line-through red;" class="txtMainHeading"> Find &
                     Hire</span>
                 <br>
                 <span class="textStyle">Connect with a Freelancer </span>
-                <br>
+                
                 <span class="textStyle">instantly-no digging </span>
 
                 <span class="textStyle">into 100's of Profile</span>
             </div>
 
         </div>
+    </div>
     </div>
 </div>

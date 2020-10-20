@@ -24,12 +24,14 @@
     padding: 0 5px;
     width: 98%;
     height: 35px;
+    max-width: 240px;
   }
   .txtFreelance {
     font-weight: bold;
     font-family: "Maven Pro";
     font-size: 44px;
     margin-top: 15px;
+    line-height: 48px;
   }
   .txtMainHeading {
     font-family: "Maven Pro", sans-serif;
@@ -49,6 +51,10 @@
   }
   .imgEditpenposition {
     padding-top: 30px;
+  }
+  .imgEditpenpositiontwo .imgEditPenSize{
+ width: 40px;
+ height: auto;
   }
   .imgEditPenSize {
     width: 20px;
@@ -76,7 +82,7 @@
 }
 @media (max-width: 768px) {
   .dcol-3 {
-    width: 50%;
+    width: 100%;
   }
   .dcol-2 {
     margin-top: 113px;
@@ -89,7 +95,7 @@
   .txtFreelance {
     font-weight: 900;
     font-family: "Maven Pro", sans-serif;
-    font-size: 44px;
+    font-size: 26px;
     margin-top: 5px;
     line-height: 45px;
   }
@@ -110,8 +116,8 @@
     padding-top: 30px;
   }
   .imgEditPenSize {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    /* height: 30px; */
   }
   .textStyle {
     font-family: "Maven Pro", sans-serif;
@@ -145,4 +151,13 @@
   .mob-pad {
     padding: 0;
   }
+  .txtSearchBar{
+    margin: 0px 0 0px 10px;
+    height: 30px;
+    padding: 8px 15px;
+}
+.imgEditpenpositiontwo .imgEditPenSize{
+  width: 55px;
+  height: auto;
+   }
 }

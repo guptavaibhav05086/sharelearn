@@ -38,6 +38,7 @@
     font-size: 30px;
     padding-left: 50px;
     margin-top: 5px;
+    line-height: 33px;
   }
   .txtSample {
     font-weight: 200;
@@ -110,12 +111,13 @@
   }
   .txtFreelance{
     font-weight: 700;
-    font-size: 35px;
-    line-height: 40px;
+    font-size: 27px;
+    line-height: 30px;
 }
 .txtSample{
-  font-size: 22px;
+  font-size: 18px;
   line-height: 30px;
+  font-weight: 300;
 }
   .hide-mob{ display: none;}
 }
