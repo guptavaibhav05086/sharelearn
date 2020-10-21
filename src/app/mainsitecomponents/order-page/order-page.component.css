@@ -346,5 +346,8 @@ button.calendar:active {
   .pad-m-b-0{
     padding-bottom: 0px !important;
   }
+  .flex-control-3-mob{
+    width: 100% !important;
+  }
 }
  
