@@ -53,6 +53,10 @@
    margin-left: -846px;
    margin-top: -10px;
 }
+.dropdown-menu-sun-one{
+  display: flex;
+  
+}
 .vis-moble{display: none;}
 @media only screen and (max-width: 768px){
   .vis-moble{display: block;}
@@ -78,6 +82,7 @@
   .dropdown-menu-sun-one{
     margin-left: 0 !important;
     margin-top: 0 !important;
+    display: initial;
     
   }
   .vis-mob{ display: block;}
