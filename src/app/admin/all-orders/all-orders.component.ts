@@ -108,7 +108,7 @@ export class AllOrdersComponent implements OnInit {
     modelref.componentInstance.data = e.rowData;
     modelref.componentInstance.isAllOrders = true;
     modelref.result.then(data => {
-      this.fetchOngoingOrder();
+      //this.fetchOngoingOrder();
     });
   }
   bookMeeting(e) {

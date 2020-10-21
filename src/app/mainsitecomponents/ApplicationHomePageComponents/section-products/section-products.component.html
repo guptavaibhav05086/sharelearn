@@ -49,48 +49,18 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        AllProducts
+                        All Products
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Action</a>
+
+                        <div class="menuItemDD" *ngFor="let menuItem of products">
+                            <a class="dropdown-item" (click)="navigateToProduct(menuItem,$event)">{{menuItem}}</a>
                         </div>
 
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Digital</a>
-                        </div>
-
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Social Media</a>
-                        </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">LOGO</a>
-                        </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Demo</a>
-                        </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Demo</a>
-                        </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Demo</a>
-                        </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Demo</a>
-                        </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Demo</a>
-                        </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Demo</a>
-                        </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Demo</a>
-                        </div>
 
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
-</header> 
+</header>

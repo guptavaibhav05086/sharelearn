@@ -108,5 +108,7 @@ export const environment = {
     "/api/customer/rescheduleMeetingNotifications?orderId=$orderId",
   adminVerifyVendor:
     "/api/admin/adminVerifyVendor?type=$type&email=$email&isProf=$isProf&isAdminVerified=$isAdminVerified",
-  adminGetFiles: "/api/admin/downloaFiles?filename=$filename&location=$location"
+  adminGetFiles: "/api/admin/downloaFiles?filename=$filename&location=$location",
+  getOngoingAdmin:
+    "/api/admin/getongoingorder?email=$email&isAllOrdersRequired=$isAllOrdersRequired"
 };

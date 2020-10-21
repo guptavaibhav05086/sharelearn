@@ -11,17 +11,18 @@ import { AgGridModule } from "ag-grid-angular";
 import { ButtonrendererComponent } from "./buttonrenderer/buttonrenderer.component";
 import { ProductsFormsComponent } from "./products-forms/products-forms.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { ProductListsComponent } from './product-lists/product-lists.component';
-import { PrintRatesComponent } from './print-rates/print-rates.component';
-import { RegsiterProfilesComponent } from './regsiter-profiles/regsiter-profiles.component';
-import { DiscountFormComponent } from './discount-form/discount-form.component';
-import { VendorPayoutsComponent } from './vendor-payouts/vendor-payouts.component';
-import { PayoutFormComponent } from './payout-form/payout-form.component';
-import { ViewDesignerProfileComponent } from './view-designer-profile/view-designer-profile.component';
-import { ViewPrinterProfileComponent } from './view-printer-profile/view-printer-profile.component';
-import { AllOrdersComponent } from './all-orders/all-orders.component';
-import { ActiveOrdersComponent } from './active-orders/active-orders.component';
-import { BookMeetingComponent } from './book-meeting/book-meeting.component';
+import { ProductListsComponent } from "./product-lists/product-lists.component";
+import { PrintRatesComponent } from "./print-rates/print-rates.component";
+import { RegsiterProfilesComponent } from "./regsiter-profiles/regsiter-profiles.component";
+import { DiscountFormComponent } from "./discount-form/discount-form.component";
+import { VendorPayoutsComponent } from "./vendor-payouts/vendor-payouts.component";
+import { PayoutFormComponent } from "./payout-form/payout-form.component";
+import { ViewDesignerProfileComponent } from "./view-designer-profile/view-designer-profile.component";
+import { ViewPrinterProfileComponent } from "./view-printer-profile/view-printer-profile.component";
+import { AllOrdersComponent } from "./all-orders/all-orders.component";
+import { ActiveOrdersComponent } from "./active-orders/active-orders.component";
+import { BookMeetingComponent } from "./book-meeting/book-meeting.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 @NgModule({
   declarations: [
     AdminComponent,
@@ -49,7 +50,8 @@ import { BookMeetingComponent } from './book-meeting/book-meeting.component';
     AgGridModule,
     NgxSpinnerModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ]
 })
 export class AdminModule {}
