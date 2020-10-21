@@ -57,7 +57,7 @@
 @media only screen and (max-width: 768px){
   .vis-moble{display: block;}
   .sub-menu-03{
-    display: flex !important;
+    display: flex ;
     flex-direction: column !important;
   }
   .navbar .navbar-nav .nav-item:not(:last-child){
