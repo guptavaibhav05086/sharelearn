@@ -301,6 +301,9 @@ button.calendar:active {
   .flex-control8 {
     width: 100%;
   }
+  .flex-control9 {
+    width: 80%;
+  }
   .flex-control5 {
     width: 40%;
   }
@@ -319,13 +322,29 @@ button.calendar:active {
     padding-left: 0;
   }
   .uploard-one label {
-    max-width: 200px;
+    max-width: 160px;
   }
   .flex-control5-mob {
-    width: 80%;
+    width: 208px;
   }
   .price-margin,.flex-control3 {
     margin-left: 0% !important;
+  }
+  .lableOR{
+    width: 85%;
+    text-align: center;
+  }
+  .pad-m-0{
+    padding: 0 !important;
+  }
+  .pad-m-t-10{
+    padding-top: 10px !important;
+  }
+  .pad-m-t-0{
+    padding-top: 0px !important;
+  }
+  .pad-m-b-0{
+    padding-bottom: 0px !important;
   }
 }
  

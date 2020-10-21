@@ -321,7 +321,7 @@
                 </div> -->
                 
                    <!-- Content Upload Code -->
-                <div class="row" *ngIf="displayDesigner" style="padding-top: 40px;">
+                <div class="row pad-m-0" *ngIf="displayDesigner" style="padding-top: 40px;">
                   <div class="flex-control-40">
                       <div class="form-group" >
                       
@@ -380,7 +380,7 @@
                    
                 <div class="row">   
                   <!-- Reference Image Upload -->              
-                  <div class="input-group col-md-4" style="padding-top: 30px;position: relative !important" *ngIf="displayDesigner">
+                  <div class="input-group col-md-4 pad-m-b-0 pad-m-t-0" style="padding-top: 30px;position: relative !important" *ngIf="displayDesigner">
                     <div class=" form-group">
                       <div style="display: flex;">
                         <div>
@@ -395,7 +395,7 @@
                             (change)="uploadGSTCertificate($event.target.files,'product')"
                           /> 
                         </div>
-                        <div style="width: 40px;margin-top: 40px;" *ngIf="uploadedFileNames.displayLoadingProductGif">
+                        <div class="pad-m-0" style="width: 40px;margin-top: 40px;" *ngIf="uploadedFileNames.displayLoadingProductGif">
                             <img src="../../../assets/img/loading.gif"/>
                           </div>
                       </div>
@@ -421,9 +421,9 @@
                    
                   </div>
                   <!-- Logo Image Upload --> 
-                  <div class="input-group col-md-4">
+                  <div class="input-group  col-md-4">
                     <div class="" *ngFor="let item of imageUpload;let  i=index">
-                      <div class="input-group uploard-one col-md-5" style="padding-top: 30px;position: relative !important">
+                      <div class="input-group pad-m-b-0 uploard-one col-md-5 pad-m-b-0 pad-m-t-10" style="padding-top: 30px;position: relative !important">
                         <div class="form-group">
                           <div *ngIf="i == 0">
                               <label *ngIf="orderForm.controls['type'].value != 'Print Only'">Logo/Image </label>
@@ -479,7 +479,7 @@
                 </div>
                 <!-- Logo Image Upload not Visible -->
                 <div class="row" *ngFor="let item of imageUpload;let  i=index" style="display: none;">
-                  <div class="input-group col-md-5" style="padding-top: 30px;position: relative !important">
+                  <div class="input-group col-md-5 pad-m-0" style="padding-top: 30px;position: relative !important">
                     <div class="form-group">
                       <div *ngIf="i == 0">
                           <label *ngIf="orderForm.controls['type'].value != 'Print Only'">Logo/Image </label>
@@ -528,7 +528,7 @@
                 </div>                            
                 <div class="row">
                   
-                  <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
+                  <div class="input-group col-md-10 pad-m-t-10" style="padding-top: 30px;position: relative !important">
                     <div class="custom-file form-group">
                         <label style="margin-bottom: 80px;color:green;font-style: italic;">*For more files or formats, please email to allotted graphic designer </label>
                      
@@ -724,7 +724,7 @@
                 <img [src]="selectedProductImage" />
                
               </div>
-              <div class="flex-control8" style="margin-left: 2%;">
+              <div class=" flex-control9" style="margin-left: 2%;">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="flex-control-50" >

@@ -2,7 +2,7 @@
 <!-- <div style="background-image: url('../../../../assets/HomePageImg/Home Page _ Images/designbackground.png');">
     data
 </div> -->
-<header class="animated fadeInDown" style="background-color: #fff !important;background-image: url('../../../../assets/HomePageImg/Home Page _ Images/Top Background1200.png') !important;background-size: cover;height :95px;">
+<header class="animated fadeInDown" style="  background-color: #fff !important;background-image: url('../../../../assets/HomePageImg/Home Page _ Images/Top Background1200.png') !important;background-size: cover;height :95px;">
     <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: none !important;"
         >
@@ -98,6 +98,14 @@
                             </div>
                             <div class="menuItemDD">
                                 <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Settings</a>
+                            </div> <div class="menuItemDD">
+                                <a class="dropdown-item" routerLink="/user/ongoingorders">On Going Order</a>
+                            </div>
+                            <div class="menuItemDD">
+                                <a class="dropdown-item" routerLink="/user/ongoingorders">All Orders</a>
+                            </div>
+                            <div class="menuItemDD">
+                                <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Settings</a>
                             </div>
 
                             <div class="menuItemDD">
@@ -108,7 +116,37 @@
 
                         </div>
                     </li>
+                    <li class="nav-item dropdown vis-moble borderNav" >
+                        <a class="nav-link dropdown-toggle" href="#" id="Allproducts" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ALL Products
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-sun-one sub-menu-03" aria-labelledby="navbarDropdownMenuLink" style="display: -webkit-box;
+                    margin-left: -110px;
+                    margin-top: -20px;">
+                          <div class="menuItemDD">
+                            <a class="dropdown-item" href="#" >Flyers</a>
+                        </div>
+                        <div class="menuItemDD">
+                            <a class="dropdown-item" href="#" >Brochure</a>
+                        </div>
+                         <div class="menuItemDD">
+                            <a class="dropdown-item" href="#">Business Card</a>
+                        </div>
+                        <div class="menuItemDD">
+                            <a class="dropdown-item" href="#">Social Media Banner</a>
+                        </div>
+                        <div class="menuItemDD">
+                            <a class="dropdown-item" href="#" >Logo</a>
+                        </div>
+                        <div class="menuItemDD">
+                            <a class="dropdown-item" href="#" >Stationaries </a>
+                        </div> 
 
+
+
+                        </div>
+                    </li>
                     <li class="nav-item active borderNav">
                         <div class="vLine"></div>
                     </li>
