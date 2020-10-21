@@ -2,10 +2,24 @@
   max-width: 1300px;
 }
 .iframe{
-  width: 450px;
+  width: 100%;
+  min-height: 320px;
 }
 .dcol-2{
   /* margin-left: 15%; */
+}
+.dot{
+  background: url("../../../../assets/HomePageImg/Home Page _ Images/Your Plan_Tick Bullet1200.png");
+  display: inline-block;
+    width: 100%;
+    font-family: Maven pro;
+    font-size: 14px;
+    font-weight: 300;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    padding: 0px 0 0 55px;
+    background-position: 0px 5px;
+  
 }
 @media (min-width: 768px) {
   .points {
@@ -15,6 +29,7 @@
   .indentSecond {
     text-indent: -2em;
   }
+  
   .container {
     width: 100%;
     display: flex;
@@ -73,12 +88,12 @@
   }
   .txtFreelance {
     font-weight: 700;
-    font-size: 30px;
-    line-height: 35px;
+    font-size: 23px;
+    line-height: 25px;
   }
   
   .alingdiv {
-    padding-top: 100px;
+    padding-top: 60px;
   }
   .searchBtnStyle {
     border-radius: 10px;
@@ -102,5 +117,10 @@
   }
   .iframe{
     width: 100%;
+    height: 240px;
   }
+  .dot{
+    padding: 0px 0 0 29px;
+ 
+}
 }

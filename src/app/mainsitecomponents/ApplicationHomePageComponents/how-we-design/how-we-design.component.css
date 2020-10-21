@@ -86,7 +86,7 @@
     font-weight: 700;
   }
   .alingdiv {
-    padding-top: 100px;
+    padding-top: 60px;
   }
   .searchBtnStyle {
     border-radius: 10px;
@@ -109,7 +109,7 @@
   .image-1{
     background: url("../../../../assets/HomePageImg/Home Page _ Images/How_we_esign_mob.png");
     width: 100%;
-    height: 250px;
+    height: 300px;
     background-size: contain;
     background-repeat: no-repeat;
   }

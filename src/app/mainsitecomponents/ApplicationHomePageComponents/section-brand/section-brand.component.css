@@ -1,12 +1,27 @@
 .vis-mob{
   display: none;
 }
+.dot {
+  background: url("../../../../assets/HomePageImg/Home Page _ Images/Round Blue Bullet1200.png");
+  display: inline-block;
+  width: 100%;
+  font-family: Maven pro;
+  font-size: 14px;
+  font-weight: 300;
+  background-repeat: no-repeat;
+  background-size: 14px;
+  padding: 0px 0 0 30px;
+  background-position: 0px 7px;
+}
+.container{
+max-width: 1300px;
+}
 .hide-mob{
   display: block;
   position: absolute;
-  right: 0;
-    top: -35px;
-    width: 14% !important;
+  right: -60px;
+  top: -35px;
+  width: 70px !important;
 }
 @media (min-width: 768px) {
   .container {
@@ -19,7 +34,7 @@
     margin-left: 2em;
   }
   .indentSecond {
-    text-indent: -2em;
+    /* text-indent: -23px; */
   }
   .dcol-3 {
     flex-wrap: nowrap;
@@ -111,5 +126,17 @@
   }
   .mob-order-2{
     order: 2;
+  }
+  .log-head .img1 {
+    width: 110px !important;
+    height: auto !important;
+  }
+  .log-head span{ font-size: 14px !important;}
+
+  .dot {
+   
+    background-size: 14px;
+    padding: 0px 0 0 30px;
+    background-position: 0px 7px;
   }
 }

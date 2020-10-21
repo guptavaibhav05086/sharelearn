@@ -4,6 +4,12 @@
 .navbar a:not(.btn):not(.dropdown-item) {
   color: lightgrey;
 }
+.container{
+  max-width: 1300px;
+}
+.nav-link,.navbar {
+  padding: .5rem 0;
+}
 .searchBtn {
   border-radius: 5px;
   border: 1px solid lightblue;
@@ -28,6 +34,7 @@
   font-weight: 200;
   font-family: 'Maven Pro', sans-serif;
   font-size: 13px;
+  font-weight: 500;
 }
 .navbar {
   position: initial !important;
@@ -86,5 +93,20 @@
     left: 24px;
     top: 53px;
     right: inherit;
+}
+}
+@media only screen and (max-width: 420px){
+.logo-nav{
+  margin-left: -90px;
+}
+}
+@media only screen and (max-width: 380px){
+.logo-nav{
+  margin-left: -50px;
+}
+}
+@media only screen and (max-width: 320px){
+.logo-nav{
+  margin-left: 0px;
 }
 }

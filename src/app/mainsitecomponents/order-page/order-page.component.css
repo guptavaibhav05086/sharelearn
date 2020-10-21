@@ -290,11 +290,13 @@ button.calendar:active {
     flex-direction: column;
   }
   .flex-control3 {
-    width: 90%;
+    width: 100%;
   }
   .flex-control2 {
     width: 100%;
-    margin-right: 0;
+    margin: 0 auto;
+    text-align: center;
+
   }
   .flex-control8 {
     width: 100%;
