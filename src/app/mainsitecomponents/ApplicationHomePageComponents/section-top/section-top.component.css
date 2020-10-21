@@ -81,6 +81,10 @@
   }
 }
 @media (max-width: 768px) {
+  .z-ind-les{
+    z-index: -1;
+    position: relative;
+  }
   .dcol-3 {
     width: 100%;
   }
@@ -145,7 +149,7 @@
     background: url("../../../../assets/HomePageImg/Home Page _ Images/Find and hire1200.png");
     background-size: contain;
     height: 210px;
-    background-position: 74px 66px;
+    background-position: 110px 66px;
     background-repeat: no-repeat;
   }
   .mob-pad {
