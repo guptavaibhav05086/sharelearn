@@ -3,14 +3,17 @@ import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  UrlTree
+  UrlTree,
+  Router
 } from "@angular/router";
 import { Observable } from "rxjs";
+import { LoginService } from '../services/login.service';
 
 @Injectable({
   providedIn: "root"
 })
 export class AdminGuard implements CanActivate {
+  constructor(private service: LoginService, private router: Router) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -19,6 +22,17 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return true;
+      let token = this.service.getUserToken();
+      let isUserVerified = false;
+      if (token.type.toLocaleLowerCase() == "admin") {
+        return true;
+        // let emailVerfied = localStorage.getItem("emailVerificationDone");
+        // if (emailVerfied == "True") {
+        //   return true;
+        // } else {
+        //   this.router.navigate(["/designer/dashboard"]);
+        // }
+      }
+      this.router.navigate(["/login"]);
   }
 }

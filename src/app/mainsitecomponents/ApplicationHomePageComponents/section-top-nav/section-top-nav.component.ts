@@ -41,6 +41,7 @@ export class SectionTopNavComponent implements OnInit {
     }
     this.adminService.getProducts().subscribe(data => {
       debugger;
+      this.productsdata = data;
       data["products"].forEach(element => {
         let item = {
           pName: element.value,

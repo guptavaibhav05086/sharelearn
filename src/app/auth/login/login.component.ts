@@ -75,6 +75,8 @@ export class LoginComponent implements OnInit {
             this._helper.navigateToPath("/designer/dashboard");
           } else if (data.role == "Printer") {
             this._helper.navigateToPath("/printers/dashboard");
+          } else if (data.role == "Admin") {
+            this._helper.navigateToPath("/admin/products");
           }
         }
       },
