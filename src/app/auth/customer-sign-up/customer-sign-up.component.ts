@@ -22,6 +22,9 @@ export class CustomerSignUpComponent implements OnInit {
     userId: "",
     role: ""
   };
+  pattern:RegExp=/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/;
+  changeRequested = false;
+  newMobileNumber;
   isCustomerSignUp = true;
   flag = false;
   dropdownList = [];
@@ -88,8 +91,14 @@ export class CustomerSignUpComponent implements OnInit {
   checkDetailsVerification() {
     debugger;
     let email = localStorage.getItem("unverifiedEmail");
-    let phoneNum = localStorage.getItem("unverifiedMobile") == null ?localStorage.getItem("unverifiedMobile") : localStorage.getItem("unverifiedMobile").trim();
-    let data = localStorage.getItem("isEmailVerified") ==null ?null : localStorage.getItem("isEmailVerified").split(";");
+    let phoneNum =
+      localStorage.getItem("unverifiedMobile") == null
+        ? localStorage.getItem("unverifiedMobile")
+        : localStorage.getItem("unverifiedMobile").trim();
+    let data =
+      localStorage.getItem("isEmailVerified") == null
+        ? null
+        : localStorage.getItem("isEmailVerified").split(";");
     this.userVerificationDetails.isEmailVerified = localStorage.getItem(
       "emailVerificationDone"
     );
@@ -97,28 +106,40 @@ export class CustomerSignUpComponent implements OnInit {
     this.userVerificationDetails.isPhoneVerified = localStorage.getItem(
       "mobileVerificationDone"
     );
-    if(data != null){
+    if (data != null) {
       this.userVerificationDetails.phoneNumber = data[2];
     }
-    
+
     this.userVerificationDetails.email = localStorage.getItem(
       "unverifiedEmail"
     );
     this.userVerificationDetails.role = localStorage.getItem("unverifiedRole");
-    if (this.userVerificationDetails.isEmailVerified !=null && this.userVerificationDetails.isEmailVerified.trim() == "False") {
+    if (
+      this.userVerificationDetails.isEmailVerified != null &&
+      this.userVerificationDetails.isEmailVerified.trim() == "False"
+    ) {
       debugger;
       this.verifyUser = true;
       this.studentForm.patchValue({
         email: email
       });
     }
-    if (this.userVerificationDetails.isPhoneVerified !=null &&this.userVerificationDetails.isPhoneVerified.trim() == "False") {
+    if (
+      this.userVerificationDetails.isPhoneVerified != null &&
+      this.userVerificationDetails.isPhoneVerified.trim() == "False"
+    ) {
       debugger;
       this.verifyUser = true;
       this.studentForm.patchValue({
         mobileNumber: phoneNum
       });
     }
+  }
+  enableNumberEdit(event) {
+    event.preventDefault();
+    this.newMobileNumber = "";
+    this.changeRequested = true;
+    this.displayVerifyOTPM = false;
   }
   onItemSelect(item: any) {
     console.log(item);
@@ -163,6 +184,8 @@ export class CustomerSignUpComponent implements OnInit {
         let loginRequest = new TokenRequest();
         loginRequest.username = this.studentForm.controls["email"].value;
         loginRequest.password = this.studentForm.controls["password"].value;
+        this.GenerateOTP();
+        this.GenerateOTPEmail();
         this._login.getToken(loginRequest).subscribe(data => {
           this._login.setUnverifiedToken(data);
         });
@@ -183,6 +206,23 @@ export class CustomerSignUpComponent implements OnInit {
   }
 
   GenerateOTP() {
+    debugger;
+
+    if (this.changeRequested == true) {
+      //let 
+     
+     
+     
+      let result =  this.pattern.test(this.newMobileNumber);
+      if (!result) {
+        alert("Invalid Mobile Number");
+        return;
+      } else {
+        this.studentForm.patchValue({
+          mobileNumber: this.newMobileNumber
+        });
+      }
+    }
     this.displayLoadingContentGifM = true;
     let phoneNumber = this.studentForm.controls["mobileNumber"].value;
     let email = this.studentForm.controls["email"].value;
@@ -206,6 +246,7 @@ export class CustomerSignUpComponent implements OnInit {
           this.userVerificationDetails.isPhoneVerified = "True";
           alert("Mobile number is verified");
           localStorage.setItem("mobileVerificationDone", "True");
+          this.changeRequested = false;
           //this.activeModal.close();
 
           if (

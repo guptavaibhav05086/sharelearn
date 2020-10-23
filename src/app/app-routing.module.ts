@@ -14,12 +14,12 @@ import { ResetpasswordComponent } from "./auth/resetpassword/resetpassword.compo
 import { UsersignupComponent } from "./auth/usersignup/usersignup.component";
 import { DesignerprofileComponent } from "./students/designerprofile/designerprofile.component";
 
-import { ComingsoonComponent } from "../app/public/comingsoon/comingsoon.component";
+
 import { ErrorMessageComponent } from "../app/public/error-message/error-message.component";
 import { VerifyEmailComponent } from "../app/public/verify-email/verify-email.component";
 import { PageNotFoundComponent } from "./public/page-not-found/page-not-found.component";
 import { OrderPageComponent } from "./mainsitecomponents/order-page/order-page.component";
-import { HomelinkPageComponent } from "./mainsitecomponents/homelink-page/homelink-page.component";
+import {TermsConditionsComponent } from './mainsitecomponents/terms-conditions/terms-conditions.component'
 import { SelectAddressComponent } from "./mainsitecomponents/select-address/select-address.component";
 import { OrderCartComponent } from "./mainsitecomponents/order-cart/order-cart.component";
 import { ReviewOrderComponent } from "./mainsitecomponents/review-order/review-order.component";
@@ -99,6 +99,11 @@ const routes: Routes = [
       {
         path: "logout",
         component: LogoutComponent
+      },
+      {
+        path:"terms",
+        component:TermsConditionsComponent
+
       },
       {
         path: "resetpassword",

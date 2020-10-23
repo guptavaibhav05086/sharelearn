@@ -1208,11 +1208,10 @@
                                   </a> Printers
                           </label>
                         </div>
+                        
+
                       </div>
-                  <div style="display:none">   Colors of images on screen and their printed output may vary from 5% to 10%</div>
-                  <div style="display:none">
-                      Thickness (GSM) of paper may vary by 5%
-                  </div>
+                  
                  
 
                
@@ -1224,10 +1223,28 @@
               <div class="flex-control-3" style="margin-left: 3%;width:97%">
                 <div class="" *ngIf="displayprinter">
                     
-                  <div>   Colors of images on screen and their printed output may vary from 5% to 10%</div>
-                  <div>
-                      Thickness (GSM) of paper may vary by 5%
-                  </div>
+                    <div style="display: flex;">
+                        <div class="form-group">
+                            <input  type="checkbox" class="" formControlName="tPrinterPaperSize" [disabled]="!displayprinter">
+                        </div>
+                        <div class="form-group">
+                            <label  class="" style="padding-left: 20px;">
+                               
+                                  Colors of images on screen and their printed output may vary from 5% to 10%
+                          </label>
+                        </div>
+                      </div>
+                      <div style="display: flex;">
+                        <div>
+                            <input type="checkbox" class="" formControlName="tPrinterGSM" [disabled]="!displayprinter">
+                        </div>
+                        <div>
+                            <label  class="" style="padding-left: 20px;">
+                               
+                                  Thickness (GSM) of paper may vary by 5%
+                          </label>
+                        </div>
+                      </div>
                  
 
                

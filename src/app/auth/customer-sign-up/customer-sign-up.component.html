@@ -129,15 +129,19 @@
             <div>
                 <label class="label text-uppercase">Verify Mobile :
                     {{studentForm.controls['mobileNumber'].value}}</label>
+                <a href="#" (click)="enableNumberEdit($event)">
+                    Edit
+                </a>
             </div>
             <div>
 
-                <button (click)="GenerateOTP()" class="btn btn-primary" [disabled]="displayLoadingContentGifM">Generate
+                <button (click)="GenerateOTP()" class="btn btn-primary" [disabled]="displayLoadingContentGifM">Resend
                     OTP</button>
                 <img src="../.../../../../assets/img/loading.gif" *ngIf="displayLoadingContentGifM"
                     style="width:40px" />
 
             </div>
+
             <div *ngIf="displayVerifyOTPM">
                 <input type="text" class="form-control" placeholder="OTP" [(ngModel)]="mOTP" />
 
@@ -147,7 +151,10 @@
                 <button (click)="verifyOTP()" class="btn btn-primary">Verify OTP</button>
             </div>
         </div>
-
+        <!-- Change Mobile Number section -->
+        <div *ngIf="changeRequested">
+            <input type="text" class="form-control" placeholder="+91" [(ngModel)]="newMobileNumber" />
+        </div>
         <!-- Email Verification Section -->
         <div *ngIf="userVerificationDetails.isEmailVerified == 'False'">
             <div>
@@ -156,7 +163,7 @@
             <div>
 
                 <button (click)="GenerateOTPEmail()" class="btn btn-primary"
-                    [disabled]="displayLoadingContentGifEmail">Generate OTP</button>
+                    [disabled]="displayLoadingContentGifEmail">Resend OTP</button>
                 <img src="../.../../../../assets/img/loading.gif" *ngIf="displayLoadingContentGifEmail"
                     style="width:40px" />
 
@@ -179,8 +186,7 @@
 
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="activeModal.close('Cross')"
-        *ngIf="!isComingFromCartPage">
+    <button type="button" class="btn btn-light" (click)="activeModal.close('Cross')" *ngIf="!isComingFromCartPage">
         Close
     </button>
 </div>

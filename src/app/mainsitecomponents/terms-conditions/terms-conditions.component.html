@@ -1,309 +1,661 @@
-<div class="modal-header">
-    <h4 class="modal-title">Terms and Conditons</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="activeModal.close('Close click')"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <!-- For Printer -->
-  <div class="modal-body" *ngIf="displayPrinter">
-    <p>
-      1. Registration and Verification:
-    </p>
-    <p>
-      a. Non-refundable amount shall be charged as a
-      registration/verification/convenience fees from the prospective Printers
-      whosoever be interested to appropriate the services/facilities of
-      shapeNprint.
-    </p>
-    <p>
-      b. The Printer shall be required to disclose his personal and professional
-      details alongwith relevant proofs to that effect which may include the GST
-      Certificate No. or the CIN for its respective business enterprises.
-    </p>
-    <p>
-      c. The submission of registration form doesn’t imply completion of
-      registration process until thoroughly verified by ShapeNprint
-    </p>
-    <p>
-      d. Printer shall be required to undergo a verification process for the
-      activation of the dashboard which will require him to upload the relevant
-      certificates such as Aadhar number, PAN number, GST number, etc. for proving
-      the existence of its enterprise.
-    </p>
-    <p>
-      e. Apart from the said procedure, a verification call shall be made to
-      verify and inspect the details as provided by the Printer and only after
-      concluding the said verification the shapeNprint will confirm the
-      registration of the Printer on its platform.
-    </p>
-    <p>
-      f. shapeNPrint shall have the exclusive Right to Reject and Cancel if the
-      prospective Printer fails to qualify the verification process as prescribed.
-    </p>
-    <p>
-      2. Circulation Floating of the Orders placed by the Users/Customers:
-    </p>
-    <p>
-      a. Any order which will be placed by the user shall be circulated/floated
-      amongst the Printers who have been successfully registered by complying with
-      procedures as explained in Clause 1 of this agreement. The algorithm of the
-      Registered Printers will be emerged automatically on the platform, wherein
-      the Printers will receive the notifications of the orders as placed.
-      Accordingly, the Printers can view the summary of the order, amount to
-      receive, and time slot as selected by the user.
-    </p>
-    <p>
-      b. It is to confirm that the shapeNprint and the Printers shall have no
-      liability in the event of placing of any order of the design or content by
-      the User which is illegal/unlawful or the content which is not permissible
-      by the land of law to be propagated, circulated, displayed or distributed
-    </p>
-    <p>
-      3. Acceptance of Order
-    </p>
-    <p>
-      Order will be assigned only to the printer who first accepts the order.
-    </p>
-    <p>
-      a. Printer shall be required to immediately report the User/Company of any
-      illegal/inappropriate content received to him and should not proceed further
-      for printing.
-    </p>
-    <p>
-      4. Delivery Time:
-    </p>
-    <p>
-      Printer shall be required to complete the assigned work within the estimated
-      delivery time as agreed/mentioned alongwith the specifications of the order
-      for which he has qualified. shapeNprint shall have the right to cancel the
-      order, if the order is not processed for delivery within the specified time
-      as prescribed with the order.
-    </p>
-    <p>
-      5. Managing The Delivery :
-    </p>
-    <p>
-      Procedurally the Printer shall be required to click delivery button on the
-      interface as provided by the shapeNprint portal through which he shall be
-      handing over the package to dunzo(delivery partner).
-    </p>
-    <p>
-      a. The Printer shall assure that the ordered material has been properly
-      packed before handing over the delivery to Dunzo.
-    </p>
-    <p>
-      b. The Printer before making the delivery, shall be at the liberty to verify
-      the availability of the User or its representative at the site of the
-      delivery for avoiding any inconvenience on the location.
-    </p>
-    <p>
-      c. Only one time delivery charges shall be paid to printers.
-    </p>
-    <p>
-      6. User satisfaction (paper quality, print quality, number of quantity):
-    </p>
-    <p>
-      Printer shall strictly follow all the specification as ordered by the User
-      for the printing purpose.
-    </p>
-    <p>
-      a. In the event of User not being satisfied with the printing quality, paper
-      quality or quantity, the User after verifying the goods at the time of
-      delivery shall be at the liberty to return the goods if the same are not in
-      compliance with the specification as given by him at the time of placing the
-      order. In furtherance, the User/Printer will ask the Dunzo Representative
-      for returning the package.
-    </p>
-    <p>
-      b. Furthermore, the Printer after rectifying the issues as reported by the
-      User shall be required to deliver the goods again by using the services of
-      Dunzo and the expenses for the particular delivery shall be deducted from
-      the final payment of the Printer.
-    </p>
-    <p>
-      7. Payment:
-    </p>
-    <p>
-      a. Once the order is satisfactorily delivered to the user, the agreed amount
-      will be transferred to the printer’s account within seven business days
-      after the GST invoice has been uploaded or emailed to the
-      website/company/shapeNprint.
-    </p>
-    <p>
-      b. If the user pays the dunzo amount for return in case of point 6b, the
-      same amount will be deducted from the printer’s amount to be paid.
-    </p>
-    <p>
-      8. The Printer is required to connect with the User/Support immediately if
-      the uploaded file for which the order has been placed is not appropriate for
-      printing or of wrong size or nomenclature.
-    </p>
-    <p>
-      9. GST Invoice: Printer shall be required to upload or email the GST Invoice
-      copy of the entire payment for the printing work in favor of RJB
-      International (29AICPA1550H1ZP)
-    </p>
-    <p>
-      10. Packaging Cost of 1% of job amount or Rs. 100 whichever is lower shall
-      be paid to the Printer as packaging charges.
-    </p>
-  </div>
-  <!-- For Designer -->
-  <div class="modal-body" *ngIf="displayDesingner">
-    <p>
-      1. Registration and Verification:
-    </p>
-    <p>
-      a. Non-refundable amount shall be charged as a
-      registration/verification/convenience fees from the prospective Printers
-      whosoever be interested to appropriate the services/facilities of
-      shapeNprint.
-    </p>
-    <p>
-      b. The Printer shall be required to disclose his personal and professional
-      details alongwith relevant proofs to that effect which may include the GST
-      Certificate No. or the CIN for its respective business enterprises.
-    </p>
-    <p>
-      c. The submission of registration form doesn’t imply completion of
-      registration process until thoroughly verified by ShapeNprint
-    </p>
-    <p>
-      d. Printer shall be required to undergo a verification process for the
-      activation of the dashboard which will require him to upload the relevant
-      certificates such as Aadhar number, PAN number, GST number, etc. for proving
-      the existence of its enterprise.
-    </p>
-    <p>
-      e. Apart from the said procedure, a verification call shall be made to
-      verify and inspect the details as provided by the Printer and only after
-      concluding the said verification the shapeNprint will confirm the
-      registration of the Printer on its platform.
-    </p>
-    <p>
-      f. shapeNPrint shall have the exclusive Right to Reject and Cancel if the
-      prospective Printer fails to qualify the verification process as prescribed.
-    </p>
-    <p>
-      2. Circulation Floating of the Orders placed by the Users/Customers:
-    </p>
-    <p>
-      a. Any order which will be placed by the user shall be circulated/floated
-      amongst the Printers who have been successfully registered by complying with
-      procedures as explained in Clause 1 of this agreement. The algorithm of the
-      Registered Printers will be emerged automatically on the platform, wherein
-      the Printers will receive the notifications of the orders as placed.
-      Accordingly, the Printers can view the summary of the order, amount to
-      receive, and time slot as selected by the user.
-    </p>
-    <p>
-      b. It is to confirm that the shapeNprint and the Printers shall have no
-      liability in the event of placing of any order of the design or content by
-      the User which is illegal/unlawful or the content which is not permissible
-      by the land of law to be propagated, circulated, displayed or distributed
-    </p>
-    <p>
-      3. Acceptance of Order
-    </p>
-    <p>
-      Order will be assigned only to the printer who first accepts the order.
-    </p>
-    <p>
-      a. Printer shall be required to immediately report the User/Company of any
-      illegal/inappropriate content received to him and should not proceed further
-      for printing.
-    </p>
-    <p>
-      4. Delivery Time:
-    </p>
-    <p>
-      Printer shall be required to complete the assigned work within the estimated
-      delivery time as agreed/mentioned alongwith the specifications of the order
-      for which he has qualified. shapeNprint shall have the right to cancel the
-      order, if the order is not processed for delivery within the specified time
-      as prescribed with the order.
-    </p>
-    <p>
-      5. Managing The Delivery :
-    </p>
-    <p>
-      Procedurally the Printer shall be required to click delivery button on the
-      interface as provided by the shapeNprint portal through which he shall be
-      handing over the package to dunzo(delivery partner).
-    </p>
-    <p>
-      a. The Printer shall assure that the ordered material has been properly
-      packed before handing over the delivery to Dunzo.
-    </p>
-    <p>
-      b. The Printer before making the delivery, shall be at the liberty to verify
-      the availability of the User or its representative at the site of the
-      delivery for avoiding any inconvenience on the location.
-    </p>
-    <p>
-      c. Only one time delivery charges shall be paid to printers.
-    </p>
-    <p>
-      6. User satisfaction (paper quality, print quality, number of quantity):
-    </p>
-    <p>
-      Printer shall strictly follow all the specification as ordered by the User
-      for the printing purpose.
-    </p>
-    <p>
-      a. In the event of User not being satisfied with the printing quality, paper
-      quality or quantity, the User after verifying the goods at the time of
-      delivery shall be at the liberty to return the goods if the same are not in
-      compliance with the specification as given by him at the time of placing the
-      order. In furtherance, the User/Printer will ask the Dunzo Representative
-      for returning the package.
-    </p>
-    <p>
-      b. Furthermore, the Printer after rectifying the issues as reported by the
-      User shall be required to deliver the goods again by using the services of
-      Dunzo and the expenses for the particular delivery shall be deducted from
-      the final payment of the Printer.
-    </p>
-    <p>
-      7. Payment:
-    </p>
-    <p>
-      a. Once the order is satisfactorily delivered to the user, the agreed amount
-      will be transferred to the printer’s account within seven business days
-      after the GST invoice has been uploaded or emailed to the
-      website/company/shapeNprint.
-    </p>
-    <p>
-      b. If the user pays the dunzo amount for return in case of point 6b, the
-      same amount will be deducted from the printer’s amount to be paid.
-    </p>
-    <p>
-      8. The Printer is required to connect with the User/Support immediately if
-      the uploaded file for which the order has been placed is not appropriate for
-      printing or of wrong size or nomenclature.
-    </p>
-    <p>
-      9. GST Invoice: Printer shall be required to upload or email the GST Invoice
-      copy of the entire payment for the printing work in favor of RJB
-      International (29AICPA1550H1ZP)
-    </p>
-    <p>
-      10. Packaging Cost of 1% of job amount or Rs. 100 whichever is lower shall
-      be paid to the Printer as packaging charges.
-    </p>
-  </div>
-  <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-light"
-      (click)="activeModal.dismiss('Cross click')"
-    >
-      Close
-    </button>
-  </div>
+<div style="margin-left: 5%;width:90%">
+    <P class="mainHeading">User Terms and Conditions</P>
+    <OL>
+      <LI>
+        <P STYLE="margin-bottom: 0.11in">Registration</P>
+        <OL TYPE=a>
+          <LI>
+            <P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 150%">
   
+              User/Consumers can peruse the website as per their own discretion
+              but for the purpose of placing orders, the User/Consumer shall be
+              required to register themselves.
+  
+            </P>
+          <LI>
+            <P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 150%">
+              User
+              need to provide some personal details including name, contact
+              details, valid mobile numbers etc while registering on the
+              platform. All these details submitted by the user will be saved in
+              our database and can be used for future orders. shapeNprint has the
+              right to display, the information, feedback, rating, etc provided
+              by you on the platform.
+            </P>
+          <LI>
+            <P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 150%">
+              You
+              will be asked, as part of the registration process, to undergo a
+              verification process to verify your personal details to set up an
+              account.
+            </P>
+          <LI>
+            <P ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 150%">
+              You
+              agree and acknowledge that the information given by you is
+              complete, correct and up to date as of the date of your
+              registration on the platform. In the event of any change to this
+              information, you must promptly notify Dunzo in writing of the
+              change at least 1 (one) week before the date on which that change
+              takes effect.
+            </P>
+        </OL>
+      <LI>
+        <P STYLE="margin-bottom: 0.11in">Order</P>
+        <OL TYPE=a>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">You can design, design &amp;
+              print, and print on shapeNprint.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">Any
+              content/images/files/documents written or uploaded while placing
+              the order should not be illegal, immoral, unethical, unlawful,
+              unsafe, contains harmful substance and is in violation of this
+              Terms of Use and applicable laws. shapeNprint is not responsible
+              for the content/images/files/documents written or uploaded by user.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">While placing the order, it’s
+              user responsibility to ensure that all the specifications entered
+              by the user are correct.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">While placing the order for
+              print, it’s user responsibility to ensure that the file uploaded
+              for printing is correct and in printable format. We recommend
+              uploading high resolution or printable format file for the best
+              printing quality. shapeNprint is not responsible if the uploaded
+              file by the user is wrong or of low resolution.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">All the source file of the
+              design placed on shapeNprint will be available to user only when he
+              has opted for “I want Source File” check box on order page.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">Images on screen and their
+              printed output colors may have variations from 5% to 10%.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">The size (length x width) of
+              the file should be exactly the same as specified by the user in
+              product specification while creating the order.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">Thickness (GSM) of paper may
+              vary by 5%.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">Orders once placed cannot be
+              cancelled.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">In design &amp; print order,
+              once the design is accepted by the user then only the order will
+              proceed for printing.
+            </P>
+        </OL>
+      <LI>
+        <P STYLE="margin-bottom: 0.11in">Cancelation and Refunds</P>
+        <OL TYPE=a>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">Order once placed cannot be
+              cancelled or modified.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">Once the design is accepted by
+              the user, the user cannot claim for the refund.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">The user can claim upto 50% of
+              the design order value within 3 days after the meeting is over if
+              he is not satisfied with design.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">If the user has not accepted
+              the design order within 3 days after the meeting is over, it will
+              be termed as accepted by the user and no refund request will be
+              entertained.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">If the users face any issue in
+              print order, the issue will be rectified by the allotted printer
+              through shapeNprint. If the issue persists, refund can be claimed.
+              The above amount of refund will be subjective and will be initiated
+              after thorough inspection by the consult team of shapeNprint.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">All refund initiated by
+              shapeNprint may take up to 7 to 15 business days and will be
+              refunded in the same account through which payment was made while
+              placing the order.
+            </P>
+        </OL>
+    </OL>
+    <P STYLE="margin-left: 1in; margin-bottom: 0.11in"><BR><BR>
+    </P>
+    <OL START=4>
+      <LI>
+        <P STYLE="margin-bottom: 0.11in">Virtual Meeting</P>
+        <OL TYPE=a>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">shapeNprint provides Live
+              Designing to users for design corrections/revisions through screen
+              share powered by Google Meet. A virtual meeting will be created
+              between user, designer and shapeNprint where in that fixed period
+              of time slot, user can instruct the designer to make necessary
+              changes in the design.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">shapeNprint portal will search
+              for designer for 30 minutes. If no designer is available at the
+              selected time slot, then user will be notified, and the user has to
+              select another meeting slot which can be done from the user’s
+              dashboard.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">
+              The
+              user shall be required to comply with the google meet terms and
+              conditions.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">
+              The
+              user shall be required to maintain a professional decorum during
+              the meeting with the designer, in the event of any irregularity the
+              Registration of the user shall be liable for termination by the
+              shapeNprint.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">
+              Both
+              the User and Designer shall be bound by the timings as fixed for
+              the meeting but in case of the unavailability or delay by the
+              designer, the user will have to wait for 15 minutes and accordingly
+              the designer will be termed as not available.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">If the designer connects late
+              in the meeting, then that much time will be add on in the time slot
+              chosen by the user.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">Once the meeting time slot is
+              booked by the user, then the time slot will not be rescheduled.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">Once the meeting time period
+              is over, no changes or revisions will be entertained.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">Incase of any technical glitch
+              or technical failure which is beyond our control from either side,
+              will result in new meeting slot with the same designer. If the
+              designer is unavailable for the new meeting slot, then new designer
+              will be assigned to the user. shapeNprint recommends good internet
+              connectivity for smooth and seamless experience.
+            </P>
+        </OL>
+    </OL>
+    <P STYLE="margin-left: 1in; margin-bottom: 0.11in"><BR><BR>
+    </P>
+    <OL START=5>
+      <LI>
+        <P STYLE="margin-bottom: 0.11in">Delivery</P>
+        <OL TYPE=a>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">If the user has ordered design
+              &amp; print, once the design is accepted by the user, then only the
+              order will proceed for printing.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">shapeNprint is not responsible
+              for any kind of delay in any order placed by the user on account of
+              any factor that cannot be controlled by shapeNprint.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">Incase of print delivery, if
+              the user is not satisfied with the print quantity or find any
+              physical damage, he has the liberty not to accept the order. If
+              the order is accepted, then the user is not eligible for any claim
+              on the order regarding print quantity or physical damage.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">Incase of print delivery, if
+              the user is not satisfied with the print quality, or paper GSM, the
+              user must inform shapeNprint within 24 hours of delivery. If the
+              user fails to inform within 24 hours, the user is not eligible for
+              any claim on the order regarding print quality or paper GSM.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">At the time of print delivery,
+              the user or any representative of the user must be present at the
+              delivery location mentioned at the time of placing the order to
+              accept the order.
+            </P>
+        </OL>
+    </OL>
+    <P STYLE="margin-left: 1in; margin-bottom: 0.11in"><BR><BR>
+    </P>
+    <OL START=6>
+      <LI>
+        <P STYLE="margin-bottom: 0.11in">Payment</P>
+        <OL TYPE=a>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">Do not offer direct payments
+              to service provider.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">According to the Indian
+              Government rules, applicable GST to be paid by the user in design
+              and print orders.</P>
+        </OL>
+    </OL>
+    <P STYLE="margin-left: 1in; margin-bottom: 0.11in"><BR><BR>
+    </P>
+    <OL START=7>
+      <LI>
+        <P STYLE="margin-bottom: 0.11in">
+          Circulation
+          Floating of the Orders placed by the Users/Customers:
+        </P>
+    </OL>
+    <OL TYPE=a>
+      <LI>
+        <P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 115%">
+          Any
+          order which will be placed by the user shall be circulated/floated
+          amongst the designers who have been successfully registered and
+          verified on shapeNprint. The algorithm of the Verified Designers
+          will be emerged automatically on the platform, wherein the Designers
+          will receive the notifications of the orders as placed. Whomsoever
+          accepts the order first, will be allotted as the designer to the
+          client.
+        </P>
+      <LI>
+        <P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 115%">
+          Any
+          order which will be placed by the user shall be circulated/floated
+          amongst the printers who have been successfully registered and
+          verified on shapeNprint. The algorithm of the Verified Printers will
+          be emerged automatically on the platform, wherein the Printers will
+          receive the notifications of the orders as placed. Whomsoever
+          accepts the order first, will be allotted as the printer to the
+          client
+        </P>
+      <LI>
+        <P LANG="en-US" ALIGN=JUSTIFY STYLE="margin-bottom: 0in; line-height: 115%">
+          It is
+          to confirm that the shapeNprint, the Designers and the Printers
+          shall have no liability in the event of placing of any order or
+          content by the User which is illegal/unlawful or the content which
+          is not permissible by the land of law to be propagated, circulated,
+          displayed or distributed.
+        </P>
+    </OL>
+    <P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><BR><BR>
+    </P>
+    <OL START=8>
+      <LI>
+        <P STYLE="margin-bottom: 0.11in">General Terms</P>
+        <OL TYPE=a>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">shapeNprint reserves the right
+              to keep or permanently disable accounts or terminate account due to
+              violation of these Terms and Conditions and/or our Community
+              Standards or due to any unauthorised or improper use of the
+              Platform or Services or any other reasons not mentioned above.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">It would not be possible for
+              people with disabled or terminated accounts to sell or purchase
+              from shapeNprint.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">Disputes can be dealt by
+              calling or email at shapeNprint Customer Service.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">From time to time, shapeNprint
+              can make improvements, changes or updates to its terms and
+              conditions. shapeNprint will make a new copy of the terms and
+              conditions accessible on this website as these updates are made.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">You recognise and acknowledge
+              that shapeNprint will regard your usage as approval of the revised
+              Terms and conditions if you use shapeNprint’s services after the
+              date when the Terms and conditions have changed or updated.</P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">shapeNprint shall maintain the
+              freedom to use all publicly released works for the advertisement
+              and advertising purposes of shapeNprint.</P>
+        </OL>
+      <LI>
+        <P STYLE="margin-bottom: 0.11in">Bulk Designs and Prints</P>
+        <OL TYPE=a>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">shapeNprint offers bulk
+              designing and printing services as well.
+            </P>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in">In bulk designing, if the user
+              doesn’t want to continue with the designer, he/she can ask
+              shapeNprint’s customer service for the refund. The amount will be
+              charged for the number of designs completed or the number of days
+              whichever is higher multiplied by 1.25 times and the balance amount
+              will be refunded within 7 working days. For example, the amount of
+              bulk designs for 30 days or 30 designs was Rs. 9000 and the user
+              wants refund on 10<SUP>th</SUP> day. And if the designs delivered
+              are 12, then the amount charged will be 12 x 300 x 1.25 (designs
+              delivered x cost per design x 1.25) i.e., Rs. 4500. Then the final
+              amount to be refunded will be Rs. 4500.
+            </P>
+        </OL>
+      <LI>
+        <P STYLE="margin-bottom: 0.11in">Violations</P>
+        <OL TYPE=a>
+          <LI>
+            <P STYLE="margin-bottom: 0.11in"></P>
+        </OL>
+    </OL>
+    <P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><BR><BR>
+    </P>
+    <OL START=11>
+      <LI>
+        <P STYLE="margin-bottom: 0.11in">User conduct and Protection</P>
+    </OL>
+    <P STYLE="margin-bottom: 0.11in"><BR><BR>
+    </P>
+    <P STYLE="margin-bottom: 0.11in"><BR><BR>
+    </P>
+  </div>
+
+
+<div class="modal-header" style="display: none;">
+  <h4 class="modal-title">Terms and Conditons</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!-- For Printer -->
+<div class="modal-body" *ngIf="displayPrinter" style="display:none">
+  <p>
+    1. Registration and Verification:
+  </p>
+  <p>
+    a. Non-refundable amount shall be charged as a
+    registration/verification/convenience fees from the prospective Printers
+    whosoever be interested to appropriate the services/facilities of
+    shapeNprint.
+  </p>
+  <p>
+    b. The Printer shall be required to disclose his personal and professional
+    details alongwith relevant proofs to that effect which may include the GST
+    Certificate No. or the CIN for its respective business enterprises.
+  </p>
+  <p>
+    c. The submission of registration form doesn’t imply completion of
+    registration process until thoroughly verified by ShapeNprint
+  </p>
+  <p>
+    d. Printer shall be required to undergo a verification process for the
+    activation of the dashboard which will require him to upload the relevant
+    certificates such as Aadhar number, PAN number, GST number, etc. for proving
+    the existence of its enterprise.
+  </p>
+  <p>
+    e. Apart from the said procedure, a verification call shall be made to
+    verify and inspect the details as provided by the Printer and only after
+    concluding the said verification the shapeNprint will confirm the
+    registration of the Printer on its platform.
+  </p>
+  <p>
+    f. shapeNPrint shall have the exclusive Right to Reject and Cancel if the
+    prospective Printer fails to qualify the verification process as prescribed.
+  </p>
+  <p>
+    2. Circulation Floating of the Orders placed by the Users/Customers:
+  </p>
+  <p>
+    a. Any order which will be placed by the user shall be circulated/floated
+    amongst the Printers who have been successfully registered by complying with
+    procedures as explained in Clause 1 of this agreement. The algorithm of the
+    Registered Printers will be emerged automatically on the platform, wherein
+    the Printers will receive the notifications of the orders as placed.
+    Accordingly, the Printers can view the summary of the order, amount to
+    receive, and time slot as selected by the user.
+  </p>
+  <p>
+    b. It is to confirm that the shapeNprint and the Printers shall have no
+    liability in the event of placing of any order of the design or content by
+    the User which is illegal/unlawful or the content which is not permissible
+    by the land of law to be propagated, circulated, displayed or distributed
+  </p>
+  <p>
+    3. Acceptance of Order
+  </p>
+  <p>
+    Order will be assigned only to the printer who first accepts the order.
+  </p>
+  <p>
+    a. Printer shall be required to immediately report the User/Company of any
+    illegal/inappropriate content received to him and should not proceed further
+    for printing.
+  </p>
+  <p>
+    4. Delivery Time:
+  </p>
+  <p>
+    Printer shall be required to complete the assigned work within the estimated
+    delivery time as agreed/mentioned alongwith the specifications of the order
+    for which he has qualified. shapeNprint shall have the right to cancel the
+    order, if the order is not processed for delivery within the specified time
+    as prescribed with the order.
+  </p>
+  <p>
+    5. Managing The Delivery :
+  </p>
+  <p>
+    Procedurally the Printer shall be required to click delivery button on the
+    interface as provided by the shapeNprint portal through which he shall be
+    handing over the package to dunzo(delivery partner).
+  </p>
+  <p>
+    a. The Printer shall assure that the ordered material has been properly
+    packed before handing over the delivery to Dunzo.
+  </p>
+  <p>
+    b. The Printer before making the delivery, shall be at the liberty to verify
+    the availability of the User or its representative at the site of the
+    delivery for avoiding any inconvenience on the location.
+  </p>
+  <p>
+    c. Only one time delivery charges shall be paid to printers.
+  </p>
+  <p>
+    6. User satisfaction (paper quality, print quality, number of quantity):
+  </p>
+  <p>
+    Printer shall strictly follow all the specification as ordered by the User
+    for the printing purpose.
+  </p>
+  <p>
+    a. In the event of User not being satisfied with the printing quality, paper
+    quality or quantity, the User after verifying the goods at the time of
+    delivery shall be at the liberty to return the goods if the same are not in
+    compliance with the specification as given by him at the time of placing the
+    order. In furtherance, the User/Printer will ask the Dunzo Representative
+    for returning the package.
+  </p>
+  <p>
+    b. Furthermore, the Printer after rectifying the issues as reported by the
+    User shall be required to deliver the goods again by using the services of
+    Dunzo and the expenses for the particular delivery shall be deducted from
+    the final payment of the Printer.
+  </p>
+  <p>
+    7. Payment:
+  </p>
+  <p>
+    a. Once the order is satisfactorily delivered to the user, the agreed amount
+    will be transferred to the printer’s account within seven business days
+    after the GST invoice has been uploaded or emailed to the
+    website/company/shapeNprint.
+  </p>
+  <p>
+    b. If the user pays the dunzo amount for return in case of point 6b, the
+    same amount will be deducted from the printer’s amount to be paid.
+  </p>
+  <p>
+    8. The Printer is required to connect with the User/Support immediately if
+    the uploaded file for which the order has been placed is not appropriate for
+    printing or of wrong size or nomenclature.
+  </p>
+  <p>
+    9. GST Invoice: Printer shall be required to upload or email the GST Invoice
+    copy of the entire payment for the printing work in favor of RJB
+    International (29AICPA1550H1ZP)
+  </p>
+  <p>
+    10. Packaging Cost of 1% of job amount or Rs. 100 whichever is lower shall
+    be paid to the Printer as packaging charges.
+  </p>
+</div>
+<!-- For Designer -->
+<div class="modal-body" *ngIf="displayDesingner" style="display: none;">
+  <p>
+    1. Registration and Verification:
+  </p>
+  <p>
+    a. Non-refundable amount shall be charged as a
+    registration/verification/convenience fees from the prospective Printers
+    whosoever be interested to appropriate the services/facilities of
+    shapeNprint.
+  </p>
+  <p>
+    b. The Printer shall be required to disclose his personal and professional
+    details alongwith relevant proofs to that effect which may include the GST
+    Certificate No. or the CIN for its respective business enterprises.
+  </p>
+  <p>
+    c. The submission of registration form doesn’t imply completion of
+    registration process until thoroughly verified by ShapeNprint
+  </p>
+  <p>
+    d. Printer shall be required to undergo a verification process for the
+    activation of the dashboard which will require him to upload the relevant
+    certificates such as Aadhar number, PAN number, GST number, etc. for proving
+    the existence of its enterprise.
+  </p>
+  <p>
+    e. Apart from the said procedure, a verification call shall be made to
+    verify and inspect the details as provided by the Printer and only after
+    concluding the said verification the shapeNprint will confirm the
+    registration of the Printer on its platform.
+  </p>
+  <p>
+    f. shapeNPrint shall have the exclusive Right to Reject and Cancel if the
+    prospective Printer fails to qualify the verification process as prescribed.
+  </p>
+  <p>
+    2. Circulation Floating of the Orders placed by the Users/Customers:
+  </p>
+  <p>
+    a. Any order which will be placed by the user shall be circulated/floated
+    amongst the Printers who have been successfully registered by complying with
+    procedures as explained in Clause 1 of this agreement. The algorithm of the
+    Registered Printers will be emerged automatically on the platform, wherein
+    the Printers will receive the notifications of the orders as placed.
+    Accordingly, the Printers can view the summary of the order, amount to
+    receive, and time slot as selected by the user.
+  </p>
+  <p>
+    b. It is to confirm that the shapeNprint and the Printers shall have no
+    liability in the event of placing of any order of the design or content by
+    the User which is illegal/unlawful or the content which is not permissible
+    by the land of law to be propagated, circulated, displayed or distributed
+  </p>
+  <p>
+    3. Acceptance of Order
+  </p>
+  <p>
+    Order will be assigned only to the printer who first accepts the order.
+  </p>
+  <p>
+    a. Printer shall be required to immediately report the User/Company of any
+    illegal/inappropriate content received to him and should not proceed further
+    for printing.
+  </p>
+  <p>
+    4. Delivery Time:
+  </p>
+  <p>
+    Printer shall be required to complete the assigned work within the estimated
+    delivery time as agreed/mentioned alongwith the specifications of the order
+    for which he has qualified. shapeNprint shall have the right to cancel the
+    order, if the order is not processed for delivery within the specified time
+    as prescribed with the order.
+  </p>
+  <p>
+    5. Managing The Delivery :
+  </p>
+  <p>
+    Procedurally the Printer shall be required to click delivery button on the
+    interface as provided by the shapeNprint portal through which he shall be
+    handing over the package to dunzo(delivery partner).
+  </p>
+  <p>
+    a. The Printer shall assure that the ordered material has been properly
+    packed before handing over the delivery to Dunzo.
+  </p>
+  <p>
+    b. The Printer before making the delivery, shall be at the liberty to verify
+    the availability of the User or its representative at the site of the
+    delivery for avoiding any inconvenience on the location.
+  </p>
+  <p>
+    c. Only one time delivery charges shall be paid to printers.
+  </p>
+  <p>
+    6. User satisfaction (paper quality, print quality, number of quantity):
+  </p>
+  <p>
+    Printer shall strictly follow all the specification as ordered by the User
+    for the printing purpose.
+  </p>
+  <p>
+    a. In the event of User not being satisfied with the printing quality, paper
+    quality or quantity, the User after verifying the goods at the time of
+    delivery shall be at the liberty to return the goods if the same are not in
+    compliance with the specification as given by him at the time of placing the
+    order. In furtherance, the User/Printer will ask the Dunzo Representative
+    for returning the package.
+  </p>
+  <p>
+    b. Furthermore, the Printer after rectifying the issues as reported by the
+    User shall be required to deliver the goods again by using the services of
+    Dunzo and the expenses for the particular delivery shall be deducted from
+    the final payment of the Printer.
+  </p>
+  <p>
+    7. Payment:
+  </p>
+  <p>
+    a. Once the order is satisfactorily delivered to the user, the agreed amount
+    will be transferred to the printer’s account within seven business days
+    after the GST invoice has been uploaded or emailed to the
+    website/company/shapeNprint.
+  </p>
+  <p>
+    b. If the user pays the dunzo amount for return in case of point 6b, the
+    same amount will be deducted from the printer’s amount to be paid.
+  </p>
+  <p>
+    8. The Printer is required to connect with the User/Support immediately if
+    the uploaded file for which the order has been placed is not appropriate for
+    printing or of wrong size or nomenclature.
+  </p>
+  <p>
+    9. GST Invoice: Printer shall be required to upload or email the GST Invoice
+    copy of the entire payment for the printing work in favor of RJB
+    International (29AICPA1550H1ZP)
+  </p>
+  <p>
+    10. Packaging Cost of 1% of job amount or Rs. 100 whichever is lower shall
+    be paid to the Printer as packaging charges.
+  </p>
+</div>
+<div class="modal-footer" style="display:none">
+  <button type="button" class="btn btn-light" (click)="activeModal.dismiss('Cross click')">
+    Close
+  </button>
+</div>
+
