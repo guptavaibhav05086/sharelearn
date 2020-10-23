@@ -1,25 +1,24 @@
 .container {
   max-width: 1300px;
 }
-.iframe{
+.iframe {
   width: 100%;
   min-height: 320px;
 }
-.dcol-2{
+.dcol-2 {
   /* margin-left: 15%; */
 }
-.dot{
+.dot {
   background: url("../../../../assets/HomePageImg/Home Page _ Images/Your Plan_Tick Bullet1200.png");
   display: inline-block;
-    width: 100%;
-    font-family: Maven pro;
-    font-size: 14px;
-    font-weight: 300;
-    background-repeat: no-repeat;
-    background-size: 20px;
-    padding: 0px 0 0 55px;
-    background-position: 0px 5px;
-  
+  width: 100%;
+  font-family: Maven pro;
+  font-size: 14px;
+  font-weight: 300;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  padding: 0px 0 0 55px;
+  background-position: 0px 5px;
 }
 @media (min-width: 768px) {
   .points {
@@ -29,12 +28,13 @@
   .indentSecond {
     text-indent: -2em;
   }
-  
+
   .container {
     width: 100%;
     display: flex;
     flex-wrap: unset;
     justify-content: space-between;
+    margin-top: 100px;
   }
   .dcol-3 {
     flex-wrap: nowrap;
@@ -43,6 +43,10 @@
   .dcol-2 {
     flex-wrap: nowrap;
     width: 45%;
+  }
+  .dcol-5 {
+    flex-wrap: nowrap;
+    width: 50%;
   }
   .searchBtnStyle {
     border-radius: 10px;
@@ -66,7 +70,7 @@
     height: 40px;
   }
   .textStyle {
-    font-family:'Maven Pro', sans-serif;
+    font-family: "Maven Pro", sans-serif;
     font-size: 16px;
     font-weight: 300;
   }
@@ -91,7 +95,7 @@
     font-size: 23px;
     line-height: 25px;
   }
-  
+
   .alingdiv {
     padding-top: 60px;
   }
@@ -112,15 +116,14 @@
     font-size: 14px;
     font-weight: 300;
   }
-  .dcol-2{
+  .dcol-2 {
     margin-left: 0;
   }
-  .iframe{
+  .iframe {
     width: 100%;
     height: 240px;
   }
-  .dot{
+  .dot {
     padding: 0px 0 0 29px;
- 
-}
+  }
 }

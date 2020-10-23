@@ -9,13 +9,12 @@ import { SliderData } from "src/app/Models/slider-data";
 export class CarouselholderComponent implements OnInit {
   @Input()
   slidesData;
-  itemsPerSlide = 4;
+  @Input() itemsPerSlide = 4;
   singleSlideOffset = true;
   noWrap = false;
   showIndicators = false;
   slidesChangeMessage = "";
 
- 
   slides = [
     { image: "../../../assets/StudentDashboard/img/download.jpg" }
     // { image: "../../../assets/StudentDashboard/img/download.jpg" },
@@ -29,7 +28,7 @@ export class CarouselholderComponent implements OnInit {
   ];
 
   onSlideRangeChange(indexes: number[]): void {
-   // debugger;
+    // debugger;
     this.slidesChangeMessage = `Slides have been switched: ${indexes}`;
   }
   customOptions: OwlOptions = {
@@ -49,7 +48,7 @@ export class CarouselholderComponent implements OnInit {
       },
       400: {
         items: 2
-      }, 
+      },
       740: {
         items: 3
       },
@@ -57,14 +56,13 @@ export class CarouselholderComponent implements OnInit {
         items: 5
       }
     },
-  
+
     nav: false
   };
   constructor() {}
 
   ngOnInit() {
-   // debugger;
-
+    // debugger;
 
     console.log(this.slidesData);
     console.log(this.slides);

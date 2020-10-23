@@ -63,7 +63,76 @@ export class AllOrdersComponent implements OnInit {
       }
     }
   ];
+  columnAdminDefs = [
+    { headerName: "orderid", field: "orderid", sortable: true },
+    { headerName: "orderType", field: "orderType" },
+    { headerName: "subcategory", field: "subcategory", sortable: true },
+    {
+      headerName: "Price",
+      field: "Price",
+      sortable: true
+    },
+    { headerName: "GST", field: "GST", sortable: true },
+    { headerName: "Total", field: "Total" },
+    { headerName: "BaseDesignPrice", field: "BaseDesignPrice", sortable: true },
+    {
+      headerName: "DesignGST",
+      field: "DesignGST",
+      sortable: true
+    },
+    { headerName: "ProfessionDesignerFees", field: "ProfessionDesignerFees", sortable: true },
+    { headerName: "SourceFileFees", field: "SourceFileFees" },
+    { headerName: "DesignGST", field: "subcategory", sortable: true },
+    {
+      headerName: "TotalDesignCost",
+      field: "Price",
+      sortable: true
+    },
 
+
+    { headerName: "orderid", field: "orderid", sortable: true },
+    { headerName: "orderType", field: "orderType" },
+    { headerName: "subcategory", field: "subcategory", sortable: true },
+    {
+      headerName: "Price",
+      field: "Price",
+      sortable: true
+    },
+    { headerName: "GST", field: "GST", sortable: true },
+    { headerName: "Total", field: "Total" },
+    { headerName: "BaseDesignPrice", field: "BaseDesignPrice", sortable: true },
+    {
+      headerName: "DesignGST",
+      field: "DesignGST",
+      sortable: true
+    },
+    { headerName: "ProfessionDesignerFees", field: "ProfessionDesignerFees", sortable: true },
+    { headerName: "SourceFileFees", field: "SourceFileFees" },
+    { headerName: "DesignGST", field: "subcategory", sortable: true },
+    {
+      headerName: "TotalDesignCost",
+      field: "Price",
+      sortable: true
+    },
+    {
+      headerName: "Book Slot",
+
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        label: "Book Slot",
+        onClick: this.bookMeeting.bind(this)
+      }
+    },
+    {
+      headerName: "Actions",
+
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        label: "Order Details",
+        onClick: this.openOrderDetails.bind(this)
+      }
+    }
+  ];
   constructor(
     private customerService: AdminService,
     private modalService: NgbModal

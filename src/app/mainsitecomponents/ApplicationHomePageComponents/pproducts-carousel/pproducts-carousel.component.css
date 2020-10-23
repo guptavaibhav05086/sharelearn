@@ -2,3 +2,13 @@
   height: 200px;
   width: 200px !important;
 }
+@media (min-width: 768px) {
+  .displayCar2 {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .displayCar4 {
+    display: none;
+  }
+}

@@ -2,8 +2,13 @@
   display: flex !important;
 }
 .itemSize {
-  height: 200px; 
-   /* width: 200px !important; */
+  /* height: 300px;
+  width: 300px !important; */
+  width: 90%;
+}
+.carousel-control-next,
+.carousel-control-prev {
+  width: 10% !important;
 }
 /* .carousel-control-next-icon {
   background-image: url("../../../assets/HomePageImg/Home Page _ Images/Left Arrow1200.png") !important;
@@ -14,7 +19,16 @@
 } */
 @media (max-width: 768px) {
   .itemSize {
-    height: auto; 
-     /* width: 200px !important; */
+    height: auto;
+    /* width: 200px !important; */
+  }
+  .carousel-control-next-icon,
+  .carousel-control-prev-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: transparent no-repeat center center;
+    background-size: 100% 100%;
+    margin-left: 100px !important;
   }
 }

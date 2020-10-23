@@ -1,20 +1,19 @@
 .container {
   max-width: 1300px;
 }
-  .image-1{
-    background: url("../../../../assets/HomePageImg/Home Page _ Images/How we Design1200.png");
-    width: 100%;
-    height: 250px;
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
+.image-1 {
+  background: url("../../../../assets/HomePageImg/Home Page _ Images/How we Design1200.png");
+  width: 100%;
+  height: 250px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 @media (min-width: 768px) {
-
-  
   .container {
     width: 100%;
     display: flex;
     flex-wrap: unset;
+    margin-top: 100px;
     /* max-width: 1300px !important; */
   }
   .dcol-3 {
@@ -106,12 +105,11 @@
     font-weight: 300;
   }
 
-  .image-1{
+  .image-1 {
     background: url("../../../../assets/HomePageImg/Home Page _ Images/How_we_esign_mob.png");
     width: 100%;
     height: 300px;
     background-size: contain;
     background-repeat: no-repeat;
   }
- 
 }

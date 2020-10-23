@@ -1,4 +1,4 @@
-.vis-mob{
+.vis-mob {
   display: none;
 }
 .dot {
@@ -13,10 +13,10 @@
   padding: 0px 0 0 30px;
   background-position: 0px 7px;
 }
-.container{
-max-width: 1300px;
+.container {
+  max-width: 1300px;
 }
-.hide-mob{
+.hide-mob {
   display: block;
   position: absolute;
   right: -60px;
@@ -31,7 +31,7 @@ max-width: 1300px;
   }
   .points {
     margin-top: 20px;
-    margin-left: 2em;
+    /* margin-left: 2em; */
   }
   .indentSecond {
     /* text-indent: -23px; */
@@ -59,7 +59,9 @@ max-width: 1300px;
   }
   .alingdiv {
     /* padding-top: 100px; */
-    margin-left: 5%;
+    /* margin-left: 5%; */
+    margin-left: 2em;
+    margin-top: 70px;
   }
   .imgEditpenposition {
     padding-top: 30px;
@@ -112,29 +114,30 @@ max-width: 1300px;
     font-size: 12px;
     font-weight: 300;
   }
-  .vis-mob{
+  .vis-mob {
     display: block;
     position: absolute;
     right: 20px;
     margin-top: -25px;
   }
-  .hide-mob{
+  .hide-mob {
     display: none;
   }
-  .flex-colm-mob{
+  .flex-colm-mob {
     flex-direction: column;
   }
-  .mob-order-2{
+  .mob-order-2 {
     order: 2;
   }
   .log-head .img1 {
     width: 110px !important;
     height: auto !important;
   }
-  .log-head span{ font-size: 14px !important;}
+  .log-head span {
+    font-size: 14px !important;
+  }
 
   .dot {
-   
     background-size: 14px;
     padding: 0px 0 0 30px;
     background-position: 0px 7px;

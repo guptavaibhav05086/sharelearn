@@ -6,7 +6,7 @@
   </ng-container>
 </owl-carousel-o> -->
 <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [noWrap]="!noWrap" [interval]="false"
-  [showIndicators]="showIndicators" [startFromIndex]="0" (slideRangeChange)="onSlideRangeChange($event)">
+  [showIndicators]="showIndicators" [startFromIndex]="6" (slideRangeChange)="onSlideRangeChange($event)">
   <slide *ngFor="let slide of slidesData; let index=index">
     <img [src]="slide.image" alt="image slide" style="display: block; " class="itemSize">
     <!-- <div class="carousel-caption">

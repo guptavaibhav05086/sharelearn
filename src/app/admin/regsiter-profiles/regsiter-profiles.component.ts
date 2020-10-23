@@ -63,7 +63,8 @@ export class RegsiterProfilesComponent implements OnInit {
       headerName: "Registration Id",
       field: "Registrationnumber",
       sortable: true,
-      filter: true
+      filter: true,
+      pinned:'left'
     },
     {
       headerName: "FirstName",

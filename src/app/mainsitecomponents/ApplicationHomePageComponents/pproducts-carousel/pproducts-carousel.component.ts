@@ -9,7 +9,8 @@ import { SliderData } from "src/app/Models/slider-data";
 })
 export class PproductsCarouselComponent implements OnInit {
   products: any;
-
+  slide2=2;
+  slide4=4;
   images = [];
   displayC = false;
   constructor(private admin: AdminService) {}
