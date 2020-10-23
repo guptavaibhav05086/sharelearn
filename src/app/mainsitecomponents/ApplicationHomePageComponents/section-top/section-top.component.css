@@ -149,7 +149,7 @@
     background: url("../../../../assets/HomePageImg/Home Page _ Images/Find and hire1200.png");
     background-size: contain;
     height: 210px;
-    background-position: 110px 66px;
+    background-position: 140px 66px;
     background-repeat: no-repeat;
   }
   .mob-pad {
@@ -161,7 +161,7 @@
     padding: 8px 15px;
 }
 .imgEditpenpositiontwo .imgEditPenSize{
-  width: 55px;
+  width: 35px;
   height: auto;
    }
 }

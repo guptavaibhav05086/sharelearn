@@ -25,7 +25,7 @@
   }
   .dcol-5 {
     flex-wrap: nowrap;
-    width: 35%;
+    width: 30%;
   }
   .searchBtnStyle {
     border-radius: 10px;
@@ -107,7 +107,7 @@
     height: 250px;
     background-size: contain;
     background-repeat: no-repeat;
-    margin-top: 120px;
+    margin-top: 140px;
   }
   .txtFreelance{
     font-weight: 700;
@@ -117,7 +117,13 @@
 .txtSample{
   font-size: 18px;
   line-height: 30px;
-  font-weight: 300;
+  font-weight: 300; 
 }
-  .hide-mob{ display: none;}
+ 
+.hide-mob{ display: none;}
+  .hide-mob2{ display: block;}
+  .hide-lap{ display: none;} 
 }
+
+.hide-mob2{ display: block;}
+.hide-lap{ display: none;}

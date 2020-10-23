@@ -301,6 +301,9 @@ button.calendar:active {
   .flex-control8 {
     width: 100%;
   }
+  .row-two .flex-control8{
+    width: 95%;
+  }
   .flex-control9 {
     width: 80%;
   }
@@ -349,5 +352,6 @@ button.calendar:active {
   .flex-control-3-mob{
     width: 100% !important;
   }
+  
 }
  
