@@ -118,6 +118,31 @@ export class SectionTopNavComponent implements OnInit {
     //   keyboard: false
     // });
   }
+  toggleClass(flag) {
+    debugger;
+    let element = document.getElementById("navbar");
+    if (flag) {
+      element.classList.remove("nav-bar-two");
+      element.classList.add("nav-bar-two-2");
+    } else {
+      element.classList.remove("nav-bar-two-2");
+      element.classList.add("nav-bar-two");
+    }
+  }
+  toggleClassLogin() {
+    debugger;
+    let element = document.getElementById("navbar");
+    let value = document
+      .getElementById("navbarDropdownMenuLink")
+      .getAttribute("aria-expanded");
+    if (value == "false") {
+      element.classList.remove("nav-bar-two");
+      element.classList.add("nav-bar-two-2");
+    } else if (value == "true") {
+      element.classList.remove("nav-bar-two-2");
+      element.classList.add("nav-bar-two");
+    }
+  }
   googleLogin(event) {
     event.preventDefault();
     debugger;
@@ -156,5 +181,12 @@ export class SectionTopNavComponent implements OnInit {
     }
     let param = { queryParams: params };
     this.helper.navigateToPathWithparams("/createorder", param);
+  }
+  navigateToProduct(prodName, e) {
+    e.preventDefault();
+    let params = { selectedProduct: prodName };
+    this.helper.navigateToPathWithparams("/createorder", {
+      queryParams: params
+    });
   }
 }

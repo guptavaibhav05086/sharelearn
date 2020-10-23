@@ -802,15 +802,16 @@
                
           </div>
           <div class="flex-control-50">
-            <div style="display: flex;" *ngIf="displayDesigner">
+            <div style="display: flex;" *ngIf="displayDesignOnly">
               <div>
                   <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tDesign">
               </div>
              <div>
+                <!-- Designers -->
                 <label for="checkbox1" class="checkboxLabel" style="color: black;padding-left: 20px;">
                     I have read and agree to the <a href="#" (click)="openTermCondition('designer',$event)">
                         <span ><u style="color:blue">Terms and Conditons</u></span> 
-                      </a> Designers 
+                      </a>  
               </label>
              </div>
             
@@ -927,26 +928,43 @@
                     </div>
                    
               </div>
-              <div class="flex-control-3 flex-control-3-mob" style="margin-left: 3%;width:30%">
+              <div class="flex-control-3 flex-control-3-mob" style="margin-left: 3%">
                 <div class="" *ngIf="displayprinter">
                     <div style="display: flex;">
-                        <div >
-                            <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tPrinter">
+                        <div class="form-group">
+                            <input  type="checkbox" class="" formControlName="tPrinter">
                         </div>
                         <div>
-                            <label for="checkbox1" class="checkboxLabel" style="padding-left: 20px;">
+                            <label  class="" style="padding-left: 20px;">
                                 I have read and agree to the  <a href="#" (click)="openTermCondition('Printer',$event)">
                                     <span ><u style="color:blue">Terms and Conditons</u></span> 
-                                  </a> Printers
+                                  </a>                                  
                           </label>
                         </div>
                       </div>
-                  <div>   Colors of images on screen and their printed output may vary from 5% to 10%</div>
-                  <div>
-                      Thickness (GSM) of paper may vary by 5%
-                  </div>
+                    <div style="display: flex;">
+                        <div class="form-group">
+                            <input  type="checkbox" class="" formControlName="tPrinterPaperSize" [disabled]="!displayprinter">
+                        </div>
+                        <div class="form-group">
+                            <label  class="" style="padding-left: 20px;">
+                               
+                                  Colors of images on screen and their printed output may vary from 5% to 10%
+                          </label>
+                        </div>
+                      </div>
+                      <div style="display: flex;">
+                        <div>
+                            <input type="checkbox" class="" formControlName="tPrinterGSM" [disabled]="!displayprinter">
+                        </div>
+                        <div>
+                            <label  class="" style="padding-left: 20px;">
+                               
+                                  Thickness (GSM) of paper may vary by 5%
+                          </label>
+                        </div>
+                      </div>
                  
-
                
                  
               </div>
@@ -1232,15 +1250,15 @@
                 <div class="form-group">
                    <button class="btn btn-primary" style="margin-left: 18%;" (click)="addToCart()">Proceed</button>
                     
-                            <label style="font-size: 14px;font-weight:bold;">Total: </label> 
+                            <!-- <label style="font-size: 14px;font-weight:bold;">Total: </label>  -->
                         </div>
-                          <div class="flex-controlPrice">
+                          <!-- <div class="flex-controlPrice">
                               <label>
                               </label>
-                          </div>
+                          </div> -->
                        
                       </div>
-                      <hr/>
+                      <!-- <hr/> -->
                       
                 </div>
 

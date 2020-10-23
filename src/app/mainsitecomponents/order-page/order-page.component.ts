@@ -34,6 +34,7 @@ export class OrderPageComponent implements OnInit {
   displayMeetings = false;
   displayprinter = false;
   displayDesigner = false;
+  displayDesignOnly=false;
   displaysummary = false;
   displaycartMessage = false;
   displayLenghtWidth = false;
@@ -362,7 +363,9 @@ export class OrderPageComponent implements OnInit {
     disableCat:new FormControl(""),
     disableType:new FormControl(""),
     tDesign:new FormControl(false),
-    tPrinter:new FormControl(false)
+    tPrinter:new FormControl(false),
+    tPrinterPaperSize:new FormControl(false),
+    tPrinterGSM:new FormControl(false)
   });
 
   addToCart() {
@@ -507,8 +510,16 @@ export class OrderPageComponent implements OnInit {
         alert('Accept Terms and Conditions to proceed.');
         return false;
       }
+      if(this.orderForm.controls['tPrinterPaperSize'].value == false){
+        alert('Accept Terms and Conditions to proceed.');
+        return false;
+      }
+      if(this.orderForm.controls['tPrinterGSM'].value == false){
+        alert('Accept Terms and Conditions to proceed.');
+        return false;
+      }
     }
-    if(this.displayDesigner ==true){
+    if(this.displayDesignOnly ==true){
       if(this.orderForm.controls['tDesign'].value == false){
         alert('Accept Terms and Conditions to proceed.');
         return false;
@@ -598,6 +609,8 @@ return true;
     this.orderForm.controls["GSTNumber"].enable();
     this.orderForm.controls['tPrinter'].enable();
     this.orderForm.controls['tDesign'].enable();
+    this.orderForm.controls['tPrinterPaperSize'].enable();
+    this.orderForm.controls['tPrinterGSM'].enable();
     this.displayeproceed=false;
     //TODO Calculate Price method
   }
@@ -823,6 +836,7 @@ return true;
       item => item.category == category || item.category == "Design And Print"
     );
     if (category == "Design And Print" || category == "Print Only") {
+      this.displayDesignOnly=false;
       this.displayprinter = true;
       this.displayDesigner = false;
       this.Servicable = false;
@@ -841,6 +855,7 @@ return true;
       
     } else {
       this.displayprinter = false;
+      this.displayDesignOnly=true;
       this.displayDesigner = true;
       this.orderForm.patchValue({
         pinCode: "0",

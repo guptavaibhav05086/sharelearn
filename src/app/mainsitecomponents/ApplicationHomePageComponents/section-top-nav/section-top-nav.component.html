@@ -2,165 +2,176 @@
 <!-- <div style="background-image: url('../../../../assets/HomePageImg/Home Page _ Images/designbackground.png');">
     data
 </div> -->
-<header class="animated fadeInDown" style="  background-color: #fff !important;background-image: url('../../../../assets/HomePageImg/Home Page _ Images/Top Background1200.png') !important;background-size: cover;height :95px;">
+<header class="animated fadeInDown"
+    style="  background-color: #fff !important;background-image: url('../../../../assets/HomePageImg/Home Page _ Images/Top Background1200.png') !important;background-size: cover;height :95px;">
     <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: none !important;"
-        >
-        <div class="container-fluid p-0">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdownTop"
-                aria-controls="navbarNavDropdownTop" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" style="height: 25px;background-color:transparent;"></span>
-            </button>
-            <a class="nav-link logo-nav" href="#"><img _ngcontent-bjd-c124="" src="../../../assets/img/logonew.svg" alt=""
-                    style="height: 40px;"></a>
-            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-            <div class="nav-item vis-mob" *ngIf="!displayUserNav">
-                <button class="btn btn-primary" (click)="navigateSignUp(false)">Create an Account</button>
-            </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: none !important;">
+            <div class="container-fluid p-0">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdownTop"
+                    aria-controls="navbarNavDropdownTop" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon" style="height: 25px;background-color:transparent;"></span>
+                </button>
+                <a class="nav-link logo-nav" href="#"><img _ngcontent-bjd-c124="" src="../../../assets/img/logonew.svg"
+                        alt="" style="height: 40px;"></a>
+                <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+                <div class="nav-item vis-mob" *ngIf="!displayUserNav">
+                    <button class="btn btn-primary" (click)="navigateSignUp(false)">Create an Account</button>
+                </div>
 
-            <div class="nav-item vis-mob" *ngIf="displayUserNav" style="margin-left:50px ">
-                <a class="nav-link" href="#">
-                    <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png" alt=""
-                        style="height: 30px;">
-                </a>
+                <div class="nav-item vis-mob" *ngIf="displayUserNav" style="margin-left:50px ">
+                    <a class="nav-link" href="#">
+                        <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png" alt=""
+                            style="height: 30px;">
+                    </a>
 
-            </div>
+                </div>
 
-            <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNavDropdownTop"
-                style="">
-                <ul class="navbar-nav">
-                    <!-- <li class="nav-item active borderNav">
+                <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNavDropdownTop"
+                    style="">
+                    <ul class="navbar-nav">
+                        <!-- <li class="nav-item active borderNav">
                
                 </li> -->
 
-                    <li class="nav-item borderNav topsearchhide" style="padding-top: 10px;" id="searchBarButton">
-                        <input type="text" class="searchBtn" style="height: 35px;" [(ngModel)]="selected"
-                            [typeahead]="dproducts" [isAnimated]="true" />
-                        <button class="btn btn-primary" style="height: 35px; margin-top: 7px;"
-                            (click)="NavigateToOrder()">Design/Print</button>
-                    </li>
-                    <li class="nav-item borderNav">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item active borderNav">
-                        <div class="vLine"></div>
-                    </li>
-                    <li class="nav-item borderNav">
-                        <a class="nav-link" href="#">About Us</a>
-                    </li>
-                    <li class="nav-item active borderNav">
-                        <div class="vLine"></div>
-                    </li>
-                    <li class="nav-item borderNav">
-                        <a class="nav-link" href="#">Become a Service Provider</a>
-                    </li>
-                    <li class="nav-item active borderNav">
-                        <div class="vLine"></div>
-                    </li>
-                    <li class="nav-item dropdown borderNav" *ngIf="!displayUserNav">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Sign In
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-sun-one" aria-labelledby="navbarDropdownMenuLink" style="
+                        <li class="nav-item borderNav topsearchhide" style="padding-top: 10px;" id="searchBarButton">
+                            <input type="text" class="searchBtn" style="height: 35px;" [(ngModel)]="selected"
+                                [typeahead]="dproducts" [isAnimated]="true" (focus)="toggleClass(true)"
+                                (blur)="toggleClass(false)" />
+                            <button class="btn btn-primary" style="height: 35px; margin-top: 7px;"
+                                (click)="NavigateToOrder()">Design/Print</button>
+                        </li>
+                        <li class="nav-item borderNav">
+                            <a class="nav-link" routerLink="/">Home</a>
+                        </li>
+                        <li class="nav-item active borderNav">
+                            <div class="vLine"></div>
+                        </li>
+                        <li class="nav-item borderNav">
+                            <a class="nav-link" routerLink="/">About Us</a>
+                        </li>
+                        <li class="nav-item active borderNav">
+                            <div class="vLine"></div>
+                        </li>
+                        <li class="nav-item borderNav">
+                            <a class="nav-link" routerLink="/register">Become a Service Provider</a>
+                        </li>
+                        <li class="nav-item active borderNav">
+                            <div class="vLine"></div>
+                        </li>
+                        <li class="nav-item dropdown borderNav" *ngIf="!displayUserNav">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                (click)="toggleClassLogin()">
+                                Sign In
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-sun-one" aria-labelledby="navbarDropdownMenuLink"
+                                style="
                     margin-left: -135px;
                     margin-top: -15px;">
-                            <div class="menuItemDD">
-                                <a class="dropdown-item" href="#" (click)="openLogin($event)">Customer</a>
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item" href="#" (click)="openLogin($event)">Customer</a>
+                                </div>
+
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item" routerLink="/login">Vendor</a>
+                                </div>
+
+
+
                             </div>
-
-                            <div class="menuItemDD">
-                                <a class="dropdown-item" routerLink="/login">Vendor</a>
-                            </div>
-
-
-
-                        </div>
-                    </li>
-                    <!-- After User Sign Up Menu -->
-                    <li class="nav-item dropdown borderNav" *ngIf="displayUserNav" style="padding-top:0px !important">
-                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <a class="nav-link">
-                                <img _ngcontent-bjd-c124=""
-                                    src="../../../../assets/HomePageImg/Home Page _ Images/Sign in Icon1200.png" alt=""
-                                    style="height: 30px;"></a>
-                        </a>
-                        <div class="dropdown-menu drop-sub" aria-labelledby="navbarDropdownMenuLink">
-                            <!-- <div class="menuItemDD">
+                        </li>
+                        <!-- After User Sign Up Menu -->
+                        <li class="nav-item dropdown borderNav" *ngIf="displayUserNav"
+                            style="padding-top:0px !important">
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                (click)="toggleClassLogin()">
+                                <a class="nav-link">
+                                    <img _ngcontent-bjd-c124=""
+                                        src="../../../../assets/HomePageImg/Home Page _ Images/Sign in Icon1200.png"
+                                        alt="" style="height: 30px;"></a>
+                            </a>
+                            <div class="dropdown-menu drop-sub" aria-labelledby="navbarDropdownMenuLink">
+                                <!-- <div class="menuItemDD">
                             <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Profile</a>
                         </div> -->
-                            
-                            <div class="menuItemDD">
-                                <a class="dropdown-item" routerLink="/user/ongoingorders">On Going Order</a>
-                            </div>
-                            <div class="menuItemDD">
-                                <a class="dropdown-item" routerLink="/user/allorders">All Orders</a>
-                            </div>
-                            <div class="menuItemDD">
-                                <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Settings</a>
-                            </div>
 
-                            <div class="menuItemDD">
-                                <a class="dropdown-item" href="#" routerLink="/logout">Help & Support</a>
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item" routerLink="/user/ongoingorders">On Going Order</a>
+                                </div>
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item" routerLink="/user/allorders">All Orders</a>
+                                </div>
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Settings</a>
+                                </div>
+
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item" href="#" routerLink="/logout">Help & Support</a>
+                                </div>
+
+
+
                             </div>
-
-
-
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown vis-moble borderNav" >
-                        <a class="nav-link dropdown-toggle" href="#" id="Allproducts" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            ALL Products
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-sun-one sub-menu-03" aria-labelledby="navbarDropdownMenuLink" style="
+                        </li>
+                        <li class="nav-item dropdown vis-moble borderNav">
+                            <a class="nav-link dropdown-toggle" href="#" id="Allproducts" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ALL Products
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-sun-one sub-menu-03"
+                                aria-labelledby="navbarDropdownMenuLink" style="
                     margin-left: -110px; 
                     margin-top: -20px;">
-                          <div class="menuItemDD">
-                            <a class="dropdown-item" href="#" >Flyers</a>
-                        </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#" >Brochure</a>
-                        </div>
-                         <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Business Card</a>
-                        </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#">Social Media Banner</a>
-                        </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#" >Logo</a>
-                        </div>
-                        <div class="menuItemDD">
-                            <a class="dropdown-item" href="#" >Stationaries </a>
-                        </div> 
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item" href="#"
+                                        (click)="navigateToProduct('Flyers',$event)">Flyers</a>
+                                </div>
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item" (click)="navigateToProduct('Brochure',$event)">Brochure</a>
+                                </div>
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item"
+                                        (click)="navigateToProduct('Business Card',$event)">Business Card</a>
+                                </div>
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item"
+                                        (click)="navigateToProduct('Digital Marketing Banners/Social Media Banners',$event)">Social
+                                        Media Banner</a>
+                                </div>
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item" (click)="navigateToProduct('Logo',$event)">Logo</a>
+                                </div>
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item"
+                                        (click)="navigateToProduct('Stationaries',$event)">Stationaries </a>
+                                </div>
 
 
 
-                        </div>
-                    </li>
-                    <li class="nav-item active borderNav">
-                        <div class="vLine"></div>
-                    </li>
+                            </div>
+                        </li>
+                        <li class="nav-item active borderNav">
+                            <div class="vLine"></div>
+                        </li>
 
-                    <li class="nav-item hide-mob" *ngIf="!displayUserNav">
-                        <button class="btn btn-primary" (click)="navigateSignUp(false)">Create an Account</button>
-                    </li>
+                        <li class="nav-item hide-mob" *ngIf="!displayUserNav">
+                            <button class="btn btn-primary" (click)="navigateSignUp(false)">Create an Account</button>
+                        </li>
 
-                    <!-- User Cart Menu -->
-                    <li class="nav-item hide-mob" *ngIf="displayUserNav" style="padding-top:10px !important">
-                        <a class="nav-link" href="#">
-                            <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png"
-                                alt="" style="height: 30px;">
-                        </a>
+                        <!-- User Cart Menu -->
+                        <li class="nav-item hide-mob" *ngIf="displayUserNav" style="padding-top:10px !important">
+                            <a class="nav-link" href="#">
+                                <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png"
+                                    alt="" style="height: 30px;">
+                            </a>
 
-                    </li>
-                    <!-- 9415191978 -->
+                        </li>
+                        <!-- 9415191978 -->
 
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-</div>
+        </nav>
+    </div>
 </header>

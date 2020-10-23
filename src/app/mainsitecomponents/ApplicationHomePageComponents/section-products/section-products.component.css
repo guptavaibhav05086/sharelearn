@@ -1,17 +1,26 @@
 .navbar a:not(.btn):not(.dropdown-item) {
   color: lightgrey;
 }
+.nav-link {
+  cursor: pointer;
+}
 .bg-light {
   background-color: white !important;
 }
-.navbar-two{
+.navbar-two {
   z-index: -1;
 }
- .nav-bar-two{
-   position: relative;
-   z-index: 1;
-   width: 100%;
- }
+.nav-bar-two {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.nav-bar-two-2 {
+  position: relative;
+  z-index: -1;
+  width: 100%;
+}
 @media (min-width: 778px) {
   .borderNav {
     border-right: 0x solid;

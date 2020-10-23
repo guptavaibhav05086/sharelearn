@@ -34,6 +34,9 @@
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 768px) {
+  .flex-control9 {
+    width: 70%;
+  }
   .flex-control-radio {
     width: 25%;
     margin-bottom: 20px;
@@ -86,7 +89,7 @@
 }
 .flex-control33 {
   width: 33%;
-   padding-left: 4%; 
+  padding-left: 4%;
 }
 /*
 .flex-control3 {
@@ -296,12 +299,11 @@ button.calendar:active {
     width: 100%;
     margin: 0 auto;
     text-align: center;
-
   }
   .flex-control8 {
     width: 100%;
   }
-  .row-two .flex-control8{
+  .row-two .flex-control8 {
     width: 95%;
   }
   .flex-control9 {
@@ -330,28 +332,27 @@ button.calendar:active {
   .flex-control5-mob {
     width: 208px;
   }
-  .price-margin,.flex-control3 {
+  .price-margin,
+  .flex-control3 {
     margin-left: 0% !important;
   }
-  .lableOR{
+  .lableOR {
     width: 85%;
     text-align: center;
   }
-  .pad-m-0{
+  .pad-m-0 {
     padding: 0 !important;
   }
-  .pad-m-t-10{
+  .pad-m-t-10 {
     padding-top: 10px !important;
   }
-  .pad-m-t-0{
+  .pad-m-t-0 {
     padding-top: 0px !important;
   }
-  .pad-m-b-0{
+  .pad-m-b-0 {
     padding-bottom: 0px !important;
   }
-  .flex-control-3-mob{
+  .flex-control-3-mob {
     width: 100% !important;
   }
-  
 }
- 
