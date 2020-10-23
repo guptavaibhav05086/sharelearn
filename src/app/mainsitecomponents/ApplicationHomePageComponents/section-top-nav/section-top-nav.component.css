@@ -6,6 +6,7 @@
 }
 .container{
   max-width: 1300px;
+  padding-left: 5px;
 }
 .nav-link,.navbar {
   padding: .5rem 0;
@@ -80,7 +81,7 @@
     display: none;
   }
   .dropdown-menu-sun-one{
-    margin-left: 0 !important;
+    margin-left: 10px !important;
     margin-top: 0 !important;
     display: initial;
     

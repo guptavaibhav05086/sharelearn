@@ -20,6 +20,12 @@
   padding: 0px 0 0 55px;
   background-position: 0px 5px;
 }
+.hide-mob {
+  display: block;
+}
+.view-mob {
+  display: none;
+}
 @media (min-width: 768px) {
   .points {
     margin-top: 20px;
@@ -42,7 +48,7 @@
   }
   .dcol-2 {
     flex-wrap: nowrap;
-    width: 45%;
+    width: 49%;
   }
   .dcol-5 {
     flex-wrap: nowrap;
@@ -125,5 +131,11 @@
   }
   .dot {
     padding: 0px 0 0 29px;
+  }
+  .hide-mob {
+    display: none;
+  }
+  .view-mob {
+    display: block;
   }
 }
