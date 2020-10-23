@@ -2,8 +2,9 @@
   display: flex !important;
 }
 .itemSize {
-  height: 200px; 
-   /* width: 200px !important; */
+  /* height: 200px;  */
+   width: 95%;
+   max-height: 300px;
 }
 /* .carousel-control-next-icon {
   background-image: url("../../../assets/HomePageImg/Home Page _ Images/Left Arrow1200.png") !important;
