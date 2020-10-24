@@ -321,8 +321,16 @@ export class OrderCartComponent implements OnInit {
           this.userCart.finalPrice.calDelivery
       );
     } else {
-      this.userCart.finalPrice.calDiscountedTotal = this.userCart.finalPrice.calFinalTotal;
+      this.userCart.finalPrice.calDiscountedTotal = this.userCart.finalPrice.calFinalTotal + this.userCart.finalPrice.calDelivery;
       this.userCart.finalPrice.calDiscountedGST = this.userCart.finalPrice.calGST;
+      this.userCart.finalPrice.calDiscountedDesignGST = Math.round(
+        this.userCart.finalPrice.calDesignPrice *
+          this.userCart.finalPrice.designGSTPct
+      );
+      this.userCart.finalPrice.calDiscountedPrintGST = Math.round(
+        this.userCart.finalPrice.calPrintPrice *
+          this.userCart.finalPrice.printGSTPct
+      );
     }
   }
   placeOrder() {

@@ -125,9 +125,15 @@ export class ReviewOrderComponent implements OnInit {
     //debugger;
     if (event.tranId == null) {
       this.displayTranFail = true;
-      let origin = this.document.location.origin;
-      let url = origin + "/orderstatus?tranId=" + null;
-      window.location.href = url;
+      this.custService.updateFailedTransaction(this.interOrderId).subscribe(data=>{
+        let origin = this.document.location.origin;
+        let url = origin + "/orderstatus?tranId=" + null;
+        window.location.href = url;
+      },err=>{
+
+      })
+      alert("Transaction Failed for your Order");
+      
     } else {
       //debugger;
       try {
@@ -262,7 +268,7 @@ export class ReviewOrderComponent implements OnInit {
     //this.spinner.hide("loadcart");
   }
   calculateDiscounts() {
-    //debugger;
+    debugger;
     let totalpriceWithoutDelivery =
       this.userCart.finalPrice.calPrice + this.userCart.finalPrice.calGST;
     let perc = this.custService.getDiscountPercentage(
@@ -322,9 +328,19 @@ export class ReviewOrderComponent implements OnInit {
           this.userCart.finalPrice.calDiscountedGST +
           this.userCart.finalPrice.calDelivery
       );
-    } else {
-      this.userCart.finalPrice.calDiscountedTotal = this.userCart.finalPrice.calFinalTotal;
+    } 
+    else {
+      this.userCart.finalPrice.calDiscountedTotal = this.userCart.finalPrice.calFinalTotal + this.userCart.finalPrice.calDelivery;
       this.userCart.finalPrice.calDiscountedGST = this.userCart.finalPrice.calGST;
+      this.userCart.finalPrice.calDiscountedDesignGST = Math.round(
+        this.userCart.finalPrice.calDesignPrice *
+          this.userCart.finalPrice.designGSTPct
+      );
+      this.userCart.finalPrice.calDiscountedPrintGST = Math.round(
+        this.userCart.finalPrice.calPrintPrice *
+          this.userCart.finalPrice.printGSTPct
+      );
+      
     }
   }
   generateOrderId() {

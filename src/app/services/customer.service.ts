@@ -80,6 +80,13 @@ export class CustomerService {
       this.login.getAuthHeader()
     );
   }
+  updateFailedTransaction( orderId) {
+    let url = `${environment.baseUrl}${environment.transactionFailed}`
+      
+      .replace("$orderId", orderId)
+      ;
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   rescheduleMeetNotify(meetingDetails, orderId) {
     return this._httpclient.post(
       `${environment.baseUrl}${environment.reschuleMeetNoti}`.replace(

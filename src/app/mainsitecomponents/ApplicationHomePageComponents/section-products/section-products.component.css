@@ -25,6 +25,10 @@
   .borderNav {
     border-right: 0x solid;
   }
+  .menuItemDD :hover {
+    background-color: blue !important;
+    cursor: pointer;
+  }
 }
 @media (max-width: 778px) {
   .borderNav {

@@ -24,6 +24,7 @@ export const environment = {
   generateOrder: "/api/customer/generateorder?amount=$amount",
   transactionValidate:
     "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature",
+  transactionFailed: "/api/customer/updateFailedTransaction?orderId=$orderId",
   getDesignerProfile: "/api/designer/getProfile?userId=$userId",
   getPrinterProfile: "/api/printer/getProfile?userId=$userId",
   generateOTP:

@@ -20,6 +20,7 @@ export const environment = {
   generateOrder: "/api/customer/generateorder?amount=$amount",
   transactionValidate:
     "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature",
+  transactionFailed: "/api/customer/updateFailedTransaction?orderId=$orderId",
   getDesignerProfile: "/api/designer/getProfile?userId=$userId",
   getPrinterProfile: "/api/printer/getProfile?userId=$userId",
   generateOTP:
@@ -108,7 +109,8 @@ export const environment = {
     "/api/customer/rescheduleMeetingNotifications?orderId=$orderId",
   adminVerifyVendor:
     "/api/admin/adminVerifyVendor?type=$type&email=$email&isProf=$isProf&isAdminVerified=$isAdminVerified",
-  adminGetFiles: "/api/admin/downloaFiles?filename=$filename&location=$location",
+  adminGetFiles:
+    "/api/admin/downloaFiles?filename=$filename&location=$location",
   getOngoingAdmin:
     "/api/admin/getongoingorder?email=$email&isAllOrdersRequired=$isAllOrdersRequired"
 };
