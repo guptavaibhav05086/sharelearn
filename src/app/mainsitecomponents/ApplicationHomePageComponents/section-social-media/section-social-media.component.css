@@ -4,13 +4,39 @@
 .hide-mob{
   display: block;
 }
+/*begin new footer css */
+.container{
+  max-width: 1370px;
+}
+.footer-menu-block{
+  background: #e1eefe;
+  padding: 15px 0;
+}
+.footer-menu-block b{
+  color: #2c2c2c;
+  font-size: 15px;
+  font-weight: 600;
+}
+.footer-menu-block ul{
+  margin: 0;
+  padding: 0;
+}
+.footer-menu-block ul li{
+  list-style: none;
+  display: block;
+  font-weight: 300;
+}
+.footer-menu-block ul li a{
+  color: #2c2c2c;
+}
+/*end new footer css */
 @media (min-width: 768px) {
   .container {
     width: 100%;
     display: flex;
     flex-wrap: unset;
     margin-right: inherit;
-    max-width: 1300px;
+    max-width: 1370px;
   }
   .containerFooter {
     width: 100%;
