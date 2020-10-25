@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="nav-item vis-mob" *ngIf="displayUserNav" style="margin-left:50px ">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" routerLink="/cart">
                         <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png" alt=""
                             style="height: 30px;">
                     </a>
@@ -109,6 +109,9 @@
                                 <div class="menuItemDD">
                                     <a class="dropdown-item" href="#" routerLink="/logout">Help & Support</a>
                                 </div>
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item" href="#" routerLink="/logout">Log Out</a>
+                                </div>
 
 
 
@@ -161,7 +164,7 @@
 
                         <!-- User Cart Menu -->
                         <li class="nav-item hide-mob" *ngIf="displayUserNav" style="padding-top:10px !important">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" routerLink="/cart">
                                 <img src="../../../../assets/HomePageImg/Home Page _ Images/Create Accout Bag1200.png"
                                     alt="" style="height: 30px;">
                             </a>

@@ -26,13 +26,16 @@ export class PproductsCarouselComponent implements OnInit {
         //debugger;
         this.products = data["products"];
         this.products.map(item => {
-          this.images.push({
-            image:
-              item.productImage == ""
-                ? "../../../assets/StudentDashboard/img/download.jpg"
-                : item.productImage,
-            name: item.value
-          });
+          if(item.IsDisabled == false){
+            this.images.push({
+              image:
+                item.productImage == ""
+                  ? "../../../assets/StudentDashboard/img/download.jpg"
+                  : item.productImage,
+              name: item.value
+            });
+          }
+          
           this.displayC = true;
         });
         console.log(this.products);

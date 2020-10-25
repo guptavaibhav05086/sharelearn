@@ -1,7 +1,21 @@
-.input01{
-  border-radius: 10px;width: 100%;border: 1px solid lightblue;
+.input01 {
+  border-radius: 10px;
+  width: 100%;
+  border: 1px solid lightblue;
   max-width: 400px;
-
+}
+.dropdownitem {
+  cursor: pointer;
+  font-family: "Maven pro";
+  color: blue !important;
+  text-decoration: underline !important;
+}
+.dropdownitem:hover {
+  background-color: none !important;
+}
+.mainheading {
+  font-family: "Maven pro";
+  font-size: 18px;
 }
 @media (min-width: 768px) {
   .container {
@@ -105,26 +119,24 @@
     font-size: 12px;
     font-weight: 300;
   }
-  .input01{
-    border-radius: 10px;width: 100%;
+  .input01 {
+    border-radius: 10px;
+    width: 100%;
     max-width: auto;
-  
   }
   .dcol-4 {
-    
     float: left;
     width: 46%;
     text-align: left;
-}
- .dcol-4{
-  border-right: 2px solid lightblue;
-  margin-right: 10px;
-}
-.mob-no-border{
-  border: none;
-}
-.dcol-5{
-  clear: both;
-}
-
+  }
+  .dcol-4 {
+    border-right: 2px solid lightblue;
+    margin-right: 10px;
+  }
+  .mob-no-border {
+    border: none;
+  }
+  .dcol-5 {
+    clear: both;
+  }
 }

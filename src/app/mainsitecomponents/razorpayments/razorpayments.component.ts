@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import { WindowRefService } from "src/app/services/window-ref.service";
 import { PrinterService } from "src/app/services/printer.service";
-import {CustomerService } from "src/app/services/customer.service"
+import { CustomerService } from "src/app/services/customer.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Router } from "@angular/router";
 @Component({
@@ -21,7 +21,7 @@ export class RazorpaymentsComponent implements OnInit {
     private printer: PrinterService,
     private modalService: NgbModal,
     private router: Router,
-    private custService:CustomerService
+    private custService: CustomerService
   ) {}
 
   ngOnInit() {}
@@ -29,24 +29,23 @@ export class RazorpaymentsComponent implements OnInit {
   createRzpayOrder(amount) {
     debugger;
     console.log(amount);
-    if(this.orderId !=null && this.orderId !=undefined){
+    if (this.orderId != null && this.orderId != undefined) {
       this.payWithRazor(this.orderId);
+    } else {
+      this.custService.generateOrderId(this.paymentAmount * 100).subscribe(
+        data => {
+          if (this.orderId != null && this.orderId != undefined) {
+            this.payWithRazor(data);
+          } else {
+            alert(
+              "Issue in initiating the payment.Please referesh the page or try after some time"
+            );
+          }
+        },
+        err => {}
+      );
     }
-    else{
-      this.custService.generateOrderId((this.paymentAmount * 100)).subscribe(data=>{
-        if(this.orderId !=null && this.orderId !=undefined){
-          this.payWithRazor(data);
-        }
-        else{
-          alert('Issue in initiating the payment.Please referesh the page or try after some time')
-        }
-        
-      },err=>{
 
-      })
-
-    }
-    
     // this.printer.generateOrderId((this.paymentAmount * 100)).subscribe(
     //   data => {
     //     this.payWithRazor(data);
@@ -57,7 +56,7 @@ export class RazorpaymentsComponent implements OnInit {
 
   payWithRazor(val) {
     const options: any = {
-      key: "rzp_test_mz10cbdFCEOGCL",
+      key: "rzp_live_Fg9NN5NAEvUp4N",
       amount: this.paymentAmount * 100, // amount should be in paise format to display Rs 1255 without decimal point
       currency: "INR",
       name: "shapeNprint", // company name or product name

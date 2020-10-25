@@ -12,4 +12,17 @@ export class SectionSocialMediaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openLinkSocial(path,e){
+    e.preventDefault();
+    //this._helper.navigateToPath("/terms");
+    window.open(path,"_blank");
+    // let modelRef = this.modalService.open(TermsConditionsComponent);
+    // modelRef.componentInstance.type = type;
+    // modelRef.result.then(data => {
+    //   debugger;
+    //   console.log(data);
+      
+    // });
+  }
+
 }

@@ -7,8 +7,8 @@ import {
   transition
 } from "@angular/animations";
 import { DOCUMENT } from "@angular/common";
-import { AdminService } from 'src/app/services/admin.service';
-import { CustomerService } from 'src/app/services/customer.service';
+import { AdminService } from "src/app/services/admin.service";
+import { CustomerService } from "src/app/services/customer.service";
 @Component({
   selector: "app-home-container",
   templateUrl: "./home-container.component.html",
@@ -23,11 +23,14 @@ import { CustomerService } from 'src/app/services/customer.service';
 })
 export class HomeContainerComponent implements OnInit {
   displayTopNav = true;
-  constructor(@Inject(DOCUMENT) document,
-  private adminService: AdminService,
-  private customerService:CustomerService) {}
+  constructor(
+    @Inject(DOCUMENT) document,
+    private adminService: AdminService,
+    private customerService: CustomerService
+  ) {}
 
   ngOnInit(): void {
+    document.getElementsByTagName("body")[0].removeAttribute("style");
     this.adminService.getProducts().subscribe(data => {
       this.customerService.setProductsData(data);
     });
@@ -35,7 +38,7 @@ export class HomeContainerComponent implements OnInit {
   @HostListener("window:scroll", ["$event"])
   onWindowScroll(e) {
     if (window.pageYOffset > 400) {
-     // debugger;
+      // debugger;
       this.displayTopNav = false;
       let element = document.getElementById("navbar");
       let elementTop = document.getElementById("topNav");
@@ -47,7 +50,7 @@ export class HomeContainerComponent implements OnInit {
       elementTop.classList.remove("topNavhide");
       //navbarinner
     } else {
-     // debugger;
+      // debugger;
       this.displayTopNav = true;
       let element = document.getElementById("navbar");
       let elementTop = document.getElementById("topNav");

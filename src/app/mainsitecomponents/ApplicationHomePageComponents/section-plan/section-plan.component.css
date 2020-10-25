@@ -89,8 +89,18 @@
     padding-top: 5px;
     width: 20px;
   }
+  .brndvd{
+    width: 700px;
+    height: 350px;
+
+  }
+  
 }
 @media (max-width: 768px) {
+  .mob-brndvd{
+    width: 320px;
+    height: 320px;
+  }
   .imgEditPrintSize {
     height: 30px;
     padding-top: 5px;

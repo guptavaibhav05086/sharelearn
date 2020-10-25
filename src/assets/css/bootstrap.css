@@ -6238,7 +6238,8 @@ button.close {
     width: 20px;
     height: 20px;
     background: transparent no-repeat center center;
-    background-size: 100% 100%
+    background-size: 100% 100%;
+    
 }
 
 .carousel-control-prev-icon {
@@ -6254,8 +6255,18 @@ button.close {
 /* .carousel-control-next-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E")
 } */
-.carousel-control-next-icon {
-    background-image:  url("../../../assets/HomePageImg/Home Page _ Images/Right Arrow1200.png");
+
+@media (max-width: 768px){
+    .carousel-control-next-icon {
+        background-image:  url("../../../assets/HomePageImg/Home Page _ Images/Right Arrow1200.png");
+        margin-left: 25px;
+    }
+}
+@media (min-width: 768px){
+    .carousel-control-next-icon {
+        background-image:  url("../../../assets/HomePageImg/Home Page _ Images/Right Arrow1200.png");
+        margin-left: 150px;
+    } 
 }
 
 .carousel-indicators {

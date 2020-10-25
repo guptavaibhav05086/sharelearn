@@ -48,7 +48,9 @@ export class SectionTopNavComponent implements OnInit {
           pSub: null,
           displayN: element.value
         };
-        this.products.push(element.value.trim());
+        if (element.IsDisabled == false) {
+          this.products.push(element.value.trim());
+        }
       });
       data["productList"].forEach(element => {
         let item = {
@@ -56,7 +58,9 @@ export class SectionTopNavComponent implements OnInit {
           pSub: element.productSubcategory,
           displayN: element.productSubcategory
         };
-        this.products.push(element.productSubcategory.trim());
+        if (element.IsDisabled == false) {
+          this.products.push(element.productSubcategory.trim());
+        }
       });
       this.dproducts = [...new Set(this.products)];
     });

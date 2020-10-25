@@ -529,7 +529,8 @@ return true;
   }
   openTermCondition(type,e){
     e.preventDefault();
-    this._helper.navigateToPath("/terms");
+    //this._helper.navigateToPath("/terms");
+    window.open("/terms","_blank");
     // let modelRef = this.modalService.open(TermsConditionsComponent);
     // modelRef.componentInstance.type = type;
     // modelRef.result.then(data => {
@@ -1348,7 +1349,7 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
     debugger;
     if (this.orderForm.controls["professionDesigner"].value == true) {
       this.orderPrice.professiondesignerFees = item.profDesignerFee;
-      this.orderPrice.professiondesignerFeesAfterCommision=(item.profDesignerFee)-(item.profDesignerFee * (item.DesignCommision/100));
+      this.orderPrice.professiondesignerFeesAfterCommision=Math.round((item.profDesignerFee)-(item.profDesignerFee * (item.DesignCommision/100)));
     } else {
       this.orderPrice.professiondesignerFees = 0;
       this.orderPrice.professiondesignerFeesAfterCommision=0;
@@ -1358,8 +1359,8 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
     } else {
       this.orderPrice.sourceFileFees = 0;
     }
-    this.orderPrice.baseDesignPrice = item.DesignPrice +
-    (item.DesignCommision / 100) * item.DesignPrice ;
+    this.orderPrice.baseDesignPrice = Math.round( item.DesignPrice +
+    (item.DesignCommision / 100) * item.DesignPrice) ;
     let designCost =this.orderPrice.baseDesignPrice
       +
       this.orderPrice.professiondesignerFees 
@@ -1368,7 +1369,7 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
       this.orderPrice.designerCost=item.DesignPrice;
     let designGST = designCost * (item.DesignGST / 100);
     let totalDesignCost = designCost + designGST;
-    this.orderPrice.designCost = designCost;
+    this.orderPrice.designCost = Math.round(designCost);
     this.orderPrice.designGST =Math.round(designGST) ;
     this.orderPrice.totalDesignCost = Math.round(totalDesignCost);
     this.orderPrice.DesignGSTPct=(item.DesignGST / 100);
@@ -1390,7 +1391,7 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
         let gstPercentage = item[0].PrintGST / 100;
         let pGST = pCost * gstPercentage;
         let totalPrintCost = pCost + pGST;
-        this.orderPrice.printerCost=(itemPrice.pricePerUnit *quant) + (itemPrice.pricePerUnit *quant) * gstPercentage;
+        this.orderPrice.printerCost=Math.round((itemPrice.pricePerUnit *quant) + (itemPrice.pricePerUnit *quant) * gstPercentage);
         this.orderPrice.printGST = Math.round(pGST);
         this.orderPrice.printCost = Math.round(pCost);
         this.orderPrice.totalPrintCost = Math.round(totalPrintCost);
@@ -1438,7 +1439,7 @@ this.document.getElementsByTagName("body")[0].removeAttribute("style");
           ;
           
         let gstPercentage = item[0].PrintGST / 100;
-        this.orderPrice.printerCost=(itemPrice.pricePerUnit *  selectedSqft) + (itemPrice.pricePerUnit *  selectedSqft) * gstPercentage;
+        this.orderPrice.printerCost=Math.round((itemPrice.pricePerUnit *  selectedSqft) + (itemPrice.pricePerUnit *  selectedSqft) * gstPercentage);
         let pGST = pCost * gstPercentage;
         let totalPrintCost = pCost + pGST;
         this.orderPrice.printGST = Math.round(pGST);

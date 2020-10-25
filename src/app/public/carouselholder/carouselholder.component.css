@@ -17,6 +17,11 @@
   background-image: url("../../../assets/HomePageImg/Home Page _ Images/Left Arrow1200.png") !important;
   margin-left: -200%;
 } */
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  margin-left: 150px !important;
+}
 @media (max-width: 768px) {
   .itemSize {
     height: auto;

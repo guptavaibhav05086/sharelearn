@@ -17,14 +17,22 @@ export class SectionTopComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    debugger;
     this.adminService.getProducts().subscribe(data => {
       this.productsdata = data;
       data["products"].forEach(element => {
-        this.products.push(element.value);
+        if (element.IsDisabled == false) {
+          this.products.push(element.value.trim());
+        }
+        //this.products.push(element.value);
       });
       data["productList"].forEach(element => {
-        this.products.push(element.productSubcategory);
+        if (element.IsDisabled == false) {
+          this.products.push(element.productSubcategory.trim());
+        }
+        //this.products.push(element.productSubcategory);
       });
+
       this.products = [...new Set(this.products)];
     });
   }

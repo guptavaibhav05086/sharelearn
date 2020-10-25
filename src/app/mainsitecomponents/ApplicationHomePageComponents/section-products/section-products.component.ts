@@ -22,7 +22,10 @@ export class SectionProductsComponent implements OnInit {
           pSub: null,
           displayN: element.value
         };
-        this.products.push(element.value.trim());
+        if(element.IsDisabled == false){
+          this.products.push(element.value.trim());
+        }
+        
       });
 
       this.products = [...new Set(this.products)];
