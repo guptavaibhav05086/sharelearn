@@ -82,6 +82,25 @@ export class DesignerService {
       options
     );
   }
+  downloadDesignCompletedFiles(filename) {
+    let url = `${environment.baseUrl}${environment.fetchCustomerDesignFiles}`.replace(
+      "$filename",
+      filename
+    );
+    let authHeaders = new HttpHeaders({
+      Authorization: "Bearer " + this.login.getUserToken().Token
+    });
+
+    const options = {
+      headers: authHeaders,
+      responseType: "blob" as "json"
+    };
+    return this._httpclient.get(
+      url,
+
+      options
+    );
+  }
   getProfile(userId) {
     let url = `${environment.baseUrl}${environment.getDesignerProfile}`.replace(
       "$userId",

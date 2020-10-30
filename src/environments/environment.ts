@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: "https://www.shapenprint.in",
-  //baseUrl: "http://localhost:39117",
+  //baseUrl: "https://www.shapenprint.in",
+  baseUrl: "http://localhost:39117",
 
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
@@ -64,6 +64,8 @@ export const environment = {
     "/api/designer/getOngoingOrder?email=$email&isAllOrdersRequired=$isAllOrdersRequired",
   fetchongoingorderfilesDesigner:
     "/api/designer/downloadOngoingOrderFiles?filename=$filename",
+  fetchCustomerDesignFiles:
+    "/api/customer/downloadDesigneCompletedFiles?filename=$filename",
   getDesignerDashBoard: "/api/designer/getdesignerDashboard?email=$email",
   updateBankDetails: "/api/designer/updateBankDetails",
   getBankDetails: "/api/designer/getBankDetails",
@@ -107,7 +109,8 @@ export const environment = {
   verifyOTPCustomerEmail:
     "/api/customer/ValidateOTPEmail?email=$email&OTP=$OTP",
   trackDelivery: "/api/printer/GetDeliveryStatus?taskId=$taskId",
-  sendNotificationPrinter: "/api/customer/sendNotificationPrinter",
+  sendNotificationPrinter:
+    "/api/customer/sendNotificationPrinter?orderId=$orderId",
   rescheduleMeet: "/api/customer/rescheduleMeeting?orderId=$orderId",
   reschuleMeetNoti:
     "/api/customer/rescheduleMeetingNotifications?orderId=$orderId",

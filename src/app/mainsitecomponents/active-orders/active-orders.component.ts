@@ -316,6 +316,27 @@ export class ActiveOrdersComponent implements OnInit {
       }
     );
   }
+  downloadFinalDesignFiles(filename, e){
+    debugger;
+    e.preventDefault();
+    this.service.downloadDesignCompletedFiles(filename).subscribe(
+      (response: any) => {
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement("a");
+        downloadLink.href = window.URL.createObjectURL(
+          new Blob(binaryData, { type: dataType })
+        );
+        if (filename) downloadLink.setAttribute("download", filename);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
   startMeeting() {
     window.open(this.data.MeetingUrl, "_blank");
   }
@@ -324,7 +345,7 @@ export class ActiveOrdersComponent implements OnInit {
       debugger;
       this.userFinishedOrders = true;
       alert("Order Completed Successfully.Now You can download the Files");
-      this.service.sendPrintNotifications(this.data.orderId).subscribe(data => {
+      this.service.sendPrintNotifications(this.data.OrderId).subscribe(data => {
         console.log("Notification Send");
       });
       //this.activeModal.close();

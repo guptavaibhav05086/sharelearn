@@ -56,7 +56,8 @@ export class RazorpaymentsComponent implements OnInit {
 
   payWithRazor(val) {
     const options: any = {
-      key: "rzp_live_Fg9NN5NAEvUp4N",
+      // key: "rzp_live_Fg9NN5NAEvUp4N",
+      key: "rzp_test_mz10cbdFCEOGCL",
       amount: this.paymentAmount * 100, // amount should be in paise format to display Rs 1255 without decimal point
       currency: "INR",
       name: "shapeNprint", // company name or product name

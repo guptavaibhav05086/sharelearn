@@ -146,6 +146,25 @@ export class CustomerService {
       options
     );
   }
+  downloadDesignCompletedFiles(filename) {
+    let url = `${environment.baseUrl}${environment.fetchCustomerDesignFiles}`.replace(
+      "$filename",
+      filename
+    );
+    let authHeaders = new HttpHeaders({
+      Authorization: "Bearer " + this.login.getUserToken().Token
+    });
+
+    const options = {
+      headers: authHeaders,
+      responseType: "blob" as "json"
+    };
+    return this._httpclient.get(
+      url,
+
+      options
+    );
+  }
   acceptDesign(orderId) {
     let url = `${environment.baseUrl}${environment.acceptDesign}`.replace(
       "$orderId",
