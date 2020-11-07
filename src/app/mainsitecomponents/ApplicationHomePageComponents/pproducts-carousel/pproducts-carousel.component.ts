@@ -23,7 +23,7 @@ export class PproductsCarouselComponent implements OnInit {
     //this.initiateCarousel(data);
     this.admin.getProducts().subscribe(
       data => {
-        //debugger;
+        ////debugger;
         this.products = data["products"];
         this.products.map(item => {
           if(item.IsDisabled == false){

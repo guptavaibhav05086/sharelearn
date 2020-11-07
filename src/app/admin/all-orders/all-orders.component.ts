@@ -16,7 +16,7 @@ export class AllOrdersComponent implements OnInit {
   ongoingOrderData: any;
   frameworkComponents: any;
   ngOnInit(): void {
-    //debugger;
+    ////debugger;
 
     this.fetchOngoingOrder();
   }
@@ -26,7 +26,7 @@ export class AllOrdersComponent implements OnInit {
     this.customerService
       .FetchOngoingAllOrder(customerEmail, false)
       .subscribe(data => {
-        //debugger;
+        ////debugger;
         this.ongoingOrderData = data;
         console.log(data);
       });
@@ -151,7 +151,7 @@ export class AllOrdersComponent implements OnInit {
   }
 
   checkRow(params) {
-    //debugger;
+    ////debugger;
     var todayDate = new Date();
     var meetingTime = new Date(Date.parse(params.data.meetingTime));
 
@@ -181,7 +181,7 @@ export class AllOrdersComponent implements OnInit {
     });
   }
   bookMeeting(e) {
-    debugger;
+    //debugger;
     let modelRef = this.modalService.open(BookMeetingComponent, {
       backdrop: "static",
       keyboard: false
@@ -203,7 +203,7 @@ export class AllOrdersComponent implements OnInit {
         },
         meetingDuration: data.duration
       };
-      //debugger;
+      ////debugger;
       console.log(data);
       // this.customerService.rescheduleMeetRequest(meet,e.rowData.OrderId).subscribe(data=>{
       //   this.customerService.rescheduleMeetNotify(meet,e.rowData.OrderId).subscribe(data=>{

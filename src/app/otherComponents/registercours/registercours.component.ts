@@ -41,7 +41,7 @@ export class RegistercoursComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    debugger;
+    //debugger;
     let courseid = this.route.snapshot.queryParams["course"];
     let topicId = this.route.snapshot.queryParams["topic"];
     this.getCourseTopicDetails(courseid, topicId);
@@ -87,7 +87,7 @@ export class RegistercoursComponent implements OnInit {
     );
   }
   getCourseTopicDetails(courseId, topicid) {
-    debugger;
+    //debugger;
     let courseList = this._helper.getCourseList();
     let topicList = this._helper.getTopicList();
     let courseName = courseList.filter(item => item.courseId == courseId);

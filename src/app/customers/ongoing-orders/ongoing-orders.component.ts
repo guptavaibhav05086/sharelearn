@@ -13,7 +13,7 @@ export class OngoingOrdersComponent implements OnInit {
   ongoingOrderData: any;
   frameworkComponents: any;
   ngOnInit(): void {
-    //debugger;
+    ////debugger;
 
     this.fetchOngoingOrder();
   }
@@ -22,7 +22,7 @@ export class OngoingOrdersComponent implements OnInit {
     this.designerService
       .FetchOngoingDesignerOrder(designerEmail, false)
       .subscribe(data => {
-        //debugger;
+        ////debugger;
         this.ongoingOrderData = data;
         console.log(data);
       });
@@ -64,7 +64,7 @@ export class OngoingOrdersComponent implements OnInit {
   }
 
   checkRow(params) {
-    //debugger;
+    ////debugger;
     var todayDate = new Date();
     var meetingTime = new Date(Date.parse(params.data.meetingTime));
     var differenceinMins = -1;

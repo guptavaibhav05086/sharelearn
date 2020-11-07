@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
     this.spinnerService.show();
     this._login.getToken(loginRequest).subscribe(
       data => {
-        debugger;
+        //debugger;
         this.spinnerService.hide();
         let verification = data.emailVerified.split(";");
         if (verification[0] != null && verification[0].trim() == "False") {
@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
     modalRef.componentInstance.name = "World";
   }
   // public socialSignIn(socialProvider: string) {
-  //   debugger;
+  //   //debugger;
   //   let socialPlatformProvider;
   //   if (socialProvider === "facebook") {
   //     socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
@@ -108,7 +108,7 @@ export class LoginComponent implements OnInit {
   // }
   Savesresponse(socialusers: Socialusers) {
     // this.SocialloginService.Savesresponse(socialusers).subscribe((res: any) => {
-    //   debugger;
+    //   //debugger;
     //   console.log(res);
     //   this.socialusers=res;
     //   this.response = res.userDetail;

@@ -45,7 +45,7 @@ export class ReviewsComponent implements OnInit {
   getFeedback() {
     this.register.getFeedback(this.courseId).subscribe(
       data => {
-        debugger;
+        //debugger;
         console.log(data);
         this.userFeedbacks = data;
         this.userFeedbacks.map((item, index) => {
@@ -58,7 +58,7 @@ export class ReviewsComponent implements OnInit {
     );
   }
   expandComment(e, i) {
-    debugger;
+    //debugger;
     e.preventDefault();
     this.flags[i] = this.flags[i] ? false : true;
   }

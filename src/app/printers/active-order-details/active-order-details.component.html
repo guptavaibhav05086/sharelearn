@@ -28,6 +28,8 @@
                     <span class="detailsHeading">Size:</span> {{ item.size }},
                     <span class="detailsHeading">Qunatity:</span> {{ item.quantity }},
                     <span class="detailsHeading">Paper GSM:</span> {{ item.paperGSM }},
+                    <span class="detailsHeading">Delivery Days:</span> {{ item.DeliveryDays }}
+
                   </p>
 
                   <p class="productDetails">
@@ -83,43 +85,7 @@
 
 
                   </div>
-                  <div class="row" *ngFor="let itemImg of item.SourceUploads;let  i=index" style="display: none;">
-                    <div class="input-group col-md-10" style="position: relative !important">
-                      <div class="form-group">
-                        <div *ngIf="i == 0">
-                          <label *ngIf="!isAllOrders">Upload Invoice </label>
-                          <label *ngIf="isAllOrders">Uploaded Invoice </label>
 
-                        </div>
-                        <div style="display: flex;">
-                          <div *ngIf="!isAllOrders">
-                            <label [for]="itemImg.name" class="btn btn-primary btn-block btn-outlined"
-                              style="width:250px">UPLOAD</label>
-                            <input type="file" accept="image/*" style="display: none" [id]="itemImg.name"
-                              (change)="uploadGSTCertificate($event.target.files,'source')" />
-                          </div>
-                          <div style="width: 40px;" *ngIf="itemImg.displayLoadingGif">
-                            <img src="../../../assets/img/loading.gif" />
-                          </div>
-
-
-
-                        </div>
-                        <div *ngIf="itemImg.displayFileName">
-                          <a href="#" (click)="stopDefault($event)">{{itemImg.fileName}}</a>
-
-
-
-                        </div>
-
-
-
-                      </div>
-
-                    </div>
-
-
-                  </div>
 
                 </div>
               </div>
@@ -131,16 +97,16 @@
       <div class="input-group col-md-10" style="position: relative !important;margin-left: 30%;">
         <div class="form-group">
 
-          <label *ngIf="!toggleUploadInvoiceButton" style="margin-left: 30%;">Upload Invoice </label>
-          <label *ngIf="toggleUploadInvoiceButton" style="margin-left: 30%;">Uploaded Invoice </label>
+          <label *ngIf="toggleUploadInvoiceButton" style="margin-left: 30%;">Upload Invoice </label>
+          <!-- <label *ngIf="toggleUploadInvoiceButton" style="margin-left: 30%;">Uploaded Invoice </label> -->
 
 
           <div style="display: flex;">
             <div>
               <label for="invoice" class="btn btn-primary btn-block btn-outlined" style="width:250px"
-                *ngIf="!toggleUploadInvoiceButton">UPLOAD</label>
+                *ngIf="toggleUploadInvoiceButton">UPLOAD</label>
               <input type="file" accept="image/*" style="display: none" id="invoice"
-                (change)="uploadGSTCertificate($event.target.files,'source')" />
+                (change)="uploadGSTCertificate($event.target.files,'source')" [disabled]="!isDeliveryCompleted" />
             </div>
             <div style="width: 40px;" *ngIf="uploadedFileNames.displayLoadingProductGif ">
               <img src="../../../assets/img/loading.gif" />

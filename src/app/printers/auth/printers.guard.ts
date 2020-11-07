@@ -22,7 +22,7 @@ export class PrintersGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    debugger;
+    //debugger;
     let token = this.service.getUserToken();
     if (token.type != null && token.type.toLocaleLowerCase() == "printer") {
       return true;

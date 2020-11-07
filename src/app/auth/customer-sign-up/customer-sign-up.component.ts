@@ -89,7 +89,7 @@ export class CustomerSignUpComponent implements OnInit {
     }
   }
   checkDetailsVerification() {
-    debugger;
+    ////debugger;
     let email = localStorage.getItem("unverifiedEmail");
     let phoneNum =
       localStorage.getItem("unverifiedMobile") == null
@@ -118,7 +118,7 @@ export class CustomerSignUpComponent implements OnInit {
       this.userVerificationDetails.isEmailVerified != null &&
       this.userVerificationDetails.isEmailVerified.trim() == "False"
     ) {
-      debugger;
+      ////debugger;
       this.verifyUser = true;
       this.studentForm.patchValue({
         email: email
@@ -128,7 +128,7 @@ export class CustomerSignUpComponent implements OnInit {
       this.userVerificationDetails.isPhoneVerified != null &&
       this.userVerificationDetails.isPhoneVerified.trim() == "False"
     ) {
-      debugger;
+      ////debugger;
       this.verifyUser = true;
       this.studentForm.patchValue({
         mobileNumber: phoneNum
@@ -160,7 +160,7 @@ export class CustomerSignUpComponent implements OnInit {
   }
 
   registerUser() {
-    debugger;
+    //debugger;
     this.spinnerService.show();
     let newUser = new RegisterUser();
     newUser.Email = this.studentForm.controls["email"].value;
@@ -196,7 +196,7 @@ export class CustomerSignUpComponent implements OnInit {
         if (err.status == 500 && err.error.ModelState == null) {
           alert(err.error.Message);
         }
-        debugger;
+        //debugger;
         this.serverError = true;
         this.error = err.error.ModelState[""];
 
@@ -206,7 +206,7 @@ export class CustomerSignUpComponent implements OnInit {
   }
 
   GenerateOTP() {
-    debugger;
+    //debugger;
 
     if (this.changeRequested == true) {
       //let 

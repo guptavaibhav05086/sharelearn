@@ -41,7 +41,7 @@ export class ProductListsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+    ////debugger;
     if (this.isEdit) {
       this.productform.patchValue({
         Pname: this.selProduct["value"],
@@ -99,12 +99,12 @@ export class ProductListsComponent implements OnInit {
   }
 
   uploadGSTCertificate(images: FileList, name: string) {
-    //debugger;
+    ////debugger;
     var result = "";
     var file;
     const formData = new FormData();
     var userImage = images.item(0);
-    //debugger;
+    ////debugger;
     for (var i = 0; (file = images[i]); i++) {
       //if the file is not an image, continue
       if (!this.validateFiles(name, file)) {
@@ -131,7 +131,7 @@ export class ProductListsComponent implements OnInit {
     }
     this.service.uploadProdImage(formData).subscribe(
       data => {
-        debugger;
+        //debugger;
         console.log(data);
         //alert("File Uploaded Successfully");
         this.uploadedFileNames[name] = data;
@@ -151,7 +151,7 @@ export class ProductListsComponent implements OnInit {
         this.uploadedFileNames.displayLoadingProductGif = false;
       },
       err => {
-        //debugger;
+        ////debugger;
         this.fileError = true;
         alert("Issue in file upload please contact admin");
         if (name == "image1") {

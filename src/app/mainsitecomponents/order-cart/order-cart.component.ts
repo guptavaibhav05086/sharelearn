@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { CustomerService } from "../../services/customer.service";
 import { HelperService } from "../../services/helper.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
 import { AdminService } from "src/app/services/admin.service";
@@ -43,6 +43,8 @@ export class OrderCartComponent implements OnInit {
     totalItems: 0
   };
   disableProceed: boolean = false;
+  fromOrderPage = "false";
+  editItemId = 0;
   constructor(
     private custService: CustomerService,
     private router: Router,
@@ -50,39 +52,139 @@ export class OrderCartComponent implements OnInit {
     private helper: HelperService,
     private admin: AdminService,
     private spinner: NgxSpinnerService,
-    private login: LoginService
+    private login: LoginService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.spinner.show();
+    this.route.queryParams.subscribe(params => {
+      //debugger;
+      console.log(params); // { order: "popular" }
+      //this.cartItemId = params.itemId;
+      if (params.orderpage != undefined) {
+        this.fromOrderPage = params.orderpage;
+      }
+      if (params.editItem != undefined) {
+        this.editItemId = parseInt(params.editItem);
+      }
+
+      // popular
+    });
     let token = this.login.getUserToken();
     //let roe
     if (token.Token == null || token.Token == "" || token.type != "Customer") {
       this.openLogin();
-    }
-    // else if(){
+    } else {
+      this.custService.getuserCart(token.email).subscribe(
+        data => {
+          console.log(this.custService.discountedPrice);
 
-    // }
-    this.admin.getProducts().subscribe(
-      data => {
-        //this.discountPrice=data["discountList"];
-        this.custService.discountedPrice = data["discountList"];
-        console.log(this.custService.discountedPrice);
-        debugger;
-        try {
-          this.loadCart();
-        } catch (error) {
+          try {
+            localStorage.setItem("serverCart", null);
+            this.loadCustomerCart(data);
+            this.loadCart();
+            this.updateCustomerCartToServer();
+            this.custService.discountedPrice = data["prodList"]["discountList"];
+          } catch (error) {
+            this.spinner.hide();
+          }
+
+          this.spinner.hide();
+          ////debugger;
+        },
+        err => {
           this.spinner.hide();
         }
+      );
+    }
 
-        this.spinner.hide();
-        //debugger;
-      },
-      err => {
-        this.spinner.hide();
-      }
-    );
+    // this.admin.getProducts().subscribe(
+    //   data => {
+    //     //this.discountPrice=data["discountList"];
+    //     this.custService.discountedPrice = data["discountList"];
+    //     console.log(this.custService.discountedPrice);
+    //     //debugger;
+    //     try {
+    //       this.loadCart();
+    //     } catch (error) {
+    //       this.spinner.hide();
+    //     }
+
+    //     this.spinner.hide();
+    //     ////debugger;
+    //   },
+    //   err => {
+    //     this.spinner.hide();
+    //   }
+    // );
     // this.loadCart();
+  }
+  changeUrl() {
+    var url = window.location.href;
+    var urlSplit = url.split("?");
+    var stateObj = {
+      Title: "New title",
+      Url: urlSplit[0] + "?orderpage=loaded"
+    };
+    history.pushState(stateObj, stateObj.Title, stateObj.Url);
+  }
+  loadCustomerCart(data) {
+    debugger;
+    if (data != null) {
+      let CartFromServer = data["UserCart"];
+      let serverCart = localStorage.getItem("serverCart");
+
+      let localCart = localStorage.getItem("cart");
+      let parsedLocalCart = JSON.parse(localStorage.getItem("cart"));
+      if (
+        serverCart == "" ||
+        serverCart == null ||
+        serverCart == "null" ||
+        serverCart == undefined ||
+        serverCart == "undefined"
+      ) {
+        localStorage.setItem("serverCart", CartFromServer);
+        if (this.fromOrderPage == "true") {
+          let cart = JSON.parse(CartFromServer);
+          cart.forEach(element => {
+            this.custService.addItemUserOrdersList(element);
+          });
+          if (this.editItemId > 0) {
+            this.custService.deletItemFromCart(this.editItemId);
+          }
+          this.changeUrl();
+        } else if (this.fromOrderPage == "loaded") {
+        } else {
+          localStorage.setItem("cart", CartFromServer);
+        }
+      } else if (
+        localCart == "" ||
+        localCart == null ||
+        localCart == "null" ||
+        localCart == undefined ||
+        localCart == "undefined"
+      ) {
+        localStorage.setItem("cart", CartFromServer);
+      }
+    }
+  }
+  updateCustomerCartToServer() {
+    debugger;
+    let cartServer = {
+      UserEmail: this.login.getUserToken().email,
+      UserCart: localStorage.getItem("cart"),
+      IsPrintonly: false
+    };
+    if (
+      this.userCart.designNprint.length == 0 &&
+      this.userCart.design.length == 0
+    ) {
+      cartServer.IsPrintonly = true;
+    }
+    this.custService.updateUserCartPost(cartServer).subscribe(data => {
+      console.log(data);
+    });
   }
   resetCart() {
     this.userCart = {
@@ -120,15 +222,12 @@ export class OrderCartComponent implements OnInit {
     });
     modelRef.componentInstance.isComingFromCartPage = true;
     modelRef.result.then(data => {
-      debugger;
+      //debugger;
       if (data == "OpenVerify") {
         this.navigateSignUp(true);
-      } 
-      else if(data == "OpenSignUp"){
+      } else if (data == "OpenSignUp") {
         this.navigateSignUp(false);
-
-      }
-      else {
+      } else {
         window.location.reload();
       }
     });
@@ -140,17 +239,15 @@ export class OrderCartComponent implements OnInit {
     });
     modelRef.componentInstance.isComingFromCartPage = flag;
     modelRef.result.then(data => {
-      debugger;
+      //debugger;
       if (data == "AccountVerified") {
         window.location.reload();
         //this.placeOrder();
-      }
-      else if(data=="openLogin"){
+      } else if (data == "openLogin") {
         this.openLogin();
-      }
-      else if(data=="Close"){
-        let ver= localStorage.getItem("emailVerificationDone");
-        if(ver == "True"){
+      } else if (data == "Close") {
+        let ver = localStorage.getItem("emailVerificationDone");
+        if (ver == "True") {
           window.location.reload();
         }
       }
@@ -163,6 +260,7 @@ export class OrderCartComponent implements OnInit {
       this.resetCart();
       this.loadCart();
     }
+    this.updateCustomerCartToServer();
   }
   editItem(id) {
     this.router.navigate(["/createorder"], { queryParams: { itemId: id } });
@@ -171,9 +269,9 @@ export class OrderCartComponent implements OnInit {
     this.router.navigate(["/createorder"]);
   }
   loadCart() {
-    debugger;
+    //debugger;
     let cartItems = JSON.parse(localStorage.getItem("cart"));
-   
+
     if (cartItems != null && cartItems.length > 0) {
       this.userCart.totalItems = cartItems.length;
       cartItems.forEach(item => {
@@ -321,7 +419,9 @@ export class OrderCartComponent implements OnInit {
           this.userCart.finalPrice.calDelivery
       );
     } else {
-      this.userCart.finalPrice.calDiscountedTotal = this.userCart.finalPrice.calFinalTotal + this.userCart.finalPrice.calDelivery;
+      this.userCart.finalPrice.calDiscountedTotal =
+        this.userCart.finalPrice.calFinalTotal +
+        this.userCart.finalPrice.calDelivery;
       this.userCart.finalPrice.calDiscountedGST = this.userCart.finalPrice.calGST;
       this.userCart.finalPrice.calDiscountedDesignGST = Math.round(
         this.userCart.finalPrice.calDesignPrice *
@@ -335,6 +435,8 @@ export class OrderCartComponent implements OnInit {
   }
   placeOrder() {
     let param = null;
+    this.updateCustomerCartToServer();
+    localStorage.setItem("serverCart", null);
     let checkMobileVerification = localStorage.getItem(
       "mobileVerificationDone"
     );
@@ -363,7 +465,7 @@ export class OrderCartComponent implements OnInit {
     //   backdrop: "static"
     // });
     // modelRef.result.then(data => {
-    //   debugger;
+    //   //debugger;
     //   console.log(data);
     //   this.custService.setMeetingSlot(data);
     //   this.helper.navigateToPath("/revieworder");
@@ -371,5 +473,4 @@ export class OrderCartComponent implements OnInit {
   }
   calculatePrintPrice() {}
   calculateDesignPrice() {}
-  
 }

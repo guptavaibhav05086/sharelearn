@@ -11,8 +11,14 @@
       <div class="row" style="text-align: center;">
         <div class="col-md-12">
           <p>Designer Name: <span style="font-weight: 300;">{{data.CustomerName}}</span></p>
-          <p>Contact Details: +91 {{data.CustomerNumber}} <span
+          <p>Contact Details: (+91 {{data.CustomerNumber}}), <span
               style="font-weight: 300;font-style: italic;">{{data.CustomerEmail}}</span> </p>
+
+        </div>
+        <div class="col-md-12" *ngIf="data.assgnedPrinterName !=null">
+          <p>Printer Name: <span style="font-weight: 300;">{{data.assgnedPrinterName}}</span></p>
+          <p>Contact Details: (+91 {{data.assgnedPrinterMobile}}), <span
+              style="font-weight: 300;font-style: italic;">{{data.assignedPrinterEmail}}</span> </p>
 
         </div>
       </div>
@@ -61,7 +67,8 @@
                     <a (click)="downloadFile(item.referenceImageURL,$event)" href="#">Download Reference Image</a>
                   </div>
                   <div *ngIf="item.orderType !='Print Only'">
-                    <a (click)="downloadFile(item.contentpath,$event)" href="#">Download Content File</a>
+                    <a (click)="downloadFile(item.contentpath,$event)" href="#" *ngIf="item.contentpath !=null">Download
+                      Content File</a>
                   </div>
                   <div *ngFor="let filekey of item.sourceLogoFile;let j=index" style="display: flex;flex-wrap: wrap;">
                     <div *ngIf="item.orderType !='Print Only'">
@@ -113,7 +120,8 @@
 
                             </div>
                             <div *ngIf="itemImg.displayFileName">
-                              <a href="#" (click)="downloadFinalDesignFiles(itemImg.fileName,$event)">{{itemImg.fileName}}</a>
+                              <a href="#"
+                                (click)="downloadFinalDesignFiles(itemImg.fileName,$event)">{{itemImg.fileName}}</a>
 
 
 
@@ -200,20 +208,24 @@
         </div>
       </div>
 
-      <p *ngIf="displayFinishButton && containsDesignOrders">
+      <div *ngIf="displayFinishButton && containsDesignOrders" style="display: flex;">
         <button class="btn" (click)="startMeeting()" *ngIf="displayOnGoingOrdersElement">
           Join Meeting
         </button>
-        <button class="btn" (click)="FinishOrder()" *ngIf="displayOnGoingOrdersElement"
+        <button class="btn" (click)="FinishOrder()" *ngIf="displayOnGoingOrdersElement && designConfirm"
           [disabled]="!designConfirm">Finish</button>
-
-      </p>
+        <div style="width: 40px;" *ngIf="displayLoadingFinishGif">
+          <img src="../../../assets/img/loading.gif" />
+        </div>
+      </div>
       <!-- Print only orders -->
-      <p *ngIf="!containsDesignOrders">
+      <div *ngIf="!containsDesignOrders" style="display: flex;">
 
         <button class="btn" (click)="FinishOrder()" *ngIf="displayOnGoingOrdersElement">Finish</button>
-
-      </p>
+        <div style="width: 40px;" *ngIf="displayLoadingFinishGif">
+          <img src="../../../assets/img/loading.gif" />
+        </div>
+      </div>
     </div>
   </div>
 

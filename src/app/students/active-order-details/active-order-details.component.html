@@ -115,7 +115,9 @@
                     <a (click)="downloadFile(item.referenceImageURL,$event)" href="#">Download Reference Image</a>
                   </div>
                   <div>
-                    <a (click)="downloadFile(item.contentpath,$event)" href="#">Download Content File</a>
+                    <a (click)="downloadFile(item.contentpath,$event)" href="#"
+                      *ngIf="item.contentpath != null">Download
+                      Content File</a>
                   </div>
                   <div *ngFor="let filekey of item.sourceLogoFile;let j=index" style="display: flex;flex-wrap: wrap;">
                     <div>
@@ -238,13 +240,18 @@
           </div>
         </div>
       </div>
-      <p *ngIf="!isAllOrders">
+      <div *ngIf="!isAllOrders" style="display: flex;">
         <button class="btn" (click)="startMeeting()">
           Start Meeting
         </button>
         <button class="btn" (click)="FinishOrder()" [disabled]="disableFinishButton">Finish</button>
-
-      </p>
+        <div style="width: 40px;" *ngIf="displayLoadingFinishGif">
+          <img src="../../../assets/img/loading.gif" />
+        </div>
+      </div>
+      <!-- <div style="width: 40px;" *ngIf="displayLoadingFinishGif">
+        <img src="../../../assets/img/loading.gif" />
+      </div> -->
     </div>
   </div>
 

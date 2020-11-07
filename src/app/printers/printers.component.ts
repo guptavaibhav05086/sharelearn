@@ -44,7 +44,7 @@ export class PrintersComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
-          debugger;
+          //debugger;
           let path = this.route.url;
           console.log(event);
           console.log("Navigation Start");
@@ -54,7 +54,7 @@ export class PrintersComponent implements OnInit {
         case event instanceof NavigationEnd:
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
-          debugger;
+          //debugger;
           let isUserApproved = this.service.getPrinterApproveStatus();
           if (isUserApproved == false) {
             this.data.display = false;
@@ -95,7 +95,7 @@ export class PrintersComponent implements OnInit {
           break;
         }
         case event instanceof NavigationStart: {
-          debugger;
+          //debugger;
           console.log(event);
 
           let path = this.route.url;

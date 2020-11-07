@@ -102,7 +102,7 @@ export class VendorPayoutsComponent implements OnInit {
   ];
 
   initiatePayment(e) {
-    debugger;
+    ////debugger;
     console.log(e.rowData);
     var modelRef = this.modalService.open(PayoutFormComponent);
     modelRef.componentInstance.rowData = e.rowData;

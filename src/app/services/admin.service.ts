@@ -25,7 +25,7 @@ export class AdminService {
     );
   }
   FetchOngoingAllOrder(email, allOrdersflag) {
-    debugger;
+    //debugger;
     let url = `${environment.baseUrl}${environment.getOngoingAdmin}`
       .replace("$email", email)
       .replace("$isAllOrdersRequired", allOrdersflag);
@@ -154,7 +154,7 @@ export class AdminService {
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
   DesignerPaymentVpa(orderId, vendorEmail, amount) {
-    debugger;
+    //debugger;
     let url = `${environment.baseUrl}${environment.designerVpaPay}`
       .replace("$orderId", orderId)
       .replace("$vendorEmail", vendorEmail)
@@ -169,7 +169,7 @@ export class AdminService {
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
   DesignerPaymentBank(orderId, vendorEmail, amount) {
-    debugger;
+    //debugger;
     let url = `${environment.baseUrl}${environment.designerBankAccountPay}`
       .replace("$orderId", orderId)
       .replace("$vendorEmail", vendorEmail)

@@ -32,7 +32,7 @@ export class LoginService {
     });
   }
   getToken(tokenRequest: TokenRequest) {
-    debugger;
+    ////debugger;
     let body =
       "username=" +
       tokenRequest.username +
@@ -84,6 +84,7 @@ export class LoginService {
   public getUserToken() {
     this.Tokens.Token = localStorage.getItem("Token");
     this.Tokens.type = localStorage.getItem("type");
+    this.Tokens.email = localStorage.getItem("email");
 
     return this.Tokens;
   }

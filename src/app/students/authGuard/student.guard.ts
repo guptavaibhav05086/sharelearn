@@ -22,7 +22,7 @@ export class StudentGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    debugger;
+    //debugger;
     let token = this.service.getUserToken();
     let isUserVerified = false;
     if (token.type.toLocaleLowerCase() == "designer") {

@@ -76,7 +76,7 @@ export class DesignersignupComponent implements OnInit {
     console.log(items);
   }
   registerUser() {
-    debugger;
+    //debugger;
     this.spinnerService.show();
     let newUser = new RegisterUser();
     newUser.Email = this.studentForm.controls["email"].value;
@@ -118,7 +118,7 @@ export class DesignersignupComponent implements OnInit {
         if (err.status == 500 && err.error.ModelState == null) {
           alert(err.error.Message);
         }
-        debugger;
+        //debugger;
         this.serverError = true;
         this.error = err.error.ModelState[""];
 

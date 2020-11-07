@@ -14,7 +14,7 @@ export class ViewPrinterProfileComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, public admin: AdminService) {}
 
   ngOnInit(): void {
-    debugger;
+    ////debugger;
     //this.IsProfDesi=this.profile.isVerified;
     this.verifyDes = this.profile.isProfessional;
     console.log(this.profile);

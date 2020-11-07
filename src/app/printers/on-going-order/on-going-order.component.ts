@@ -14,14 +14,14 @@ export class OnGoingOrderComponent implements OnInit {
   ongoingOrderData: any;
   frameworkComponents: any;
   ngOnInit(): void {
-    debugger;
+    //debugger;
 
     this.fetchOngoingOrder();
   }
   fetchOngoingOrder() {
     let Email = localStorage.getItem("email");
     this.service.FetchOngoingOrder(Email, false).subscribe(data => {
-      //debugger;
+      ////debugger;
       this.ongoingOrderData = data;
       console.log(data);
     });
@@ -77,7 +77,7 @@ export class OnGoingOrderComponent implements OnInit {
   }
 
   checkRow(params) {
-    //debugger;
+    ////debugger;
     let deliveryStatus = params.data.DunzoTaskId;
     if (deliveryStatus != null) {
       //this.gridOptions.columnApi.setColumnVisible()
@@ -91,7 +91,7 @@ export class OnGoingOrderComponent implements OnInit {
   }
 
   openOrderDetails(e) {
-    debugger;
+    //debugger;
     let modelref = this.modalService.open(ActiveOrderDetailsComponent, {
       centered: true,
       size: "lg"
@@ -104,7 +104,7 @@ export class OnGoingOrderComponent implements OnInit {
     });
   }
   initiateDelivery(e) {
-    debugger;
+    //debugger;
     let result = confirm(
       "This will start the deilvery Process.Please confirm to continue"
     );
@@ -122,7 +122,7 @@ export class OnGoingOrderComponent implements OnInit {
     }
   }
   trackDelivery(e) {
-    debugger;
+    //debugger;
     let modelref = this.modalService.open(DeliveryStatusComponent, {
       centered: true
     });

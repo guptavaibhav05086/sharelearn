@@ -17,7 +17,7 @@ export class AllOrdersComponent implements OnInit {
   ongoingOrderData: any;
   frameworkComponents: any;
   ngOnInit(): void {
-    //debugger;
+    ////debugger;
     let token = localStorage.getItem("Token");
     if (token == null || token == "") {
       this._helper.navigateToPath("/homePage");
@@ -30,7 +30,7 @@ export class AllOrdersComponent implements OnInit {
     this.customerService
       .FetchOngoingCustomerOrder(customerEmail, true)
       .subscribe(data => {
-        //debugger;
+        ////debugger;
         this.ongoingOrderData = data;
         console.log(data);
       });
@@ -73,7 +73,7 @@ export class AllOrdersComponent implements OnInit {
   }
 
   checkRow(params) {
-    //debugger;
+    ////debugger;
     var todayDate = new Date();
     var meetingTime = new Date(Date.parse(params.data.meetingTime));
     var differenceinMins = -1;

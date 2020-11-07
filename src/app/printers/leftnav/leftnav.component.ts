@@ -30,9 +30,9 @@ export class LeftnavComponent implements OnInit {
     }
   }
   ngOnInit() {
-    debugger;
+    //debugger;
     this.resetFormSubject.subscribe(response => {
-      debugger;
+      //debugger;
       if (response.type == "order") {
         this.toggleOrders = response.display;
         this.toggleSettings = false;

@@ -22,7 +22,7 @@ export class DisplayMessagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      debugger;
+      //debugger;
       console.log(params); // { order: "popular" }
       //this.cartItemId = params.itemId;
       if (params.tranId != undefined && params.tranId != "null") {

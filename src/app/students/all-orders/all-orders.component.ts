@@ -14,16 +14,17 @@ export class AllOrdersComponent implements OnInit {
   ongoingOrderData: any;
   frameworkComponents: any;
   ngOnInit(): void {
-    debugger;
+    //debugger;
 
     this.fetchOngoingOrder();
   }
   fetchOngoingOrder() {
     let designerEmail = localStorage.getItem("email");
+    this.ongoingOrderData = null;
     this.designerService
       .FetchOngoingDesignerOrder(designerEmail, true)
       .subscribe(data => {
-        debugger;
+        //debugger;
         this.ongoingOrderData = data;
         console.log(data);
       });
@@ -65,7 +66,7 @@ export class AllOrdersComponent implements OnInit {
   }
 
   checkRow(params) {
-    debugger;
+    //debugger;
     if (params.data.meetingslot < new Date()) {
       return {
         "background-color": "#455A64",
@@ -82,7 +83,7 @@ export class AllOrdersComponent implements OnInit {
     modelref.componentInstance.data = e.rowData;
     modelref.componentInstance.isAllOrders = true;
     modelref.result.then(data => {
-      debugger;
+      //debugger;
       this.fetchOngoingOrder();
     });
   }

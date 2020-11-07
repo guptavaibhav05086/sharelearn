@@ -31,7 +31,7 @@ export class GoogleplacesComponent implements OnInit {
   }
 
   private getPlaceAutocomplete() {
-    debugger;
+    //debugger;
     const autocomplete = new google.maps.places.Autocomplete(
       this.addresstext.nativeElement,
       {
@@ -46,7 +46,7 @@ export class GoogleplacesComponent implements OnInit {
   }
 
   invokeEvent(place: Object) {
-    debugger;
+    //debugger;
     this.setAddress.emit(place);
   }
 }

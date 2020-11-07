@@ -68,7 +68,7 @@ export class PrintersignupComponent implements OnInit {
 
     this._login.registerUser(newUser).subscribe(
       data => {
-        debugger;
+        //debugger;
         this.spinnerService.hide();
         this.registered = true;
         localStorage.setItem("unverifiedRole", "Printer");
@@ -79,13 +79,13 @@ export class PrintersignupComponent implements OnInit {
         this._helper.navigateToPath("/verifyvendors");
       },
       err => {
-        debugger;
+        //debugger;
         this.spinnerService.hide();
         console.log(err);
         if (err.status == 500 && err.error.ModelState == null) {
           alert(err.error.Message);
         }
-        debugger;
+        //debugger;
         this.serverError = true;
         this.error = err.error.ModelState[""];
 

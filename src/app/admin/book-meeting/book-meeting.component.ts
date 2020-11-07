@@ -46,7 +46,7 @@ export class BookMeetingComponent implements OnInit {
     meetingDateContol: new FormControl(),
     meetingTill: new FormControl(""),
     meetingSlot: new FormControl("", (control: FormControl) => {
-      //debugger;
+      ////debugger;
       const value = control.value;
       if (
         this.meetingSlotBookingTimeStart != undefined &&
@@ -76,7 +76,7 @@ export class BookMeetingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //debugger;
+    ////debugger;
     this.time = {
       hour: 0,
       minute: 0,
@@ -124,12 +124,12 @@ export class BookMeetingComponent implements OnInit {
   }
   @HostListener("window:popstate", ["$event"])
   onPopState(event) {
-    debugger;
+    //debugger;
     console.log("Back button pressed");
     this.activeModal.close();
   }
   checkTimeGap() {
-    //debugger;
+    ////debugger;
     let cartList = this.custService.getLocalStorageCart();
     let calGap = 0;
     let meetingDuration = 0;
@@ -145,7 +145,7 @@ export class BookMeetingComponent implements OnInit {
     return { gap: calGap, duration: meetingDuration };
   }
   calculateSlots() {
-  debugger;
+  //debugger;
     var date = new Date();
     let gap = this.meetingInfo.gap;
     let gapTobeAddedInNextWrkingDay = gap;
@@ -200,7 +200,7 @@ export class BookMeetingComponent implements OnInit {
     } else {
       this.settIntialMeetingDetailsForSameDay(gapTobeAddedInNextWrkingDay);
     }
-    debugger;
+    //debugger;
     this.productform.patchValue({
       meetingDateContol: this.convertDate(this.meetingSlotBookingTimeStart)
     });
@@ -242,7 +242,7 @@ export class BookMeetingComponent implements OnInit {
     });
   }
   dateControlValidation() {
-    //debugger;
+    ////debugger;
     if (this.checkSelectedDateIsTodaysDate() == true) {
       this.time.hour = this.meetingSlotBookingTimeStart.hour;
       this.productform.patchValue({
@@ -267,7 +267,7 @@ export class BookMeetingComponent implements OnInit {
     } catch (error) {}
   }
   validateDate() {
-    //debugger;
+    ////debugger;
     //let val = this.productform.controls["meetingSlot"].value.minute;
     this.time.minute = 30;
     this.productform.patchValue({
@@ -287,7 +287,7 @@ export class BookMeetingComponent implements OnInit {
     }
   }
   slot() {
-    //debugger;
+    ////debugger;
     if (this.productform.controls["meetingSlot"].status == "INVALID") {
       alert("Please choose the valid slot to proceed");
       return;
@@ -311,7 +311,7 @@ export class BookMeetingComponent implements OnInit {
     // this.activeModal.close(this.productform.controls['meetingSlot'].value);
   }
   convertDate(date: any) {
-    //debugger;
+    ////debugger;
     let validDate = `${date.year}-${
       date.month < 10 ? "0" + date.month : date.month
     }-${date.day < 10 ? "0" + date.day : date.day}`;

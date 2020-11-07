@@ -30,17 +30,17 @@ export class SectionTopNavComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+    //debugger;
     this.componentLoaded.emit(true);
     let token = this.login.getUserToken();
-    if (token.Token == null || token.Token == "") {
+    if (token.Token == null || token.Token == "" || token.type != "Customer") {
       this.displayUserNav = false;
     } else {
       this.displayUserNav = true;
       this.username = localStorage.getItem("email");
     }
     this.adminService.getProducts().subscribe(data => {
-      debugger;
+      //debugger;
       this.productsdata = data;
       data["products"].forEach(element => {
         let item = {
@@ -81,7 +81,7 @@ export class SectionTopNavComponent implements OnInit {
     });
   }
   navigateprofile(event) {
-    //debugger;
+    ////debugger;
     event.preventDefault();
     let token = this.login.getUserToken();
     if (token == null) {
@@ -105,7 +105,7 @@ export class SectionTopNavComponent implements OnInit {
       keyboard: false
     });
     modelRef.result.then(data => {
-      debugger;
+      //debugger;
       if (data == "OpenVerify") {
         this.navigateSignUp(true);
       } else if (data == "OpenSignUp") {
@@ -123,7 +123,7 @@ export class SectionTopNavComponent implements OnInit {
     // });
   }
   toggleClass(flag) {
-    debugger;
+    //debugger;
     let element = document.getElementById("navbar");
     if (flag) {
       element.classList.remove("nav-bar-two");
@@ -134,7 +134,7 @@ export class SectionTopNavComponent implements OnInit {
     }
   }
   toggleClassLogin() {
-    debugger;
+    //debugger;
     let element = document.getElementById("navbar");
     let value = document
       .getElementById("navbarDropdownMenuLink")
@@ -149,7 +149,7 @@ export class SectionTopNavComponent implements OnInit {
   }
   googleLogin(event) {
     event.preventDefault();
-    debugger;
+    //debugger;
     this.customerService.getExternalLogins().subscribe(data => {
       console.log(data);
       let url = data[0];

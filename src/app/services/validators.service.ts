@@ -20,7 +20,7 @@ export class ValidatorsService {
   passwordLength: ValidatorFn = (
     control: AbstractControl
   ): { [key: string]: any } | null => {
-    //debugger;
+    ////debugger;
     if (control.value != "" && control.value != null) {
       return control.value.length > 6
         ? null
@@ -31,7 +31,7 @@ export class ValidatorsService {
 
   patternValidation(pattern: RegExp) {
     return (control: AbstractControl): { [key: string]: any } | null => {
-      //debugger;
+      ////debugger;
       if (control.value != "" && control.value != null) {
         const forbidden = pattern.test(control.value);
         return forbidden
@@ -43,7 +43,7 @@ export class ValidatorsService {
   }
   patternValidationTrainer(pattern: RegExp) {
     return (control: AbstractControl): { [key: string]: any } | null => {
-      //debugger;
+      ////debugger;
       if (control.value != "" && control.value != null) {
         const forbidden = pattern.test(control.value);
         return forbidden
@@ -57,7 +57,7 @@ export class ValidatorsService {
   confirmPasswordValidation: ValidatorFn = (
     control: FormGroup
   ): ValidationErrors | null => {
-    //debugger;
+    ////debugger;
     const name = control.get("password");
     const alterEgo = control.get("confirmPassword");
 

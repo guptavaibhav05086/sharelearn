@@ -38,7 +38,7 @@ export class AddressFormComponent implements OnInit {
   @Input() editAddress;
   @Input() formName;
   ngOnInit(): void {
-    debugger;
+    //debugger;
     this.addressRequest = new AddressRequest();
     this.helper.getStates().subscribe(
       data => {
@@ -53,7 +53,7 @@ export class AddressFormComponent implements OnInit {
       },
       err => {}
     );
-    debugger;
+    //debugger;
     if (this.editAddress != null && this.editAddress != undefined) {
       this.userAddress = this.editAddress.address;
       this.userPhone = this.editAddress.phoneNumber;
@@ -68,7 +68,7 @@ export class AddressFormComponent implements OnInit {
     }
   }
   filterDistricts(stateId) {
-    debugger;
+    //debugger;
     let sValue = stateId.split(":");
     if (sValue.length > 1) {
       sValue = sValue[1].trim();
@@ -110,7 +110,7 @@ export class AddressFormComponent implements OnInit {
     this.addSave.emit(false);
   }
   saveAddress() {
-    debugger;
+    //debugger;
     if (
       this.userAddress == "" ||
       this.userPhone == "" ||

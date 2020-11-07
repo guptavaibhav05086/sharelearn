@@ -113,7 +113,7 @@ export class DesignerprofileComponent implements OnInit {
     if (userId != null && userId != undefined) {
       this.designer.getProfile(userId).subscribe(
         data => {
-          debugger;
+          //debugger;
           //console.log(data);
 
           this.profileform.patchValue({
@@ -170,12 +170,12 @@ export class DesignerprofileComponent implements OnInit {
     }
   }
   acceptTerms() {
-    debugger;
+    //debugger;
     if (this.isTermsAccepted) this.isTermsAccepted = false;
     else this.isTermsAccepted = true;
   }
   selectedSoftware(name, event) {
-    debugger;
+    //debugger;
     console.log(event);
     if (name == "Others (please specify)") {
       if (event.target.checked) this.displayOthers = true;
@@ -190,7 +190,7 @@ export class DesignerprofileComponent implements OnInit {
     }
   }
   filterDistricts(stateId) {
-    debugger;
+    //debugger;
     try {
       this.filteredCities = this.statesData.filter(
         item => item.stateName == stateId
@@ -281,7 +281,7 @@ export class DesignerprofileComponent implements OnInit {
     //this.request.gender=this.profileform.controls["gender"].value;
   }
   editForm(formname) {
-    debugger;
+    //debugger;
     // let check = this.profileform.controls["fName"].value;
     if (formname == "personal") this.isDisabled = false;
     else this.isDisableProfession = false;
@@ -291,7 +291,7 @@ export class DesignerprofileComponent implements OnInit {
     else this.isDisableProfession = true;
   }
   changeNumber() {
-    debugger;
+    //debugger;
     this.isPhoneVerified = false;
     this.profileform.get("mobileNumber").enable();
     // //this.oldNumber=this.profileform.controls['mobileNumber'].value;
@@ -319,7 +319,7 @@ export class DesignerprofileComponent implements OnInit {
           "mobileNumber"
         ].value;
         modalRef.result.then(result => {
-          debugger;
+          //debugger;
           if (result) {
             this.isPhoneVerified = result;
             this.profileform.get("mobileNumber").disable();
@@ -335,7 +335,7 @@ export class DesignerprofileComponent implements OnInit {
     }
   }
   generateOTP() {
-    debugger;
+    //debugger;
     let number = this.profileform.controls["mobileNumber"].value;
     //this.message = "";
     //this.spinner.show();
@@ -370,12 +370,12 @@ export class DesignerprofileComponent implements OnInit {
     modalRef.componentInstance.name = "terms conditions";
   }
   fileSelect(images: FileList, name: string) {
-    debugger;
+    //debugger;
     var result = "";
     var file;
     const formData = new FormData();
     var userImage = images.item(0);
-    debugger;
+    //debugger;
     for (var i = 0; (file = images[i]); i++) {
       // if the file is not an image, continue
       if (!this.validateFiles(name, file)) {
@@ -407,11 +407,11 @@ export class DesignerprofileComponent implements OnInit {
     formData.append("userimage", userImage, userImage.name);
     this.designer.uploadUserImage(formData).subscribe(
       data => {
-        debugger;
+        //debugger;
         console.log(data);
       },
       err => {
-        debugger;
+        //debugger;
         console.log(err);
       }
     );

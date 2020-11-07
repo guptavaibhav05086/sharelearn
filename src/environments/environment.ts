@@ -119,7 +119,9 @@ export const environment = {
   adminGetFiles:
     "/api/admin/downloaFiles?filename=$filename&location=$location",
   getOngoingAdmin:
-    "/api/admin/getongoingorder?email=$email&isAllOrdersRequired=$isAllOrdersRequired"
+    "/api/admin/getongoingorder?email=$email&isAllOrdersRequired=$isAllOrdersRequired",
+  getUserCart: "/api/customer/getusercart?userEmail=$userEmail",
+  updateUserCart: "/api/customer/saveusercart"
 };
 
 /*

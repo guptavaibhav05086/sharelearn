@@ -11,6 +11,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
   orderItems: any;
   @Input() isAllOrders;
   disableFinishButton = false;
+  displayLoadingFinishGif=false;
   //@Input() orderId;
   constructor(
     public activeModal: NgbActiveModal,
@@ -18,7 +19,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+    //;
     this.orderItems = this.data.ongoingOrders;
 
     this.initializeFiles();
@@ -140,7 +141,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
     }
   }
   addImage(i, orderId, type) {
-    debugger;
+    //debugger;
     //if(this.imageUpload.length < 4){
     //let imgname = "image" + (i + 1);
     let selItem = this.orderItems.filter(i => i.id == orderId)[0];
@@ -179,7 +180,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
     }
   }
   removeImage(i, orderId, type) {
-    debugger;
+    //debugger;
     let selItem = this.orderItems.filter(i => i.id == orderId)[0];
 
     if (type == "source") {
@@ -212,13 +213,13 @@ export class ActiveOrderDetailsComponent implements OnInit {
     }
   }
   uploadGSTCertificate(images: FileList, id, name: string, uploadImageId) {
-    debugger;
+    //debugger;
     console.log(this.orderItems);
     var result = "";
     var file;
     const formData = new FormData();
     var userImage = images.item(0);
-    //debugger;
+    ////debugger;
     for (var i = 0; (file = images[i]); i++) {
       let reader = new FileReader();
 
@@ -269,7 +270,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
 
     this.service.uploadFinalSourceImage(formData, id, name).subscribe(
       data => {
-        debugger;
+        //debugger;
         console.log(data);
         keys = "";
         uplImg.displayLoadingGif = false;
@@ -294,7 +295,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
     );
   }
   downloadFile(filename, e) {
-    debugger;
+    //debugger;
     e.preventDefault();
     this.service.downloadOrderFiles(filename).subscribe(
       (response: any) => {
@@ -339,9 +340,13 @@ export class ActiveOrderDetailsComponent implements OnInit {
       }
     });
     if (eligibleForFinish == true) {
+      this.displayLoadingFinishGif=true;
       this.service.finishDesignerOrder(this.data.OrderId).subscribe(data => {
         alert("Order Completed Successfully");
+        this.displayLoadingFinishGif=false;
         this.activeModal.close();
+      },err=>{
+        this.displayLoadingFinishGif=false;
       });
     } else {
       alert("Upload All required Files to Finish the Order");

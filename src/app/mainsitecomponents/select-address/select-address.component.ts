@@ -28,7 +28,7 @@ export class SelectAddressComponent implements OnInit {
   ngOnInit(): void {
     this.addressList = new Array<AddressRequest>();
     this.route.queryParams.subscribe(params => {
-      debugger;
+      //debugger;
       console.log(params); // { order: "popular" }
       //this.cartItemId = params.itemId;
       if (params.isPrintOrder != undefined) {
@@ -59,7 +59,7 @@ export class SelectAddressComponent implements OnInit {
   }
 
   formatAddressResponse(data) {
-    debugger;
+    //debugger;
     this.addressList = data;
     if (this.addressList.length == 0) {
       alert("No address found for the user");
@@ -141,7 +141,7 @@ export class SelectAddressComponent implements OnInit {
     // });
     // //modalRef.componentInstance.name = "World";
     // modalRef.result.then(result => {
-    //   debugger;
+    //   //debugger;
     //   this.fetchAddress();
     // });
   }

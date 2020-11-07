@@ -15,7 +15,7 @@ export class SectionProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.adminService.getProducts().subscribe(data => {
-      debugger;
+      //debugger;
       data["products"].forEach(element => {
         let item = {
           pName: element.value,

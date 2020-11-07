@@ -7,7 +7,7 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ["./delivery-status.component.css"]
 })
 export class DeliveryStatusComponent implements OnInit {
-  debugger;
+  //debugger;
   @Input() data;
   trackingData: any;
   eventStartDate: any;
@@ -15,11 +15,13 @@ export class DeliveryStatusComponent implements OnInit {
     private dService: PrinterService,
     public activeModal: NgbActiveModal
   ) {}
-
+  closeButton() {
+    this.activeModal.dismiss();
+  }
   ngOnInit(): void {
     debugger;
     this.dService.trackDelivery(this.data.DunzoTaskId).subscribe(res => {
-      debugger;
+      //debugger;
       this.trackingData = res;
       this.eventStartDate = new Date(this.trackingData.event_timestamp);
       //.eventStartDate=`{eventStartDate.}`

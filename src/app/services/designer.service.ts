@@ -123,7 +123,7 @@ export class DesignerService {
     );
   }
   FetchOngoingDesignerOrder(email, allOrdersflag) {
-    debugger;
+    //debugger;
     let url = `${environment.baseUrl}${environment.fetchOngoingOrdersDesigners}`
       .replace("$email", email)
       .replace("$isAllOrdersRequired", allOrdersflag);
@@ -135,7 +135,7 @@ export class DesignerService {
     );
   }
   FetchDesignerDashboard(email) {
-    debugger;
+    //debugger;
     let url = `${environment.baseUrl}${environment.getDesignerDashBoard}`.replace(
       "$email",
       email
@@ -149,13 +149,13 @@ export class DesignerService {
   }
 
   UpdateBankDetails(model: BankAccountModel) {
-    debugger;
+    //debugger;
     let url = `${environment.baseUrl}${environment.updateBankDetails}`;
     //isAllOrdersRequired
     return this._httpclient.post(url, model, this.login.getAuthHeader());
   }
   GetBankDetails(): Observable<Array<BankAccountModel>> {
-    debugger;
+    //debugger;
     let url = `${environment.baseUrl}${environment.getBankDetails}`;
     //isAllOrdersRequired
     return this._httpclient.get<Array<BankAccountModel>>(

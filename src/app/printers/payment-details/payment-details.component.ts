@@ -48,7 +48,7 @@ export class PaymentDetailsComponent implements OnInit {
     private spinnerService: NgxSpinnerService
   ) {}
   submitAccountDetails() {
-    debugger;
+    //debugger;
     if (this.studentForm.invalid) {
       alert("Please Provide data in all fields ");
       return;

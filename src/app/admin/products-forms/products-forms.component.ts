@@ -62,7 +62,7 @@ export class ProductsFormsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //debugger;
+    ////debugger;
     let item = new ProductprintPrice();
     if (this.printPriceList == undefined || this.printPriceList.length == 0) {
       this.initializePricingSection(item);
@@ -100,7 +100,7 @@ export class ProductsFormsComponent implements OnInit {
       if (prodPice == null || prodPice.length == 0) {
         this.initializePricingSection(item);
       }
-      debugger;
+      ////debugger;
       for (let i = 0; i < prodPice.length; i++) {
         this.loadItem(i, prodPice[i]);
       }
@@ -116,7 +116,7 @@ export class ProductsFormsComponent implements OnInit {
     this.printPrice.push(item);
   }
   loadItem(index, row) {
-    //debugger;
+    ////debugger;
     let item = new ProductprintPrice();
     item.prodDetailsId = this.selectedProduct.poductDetailsId;
     item.Id = index;
@@ -129,7 +129,7 @@ export class ProductsFormsComponent implements OnInit {
     console.log(this.printPrice);
   }
   createItem(index) {
-    //debugger;
+    ////debugger;
     let item = new ProductprintPrice();
     let itempre = this.printPrice.filter(item => item.Id == index);
     if (itempre != null && itempre.length > 0) {
@@ -155,11 +155,11 @@ export class ProductsFormsComponent implements OnInit {
     console.log(this.printPrice);
   }
   removeItem(index) {
-    //debugger;
+    ////debugger;
     this.printPrice = this.printPrice.filter(i => i.Id != index);
   }
   setpriceprint(event, i) {
-    //debugger;
+    ////debugger;
     console.log(event);
     let row = this.printPrice.filter(item => item.Id == i)[0];
     row.pricePerUnit = event.target.value;
@@ -249,7 +249,7 @@ export class ProductsFormsComponent implements OnInit {
     if (this.editForm == true) {
       this.product.productsubId = this.selectedProduct["productsubId"];
     } else {
-      //debugger;
+      ////debugger;
       this.product.productsubId = 0;
       this.product.productId = this.productform.controls["Pname"].value;
     }
@@ -265,12 +265,12 @@ export class ProductsFormsComponent implements OnInit {
     );
   }
   uploadGSTCertificate(images: FileList, name: string) {
-    //debugger;
+    ////debugger;
     var result = "";
     var file;
     const formData = new FormData();
     var userImage = images.item(0);
-    //debugger;
+    ////debugger;
     for (var i = 0; (file = images[i]); i++) {
       //if the file is not an image, continue
       if (!this.validateFiles(name, file)) {
@@ -291,7 +291,7 @@ export class ProductsFormsComponent implements OnInit {
     this.selectedFileName = userImage.name;
     this.admin.uploadProdImage(formData).subscribe(
       data => {
-        //debugger;
+        ////debugger;
         this.product.productImage = data;
       },
       err => {}

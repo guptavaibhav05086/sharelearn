@@ -38,7 +38,7 @@ export class HomeContainerComponent implements OnInit {
   @HostListener("window:scroll", ["$event"])
   onWindowScroll(e) {
     if (window.pageYOffset > 400) {
-      // debugger;
+      // //debugger;
       this.displayTopNav = false;
       let element = document.getElementById("navbar");
       let elementTop = document.getElementById("topNav");
@@ -50,7 +50,7 @@ export class HomeContainerComponent implements OnInit {
       elementTop.classList.remove("topNavhide");
       //navbarinner
     } else {
-      // debugger;
+      // //debugger;
       this.displayTopNav = true;
       let element = document.getElementById("navbar");
       let elementTop = document.getElementById("topNav");

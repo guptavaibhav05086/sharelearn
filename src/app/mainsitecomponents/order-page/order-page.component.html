@@ -447,7 +447,7 @@
                              <div style="width: 40px;" *ngIf="item.displayLoadingGif">
                                 <img src="../../../assets/img/loading.gif"/>
                               </div>
-                             <div>
+                             <div *ngIf="i== imageUpload.length-1">
                                 <button class="btn btn-outlined" (click)="addImage(item.id)" *ngIf="i<3">+</button>
                              </div> 
                              <div>
@@ -504,7 +504,7 @@
                             <img src="../../../assets/img/loading.gif"/>
                           </div>
                          <div>
-                            <button class="btn btn-outlined" (click)="addImage(item.id)" *ngIf="i<3">+</button>
+                            <button class="btn btn-outlined" (click)="addImage(item.id)" data-test="test">+</button>
                          </div> 
                          <div>
                             <button class="btn btn-outlined"  (click)="removeImage(item.id)">-</button>
@@ -653,7 +653,7 @@
        
         <!-- Container for Meeting Slot -->
         <!-- <div class="container shadow p-3 mb-5 bg-white rounded" *ngIf="displayMeetings"> -->
-        <div class="container shadow p-3 mb-5 bg-white rounded" style="visibility:hidden" #mslot id="mslot">
+        <div class="container shadow p-3 mb-5 bg-white rounded" style="display:none" #mslot id="mslot">
             <div class="or-formcontrol">
               <h3 class="display-label">
                 Book a Meeting Slot
@@ -711,6 +711,7 @@
               </div>
             </div>
           </div>
+          <div #summary></div>
         <!-- Container for Order Review Desgin and Design and Print-->
         <div [style.visibility]="displaysummary ? 'visible': 'hidden'"
         *ngIf="orderForm.controls['type'].value != 'Print Only'"  >
@@ -1293,7 +1294,7 @@
             </div>
           </div>
         </div>
-        <div #summary></div>
+       
       </form>
     </div>
   </div>

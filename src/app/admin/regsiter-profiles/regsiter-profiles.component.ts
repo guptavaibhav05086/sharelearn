@@ -237,7 +237,7 @@ export class RegsiterProfilesComponent implements OnInit {
   ];
 
   VerifyDesigner(e) {
-    debugger;
+    ////debugger;
     let modelRef = this.modalService.open(ViewDesignerProfileComponent, {
       size: "lg"
     });
@@ -249,7 +249,7 @@ export class RegsiterProfilesComponent implements OnInit {
     });
   }
   VerifyPrinter(e) {
-    debugger;
+    ////debugger;
     let modelRef = this.modalService.open(ViewPrinterProfileComponent, {
       size: "lg"
     });

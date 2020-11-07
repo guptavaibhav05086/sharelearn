@@ -48,7 +48,7 @@ export class CustomerLoginComponent implements OnInit {
     this.spinnerService.show();
     this._login.getToken(loginRequest).subscribe(
       data => {
-        debugger;
+        ////debugger;
         this.spinnerService.hide();
         let verification = data.emailVerified.split(";");
         if (

@@ -31,7 +31,7 @@ export class PayoutFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+    ////debugger;
     this.service
       .getAccountDetailsVendor(
         this.rowData.VendorType,
@@ -39,7 +39,7 @@ export class PayoutFormComponent implements OnInit {
       )
       .subscribe(
         data => {
-          debugger;
+          ////debugger;
 
           this.accountDetails = data[0];
           if (this.accountDetails == undefined) {
@@ -56,7 +56,7 @@ export class PayoutFormComponent implements OnInit {
           });
         },
         err => {
-          debugger;
+          ////debugger;
         }
       );
   }

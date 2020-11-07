@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { DetailsComponentComponent } from "../details-component/details-component.component";
-
+import { NgxSpinnerService } from "ngx-spinner";
 import { PrinterService } from "../../services/printer.service";
 @Component({
   selector: "app-notifications",
@@ -20,12 +20,15 @@ export class NotificationsComponent implements OnInit {
   orderList: any;
   constructor(
     private modalService: NgbModal,
-    private printer: PrinterService
+    private printer: PrinterService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
+    this.spinner.show();
     this.printer.fetchNotifications().subscribe(data => {
       this.orderList = data;
+      this.spinner.hide();
     });
     //this.DisplayPrinterOrderNoti();
   }
@@ -35,7 +38,7 @@ export class NotificationsComponent implements OnInit {
   //     },()=>{});
   //   }
   openModal(orderDeatils, orderId) {
-    debugger;
+    //debugger;
     let modelref = this.modalService.open(DetailsComponentComponent, {
       centered: true,
       size: "lg"

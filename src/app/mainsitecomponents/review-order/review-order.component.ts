@@ -9,6 +9,7 @@ import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
 import { AdminService } from "src/app/services/admin.service";
 import { HostListener } from "@angular/core";
 import { NgxSpinnerService } from "ngx-spinner";
+import { LoginService } from "src/app/services/login.service";
 @Component({
   selector: "app-review-order",
   templateUrl: "./review-order.component.html",
@@ -74,68 +75,98 @@ export class ReviewOrderComponent implements OnInit {
     private modalService: NgbModal,
     private admin: AdminService,
     private spinner: NgxSpinnerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private login: LoginService
   ) {}
 
   ngOnInit(): void {
-    //debugger;
+    ////debugger;
 
-    this.route.queryParams.subscribe(params => {
-      //debugger;
-      console.log(params); // { order: "popular" }
-      //this.cartItemId = params.itemId;
-      if (params.isPrintOrder != undefined) {
-        this.isPrintOrder = params.isPrintOrder;
-      }
-      if (this.isPrintOrder != "true") {
-        this.bookMeeting();
-      }
-      // popular
-    });
+    // this.route.queryParams.subscribe(params => {
+    //   ////debugger;
+    //   console.log(params); // { order: "popular" }
+    //   //this.cartItemId = params.itemId;
+    //   if (params.isPrintOrder != undefined) {
+    //     this.isPrintOrder = params.isPrintOrder;
+    //   }
+    //   if (this.isPrintOrder != "true") {
+    //     this.bookMeeting();
+    //   }
+    //   // popular
+    // });
+    let token = this.login.getUserToken();
     //this.spinner.show();
-    this.admin.getProducts().subscribe(
+    this.custService.getuserCart(token.email).subscribe(
       data => {
-        //this.discountPrice=data["discountList"];
-        this.custService.discountedPrice = data["discountList"];
         console.log(this.custService.discountedPrice);
         //debugger;
-
-        this.loadCart();
-        this.isCartLoaded = true;
-        //this.spinner.hide();
-        // if (this.isPrintOrder != "true") {
-        //   this.bookMeeting();
-        // }
-        if (this.isPrintOrder == "true") {
-          this.generateOrderId();
+        try {
+          let CartFromServer = data["UserCart"];
+          let isPrintOnlyOrder = data["IsPrintonly"];
+          this.loadCart();
+          if (isPrintOnlyOrder == false) {
+            this.bookMeeting();
+            // this.spinner.hide();
+          } else if (isPrintOnlyOrder == true) {
+            this.generateOrderId();
+          }
+          localStorage.setItem("cart", CartFromServer);
+          this.custService.discountedPrice = data["prodList"]["discountList"];
+        } catch (error) {
+          this.spinner.hide();
         }
 
-        //debugger;
+        this.spinner.hide();
+        ////debugger;
       },
       err => {
         this.spinner.hide();
       }
     );
+    //this.spinner.show();
+    // this.admin.getProducts().subscribe(
+    //   data => {
+    //     //this.discountPrice=data["discountList"];
+    //     this.custService.discountedPrice = data["discountList"];
+    //     console.log(this.custService.discountedPrice);
+    //     ////debugger;
+
+    //     this.loadCart();
+    //     this.isCartLoaded = true;
+    //     //this.spinner.hide();
+    //     // if (this.isPrintOrder != "true") {
+    //     //   this.bookMeeting();
+    //     // }
+    //     if (this.isPrintOrder == "true") {
+    //       this.generateOrderId();
+    //     }
+
+    //     ////debugger;
+    //   },
+    //   err => {
+    //     this.spinner.hide();
+    //   }
+    // );
   }
   @HostListener("window:popstate", ["$event"])
   onPopState(event) {
     console.log("Back button pressed");
   }
   transactionUpdate(event) {
-    //debugger;
+    ////debugger;
     if (event.tranId == null) {
       this.displayTranFail = true;
-      this.custService.updateFailedTransaction(this.interOrderId).subscribe(data=>{
-        let origin = this.document.location.origin;
-        let url = origin + "/orderstatus?tranId=" + null;
-        window.location.href = url;
-      },err=>{
-
-      })
+      this.custService.updateFailedTransaction(this.interOrderId).subscribe(
+        data => {
+          let origin = this.document.location.origin;
+          let url = origin + "/orderstatus?tranId=" + null;
+          window.location.href = url;
+        },
+        err => {}
+      );
       alert("Transaction Failed for your Order");
-      
     } else {
-      //debugger;
+      ////debugger;
       try {
         let cart = this.custService.getLocalStorageCart();
         cart.forEach(element => {
@@ -169,7 +200,7 @@ export class ReviewOrderComponent implements OnInit {
     console.log(event);
   }
   loadCart() {
-    //debugger;
+    ////debugger;
     //this.spinner.getSpinner()
     //this.spinner.show("loadcart");
     if (
@@ -268,7 +299,7 @@ export class ReviewOrderComponent implements OnInit {
     //this.spinner.hide("loadcart");
   }
   calculateDiscounts() {
-    debugger;
+    //debugger;
     let totalpriceWithoutDelivery =
       this.userCart.finalPrice.calPrice + this.userCart.finalPrice.calGST;
     let perc = this.custService.getDiscountPercentage(
@@ -328,9 +359,10 @@ export class ReviewOrderComponent implements OnInit {
           this.userCart.finalPrice.calDiscountedGST +
           this.userCart.finalPrice.calDelivery
       );
-    } 
-    else {
-      this.userCart.finalPrice.calDiscountedTotal = this.userCart.finalPrice.calFinalTotal + this.userCart.finalPrice.calDelivery;
+    } else {
+      this.userCart.finalPrice.calDiscountedTotal =
+        this.userCart.finalPrice.calFinalTotal +
+        this.userCart.finalPrice.calDelivery;
       this.userCart.finalPrice.calDiscountedGST = this.userCart.finalPrice.calGST;
       this.userCart.finalPrice.calDiscountedDesignGST = Math.round(
         this.userCart.finalPrice.calDesignPrice *
@@ -340,7 +372,6 @@ export class ReviewOrderComponent implements OnInit {
         this.userCart.finalPrice.calPrintPrice *
           this.userCart.finalPrice.printGSTPct
       );
-      
     }
   }
   generateOrderId() {
@@ -389,12 +420,12 @@ export class ReviewOrderComponent implements OnInit {
       keyboard: false
     });
     modelRef.result.then(data => {
-      //debugger;
+      ////debugger;
       console.log(data);
       this.custService.setMeetingSlot(data);
       if (this.userCart.finalPrice.calDiscountedTotal == 0) {
         let timer = setInterval(() => {
-          debugger;
+          //debugger;
 
           if (this.userCart.finalPrice.calDiscountedTotal > 0) {
             this.generateOrderId();
@@ -421,7 +452,7 @@ export class ReviewOrderComponent implements OnInit {
         (data.mSlot.hour >= 12 ? "PM" : "AM");
       this.selectedSlot.duration = data.duration;
       let timer = setInterval(() => {
-        debugger;
+        //debugger;
         alert("Your Meeting Slot is expired.Please choose the New slot");
         clearInterval(timer);
         //this.bookMeeting();
@@ -447,7 +478,7 @@ export class ReviewOrderComponent implements OnInit {
     }
   }
   editItem(id) {
-    //debugger;
+    ////debugger;
     this.router.navigate(["/createorder"], { queryParams: { itemId: id } });
   }
   resetCart() {

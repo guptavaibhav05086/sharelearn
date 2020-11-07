@@ -30,7 +30,7 @@ export class GoogleplacesComponent implements OnInit {
   queryWait: boolean;
 
   ngAfterViewInit() {
-    debugger;
+    //debugger;
     this.getPlaceAutocomplete();
   }
   private getPlaceAutocomplete() {
@@ -42,14 +42,14 @@ export class GoogleplacesComponent implements OnInit {
       }
     );
     google.maps.event.addListener(autocomplete, "place_changed", () => {
-      debugger;
+      //debugger;
       const place = autocomplete.getPlace();
       this.invokeEvent(place);
     });
   }
 
   invokeEvent(place: Object) {
-    debugger;
+    //debugger;
     this.setAddress.emit(place);
   }
   addressChange() {

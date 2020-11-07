@@ -81,7 +81,7 @@ export class PrinterService {
     );
   }
   FetchDashboard(email) {
-    debugger;
+    //debugger;
     let url = `${environment.baseUrl}${environment.getPrinterDashboard}`.replace(
       "$email",
       email
@@ -94,7 +94,7 @@ export class PrinterService {
     );
   }
   FetchOngoingOrder(email, allOrdersflag) {
-    debugger;
+    //debugger;
     let url = `${environment.baseUrl}${environment.fetchOngoingOrdersPrinter}`
       .replace("$email", email)
       .replace("$isAllOrdersRequired", allOrdersflag);
@@ -144,13 +144,13 @@ export class PrinterService {
     );
   }
   UpdateBankDetails(model: BankAccountModel) {
-    debugger;
+    //debugger;
     let url = `${environment.baseUrl}${environment.updateBankDetailsPrinter}`;
     //isAllOrdersRequired
     return this._httpclient.post(url, model, this.login.getAuthHeader());
   }
   GetBankDetails(): Observable<Array<BankAccountModel>> {
-    debugger;
+    //debugger;
     let url = `${environment.baseUrl}${environment.getPrinterBankDetails}`;
     //isAllOrdersRequired
     return this._httpclient.get<Array<BankAccountModel>>(

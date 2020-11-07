@@ -28,7 +28,7 @@ export class CarouselholderComponent implements OnInit {
   ];
 
   onSlideRangeChange(indexes: number[]): void {
-    // debugger;
+    // //debugger;
     this.slidesChangeMessage = `Slides have been switched: ${indexes}`;
   }
   customOptions: OwlOptions = {
@@ -62,7 +62,7 @@ export class CarouselholderComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    // debugger;
+    // //debugger;
 
     console.log(this.slidesData);
     console.log(this.slides);

@@ -119,14 +119,14 @@ export class PrinterprofileComponent implements OnInit {
   ];
   profileImg = "../../../assets/StudentDashboard/img/avatar.jpg";
   paymentStatus(paymentStatus) {
-    debugger;
+    //debugger;
     console.log(paymentStatus);
     const modelRef = this.modalService.open(TransactionsuccessdetailsComponent);
     modelRef.componentInstance.transactionId = paymentStatus.status;
     modelRef.componentInstance.transactionStatus = paymentStatus.tranId;
   }
   generateOTP() {
-    debugger;
+    //debugger;
     let number = this.profileform.controls["mobileNumber"].value;
     //this.message = "";
     //this.spinner.show();
@@ -154,7 +154,7 @@ export class PrinterprofileComponent implements OnInit {
   }
 
   changeNumber() {
-    debugger;
+    //debugger;
     //this.oldNumber=this.profileform.controls['mobileNumber'].value;
     this.profileform.get("mobileNumber").enable();
     this.isPhoneVerified = false;
@@ -188,7 +188,7 @@ export class PrinterprofileComponent implements OnInit {
       this.spinnerService.show();
       this.printer.getProfile(userId).subscribe(
         data => {
-          debugger;
+          //debugger;
           this.filterDistricts(data["state"]);
           console.log(data);
           this.modfyAdd = true;
@@ -230,12 +230,12 @@ export class PrinterprofileComponent implements OnInit {
     }
   }
   acceptTerms() {
-    debugger;
+    //debugger;
     if (this.isTermsAccepted) this.isTermsAccepted = false;
     else this.isTermsAccepted = true;
   }
   selectedSoftware(name) {
-    debugger;
+    //debugger;
     console.log(name);
     let item = this.softwares.filter(item => item.name == name);
     if (item[0].selected) {
@@ -266,7 +266,7 @@ export class PrinterprofileComponent implements OnInit {
     }
   }
   createProfile() {
-    debugger;
+    //debugger;
     if (
       !(this.profileform.valid && this.isTermsAccepted && this.isPhoneVerified)
     ) {
@@ -332,7 +332,7 @@ export class PrinterprofileComponent implements OnInit {
     );
   }
   editForm(formname) {
-    debugger;
+    //debugger;
     // let check = this.profileform.controls["fName"].value;
     if (formname == "personal") this.isDisabled = false;
     else this.isDisableProfession = false;
@@ -375,12 +375,12 @@ export class PrinterprofileComponent implements OnInit {
     modalRef.componentInstance.name = "terms conditions";
   }
   uploadGSTCertificate(images: FileList, name: string) {
-    debugger;
+    //debugger;
     var result = "";
     var file;
     const formData = new FormData();
     var userImage = images.item(0);
-    debugger;
+    //debugger;
     for (var i = 0; (file = images[i]); i++) {
       //if the file is not an image, continue
       if (!this.validateFiles(name, file)) {
@@ -404,7 +404,7 @@ export class PrinterprofileComponent implements OnInit {
     this.printer.uploadUserImage(formData).subscribe(
       data => {
         this.spinnerService.hide();
-        debugger;
+        //debugger;
         console.log(data);
         alert("File Uploaded Successfully");
         this.fileError = false;
@@ -412,14 +412,14 @@ export class PrinterprofileComponent implements OnInit {
       },
       err => {
         this.spinnerService.hide();
-        debugger;
+        //debugger;
         this.fileError = true;
         alert("Issue in file upload please contact admin");
       }
     );
   }
   filterDistricts(stateId) {
-    debugger;
+    //debugger;
     try {
       this.filteredCities = this.statesData.filter(
         item => item.stateName == stateId
@@ -429,12 +429,12 @@ export class PrinterprofileComponent implements OnInit {
     } catch {}
   }
   fileSelect(images: FileList, name: string) {
-    debugger;
+    //debugger;
     var result = "";
     var file;
     const formData = new FormData();
     var userImage = images.item(0);
-    debugger;
+    //debugger;
     for (var i = 0; (file = images[i]); i++) {
       // if the file is not an image, continue
       if (!this.validateFiles(name, file)) {
@@ -468,11 +468,11 @@ export class PrinterprofileComponent implements OnInit {
     this.printer.uploadUserImage(formData).subscribe(
       data => {
         this.spinnerService.hide();
-        debugger;
+        //debugger;
         alert("Profile pic updated");
       },
       err => {
-        debugger;
+        //debugger;
         this.spinnerService.hide();
         console.log(err);
         alert("Issue in saving profile pic.Please try after sometime");

@@ -18,7 +18,7 @@ export class ActiveOrdersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+    //debugger;
     this.orderItems = this.data.ongoingOrders;
 
     this.initializeFiles();
@@ -140,7 +140,7 @@ export class ActiveOrdersComponent implements OnInit {
     }
   }
   addImage(i, orderId, type) {
-    debugger;
+    //debugger;
     //if(this.imageUpload.length < 4){
     //let imgname = "image" + (i + 1);
     let selItem = this.orderItems.filter(i => i.id == orderId)[0];
@@ -179,7 +179,7 @@ export class ActiveOrdersComponent implements OnInit {
     }
   }
   removeImage(i, orderId, type) {
-    debugger;
+    //debugger;
     let selItem = this.orderItems.filter(i => i.id == orderId)[0];
 
     if (type == "source") {
@@ -212,13 +212,13 @@ export class ActiveOrdersComponent implements OnInit {
     }
   }
   uploadGSTCertificate(images: FileList, id, name: string, uploadImageId) {
-    debugger;
+    //debugger;
     console.log(this.orderItems);
     var result = "";
     var file;
     const formData = new FormData();
     var userImage = images.item(0);
-    //debugger;
+    ////debugger;
     for (var i = 0; (file = images[i]); i++) {
       let reader = new FileReader();
 
@@ -269,7 +269,7 @@ export class ActiveOrdersComponent implements OnInit {
 
     this.service.uploadFinalSourceImage(formData, id, name).subscribe(
       data => {
-        debugger;
+        //debugger;
         console.log(data);
         keys = "";
         uplImg.displayLoadingGif = false;
@@ -294,7 +294,7 @@ export class ActiveOrdersComponent implements OnInit {
     );
   }
   downloadFile(filename, e) {
-    debugger;
+    //debugger;
     e.preventDefault();
     this.service.downloadOrderFiles(filename).subscribe(
       (response: any) => {

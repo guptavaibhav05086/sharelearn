@@ -37,7 +37,7 @@ export class VerifyOTPComponent implements OnInit {
     this.spinner.show();
     this.register.verifyOTP(number, userId).subscribe(
       data => {
-        debugger;
+        //debugger;
         if (data == true) {
           this.message = "Phone# Validated";
           this.verified = true;
@@ -60,7 +60,7 @@ export class VerifyOTPComponent implements OnInit {
   });
 
   closeModel() {
-    debugger;
+    //debugger;
     this.activeModal.close(this.verified);
   }
 }

@@ -55,7 +55,7 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit() {}
 
   registerUser() {
-    debugger;
+    //debugger;
     this.spinnerService.show();
     let newUser = new ResetPassword();
     newUser.OldPassword = this.studentForm.controls["currentpassword"].value;
@@ -80,7 +80,7 @@ export class ChangePasswordComponent implements OnInit {
         if (err.status == 500 && err.error.ModelState == null) {
           alert(err.error.Message);
         }
-        debugger;
+        //debugger;
         this.serverError = true;
         this.error = err.error.ModelState[""];
 

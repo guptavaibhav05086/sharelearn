@@ -7,6 +7,8 @@ import { CustomerService } from "../../services/customer.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ActiveOrdersComponent } from "../active-orders/active-orders.component";
 import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
+import { LoginService } from "src/app/services/login.service";
+import { CustomerLoginComponent } from "src/app/auth/customer-login/customer-login.component";
 @Component({
   selector: "app-ongoing-orders",
   templateUrl: "./ongoing-orders.component.html",
@@ -16,9 +18,27 @@ export class OngoingOrdersComponent implements OnInit {
   ongoingOrderData: any;
   frameworkComponents: any;
   ngOnInit(): void {
-    //debugger;
+    debugger;
+    let token = this.login.getUserToken();
+    //let roe
+    if (token.Token == null || token.Token == "" || token.type != "Customer") {
+      this.openLogin();
+    } else {
+      this.fetchOngoingOrder();
+    }
+  }
+  openLogin() {
+    //event.preventDefault();
+    let modelRef = this.modalService.open(CustomerLoginComponent, {
+      backdrop: "static",
+      keyboard: false
+    });
+    modelRef.componentInstance.isComingFromCartPage = true;
+    modelRef.result.then(data => {
+      //debugger;
 
-    this.fetchOngoingOrder();
+      window.location.reload();
+    });
   }
   fetchOngoingOrder() {
     let customerEmail = localStorage.getItem("email");
@@ -26,7 +46,7 @@ export class OngoingOrdersComponent implements OnInit {
     this.customerService
       .FetchOngoingCustomerOrder(customerEmail, false)
       .subscribe(data => {
-        //debugger;
+        ////debugger;
         this.ongoingOrderData = data;
         console.log(data);
       });
@@ -66,7 +86,8 @@ export class OngoingOrdersComponent implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private login: LoginService
   ) {
     this.gridOptions = <GridOptions>{
       getRowStyle: this.checkRow.bind(this)
@@ -82,7 +103,7 @@ export class OngoingOrdersComponent implements OnInit {
   }
 
   checkRow(params) {
-    //debugger;
+    ////debugger;
     var todayDate = new Date();
     var meetingTime = new Date(Date.parse(params.data.meetingTime));
 
@@ -112,7 +133,7 @@ export class OngoingOrdersComponent implements OnInit {
     });
   }
   bookMeeting(e) {
-    debugger;
+    //debugger;
     let modelRef = this.modalService.open(BookMeetingComponent, {
       backdrop: "static",
       keyboard: false
@@ -121,26 +142,30 @@ export class OngoingOrdersComponent implements OnInit {
     modelRef.componentInstance.comingFromOrderPage = true;
     modelRef.componentInstance.gapDetails = gapDetails;
     modelRef.result.then(data => {
-      let meet={
-        day:{
-          year:data.mDate.year,
-          day:data.mDate.day,
-          month:data.mDate.month
+      let meet = {
+        day: {
+          year: data.mDate.year,
+          day: data.mDate.day,
+          month: data.mDate.month
         },
-        slot:{
-          hour:data.mSlot.hour,
-          minute:data.mSlot.minute,
-          second:data.mSlot.second
+        slot: {
+          hour: data.mSlot.hour,
+          minute: data.mSlot.minute,
+          second: data.mSlot.second
         },
-        meetingDuration:data.duration
-      }
-      //debugger;
+        meetingDuration: data.duration
+      };
+      ////debugger;
       console.log(data);
-      this.customerService.rescheduleMeetRequest(meet,e.rowData.OrderId).subscribe(data=>{
-        this.customerService.rescheduleMeetNotify(meet,e.rowData.OrderId).subscribe(data=>{
-          console.log('notifications sending Done')
-        })
-      })
+      this.customerService
+        .rescheduleMeetRequest(meet, e.rowData.OrderId)
+        .subscribe(data => {
+          this.customerService
+            .rescheduleMeetNotify(meet, e.rowData.OrderId)
+            .subscribe(data => {
+              console.log("notifications sending Done");
+            });
+        });
 
       //this.helper.navigateToPath("/revieworder");
     });

@@ -15,7 +15,7 @@ export class VerifyEmailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+    //debugger;
     let emailId = this.route.snapshot.queryParams["email"];
     let guid = this.route.snapshot.queryParams["guid"];
     let role = this.route.snapshot.queryParams["role"];

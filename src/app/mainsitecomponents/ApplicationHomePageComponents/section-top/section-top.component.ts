@@ -17,7 +17,7 @@ export class SectionTopComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+    //debugger;
     this.adminService.getProducts().subscribe(data => {
       this.productsdata = data;
       data["products"].forEach(element => {

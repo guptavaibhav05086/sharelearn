@@ -26,7 +26,7 @@ export class DetailsComponentComponent implements OnInit {
     });
   }
   AcceptOrder() {
-    debugger;
+    //debugger;
     this.displayLoadingContentGif = true;
     let email = localStorage.getItem("email");
     this.service.acceptDesignerOrder(email, this.orderId).subscribe(

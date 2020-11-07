@@ -27,7 +27,7 @@ export class RazorpaymentsComponent implements OnInit {
   ngOnInit() {}
 
   createRzpayOrder(amount) {
-    debugger;
+    //debugger;
     console.log(amount);
     if (this.orderId != null && this.orderId != undefined) {
       this.payWithRazor(this.orderId);
@@ -56,7 +56,7 @@ export class RazorpaymentsComponent implements OnInit {
 
   payWithRazor(val) {
     const options: any = {
-      // key: "rzp_live_Fg9NN5NAEvUp4N",
+      //key: "rzp_live_Fg9NN5NAEvUp4N",
       key: "rzp_test_mz10cbdFCEOGCL",
       amount: this.paymentAmount * 100, // amount should be in paise format to display Rs 1255 without decimal point
       currency: "INR",

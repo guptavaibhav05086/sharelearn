@@ -10,7 +10,8 @@ export class ActiveOrderDetailsComponent implements OnInit {
   @Input() data;
   orderItems: any;
   @Input() isAllOrders;
-  toggleUploadInvoiceButton:boolean;
+  isDeliveryCompleted: false;
+  toggleUploadInvoiceButton: boolean;
   constructor(
     public activeModal: NgbActiveModal,
     private service: PrinterService
@@ -18,9 +19,11 @@ export class ActiveOrderDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     debugger;
-    this.toggleUploadInvoiceButton=this.isAllOrders;
+    //this.toggleUploadInvoiceButton = this.isAllOrders;
     this.isAllOrders = true;
     this.orderItems = this.data.ongoingOrders;
+    this.isDeliveryCompleted = this.data.ongoingOrders[0].isPrintCompleted;
+    this.toggleUploadInvoiceButton = this.isDeliveryCompleted;
 
     this.initializeFiles();
     console.log(this.data.ongoingOrders);
@@ -142,7 +145,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
     }
   }
   addImage(i, orderId, type) {
-    debugger;
+    //debugger;
     //if(this.imageUpload.length < 4){
     //let imgname = "image" + (i + 1);
     let selItem = this.orderItems.filter(i => i.id == orderId)[0];
@@ -173,7 +176,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
     }
   }
   removeImage(i, orderId, type) {
-    debugger;
+    //debugger;
     let selItem = this.orderItems.filter(i => i.id == orderId)[0];
 
     if (type == "source") {
@@ -197,13 +200,13 @@ export class ActiveOrderDetailsComponent implements OnInit {
   }
 
   uploadGSTCertificate(images: FileList, name: string) {
-    debugger;
+    //debugger;
     var result = "";
     var file;
 
     const formData = new FormData();
     var userImage = images.item(0);
-    //debugger;
+    ////debugger;
     for (var i = 0; (file = images[i]); i++) {
       let reader = new FileReader();
 
@@ -214,7 +217,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
     //formData.append("FileNames", keys);
     this.service.uploadFinalInvoice(formData, this.data.OrderId).subscribe(
       data => {
-        debugger;
+        //debugger;
         console.log(data);
         this.uploadedFileNames.product = userImage.name;
         this.uploadedFileNames.displayLoadingProductGif = false;
@@ -226,7 +229,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
     );
   }
   downloadFile(filename, e, type) {
-    debugger;
+    //debugger;
     e.preventDefault();
     this.service.downloadOrderFiles(filename, type).subscribe(
       (response: any) => {

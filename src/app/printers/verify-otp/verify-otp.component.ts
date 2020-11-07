@@ -46,7 +46,7 @@ export class VerifyOTPComponent implements OnInit {
 
       this.register.verifyOTP(number, userId).subscribe(
         data => {
-          debugger;
+          //debugger;
           if (data == true) {
             this.message = "Phone# Validated";
             this.verified = true;

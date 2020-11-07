@@ -19,7 +19,7 @@ export class SectionSocialMediaComponent implements OnInit {
     // let modelRef = this.modalService.open(TermsConditionsComponent);
     // modelRef.componentInstance.type = type;
     // modelRef.result.then(data => {
-    //   debugger;
+    //   //debugger;
     //   console.log(data);
       
     // });

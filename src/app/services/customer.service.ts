@@ -8,7 +8,7 @@ import { AddressRequest } from "../Models/address-request";
   providedIn: "root"
 })
 export class CustomerService {
-   productsData:any;
+  productsData: any;
   item = {
     type: "",
     category: [
@@ -41,11 +41,11 @@ export class CustomerService {
   cartpriceDetails;
   constructor(private _httpclient: HttpClient, private login: LoginService) {}
 
-  getproductsData(){
+  getproductsData() {
     return this.productsData;
   }
-  setProductsData(data){
-    this.productsData=data;
+  setProductsData(data) {
+    this.productsData = data;
   }
   getDiscountPriceDetails() {
     return this.discountedPrice;
@@ -53,13 +53,18 @@ export class CustomerService {
   getDiscountPercentage(cartValue) {
     let discountPer = 0;
     let max = 0;
-    this.discountedPrice.forEach(element => {
-      let cVal = parseFloat(element.CartAmount);
-      if (cartValue >= cVal && cVal > max) {
-        discountPer = parseFloat(element.DiscountPercentage);
-        max = cVal;
-      }
-    });
+    if (this.discountedPrice != undefined && this.discountedPrice != null) {
+      this.discountedPrice.forEach(element => {
+        let cVal = parseFloat(element.CartAmount);
+        if (cartValue >= cVal && cVal > max) {
+          discountPer = parseFloat(element.DiscountPercentage);
+          max = cVal;
+        }
+      });
+    } else {
+      this.discountedPrice = [];
+    }
+
     return discountPer;
     //this.dis
   }
@@ -80,11 +85,11 @@ export class CustomerService {
       this.login.getAuthHeader()
     );
   }
-  updateFailedTransaction( orderId) {
-    let url = `${environment.baseUrl}${environment.transactionFailed}`
-      
-      .replace("$orderId", orderId)
-      ;
+  updateFailedTransaction(orderId) {
+    let url = `${environment.baseUrl}${environment.transactionFailed}`.replace(
+      "$orderId",
+      orderId
+    );
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
   rescheduleMeetNotify(meetingDetails, orderId) {
@@ -116,7 +121,7 @@ export class CustomerService {
     );
   }
   FetchOngoingCustomerOrder(email, allOrdersflag) {
-    debugger;
+    ////debugger;
     let url = `${environment.baseUrl}${environment.getOngoingOrderCustomer}`
       .replace("$email", email)
       .replace("$isAllOrdersRequired", allOrdersflag);
@@ -190,14 +195,17 @@ export class CustomerService {
     );
   }
   addItemUserOrdersList(item) {
-    debugger;
+    ////debugger;
     let existnCart = this.getLocalStorageCart();
     if (existnCart != null && existnCart != undefined) {
       this.itemsList = existnCart;
+    } else {
+      this.itemsList = [];
     }
     this.itemsList.push(item);
     this.updateLocalStorageCart();
   }
+
   deletItemFromCart(itemId) {
     let existnCart = this.getLocalStorageCart();
     if (existnCart != null && existnCart != undefined) {
@@ -220,6 +228,7 @@ export class CustomerService {
     }
     return null;
   }
+
   setMeetingSlot(meetingSlot) {
     let existnCart = this.getLocalStorageCart();
     existnCart.forEach(item => {
@@ -256,6 +265,17 @@ export class CustomerService {
     let url = `${environment.baseUrl}${environment.generateOrderUser}`;
     return this._httpclient.post(url, orderCart, this.login.getAuthHeader());
   }
+  updateUserCartPost(userCart) {
+    let url = `${environment.baseUrl}${environment.updateUserCart}`;
+    return this._httpclient.post(url, userCart, this.login.getAuthHeader());
+  }
+  getuserCart(email) {
+    let url = `${environment.baseUrl}${environment.getUserCart}`.replace(
+      "$userEmail",
+      email
+    );
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   validateTransaction(paymentId, orderId, signature) {
     let url = `${environment.baseUrl}${environment.transactionValidateUser}`
       .replace("$paymentId", paymentId)
@@ -268,7 +288,7 @@ export class CustomerService {
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
   initiateGoogleLogin(urlBase) {
-    debugger;
+    ////debugger;
     let url = `${environment.baseUrl}${urlBase}`;
     window.location.href = url;
     return this._httpclient.get(url);

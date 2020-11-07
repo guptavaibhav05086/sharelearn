@@ -9,7 +9,7 @@
 
     //* Navbar Fixed  
     function navbarFixed() {
-        debugger;
+        //debugger;
         if ($('.header_area').length) {
             $(window).scroll(function () {
                 var scroll = $(window).scrollTop();

@@ -21,7 +21,7 @@ export class RazorpaymentsComponent implements OnInit {
   ngOnInit() {}
 
   createRzpayOrder(amount) {
-    debugger;
+    //debugger;
     console.log(amount);
     this.printer.generateOrderId(amount).subscribe(
       data => {

@@ -266,7 +266,7 @@ export class ProductsComponent implements OnInit {
     };
   }
   ngOnInit(): void {
-    debugger;
+    ////debugger;
     this.fetchProductsData();
   }
   onGridReady(params) {
@@ -280,7 +280,7 @@ export class ProductsComponent implements OnInit {
     this.rowData = this.admin.getProducts();
     this.admin.getProducts().subscribe(
       data => {
-        debugger;
+        ////debugger;
         this.spinner.hide();
         this.rowData = data["productList"];
         this.productLists = data["products"];
@@ -312,7 +312,7 @@ export class ProductsComponent implements OnInit {
     });
   }
   editprodList(e) {
-    debugger;
+    ////debugger;
     const modelRef = this.modalService.open(ProductListsComponent, {
       backdrop: "static"
     });
@@ -324,7 +324,7 @@ export class ProductsComponent implements OnInit {
     });
   }
   deleteprodList(e) {
-    debugger;
+    ////debugger;
     let result = confirm("Do you want to delete the product");
     if (result) {
       this.admin.deleteProduct(e.rowData.key).subscribe(

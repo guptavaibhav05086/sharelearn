@@ -12,7 +12,7 @@ export class ButtonrendererComponent implements ICellRendererAngularComp {
   label: string;
 
   agInit(params): void {
-    debugger;
+    //debugger;
     this.params = params;
     this.label = this.params.label || null;
     if (this.params.label == "ProdDelete") {

@@ -14,7 +14,8 @@ export class ActiveOrdersComponent implements OnInit {
   @Input() displayOnGoingOrdersElement = true;
   designConfirm = false;
   userFinishedOrders = false;
-  containsDesignOrders=false;
+  containsDesignOrders = false;
+  displayLoadingFinishGif = false;
   //@Input() orderId;
   constructor(
     public activeModal: NgbActiveModal,
@@ -22,13 +23,15 @@ export class ActiveOrdersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
+    //debugger;
     this.orderItems = this.data.ongoingOrders;
-    this.orderItems.forEach(item=> {
-      if(item.orderType == "Design Only" ||item.orderType == "Design And Print"){
-        this.containsDesignOrders=true;
+    this.orderItems.forEach(item => {
+      if (
+        item.orderType == "Design Only" ||
+        item.orderType == "Design And Print"
+      ) {
+        this.containsDesignOrders = true;
       }
-
     });
     this.userFinishedOrders = this.orderItems[0].isDesignCompleted;
     this.initializeFiles();
@@ -150,7 +153,7 @@ export class ActiveOrdersComponent implements OnInit {
     }
   }
   addImage(i, orderId, type) {
-    debugger;
+    //debugger;
     //if(this.imageUpload.length < 4){
     //let imgname = "image" + (i + 1);
     let selItem = this.orderItems.filter(i => i.id == orderId)[0];
@@ -189,7 +192,7 @@ export class ActiveOrdersComponent implements OnInit {
     }
   }
   removeImage(i, orderId, type) {
-    debugger;
+    //debugger;
     let selItem = this.orderItems.filter(i => i.id == orderId)[0];
 
     if (type == "source") {
@@ -212,7 +215,7 @@ export class ActiveOrdersComponent implements OnInit {
     }
   }
   validateMeetingStartTime() {
-    debugger;
+    //debugger;
     var mT = new Date(this.data.meetingTime);
     var cuD = new Date();
     if (cuD.getTime() > mT.getTime()) {
@@ -223,13 +226,13 @@ export class ActiveOrdersComponent implements OnInit {
     }
   }
   uploadGSTCertificate(images: FileList, id, name: string, uploadImageId) {
-    debugger;
+    //debugger;
     console.log(this.orderItems);
     var result = "";
     var file;
     const formData = new FormData();
     var userImage = images.item(0);
-    //debugger;
+    ////debugger;
     for (var i = 0; (file = images[i]); i++) {
       let reader = new FileReader();
 
@@ -280,7 +283,7 @@ export class ActiveOrdersComponent implements OnInit {
 
     // this.service.uploadFinalSourceImage(formData, id, name).subscribe(
     //   data => {
-    //     debugger;
+    //     //debugger;
     //     console.log(data);
     //     keys = "";
     //     uplImg.displayLoadingGif = false;
@@ -296,7 +299,7 @@ export class ActiveOrdersComponent implements OnInit {
     // );
   }
   downloadFile(filename, e) {
-    debugger;
+    //debugger;
     e.preventDefault();
     this.service.downloadOrderFiles(filename).subscribe(
       (response: any) => {
@@ -316,8 +319,8 @@ export class ActiveOrdersComponent implements OnInit {
       }
     );
   }
-  downloadFinalDesignFiles(filename, e){
-    debugger;
+  downloadFinalDesignFiles(filename, e) {
+    //debugger;
     e.preventDefault();
     this.service.downloadDesignCompletedFiles(filename).subscribe(
       (response: any) => {
@@ -341,15 +344,26 @@ export class ActiveOrdersComponent implements OnInit {
     window.open(this.data.MeetingUrl, "_blank");
   }
   FinishOrder() {
-    this.service.acceptDesign(this.data.OrderId).subscribe(data => {
-      debugger;
-      this.userFinishedOrders = true;
-      alert("Order Completed Successfully.Now You can download the Files");
-      this.service.sendPrintNotifications(this.data.OrderId).subscribe(data => {
-        console.log("Notification Send");
-      });
-      //this.activeModal.close();
-    });
+    this.displayFinishButton = true;
+    this.displayLoadingFinishGif = true;
+    this.service.acceptDesign(this.data.OrderId).subscribe(
+      data => {
+        //debugger;
+        this.userFinishedOrders = true;
+        this.displayLoadingFinishGif = false;
+        alert("Order Completed Successfully.Now You can download the Files");
+        this.displayFinishButton = false;
+        this.service
+          .sendPrintNotifications(this.data.OrderId)
+          .subscribe(data => {
+            console.log("Notification Send");
+          });
+        //this.activeModal.close();
+      },
+      err => {
+        this.displayFinishButton = false;
+      }
+    );
   }
   // AcceptDesign(){
   //   console()

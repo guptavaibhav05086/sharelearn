@@ -99,7 +99,7 @@ export class ResetpasswordComponent implements OnInit {
         if (err.status == 500 && err.error.ModelState == null) {
           alert(err.error.Message);
         }
-        debugger;
+        //debugger;
         this.serverError = true;
         this.error = err.error.ModelState[""];
 
