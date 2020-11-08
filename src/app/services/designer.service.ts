@@ -11,13 +11,13 @@ import { BankAccountModel } from "../Models/bank-account-model";
 export class DesignerService {
   constructor(private _httpclient: HttpClient, private login: LoginService) {}
 
-  private isDesignerAdminApproved:boolean;
+  private isDesignerAdminApproved: boolean;
 
-  getDesignerApproveStatus(){
+  getDesignerApproveStatus() {
     return this.isDesignerAdminApproved;
   }
-  setDesignerApproveStatus(status:boolean){
-    this.isDesignerAdminApproved=status;
+  setDesignerApproveStatus(status: boolean) {
+    this.isDesignerAdminApproved = status;
   }
   getDesignersNotification() {
     let url = `${environment.baseUrl}${environment.getDesignerNotification}`;
@@ -31,6 +31,11 @@ export class DesignerService {
       this.login.getAuthHeader()
     );
   }
+  getDesignerPayout() {
+    let url = `${environment.baseUrl}${environment.getDesignerPanelPayout}`;
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
+
   uploadUserImage(file) {
     return this._httpclient.post(
       `${environment.baseUrl}${environment.uploadImage}`,
@@ -56,7 +61,10 @@ export class DesignerService {
     );
   }
   finishDesignerOrder(orderId) {
-    let url = `${environment.baseUrl}${environment.finishDesignerOrder}`.replace("$orderId",orderId);
+    let url = `${environment.baseUrl}${environment.finishDesignerOrder}`.replace(
+      "$orderId",
+      orderId
+    );
     return this._httpclient.get(
       url,
 

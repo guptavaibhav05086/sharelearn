@@ -22,20 +22,17 @@ export class AppComponent {
   title = "mLearnApp";
   loading = false;
 
-  ngOnInit() {
-   
-  }
+  ngOnInit() {}
 
   constructor(
     private router: Router,
     private spinnerService: NgxSpinnerService,
     private route: ActivatedRoute
-    
   ) {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
-          this.spinnerService.show();
+          //this.spinnerService.show();
 
           this.loading = true;
           console.log("Navigation Start");
@@ -45,7 +42,7 @@ export class AppComponent {
         case event instanceof NavigationEnd:
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
-          this.spinnerService.hide();
+          //this.spinnerService.hide();
           console.log("Navigation End");
           this.loading = false;
           break;

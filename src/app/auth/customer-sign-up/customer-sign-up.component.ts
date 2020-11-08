@@ -22,7 +22,7 @@ export class CustomerSignUpComponent implements OnInit {
     userId: "",
     role: ""
   };
-  pattern:RegExp=/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/;
+  pattern: RegExp = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/;
   changeRequested = false;
   newMobileNumber;
   isCustomerSignUp = true;
@@ -52,7 +52,7 @@ export class CustomerSignUpComponent implements OnInit {
     ]),
     password: new FormControl("", [
       Validators.required,
-      this._validator.patternValidation(/^([a-zA-Z0-9]{6,15})$/)
+      this._validator.patternValidation(/^[A-Za-z0-9_@].{6,15}$/)
     ]),
     mobileNumber: new FormControl("", [
       Validators.required,
@@ -209,11 +209,9 @@ export class CustomerSignUpComponent implements OnInit {
     //debugger;
 
     if (this.changeRequested == true) {
-      //let 
-     
-     
-     
-      let result =  this.pattern.test(this.newMobileNumber);
+      //let
+
+      let result = this.pattern.test(this.newMobileNumber);
       if (!result) {
         alert("Invalid Mobile Number");
         return;

@@ -39,7 +39,9 @@ export class ActiveOrderDetailsComponent implements OnInit {
     IscontentUploaded: false,
     displayReadOnlyError: false
   };
-  stopDefault(event) {}
+  stopDefault(event) {
+    event.preventDefault();
+  }
   imageUpload = [
     {
       id: 1,
@@ -215,6 +217,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
 
     formData.append(name, userImage, userImage.name);
     //formData.append("FileNames", keys);
+    this.uploadedFileNames.displayLoadingProductGif = true;
     this.service.uploadFinalInvoice(formData, this.data.OrderId).subscribe(
       data => {
         //debugger;

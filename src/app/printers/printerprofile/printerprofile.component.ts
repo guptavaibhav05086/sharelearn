@@ -20,7 +20,7 @@ import { TransactionsuccessdetailsComponent } from "../transactionsuccessdetails
   styleUrls: ["./printerprofile.component.css"]
 })
 export class PrinterprofileComponent implements OnInit {
-  isEdit=true;
+  isEdit = true;
   isDisabled: boolean = false;
   isDisableProfession: boolean = false;
   request: PrinterProfileRequest;
@@ -32,11 +32,11 @@ export class PrinterprofileComponent implements OnInit {
   selectedFileName = "Choose GST Certificate";
   verifyClicked = false;
   isPhoneVerified = false;
-  isDisplay=false;
+  isDisplay = false;
   profileform = new FormGroup({
-    city:new FormControl("", [Validators.required]),
-    state:new FormControl("", [Validators.required]),
-    postalCode:new FormControl("", [Validators.required]),
+    city: new FormControl("", [Validators.required]),
+    state: new FormControl("", [Validators.required]),
+    postalCode: new FormControl("", [Validators.required]),
     fName: new FormControl("", [Validators.required]),
     lName: new FormControl("", [Validators.required]),
     gender: new FormControl("", [Validators.required]),
@@ -61,7 +61,7 @@ export class PrinterprofileComponent implements OnInit {
     //     /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/
     //   )
     // ]),
-    address: new FormControl(""),
+    address: new FormControl("")
     // softwares: new FormArray([]),
     // aadhar: new FormControl("", [
     //   Validators.required,
@@ -201,7 +201,7 @@ export class PrinterprofileComponent implements OnInit {
             profile: data["profileUrl"],
             address: data["address"],
             gst: data["gst"],
-            postalCode: data["postalCode"],
+            postalCode: data["pincode"],
             state: data["state"],
             city: data["city"]
             //aadhar: data["aadhar"],
@@ -209,7 +209,6 @@ export class PrinterprofileComponent implements OnInit {
           });
           this.isEdit = true;
 
-          
           if (data["mobileNumber"] != null && data["mobileNumber"] != "") {
             this.isPhoneVerified = data["isMobileVerified"];
             this.profileform.get("mobileNumber").disable();
@@ -257,7 +256,7 @@ export class PrinterprofileComponent implements OnInit {
     console.log(place.geometry.location.lat());
     console.log(place.geometry.location.lng());
   }
-  
+
   modifyAddress() {
     if (this.modfyAdd) {
       this.modfyAdd = false;
@@ -266,7 +265,7 @@ export class PrinterprofileComponent implements OnInit {
     }
   }
   createProfile() {
-    //debugger;
+    debugger;
     if (
       !(this.profileform.valid && this.isTermsAccepted && this.isPhoneVerified)
     ) {
@@ -291,8 +290,11 @@ export class PrinterprofileComponent implements OnInit {
       }
       return;
     }
-    if( this.profileform.controls["address"].value == '' ||  this.profileform.controls["address"].value ==null){
-      alert('Updating the Address Field.Please try again in few moments');
+    if (
+      this.profileform.controls["address"].value == "" ||
+      this.profileform.controls["address"].value == null
+    ) {
+      alert("Updating the Address Field.Please try again in few moments");
       return;
     }
     //this.request.softwares = "";

@@ -8,9 +8,13 @@
 
   <div class="modal-body" style="width:80%">
     <div class="container" style="margin-left: 10%;">
-      <div class="row">
+      <div class="row" style="text-align: center;">
+        <div class="col-md-12">
+          <p>Customer Name: <span style="font-weight: 300;">{{data.CustomerName}}</span></p>
+          <p>Contact Details: (+91 {{data.CustomerNumber}}), <span
+              style="font-weight: 300;font-style: italic;">{{data.CustomerEmail}}</span> </p>
 
-
+        </div>
       </div>
       <div class="row" *ngFor="let item of orderItems">
 
@@ -24,7 +28,7 @@
                 <div class="col-shp-7 mobCard" style="padding-left: 1%;">
                   <p class="productTitle">{{ item.subcategory }}</p>
                   <p class="productDetails">
-                    <span class="detailsHeading">Orientation:</span> {{ item.orientation }},
+
                     <span class="detailsHeading">Size:</span> {{ item.size }},
                     <span class="detailsHeading">Qunatity:</span> {{ item.quantity }},
                     <span class="detailsHeading">Paper GSM:</span> {{ item.paperGSM }},

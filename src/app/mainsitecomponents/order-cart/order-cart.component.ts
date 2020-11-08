@@ -75,6 +75,7 @@ export class OrderCartComponent implements OnInit {
     //let roe
     if (token.Token == null || token.Token == "" || token.type != "Customer") {
       this.openLogin();
+      this.spinner.hide();
     } else {
       this.custService.getuserCart(token.email).subscribe(
         data => {

@@ -27,6 +27,7 @@ export class ResetpasswordComponent implements OnInit {
   serverError = false;
   error: any;
   registered = false;
+  displayVendorPass = true;
   studentForm = new FormGroup(
     {
       email: new FormControl("", [
@@ -45,6 +46,22 @@ export class ResetpasswordComponent implements OnInit {
     },
     { validators: this._validator.confirmPasswordValidation }
   );
+  PaaswordFormCustomer = new FormGroup(
+    {
+      email: new FormControl("", [
+        Validators.required,
+        this._validator.patternValidation(
+          /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
+        )
+      ]),
+      password: new FormControl("", [
+        Validators.required,
+        this._validator.patternValidation(/^[A-Za-z0-9_@].{6,15}$/)
+      ]),
+      confirmPassword: new FormControl("", [Validators.required])
+    },
+    { validators: this._validator.confirmPasswordValidation }
+  );
 
   constructor(
     private _helper: HelperService,
@@ -55,10 +72,21 @@ export class ResetpasswordComponent implements OnInit {
     private register: RegisterService
   ) {}
 
+  checkTest() {
+    debugger;
+    console.log(JSON.stringify(this.PaaswordFormCustomer));
+  }
   ngOnInit() {
     let emailId = this.route.snapshot.queryParams["email"];
     let guid = this.route.snapshot.queryParams["guid"];
+    let userType = this.route.snapshot.queryParams["type"];
+    if (userType == "Customer") {
+      this.displayVendorPass = false;
+    }
     this.studentForm.patchValue({
+      email: emailId
+    });
+    this.PaaswordFormCustomer.patchValue({
       email: emailId
     });
     this.dropdownList = this._helper.getCourseList();
@@ -76,11 +104,53 @@ export class ResetpasswordComponent implements OnInit {
   }
 
   registerUser() {
+    if (!this.studentForm.valid) {
+      alert("Invalid values in Form");
+      return;
+    }
     this.spinnerService.show();
     let newUser = new ResetPassword();
     newUser.EmailId = this.studentForm.controls["email"].value;
     newUser.NewPassword = this.studentForm.controls["password"].value;
     newUser.ConfirmPassword = this.studentForm.controls[
+      "confirmPassword"
+    ].value;
+    newUser.Guid = this.route.snapshot.queryParams["guid"];
+
+    this.register.resetPasswordRequest(newUser).subscribe(
+      data => {
+        this.spinnerService.hide();
+        this.registered = true;
+        this.serverError = false;
+        alert("Password Reset Successful");
+        this._helper.navigateToLogin();
+      },
+      err => {
+        this.spinnerService.hide();
+        console.log(err);
+        if (err.status == 500 && err.error.ModelState == null) {
+          alert(err.error.Message);
+        }
+        //debugger;
+        this.serverError = true;
+        this.error = err.error.ModelState[""];
+
+        console.log(this.error);
+      }
+    );
+  }
+  resetPasswordCustomer() {
+    debugger;
+    if (!this.PaaswordFormCustomer.valid) {
+      alert("Invalid values in Form");
+      return;
+    }
+    this.spinnerService.show();
+
+    let newUser = new ResetPassword();
+    newUser.EmailId = this.PaaswordFormCustomer.controls["email"].value;
+    newUser.NewPassword = this.PaaswordFormCustomer.controls["password"].value;
+    newUser.ConfirmPassword = this.PaaswordFormCustomer.controls[
       "confirmPassword"
     ].value;
     newUser.Guid = this.route.snapshot.queryParams["guid"];

@@ -23,13 +23,12 @@ export class HomeComponent implements OnInit {
     X: 0,
     Y: 0
   };
-  topNavLoaded(value){
+  topNavLoaded(value) {
     //;
-    if(value==true){
-         let elementnavbarinner = document.getElementById("searchBarButton");
+    if (value == true) {
+      let elementnavbarinner = document.getElementById("searchBarButton");
       elementnavbarinner.classList.remove("topsearchhide");
     }
-
   }
   constructor(
     private login: LoginService,
@@ -39,7 +38,6 @@ export class HomeComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
-          ;
           console.log(this.router.url);
           let token = localStorage.getItem("Token");
           if (token == "" || token == null) {
@@ -54,16 +52,18 @@ export class HomeComponent implements OnInit {
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           console.log("Navigation End");
+          debugger;
           console.log(this.router.url);
-          if (this.router.url == "/" || this.router.url == "/homePage") {
+          let url = this.router.url.split("?")[0];
+          if (url == "/" || url == "/homePage") {
             this.displayNavigation = false;
             this.displayTopNav = false;
             //this._document.body.classList.add("home");
           } else {
-           // ;
+            // ;
             this.displayNavigation = true;
             this.displayTopNav = true;
-            
+
             //this._document.body.classList.remove("home");
           }
           break;

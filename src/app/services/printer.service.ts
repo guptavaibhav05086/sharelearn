@@ -10,13 +10,13 @@ import { BankAccountModel } from "../Models/bank-account-model";
 })
 export class PrinterService {
   constructor(private _httpclient: HttpClient, private login: LoginService) {}
-  private isPrinterAdminApproved:boolean;
+  private isPrinterAdminApproved: boolean;
 
-  getPrinterApproveStatus(){
+  getPrinterApproveStatus() {
     return this.isPrinterAdminApproved;
   }
-  setPrinterApproveStatus(status:boolean){
-    this.isPrinterAdminApproved=status;
+  setPrinterApproveStatus(status: boolean) {
+    this.isPrinterAdminApproved = status;
   }
   updateProfileRequest(updateProfile) {
     return this._httpclient.post(
@@ -24,6 +24,10 @@ export class PrinterService {
       updateProfile,
       this.login.getAuthHeader()
     );
+  }
+  getPrinterPayout() {
+    let url = `${environment.baseUrl}${environment.getPrinterPanelPayout}`;
+    return this._httpclient.get(url, this.login.getAuthHeader());
   }
   uploadUserImage(file) {
     return this._httpclient.post(
@@ -46,7 +50,8 @@ export class PrinterService {
   trackDelivery(taskId) {
     let url = `${environment.baseUrl}${environment.trackDelivery}`.replace(
       "$taskId",
-      taskId    );
+      taskId
+    );
     return this._httpclient.get(
       url,
 
@@ -158,7 +163,7 @@ export class PrinterService {
       this.login.getAuthHeader()
     );
   }
-  initiateDelivery(orderId,customerId){
+  initiateDelivery(orderId, customerId) {
     let url = `${environment.baseUrl}${environment.initiateDelivery}`
       .replace("$orderId", orderId)
       .replace("$customerId", customerId);

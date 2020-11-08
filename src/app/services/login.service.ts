@@ -78,6 +78,7 @@ export class LoginService {
     localStorage.setItem("unverifiedEmail", "");
     localStorage.setItem("isEmailVerified", "");
     localStorage.setItem("unverifiedRole", "");
+    localStorage.setItem("email", "");
     //
   }
 

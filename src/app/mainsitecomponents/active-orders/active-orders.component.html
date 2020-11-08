@@ -9,7 +9,7 @@
   <div class="modal-body" style="width:80%">
     <div class="container" style="margin-left: 10%;">
       <div class="row" style="text-align: center;">
-        <div class="col-md-12">
+        <div class="col-md-12" *ngIf="data.CustomerName !=null">
           <p>Designer Name: <span style="font-weight: 300;">{{data.CustomerName}}</span></p>
           <p>Contact Details: (+91 {{data.CustomerNumber}}), <span
               style="font-weight: 300;font-style: italic;">{{data.CustomerEmail}}</span> </p>
@@ -52,13 +52,15 @@
                     <span class="detailsHeading">Order Type:</span> {{ item.orderType }}
 
                   </p>
-
-                  <p class="productDetails" *ngIf="item.TotalDesignCost > 0">
+                  <p class="productDetails" *ngIf="item.Total > 0">
+                    <span class="detailsHeading">Total Cost: &#x20B9;</span> {{ item.Total }}
+                  </p>
+                  <!-- <p class="productDetails" *ngIf="item.TotalDesignCost > 0">
                     <span class="detailsHeading">Total Design Price: &#x20B9;</span> {{ item.TotalDesignCost }}
                   </p>
                   <p class="productDetails" *ngIf="item.TotalPrintCost > 0">
                     <span class="detailsHeading">Total Print Price: &#x20B9;</span> {{ item.TotalPrintCost }}
-                  </p>
+                  </p> -->
                   <p class="productDetails" *ngIf="item.orderType !='Print Only'">
                     <span class="detailsHeading">Order Content</span> {{ item.content }}
                   </p>
@@ -219,13 +221,13 @@
         </div>
       </div>
       <!-- Print only orders -->
-      <div *ngIf="!containsDesignOrders" style="display: flex;">
+      <!-- <div *ngIf="!containsDesignOrders" style="display: flex;">
 
         <button class="btn" (click)="FinishOrder()" *ngIf="displayOnGoingOrdersElement">Finish</button>
         <div style="width: 40px;" *ngIf="displayLoadingFinishGif">
           <img src="../../../assets/img/loading.gif" />
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 

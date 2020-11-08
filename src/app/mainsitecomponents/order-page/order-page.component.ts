@@ -22,6 +22,7 @@ export class OrderPageComponent implements OnInit {
   paramSelSubCat = "";
   minDate: NgbDateStruct;
   model: NgbDateStruct;
+  //displayOrderForm=false;
   selectedProductImage: string;
   productList;
   products;
@@ -972,6 +973,7 @@ export class OrderPageComponent implements OnInit {
         this.discountPrice = data["discountList"];
         this.custService.discountedPrice = this.discountPrice;
         //debugger;
+        //this.displayOrderForm=true;
         this.products.forEach(item => {
           item.isSelected = false;
         });
