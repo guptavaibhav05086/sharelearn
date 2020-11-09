@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { CustomerService } from "../../services/customer.service";
 import { HelperService } from "../../services/helper.service";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -121,6 +121,7 @@ export class OrderCartComponent implements OnInit {
     // );
     // this.loadCart();
   }
+
   changeUrl() {
     var url = window.location.href;
     var urlSplit = url.split("?");

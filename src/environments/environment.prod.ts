@@ -117,5 +117,7 @@ export const environment = {
   getOngoingAdmin:
     "/api/admin/getongoingorder?email=$email&isAllOrdersRequired=$isAllOrdersRequired",
   getUserCart: "/api/customer/getusercart?userEmail=$userEmail",
-  updateUserCart: "/api/customer/saveusercart"
+  updateUserCart: "/api/customer/saveusercart",
+  getDesignerPanelPayout: "/api/designer/getDesignerpayouts",
+  getPrinterPanelPayout: "/api/printer/getPrinterpayouts"
 };

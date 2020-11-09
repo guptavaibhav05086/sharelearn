@@ -7,8 +7,8 @@
 .dropdownitem {
   cursor: pointer;
   font-family: "Maven pro";
-  color: blue !important;
-  text-decoration: underline !important;
+  /* color: blue !important;
+  text-decoration: underline !important; */
 }
 .dropdownitem:hover {
   background-color: none !important;
@@ -40,8 +40,9 @@
   }
   .dcol-4 {
     flex-wrap: nowrap;
-    width: 20%;
-    text-align: center;
+    width: 15%;
+    text-align: left;
+    margin-left: 2%;
   }
   .dcol-5 {
     flex-wrap: nowrap;

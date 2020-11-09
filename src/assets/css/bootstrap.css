@@ -6208,7 +6208,7 @@ button.close {
     align-items: center;
     -ms-flex-pack: center;
     justify-content: center;
-    width: 15%;
+    /* width: 15%; */
     color: #fff;
     text-align: center;
     opacity: .5
@@ -6249,7 +6249,7 @@ button.close {
 
 .carousel-control-prev-icon {
     background-image: url("../../../assets/HomePageImg/Home Page _ Images/LeftArrow1200.png");
-    margin-left: -120%;
+    margin-left: -250%;
   }
 
 /* .carousel-control-next-icon {
@@ -6265,7 +6265,7 @@ button.close {
 @media (min-width: 768px){
     .carousel-control-next-icon {
         background-image:  url("../../../assets/HomePageImg/Home Page _ Images/Right Arrow1200.png");
-        margin-left: 150px;
+        /* margin-left: 150px; */
     } 
 }
 

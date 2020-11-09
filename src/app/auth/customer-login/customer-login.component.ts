@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, HostListener } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
@@ -90,6 +90,13 @@ export class CustomerLoginComponent implements OnInit {
         console.log(err.error.error_description);
       }
     );
+  }
+  @HostListener("window:popstate", ["$event"])
+  onPopState(event) {
+    debugger;
+    console.log("Back button pressed");
+    this.activeModal.dismiss();
+    window.location.reload();
   }
   openForgetPassword() {
     const modalRef = this.modalService.open(ForgetpasswordComponent);

@@ -936,12 +936,13 @@ export class OrderPageComponent implements OnInit {
     // this.selectedCategory.sort((a, b) => a.value.localeCompare(b.value));
   }
   ngOnInit(): void {
+    //debugger;
     this.spinner.show();
     for (let i = 1; i < 101; i++) {
       this.arrLnW.push(i);
     }
     this.route.queryParams.subscribe(params => {
-      //debugger;
+      debugger;
       console.log(params); // { order: "popular" }
       //this.cartItemId = params.itemId;
       if (params.itemId != undefined) {
@@ -952,6 +953,10 @@ export class OrderPageComponent implements OnInit {
       }
       if (params.selectedProduct != undefined) {
         this.paramSelProduct = params.selectedProduct;
+        this.displaySpecs = false;
+        this.displaysummary = false;
+        this.displayCategory = false;
+        this.addRemoveOverflow(true);
       }
       if (params.selSubCat != undefined) {
         this.paramSelSubCat = params.selSubCat;

@@ -1,5 +1,5 @@
 <div class="" style="padding-top:50px">
-  <div class="col-md-10 mx-auto ">
+  <div class="col-md-12 mx-auto ">
     <div>
       <form [formGroup]="orderForm">
         <!-- Container for Order Type Selection -->
@@ -323,7 +323,7 @@
                 </div> -->
                
                    <!-- Content Upload Code -->
-                <div class="row pad-m-0" *ngIf="displayDesigner" style="padding-top: 40px;">
+                <div class="row pad-m-0" *ngIf="displayDesigner" style="padding-top: 10px;">
                   <div class="flex-control-40">
                       <div class="form-group" >
                       
@@ -383,7 +383,7 @@
                    
                 <div class="row">   
                   <!-- Reference Image Upload -->              
-                  <div class="input-group col-md-4 pad-m-b-0 pad-m-t-0" style="padding-top: 30px;position: relative !important" *ngIf="displayDesigner">
+                  <div class="input-group col-md-4 pad-m-b-0 pad-m-t-0" style="padding-top: 10px;position: relative !important" *ngIf="displayDesigner">
                     <div class=" form-group">
                       <div style="display: flex;">
                         <div>
@@ -426,7 +426,7 @@
                   <!-- Logo Image Upload --> 
                   <div class="input-group  col-md-4">
                     <div class="" *ngFor="let item of imageUpload;let  i=index">
-                      <div class="input-group pad-m-b-0 uploard-one col-md-5 pad-m-b-0 pad-m-t-10" style="padding-top: 30px;position: relative !important">
+                      <div class="input-group pad-m-b-0 uploard-one col-md-5 pad-m-b-0 pad-m-t-10" style="padding-top: 10px;position: relative !important">
                         <div class="form-group">
                           <div *ngIf="i == 0">
                               <label *ngIf="orderForm.controls['type'].value != 'Print Only'">Logo/Image </label>
