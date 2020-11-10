@@ -299,6 +299,7 @@ button.calendar:active {
     width: 100%;
     margin: 0 auto;
     text-align: left;
+    margin-right: 20px;
   }
   .flex-control8 {
     width: 100%;
@@ -317,7 +318,7 @@ button.calendar:active {
     padding-left: 10px;
   }
   .flex-container {
-    margin: 15px;
+    margin: 0px;
   }
   .or-btn {
     height: 50px;
@@ -356,7 +357,11 @@ button.calendar:active {
     width: 100% !important;
   }
   .flex-control-l {
-    width: 22%;
+    width: 41%;
     margin-left: 2%;
+  }
+  .img-mobile{
+    width: auto !important;
+    height: auto !important;
   }
 }
