@@ -153,7 +153,7 @@
   margin-top: 30px;
 }
 .display-label {
-  text-align: center;
+  text-align: left;
 }
 .or-btn {
   height: 50px;
@@ -298,7 +298,7 @@ button.calendar:active {
   .flex-control2 {
     width: 100%;
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
   }
   .flex-control8 {
     width: 100%;
@@ -354,5 +354,9 @@ button.calendar:active {
   }
   .flex-control-3-mob {
     width: 100% !important;
+  }
+  .flex-control-l {
+    width: 22%;
+    margin-left: 2%;
   }
 }
