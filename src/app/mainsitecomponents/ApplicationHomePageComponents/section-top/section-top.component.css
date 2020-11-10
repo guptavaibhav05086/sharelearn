@@ -145,11 +145,14 @@
   .mt-mob-0 {
     margin-top: 0 !important;
   }
+  .mt-mob-30Im{
+    margin-top: 30px !important;
+  }
   .positioncontainerRight {
     background: url("../../../../assets/HomePageImg/Home Page _ Images/Find and hire1200.png");
     background-size: contain;
     height: 210px;
-    background-position: 140px 66px;
+    background-position: 70px 87px;
     background-repeat: no-repeat;
   }
   .mob-pad {
