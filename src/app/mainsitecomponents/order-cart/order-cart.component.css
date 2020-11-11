@@ -149,3 +149,16 @@
     width: 100%;
   }
 }
+@media (max-width: 768px) {
+.rowCart{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.col-shp-6{
+  width: 50%;
+}
+.col-shp-4{
+  width: 30%;
+}
+}

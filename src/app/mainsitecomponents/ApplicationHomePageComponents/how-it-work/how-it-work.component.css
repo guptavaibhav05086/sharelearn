@@ -106,6 +106,7 @@
     height: 150px;
     background-size: contain;
     background-repeat: no-repeat;
+    margin-top: 0;
   }
   .image-3 {
     background: url("../../../../assets/HomePageImg/Home Page _ Images/Fastest Delivery1200_mob.png");

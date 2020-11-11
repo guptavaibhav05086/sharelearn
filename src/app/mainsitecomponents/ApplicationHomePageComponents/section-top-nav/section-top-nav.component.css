@@ -124,17 +124,17 @@
 }
 @media only screen and (max-width: 420px) {
   .logo-nav {
-    margin-left: -55px;
+    margin-left: -22px;
   }
 }
 @media only screen and (max-width: 380px) {
   .logo-nav {
-    margin-left: -50px;
+    margin-left: -22px;
   }
 }
 @media only screen and (max-width: 360px) {
   .logo-nav {
-    margin-left: -20px;
+    margin-left: -15px;
   }
 }
 @media only screen and (max-width: 340px) {
