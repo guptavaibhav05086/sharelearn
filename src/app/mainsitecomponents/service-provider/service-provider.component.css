@@ -186,7 +186,7 @@
     border-color: transparent;
    
 } 
-.jumbotron b{ color: #000;}
+.jumbotron li b{ color: #000;}
 .jumbotron-faq.jumbotron{
     background: url("../../../assets/HomePageImg/serviceProvider/faqbg2.jpg"); 
     height: 500px;
