@@ -27,6 +27,7 @@ import { DisplayMessagesComponent } from "./mainsitecomponents/display-messages/
 import { HomeContainerComponent } from "./mainsitecomponents/ApplicationHomePageComponents/home-container/home-container.component";
 import { OngoingOrdersComponent } from "./mainsitecomponents/ongoing-orders/ongoing-orders.component";
 import { AllOrdersComponent } from "./mainsitecomponents/all-orders/all-orders.component";
+import { ServiceProviderComponent } from "./mainsitecomponents/service-provider/service-provider.component";
 
 const routes: Routes = [
   {
@@ -108,6 +109,10 @@ const routes: Routes = [
       {
         path: "resetpassword",
         component: ResetpasswordComponent
+      },
+      {
+        path: "serviceprovider",
+        component: ServiceProviderComponent
       },
       { path: "designerprofile", component: DesignerprofileComponent },
       { path: "verifyemail", component: VerifyEmailComponent },

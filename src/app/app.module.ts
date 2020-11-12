@@ -78,6 +78,7 @@ import { ActiveOrdersComponent } from "../app/mainsitecomponents/active-orders/a
 import { ButtonrendererComponent } from "../app/mainsitecomponents/buttonrenderer/buttonrenderer.component";
 import { OngoingOrdersComponent } from "../app/mainsitecomponents/ongoing-orders/ongoing-orders.component";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
+import { ServiceProviderComponent } from './mainsitecomponents/service-provider/service-provider.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -141,7 +142,8 @@ import { TypeaheadModule } from "ngx-bootstrap/typeahead";
     SectionBrandComponent,
     SectionSocialMediaComponent,
     CustomerSignUpComponent,
-    CustomerLoginComponent
+    CustomerLoginComponent,
+    ServiceProviderComponent
   ],
   imports: [
     BrowserModule,
