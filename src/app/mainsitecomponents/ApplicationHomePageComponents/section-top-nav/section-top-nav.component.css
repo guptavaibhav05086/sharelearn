@@ -44,10 +44,11 @@
   font-weight: 500;
 }
 .menuItemDD :hover {
-  background-color: blue !important;
+  background-color: lightskyblue !important;
+  color: white !important;
 }
-.navbar {
-  position: initial !important;
+.dropdown-item :hover {
+  color: white !important;
 }
 .dropdown.show .dropdown-menu,
 .dropup.show .dropdown-menu,

@@ -17,15 +17,19 @@
 
             </div>
             <div class="row" *ngIf="trackingData">
-                <div>Estimated Pick Up Time : {{trackingData.eta.pickup}} Mins</div>
+                <div *ngIf="trackingData.eta">Estimated Pick Up Time : {{trackingData.eta.pickup}} Mins</div>
 
             </div>
             <div class="row" *ngIf="trackingData">
-                <div>Estimated Drop Time :{{trackingData.eta.dropoff}} Mins</div>
+                <div *ngIf="trackingData.eta">Estimated Drop Time :{{trackingData.eta.dropoff}} Mins</div>
 
             </div>
-            <div class="row" *ngIf="trackingData">
+            <div class="row">
                 <div>Dunzo Task Id : {{trackingData.task_id}}</div>
+
+            </div>
+            <div class="row" *ngIf="trackingData">
+                <div>Tracking Url : {{trackingData.tracking_url}}</div>
 
             </div>
 

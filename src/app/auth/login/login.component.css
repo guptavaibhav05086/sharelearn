@@ -2,10 +2,7 @@
 .ng-valid.required {
   border-left: 5px solid #42a948 !important; /* green */
 }
-.login-box{
-z-index: -1;
-position: relative;
-}
+
 .ng-invalid:not(form) {
   border-left: 5px solid #a94442 !important; /* red */
 }
@@ -34,4 +31,10 @@ position: relative;
 }
 .login-box {
   box-shadow: 1px 1px 1px 1px grey;
+}
+@media only screen and (max-width: 768px) {
+  /* .login-box {
+    z-index: -1;
+    position: relative;
+  } */
 }

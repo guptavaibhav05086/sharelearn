@@ -10,6 +10,9 @@
 .carousel-control-prev {
   width: 10% !important;
 }
+.carousel-text {
+  margin-left: 35%;
+}
 /* .carousel-control-next-icon {
   background-image: url("../../../assets/HomePageImg/Home Page _ Images/Left Arrow1200.png") !important;
 }
@@ -35,6 +38,9 @@
     background: transparent no-repeat center center;
     background-size: 100% 100%;
     margin-left: 100px !important;
+  }
+  .carousel-text {
+    margin-left: 35%;
   }
 }
 @media (min-width: 1200px) {

@@ -40,7 +40,6 @@ export class AdminService {
     let url = `${environment.baseUrl}${environment.adminGetFiles}`
       .replace("$filename", filename)
       .replace("$location", location);
-   
 
     // let url = `${environment.baseUrl}${environment.fetchongoingorderfilesPrinter}`
     //   .replace("$filename", filename)
@@ -59,6 +58,7 @@ export class AdminService {
       options
     );
   }
+
   checkPincodes(pincode) {
     let url = `${environment.baseUrl}${environment.checkPincodes}`.replace(
       "$pincode",

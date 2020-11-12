@@ -24,7 +24,7 @@ export class AllOrdersComponent implements OnInit {
     let customerEmail = localStorage.getItem("email");
     //let designerEmail = "guptavaibhav.05086@gmail.com";
     this.customerService
-      .FetchOngoingAllOrder(customerEmail, false)
+      .FetchOngoingAllOrder(customerEmail, true)
       .subscribe(data => {
         ////debugger;
         this.ongoingOrderData = data;
@@ -80,7 +80,11 @@ export class AllOrdersComponent implements OnInit {
       field: "DesignGST",
       sortable: true
     },
-    { headerName: "ProfessionDesignerFees", field: "ProfessionDesignerFees", sortable: true },
+    {
+      headerName: "ProfessionDesignerFees",
+      field: "ProfessionDesignerFees",
+      sortable: true
+    },
     { headerName: "SourceFileFees", field: "SourceFileFees" },
     { headerName: "DesignGST", field: "subcategory", sortable: true },
     {
@@ -88,7 +92,6 @@ export class AllOrdersComponent implements OnInit {
       field: "Price",
       sortable: true
     },
-
 
     { headerName: "orderid", field: "orderid", sortable: true },
     { headerName: "orderType", field: "orderType" },
@@ -106,7 +109,11 @@ export class AllOrdersComponent implements OnInit {
       field: "DesignGST",
       sortable: true
     },
-    { headerName: "ProfessionDesignerFees", field: "ProfessionDesignerFees", sortable: true },
+    {
+      headerName: "ProfessionDesignerFees",
+      field: "ProfessionDesignerFees",
+      sortable: true
+    },
     { headerName: "SourceFileFees", field: "SourceFileFees" },
     { headerName: "DesignGST", field: "subcategory", sortable: true },
     {

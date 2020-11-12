@@ -10,9 +10,26 @@
     <div class="container" style="margin-left: 10%;">
       <div class="row" style="text-align: center;">
         <div class="col-md-12">
-          <p>Designer Name: <span style="font-weight: 300;">{{data.CustomerName}}</span></p>
-          <p>Contact Details: +91 {{data.CustomerNumber}} <span
+          <p>Customer Name: <span style="font-weight: 300;">{{data.CustomerName}}</span></p>
+          <p>Customer Contact Details: +91 {{data.CustomerNumber}} <span
               style="font-weight: 300;font-style: italic;">{{data.CustomerEmail}}</span> </p>
+
+        </div>
+        <div class="col-md-12" *ngIf="data.assignerDesignerMobile !=null">
+
+          <p>Designer Contact Details: +91 {{data.assignerDesignerMobile}} <span
+              style="font-weight: 300;font-style: italic;">{{data.assignedDesignerEmail}}</span> </p>
+
+        </div>
+        <div class="col-md-12" *ngIf="data.assgnedPrinterMobile !=null">
+
+          <p>Printer Contact Details: +91 {{data.assgnedPrinterMobile}} <span
+              style="font-weight: 300;font-style: italic;">{{data.assignedPrinterEmail}}</span> </p>
+
+        </div>
+        <div class="col-md-12">
+
+          <p>Order Creation Date <span style="font-weight: 300;font-style: italic;">{{data.CreatedDate}}</span> </p>
 
         </div>
       </div>
@@ -46,39 +63,56 @@
                     <span class="detailsHeading">Order Type:</span> {{ item.orderType }}
 
                   </p>
+                  <p class="productDetails">
+                    <span class="detailsHeading" *ngIf="item.BillingName !=''">Billing Name:</span>
+                    {{ item.BillingName }}
+                    <span class="detailsHeading" *ngIf="item.GSTNumber !=''">GST Number:</span> {{ item.GSTNumber }}
 
-                  <p class="productDetails" *ngIf="item.TotalDesignCost > 0">
-                    <span class="detailsHeading">Total Design Price: &#x20B9;</span> {{ item.TotalDesignCost }}
                   </p>
-                  <p class="productDetails" *ngIf="item.TotalPrintCost > 0">
-                    <span class="detailsHeading">Total Print Price: &#x20B9;</span> {{ item.TotalPrintCost }}
+                  <p class="productDetails" *ngIf="item.designerCost > 0">
+                    <span class="detailsHeading"> Total Order Value: &#x20B9;</span> {{ item.Total }}
+                  </p>
+                  <p class="productDetails" *ngIf="item.UserDesignAcceptance !=null">
+                    <span class="detailsHeading"> Design Accepted Time: &#x20B9;</span> {{ item.UserDesignAcceptance }}
+                  </p>
+
+                  <p class="productDetails" *ngIf="item.designerCost > 0">
+                    <span class="detailsHeading"> Designer Cost: &#x20B9;</span> {{ item.designerCost }}
+                  </p>
+                  <p class="productDetails" *ngIf="item.printercost > 0">
+                    <span class="detailsHeading">Printer Cost: &#x20B9;</span> {{ item.printercost }}
                   </p>
                   <p class="productDetails" *ngIf="item.orderType !='Print Only'">
                     <span class="detailsHeading">Order Content</span> {{ item.content }}
                   </p>
 
+
                   <div *ngIf="item.orderType !='Print Only'">
-                    <a (click)="downloadFile(item.referenceImageURL,$event)" href="#">Download Reference Image</a>
+                    <a (click)="downloadFile(item.referenceImageURL,$event,'createordercontent')" href="#">Download
+                      Reference Image</a>
                   </div>
                   <div *ngIf="item.orderType !='Print Only'">
-                    <a (click)="downloadFile(item.contentpath,$event)" href="#">Download Content File</a>
+                    <a (click)="downloadFile(item.contentpath,$event,'createordercontent')" href="#">Download Content
+                      File</a>
                   </div>
                   <div *ngFor="let filekey of item.sourceLogoFile;let j=index" style="display: flex;flex-wrap: wrap;">
                     <div *ngIf="item.orderType !='Print Only'">
-                      <a *ngIf="filekey !=''" (click)="downloadFile(filekey,$event)" href="#">Download Logo/Image
+                      <a *ngIf="filekey !=''" (click)="downloadFile(filekey,$event,'createordercontent')"
+                        href="#">Download Logo/Image
                         {{j+1}} </a>
                     </div>
                     <div *ngIf="item.orderType =='Print Only'">
-                      <a *ngIf="filekey !=''" (click)="downloadFile(filekey,$event)" href="#">Download Print Ready Files
+                      <a *ngIf="filekey !=''" (click)="downloadFile(filekey,$event,'createordercontent')"
+                        href="#">Download Print Ready Files
                         {{j+1}} </a>
                     </div>
 
                   </div>
 
                   <!-- User will only be able to download the files if the order is finished by the user -->
-                  <div *ngIf="userFinishedOrders && item.orderType !='Print Only'">
+                  <div *ngIf="item.orderType !='Print Only'">
                     <!-- Only display source File Upload if User choosen for source File upload -->
-                    <div *ngIf="item.isDesignerFinishedOrder && item.selectedSourceFile">
+                    <div>
                       <div class="row" *ngFor="let itemImg of item.SourceUploads;let  i=index">
                         <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
                           <div class="form-group">
@@ -86,7 +120,7 @@
                               <label>Source Files </label>
 
                             </div>
-                            <div style="display: flex;">
+                            <div style="display: none;">
                               <div *ngIf="!isAllOrders">
                                 <label [for]="itemImg.name" class="btn btn-primary btn-block btn-outlined"
                                   style="width:250px">UPLOAD</label>
@@ -114,7 +148,7 @@
                             </div>
                             <div *ngIf="itemImg.displayFileName">
                               <a href="#"
-                                (click)="downloadFinalDesignFiles(itemImg.fileName,$event)">{{itemImg.fileName}}</a>
+                                (click)="downloadFile(itemImg.fileName,$event,'finaldesignsourceandnormalfile')">{{itemImg.fileName}}</a>
 
 
 
@@ -130,7 +164,7 @@
                       </div>
                     </div>
 
-                    <div *ngIf="item.isDesignerFinishedOrder">
+                    <div>
                       <div class="row" *ngFor="let itemNImg of item.NormalUploads;let  j=index">
                         <div class="input-group col-md-10" style="padding-top: 30px;position: relative !important">
                           <div class="form-group">
@@ -138,7 +172,7 @@
                               <label>Normal Files </label>
 
                             </div>
-                            <div style="display: flex;">
+                            <div style="display: none;">
                               <div *ngIf="!isAllOrders">
                                 <label [for]="itemNImg.name" class="btn btn-primary btn-block btn-outlined"
                                   style="width:250px">UPLOAD</label>
@@ -162,7 +196,8 @@
 
                             </div>
                             <div *ngIf="itemNImg.displayFileName">
-                              <a href="#" (click)="downloadFinalDesignFiles(itemNImg.fileName,$event)">
+                              <a href="#"
+                                (click)="downloadFile(itemNImg.fileName,$event,'finaldesignsourceandnormalfile')">
                                 {{itemNImg.fileName}}</a>
 
 
@@ -189,31 +224,59 @@
         </div>
       </div>
 
-      <div *ngIf="containsDesignOrders">
-        <!-- If order Design is already finished by the User -->
-        <div class="row" *ngIf="!userFinishedOrders && displayOnGoingOrdersElement">
-          <label class="checkbox checkbox-primary">
-            <input type="checkbox" [(ngModel)]="designConfirm">
-            <span class="check-mark"></span> I accept the design
-          </label>
-          <!-- {{designConfirm}} -->
+      <div class="row" style="text-align: center;">
+        <div class="col-md-6" *ngIf="data.printerInvoiceFilepath">
+          <div>Downlaod Printer Invoice</div>
+          <div>
+            <a href="#"
+              (click)="downloadFile(data.printerInvoiceFilepath,$event,'printerinvoices')">{{data.printerInvoiceFilepath}}</a>
+
+
+
+          </div>
         </div>
+        <div class="col-md-6">
+          <div>
+            <button class="btn btn-primary" [disabled]="!data.DunzoTaskId" (click)=" TrackDelivery()">Track
+              Delivery</button>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="row" style="text-align: center;" *ngIf="displayTrack">
+        <div class="container" style="margin-left: 10%;color:green;font-size:15px;margin-top: 20px;font-style: italic;">
+          <div class="row" *ngIf="trackingData">
+            <div>Delivery Initiation Time : <span class="infoDisplay">{{eventStartDate}}</span></div>
+
+          </div>
+          <div class="row" *ngIf="trackingData">
+            <div>Delivery Status : <span class="infoDisplay">{{trackingData.state}}</span> </div>
+
+          </div>
+          <div class="row" *ngIf="trackingData">
+            <div *ngIf="trackingData.eta">Estimated Pick Up Time : {{trackingData.eta.pickup}} Mins</div>
+
+          </div>
+          <div class="row" *ngIf="trackingData">
+            <div *ngIf="trackingData.eta">Estimated Drop Time :{{trackingData.eta.dropoff}} Mins</div>
+
+          </div>
+          <div class="row">
+            <div>Dunzo Task Id : {{trackingData.task_id}}</div>
+
+          </div>
+          <div class="row" *ngIf="trackingData">
+            <div>Tracking Url : {{trackingData.tracking_url}}</div>
+
+          </div>
+
+
+        </div>
+
       </div>
 
-      <p *ngIf="displayFinishButton && containsDesignOrders">
-        <button class="btn" (click)="startMeeting()" *ngIf="displayOnGoingOrdersElement">
-          Join Meeting
-        </button>
-        <button class="btn" (click)="FinishOrder()" *ngIf="displayOnGoingOrdersElement"
-          [disabled]="!designConfirm">Finish</button>
 
-      </p>
-      <!-- Print only orders -->
-      <p *ngIf="!containsDesignOrders">
-
-        <button class="btn" (click)="FinishOrder()" *ngIf="displayOnGoingOrdersElement">Finish</button>
-
-      </p>
     </div>
   </div>
 

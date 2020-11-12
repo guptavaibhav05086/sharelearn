@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, HostListener } from "@angular/core";
 
 import {
   Event,
@@ -23,6 +23,32 @@ export class AppComponent {
   loading = false;
 
   ngOnInit() {}
+  @HostListener("document:click", ["$event"])
+  handleMenuToggle(event) {
+    debugger;
+    var clickover = event.target;
+    var _opened = document
+      .getElementById("navbarNavDropdownTop")
+      .classList.contains("show");
+    if (clickover.classList.contains("nav-link")) {
+      return;
+    }
+    if (_opened === true) {
+      //document.getElementById(".navbar-toggler").click();
+      document.getElementById("navbarNavDropdownTop").classList.remove("show");
+    }
+    // if(clickover.classList.contains('nav-link')){
+    //   return;
+    // }
+    // else{
+    //   if (_opened === true) {
+    //     //document.getElementById(".navbar-toggler").click();
+    //     document
+    //     .getElementById("navbarNavDropdownTop")
+    //     .classList.remove('show');
+    //   }
+    // }
+  }
 
   constructor(
     private router: Router,

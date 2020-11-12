@@ -36,7 +36,7 @@ export class CustomerLoginComponent implements OnInit {
     ]),
     password: new FormControl("", [
       Validators.required,
-      this._validator.patternValidation(/^[A-Za-z0-9_@].{6,15}$/)
+      this._validator.patternValidation(/^[A-Za-z0-9_@].{5,15}$/)
     ])
   });
   ngOnInit() {}

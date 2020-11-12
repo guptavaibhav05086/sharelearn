@@ -1,11 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { CustomerService } from 'src/app/services/customer.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { Component, OnInit, Input } from "@angular/core";
+import { CustomerService } from "src/app/services/customer.service";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { AdminService } from "src/app/services/admin.service";
+import { PrinterService } from "src/app/services/printer.service";
 @Component({
-  selector: 'app-active-orders',
-  templateUrl: './active-orders.component.html',
-  styleUrls: ['./active-orders.component.css']
+  selector: "app-active-orders",
+  templateUrl: "./active-orders.component.html",
+  styleUrls: ["./active-orders.component.css"]
 })
 export class ActiveOrdersComponent implements OnInit {
   @Input() data;
@@ -15,26 +16,44 @@ export class ActiveOrdersComponent implements OnInit {
   @Input() displayOnGoingOrdersElement = true;
   designConfirm = false;
   userFinishedOrders = false;
-  containsDesignOrders=false;
+  containsDesignOrders = false;
+  trackingData: any;
+  eventStartDate: any;
+  displayTrack: boolean = false;
   //@Input() orderId;
   constructor(
     public activeModal: NgbActiveModal,
-    private service: CustomerService
+    private service: CustomerService,
+    private adminService: AdminService,
+    private dService: PrinterService
   ) {}
 
   ngOnInit(): void {
     ////debugger;
     this.orderItems = this.data.ongoingOrders;
-    this.orderItems.forEach(item=> {
-      if(item.orderType == "Design Only" ||item.orderType == "Design And Print"){
-        this.containsDesignOrders=true;
+    this.orderItems.forEach(item => {
+      if (
+        item.orderType == "Design Only" ||
+        item.orderType == "Design And Print"
+      ) {
+        this.containsDesignOrders = true;
       }
-
     });
     this.userFinishedOrders = this.orderItems[0].isDesignCompleted;
     this.initializeFiles();
     this.validateMeetingStartTime();
     console.log(this.data);
+  }
+  TrackDelivery() {
+    debugger;
+    this.dService.trackDelivery(this.data.DunzoTaskId).subscribe(res => {
+      //debugger;
+      this.trackingData = res;
+      this.eventStartDate = new Date(this.trackingData.event_timestamp);
+      this.eventStartDate = this.eventStartDate.toGMTString();
+      this.displayTrack = true;
+      //.eventStartDate=`{eventStartDate.}`
+    });
   }
   uploadedFileNames = {
     product: "",
@@ -296,10 +315,10 @@ export class ActiveOrdersComponent implements OnInit {
     //   }
     // );
   }
-  downloadFile(filename, e) {
+  downloadFile(filename, e, type) {
     //debugger;
     e.preventDefault();
-    this.service.downloadOrderFiles(filename).subscribe(
+    this.adminService.getFiles(filename, type).subscribe(
       (response: any) => {
         let dataType = response.type;
         let binaryData = [];
@@ -317,27 +336,7 @@ export class ActiveOrdersComponent implements OnInit {
       }
     );
   }
-  downloadFinalDesignFiles(filename, e){
-    //debugger;
-    e.preventDefault();
-    this.service.downloadDesignCompletedFiles(filename).subscribe(
-      (response: any) => {
-        let dataType = response.type;
-        let binaryData = [];
-        binaryData.push(response);
-        let downloadLink = document.createElement("a");
-        downloadLink.href = window.URL.createObjectURL(
-          new Blob(binaryData, { type: dataType })
-        );
-        if (filename) downloadLink.setAttribute("download", filename);
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
+
   startMeeting() {
     window.open(this.data.MeetingUrl, "_blank");
   }
@@ -355,5 +354,4 @@ export class ActiveOrdersComponent implements OnInit {
   // AcceptDesign(){
   //   console()
   // }
-
 }

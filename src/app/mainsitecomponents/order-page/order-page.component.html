@@ -73,119 +73,137 @@
           </div>
         </div>
         
+        <div #specs id="specs"></div>
         <!-- Container for Product Specification -->
-        <div [style.visibility]="displaySpecs ? 'visible': 'hidden'" #specs id="specs">
-          <div class="container shadow p-3 mb-5 bg-white rounded" >
-            <div class="or-formcontrol">
-              <h3 class="display-label">
-                Product Specification
-              </h3>
-             
-          
-            </div>
+        <div *ngIf="displaySpecs">
+          <div>
+            <div class="container shadow p-3 mb-5 bg-white rounded" >
+              <div class="or-formcontrol">
+                <h3 class="display-label">
+                  Product Specification
+                </h3>
+               
             
-            <div class="or-formcontrol flex-container">
-              <div class="flex-control2">
-                <img [src]="selectedProductImage" class="img-mobile" style="width:252px;height: 246px;"/>
               </div>
               
-              <div class="flex-control8" >
-                  <div class="row">
-                      <div style="width:80%;margin-left: 3%;">
-                          <div class="form-group">
-                              {{description}}
-                               
-                              
-                             </div>
+              <div class="or-formcontrol flex-container">
+                <div class="flex-control2">
+                  <img [src]="selectedProductImage" class="img-mobile" style="width:252px;height: 246px;"/>
+                </div>
+                
+                <div class="flex-control8" >
+                    <div class="row">
+                        <div style="width:90%;margin-left: 3%;">
+                            <div class="form-group">
+                                {{description}}
+                                 
+                                
+                               </div>
+                        </div>
+                      
+      
                       </div>
-                    
-    
+                    <div class="row">
+                        <div class="flex-control5" >
+                            <div class="form-group">
+                                <label>Order Type *</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder=""                         formControlName="disableType"                    disabled                                                
+                                />
+                               
+                                
+                               
+                              </div>
+                          
+                        </div>
+                        <div class="flex-control5">
+                            <div class="form-group">
+                                <label>Category *</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder=""                   formControlName="disableCat"                  disabled                                                        
+                                />                           
+                               
+                              </div>
+                        </div>
+                         <div class="flex-control5" *ngIf="displayprinter">
+                            <div class="form-group">
+                                <label>Pin Code *</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Check for servicable area"               formControlName="pinCode"                  (blur)="checkServicableArea()"  
+                                  [ngClass]="{'displayError': (this.orderForm.controls['pinCode'].touched && this.orderForm.controls['pinCode'].invalid ) || (this.orderForm.controls['pinCode'].touched && Servicable == false)}"                                                       
+                                />                           
+                               
+                              </div>
+                        </div>
+                       
                     </div>
+                    <div style="visibility: hidden;" #productselect id="productselect"></div>
                   <div class="row">
                       <div class="flex-control5" >
                           <div class="form-group">
-                              <label>Order Type *</label>
-                              <input
+                              <label>SubCategory *</label>
+                              <select
                                 type="text"
                                 class="form-control"
-                                placeholder=""                         formControlName="disableType"                    disabled                                                
-                              />
-                             
-                              
+                                placeholder="state"                         formControlName="subCategory"             (change)="selectedSubcategory($event)"     [ngClass]="{'displayError': (this.orderForm.controls['subCategory'].touched && this.orderForm.controls['subCategory'].invalid)}"                                                  
+                              >
+                              <option disabled value="">Select</option>
+                              <option *ngFor="let item of proSpec.displaySubcat" [value]="item.subcat">
+                                {{item.subcat}}
+                              </option>
+                              </select>
                              
                             </div>
                         
                       </div>
-                      <div class="flex-control5">
+                      <div class="flex-control5" *ngIf="displayDesigner">
                           <div class="form-group">
-                              <label>Category *</label>
-                              <input
+                              <label>Orientation *</label>
+                              <select
                                 type="text"
                                 class="form-control"
-                                placeholder=""                   formControlName="disableCat"                  disabled                                                        
-                              />                           
+                                placeholder="orientation"                   formControlName="orientation"               [ngClass]="{'displayError': (this.orderForm.controls['orientation'].touched && this.orderForm.controls['orientation'].invalid)}"                                                           
+                              >
+                              <option disabled value="">Select</option>
+                              <option *ngFor="let item of proSpec.displayOrientation" [value]="item">
+                                {{item}}
+                              </option>
+                              </select>
                              
                             </div>
                       </div>
-                       <div class="flex-control5" *ngIf="displayprinter">
+                      <div class="flex-control5" *ngIf="!displayLenghtWidth">
                           <div class="form-group">
-                              <label>Pin Code *</label>
-                              <input
+                              <label>Size *</label>
+                              <select
                                 type="text"
                                 class="form-control"
-                                placeholder="Check for servicable area"               formControlName="pinCode"                  (blur)="checkServicableArea()"  
-                                [ngClass]="{'displayError': (this.orderForm.controls['pinCode'].touched && this.orderForm.controls['pinCode'].invalid ) || (this.orderForm.controls['pinCode'].touched && Servicable == false)}"                                                       
-                              />                           
+                                placeholder="Sub Category"                   (change)="selectedSize($event)"              formControlName="size"                       [ngClass]="{'displayError': (this.orderForm.controls['size'].touched && this.orderForm.controls['size'].invalid)}"                                         
+                              >
+                              <option disabled value="">Select</option>
+                              <option *ngFor="let item of proSpec.displaySize" [value]="item">
+                                {{item}}
+                              </option>
+                              </select>
                              
                             </div>
                       </div>
-                     
-                  </div>
-                  <div style="visibility: hidden;" #productselect id="productselect"></div>
-                <div class="row">
-                    <div class="flex-control5" >
+                      <div class="flex-control-l" *ngIf="displayLenghtWidth">
                         <div class="form-group">
-                            <label>SubCategory *</label>
+                            <label> Height(in feet) *</label>
                             <select
                               type="text"
                               class="form-control"
-                              placeholder="state"                         formControlName="subCategory"             (change)="selectedSubcategory($event)"     [ngClass]="{'displayError': (this.orderForm.controls['subCategory'].touched && this.orderForm.controls['subCategory'].invalid)}"                                                  
+                              placeholder="Sub Category"                  formControlName="length"                       [ngClass]="{'displayError': (this.orderForm.controls['length'].touched && this.orderForm.controls['length'].invalid)}"                                           
                             >
                             <option disabled value="">Select</option>
-                            <option *ngFor="let item of proSpec.displaySubcat" [value]="item.subcat">
-                              {{item.subcat}}
-                            </option>
-                            </select>
-                           
-                          </div>
-                      
-                    </div>
-                    <div class="flex-control5" *ngIf="displayDesigner">
-                        <div class="form-group">
-                            <label>Orientation *</label>
-                            <select
-                              type="text"
-                              class="form-control"
-                              placeholder="orientation"                   formControlName="orientation"               [ngClass]="{'displayError': (this.orderForm.controls['orientation'].touched && this.orderForm.controls['orientation'].invalid)}"                                                           
-                            >
-                            <option disabled value="">Select</option>
-                            <option *ngFor="let item of proSpec.displayOrientation" [value]="item">
-                              {{item}}
-                            </option>
-                            </select>
-                           
-                          </div>
-                    </div>
-                    <div class="flex-control5" *ngIf="!displayLenghtWidth">
-                        <div class="form-group">
-                            <label>Size *</label>
-                            <select
-                              type="text"
-                              class="form-control"
-                              placeholder="Sub Category"                   (change)="selectedSize($event)"              formControlName="size"                       [ngClass]="{'displayError': (this.orderForm.controls['size'].touched && this.orderForm.controls['size'].invalid)}"                                         
-                            >
-                            <option disabled value="">Select</option>
-                            <option *ngFor="let item of proSpec.displaySize" [value]="item">
+                            <option *ngFor="let item of arrLnW" [value]="item">
                               {{item}}
                             </option>
                             </select>
@@ -194,11 +212,11 @@
                     </div>
                     <div class="flex-control-l" *ngIf="displayLenghtWidth">
                       <div class="form-group">
-                          <label> Height(in feet) *</label>
+                          <label>Width(in feet) *</label>
                           <select
                             type="text"
                             class="form-control"
-                            placeholder="Sub Category"                  formControlName="length"                       [ngClass]="{'displayError': (this.orderForm.controls['length'].touched && this.orderForm.controls['length'].invalid)}"                                           
+                            placeholder="Sub Category"                    formControlName="width"                        [ngClass]="{'displayError': (this.orderForm.controls['width'].touched && this.orderForm.controls['width'].invalid)}"                                       
                           >
                           <option disabled value="">Select</option>
                           <option *ngFor="let item of arrLnW" [value]="item">
@@ -208,151 +226,341 @@
                          
                         </div>
                   </div>
-                  <div class="flex-control-l" *ngIf="displayLenghtWidth">
+                  <div class="flex-control5" *ngIf="displayprinter" >
                     <div class="form-group">
-                        <label>Width(in feet) *</label>
+                        <label>Paper GSM *</label>
                         <select
                           type="text"
                           class="form-control"
-                          placeholder="Sub Category"                    formControlName="width"                        [ngClass]="{'displayError': (this.orderForm.controls['width'].touched && this.orderForm.controls['width'].invalid)}"                                       
+                          placeholder="quantities"                    formControlName="GSM"                            [ngClass]="{'displayError': (this.orderForm.controls['GSM'].touched && this.orderForm.controls['GSM'].invalid)}"                                           
                         >
                         <option disabled value="">Select</option>
-                        <option *ngFor="let item of arrLnW" [value]="item">
+                        <option *ngFor="let item of proSpec.dsiplaygsm" [value]="item.gsm">
+                          {{item.gsm}}
+                        </option>
+                        </select>
+                       
+                      </div>
+                  
+                </div>
+                <div class="flex-control5" *ngIf="displayprinter">
+                    <div class="form-group">
+                        <label>Quantities *</label>
+                        <select
+                          type="text"
+                          class="form-control"
+                          placeholder="quantities"                   formControlName="quantities"                      [ngClass]="{'displayError': (this.orderForm.controls['quantities'].touched && this.orderForm.controls['quantities'].invalid)}"                                                        
+                        >
+                        <option disabled value="">Select</option>
+                        <option *ngFor="let item of proSpec.displayQuant" [value]="item">
                           {{item}}
                         </option>
                         </select>
                        
                       </div>
                 </div>
-                <div class="flex-control5" *ngIf="displayprinter" >
-                  <div class="form-group">
-                      <label>Paper GSM *</label>
-                      <select
-                        type="text"
-                        class="form-control"
-                        placeholder="quantities"                    formControlName="GSM"                            [ngClass]="{'displayError': (this.orderForm.controls['GSM'].touched && this.orderForm.controls['GSM'].invalid)}"                                           
-                      >
-                      <option disabled value="">Select</option>
-                      <option *ngFor="let item of proSpec.dsiplaygsm" [value]="item.gsm">
-                        {{item.gsm}}
-                      </option>
-                      </select>
-                     
-                    </div>
-                
-              </div>
-              <div class="flex-control5" *ngIf="displayprinter">
-                  <div class="form-group">
-                      <label>Quantities *</label>
-                      <select
-                        type="text"
-                        class="form-control"
-                        placeholder="quantities"                   formControlName="quantities"                      [ngClass]="{'displayError': (this.orderForm.controls['quantities'].touched && this.orderForm.controls['quantities'].invalid)}"                                                        
-                      >
-                      <option disabled value="">Select</option>
-                      <option *ngFor="let item of proSpec.displayQuant" [value]="item">
-                        {{item}}
-                      </option>
-                      </select>
-                     
-                    </div>
-              </div>
-              <div class="flex-control5" *ngIf="orderForm.controls['type'].value != 'Print Only'" >
-                  <div class="form-group">
-                      <label>Industry * </label>
-                      <input
+                <div class="flex-control5" *ngIf="orderForm.controls['type'].value != 'Print Only'" >
+                    <div class="form-group">
+                        <label>Industry * </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="School, IT, Gym, etc."               formControlName="purpose"
+                            
+                          [ngClass]="{'displayError': (this.orderForm.controls['purpose'].touched && this.orderForm.controls['purpose'].invalid)}" 
+                                                                                     
+                        />                           
+                       
+                      </div>
+                </div>
+                <!-- <div class="flex-control5" *ngIf="displayprinter">
+                    <div class="form-group">
+                        <label>Pin Code *</label>
+                        <input
                         type="text"
                         class="form-control"
                         placeholder="School, IT, Gym, etc."               formControlName="purpose"
                           
-                        [ngClass]="{'displayError': (this.orderForm.controls['purpose'].touched && this.orderForm.controls['purpose'].invalid)}" 
-                                                                                   
-                      />                           
-                     
-                    </div>
-              </div>
-              <!-- <div class="flex-control5" *ngIf="displayprinter">
-                  <div class="form-group">
-                      <label>Pin Code *</label>
-                      <input
-                      type="text"
-                      class="form-control"
-                      placeholder="School, IT, Gym, etc."               formControlName="purpose"
+                        [ngClass]="{'displayError': (this.orderForm.controls['purpose'].touched && this.orderForm.controls['purpose'].invalid)}"                                                       
+                        />                           
+                       
+                      </div>
+                </div> -->
+                  </div>
+                  <!-- <div class="row" *ngIf="displayprinter">
+                      <div class="flex-control5" >
+                          <div class="form-group">
+                              <label>Paper GSM *</label>
+                              <select
+                                type="text"
+                                class="form-control"
+                                placeholder="quantities"                    formControlName="GSM"                                                                       
+                              >
+                              <option>Select</option>
+                              <option *ngFor="let item of proSpec.dsiplaygsm" [value]="item.gsm">
+                                {{item.gsm}}
+                              </option>
+                              </select>
+                             
+                            </div>
                         
-                      [ngClass]="{'displayError': (this.orderForm.controls['purpose'].touched && this.orderForm.controls['purpose'].invalid)}"                                                       
-                      />                           
+                      </div>
+                      <div class="flex-control5">
+                          <div class="form-group">
+                              <label>Quantities *</label>
+                              <select
+                                type="text"
+                                class="form-control"
+                                placeholder="quantities"                   formControlName="quantities"                                                                             
+                              >
+                              <option>Select</option>
+                              <option *ngFor="let item of proSpec.displayQuant" [value]="item">
+                                {{item}}
+                              </option>
+                              </select>
+                             
+                            </div>
+                      </div>
                      
-                    </div>
-              </div> -->
-                </div>
-                <!-- <div class="row" *ngIf="displayprinter">
-                    <div class="flex-control5" >
-                        <div class="form-group">
-                            <label>Paper GSM *</label>
-                            <select
-                              type="text"
-                              class="form-control"
-                              placeholder="quantities"                    formControlName="GSM"                                                                       
-                            >
-                            <option>Select</option>
-                            <option *ngFor="let item of proSpec.dsiplaygsm" [value]="item.gsm">
-                              {{item.gsm}}
-                            </option>
-                            </select>
-                           
-                          </div>
+                  </div> -->
+                 
+                     <!-- Content Upload Code -->
+                  <div class="row pad-m-0" *ngIf="displayDesigner" style="padding-top: 10px;">
+                    <div class="flex-control-40">
+                        <div class="form-group" >
+                        
+                            <label>Content*</label>
+                         
+                         <textarea formControlName='designcontent'  class="form-control" maxlength="250" placeholder="Description" (blur)="contextValidation()"  [ngClass]="{'displayError': (this.orderForm.controls['designcontent'].touched && uploadedFileNames.contentValidation == false)}">
+  
+                         </textarea>
+                          
+                         
+                        
+                       
+                      </div>
                       
                     </div>
-                    <div class="flex-control5">
+                    <div class="col-md-1 lableOR" style="padding-left: 2%;" *ngIf="displayDesigner">
+                      OR
+                    </div>
+                    <div class=" col-md-5 contentUploadBtn" *ngIf="displayDesigner">
+                      <div class="input-group" style="position: relative !important" style="display: flex;padding-top: 10px;">
                         <div class="form-group">
-                            <label>Quantities *</label>
-                            <select
-                              type="text"
-                              class="form-control"
-                              placeholder="quantities"                   formControlName="quantities"                                                                             
-                            >
-                            <option>Select</option>
-                            <option *ngFor="let item of proSpec.displayQuant" [value]="item">
-                              {{item}}
-                            </option>
-                            </select>
+                            
+                          <label for="contentUpload" class="btn btn-primary btn-block btn-outlined" style="width:200px">UPLOAD</label>
+                                <input
+                                type="file"
+                                
+                                style="display: none"
+                                id="contentUpload"
+                                [disabled]="disableAllUploadButtons"
+                                (change)="uploadGSTCertificate($event.target.files,'content')"
+                              /> 
+                             
+                        </div>
+                        <div style="width: 40px;" *ngIf="uploadedFileNames.displayLoadingContentGif">
+                            <img src="../../../assets/img/loading.gif"/>
+                          </div>
+                       <div>
+                          <button class="btn btn-outlined" (click)="clearContentImage()">-</button>
+                       </div>
+                      </div>
+                      <div class="input-group col-md-8">
+                          <a  href="#" (click)="stopDefault($event)" *ngIf="uploadedFileNames.IscontentUploaded" style="margin-bottom: 40px;"
+                          >{{uploadedFileNames.content}}</a>
+                         
+                      </div>
+                     
+                      <div class="input-group col-md-4" *ngIf="fileError"></div>
+                      <!-- <div class="input-group col-md-8" *ngIf="fileError">
+                        <span class="errorMessage" >File should of type doc,docx,pdf format.</span>
+                      </div>  -->
+                      <div class="input-group col-md-4" *ngIf="fileError"></div>
+                      <!-- <div class="input-group col-md-8" *ngIf="fileError">
+                        <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                      </div>  -->
+                    </div>
+                    </div>
+                     
+                  <div class="row">   
+                    <!-- Reference Image Upload -->              
+                    <div class="input-group col-md-4 pad-m-b-0 pad-m-t-0" style="padding-top: 10px;position: relative !important" *ngIf="displayDesigner">
+                      <div class=" form-group">
+                        <div style="display: flex;">
+                          <div>
+                              <label [ngClass]="{'displayImageError': uploadedFileNames.displayErrororbutton}">Reference Image* </label>
+                              <label for="productUpload" class="btn btn-primary btn-block btn-outlined" style="width:250px" [ngClass]="{'displayBorderError': uploadedFileNames.displayErrororbutton}">UPLOAD</label>
+                              <input
+                              type="file"
+                              accept="image/*"
+                              style="display: none"
+                              id="productUpload"
+                              [disabled]="disableAllUploadButtons"
+                              (change)="uploadGSTCertificate($event.target.files,'product')"
+                            /> 
+                          </div>
+                          <div class="pad-m-0" style="width: 40px;margin-top: 40px;" *ngIf="uploadedFileNames.displayLoadingProductGif">
+                              <img src="../../../assets/img/loading.gif"/>
+                            </div>
+                        </div>
+                          
+                       
+                          
+                        <!-- <input
+                          type="file"
+                          accept="image.*"
+                          class="custom-file-input"
+                          id="inputGroupFile02"
+                          aria-describedby="inputGroupFileAddon02"
+                          (change)="uploadGSTCertificate($event.target.files,'product')"
+                        />
+                        
+                        > -->
+                        <a href="#" (click)="stopDefault($event)"    *ngIf="uploadedFileNames.IsproductRefUploaded"
+                        >{{uploadedFileNames.product}}</a>
+                        <!-- <div *ngIf="uploadedFileNames.displayErrororbutton" class="displayImageError">
+                          "Please Upload the reference Image"
+                        </div> -->
+                      </div>
+                     
+                    </div>
+                    <!-- Logo Image Upload --> 
+                    <div class="input-group  col-md-4">
+                      <div class="" *ngFor="let item of imageUpload;let  i=index">
+                        <div class="input-group pad-m-b-0 uploard-one col-md-5 pad-m-b-0 pad-m-t-10" style="padding-top: 10px;position: relative !important">
+                          <div class="form-group">
+                            <div *ngIf="i == 0">
+                                <label *ngIf="orderForm.controls['type'].value != 'Print Only'">Logo/Image </label>
+                                <label *ngIf="orderForm.controls['type'].value == 'Print Only'"  [ngClass]="{'displayImageError': uploadedFileNames.displayReadOnlyError}">Print Ready File* </label>
+                            </div>
+                             <div style="display: flex;">
+                               <div>
+                                  <label [for]="item.name" class="btn btn-primary btn-block btn-outlined" style="width:250px">UPLOAD</label>
+                                  <input
+                                  type="file"
+                                  accept="image/*"
+                                  style="display: none"
+                                  [id]="item.name"
+                                  [disabled]="disableAllUploadButtons"
+                                  (change)="uploadLogoImage($event.target.files,item.name,item.id)"
+                                /> 
+                               </div>
+                               <div style="width: 40px;" *ngIf="item.displayLoadingGif">
+                                  <img src="../../../assets/img/loading.gif"/>
+                                </div>
+                               <div *ngIf="i== imageUpload.length-1">
+                                  <button class="btn btn-outlined" (click)="addImage(item.id)" *ngIf="i<3">+</button>
+                               </div> 
+                               <div>
+                                  <button class="btn btn-outlined"  (click)="removeImage(item.id)">-</button>
+                               </div> 
+                              
+                             </div>
+                             <div *ngIf="item.displayFileName">
+                                <a href="#" (click)="stopDefault($event)" >{{item.fileName}}</a> 
+                                
+                                  
+                                 
+                             </div>
+                            
+                              
                            
                           </div>
+                         
+                        </div>
+                       
+                        <div class="input-group col-md-4" *ngIf="fileError"></div>
+                        <!-- <div class="input-group col-md-8" *ngIf="fileError">
+                          <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                        </div>  -->
+                      </div>    
+                    </div>
+  
+                    <div class="input-group col-md-4" *ngIf="fileError"></div>
+                    <!-- <div class="input-group col-md-8" *ngIf="fileError">
+                      <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                    </div>  -->
+                  </div>
+                  <!-- Logo Image Upload not Visible -->
+                  <div class="row" *ngFor="let item of imageUpload;let  i=index" style="display: none;">
+                    <div class="input-group col-md-5 pad-m-0" style="padding-top: 30px;position: relative !important">
+                      <div class="form-group">
+                        <div *ngIf="i == 0">
+                            <label *ngIf="orderForm.controls['type'].value != 'Print Only'">Logo/Image </label>
+                            <label *ngIf="orderForm.controls['type'].value == 'Print Only'"  [ngClass]="{'displayImageError': uploadedFileNames.displayReadOnlyError}">Print Ready File* </label>
+                        </div>
+                         <div style="display: flex;">
+                           <div>
+                              <label [for]="item.name" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
+                              <input
+                              type="file"
+                              accept="image/*"
+                              style="display: none"
+                              [id]="item.name"
+                              
+                              (change)="uploadLogoImage($event.target.files,item.name,item.id)"
+                            /> 
+                           </div>
+                           <div style="width: 40px;" *ngIf="item.displayLoadingGif">
+                              <img src="../../../assets/img/loading.gif"/>
+                            </div>
+                           <div>
+                              <button class="btn btn-outlined" (click)="addImage(item.id)" data-test="test">+</button>
+                           </div> 
+                           <div>
+                              <button class="btn btn-outlined"  (click)="removeImage(item.id)">-</button>
+                           </div> 
+                          
+                         </div>
+                         <div *ngIf="item.displayFileName">
+                            <a href="#" (click)="stopDefault($event)" >{{item.fileName}}</a> 
+                            
+                                <!-- <button class="btn btn-outlined" *ngIf="i == 0" (click)="removeImage(item.id)">-</button> -->
+                             
+                         </div>
+                        
+                          
+                       
+                      </div>
+                     
                     </div>
                    
-                </div> -->
-               
-                   <!-- Content Upload Code -->
-                <div class="row pad-m-0" *ngIf="displayDesigner" style="padding-top: 10px;">
-                  <div class="flex-control-40">
-                      <div class="form-group" >
-                      
-                          <label>Content*</label>
+                    <div class="input-group col-md-4" *ngIf="fileError"></div>
+                    <!-- <div class="input-group col-md-8" *ngIf="fileError">
+                      <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                    </div>  -->
+                  </div>                            
+                  <div class="row">
+                    
+                    <div class="input-group col-md-10 pad-m-t-10" style="position: relative !important">
+                      <div class="custom-file form-group">
+                          <label style="color:green;font-style: italic;">*For more files or formats, please email to allotted graphic designer </label>
                        
-                       <textarea formControlName='designcontent'  class="form-control" maxlength="250" placeholder="Description" (blur)="contextValidation()"  [ngClass]="{'displayError': (this.orderForm.controls['designcontent'].touched && uploadedFileNames.contentValidation == false)}">
-
-                       </textarea>
-                        
                        
-                      
+                      </div>
                      
                     </div>
-                    
+                    <div class="input-group col-md-4" *ngIf="fileError"></div>
+                    <!-- <div class="input-group col-md-8" *ngIf="fileError">
+                      <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+                    </div>  -->
                   </div>
-                  <div class="col-md-1 lableOR" style="padding-left: 2%;" *ngIf="displayDesigner">
-                    OR
-                  </div>
-                  <div class=" col-md-5 contentUploadBtn" *ngIf="displayDesigner">
-                    <div class="input-group" style="position: relative !important" style="display: flex;padding-top: 10px;">
+                 
+                      <!-- <div class="row" style="padding-left: 25%;" *ngIf="displayDesigner" style="display: none;">
+                        OR
+                      </div> -->
+                  <!-- <div class="row" *ngIf="displayDesigner">
+                    <div class="input-group col-md-8" style="padding-top: 30px;position: relative !important" style="display: flex;">
                       <div class="form-group">
                           
-                        <label for="contentUpload" class="btn btn-primary btn-block btn-outlined" style="width:200px">UPLOAD</label>
+                        <label for="contentUpload" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
                               <input
                               type="file"
                               
                               style="display: none"
                               id="contentUpload"
-                              [disabled]="disableAllUploadButtons"
+                              
                               (change)="uploadGSTCertificate($event.target.files,'content')"
                             /> 
                            
@@ -371,288 +579,84 @@
                     </div>
                    
                     <div class="input-group col-md-4" *ngIf="fileError"></div>
-                    <!-- <div class="input-group col-md-8" *ngIf="fileError">
-                      <span class="errorMessage" >File should of type doc,docx,pdf format.</span>
-                    </div>  -->
+                    
                     <div class="input-group col-md-4" *ngIf="fileError"></div>
-                    <!-- <div class="input-group col-md-8" *ngIf="fileError">
-                      <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
-                    </div>  -->
-                  </div>
-                  </div>
                    
-                <div class="row">   
-                  <!-- Reference Image Upload -->              
-                  <div class="input-group col-md-4 pad-m-b-0 pad-m-t-0" style="padding-top: 10px;position: relative !important" *ngIf="displayDesigner">
-                    <div class=" form-group">
-                      <div style="display: flex;">
-                        <div>
-                            <label [ngClass]="{'displayImageError': uploadedFileNames.displayErrororbutton}">Reference Image* </label>
-                            <label for="productUpload" class="btn btn-primary btn-block btn-outlined" style="width:250px" [ngClass]="{'displayBorderError': uploadedFileNames.displayErrororbutton}">UPLOAD</label>
-                            <input
-                            type="file"
-                            accept="image/*"
-                            style="display: none"
-                            id="productUpload"
-                            [disabled]="disableAllUploadButtons"
-                            (change)="uploadGSTCertificate($event.target.files,'product')"
-                          /> 
-                        </div>
-                        <div class="pad-m-0" style="width: 40px;margin-top: 40px;" *ngIf="uploadedFileNames.displayLoadingProductGif">
-                            <img src="../../../assets/img/loading.gif"/>
-                          </div>
-                      </div>
-                        
-                     
-                        
-                      <!-- <input
-                        type="file"
-                        accept="image.*"
-                        class="custom-file-input"
-                        id="inputGroupFile02"
-                        aria-describedby="inputGroupFileAddon02"
-                        (change)="uploadGSTCertificate($event.target.files,'product')"
-                      />
-                      
-                      > -->
-                      <a href="#" (click)="stopDefault($event)"    *ngIf="uploadedFileNames.IsproductRefUploaded"
-                      >{{uploadedFileNames.product}}</a>
-                      <!-- <div *ngIf="uploadedFileNames.displayErrororbutton" class="displayImageError">
-                        "Please Upload the reference Image"
-                      </div> -->
-                    </div>
-                   
-                  </div>
-                  <!-- Logo Image Upload --> 
-                  <div class="input-group  col-md-4">
-                    <div class="" *ngFor="let item of imageUpload;let  i=index">
-                      <div class="input-group pad-m-b-0 uploard-one col-md-5 pad-m-b-0 pad-m-t-10" style="padding-top: 10px;position: relative !important">
+                  </div> -->
+                  
+                  <div class="row" *ngIf="displayDesigner">
+                    <div class="flex-control5 flex-control5-mob" >
                         <div class="form-group">
-                          <div *ngIf="i == 0">
-                              <label *ngIf="orderForm.controls['type'].value != 'Print Only'">Logo/Image </label>
-                              <label *ngIf="orderForm.controls['type'].value == 'Print Only'"  [ngClass]="{'displayImageError': uploadedFileNames.displayReadOnlyError}">Print Ready File* </label>
-                          </div>
-                           <div style="display: flex;">
-                             <div>
-                                <label [for]="item.name" class="btn btn-primary btn-block btn-outlined" style="width:250px">UPLOAD</label>
-                                <input
-                                type="file"
-                                accept="image/*"
-                                style="display: none"
-                                [id]="item.name"
-                                [disabled]="disableAllUploadButtons"
-                                (change)="uploadLogoImage($event.target.files,item.name,item.id)"
-                              /> 
-                             </div>
-                             <div style="width: 40px;" *ngIf="item.displayLoadingGif">
-                                <img src="../../../assets/img/loading.gif"/>
-                              </div>
-                             <div *ngIf="i== imageUpload.length-1">
-                                <button class="btn btn-outlined" (click)="addImage(item.id)" *ngIf="i<3">+</button>
-                             </div> 
-                             <div>
-                                <button class="btn btn-outlined"  (click)="removeImage(item.id)">-</button>
-                             </div> 
-                            
-                           </div>
-                           <div *ngIf="item.displayFileName">
-                              <a href="#" (click)="stopDefault($event)" >{{item.fileName}}</a> 
-                              
-                                
-                               
-                           </div>
-                          
-                            
-                         
-                        </div>
-                       
-                      </div>
-                     
-                      <div class="input-group col-md-4" *ngIf="fileError"></div>
-                      <!-- <div class="input-group col-md-8" *ngIf="fileError">
-                        <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
-                      </div>  -->
-                    </div>    
-                  </div>
-
-                  <div class="input-group col-md-4" *ngIf="fileError"></div>
-                  <!-- <div class="input-group col-md-8" *ngIf="fileError">
-                    <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
-                  </div>  -->
-                </div>
-                <!-- Logo Image Upload not Visible -->
-                <div class="row" *ngFor="let item of imageUpload;let  i=index" style="display: none;">
-                  <div class="input-group col-md-5 pad-m-0" style="padding-top: 30px;position: relative !important">
-                    <div class="form-group">
-                      <div *ngIf="i == 0">
-                          <label *ngIf="orderForm.controls['type'].value != 'Print Only'">Logo/Image </label>
-                          <label *ngIf="orderForm.controls['type'].value == 'Print Only'"  [ngClass]="{'displayImageError': uploadedFileNames.displayReadOnlyError}">Print Ready File* </label>
-                      </div>
-                       <div style="display: flex;">
-                         <div>
-                            <label [for]="item.name" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
-                            <input
-                            type="file"
-                            accept="image/*"
-                            style="display: none"
-                            [id]="item.name"
-                            
-                            (change)="uploadLogoImage($event.target.files,item.name,item.id)"
-                          /> 
-                         </div>
-                         <div style="width: 40px;" *ngIf="item.displayLoadingGif">
-                            <img src="../../../assets/img/loading.gif"/>
-                          </div>
-                         <div>
-                            <button class="btn btn-outlined" (click)="addImage(item.id)" data-test="test">+</button>
-                         </div> 
-                         <div>
-                            <button class="btn btn-outlined"  (click)="removeImage(item.id)">-</button>
-                         </div> 
-                        
-                       </div>
-                       <div *ngIf="item.displayFileName">
-                          <a href="#" (click)="stopDefault($event)" >{{item.fileName}}</a> 
-                          
-                              <!-- <button class="btn btn-outlined" *ngIf="i == 0" (click)="removeImage(item.id)">-</button> -->
+                            <input type="checkbox" formControlName="sourceFileSpecs" />
                            
-                       </div>
+                           <label style="margin-left: 20px;">I want Source File</label>
+                          </div>
                       
-                        
-                     
                     </div>
-                   
-                  </div>
-                 
-                  <div class="input-group col-md-4" *ngIf="fileError"></div>
-                  <!-- <div class="input-group col-md-8" *ngIf="fileError">
-                    <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
-                  </div>  -->
-                </div>                            
-                <div class="row">
-                  
-                  <div class="input-group col-md-10 pad-m-t-10" style="position: relative !important">
-                    <div class="custom-file form-group">
-                        <label style="color:green;font-style: italic;">*For more files or formats, please email to allotted graphic designer </label>
-                     
-                     
+                    <div style="width: 5%;
+                    margin-top: -17px;
+                    margin-left: -65px;">
+                        <button type="button" class="btn btn-outline-secondary mr-2" placement="top" ngbTooltip="Source files are original files that can be edited or resized for future use. Without source file, it will be an image for current use">
+                            <i class="fa fa-question-circle fa-lg"></i>
+                          </button>
                     </div>
+                    <div class="flex-control5 flex-control5-mob" >
+                        <div class="form-group">
+                            <input type="checkbox" formControlName="professionDesigner" />
+                           
+                           <label style="margin-left: 20px;">I want Professional Design</label>
+                          </div>
+                          
+                      
+                    </div>
+                    <div style="width:2%;margin-top: -15px;
+                          margin-left: -15px;">
+                              <button type="button" class="btn btn-outline-secondary mr-2" placement="top" ngbTooltip="Professional Designs are a visual explanation of your concept specially made by experienced Graphic Designers which will definitely shoutout your product.">
+                                  <i class="fa fa-question-circle fa-lg"></i>
+                                </button>
+                          </div>
                    
-                  </div>
-                  <div class="input-group col-md-4" *ngIf="fileError"></div>
-                  <!-- <div class="input-group col-md-8" *ngIf="fileError">
-                    <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
-                  </div>  -->
+                   
                 </div>
-               
-                    <!-- <div class="row" style="padding-left: 25%;" *ngIf="displayDesigner" style="display: none;">
-                      OR
-                    </div> -->
-                <!-- <div class="row" *ngIf="displayDesigner">
-                  <div class="input-group col-md-8" style="padding-top: 30px;position: relative !important" style="display: flex;">
-                    <div class="form-group">
+                  <div class="row" >
+                      <div class="flex-control8" >
+                          <div class="form-group">
+                              <a style="margin-left: 3%;color:blue" disabled>Click here for {{ orderForm.controls['category'].value}} Blog</a>                                                 
+                            </div>
                         
-                      <label for="contentUpload" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
-                            <input
-                            type="file"
-                            
-                            style="display: none"
-                            id="contentUpload"
-                            
-                            (change)="uploadGSTCertificate($event.target.files,'content')"
-                          /> 
-                         
-                    </div>
-                    <div style="width: 40px;" *ngIf="uploadedFileNames.displayLoadingContentGif">
-                        <img src="../../../assets/img/loading.gif"/>
                       </div>
-                   <div>
-                      <button class="btn btn-outlined" (click)="clearContentImage()">-</button>
-                   </div>
-                  </div>
-                  <div class="input-group col-md-8">
-                      <a  href="#" (click)="stopDefault($event)" *ngIf="uploadedFileNames.IscontentUploaded" style="margin-bottom: 40px;"
-                      >{{uploadedFileNames.content}}</a>
+                     
                      
                   </div>
-                 
-                  <div class="input-group col-md-4" *ngIf="fileError"></div>
+    
                   
-                  <div class="input-group col-md-4" *ngIf="fileError"></div>
-                 
-                </div> -->
-                
-                <div class="row" *ngIf="displayDesigner">
-                  <div class="flex-control5 flex-control5-mob" >
-                      <div class="form-group">
-                          <input type="checkbox" formControlName="sourceFileSpecs" />
-                         
-                         <label style="margin-left: 20px;">I want Source File</label>
-                        </div>
-                    
-                  </div>
-                  <div style="width: 5%;
-                  margin-top: -17px;
-                  margin-left: -65px;">
-                      <button type="button" class="btn btn-outline-secondary mr-2" placement="top" ngbTooltip="Source files are original files that can be edited or resized for future use. Without source file, it will be an image for current use">
-                          <i class="fa fa-question-circle fa-lg"></i>
-                        </button>
-                  </div>
-                  <div class="flex-control5 flex-control5-mob" >
-                      <div class="form-group">
-                          <input type="checkbox" formControlName="professionDesigner" />
-                         
-                         <label style="margin-left: 20px;">I want Professional Design</label>
-                        </div>
+                  <div class="row">
+                      <div class="flex-controllabel" style="padding-top: 15px;display:none">
+                          <div class="form-group">
+                              <label><span style="font-size: large;font-weight: bold;">Total Cost:  &#x20B9; 10000 </span></label>
+                            </div>
                         
-                    
+                      </div>
+                      <div class="flex-controllabel" style="margin-left: 30%;">
+                          <div class="form-group">
+                              <!-- <button type="button" class="btn btn-primary" (click)="proceedOrder(summary)" [disabled]="!(orderForm.valid && Servicable)" >Proceed</button> -->
+                              <button type="button" class="btn btn-primary" *ngIf="displayeproceed" (click)="proceedOrder(summary)">Proceed</button>
+                              <button type="button" class="btn btn-primary" *ngIf="displayeproceed == false" (click)="editSpecification()">Edit</button>
+                            </div>
+                        
+                      </div>
+                     
+                     
                   </div>
-                  <div style="width:2%;margin-top: -15px;
-                        margin-left: -15px;">
-                            <button type="button" class="btn btn-outline-secondary mr-2" placement="top" ngbTooltip="Professional Designs are a visual explanation of your concept specially made by experienced Graphic Designers which will definitely shoutout your product.">
-                                <i class="fa fa-question-circle fa-lg"></i>
-                              </button>
-                        </div>
-                 
-                 
-              </div>
-                <div class="row" >
-                    <div class="flex-control8" >
-                        <div class="form-group">
-                            <a style="margin-left: 3%;color:blue" disabled>Click here for {{ orderForm.controls['category'].value}} Blog</a>                                                 
-                          </div>
-                      
-                    </div>
-                   
-                   
-                </div>
-  
-                
-                <div class="row">
-                    <div class="flex-controllabel" style="padding-top: 15px;display:none">
-                        <div class="form-group">
-                            <label><span style="font-size: large;font-weight: bold;">Total Cost:  &#x20B9; 10000 </span></label>
-                          </div>
-                      
-                    </div>
-                    <div class="flex-controllabel" style="margin-left: 30%;">
-                        <div class="form-group">
-                            <!-- <button type="button" class="btn btn-primary" (click)="proceedOrder(summary)" [disabled]="!(orderForm.valid && Servicable)" >Proceed</button> -->
-                            <button type="button" class="btn btn-primary" *ngIf="displayeproceed" (click)="proceedOrder(summary)">Proceed</button>
-                            <button type="button" class="btn btn-primary" *ngIf="displayeproceed == false" (click)="editSpecification()">Edit</button>
-                          </div>
-                      
-                    </div>
-                   
-                   
                 </div>
               </div>
             </div>
           </div>
         </div>
        
+       
         <!-- Container for Meeting Slot -->
-        <!-- <div class="container shadow p-3 mb-5 bg-white rounded" *ngIf="displayMeetings"> -->
+       
         <div class="container shadow p-3 mb-5 bg-white rounded" style="display:none" #mslot id="mslot">
             <div class="or-formcontrol">
               <h3 class="display-label">
@@ -713,173 +717,205 @@
           </div>
           <div #summary></div>
         <!-- Container for Order Review Desgin and Design and Print-->
-        <div [style.visibility]="displaysummary ? 'visible': 'hidden'"
-        *ngIf="orderForm.controls['type'].value != 'Print Only'"  >
-          <div class="container shadow p-3 mb-5 bg-white rounded" >
-            <div class="or-formcontrol">
-              <h3 class="display-label">
-                 Order Summary
-              </h3>
-              
-          
-            </div>
-            <div class="or-formcontrol flex-container">
-              <div class="flex-control2">
-                <img [src]="selectedProductImage" />
-               
+        <div *ngIf="displaysummary">
+          <div 
+          *ngIf="orderForm.controls['type'].value != 'Print Only'"  >
+            <div class="container shadow p-3 mb-5 bg-white rounded" >
+              <div class="or-formcontrol">
+                <h3 class="display-label">
+                   Order Summary
+                </h3>
+                
+            
               </div>
-              <div class=" flex-control9" style="margin-left: 2%;">
-                  <div class="row row-two">
-                    <div class="col-md-6">
+              <div class="or-formcontrol flex-container">
+                <div class="flex-control2">
+                  <img [src]="selectedProductImage" />
+                 
+                </div>
+                <div class=" flex-control9" style="margin-left: 2%;">
+                    <div class="row row-two">
+                      <div class="col-md-6">
+                        <div class="flex-control-50" >
+                          <div class="form-group">
+                              <label style="font-size: 18px;font-weight:700;">{{orderForm.controls['type'].value}} - {{orderForm.controls['category'].value}}</label>                   
+                              <hr class="hrColor"/>        
+                             
+                              
+                             
+                            </div>
+                        
+                      </div>
                       <div class="flex-control-50" >
                         <div class="form-group">
-                            <label style="font-size: 18px;font-weight:700;">{{orderForm.controls['type'].value}} - {{orderForm.controls['category'].value}}</label>                   
-                            <hr class="hrColor"/>        
-                           
+                            <label style="font-size: 16px;font-weight:500;">({{orderForm.controls['subCategory'].value}}) - ({{orderForm.controls['orientation'].value}})</label> 
                             
                            
                           </div>
                       
                     </div>
-                    <div class="flex-control-50" >
+                    <div class="flex-control-50">
                       <div class="form-group">
-                          <label style="font-size: 16px;font-weight:500;">({{orderForm.controls['subCategory'].value}}) - ({{orderForm.controls['orientation'].value}})</label> 
+                          <label style="font-size: 14px;font-weight:bold;" *ngIf="orderForm.controls['quantities'].value == 0">Size: {{orderForm.controls['size'].value}}
+  
+                         
+                          </label> 
+                          <label style="font-size: 14px;font-weight:bold;" *ngIf="orderForm.controls['quantities'].value > 0">Size: {{orderForm.controls['size'].value}},   Quantity:  {{orderForm.controls['quantities'].value}}, GSM: {{orderForm.controls['GSM'].value}}
+  
+                          
+                          </label> 
                           
                          
                         </div>
-                    
+                        
                   </div>
                   <div class="flex-control-50">
                     <div class="form-group">
-                        <label style="font-size: 14px;font-weight:bold;" *ngIf="orderForm.controls['quantities'].value == 0">Size: {{orderForm.controls['size'].value}}
-
-                       
-                        </label> 
-                        <label style="font-size: 14px;font-weight:bold;" *ngIf="orderForm.controls['quantities'].value > 0">Size: {{orderForm.controls['size'].value}},   Quantity:  {{orderForm.controls['quantities'].value}}, GSM: {{orderForm.controls['GSM'].value}}
-
-                        
-                        </label> 
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Billing Name(optional)" formControlName="BillingName" />
+                           
+                          
+                         </div>
                         
                        
                       </div>
-                      
+                     
                 </div>
                 <div class="flex-control-50">
                   <div class="form-group">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Billing Name(optional)" formControlName="BillingName" />
-                         
-                        
-                       </div>
-                      
+                   <input type="text" class="form-control" placeholder="GST Number(optional)" formControlName="GSTNumber" style="text-transform:uppercase;" maxlength="15"/>
+                   <span
+                   class="errorMessage"
+                   *ngIf="
+                     (orderForm.controls['GSTNumber'].dirty ||
+                     orderForm.controls['GSTNumber'].touched) &&
+                     orderForm.controls['GSTNumber'].invalid &&
+                     orderForm.controls['GSTNumber'].errors.invalidPattern
+                   "
+                 >
+                   *GST# is incorrect.
+                 </span>
                      
                     </div>
                    
               </div>
               <div class="flex-control-50">
-                <div class="form-group">
-                 <input type="text" class="form-control" placeholder="GST Number(optional)" formControlName="GSTNumber" style="text-transform:uppercase;" maxlength="15"/>
-                 <span
-                 class="errorMessage"
-                 *ngIf="
-                   (orderForm.controls['GSTNumber'].dirty ||
-                   orderForm.controls['GSTNumber'].touched) &&
-                   orderForm.controls['GSTNumber'].invalid &&
-                   orderForm.controls['GSTNumber'].errors.invalidPattern
-                 "
-               >
-                 *GST# is incorrect.
-               </span>
+                <div class="form-group" style="color:green" *ngIf="orderPrice.deliveryDays>0">
+                    Post design, Expected Delivery in {{orderPrice.deliveryDays}} Days
+                    
                    
                   </div>
                  
             </div>
             <div class="flex-control-50">
-              <div class="form-group" style="color:green" *ngIf="orderPrice.deliveryDays>0">
-                  Post design, Expected Delivery in {{orderPrice.deliveryDays}} Days
+              <div style="display: flex;" *ngIf="displayDesignOnly">
+                <div>
+                    <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tDesign">
+                </div>
+               <div>
+                  <!-- Designers -->
+                  <label for="checkbox1" class="checkboxLabel" style="color: black;padding-left: 20px;">
+                      I have read and agree to the <a href="#" (click)="openTermCondition('designer',$event)">
+                          <span ><u style="color:blue">Terms and Conditons</u></span> 
+                        </a>  
+                </label>
+               </div>
+              
+            </div>
+                 
+            </div>
+            <div class="flex-control-50">
+              <div class="form-group">
+                 <button class="btn btn-primary" (click)="checkout()" style="display: none;">Proceed</button>
                   
                  
                 </div>
                
-          </div>
-          <div class="flex-control-50">
-            <div style="display: flex;" *ngIf="displayDesignOnly">
-              <div>
-                  <input id="checkbox1" type="checkbox" class="checkboxAcceptelement" formControlName="tDesign">
-              </div>
-             <div>
-                <!-- Designers -->
-                <label for="checkbox1" class="checkboxLabel" style="color: black;padding-left: 20px;">
-                    I have read and agree to the <a href="#" (click)="openTermCondition('designer',$event)">
-                        <span ><u style="color:blue">Terms and Conditons</u></span> 
-                      </a>  
-              </label>
-             </div>
-            
-          </div>
-               
-          </div>
-          <div class="flex-control-50">
-            <div class="form-group">
-               <button class="btn btn-primary" (click)="checkout()" style="display: none;">Proceed</button>
-                
-               
-              </div>
-             
-                       
+                         
+                      </div>
                     </div>
-                  </div>
-                    <div class="col-md-6">
+                      <div class="col-md-6">
+                        <div class="flex-control3 price-margin" >
+                          <div class="form-group">
+                              <label style="font-size: 18px;font-weight:700;">Price Summary</label>                   
+                              <hr class="hrColor"/>        
+                             
+                              
+                             
+                            </div>
+                        
+                      </div>
                       <div class="flex-control3 price-margin" >
-                        <div class="form-group">
-                            <label style="font-size: 18px;font-weight:700;">Price Summary</label>                   
-                            <hr class="hrColor"/>        
-                           
-                            
+                        <div class="form-group" style="display: flex;">
+                            <div class="flex-controllabel">
+                                <label style="font-size: 14px;font-weight:bold;">Price: </label> 
+                            </div>
+                              <div class="flex-controlPrice">
+                                  <label>
+                                      &#x20B9;  {{this.orderPrice.price -(this.orderPrice.sourceFileFees + this.orderPrice.professiondesignerFees)}}
+                                  </label>
+                              </div>
                            
                           </div>
+                         
                       
                     </div>
                     <div class="flex-control3 price-margin" >
-                      <div class="form-group" style="display: flex;">
+                      <div class="form-group" style="display: flex;" >
+                        <div class="flex-controllabel">
+                            <label style="font-size: 14px;font-weight:bold;">Source File: </label> 
+                        </div>
+                          <div class="flex-controlPrice">
+                              <label>
+                                  &#x20B9; {{this.orderPrice.sourceFileFees}}
+                              </label>
+                          </div>
+                        
+                         
+                        </div>
+                       
+                        
+                  </div>
+                    <!-- Illustration fees add here -->
+                    <div class="flex-control3 price-margin">
+                      <div class="form-group" style="display: flex;" >
                           <div class="flex-controllabel">
-                              <label style="font-size: 14px;font-weight:bold;">Price: </label> 
+                              <label style="font-size: 14px;font-weight:bold;">Professional Design : </label> 
                           </div>
                             <div class="flex-controlPrice">
                                 <label>
-                                    &#x20B9;  {{this.orderPrice.price -(this.orderPrice.sourceFileFees + this.orderPrice.professiondesignerFees)}}
+                                    &#x20B9; {{this.orderPrice.professiondesignerFees}}
                                 </label>
                             </div>
                          
                         </div>
-                       
-                    
+                        <hr class="hrColor"/>
+                        
                   </div>
-                  <div class="flex-control3 price-margin" >
-                    <div class="form-group" style="display: flex;" >
-                      <div class="flex-controllabel">
-                          <label style="font-size: 14px;font-weight:bold;">Source File: </label> 
-                      </div>
-                        <div class="flex-controlPrice">
-                            <label>
-                                &#x20B9; {{this.orderPrice.sourceFileFees}}
-                            </label>
-                        </div>
-                      
-                       
-                      </div>
-                     
-                      
-                </div>
-                  <!-- Illustration fees add here -->
-                  <div class="flex-control3 price-margin">
-                    <div class="form-group" style="display: flex;" >
+                  <div class="flex-control3 price-margin" style="display:none">
+                    <div class="form-group" style="display: flex;">
                         <div class="flex-controllabel">
-                            <label style="font-size: 14px;font-weight:bold;">Professional Design : </label> 
+                            <label style="font-size: 14px;font-weight:bold;">GST: </label> 
                         </div>
                           <div class="flex-controlPrice">
                               <label>
-                                  &#x20B9; {{this.orderPrice.professiondesignerFees}}
+                                  &#x20B9; {{this.orderPrice.GST}}
+                              </label>
+                          </div>
+                       
+                      </div>
+                      <hr class="hrColor">
+                      
+                </div>
+                  <!-- Total price Goes Here -->
+                  <div class="flex-control3 price-margin">
+                    <div class="form-group" style="display: flex;">
+                        <div class="flex-controllabel">
+                            <label style="font-size: 14px;font-weight:bold;">Total: </label> 
+                        </div>
+                          <div class="flex-controlPrice">
+                              <label>
+                                  &#x20B9; {{orderPrice.Total-this.orderPrice.GST}} 
                               </label>
                           </div>
                        
@@ -887,140 +923,112 @@
                       <hr class="hrColor"/>
                       
                 </div>
-                <div class="flex-control3 price-margin" style="display:none">
-                  <div class="form-group" style="display: flex;">
-                      <div class="flex-controllabel">
-                          <label style="font-size: 14px;font-weight:bold;">GST: </label> 
-                      </div>
-                        <div class="flex-controlPrice">
-                            <label>
-                                &#x20B9; {{this.orderPrice.GST}}
-                            </label>
-                        </div>
-                     
-                    </div>
-                    <hr class="hrColor">
-                    
-              </div>
-                <!-- Total price Goes Here -->
-                <div class="flex-control3 price-margin">
-                  <div class="form-group" style="display: flex;">
-                      <div class="flex-controllabel">
-                          <label style="font-size: 14px;font-weight:bold;">Total: </label> 
-                      </div>
-                        <div class="flex-controlPrice">
-                            <label>
-                                &#x20B9; {{orderPrice.Total-this.orderPrice.GST}} 
-                            </label>
-                        </div>
-                     
-                    </div>
-                    <hr class="hrColor"/>
-                    
-              </div>
-                 <!-- Detailed pricing -->
-                 <div class="flex-control-3" style="margin-left: 3%;">
-                  <div class="form-group" style="color:green;">
-                      <!-- <button type="button" class="btn btn-link" (click)="openPriceDescription()">Detailed Pricing</button> -->
-                     <a href="#" (click)="openPriceDescription($event)"><span ><u style="color:blue">Detailed Pricing</u></span></a>
-                      
-                      
-                     
-                    </div>
-                   
-              </div>
-              <div class="flex-control-3 flex-control-3-mob" style="margin-left: 3%">
-                <div class="" *ngIf="displayprinter">
-                    <div style="display: flex;">
-                        <div class="form-group">
-                            <input  type="checkbox" class="" formControlName="tPrinter">
-                        </div>
-                        <div>
-                            <label  class="" style="padding-left: 20px;">
-                                I have read and agree to the  <a href="#" (click)="openTermCondition('Printer',$event)">
-                                    <span ><u style="color:blue">Terms and Conditons</u></span> 
-                                  </a>                                  
-                          </label>
-                        </div>
-                      </div>
-                    <div style="display: flex;">
-                        <div class="form-group">
-                            <input  type="checkbox" class="" formControlName="tPrinterPaperSize" [disabled]="!displayprinter">
-                        </div>
-                        <div class="form-group">
-                            <label  class="" style="padding-left: 20px;">
-                               
-                                  Colors of images on screen and their printed output may vary from 5% to 10%
-                          </label>
-                        </div>
-                      </div>
-                      <div style="display: flex;">
-                        <div>
-                            <input type="checkbox" class="" formControlName="tPrinterGSM" [disabled]="!displayprinter">
-                        </div>
-                        <div>
-                            <label  class="" style="padding-left: 20px;">
-                               
-                                  Thickness (GSM) of paper may vary by 5%
-                          </label>
-                        </div>
-                      </div>
-                 
-               
-                 
-              </div>
-                   
-              </div>
-              <div class="flex-control3 price-margin">
-                <div class="form-group">
-                   <button class="btn btn-primary" style="margin-left: 18%;" (click)="addToCart()">Proceed</button>
-                    
-                   
-                  </div>
-                 <span style="color:green" *ngIf="displaycartMessage">Item Added to Cart</span>
-            </div>
-              
-                      
-                    </div>
-                   
-                     
-                    
-                     
-                
-              
-             
-                
-             
-                <!-- <div class="row">
-                  <div class="flex-control-50" style="visibility:hidden;">
-                      <div class="form-group">
-                      Fake data
-                         
-                        </div>
+                   <!-- Detailed pricing -->
+                   <div class="flex-control-3" style="margin-left: 3%;">
+                    <div class="form-group" style="color:green;">
+                        <!-- <button type="button" class="btn btn-link" (click)="openPriceDescription()">Detailed Pricing</button> -->
+                       <a href="#" (click)="openPriceDescription($event)"><span ><u style="color:blue">Detailed Pricing</u></span></a>
+                        
+                        
                        
-                  </div>
-                  
-
+                      </div>
+                     
+                </div>
+                <div class="flex-control-3 flex-control-3-mob" style="margin-left: 3%">
+                  <div class="" *ngIf="displayprinter">
+                      <div style="display: flex;">
+                          <div class="form-group">
+                              <input  type="checkbox" class="" formControlName="tPrinter">
+                          </div>
+                          <div>
+                              <label  class="" style="padding-left: 20px;">
+                                  I have read and agree to the  <a href="#" (click)="openTermCondition('Printer',$event)">
+                                      <span ><u style="color:blue">Terms and Conditons</u></span> 
+                                    </a>                                  
+                            </label>
+                          </div>
+                        </div>
+                      <div style="display: flex;">
+                          <div class="form-group">
+                              <input  type="checkbox" class="" formControlName="tPrinterPaperSize" [disabled]="!displayprinter">
+                          </div>
+                          <div class="form-group">
+                              <label  class="" style="padding-left: 20px;">
+                                 
+                                    Colors of images on screen and their printed output may vary from 5% to 10%
+                            </label>
+                          </div>
+                        </div>
+                        <div style="display: flex;">
+                          <div>
+                              <input type="checkbox" class="" formControlName="tPrinterGSM" [disabled]="!displayprinter">
+                          </div>
+                          <div>
+                              <label  class="" style="padding-left: 20px;">
+                                 
+                                    Thickness (GSM) of paper may vary by 5%
+                            </label>
+                          </div>
+                        </div>
+                   
                  
-              </div> -->
-             
-               <!-- Terms and conditions -->
-             
-                  
-
                    
                 </div>
+                     
+                </div>
+                <div class="flex-control3 price-margin">
+                  <div class="form-group">
+                     <button class="btn btn-primary" style="margin-left: 18%;" (click)="addToCart()">Proceed</button>
+                      
+                     
+                    </div>
+                   <span style="color:green" *ngIf="displaycartMessage">Item Added to Cart</span>
+              </div>
                 
+                        
+                      </div>
+                     
+                       
+                      
+                       
+                  
                 
+               
+                  
+               
+                  <!-- <div class="row">
+                    <div class="flex-control-50" style="visibility:hidden;">
+                        <div class="form-group">
+                        Fake data
+                           
+                          </div>
+                         
+                    </div>
+                    
   
+                   
+                </div> -->
                
+                 <!-- Terms and conditions -->
                
+                    
+  
+                     
+                  </div>
+                  
+                  
+    
+                 
+                 
+                </div>
               </div>
             </div>
           </div>
         </div>
+       
         <!-- Container for Order Review Print Only-->
-        <div [style.visibility]="displaysummary ? 'visible': 'hidden'" 
+        <div *ngIf="displaysummary">
+          <div 
         *ngIf="orderForm.controls['type'].value == 'Print Only'" >
           <div class="container shadow p-3 mb-5 bg-white rounded" >
             <div class="or-formcontrol">
@@ -1294,6 +1302,8 @@
             </div>
           </div>
         </div>
+        </div>
+        
        
       </form>
     </div>

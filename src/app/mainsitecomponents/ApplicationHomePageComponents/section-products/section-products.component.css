@@ -26,8 +26,11 @@
     border-right: 0x solid;
   }
   .menuItemDD :hover {
-    background-color: blue !important;
+    background-color: lightskyblue !important;
     cursor: pointer;
+  }
+  .dropdown-item :hover {
+    color: white !important;
   }
 }
 @media (max-width: 778px) {

@@ -106,7 +106,7 @@ export class PrintersComponent implements OnInit {
   }
 
   checkVendorApprovedByAdmin() {
-    this.spinnerService.show();
+    //this.spinnerService.show();
     let email = localStorage.getItem("email");
     this.service.FetchDashboard(email).subscribe(
       data => {
@@ -124,7 +124,7 @@ export class PrintersComponent implements OnInit {
             this.data.type = "leftNav";
             this.resetFormSubject.next(this.data);
           }
-          this.spinnerService.hide();
+          //this.spinnerService.hide();
           this.helper.navigateToPath("/printers/profile");
         }
       },

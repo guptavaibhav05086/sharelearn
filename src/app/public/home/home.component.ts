@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           console.log("Navigation End");
-          debugger;
+          //debugger;
           console.log(this.router.url);
           let url = this.router.url.split("?")[0];
           if (url == "/" || url == "/homePage") {
