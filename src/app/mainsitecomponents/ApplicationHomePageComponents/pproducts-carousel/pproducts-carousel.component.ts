@@ -9,8 +9,8 @@ import { SliderData } from "src/app/Models/slider-data";
 })
 export class PproductsCarouselComponent implements OnInit {
   products: any;
-  slide2=2;
-  slide4=4;
+  slide2 = 2;
+  slide4 = 4;
   images = [];
   displayC = false;
   constructor(private admin: AdminService) {}
@@ -23,19 +23,20 @@ export class PproductsCarouselComponent implements OnInit {
     //this.initiateCarousel(data);
     this.admin.getProducts().subscribe(
       data => {
-        ////debugger;
+        debugger;
         this.products = data["products"];
         this.products.map(item => {
-          if(item.IsDisabled == false){
+          if (item.IsDisabled == false) {
             this.images.push({
               image:
                 item.productImage == ""
                   ? "../../../assets/StudentDashboard/img/download.jpg"
                   : item.productImage,
-              name: item.value
+              name: item.value,
+              productId: item.key
             });
           }
-          
+
           this.displayC = true;
         });
         console.log(this.products);

@@ -126,11 +126,11 @@
                                 aria-labelledby="navbarDropdownMenuLink" style="
                     margin-left: -110px; 
                     margin-top: -20px;">
-                                <div class="menuItemDD" *ngFor="let menuItem of products">
+                                <!-- <div class="menuItemDD" *ngFor="let menuItem of products">
                                     <a class="dropdown-item"
                                         (click)="navigateToProduct(menuItem,$event)">{{menuItem}}</a>
-                                </div>
-                                <!-- <div class="menuItemDD">
+                                </div> -->
+                                <div class="menuItemDD">
                                     <a class="dropdown-item" href="#"
                                         (click)="navigateToProduct('Flyers',$event)">Flyers</a>
                                 </div>
@@ -152,7 +152,10 @@
                                 <div class="menuItemDD">
                                     <a class="dropdown-item"
                                         (click)="navigateToProduct('Stationaries',$event)">Stationaries </a>
-                                </div> -->
+                                </div>
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item" (click)="navigateToProduct('Others',$event)">Others </a>
+                                </div>
 
 
 

@@ -31,6 +31,7 @@ export class Productlist {
   public meetingDuration: number;
   public profDesignerFee: number;
   public sourceFileFees: number;
+  public imageUpload: any;
 }
 export class ProductprintPrice {
   public Id: number;

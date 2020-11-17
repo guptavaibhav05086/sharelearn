@@ -15,7 +15,7 @@
       <h4>Slide {{index}}</h4>
     </div> -->
       <div class="carousel-text">
-        <a href="#">{{slide.name}}</a>
+        <a href="#" (click)="openImageUploads($event,slide.productId,slide.name)">{{slide.name}}</a>
       </div>
     </slide>
   </carousel>

@@ -132,6 +132,19 @@ export class CustomerService {
       this.login.getAuthHeader()
     );
   }
+  GetProductImages(proId) {
+    ////debugger;
+    let url = `${environment.baseUrl}${environment.getproductImages}`.replace(
+      "$proId",
+      proId
+    );
+    //isAllOrdersRequired
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
   downloadOrderFiles(filename) {
     let url = `${environment.baseUrl}${environment.fetchongoingorderfilesCustomer}`.replace(
       "$filename",

@@ -1,0 +1,13 @@
+.gallery {
+  text-align: center;
+  margin-top: 20px;
+  font-family: "Maven-pro";
+  font-size: large;
+}
+.imgData {
+  height: 400px;
+  width: 400px;
+}
+.btnRow {
+  text-align: center;
+}

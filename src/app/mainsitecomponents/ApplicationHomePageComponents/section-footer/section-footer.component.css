@@ -17,6 +17,12 @@
   font-family: "Maven pro";
   font-size: 18px;
 }
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1340px;
+  }
+}
+
 @media (min-width: 768px) {
   .container {
     width: 100%;
@@ -46,7 +52,7 @@
   }
   .dcol-5 {
     flex-wrap: nowrap;
-    width: 50%;
+    width: 100%;
   }
   .dcol-6 {
     flex-wrap: nowrap;
@@ -67,7 +73,7 @@
   }
   .alingdiv {
     padding-top: 60px;
-    padding-left: 9%;
+    /* padding-left: 9%; */
   }
   .imgEditpenposition {
     padding-top: 30px;

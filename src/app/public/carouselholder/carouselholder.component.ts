@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { OwlOptions } from "ngx-owl-carousel-o";
 import { SliderData } from "src/app/Models/slider-data";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ProductImgesComponent } from "../../public/product-imges/product-imges.component";
 @Component({
   selector: "app-carouselholder",
   templateUrl: "./carouselholder.component.html",
@@ -59,7 +61,7 @@ export class CarouselholderComponent implements OnInit {
 
     nav: false
   };
-  constructor() {}
+  constructor(private modalService: NgbModal) {}
 
   ngOnInit() {
     // //debugger;
@@ -70,5 +72,14 @@ export class CarouselholderComponent implements OnInit {
       let obj = { image: item.image };
       this.slides.push(obj);
     });
+  }
+  openImageUploads(event, id, name) {
+    event.preventDefault();
+    debugger;
+    var modelRef = this.modalService.open(ProductImgesComponent, {
+      size: "lg"
+    });
+    modelRef.componentInstance.prodId = id;
+    modelRef.componentInstance.prodName = name;
   }
 }

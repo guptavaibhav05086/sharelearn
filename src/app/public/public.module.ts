@@ -8,7 +8,8 @@ import { ErrorMessageComponent } from "./error-message/error-message.component";
 import { VerifyEmailComponent } from "./verify-email/verify-email.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { TopnavuserloginComponent } from "./topnavuserlogin/topnavuserlogin.component";
-
+import { ProductImgesComponent } from "./product-imges/product-imges.component";
+import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [
     FooterComponent,
@@ -16,9 +17,10 @@ import { TopnavuserloginComponent } from "./topnavuserlogin/topnavuserlogin.comp
     ErrorMessageComponent,
     VerifyEmailComponent,
     PageNotFoundComponent,
-    TopnavuserloginComponent
+    TopnavuserloginComponent,
+    ProductImgesComponent
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, NgxSpinnerModule],
   exports: [
     FooterComponent,
     ComingsoonComponent,

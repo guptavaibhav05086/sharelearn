@@ -9,6 +9,7 @@ import { ActiveOrdersComponent } from "../active-orders/active-orders.component"
 import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
 import { LoginService } from "src/app/services/login.service";
 import { CustomerLoginComponent } from "src/app/auth/customer-login/customer-login.component";
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: "app-ongoing-orders",
   templateUrl: "./ongoing-orders.component.html",
@@ -42,14 +43,21 @@ export class OngoingOrdersComponent implements OnInit {
   }
   fetchOngoingOrder() {
     let customerEmail = localStorage.getItem("email");
+    this.spinner.show();
     //let designerEmail = "guptavaibhav.05086@gmail.com";
     this.customerService
       .FetchOngoingCustomerOrder(customerEmail, false)
-      .subscribe(data => {
-        ////debugger;
-        this.ongoingOrderData = data;
-        console.log(data);
-      });
+      .subscribe(
+        data => {
+          ////debugger;
+          this.ongoingOrderData = data;
+          this.spinner.hide();
+          console.log(data);
+        },
+        err => {
+          this.spinner.hide();
+        }
+      );
   }
 
   gridApi: any;
@@ -87,7 +95,8 @@ export class OngoingOrdersComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private modalService: NgbModal,
-    private login: LoginService
+    private login: LoginService,
+    private spinner: NgxSpinnerService
   ) {
     this.gridOptions = <GridOptions>{
       getRowStyle: this.checkRow.bind(this)
@@ -120,7 +129,16 @@ export class OngoingOrdersComponent implements OnInit {
       };
     }
   }
-
+  displayDeatils(item) {
+    let modelref = this.modalService.open(ActiveOrdersComponent, {
+      centered: true
+    });
+    modelref.componentInstance.data = item;
+    modelref.componentInstance.isAllOrders = true;
+    modelref.result.then(data => {
+      this.fetchOngoingOrder();
+    });
+  }
   openOrderDetails(e) {
     let modelref = this.modalService.open(ActiveOrdersComponent, {
       centered: true,

@@ -370,5 +370,6 @@ button.calendar:active {
   .img-mobile {
     width: auto !important;
     height: auto !important;
+    margin-left: 5%;
   }
 }

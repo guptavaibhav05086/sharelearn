@@ -1,3 +1,13 @@
 .cart {
   background-color: transparent !important;
 }
+@media (max-width: 778px) {
+  .display-grid {
+    display: none;
+  }
+}
+@media (min-width: 778px) {
+  .display-table {
+    display: none;
+  }
+}

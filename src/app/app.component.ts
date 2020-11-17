@@ -1,4 +1,4 @@
-import { Component, HostListener } from "@angular/core";
+import { Component, HostListener, Inject } from "@angular/core";
 
 import {
   Event,
@@ -13,6 +13,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { delay } from "rxjs/operators";
 import { AdminService } from "./services/admin.service";
 import { CustomerService } from "./services/customer.service";
+import { DOCUMENT } from "@angular/common";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -25,35 +26,43 @@ export class AppComponent {
   ngOnInit() {}
   @HostListener("document:click", ["$event"])
   handleMenuToggle(event) {
-    debugger;
-    var clickover = event.target;
-    var _opened = document
-      .getElementById("navbarNavDropdownTop")
-      .classList.contains("show");
-    if (clickover.classList.contains("nav-link")) {
-      return;
-    }
-    if (_opened === true) {
-      //document.getElementById(".navbar-toggler").click();
-      document.getElementById("navbarNavDropdownTop").classList.remove("show");
-    }
-    // if(clickover.classList.contains('nav-link')){
-    //   return;
-    // }
-    // else{
-    //   if (_opened === true) {
-    //     //document.getElementById(".navbar-toggler").click();
-    //     document
-    //     .getElementById("navbarNavDropdownTop")
-    //     .classList.remove('show');
-    //   }
-    // }
+    try {
+      debugger;
+      var clickover = event.target;
+      var _opened = document
+        .getElementById("navbarNavDropdownTop")
+        .classList.contains("show");
+      if (
+        clickover.classList.contains("nav-link") ||
+        clickover.classList.contains("navbar-toggler-icon")
+      ) {
+        return;
+      }
+      if (_opened === true) {
+        //document.getElementById(".navbar-toggler").click();
+        document
+          .getElementById("navbarNavDropdownTop")
+          .classList.remove("show");
+      }
+      // if(clickover.classList.contains('nav-link')){
+      //   return;
+      // }
+      // else{
+      //   if (_opened === true) {
+      //     //document.getElementById(".navbar-toggler").click();
+      //     document
+      //     .getElementById("navbarNavDropdownTop")
+      //     .classList.remove('show');
+      //   }
+      // }
+    } catch (error) {}
   }
 
   constructor(
     private router: Router,
     private spinnerService: NgxSpinnerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    @Inject(DOCUMENT) private document: Document
   ) {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
@@ -69,8 +78,19 @@ export class AppComponent {
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           //this.spinnerService.hide();
+          debugger;
           console.log("Navigation End");
           this.loading = false;
+          let url = this.router.url.split("?")[0];
+          if (url.includes("printers") || url.includes("designer")) {
+            this.document
+              .getElementById("footer")
+              .classList.add("footermargin");
+          } else {
+            this.document
+              .getElementById("footer")
+              .classList.remove("footermargin");
+          }
           break;
         }
         case event instanceof NavigationStart: {

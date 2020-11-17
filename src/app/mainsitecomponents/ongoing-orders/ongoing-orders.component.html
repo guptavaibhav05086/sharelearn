@@ -10,10 +10,10 @@
     </ag-grid-angular>
 </div>
 
-<div class="row" style="margin-top: 80px;margin-left: 0px;
+<div class="row display-grid" style="margin-top: 80px;margin-left: 0px;
 margin-right: 0px;">
     <div class="col-md-12">
-        <div class="card " style="background-color: transparent !important;">
+        <div class="card " style="background-color: transparent !important;z-index: -1;">
             <div class="card-header ">
                 <h5 class="card-title" style="text-align: center;
                 font-size: 24px;
@@ -47,3 +47,55 @@ margin-right: 0px;">
         </div>
     </div>
 </div>
+
+<div class="row display-table" style="margin-left: 0px;">
+    <table class="table table-striped">
+        <tr>
+            <th>Order#</th>
+            <th>Meeting slot</th>
+            <th>Order Details</th>
+        </tr>
+        <tr *ngFor="let item of ongoingOrderData">
+            <td>{{item.OrderId}}</td>
+            <td>{{item.meetingTime}}</td>
+            <td><button class="btn btn-primary" (click)="displayDeatils(item)">Details</button></td>
+        </tr>
+
+    </table>
+</div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+    <p style="color: white">Please Wait.</p>
+</ngx-spinner>
+<!-- <div class="row display-table">
+    <div class="col-md-12 py-4 text-center">
+        <div class="card ">
+            <div class="card-header ">
+                <h1>Accept New Orders</h1>
+            </div>
+            <div class="card-body ">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 py-4">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Order Id</th>
+                                    <th>Meeting Slot</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of ongoingOrderData">
+                                    <td>{{item.OrderId}}</td>
+                                    <td>{{item.OrdemeetingTimerId}}</td>
+                                    <td><button class="btn btn-primary" (click)="displayDeatils(item)">Details</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div> -->

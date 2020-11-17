@@ -7,7 +7,7 @@ import { CustomerService } from "../../services/customer.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ActiveOrdersComponent } from "../active-orders/active-orders.component";
 import { HelperService } from "src/app/services/helper.service";
-
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: "app-all-orders",
   templateUrl: "./all-orders.component.html",
@@ -26,14 +26,21 @@ export class AllOrdersComponent implements OnInit {
   }
   fetchOngoingOrder() {
     let customerEmail = localStorage.getItem("email");
+    this.spinner.show();
     //let designerEmail = "guptavaibhav.05086@gmail.com";
     this.customerService
       .FetchOngoingCustomerOrder(customerEmail, true)
-      .subscribe(data => {
-        ////debugger;
-        this.ongoingOrderData = data;
-        console.log(data);
-      });
+      .subscribe(
+        data => {
+          ////debugger;
+          this.spinner.hide();
+          this.ongoingOrderData = data;
+          console.log(data);
+        },
+        err => {
+          this.spinner.hide();
+        }
+      );
   }
 
   gridApi: any;
@@ -57,7 +64,8 @@ export class AllOrdersComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private modalService: NgbModal,
-    private _helper: HelperService
+    private _helper: HelperService,
+    private spinner: NgxSpinnerService
   ) {
     this.gridOptions = <GridOptions>{
       getRowStyle: this.checkRow.bind(this)
@@ -99,6 +107,17 @@ export class AllOrdersComponent implements OnInit {
     modelref.componentInstance.isAllOrders = true;
     modelref.componentInstance.displayOnGoingOrdersElement = false;
     //modelref.componentInstance.userFinishedOrders=
+    modelref.result.then(data => {
+      this.fetchOngoingOrder();
+    });
+  }
+  displayDeatils(item) {
+    let modelref = this.modalService.open(ActiveOrdersComponent, {
+      centered: true
+    });
+    modelref.componentInstance.data = item;
+    modelref.componentInstance.isAllOrders = true;
+    modelref.componentInstance.displayOnGoingOrdersElement = false;
     modelref.result.then(data => {
       this.fetchOngoingOrder();
     });

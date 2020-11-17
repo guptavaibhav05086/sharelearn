@@ -4,52 +4,40 @@
       <h1>List of Active orders</h1>
     </div>
   </div>
-  <ag-grid-angular
-    style="width: 810px; height: 400px; margin: auto;"
-    [gridOptions]="gridOptions"
-    class="ag-theme-alpine"
-    (gridReady)="OngridReady($event)"
-    [rowData]="ongoingOrderData"
-    [columnDefs]="columnDefs"
-    [frameworkComponents]="frameworkComponents"
-  >
+  <ag-grid-angular style="width: 810px; height: 400px; margin: auto;" [gridOptions]="gridOptions"
+    class="ag-theme-alpine" (gridReady)="OngridReady($event)" [rowData]="ongoingOrderData" [columnDefs]="columnDefs"
+    [frameworkComponents]="frameworkComponents">
   </ag-grid-angular>
 </div>
 
 <div class="row">
-    <div class="col-md-12">
-      <div class="card ">
-        <div class="card-header ">
-          <h5 class="card-title">Ongoing orders</h5>
-          
-        </div>
-        <div class="card-body ">
-          <div class="content" style="margin-top:0px">
-            <div class="row">
-              <div class="col-md-10">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header ">
+        <h5 class="card-title">Ongoing orders</h5>
+
+      </div>
+      <div class="card-body">
+        <div class="content" style="margin-top:0px">
+          <div class="row">
+            <div class="col-md-10">
+              <div class="">
+
                 <div class="">
-                  
-                  <div class="">
-                      <ag-grid-angular
-                      style="width: 810px; height: 400px; margin: auto;"
-                      [gridOptions]="gridOptions"
-                      class="ag-theme-alpine"
-                      (gridReady)="OngridReady($event)"
-                      [rowData]="ongoingOrderData"
-                      [columnDefs]="columnDefs"
-                      [frameworkComponents]="frameworkComponents"
-                    >
-                    </ag-grid-angular>
-                  </div>
+                  <ag-grid-angular style="width: 810px; height: 400px; margin: auto;" [gridOptions]="gridOptions"
+                    class="ag-theme-alpine" (gridReady)="OngridReady($event)" [rowData]="ongoingOrderData"
+                    [columnDefs]="columnDefs" [frameworkComponents]="frameworkComponents">
+                  </ag-grid-angular>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="card-footer ">
-          <hr />
-         
-        </div>
+      </div>
+      <div class="card-footer ">
+        <hr />
+
       </div>
     </div>
   </div>
+</div>

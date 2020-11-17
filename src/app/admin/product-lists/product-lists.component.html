@@ -1,43 +1,32 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title" style="PADDING-LEFT: 35%;">Product Form</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div
-    class="content"
-  >
+  <h4 class="modal-title" id="modal-basic-title" style="PADDING-LEFT: 35%;">Product Form</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="content">
     <div class="row">
-      
+
       <div class="col-md-12">
         <div class="">
-          
+
           <div>
             <form [formGroup]="productform" id="productform">
               <div class="row">
                 <div class="col-md-4 pr-1">
                   <div class="form-group">
                     <label>Product Name</label>
-                    
-                    
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Product Name"
-                     
-                      formControlName="Pname"
-                      required
-                    />
-                    <span
-                      class="errorMessage"
-                      *ngIf="
+
+
+                    <input type="text" class="form-control" placeholder="Product Name" formControlName="Pname"
+                      required />
+                    <span class="errorMessage" *ngIf="
                         (productform.controls['Pname'].dirty ||
                           productform.controls['Pname'].touched) &&
                         productform.controls['Pname'].invalid &&
                         productform.controls['Pname'].errors.required
-                      "
-                    >
+                      ">
                       *Name is required.
                     </span>
                   </div>
@@ -45,132 +34,151 @@
                 <div class="col-md-4 px-1" *ngIf="isEdit">
                   <div class="form-group">
                     <label>Preference</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      placeholder="Preference"
-                      formControlName="preferenece"
-                      required
-                    />
+                    <input type="number" class="form-control" placeholder="Preference" formControlName="preferenece"
+                      required />
                   </div>
-                  <span
-                    class="errorMessage"
-                    *ngIf="
+                  <span class="errorMessage" *ngIf="
                       (productform.controls['preferenece'].dirty ||
                         productform.controls['preferenece'].touched) &&
                       productform.controls['preferenece'].invalid &&
                       productform.controls['preferenece'].errors.required
-                    "
-                  >
+                    ">
                     *Preference is required.
                   </span>
                 </div>
                 <div class="col-md-4 pl-1">
                   <div class="form-group">
                     <label>Classification</label>
-                    <select
-                      class="form-control"
-                      
-                      formControlName="classification"
-                      required
-                    >
+                    <select class="form-control" formControlName="classification" required>
                       <option selected></option>
-                      <option >Design And Print</option>
+                      <option>Design And Print</option>
                       <option>Design Only</option>
                       <option>Print Only</option>
                     </select>
-                    <span
-                      class="errorMessage"
-                      *ngIf="
+                    <span class="errorMessage" *ngIf="
                         (productform.controls['classification'].dirty ||
                           productform.controls['classification'].touched) &&
                         productform.controls['classification'].invalid &&
                         productform.controls['classification'].errors.required
-                      "
-                    >
+                      ">
                       *Please Select Classification.
                     </span>
                   </div>
                 </div>
               </div>
-              
+
             </form>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-        <div class="input-group col-md-6" style="padding-top: 30px;position: relative !important" >
-            <div class=" form-group">
-              <div style="display: flex;">
-                <div>
-                    <label>Product Image </label>
-                    <label for="productUpload" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
-                    <input
-                    type="file"
-                    accept="image/*"
-                    style="display: none"
-                    id="productUpload"
-                    
-                    (change)="uploadGSTCertificate($event.target.files,'product')"
-                  /> 
-                </div>
-                <div style="width: 40px;margin-top: 40px;" *ngIf="uploadedFileNames.displayLoadingProductGif">
-                    <img src="../../../assets/img/loading.gif"/>
-                  </div>
-              </div>
-                
-             
-                
-              
-              <a href="#" (click)="stopDefault($event)"    *ngIf="uploadedFileNames.IsproductRefUploaded"
-              >{{uploadedFileNames.product}}</a>
+      <div class="input-group col-md-6" style="padding-top: 30px;position: relative !important">
+        <div class=" form-group">
+          <div style="display: flex;">
+            <div>
+              <label>Product Image </label>
+              <label for="productUpload" class="btn btn-primary btn-block btn-outlined"
+                style="width:400px">UPLOAD</label>
+              <input type="file" accept="image/*" style="display: none" id="productUpload"
+                (change)="uploadGSTCertificate($event.target.files,'product')" />
             </div>
-           
-          </div>
-    </div>
-    <div class="row">
-        <div class="input-group col-md-6" style="padding-top: 30px;position: relative !important" >
-            <div class=" form-group">
-              <div style="display: flex;">
-                <div>
-                    <label>Product Icon </label>
-                    <label for="contentUpload" class="btn btn-primary btn-block btn-outlined" style="width:400px">UPLOAD</label>
-                    <input
-                    type="file"
-                    accept="image/*"
-                    style="display: none"
-                    id="contentUpload"
-                    
-                    (change)="uploadGSTCertificate($event.target.files,'image1')"
-                  /> 
-                </div>
-                <div style="width: 40px;margin-top: 40px;" *ngIf="uploadedFileNames.displayLoadingContentGif">
-                    <img src="../../../assets/img/loading.gif"/>
-                  </div>
-              </div>
-                
-             
-                
-              
-              <a href="#" (click)="stopDefault($event)"    *ngIf="uploadedFileNames.IscontentUploaded"
-              >{{uploadedFileNames.image1}}</a>
+            <div style="width: 40px;margin-top: 40px;" *ngIf="uploadedFileNames.displayLoadingProductGif">
+              <img src="../../../assets/img/loading.gif" />
             </div>
-           
           </div>
-    </div>
-    <div class="row">
-        <!-- {{productform.valid && isTermsAccepted}} -->
-        <div class="update ml-auto mr-auto">
-          <button
-            type="button"
-            (click)="updateNewproduct()"
-            [disabled]="!productform.valid"
-            class="btn btn-primary btn-round"
-          >
-            Submit
-          </button>
+
+
+
+
+          <a href="#" (click)="stopDefault($event)"
+            *ngIf="uploadedFileNames.IsproductRefUploaded">{{uploadedFileNames.product}}</a>
         </div>
-       <span *ngIf="updateSuccess" style="color:green">Product Update successfully</span>
+
       </div>
+    </div>
+    <div class="row">
+      <!-- Logo Image Upload -->
+      <div class="input-group  col-md-4">
+        <div class="" *ngFor="let item of imageUpload;let  i=index">
+          <div class="input-group pad-m-b-0 uploard-one col-md-5 pad-m-b-0 pad-m-t-10"
+            style="padding-top: 10px;position: relative !important">
+            <div class="form-group">
+              <div *ngIf="i == 0">
+                <label>Product Carouusel Image </label>
+
+              </div>
+              <div style="display: flex;">
+                <div>
+                  <label [for]="item.name" class="btn btn-primary btn-block btn-outlined"
+                    style="width:250px">UPLOAD</label>
+                  <input type="file" accept="image/*" style="display: none" [id]="item.name"
+                    (change)="uploadLogoImage($event.target.files,item.name,item.id)" />
+                </div>
+                <div style="width: 40px;" *ngIf="item.displayLoadingGif">
+                  <img src="../../../assets/img/loading.gif" />
+                </div>
+                <div *ngIf="i== imageUpload.length-1">
+                  <button class="btn btn-outlined" (click)="addImage(item.id)">+</button>
+                </div>
+                <div>
+                  <button class="btn btn-outlined" (click)="removeImage(item.id)">-</button>
+                </div>
+
+              </div>
+              <div *ngIf="item.displayFileName">
+                <a href="#" (click)="stopDefault($event)">{{item.fileName}}</a>
+
+
+
+              </div>
+
+
+
+            </div>
+
+          </div>
+
+          <div class="input-group col-md-4" *ngIf="fileError"></div>
+          <!-- <div class="input-group col-md-8" *ngIf="fileError">
+            <span class="errorMessage" >File should of type .jpg,.png,doc,docx,pdf format.</span>
+          </div>  -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-group col-md-6" style="padding-top: 30px;position: relative !important">
+        <div class=" form-group">
+          <div style="display: flex;">
+            <div>
+              <label>Product Icon </label>
+              <label for="contentUpload" class="btn btn-primary btn-block btn-outlined"
+                style="width:400px">UPLOAD</label>
+              <input type="file" accept="image/*" style="display: none" id="contentUpload"
+                (change)="uploadGSTCertificate($event.target.files,'image1')" />
+            </div>
+            <div style="width: 40px;margin-top: 40px;" *ngIf="uploadedFileNames.displayLoadingContentGif">
+              <img src="../../../assets/img/loading.gif" />
+            </div>
+          </div>
+
+
+
+
+          <a href="#" (click)="stopDefault($event)"
+            *ngIf="uploadedFileNames.IscontentUploaded">{{uploadedFileNames.image1}}</a>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <!-- {{productform.valid && isTermsAccepted}} -->
+      <div class="update ml-auto mr-auto">
+        <button type="button" (click)="updateNewproduct()" [disabled]="!productform.valid"
+          class="btn btn-primary btn-round">
+          Submit
+        </button>
+      </div>
+      <span *ngIf="updateSuccess" style="color:green">Product Update successfully</span>
+    </div>
   </div>
