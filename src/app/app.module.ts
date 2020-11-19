@@ -79,6 +79,7 @@ import { ButtonrendererComponent } from "../app/mainsitecomponents/buttonrendere
 import { OngoingOrdersComponent } from "../app/mainsitecomponents/ongoing-orders/ongoing-orders.component";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { ServiceProviderComponent } from './mainsitecomponents/service-provider/service-provider.component';
+import { AboutusComponent } from './mainsitecomponents/aboutus/aboutus.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -143,7 +144,8 @@ import { ServiceProviderComponent } from './mainsitecomponents/service-provider/
     SectionSocialMediaComponent,
     CustomerSignUpComponent,
     CustomerLoginComponent,
-    ServiceProviderComponent
+    ServiceProviderComponent,
+    AboutusComponent
   ],
   imports: [
     BrowserModule,
