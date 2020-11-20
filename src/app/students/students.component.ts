@@ -108,7 +108,7 @@ export class StudentsComponent implements OnInit {
   }
 
   checkVendorApprovedByAdmin() {
-    this.spinnerService.show();
+    //this.spinnerService.show();
     let email = localStorage.getItem("email");
     this.service.FetchDesignerDashboard(email).subscribe(
       data => {

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: "https://www.shapenprint.in",
-  //baseUrl: "http://localhost:39117",
+  //baseUrl: "https://www.shapenprint.in",
+  baseUrl: "http://localhost:39117",
 
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
@@ -124,7 +124,11 @@ export const environment = {
   updateUserCart: "/api/customer/saveusercart",
   getDesignerPanelPayout: "/api/designer/getDesignerpayouts",
   getPrinterPanelPayout: "/api/printer/getPrinterpayouts",
-  getproductImages: "/api/customer/GetProductImages?proId=$proId"
+  getproductImages: "/api/customer/GetProductImages?proId=$proId",
+  getAllConfigs: "/api/admin/GetAllFlags",
+  setConfig: "/api/admin/SetFlagValues",
+  deleteConfig: "/api/admin/DeleteFlagValues?flagName=$id",
+  getConfig: "/api/customer/GetFlagValues?flagName=$flagName"
 };
 
 /*

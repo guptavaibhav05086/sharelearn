@@ -19,6 +19,14 @@ export class DesignerService {
   setDesignerApproveStatus(status: boolean) {
     this.isDesignerAdminApproved = status;
   }
+  getConfig(id) {
+    debugger;
+    let url = `${environment.baseUrl}${environment.getConfig}`.replace(
+      "$flagName",
+      id
+    );
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   getDesignersNotification() {
     let url = `${environment.baseUrl}${environment.getDesignerNotification}`;
     return this._httpclient.get(url, this.login.getAuthHeader());

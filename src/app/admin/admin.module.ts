@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+//import {For } from '@angular/forms'
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AdminRoutingModule } from "./admin-routing.module";
 import { AdminComponent } from "./admin.component";
@@ -23,6 +24,8 @@ import { AllOrdersComponent } from "./all-orders/all-orders.component";
 import { ActiveOrdersComponent } from "./active-orders/active-orders.component";
 import { BookMeetingComponent } from "./book-meeting/book-meeting.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { ConfigsComponent } from "./configs/configs.component";
+import { EditConfigsComponent } from "./edit-configs/edit-configs.component";
 @NgModule({
   declarations: [
     AdminComponent,
@@ -42,7 +45,9 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     ViewPrinterProfileComponent,
     AllOrdersComponent,
     ActiveOrdersComponent,
-    BookMeetingComponent
+    BookMeetingComponent,
+    ConfigsComponent,
+    EditConfigsComponent
   ],
   imports: [
     CommonModule,

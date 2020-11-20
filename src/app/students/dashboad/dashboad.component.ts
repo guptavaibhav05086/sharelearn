@@ -9,6 +9,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class DashboadComponent implements OnInit {
   dashboardData: any;
+  points: any;
   constructor(
     private service: DesignerService,
     private helper: HelperService,
@@ -18,6 +19,15 @@ export class DashboadComponent implements OnInit {
   ngOnInit() {
     let email = localStorage.getItem("email");
     this.spinner.show();
+    this.service.getConfig("PrinterPoint").subscribe(
+      data => {
+        this.points = data;
+        console.log(this.points);
+      },
+      err => {
+        console.log(err);
+      }
+    );
     this.service.FetchDesignerDashboard(email).subscribe(
       data => {
         console.log(data);

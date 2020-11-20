@@ -119,5 +119,10 @@ export const environment = {
   getUserCart: "/api/customer/getusercart?userEmail=$userEmail",
   updateUserCart: "/api/customer/saveusercart",
   getDesignerPanelPayout: "/api/designer/getDesignerpayouts",
-  getPrinterPanelPayout: "/api/printer/getPrinterpayouts"
+  getPrinterPanelPayout: "/api/printer/getPrinterpayouts",
+  getproductImages: "/api/customer/GetProductImages?proId=$proId",
+  getAllConfigs: "/api/admin/GetAllFlags",
+  setConfig: "/api/admin/SetFlagValues",
+  deleteConfig: "/api/admin/DeleteFlagValues?flagName=$id",
+  getConfig: "/api/customer/GetFlagValues?flagName=$flagName"
 };

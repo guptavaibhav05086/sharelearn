@@ -12,10 +12,13 @@
               <div class="col-md-12">
                 <div style="color:red">
                   <ul>
-                    <li>Dummy Point 1 to remember</li>
+                    <li *ngFor="let item of points">
+                      {{item}}
+                    </li>
+                    <!-- <li>Dummy Point 1 to remember</li>
                     <li>Dummy Point 2 to remember</li>
                     <li>Dummy Point 3 to remember</li>
-                    <li>Dummy Point 4 to remember</li>
+                    <li>Dummy Point 4 to remember</li> -->
                   </ul>
                 </div>
               </div>

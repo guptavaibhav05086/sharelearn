@@ -75,6 +75,21 @@ export class AdminService {
     let url = `${environment.baseUrl}${environment.updateProducts}`;
     return this._httpclient.post(url, product, this.login.getAuthHeader());
   }
+  updateConfig(flags) {
+    let url = `${environment.baseUrl}${environment.setConfig}`;
+    return this._httpclient.post(url, flags, this.login.getAuthHeader());
+  }
+  getConfig() {
+    let url = `${environment.baseUrl}${environment.getAllConfigs}`;
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
+  deleteConfig(id) {
+    let url = `${environment.baseUrl}${environment.deleteConfig}`.replace(
+      "$id",
+      id
+    );
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   updateProductList(product) {
     let url = `${environment.baseUrl}${environment.updateProdList}`;
     return this._httpclient.post(url, product, this.login.getAuthHeader());

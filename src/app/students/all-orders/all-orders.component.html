@@ -1,20 +1,8 @@
-<div class="container" style="display: none;">
-  <div class="row">
-    <div class="col-md-12 py-4 text-center">
-      <h1>List of All orders</h1>
-    </div>
-  </div>
-  <ag-grid-angular style="width: 810px; height: 400px; margin: auto;" [gridOptions]="gridOptions"
-    class="ag-theme-alpine" (gridReady)="OngridReady($event)" [rowData]="ongoingOrderData" [columnDefs]="columnDefs"
-    [frameworkComponents]="frameworkComponents">
-  </ag-grid-angular>
-</div>
-
 <div class="row">
   <div class="col-md-12">
     <div class="card ">
       <div class="card-header ">
-        <h5 class="card-title">All orders</h5>
+        <h5 class="card-title" style="margin-left: 30%;">All orders</h5>
 
       </div>
       <div class="card-body ">

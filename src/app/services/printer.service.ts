@@ -18,6 +18,14 @@ export class PrinterService {
   setPrinterApproveStatus(status: boolean) {
     this.isPrinterAdminApproved = status;
   }
+  getConfig(id) {
+    debugger;
+    let url = `${environment.baseUrl}${environment.getConfig}`.replace(
+      "$flagName",
+      id
+    );
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   updateProfileRequest(updateProfile) {
     return this._httpclient.post(
       `${environment.baseUrl}${environment.updatePrinter}`,
