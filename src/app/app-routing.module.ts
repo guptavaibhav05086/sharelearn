@@ -28,6 +28,7 @@ import { HomeContainerComponent } from "./mainsitecomponents/ApplicationHomePage
 import { OngoingOrdersComponent } from "./mainsitecomponents/ongoing-orders/ongoing-orders.component";
 import { AllOrdersComponent } from "./mainsitecomponents/all-orders/all-orders.component";
 import { ServiceProviderComponent } from "./mainsitecomponents/service-provider/service-provider.component";
+import { AboutusComponent } from "./mainsitecomponents/aboutus/aboutus.component";
 
 const routes: Routes = [
   {
@@ -113,6 +114,10 @@ const routes: Routes = [
       {
         path: "serviceprovider",
         component: ServiceProviderComponent
+      },
+      {
+        path: "aboutus",
+        component: AboutusComponent
       },
       { path: "designerprofile", component: DesignerprofileComponent },
       { path: "verifyemail", component: VerifyEmailComponent },
