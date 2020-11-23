@@ -17,7 +17,7 @@
   font-weight: 300;
   background-repeat: no-repeat;
   background-size: 20px;
-  padding: 0px 0 0 55px;
+  padding: 0px 0 0 30px;
   background-position: 0px 5px;
 }
 .hide-mob {
@@ -90,11 +90,21 @@
     width: 20px;
   }
   .brndvd{
-    width: 700px;
+    width: 624px;
     height: 350px;
 
   }
   
+}
+@media only screen and (max-width: 1224px) {
+  .brndvd{
+    width: 450px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .brndvd{
+    width: 450px;
+  }
 }
 @media (max-width: 768px) {
   .mob-brndvd{
