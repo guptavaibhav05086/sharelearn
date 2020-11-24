@@ -21,6 +21,7 @@
   z-index: -1;
   width: 100%;
 }
+
 @media (min-width: 778px) {
   .borderNav {
     border-right: 0x solid;
@@ -94,6 +95,17 @@
 /* .navbar {
   position: initial !important;
 } */
+@media only screen and (max-width: 1224px) {
+  .navbar .navbar-collapse .nav-item a{
+    font-size: 8px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+
+  .navbar .navbar-collapse .nav-item a{
+    font-size: 8px;
+  }
+}
 
 @media only screen and (max-width: 768px) {
   .navbar .navbar-nav .nav-item:not(:last-child) {

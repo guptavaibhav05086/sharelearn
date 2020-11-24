@@ -70,6 +70,26 @@
 .vis-moble {
   display: none;
 }
+@media only screen and (max-width: 1224px) {
+  .navbar .navbar-collapse .nav-item a{
+    font-size: 10px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+
+  .navbar .navbar-collapse .nav-item a{
+    font-size: 10px;
+  }
+
+  .btn, .navbar .navbar-nav>a.btn{
+    font-size: 0.6571em;
+    padding: 11px 10px;
+  }
+  .vLine{
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
 @media only screen and (max-width: 768px) {
   .vis-moble {
     display: block;
