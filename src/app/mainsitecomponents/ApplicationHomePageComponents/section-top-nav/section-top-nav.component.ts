@@ -8,6 +8,16 @@ import { CustomerLoginComponent } from "../../../auth/customer-login/customer-lo
 import { CustomerSignUpComponent } from "../../../auth/customer-sign-up/customer-sign-up.component";
 import { debug } from "util";
 
+import {
+  Event,
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+  ActivatedRoute
+} from "@angular/router";
+
 @Component({
   selector: "app-section-top-nav",
   templateUrl: "./section-top-nav.component.html",
@@ -26,8 +36,30 @@ export class SectionTopNavComponent implements OnInit {
     private helper: HelperService,
     private modalService: NgbModal,
     private customerService: CustomerService,
-    private adminService: AdminService
-  ) {}
+    private adminService: AdminService,
+    private router: Router
+  ) {
+    this.router.events.subscribe((event: Event) => {
+      switch (true) {
+        case event instanceof NavigationStart: {
+          this.selected = "";
+
+          break;
+        }
+        case event instanceof NavigationEnd:
+        case event instanceof NavigationCancel:
+        case event instanceof NavigationError: {
+          //this.spinnerService.hide();
+          debugger;
+
+          break;
+        }
+        case event instanceof NavigationStart: {
+          break;
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
     //debugger;
@@ -65,6 +97,7 @@ export class SectionTopNavComponent implements OnInit {
       this.dproducts = [...new Set(this.products)];
     });
   }
+
   navigateSignUp(validation) {
     let modelRef = this.modalService.open(CustomerSignUpComponent, {
       backdrop: "static",
@@ -184,6 +217,7 @@ export class SectionTopNavComponent implements OnInit {
       params.selectedProduct = this.selected;
     }
     let param = { queryParams: params };
+    //this.selected = "";
     this.helper.navigateToPathWithparams("/createorder", param);
   }
   navigateToProduct(prodName, e) {

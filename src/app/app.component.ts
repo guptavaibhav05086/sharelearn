@@ -34,7 +34,8 @@ export class AppComponent {
         .classList.contains("show");
       if (
         clickover.classList.contains("nav-link") ||
-        clickover.classList.contains("navbar-toggler-icon")
+        clickover.classList.contains("navbar-toggler-icon") ||
+        clickover.classList.contains("searchBtn")
       ) {
         return;
       }

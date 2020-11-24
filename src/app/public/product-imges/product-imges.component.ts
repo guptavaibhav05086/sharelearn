@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { CustomerService } from "../../services/customer.service";
+import { HelperService } from "src/app/services/helper.service";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgxSpinnerService } from "ngx-spinner";
 @Component({
@@ -14,7 +15,8 @@ export class ProductImgesComponent implements OnInit {
   constructor(
     private service: CustomerService,
     private activeModel: NgbActiveModal,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private helper: HelperService
   ) {}
 
   ngOnInit(): void {
@@ -34,5 +36,12 @@ export class ProductImgesComponent implements OnInit {
   }
   CloseButton() {
     this.activeModel.dismiss();
+  }
+  navigateToProduct(prodName) {
+    let params = { selectedProduct: prodName };
+    this.activeModel.dismiss();
+    this.helper.navigateToPathWithparams("/createorder", {
+      queryParams: params
+    });
   }
 }

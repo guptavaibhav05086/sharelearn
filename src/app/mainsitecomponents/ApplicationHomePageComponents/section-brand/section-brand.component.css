@@ -28,6 +28,7 @@
     width: 100%;
     display: flex;
     flex-wrap: unset;
+    padding-top: 90px;
   }
   .points {
     margin-top: 20px;

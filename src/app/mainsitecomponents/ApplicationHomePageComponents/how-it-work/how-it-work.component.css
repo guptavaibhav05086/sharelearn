@@ -74,6 +74,9 @@
   .txtFreelance {
     font-weight: 700;
   }
+  .removeGap-3 {
+    margin-top: -18px;
+  }
   .alingdiv {
     padding-top: 100px;
   }

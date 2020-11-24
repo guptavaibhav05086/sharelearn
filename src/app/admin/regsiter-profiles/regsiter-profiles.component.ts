@@ -23,8 +23,10 @@ export class RegsiterProfilesComponent implements OnInit {
   }
   rowDataprinter;
   rowDatadesigner;
+  rowDataCustomer;
   gridApi;
   gridApiprinter;
+  gripApiCustomer;
   frameworkComponents: any;
   ngOnInit(): void {
     this.getAdminProfile();
@@ -36,6 +38,7 @@ export class RegsiterProfilesComponent implements OnInit {
       data => {
         this.rowDatadesigner = data["dprofile"];
         this.rowDataprinter = data["pprofile"];
+        this.rowDataCustomer = data["customerProfile"];
         console.log(data);
         this.spinner.hide();
       },
@@ -51,11 +54,17 @@ export class RegsiterProfilesComponent implements OnInit {
   onGridReadyPrinter(params) {
     this.gridApiprinter = params.api;
   }
+  onGridReadyCustomer(params) {
+    this.gripApiCustomer = params.api;
+  }
   onBtnExportDataAsCsv() {
     this.gridApi.exportDataAsCsv();
   }
   onBtnExportDataAsCsvPrinter() {
     this.gridApiprinter.exportDataAsCsv();
+  }
+  onBtnExportDataAsCsvCustomer() {
+    this.gripApiCustomer.exportDataAsCsv();
   }
   columnDefs = [
     //Registrationnumber
@@ -64,7 +73,7 @@ export class RegsiterProfilesComponent implements OnInit {
       field: "Registrationnumber",
       sortable: true,
       filter: true,
-      pinned:'left'
+      pinned: "left"
     },
     {
       headerName: "FirstName",
@@ -235,7 +244,40 @@ export class RegsiterProfilesComponent implements OnInit {
       }
     }
   ];
+  columnDefCustomer = [
+    {
+      headerName: "FirstName",
+      field: "firstName",
+      sortable: true,
+      filter: true
+    },
+    { headerName: "EmailId", field: "emailId", sortable: true, filter: true },
 
+    {
+      headerName: "MobileNumber",
+      field: "mobileNumber",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "RegisteredDate",
+      field: "cretaedDate",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "isMobileVerified",
+      field: "isMobileVerified",
+      sortable: true,
+      filter: true
+    },
+    {
+      headerName: "isEmailVerified",
+      field: "isEmailVerified",
+      sortable: true,
+      filter: true
+    }
+  ];
   VerifyDesigner(e) {
     ////debugger;
     let modelRef = this.modalService.open(ViewDesignerProfileComponent, {

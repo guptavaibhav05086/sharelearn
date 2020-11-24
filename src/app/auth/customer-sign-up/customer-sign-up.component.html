@@ -107,8 +107,8 @@
         </div>
 
         <div class="form-group text-center mt-4">
-            <button class="btn btn-info btn-lg btn-block text-uppercase " type="submit" [disabled]="!studentForm.valid"
-                (click)="registerUser()">
+            <button class="btn btn-info btn-lg btn-block text-uppercase pointerCursor" type="submit"
+                [disabled]="!studentForm.valid" (click)="registerUser()">
                 Sign Up
             </button>
         </div>
@@ -117,7 +117,7 @@
             <div class="col-sm-12 text-center">
                 <p>
                     I Have an Account?
-                    <a (click)="openloginPage($event)" class="text-primary m-l-5"><b>Login</b></a>
+                    <a (click)="openloginPage($event)" class="text-primary m-l-5"><b class="pointerCursor">Login</b></a>
                 </p>
             </div>
         </div>

@@ -10,7 +10,8 @@
     [interval]="false" [showIndicators]="showIndicators" [startFromIndex]="0"
     (slideRangeChange)="onSlideRangeChange($event)">
     <slide *ngFor="let slide of slidesData; let index=index">
-      <img [src]="slide.image" alt="image slide" style="display: block; " class="itemSize">
+      <img [src]="slide.image" alt="image slide" style="display: block; " class="itemSize"
+        (click)="openImageUploads($event,slide.productId,slide.name)">
       <!-- <div class="carousel-caption">
       <h4>Slide {{index}}</h4>
     </div> -->

@@ -47,7 +47,7 @@
                             <div class="vLine"></div>
                         </li>
                         <li class="nav-item borderNav">
-                            <a class="nav-link" routerLink="/">About Us</a>
+                            <a class="nav-link" routerLink="/aboutus">About Us</a>
                         </li>
                         <li class="nav-item active borderNav">
                             <div class="vLine"></div>
@@ -73,7 +73,7 @@
                                 </div>
 
                                 <div class="menuItemDD">
-                                    <a class="dropdown-item" routerLink="/login">Vendor</a>
+                                    <a class="dropdown-item" routerLink="/login">Service Provider</a>
                                 </div>
 
 
@@ -102,12 +102,14 @@
                                 <div class="menuItemDD">
                                     <a class="dropdown-item" routerLink="/user/allorders">All Orders</a>
                                 </div>
-                                <div class="menuItemDD">
+                                <div class="menuItemDD" style="display: none;">
                                     <a class="dropdown-item" href="#" (click)="navigateprofile($event)">Settings</a>
                                 </div>
 
                                 <div class="menuItemDD">
-                                    <a class="dropdown-item" href="#" routerLink="/logout">Help & Support</a>
+                                    <a class="dropdown-item"
+                                        href="https://docs.google.com/forms/d/e/1FAIpQLScuN_PLYUJVCE6T1TUduNlCn4dPMC3PsJN6MKHZRIYXllN-GQ/viewform"
+                                        target="_blank">Help & Support</a>
                                 </div>
                                 <div class="menuItemDD">
                                     <a class="dropdown-item" href="#" routerLink="/logout">Log Out</a>
@@ -131,27 +133,38 @@
                                         (click)="navigateToProduct(menuItem,$event)">{{menuItem}}</a>
                                 </div> -->
                                 <div class="menuItemDD">
+                                    <a class="dropdown-item" (click)="navigateToProduct('Logo',$event)">Logo</a>
+                                </div>
+                                <div class="menuItemDD">
                                     <a class="dropdown-item" href="#"
                                         (click)="navigateToProduct('Flyers',$event)">Flyers</a>
                                 </div>
                                 <div class="menuItemDD">
-                                    <a class="dropdown-item" (click)="navigateToProduct('Brochure',$event)">Brochure</a>
+                                    <a class="dropdown-item"
+                                        (click)="navigateToProduct('Digital Marketing Banners/Social Media Banners',$event)">Digital
+                                        Marketing Banner</a>
                                 </div>
                                 <div class="menuItemDD">
                                     <a class="dropdown-item"
                                         (click)="navigateToProduct('Business Card',$event)">Business Card</a>
                                 </div>
                                 <div class="menuItemDD">
-                                    <a class="dropdown-item"
-                                        (click)="navigateToProduct('Digital Marketing Banners/Social Media Banners',$event)">Social
-                                        Media Banner</a>
+                                    <a class="dropdown-item" (click)="navigateToProduct('Brochure',$event)">Brochure</a>
                                 </div>
-                                <div class="menuItemDD">
-                                    <a class="dropdown-item" (click)="navigateToProduct('Logo',$event)">Logo</a>
-                                </div>
+
+
+
                                 <div class="menuItemDD">
                                     <a class="dropdown-item"
-                                        (click)="navigateToProduct('Stationaries',$event)">Stationaries </a>
+                                        (click)="navigateToProduct('Stickers/Labels',$event)">STICKERS/LABELS<</a>
+                                            </div> <div class="menuItemDD">
+                                            <a class="dropdown-item" (click)="navigateToProduct('Poster',$event)">POSTER
+                                            </a>
+                                </div>
+                                <div class="menuItemDD">
+                                    <a class="dropdown-item"
+                                        href="https://docs.google.com/forms/d/e/1FAIpQLSeN6TJj7WO5OAeMb3yPEXkez4c_DRVduwJUOWoSeMBoaEZKAQ/viewform?usp=sf_link"
+                                        target="_blank">BULK ORDER </a>
                                 </div>
                                 <div class="menuItemDD">
                                     <a class="dropdown-item" (click)="navigateToProduct('Others',$event)">Others </a>

@@ -124,5 +124,6 @@ export const environment = {
   getAllConfigs: "/api/admin/GetAllFlags",
   setConfig: "/api/admin/SetFlagValues",
   deleteConfig: "/api/admin/DeleteFlagValues?flagName=$id",
-  getConfig: "/api/customer/GetFlagValues?flagName=$flagName"
+  getConfig: "/api/customer/GetFlagValues?flagName=$flagName",
+  inviteFriend: "/api/customer/InviteFriend?email=$email"
 };

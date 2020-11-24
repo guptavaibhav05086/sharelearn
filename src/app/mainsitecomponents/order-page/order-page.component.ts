@@ -848,7 +848,7 @@ export class OrderPageComponent implements OnInit {
     return true;
   }
   showCategory(category, $element) {
-    //debugger;
+    debugger;
     this.addRemoveOverflow(false);
     if (this.displayeproceed == false) {
       return;
@@ -912,7 +912,7 @@ export class OrderPageComponent implements OnInit {
       );
       if (item.length != 0) {
         item[0].isSelected = true;
-        let elemTime = this.document.getElementById("productselect");
+        let elemTime = this.document.getElementById("specs");
         this.selectedProduct(item[0].value, elemTime);
         this.scrollToElement(elemTime);
         if (this.paramSelSubCat != null && this.paramSelSubCat != "") {
@@ -923,13 +923,13 @@ export class OrderPageComponent implements OnInit {
         }
       } else {
         try {
-          //debugger;
+          debugger;
           this.scrollToElement($element);
         } catch (err) {}
       }
     } else {
       try {
-        //debugger;
+        debugger;
         this.scrollToElement($element);
       } catch (err) {}
     }
@@ -983,7 +983,7 @@ export class OrderPageComponent implements OnInit {
           item.isSelected = false;
         });
         console.log(this.products);
-        ////debugger;
+        debugger;
         if (this.isEditOrder) {
           this.openEditForm(this.cartItemId);
           this.spinner.hide();
@@ -1021,7 +1021,7 @@ export class OrderPageComponent implements OnInit {
     }
   }
   openEditForm(id) {
-    //debugger;
+    debugger;
     let cart = this.custService.getLocalStorageCart();
     let editItem = cart.filter(item => item.id == id);
 

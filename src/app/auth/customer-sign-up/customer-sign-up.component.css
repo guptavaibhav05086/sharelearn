@@ -7,3 +7,6 @@
 .successMessage {
   color: green;
 }
+.pointerCursor {
+  cursor: pointer;
+}

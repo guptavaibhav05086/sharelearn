@@ -10,7 +10,7 @@
   border-left: 1px solid darkgrey !important;
 }
 .errorMessage {
-  color: red;
+  color: green;
 }
 .successMessage {
   color: green;
@@ -33,4 +33,7 @@
 }
 .login-box {
   box-shadow: 1px 1px 1px 1px grey;
+}
+.pointerCursor {
+  cursor: pointer;
 }

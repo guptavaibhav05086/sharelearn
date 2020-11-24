@@ -92,6 +92,13 @@ export class CustomerService {
     );
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
+  InviteFriend(email) {
+    let url = `${environment.baseUrl}${environment.inviteFriend}`.replace(
+      "$email",
+      email
+    );
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   rescheduleMeetNotify(meetingDetails, orderId) {
     return this._httpclient.post(
       `${environment.baseUrl}${environment.reschuleMeetNoti}`.replace(
