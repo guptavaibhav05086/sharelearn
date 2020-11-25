@@ -1,6 +1,9 @@
 .owl-nav {
   display: flex !important;
 }
+:focus{
+  outline: none !important;
+}
 .itemSize {
   /* height: 300px;
   width: 300px !important; */
@@ -9,6 +12,9 @@
 .carousel-control-next,
 .carousel-control-prev {
   width: 10% !important;
+}
+.carousel-inner:focus{
+  outline: none !important;
 }
 /* .carousel-control-next-icon {
   background-image: url("../../../assets/HomePageImg/Home Page _ Images/Left Arrow1200.png") !important;
