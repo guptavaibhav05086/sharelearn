@@ -5753,7 +5753,9 @@ button.close {
   width: 100%;
   overflow: hidden;
 }
-
+.carousel-inner:focus,.carousel:focus{
+  outline: none;
+} 
 .carousel-item {
   position: relative;
   display: none;

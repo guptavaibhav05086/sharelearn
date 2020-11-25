@@ -6082,7 +6082,9 @@ button.close {
     width: 100%;
     overflow: hidden
 }
-
+.carousel-inner:focus{
+    outline: none;
+  } 
 .carousel-item {
     position: relative;
     display: none;
