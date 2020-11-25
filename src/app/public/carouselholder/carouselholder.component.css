@@ -36,6 +36,9 @@
     height: auto;
     /* width: 200px !important; */
   }
+  .mob-carousel-margin {
+    margin-left: 2.5%;
+  }
   .carousel-control-next-icon,
   .carousel-control-prev-icon {
     display: inline-block;
