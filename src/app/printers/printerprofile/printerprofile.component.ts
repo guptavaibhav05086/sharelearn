@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,ChangeDetectorRef  } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TermsconditionsComponent } from "../termsconditions/termsconditions.component";
 import { VerifyOTPComponent } from "../verify-otp/verify-otp.component";
@@ -33,6 +33,7 @@ export class PrinterprofileComponent implements OnInit {
   verifyClicked = false;
   isPhoneVerified = false;
   isDisplay = false;
+  isPaymentDone = false;
   profileform = new FormGroup({
     city: new FormControl("", [Validators.required]),
     state: new FormControl("", [Validators.required]),
@@ -75,7 +76,8 @@ export class PrinterprofileComponent implements OnInit {
     private printer: PrinterService,
     private _validator: ValidatorsService,
     private spinnerService: NgxSpinnerService,
-    private register: RegisterService
+    private register: RegisterService,
+    private ref: ChangeDetectorRef
   ) {}
   statesData: Array<Cities>;
   distinctStates: Array<Cities>;
@@ -119,11 +121,24 @@ export class PrinterprofileComponent implements OnInit {
   ];
   profileImg = "../../../assets/StudentDashboard/img/avatar.jpg";
   paymentStatus(paymentStatus) {
-    //debugger;
+    debugger;
     console.log(paymentStatus);
-    const modelRef = this.modalService.open(TransactionsuccessdetailsComponent);
-    modelRef.componentInstance.transactionId = paymentStatus.status;
-    modelRef.componentInstance.transactionStatus = paymentStatus.tranId;
+    if (paymentStatus.status == "Successful") {
+      this.isPaymentDone = true;
+      this.ref.detectChanges();
+      alert(
+        "Registration Fees is Paid.Please note Transaction Id: " +
+          paymentStatus.tranId +
+          " for future reference"
+      );
+      //window.location.reload();
+    } else {
+      alert("Transaction Failed.Please Contact Admin");
+    }
+
+    // const modelRef = this.modalService.open(TransactionsuccessdetailsComponent);
+    // modelRef.componentInstance.transactionId = paymentStatus.status;
+    // modelRef.componentInstance.transactionStatus = paymentStatus.tranId;
   }
   generateOTP() {
     //debugger;
@@ -188,8 +203,9 @@ export class PrinterprofileComponent implements OnInit {
       this.spinnerService.show();
       this.printer.getProfile(userId).subscribe(
         data => {
-          //debugger;
+          debugger;
           this.filterDistricts(data["state"]);
+          this.isPaymentDone = data["isPaymentDone"];
           console.log(data);
           this.modfyAdd = true;
           this.profileform.patchValue({
@@ -295,6 +311,10 @@ export class PrinterprofileComponent implements OnInit {
       this.profileform.controls["address"].value == null
     ) {
       alert("Updating the Address Field.Please try again in few moments");
+      return;
+    }
+    if (this.isPaymentDone == false) {
+      alert("Please pay the Registration Fees");
       return;
     }
     //this.request.softwares = "";

@@ -24,6 +24,28 @@ export class AdminService {
       this.login.getAuthHeader()
     );
   }
+  getPinCodes(){
+    let url = `${environment.baseUrl}${environment.getPinCode}`;
+    return this._httpclient.get(
+      url,
+
+      this.login.getAuthHeader()
+    );
+  }
+  addPinCodes(pinCode){
+    let url = `${environment.baseUrl}${environment.setPinCode}`.replace("$pinCode",pinCode);
+    return this._httpclient.get(
+      url,
+      this.login.getAuthHeader()
+    );
+  }
+  deletePinCodes(pinCode){
+    let url = `${environment.baseUrl}${environment.deletePinCode}`.replace("$pinCode",pinCode);
+    return this._httpclient.get(
+      url,
+      this.login.getAuthHeader()
+    );
+  }
   FetchOngoingAllOrder(email, allOrdersflag) {
     //debugger;
     let url = `${environment.baseUrl}${environment.getOngoingAdmin}`

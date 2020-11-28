@@ -63,12 +63,12 @@
             I wanna bag it up"
           </p>
           <!-- Code is for Payment Gate Integration  -->
-          <div class="row" >
+          <!-- <div class="row" *ngIf="!isPaymentDone">
               <div class="update ml-auto mr-auto">
-                  <!-- <app-razorpayments (transactionStatus)="paymentStatus($event)"></app-razorpayments> -->
+                  <app-razorpayments (transactionStatus)="paymentStatus($event)"></app-razorpayments>
               </div>
            
-          </div>
+          </div> -->
         </div>
         <div class="card-footer" style="display: none;">
           <hr />
@@ -624,6 +624,12 @@
                   
                 </div>
               </div>
+              <div class="row" >
+                <div class="update ml-auto mr-auto" *ngIf="isPaymentDone == false">
+                    <app-razorpayments (transactionStatus)="paymentStatus($event)"></app-razorpayments>
+                </div>
+             
+            </div>
             <div class="row" >
               <!-- {{profileform.valid && isTermsAccepted}} -->
               <!-- <div class="update ml-auto mr-auto">

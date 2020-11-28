@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { WindowRefService } from "src/app/services/window-ref.service";
-import { PrinterService } from "src/app/services/printer.service";
+import { DesignerService } from "src/app/services/designer.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 @Component({
   selector: "app-razorpayments",
@@ -14,7 +14,7 @@ export class RazorpaymentsComponent implements OnInit {
   }>();
   constructor(
     private winRef: WindowRefService,
-    private printer: PrinterService,
+    private printer: DesignerService,
     private modalService: NgbModal
   ) {}
 

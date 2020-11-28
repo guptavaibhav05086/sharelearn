@@ -9,6 +9,8 @@ import {
 import { DOCUMENT } from "@angular/common";
 import { AdminService } from "src/app/services/admin.service";
 import { CustomerService } from "src/app/services/customer.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { SectionDescriptionComponent } from "../section-description/section-description.component";
 @Component({
   selector: "app-home-container",
   templateUrl: "./home-container.component.html",
@@ -26,13 +28,21 @@ export class HomeContainerComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) document,
     private adminService: AdminService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
     document.getElementsByTagName("body")[0].removeAttribute("style");
+
     this.adminService.getProducts().subscribe(data => {
       this.customerService.setProductsData(data);
+      let promoUrl = data["promotionImageURL"];
+      let displayPromo = data["displayPromotion"];
+      if (displayPromo == "true") {
+        let modelref = this.modalService.open(SectionDescriptionComponent);
+        modelref.componentInstance.promotionURL = promoUrl;
+      }
     });
   }
   @HostListener("window:scroll", ["$event"])

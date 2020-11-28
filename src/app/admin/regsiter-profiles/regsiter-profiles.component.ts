@@ -121,6 +121,12 @@ export class RegsiterProfilesComponent implements OnInit {
       filter: true
     },
     {
+      headerName: "isRegistrationFeesPaid",
+      field: "isPaymentDone",
+      sortable: true,
+      filter: true
+    },
+    {
       headerName: "PostalCode",
       field: "postalCode",
       sortable: true,
@@ -216,7 +222,12 @@ export class RegsiterProfilesComponent implements OnInit {
       sortable: true,
       filter: true
     },
-
+    {
+      headerName: "isRegistrationFeesPaid",
+      field: "isPaymentDone",
+      sortable: true,
+      filter: true
+    },
     {
       headerName: "Address",
       field: "address",

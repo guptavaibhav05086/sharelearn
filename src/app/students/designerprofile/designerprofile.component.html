@@ -532,6 +532,12 @@
                   
                 </div>
               </div>
+              <div class="row" >
+                <div class="update ml-auto mr-auto" *ngIf="isPaymentDone == false">
+                    <app-razorpayments (transactionStatus)="paymentStatus($event)"></app-razorpayments>
+                </div>
+             
+            </div>
             <div class="row" >
               <!-- {{profileform.valid && isTermsAccepted}} -->
               <div class="update ml-auto mr-auto">

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: "https://www.shapenprint.in",
-  //baseUrl: "http://localhost:39117",
+  //baseUrl: "https://www.shapenprint.in",
+  baseUrl: "http://localhost:39117",
 
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
@@ -22,8 +22,14 @@ export const environment = {
   updatePrinter: "/api/printer/updateprofile",
   uploadPrinterImage: "/api/printer/uploadimage",
   generateOrder: "/api/customer/generateorder?amount=$amount",
+  generateOrderPrinterRegistration: "/api/printer/generateorder?amount=$amount",
+  transactionValidateVendor:
+    "/api/printer/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature",
   transactionValidate:
     "/api/Public/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature",
+  generateOrderDesigner: "/api/designer/generateorder?amount=$amount",
+  transactionValidateDesigner:
+    "/api/designer/validateTransaction?paymentId=$paymentId&orderId=$orderId&signature=$signature",
   transactionFailed: "/api/customer/updateFailedTransaction?orderId=$orderId",
   getDesignerProfile: "/api/designer/getProfile?userId=$userId",
   getPrinterProfile: "/api/printer/getProfile?userId=$userId",
@@ -129,7 +135,10 @@ export const environment = {
   setConfig: "/api/admin/SetFlagValues",
   deleteConfig: "/api/admin/DeleteFlagValues?flagName=$id",
   getConfig: "/api/customer/GetFlagValues?flagName=$flagName",
-  inviteFriend: "/api/customer/InviteFriend?email=$email"
+  inviteFriend: "/api/customer/InviteFriend?email=$email",
+  getPinCode: "/api/admin/getPinCode",
+  setPinCode: "/api/admin/addPinCode?pinCode=$pinCode",
+  deletePinCode: "/api/admin/deletePinCode?pinCode=$pinCode"
 };
 
 /*

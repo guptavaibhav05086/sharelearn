@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TermsconditionsComponent } from "../termsconditions/termsconditions.component";
 import { VerifyOTPComponent } from "../verify-otp/verify-otp.component";
@@ -56,13 +56,15 @@ export class DesignerprofileComponent implements OnInit {
     // ])
   });
   oldNumber: any;
+  isPaymentDone: any;
   constructor(
     private modalService: NgbModal,
     private helper: HelperService,
     private designer: DesignerService,
     private _validator: ValidatorsService,
     private spinnerService: NgxSpinnerService,
-    private register: RegisterService
+    private register: RegisterService,
+    private ref: ChangeDetectorRef
   ) {}
   statesData: Array<Cities>;
   distinctStates: Array<Cities>;
@@ -115,7 +117,7 @@ export class DesignerprofileComponent implements OnInit {
         data => {
           //debugger;
           //console.log(data);
-
+          this.isPaymentDone =  data["isPaymentDone"]
           this.profileform.patchValue({
             fName: data["firstName"],
             lName: data["lastName"],
@@ -168,6 +170,22 @@ export class DesignerprofileComponent implements OnInit {
         err => {}
       );
     }
+  }
+  paymentStatus(paymentStatus) {
+    debugger;
+    console.log(paymentStatus);
+    if(paymentStatus.status == "Successful"){
+      alert("Registration Fees is Paid.Please note Transaction Id: " + paymentStatus.tranId +  " for future reference");
+      this.isPaymentDone=true;
+      this.ref.detectChanges();
+    }
+    else{
+      alert("Transaction Failed.Please Contact Admin");
+    }
+   
+    // const modelRef = this.modalService.open(TransactionsuccessdetailsComponent);
+    // modelRef.componentInstance.transactionId = paymentStatus.status;
+    // modelRef.componentInstance.transactionStatus = paymentStatus.tranId;
   }
   acceptTerms() {
     //debugger;
@@ -228,6 +246,10 @@ export class DesignerprofileComponent implements OnInit {
           `Please provide correct value in these controls ${invalidControls}`
         );
       }
+      return;
+    }
+    if(this.isPaymentDone == false){
+      alert('Please pay the Registration Fees');
       return;
     }
     this.request = new DesignerProfileRequest();

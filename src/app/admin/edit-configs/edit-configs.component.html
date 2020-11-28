@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h2 class="modal-title">Order Details</h2>
+    <h2 class="modal-title">config Values</h2>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -29,6 +29,11 @@
                 <select class="form-control" [(ngModel)]="config.FlagName">
                     <option value="PrinterPoint">PrinterPoint</option>
                     <option value="DesignerPoint">DesignerPoint</option>
+                    <option value="VideoURL">Video URL</option>
+                    <option value="PrinterRadius">PrinterRadius</option>
+                    <option value="PromotionImageURL">PromotionImageURL</option>
+                    <option value="DisplayPromotion">DisplayPromotion</option>
+                    <option value="ServiceProviderFees">ServiceProviderFees</option>
 
                 </select>
 
@@ -45,11 +50,28 @@
 
 
     </div>
+    <div class="container" style="margin-left: 10%;" *ngIf="type == 'Pin'">
+        <div class="row" style="text-align: center;">
+
+            <div class="col-md-12" style="margin-top: 20px;">
+                <input type="text" placeholder="Add Pin Code" class="form-control" [(ngModel)]="config.FlagValue">
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="SaveChanges()">
+    <button type="button" *ngIf="type != 'Pin'" class="btn btn-light" (click)="SaveChanges()">
         Save
+    </button>
+    <button type="button" *ngIf="type == 'Pin'" class="btn btn-light" (click)="SavePin()">
+        Save Pin
     </button>
     <button *ngIf="type == 'Edit'" type="button" class="btn btn-light" (click)="Delete(config.FlagId)">
         Delete

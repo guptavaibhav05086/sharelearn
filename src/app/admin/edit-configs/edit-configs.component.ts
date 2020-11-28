@@ -36,6 +36,11 @@ export class EditConfigsComponent implements OnInit {
       }
     );
   }
+  SavePin() {
+    this.service.addPinCodes(this.config.FlagValue).subscribe(data => {
+      this.activeModal.dismiss(data);
+    });
+  }
   Delete(id) {
     this.service.deleteConfig(id).subscribe(
       data => {

@@ -27,7 +27,7 @@ import { AllOrdersComponent } from "./all-orders/all-orders.component";
 import { PaymentDetailsComponent } from "./payment-details/payment-details.component";
 import { PaymentSummaryComponent } from "./payment-summary/payment-summary.component";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
-
+import { RazorpaymentsComponent } from "./razorpayments/razorpayments.component";
 @NgModule({
   declarations: [
     StudentsComponent,
@@ -51,7 +51,8 @@ import { ChangePasswordComponent } from "./change-password/change-password.compo
     AllOrdersComponent,
     PaymentDetailsComponent,
     PaymentSummaryComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    RazorpaymentsComponent
   ],
   imports: [
     CommonModule,

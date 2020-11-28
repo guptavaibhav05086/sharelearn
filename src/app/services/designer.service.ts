@@ -68,6 +68,20 @@ export class DesignerService {
       this.login.getAuthHeader()
     );
   }
+  generateOrderId(amount) {
+    let url = `${environment.baseUrl}${environment.generateOrderDesigner}`.replace(
+      "$amount",
+      amount
+    );
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
+  validateTransaction(paymentId, orderId, signature) {
+    let url = `${environment.baseUrl}${environment.transactionValidateDesigner}`
+      .replace("$paymentId", paymentId)
+      .replace("$orderId", orderId)
+      .replace("$signature", signature);
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   finishDesignerOrder(orderId) {
     let url = `${environment.baseUrl}${environment.finishDesignerOrder}`.replace(
       "$orderId",

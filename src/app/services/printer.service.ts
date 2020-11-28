@@ -68,18 +68,17 @@ export class PrinterService {
   }
 
   generateOrderId(amount) {
-    let url = `${environment.baseUrl}${environment.generateOrder}`.replace(
+    let url = `${environment.baseUrl}${environment.generateOrderPrinterRegistration}`.replace(
       "$amount",
       amount
     );
     return this._httpclient.get(
       url,
-
       this.login.getAuthHeader()
     );
   }
   validateTransaction(paymentId, orderId, signature) {
-    let url = `${environment.baseUrl}${environment.transactionValidate}`
+    let url = `${environment.baseUrl}${environment.transactionValidateVendor}`
       .replace("$paymentId", paymentId)
       .replace("$orderId", orderId)
       .replace("$signature", signature);

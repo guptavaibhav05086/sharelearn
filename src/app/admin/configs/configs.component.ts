@@ -9,6 +9,7 @@ import { EditConfigsComponent } from "../edit-configs/edit-configs.component";
 })
 export class ConfigsComponent implements OnInit {
   configValue: any;
+  pinCodeList: any;
   constructor(private service: AdminService, private modalService: NgbModal) {}
 
   ngOnInit(): void {
@@ -21,10 +22,26 @@ export class ConfigsComponent implements OnInit {
         console.log(err);
       }
     );
+    this.service.getPinCodes().subscribe(data => {
+      this.pinCodeList = data;
+    });
   }
   openModal(config, type) {
     let modelRef = this.modalService.open(EditConfigsComponent);
     modelRef.componentInstance.config = config;
     modelRef.componentInstance.type = type;
+    modelRef.result.then(data => {
+      this.pinCodeList = data;
+      window.location.reload();
+    });
+  }
+  DeletePinCode(pin) {
+    let res = confirm("Do you want to delete the Pin code: " + pin);
+    if (res) {
+      this.service.deletePinCodes(pin).subscribe(data => {
+        this.configValue = data;
+        window.location.reload();
+      });
+    }
   }
 }

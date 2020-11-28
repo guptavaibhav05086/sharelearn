@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
           //debugger;
           console.log(this.router.url);
           let url = this.router.url.split("?")[0];
-          if (url == "/" || url == "/homePage" || url == "/serviceprovider") {
+          if (url == "/" || url == "/homePage") {
             this.displayNavigation = false;
             this.displayTopNav = false;
             //this._document.body.classList.add("home");

@@ -40,7 +40,45 @@
 
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12 py-4 text-center">
+            <div class="card ">
+                <div class="card-header ">
+                    <h1>Pin Codes</h1>
+                </div>
+                <div class="card-body ">
+                    <div class="row justify-content-center">
+                        <button (click)="openModal(null,'Pin')" class="btn btn-primary">
+                            Add +
+                        </button>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 py-4">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
 
+                                        <th>Pin Code</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let pincode of pinCodeList">
+
+                                        <td>{{ pincode }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary"
+                                                (click)="DeletePinCode(pincode)">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">

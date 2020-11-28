@@ -13,9 +13,7 @@
 .carousel-control-prev {
   width: 10% !important;
 }
-.carousel-text {
-  margin-left: 35%;
-}
+
 .carousel-inner:focus {
   outline: none !important;
 }
@@ -30,6 +28,11 @@
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
   margin-left: 150px !important;
+}
+@media (min-width: 768px) {
+  .carousel-text {
+    margin-left: 35%;
+  }
 }
 @media (max-width: 768px) {
   .itemSize {
@@ -49,7 +52,8 @@
     margin-left: 100px !important;
   }
   .carousel-text {
-    margin-left: 35%;
+    width: 90%;
+    text-align: center;
   }
 }
 @media (min-width: 1200px) {
