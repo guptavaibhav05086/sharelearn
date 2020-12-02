@@ -21,11 +21,11 @@ body {
   margin: 0;
   font-family: Maven pro;
 }
-:focus{
+:focus {
   outline: none !important;
 }
 .navbar-toggler[aria-expanded="true"] span:last-child {
-   transform: rotate(0deg);
-   bottom: 0px;
+  transform: rotate(0deg);
+  bottom: 0px;
   position: relative;
 }

@@ -1,7 +1,9 @@
 .heads {
   color: black;
 }
-
+a:active {
+  color: green;
+}
 .form-group {
   margin-bottom: 10px;
   position: inherit;

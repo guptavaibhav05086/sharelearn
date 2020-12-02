@@ -40,8 +40,11 @@ export class HomeContainerComponent implements OnInit {
       let promoUrl = data["promotionImageURL"];
       let displayPromo = data["displayPromotion"];
       if (displayPromo == "true") {
-        let modelref = this.modalService.open(SectionDescriptionComponent);
-        modelref.componentInstance.promotionURL = promoUrl;
+        let timer = setInterval(() => {
+          let modelref = this.modalService.open(SectionDescriptionComponent);
+          modelref.componentInstance.promotionURL = promoUrl;
+          clearInterval(timer);
+        }, 15000);
       }
     });
   }

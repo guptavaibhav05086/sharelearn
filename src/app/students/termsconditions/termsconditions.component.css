@@ -5,3 +5,4 @@
   max-height: calc(100vh - 200px);
   overflow-y: auto;
 }
+P { margin-bottom: 0.08in; direction: ltr; widows: 2; orphans: 2 }

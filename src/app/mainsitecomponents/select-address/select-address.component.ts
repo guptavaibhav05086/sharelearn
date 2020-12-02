@@ -26,6 +26,7 @@ export class SelectAddressComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    document.getElementsByTagName("body")[0].removeAttribute("style");
     this.addressList = new Array<AddressRequest>();
     this.route.queryParams.subscribe(params => {
       //debugger;
@@ -40,7 +41,7 @@ export class SelectAddressComponent implements OnInit {
     this.fetchAddress();
   }
   fetchAddress() {
-    let userId =localStorage.getItem("userId");
+    let userId = localStorage.getItem("userId");
     this.spinnerService.show();
     this.custService.getUserAddress(userId).subscribe(
       data => {
@@ -113,7 +114,7 @@ export class SelectAddressComponent implements OnInit {
     var r = confirm("Press a button!");
     if (r == true) {
       //
-      
+
       let userId = localStorage.getItem("userId");
       this.custService.deleteUserAddress(userId, item.addId).subscribe(
         data => {

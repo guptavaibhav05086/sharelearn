@@ -1,7 +1,9 @@
 .heads {
   color: black;
 }
-
+a:visited {
+  color: green !important;
+}
 .form-group {
   margin-bottom: 10px;
   position: inherit;

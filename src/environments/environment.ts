@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //baseUrl: "https://www.shapenprint.in",
-  baseUrl: "http://localhost:39117",
+  baseUrl: "https://www.shapenprint.in",
+  //baseUrl: "http://localhost:39117",
 
   api_RegisterUser: "/api/Account/Register",
   userDetails: "/api/Students/GetUserProfile",
@@ -138,7 +138,8 @@ export const environment = {
   inviteFriend: "/api/customer/InviteFriend?email=$email",
   getPinCode: "/api/admin/getPinCode",
   setPinCode: "/api/admin/addPinCode?pinCode=$pinCode",
-  deletePinCode: "/api/admin/deletePinCode?pinCode=$pinCode"
+  deletePinCode: "/api/admin/deletePinCode?pinCode=$pinCode",
+  cancelOrderVendor: "/api/admin/cancelVendorOrder?orderId=$orderId&type=$type"
 };
 
 /*

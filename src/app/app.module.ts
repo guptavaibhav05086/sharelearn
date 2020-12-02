@@ -80,6 +80,8 @@ import { OngoingOrdersComponent } from "../app/mainsitecomponents/ongoing-orders
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { ServiceProviderComponent } from './mainsitecomponents/service-provider/service-provider.component';
 import { AboutusComponent } from './mainsitecomponents/aboutus/aboutus.component';
+import { ChangePasswordComponent } from './mainsitecomponents/change-password/change-password.component';
+import { VerifyOTPComponent } from './mainsitecomponents/verify-otp/verify-otp.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -145,7 +147,9 @@ import { AboutusComponent } from './mainsitecomponents/aboutus/aboutus.component
     CustomerSignUpComponent,
     CustomerLoginComponent,
     ServiceProviderComponent,
-    AboutusComponent
+    AboutusComponent,
+    ChangePasswordComponent,
+    VerifyOTPComponent
   ],
   imports: [
     BrowserModule,

@@ -16,6 +16,12 @@ export class AdminService {
       .replace("$isAdminVerified", isAdminVerified);
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
+  cancleVendorOrder(type, orderId) {
+    let url = `${environment.baseUrl}${environment.cancelOrderVendor}`
+      .replace("$type", type)
+      .replace("$orderId", orderId);
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   getProducts() {
     let url = `${environment.baseUrl}${environment.getProducts}`;
     return this._httpclient.get(
@@ -24,7 +30,7 @@ export class AdminService {
       this.login.getAuthHeader()
     );
   }
-  getPinCodes(){
+  getPinCodes() {
     let url = `${environment.baseUrl}${environment.getPinCode}`;
     return this._httpclient.get(
       url,
@@ -32,19 +38,19 @@ export class AdminService {
       this.login.getAuthHeader()
     );
   }
-  addPinCodes(pinCode){
-    let url = `${environment.baseUrl}${environment.setPinCode}`.replace("$pinCode",pinCode);
-    return this._httpclient.get(
-      url,
-      this.login.getAuthHeader()
+  addPinCodes(pinCode) {
+    let url = `${environment.baseUrl}${environment.setPinCode}`.replace(
+      "$pinCode",
+      pinCode
     );
+    return this._httpclient.get(url, this.login.getAuthHeader());
   }
-  deletePinCodes(pinCode){
-    let url = `${environment.baseUrl}${environment.deletePinCode}`.replace("$pinCode",pinCode);
-    return this._httpclient.get(
-      url,
-      this.login.getAuthHeader()
+  deletePinCodes(pinCode) {
+    let url = `${environment.baseUrl}${environment.deletePinCode}`.replace(
+      "$pinCode",
+      pinCode
     );
+    return this._httpclient.get(url, this.login.getAuthHeader());
   }
   FetchOngoingAllOrder(email, allOrdersflag) {
     //debugger;

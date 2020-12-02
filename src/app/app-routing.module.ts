@@ -14,12 +14,11 @@ import { ResetpasswordComponent } from "./auth/resetpassword/resetpassword.compo
 import { UsersignupComponent } from "./auth/usersignup/usersignup.component";
 import { DesignerprofileComponent } from "./students/designerprofile/designerprofile.component";
 
-
 import { ErrorMessageComponent } from "../app/public/error-message/error-message.component";
 import { VerifyEmailComponent } from "../app/public/verify-email/verify-email.component";
 import { PageNotFoundComponent } from "./public/page-not-found/page-not-found.component";
 import { OrderPageComponent } from "./mainsitecomponents/order-page/order-page.component";
-import {TermsConditionsComponent } from './mainsitecomponents/terms-conditions/terms-conditions.component'
+import { TermsConditionsComponent } from "./mainsitecomponents/terms-conditions/terms-conditions.component";
 import { SelectAddressComponent } from "./mainsitecomponents/select-address/select-address.component";
 import { OrderCartComponent } from "./mainsitecomponents/order-cart/order-cart.component";
 import { ReviewOrderComponent } from "./mainsitecomponents/review-order/review-order.component";
@@ -29,7 +28,7 @@ import { OngoingOrdersComponent } from "./mainsitecomponents/ongoing-orders/ongo
 import { AllOrdersComponent } from "./mainsitecomponents/all-orders/all-orders.component";
 import { ServiceProviderComponent } from "./mainsitecomponents/service-provider/service-provider.component";
 import { AboutusComponent } from "./mainsitecomponents/aboutus/aboutus.component";
-
+import { ChangePasswordComponent } from "./mainsitecomponents/change-password/change-password.component";
 const routes: Routes = [
   {
     path: "designer",
@@ -103,13 +102,16 @@ const routes: Routes = [
         component: LogoutComponent
       },
       {
-        path:"terms",
-        component:TermsConditionsComponent
-
+        path: "terms",
+        component: TermsConditionsComponent
       },
       {
         path: "resetpassword",
         component: ResetpasswordComponent
+      },
+      {
+        path: "user/settings",
+        component: ChangePasswordComponent
       },
       {
         path: "serviceprovider",

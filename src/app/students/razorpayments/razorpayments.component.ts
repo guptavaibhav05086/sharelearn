@@ -38,11 +38,12 @@ export class RazorpaymentsComponent implements OnInit {
     let amount = parseFloat(val[1]);
     const options: any = {
       key: "rzp_test_mz10cbdFCEOGCL",
+      //key: "rzp_live_Fg9NN5NAEvUp4N",
       amount: amount, // amount should be in paise format to display Rs 1255 without decimal point
       currency: "INR",
       name: "RJB Internation", // company name or product name
       description: "Share and print", // product description
-      image: "./assets/logo.png", // company logo or product image
+      image: "../../../assets/img/logo.png", // company logo or product image
       order_id: val[0], // order_id created by you in backend
       modal: {
         // We should prevent closing of the form when esc key is pressed.

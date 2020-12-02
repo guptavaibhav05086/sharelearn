@@ -533,7 +533,7 @@
                   </div>                            
                   <div class="row">
                     
-                    <div class="input-group col-md-10 pad-m-t-10" style="position: relative !important">
+                    <div class="input-group col-md-10 pad-m-t-10" style="position: relative !important" *ngIf="orderForm.controls['type'].value != 'Print Only'">
                       <div class="custom-file form-group">
                           <label style="color:green;font-style: italic;">*For more files or formats, please email to allotted graphic designer </label>
                        

@@ -57,6 +57,7 @@ export class OrderCartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    document.getElementsByTagName("body")[0].removeAttribute("style");
     this.spinner.show();
     this.route.queryParams.subscribe(params => {
       //debugger;

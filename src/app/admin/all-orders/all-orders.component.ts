@@ -61,6 +61,24 @@ export class AllOrdersComponent implements OnInit {
         label: "Order Details",
         onClick: this.openOrderDetails.bind(this)
       }
+    },
+    {
+      headerName: "Cancel Print",
+
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        label: "CancelPrint",
+        onClick: this.CancelOrder.bind(this, "P")
+      }
+    },
+    {
+      headerName: "Cancel Design",
+
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        label: "CancelDesign",
+        onClick: this.CancelOrder.bind(this, "D")
+      }
     }
   ];
   columnAdminDefs = [
@@ -121,13 +139,31 @@ export class AllOrdersComponent implements OnInit {
       field: "Price",
       sortable: true
     },
+    // {
+    //   headerName: "Book Slot",
+
+    //   cellRenderer: "buttonRenderer",
+    //   cellRendererParams: {
+    //     label: "Book Slot",
+    //     onClick: this.bookMeeting.bind(this)
+    //   }
+    // },
     {
-      headerName: "Book Slot",
+      headerName: "Cancel Print",
 
       cellRenderer: "buttonRenderer",
       cellRendererParams: {
-        label: "Book Slot",
-        onClick: this.bookMeeting.bind(this)
+        label: "CancelPrint",
+        onClick: this.bookMeeting.bind(this, "P")
+      }
+    },
+    {
+      headerName: "Cancel Design",
+
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        label: "CancelDesign",
+        onClick: this.bookMeeting.bind(this, "D")
       }
     },
     {
@@ -187,6 +223,18 @@ export class AllOrdersComponent implements OnInit {
       //this.fetchOngoingOrder();
     });
   }
+  CancelOrder(type, e) {
+    debugger;
+    this.customerService.cancleVendorOrder(type, e.rowData.OrderId).subscribe(
+      data => {
+        console.log(data);
+        alert("Order Cancelled Successfully");
+      },
+      err => {
+        alert(err["error"]);
+      }
+    );
+  }
   bookMeeting(e) {
     //debugger;
     let modelRef = this.modalService.open(BookMeetingComponent, {
@@ -212,6 +260,7 @@ export class AllOrdersComponent implements OnInit {
       };
       ////debugger;
       console.log(data);
+      this.fetchOngoingOrder();
       // this.customerService.rescheduleMeetRequest(meet,e.rowData.OrderId).subscribe(data=>{
       //   this.customerService.rescheduleMeetNotify(meet,e.rowData.OrderId).subscribe(data=>{
       //     console.log('notifications sending Done')

@@ -7,7 +7,7 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 })
 export class SectionDescriptionComponent implements OnInit {
   @Input() promotionURL;
-  constructor(private activeModal: NgbActiveModal) {}
+  constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit(): void {}
 }
