@@ -12,6 +12,7 @@ import { PriceDescriptionComponent } from "../price-description/price-descriptio
 import { TermsConditionsComponent } from "../terms-conditions/terms-conditions.component";
 import { Discounts } from "src/app/Models/discounts";
 import { DOCUMENT } from "@angular/common";
+import { LoginService } from "src/app/services/login.service";
 @Component({
   selector: "app-order-page",
   templateUrl: "./order-page.component.html",
@@ -518,6 +519,7 @@ export class OrderPageComponent implements OnInit {
     private _validator: ValidatorsService,
     private modalService: NgbModal,
     private elRef: ElementRef,
+    private _login: LoginService,
     @Inject(DOCUMENT) private document: Document
   ) {}
 
@@ -936,7 +938,15 @@ export class OrderPageComponent implements OnInit {
     // this.selectedCategory.sort((a, b) => a.value.localeCompare(b.value));
   }
   ngOnInit(): void {
-    //debugger;
+    debugger;
+    let Tokendetails = this._login.getUserToken();
+    if (
+      Tokendetails.Token != null ||
+      Tokendetails.Token != undefined ||
+      Tokendetails.Token != ""
+    ) {
+      localStorage.setItem("cart", null);
+    }
     this.spinner.show();
     for (let i = 1; i < 101; i++) {
       this.arrLnW.push(i);

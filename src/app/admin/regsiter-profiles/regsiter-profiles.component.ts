@@ -298,7 +298,10 @@ export class RegsiterProfilesComponent implements OnInit {
 
     console.log(e.rowData);
     modelRef.result.then(data => {
-      //this.getAdminProfile();
+      if(data){
+        this.getAdminProfile();
+      }
+      //
     });
   }
   VerifyPrinter(e) {
@@ -309,7 +312,10 @@ export class RegsiterProfilesComponent implements OnInit {
     modelRef.componentInstance.profile = e.rowData;
     console.log(e.rowData);
     modelRef.result.then(data => {
-      //this.getAdminProfile();
+      if(data){
+        this.getAdminProfile();
+      }
+      
     });
   }
 }

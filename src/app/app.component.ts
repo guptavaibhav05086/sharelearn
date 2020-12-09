@@ -27,7 +27,7 @@ export class AppComponent {
   @HostListener("document:click", ["$event"])
   handleMenuToggle(event) {
     try {
-      debugger;
+      //debugger;
       var clickover = event.target;
       var _opened = document
         .getElementById("navbarNavDropdownTop")
@@ -79,7 +79,7 @@ export class AppComponent {
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           //this.spinnerService.hide();
-          debugger;
+          //debugger;
           console.log("Navigation End");
           this.loading = false;
           let url = this.router.url.split("?")[0];

@@ -134,12 +134,17 @@ export class OrderCartComponent implements OnInit {
   }
   loadCustomerCart(data) {
     debugger;
+    let cartlastItemId = 0;
     if (data != null) {
       let CartFromServer = data["UserCart"];
       let serverCart = localStorage.getItem("serverCart");
 
       let localCart = localStorage.getItem("cart");
+
       let parsedLocalCart = JSON.parse(localStorage.getItem("cart"));
+      try {
+        cartlastItemId = Math.max(...parsedLocalCart.map(user => user.id));
+      } catch (error) {}
       if (
         serverCart == "" ||
         serverCart == null ||
@@ -151,6 +156,8 @@ export class OrderCartComponent implements OnInit {
         if (this.fromOrderPage == "true") {
           let cart = JSON.parse(CartFromServer);
           cart.forEach(element => {
+            cartlastItemId = cartlastItemId + 1;
+            element.id = cartlastItemId;
             this.custService.addItemUserOrdersList(element);
           });
           if (this.editItemId > 0) {

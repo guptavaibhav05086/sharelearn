@@ -30,6 +30,13 @@ export class AdminService {
       this.login.getAuthHeader()
     );
   }
+  delProductsImage(imgId) {
+    let url = `${environment.baseUrl}${environment.delProductImage}`.replace(
+      "$imgId",
+      imgId
+    );
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   getPinCodes() {
     let url = `${environment.baseUrl}${environment.getPinCode}`;
     return this._httpclient.get(

@@ -139,7 +139,9 @@ export const environment = {
   getPinCode: "/api/admin/getPinCode",
   setPinCode: "/api/admin/addPinCode?pinCode=$pinCode",
   deletePinCode: "/api/admin/deletePinCode?pinCode=$pinCode",
-  cancelOrderVendor: "/api/admin/cancelVendorOrder?orderId=$orderId&type=$type"
+  cancelOrderVendor: "/api/admin/cancelVendorOrder?orderId=$orderId&type=$type",
+  getCustomerNumber: "/api/customer/getUserDetails",
+  delProductImage: "/api/admin/delproductImg?imgId=$imgId"
 };
 
 /*

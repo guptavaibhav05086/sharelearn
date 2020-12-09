@@ -72,6 +72,9 @@ export class CustomerSignUpComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    let ele = document
+      .getElementsByClassName("modal-content")[0]
+      .removeAttribute("style");
     this.dropdownList = this._helper.getCourseList();
     this.selectedItems = [];
     this.dropdownSettings = {

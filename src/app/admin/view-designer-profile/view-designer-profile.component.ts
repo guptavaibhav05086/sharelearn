@@ -14,8 +14,8 @@ export class ViewDesignerProfileComponent implements OnInit {
 
   ngOnInit(): void {
     ////debugger;
-    this.IsProfDesi = this.profile.isVerified;
-    this.verifyDes = this.profile.isProfessional;
+    this.IsProfDesi = this.profile.isProfessional;
+    this.verifyDes = this.profile.isVerified;
     console.log(this.profile);
   }
   approveProfile() {
@@ -29,6 +29,7 @@ export class ViewDesignerProfileComponent implements OnInit {
       .subscribe(data => {
         if (data == true) {
           alert("Deatils Updated in system");
+          this.activeModal.close(true);
         } else {
           alert("Issue in Deatils Updating.Please contact the admin");
         }

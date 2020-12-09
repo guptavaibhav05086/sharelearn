@@ -39,7 +39,8 @@ export class ProductListsComponent implements OnInit {
       fileSize: 0,
       fileError: false,
       serverFileName: "",
-      displyBtn: true
+      displyBtn: true,
+      serverId: 0
     }
   ];
   uploadLogoImage(images: FileList, name: string, itemId: number) {
@@ -109,6 +110,27 @@ export class ProductListsComponent implements OnInit {
       }
     );
   }
+  loadImages() {
+    debugger;
+    if (this.selProduct["productImages"].length > 0) {
+      this.imageUpload = [];
+      this.selProduct["productImages"].forEach((item, index) => {
+        let imgname = "image" + (index + 1);
+        this.imageUpload.push({
+          id: index + 1,
+          name: imgname,
+          displayLoadingGif: false,
+          displayFileName: true,
+          fileName: item.Url,
+          fileSize: 0,
+          fileError: false,
+          serverFileName: "",
+          displyBtn: true,
+          serverId: item.Id
+        });
+      });
+    }
+  }
   addImage(i) {
     let imgname = "image" + (i + 1);
     this.imageUpload.forEach(item => item.displyBtn == false);
@@ -121,10 +143,16 @@ export class ProductListsComponent implements OnInit {
       fileSize: 0,
       fileError: false,
       serverFileName: "",
-      displyBtn: true
+      displyBtn: true,
+      serverId: 0
     });
   }
   removeImage(i) {
+    debugger;
+    let delItem = this.imageUpload.filter(item => item.id == i)[0];
+    this.service.delProductsImage(delItem.serverId).subscribe(data => {
+      console.log(data);
+    });
     if (i == 1) {
       let item = this.imageUpload.filter(item => item.id == i)[0];
       item.displayFileName = false;
@@ -146,7 +174,7 @@ export class ProductListsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    ////debugger;
+    debugger;
     if (this.isEdit) {
       this.productform.patchValue({
         Pname: this.selProduct["value"],
@@ -158,6 +186,7 @@ export class ProductListsComponent implements OnInit {
       this.uploadedFileNames.image1 = this.selProduct["productIcon"];
       this.uploadedFileNames.IscontentUploaded = true;
       this.uploadedFileNames.IsproductRefUploaded = true;
+      this.loadImages();
     }
   }
   stopDefault(e) {

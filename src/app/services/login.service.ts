@@ -52,6 +52,7 @@ export class LoginService {
     );
   }
   public setToken(token: TokenResponse) {
+    debugger;
     this.Tokens.Token = token.access_token;
     this.Tokens.type = token.role;
     this.Tokens.userId = token.userId;
@@ -78,7 +79,8 @@ export class LoginService {
     localStorage.setItem("unverifiedEmail", "");
     localStorage.setItem("isEmailVerified", "");
     localStorage.setItem("unverifiedRole", "");
-    localStorage.setItem("email", "");
+    localStorage.setItem("cart", null);
+    localStorage.setItem("serverCart", null);
     //
   }
 

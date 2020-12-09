@@ -30,6 +30,7 @@ export class ViewPrinterProfileComponent implements OnInit {
       .subscribe(data => {
         if (data == true) {
           alert("Deatils Updated in system");
+          this.activeModal.dismiss(true);
         } else {
           alert("Issue in Deatils Updating.Please contact the admin");
         }

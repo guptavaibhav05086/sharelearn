@@ -197,6 +197,10 @@ export class CustomerService {
     );
     return this._httpclient.get(url, this.login.getAuthHeader());
   }
+  getCustomerNumber() {
+    let url = `${environment.baseUrl}${environment.getCustomerNumber}`;
+    return this._httpclient.get(url, this.login.getAuthHeader());
+  }
   sendPrintNotifications(orderId) {
     let url = `${environment.baseUrl}${environment.sendNotificationPrinter}`.replace(
       "$orderId",

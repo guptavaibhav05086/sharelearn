@@ -10,7 +10,7 @@ import { CustomerService } from "src/app/services/customer.service";
   styleUrls: ["./book-meeting.component.css"]
 })
 export class BookMeetingComponent implements OnInit {
-  @Input() comingFromOrderPage=false;
+  @Input() comingFromOrderPage = false;
   @Input() gapDetails;
   minDatecontrol: any;
   maxDatecontrol: any;
@@ -82,13 +82,12 @@ export class BookMeetingComponent implements OnInit {
       minute: 0,
       second: 0
     };
-    if(this.comingFromOrderPage){
+    if (this.comingFromOrderPage) {
       this.meetingInfo = this.gapDetails;
-    }
-    else{
+    } else {
       this.meetingInfo = this.checkTimeGap();
     }
-   
+
     this.calculateSlots();
     let date = new Date();
     // date.setHours(date.getHours() + this.meetingInfo.gap);
@@ -145,11 +144,11 @@ export class BookMeetingComponent implements OnInit {
     return { gap: calGap, duration: meetingDuration };
   }
   calculateSlots() {
-  //debugger;
+    debugger;
     var date = new Date();
     let gap = this.meetingInfo.gap;
     let gapTobeAddedInNextWrkingDay = gap;
-    let currentTime = new Date().getHours();
+    let currentTime = new Date().getHours() + 1;
     let remainingWorkingHoursInDay = 0;
     if (currentTime >= 10 && currentTime <= 22) {
       remainingWorkingHoursInDay = 22 - (currentTime + 1);
@@ -204,7 +203,6 @@ export class BookMeetingComponent implements OnInit {
     this.productform.patchValue({
       meetingDateContol: this.convertDate(this.meetingSlotBookingTimeStart)
     });
-    
   }
   settIntialMeetingDetailsForSameDay(gapTobeAddedInNextWrkingDay) {
     let date = new Date();
@@ -299,7 +297,7 @@ export class BookMeetingComponent implements OnInit {
 
     let selModel = {
       day: selectedDate.getDate(),
-      month: selectedDate.getMonth()+1,
+      month: selectedDate.getMonth() + 1,
       year: selectedDate.getFullYear()
     };
     let meetingDetails = {

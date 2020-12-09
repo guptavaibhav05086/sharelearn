@@ -1,5 +1,12 @@
-@media (min-width: 1200px){
-    .container {
-        max-width: 1300px;
-    }
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1300px;
+  }
+}
+.modal-contentnew {
+  background-color: transparent !important;
+  background-clip: padding-box;
+  border: 0px solid rgba(0, 0, 0, 0.2) !important;
+  border-radius: 0.3rem;
+  outline: 0;
 }

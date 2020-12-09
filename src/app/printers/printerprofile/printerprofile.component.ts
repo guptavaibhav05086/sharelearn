@@ -1,4 +1,4 @@
-import { Component, OnInit,ChangeDetectorRef  } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TermsconditionsComponent } from "../termsconditions/termsconditions.component";
 import { VerifyOTPComponent } from "../verify-otp/verify-otp.component";
@@ -266,8 +266,8 @@ export class PrinterprofileComponent implements OnInit {
       address: place["formatted_address"]
     });
     this.request.address = place["formatted_address"];
-    this.request.longitude = place.geometry.location.lat();
-    this.request.lattitude = place.geometry.location.lng();
+    this.request.longitude = place.geometry.location.lng();
+    this.request.lattitude = place.geometry.location.lat();
 
     console.log(place.geometry.location.lat());
     console.log(place.geometry.location.lng());
@@ -363,6 +363,7 @@ export class PrinterprofileComponent implements OnInit {
     if (formname == "personal") this.isDisabled = true;
     else this.isDisableProfession = true;
   }
+
   openVerifyOTP() {
     if (this.isPhoneVerified == false) {
       this.verifyClicked = true;

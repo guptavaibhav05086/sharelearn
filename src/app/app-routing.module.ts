@@ -141,8 +141,8 @@ const routes: Routes = [
     path: "customers",
     loadChildren: () =>
       import("./customers/customers.module").then(m => m.CustomersModule)
-  },
-  { path: "**", component: PageNotFoundComponent }
+  }
+  // { path: "**", component: PageNotFoundComponent }
 ];
 
 @NgModule({
