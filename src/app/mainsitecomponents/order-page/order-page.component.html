@@ -1155,7 +1155,8 @@
                           </div>
                             <div class="flex-controlPrice">
                                 <label>
-                                    &#x20B9;  {{this.orderPrice.price -(this.orderPrice.sourceFileFees + this.orderPrice.professiondesignerFees)}}
+                                    &#x20B9; {{orderPrice.printCost }} 
+                                    <!-- &#x20B9;  {{this.orderPrice.price -(this.orderPrice.sourceFileFees + this.orderPrice.professiondesignerFees)}} -->
                                 </label>
                             </div>
                          
@@ -1187,7 +1188,8 @@
                       </div>
                         <div class="flex-controlPrice">
                             <label>
-                                &#x20B9; {{orderPrice.Total - this.orderPrice.GST}} 
+                                &#x20B9; {{orderPrice.printCost }} 
+                                <!-- &#x20B9; {{orderPrice.Total - this.orderPrice.GST}}  -->
                             </label>
                         </div>
                      

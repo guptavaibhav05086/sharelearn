@@ -84,10 +84,15 @@ export class OrderCartComponent implements OnInit {
 
           try {
             localStorage.setItem("serverCart", null);
+            if (data["prodList"] != null) {
+              this.custService.discountedPrice =
+                data["prodList"]["discountList"];
+            }
+
             this.loadCustomerCart(data);
             this.loadCart();
             this.updateCustomerCartToServer();
-            this.custService.discountedPrice = data["prodList"]["discountList"];
+            debugger;
           } catch (error) {
             this.spinner.hide();
           }
@@ -154,12 +159,17 @@ export class OrderCartComponent implements OnInit {
       ) {
         localStorage.setItem("serverCart", CartFromServer);
         if (this.fromOrderPage == "true") {
-          let cart = JSON.parse(CartFromServer);
-          cart.forEach(element => {
-            cartlastItemId = cartlastItemId + 1;
-            element.id = cartlastItemId;
-            this.custService.addItemUserOrdersList(element);
-          });
+          if (CartFromServer != "null") {
+            let cart = JSON.parse(CartFromServer);
+            cart.forEach(element => {
+              if (element.id != this.editItemId) {
+                cartlastItemId = cartlastItemId + 1;
+                element.id = cartlastItemId;
+                this.custService.addItemUserOrdersList(element);
+              }
+            });
+          }
+
           if (this.editItemId > 0) {
             this.custService.deletItemFromCart(this.editItemId);
           }
@@ -369,6 +379,7 @@ export class OrderCartComponent implements OnInit {
     console.log(this.userCart);
   }
   calculateDiscounts() {
+    debugger;
     let totalpriceWithoutDelivery =
       this.userCart.finalPrice.calPrice + this.userCart.finalPrice.calGST;
     let perc = this.custService.getDiscountPercentage(

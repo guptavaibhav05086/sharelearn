@@ -98,7 +98,9 @@
             <span class="detailsHeading">GSM:</span> {{item.specs.paperGSM}}
           </p>
           <p class="productDetails">
-            <span class="detailsHeading">Price: &#x20B9;</span> {{item.price.Total - item.price.GST}}
+            <span class="detailsHeading">Price: &#x20B9;</span>
+            {{item.price.printCost}}
+            <!-- {{item.price.Total - item.price.GST}} -->
           </p>
 
 

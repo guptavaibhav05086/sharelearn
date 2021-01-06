@@ -50,7 +50,7 @@ export class SectionTopNavComponent implements OnInit {
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           //this.spinnerService.hide();
-          debugger;
+          //debugger;
 
           break;
         }

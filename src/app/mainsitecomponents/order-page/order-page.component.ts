@@ -201,7 +201,7 @@ export class OrderPageComponent implements OnInit {
     event.preventDefault();
   }
   uploadLogoImage(images: FileList, name: string, itemId: number) {
-    ////debugger;
+    debugger;
     var result = "";
     var file;
     const formData = new FormData();
@@ -574,7 +574,7 @@ export class OrderPageComponent implements OnInit {
   }
 
   proceedOrder($element: any) {
-    //debugger;
+    debugger;
     if (this.orderForm.controls["type"].value == "Design Only") {
       this.orderForm.patchValue({
         quantities: 0,
@@ -594,7 +594,7 @@ export class OrderPageComponent implements OnInit {
       (this.displayDesigner &&
         this.uploadedFileNames.IsproductRefUploaded == false) ||
       (this.orderForm.controls["type"].value == "Print Only" &&
-        this.imageUpload[0].fileName == "")
+        this.imageUpload[0].serverFileName == "")
     ) {
       if (this.uploadedFileNames.IsproductRefUploaded == false) {
         this.uploadedFileNames.displayErrororbutton = true;
@@ -603,7 +603,7 @@ export class OrderPageComponent implements OnInit {
       }
       if (
         this.orderForm.controls["type"].value == "Print Only" &&
-        this.imageUpload[0].fileName == ""
+        this.imageUpload[0].serverFileName == ""
       ) {
         this.uploadedFileNames.displayReadOnlyError = true;
       } else {
@@ -940,13 +940,14 @@ export class OrderPageComponent implements OnInit {
   ngOnInit(): void {
     debugger;
     let Tokendetails = this._login.getUserToken();
-    if (
-      Tokendetails.Token != null ||
-      Tokendetails.Token != undefined ||
-      Tokendetails.Token != ""
-    ) {
-      localStorage.setItem("cart", null);
-    }
+    // if (
+    //   this.isEditOrder != true &&
+    //   (Tokendetails.Token != null ||
+    //     Tokendetails.Token != undefined ||
+    //     Tokendetails.Token != "")
+    // ) {
+    //   localStorage.setItem("cart", null);
+    // }
     this.spinner.show();
     for (let i = 1; i < 101; i++) {
       this.arrLnW.push(i);
@@ -974,7 +975,14 @@ export class OrderPageComponent implements OnInit {
 
       // popular
     });
-
+    if (
+      this.isEditOrder != true &&
+      (Tokendetails.Token != null ||
+        Tokendetails.Token != undefined ||
+        Tokendetails.Token != "")
+    ) {
+      localStorage.setItem("cart", null);
+    }
     this.admin.getProducts().subscribe(
       data => {
         this.productList = data["productList"];
@@ -1078,7 +1086,8 @@ export class OrderPageComponent implements OnInit {
       });
       this.selectedSubcategory(null);
       this.orderForm.patchValue({
-        orientation: editItem[0].category[0].specs.orientation
+        orientation: editItem[0].category[0].specs.orientation,
+        size: editItem[0].category[0].specs.size
       });
       this.Servicable = true;
       this.uploadedFileNames.contentValidation = true;
@@ -1092,6 +1101,10 @@ export class OrderPageComponent implements OnInit {
     if (this.displayeproceed == false) {
       return;
     }
+    this.orderForm.patchValue({
+      subCategory: ""
+    });
+    this.resetControls();
     let selItem = this.selectedCategory.filter(item => item.value == value)[0];
     if (selItem != null) {
       this.selectedProductImage = selItem.productImage;
@@ -1197,7 +1210,7 @@ export class OrderPageComponent implements OnInit {
   }
   selectedCustomizedSize() {}
   selectedSubcategory(event) {
-    //debugger;
+    debugger;
 
     let selproducts = this.productList.filter(
       item =>
@@ -1247,6 +1260,13 @@ export class OrderPageComponent implements OnInit {
       );
       if (selctedquant != null) {
         this.proSpec.displayQuant = selctedquant[0].qunat.split(",");
+        this.orderForm.patchValue({
+          size: "NA"
+        });
+      } else {
+        this.orderForm.patchValue({
+          size: ""
+        });
       }
     } else {
       this.displayLenghtWidth = false;
@@ -1367,6 +1387,7 @@ export class OrderPageComponent implements OnInit {
     console.log(this.orderPrice);
   }
   getDiscountDetails(cartValue) {
+    debugger;
     let discountPer = 0;
     let max = 0;
     this.discountPrice.forEach(element => {

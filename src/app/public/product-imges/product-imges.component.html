@@ -2,7 +2,7 @@
     {{prodName}} Gallery
 </div>
 <div *ngFor="let item of imageProducts" class="gallery">
-    <img [src]="item.serverFileName" class="imgData" />
+    <img [src]="item.serverFileName" class="imgData" *ngIf="item.serverFileName !=''" />
 </div>
 <div class="btnRow">
     <button class="btn btn-primary" (click)="navigateToProduct(prodName)">

@@ -37,8 +37,8 @@ export class RazorpaymentsComponent implements OnInit {
     debugger;
     let amount = parseFloat(val[1]);
     const options: any = {
-      //key: "rzp_test_mz10cbdFCEOGCL",
-      key: "rzp_live_Fg9NN5NAEvUp4N",
+      key: "rzp_test_mz10cbdFCEOGCL",
+      //key: "rzp_live_Fg9NN5NAEvUp4N",
       amount: amount, // amount should be in paise format to display Rs 1255 without decimal point
       currency: "INR",
       name: "RJB Internation", // company name or product name

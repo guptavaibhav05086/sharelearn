@@ -23,7 +23,17 @@ export class AppComponent {
   title = "mLearnApp";
   loading = false;
 
-  ngOnInit() {}
+  ngOnInit() {
+    try {
+      if (
+        window.location.href.split(":")[0] === "http" &&
+        (window.location.href.split(":")[1] === "//shapenprint.com/" ||
+          window.location.href.split(":")[1] === "//www.shapenprint.com/")
+      ) {
+        window.location.href = "https://www.shapenprint.com/";
+      }
+    } catch (error) {}
+  }
   @HostListener("document:click", ["$event"])
   handleMenuToggle(event) {
     try {
