@@ -35,7 +35,7 @@ export class LoginService {
     ////debugger;
     let body =
       "username=" +
-      tokenRequest.username +
+      tokenRequest.username.trim() +
       "&password=" +
       tokenRequest.password +
       "&grant_type=password";
@@ -45,7 +45,16 @@ export class LoginService {
       this.httpOptions
     );
   }
+  checkSupportRole() {
+    let token = this.getUserToken();
+    if (token.type.toLocaleLowerCase() == "support") {
+      return true;
+    }
+    return false;
+  }
   registerUser(userData: RegisterUser): Observable<any> {
+    debugger;
+    userData.Email = userData.Email.trim();
     return this.httpClient.post<any>(
       environment.baseUrl + environment.api_RegisterUser,
       userData

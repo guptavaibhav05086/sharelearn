@@ -8,6 +8,12 @@ a:visited {
   margin-bottom: 10px;
   position: inherit;
 }
+.anchrClickColor {
+  color: green !important;
+}
+a:active {
+  color: green !important;
+}
 
 .modal-dialog {
   max-width: 100% !important;

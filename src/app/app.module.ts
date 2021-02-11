@@ -82,6 +82,7 @@ import { ServiceProviderComponent } from './mainsitecomponents/service-provider/
 import { AboutusComponent } from './mainsitecomponents/aboutus/aboutus.component';
 import { ChangePasswordComponent } from './mainsitecomponents/change-password/change-password.component';
 import { VerifyOTPComponent } from './mainsitecomponents/verify-otp/verify-otp.component';
+import { BrochureComponent } from './blogs/brochure/brochure.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -149,7 +150,8 @@ import { VerifyOTPComponent } from './mainsitecomponents/verify-otp/verify-otp.c
     ServiceProviderComponent,
     AboutusComponent,
     ChangePasswordComponent,
-    VerifyOTPComponent
+    VerifyOTPComponent,
+    BrochureComponent
   ],
   imports: [
     BrowserModule,

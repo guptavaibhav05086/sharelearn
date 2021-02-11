@@ -31,9 +31,9 @@ export class ValidatorsService {
 
   patternValidation(pattern: RegExp) {
     return (control: AbstractControl): { [key: string]: any } | null => {
-      ////debugger;
+      debugger;
       if (control.value != "" && control.value != null) {
-        const forbidden = pattern.test(control.value);
+        const forbidden = pattern.test(control.value.trim());
         return forbidden
           ? null
           : { invalidPattern: { valid: false, value: control.value } };
@@ -43,7 +43,7 @@ export class ValidatorsService {
   }
   patternValidationTrainer(pattern: RegExp) {
     return (control: AbstractControl): { [key: string]: any } | null => {
-      ////debugger;
+      debugger;
       if (control.value != "" && control.value != null) {
         const forbidden = pattern.test(control.value);
         return forbidden

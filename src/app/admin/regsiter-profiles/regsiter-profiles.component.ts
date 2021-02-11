@@ -5,6 +5,8 @@ import { ViewDesignerProfileComponent } from "../view-designer-profile/view-desi
 import { ViewPrinterProfileComponent } from "../view-printer-profile/view-printer-profile.component";
 import { ButtonrendererComponent } from "../buttonrenderer/buttonrenderer.component";
 import { NgxSpinnerService } from "ngx-spinner";
+import { LoginService } from "src/app/services/login.service";
+import { HelperService } from "src/app/services/helper.service";
 
 @Component({
   selector: "app-regsiter-profiles",
@@ -15,7 +17,9 @@ export class RegsiterProfilesComponent implements OnInit {
   constructor(
     private admin: AdminService,
     private modalService: NgbModal,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private loginService: LoginService,
+    private helperServive: HelperService
   ) {
     this.frameworkComponents = {
       buttonRenderer: ButtonrendererComponent
@@ -29,6 +33,9 @@ export class RegsiterProfilesComponent implements OnInit {
   gripApiCustomer;
   frameworkComponents: any;
   ngOnInit(): void {
+    if (this.loginService.checkSupportRole()) {
+      this.helperServive.navigateToPath("/admin/orders");
+    }
     this.getAdminProfile();
   }
 
@@ -298,7 +305,7 @@ export class RegsiterProfilesComponent implements OnInit {
 
     console.log(e.rowData);
     modelRef.result.then(data => {
-      if(data){
+      if (data) {
         this.getAdminProfile();
       }
       //
@@ -312,10 +319,9 @@ export class RegsiterProfilesComponent implements OnInit {
     modelRef.componentInstance.profile = e.rowData;
     console.log(e.rowData);
     modelRef.result.then(data => {
-      if(data){
+      if (data) {
         this.getAdminProfile();
       }
-      
     });
   }
 }

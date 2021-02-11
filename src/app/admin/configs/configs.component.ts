@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { AdminService } from "src/app/services/admin.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EditConfigsComponent } from "../edit-configs/edit-configs.component";
+import { LoginService } from "src/app/services/login.service";
+import { HelperService } from "src/app/services/helper.service";
 @Component({
   selector: "app-configs",
   templateUrl: "./configs.component.html",
@@ -10,9 +12,17 @@ import { EditConfigsComponent } from "../edit-configs/edit-configs.component";
 export class ConfigsComponent implements OnInit {
   configValue: any;
   pinCodeList: any;
-  constructor(private service: AdminService, private modalService: NgbModal) {}
+  constructor(
+    private service: AdminService,
+    private modalService: NgbModal,
+    private loginService: LoginService,
+    private helperServive: HelperService
+  ) {}
 
   ngOnInit(): void {
+    if (this.loginService.checkSupportRole()) {
+      this.helperServive.navigateToPath("/admin/orders");
+    }
     this.service.getConfig().subscribe(
       data => {
         console.log(data);

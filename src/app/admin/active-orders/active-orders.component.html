@@ -72,12 +72,19 @@
                   <p class="productDetails" *ngIf="item.designerCost > 0">
                     <span class="detailsHeading"> Total Order Value: &#x20B9;</span> {{ item.Total }}
                   </p>
+                  <p class="productDetails" *ngIf="item.designerCost > 0">
+                    <span class="detailsHeading"> Total Design Cost: &#x20B9;</span> {{ item.TotalDesignCost }}
+                  </p>
+                  <p class="productDetails" *ngIf="item.designerCost > 0">
+                    <span class="detailsHeading"> Total Print Cost: &#x20B9;</span> {{ item.TotalPrintCost }}
+                  </p>
                   <p class="productDetails" *ngIf="item.UserDesignAcceptance !=null">
                     <span class="detailsHeading"> Design Accepted Time: &#x20B9;</span> {{ item.UserDesignAcceptance }}
                   </p>
 
                   <p class="productDetails" *ngIf="item.designerCost > 0">
-                    <span class="detailsHeading"> Designer Cost: &#x20B9;</span> {{ item.designerCost }}
+                    <span class="detailsHeading"> Designer Cost: &#x20B9;</span>
+                    {{ item.designerCost + item.ProfessiondesignerFeesAfterCommision }}
                   </p>
                   <p class="productDetails" *ngIf="item.printercost > 0">
                     <span class="detailsHeading">Printer Cost: &#x20B9;</span> {{ item.printercost }}

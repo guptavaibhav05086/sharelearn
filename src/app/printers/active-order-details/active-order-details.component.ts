@@ -234,6 +234,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
   downloadFile(filename, e, type) {
     //debugger;
     e.preventDefault();
+    e.target.classList.add("anchrClickColor");
     this.service.downloadOrderFiles(filename, type).subscribe(
       (response: any) => {
         let dataType = response.type;

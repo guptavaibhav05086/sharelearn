@@ -11,7 +11,7 @@ export class ActiveOrderDetailsComponent implements OnInit {
   orderItems: any;
   @Input() isAllOrders;
   disableFinishButton = false;
-  displayLoadingFinishGif=false;
+  displayLoadingFinishGif = false;
   //@Input() orderId;
   constructor(
     public activeModal: NgbActiveModal,
@@ -37,7 +37,9 @@ export class ActiveOrderDetailsComponent implements OnInit {
     IscontentUploaded: false,
     displayReadOnlyError: false
   };
-  stopDefault(event) {}
+  stopDefault(event) {
+    event.preventDefault();
+  }
   imageUpload = [
     {
       id: 1,
@@ -295,8 +297,9 @@ export class ActiveOrderDetailsComponent implements OnInit {
     );
   }
   downloadFile(filename, e) {
-    //debugger;
+    debugger;
     e.preventDefault();
+    e.target.classList.add("anchrClickColor");
     this.service.downloadOrderFiles(filename).subscribe(
       (response: any) => {
         let dataType = response.type;
@@ -340,14 +343,17 @@ export class ActiveOrderDetailsComponent implements OnInit {
       }
     });
     if (eligibleForFinish == true) {
-      this.displayLoadingFinishGif=true;
-      this.service.finishDesignerOrder(this.data.OrderId).subscribe(data => {
-        alert("Order Completed Successfully");
-        this.displayLoadingFinishGif=false;
-        this.activeModal.close();
-      },err=>{
-        this.displayLoadingFinishGif=false;
-      });
+      this.displayLoadingFinishGif = true;
+      this.service.finishDesignerOrder(this.data.OrderId).subscribe(
+        data => {
+          alert("Order Completed Successfully");
+          this.displayLoadingFinishGif = false;
+          this.activeModal.close();
+        },
+        err => {
+          this.displayLoadingFinishGif = false;
+        }
+      );
     } else {
       alert("Upload All required Files to Finish the Order");
     }

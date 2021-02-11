@@ -5,6 +5,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Productlist, ProductprintPrice } from "src/app/Models/productlist";
 import { AdminService } from "../../services/admin.service";
+import { LoginService } from "src/app/services/login.service";
+import { HelperService } from "src/app/services/helper.service";
 @Component({
   selector: "app-products-forms",
   templateUrl: "./products-forms.component.html",
@@ -58,10 +60,14 @@ export class ProductsFormsComponent implements OnInit {
     private spinnerService: NgxSpinnerService,
     public activeModal: NgbActiveModal,
     public admin: AdminService,
-    
+    private loginService: LoginService,
+    private helperServive: HelperService
   ) {}
 
   ngOnInit(): void {
+    if (this.loginService.checkSupportRole()) {
+      this.helperServive.navigateToPath("/admin/orders");
+    }
     ////debugger;
     let item = new ProductprintPrice();
     if (this.printPriceList == undefined || this.printPriceList.length == 0) {

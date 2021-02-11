@@ -7,6 +7,8 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Discounts } from "src/app/Models/discounts";
 import { DiscountFormComponent } from "../discount-form/discount-form.component";
+import { LoginService } from "src/app/services/login.service";
+import { HelperService } from "src/app/services/helper.service";
 @Component({
   selector: "app-products",
   templateUrl: "./products.component.html",
@@ -259,6 +261,8 @@ export class ProductsComponent implements OnInit {
   constructor(
     private admin: AdminService,
     private modalService: NgbModal,
+    private loginService: LoginService,
+    private helperServive: HelperService,
     private spinner: NgxSpinnerService
   ) {
     this.frameworkComponents = {
@@ -267,6 +271,9 @@ export class ProductsComponent implements OnInit {
   }
   ngOnInit(): void {
     ////debugger;
+    if (this.loginService.checkSupportRole()) {
+      this.helperServive.navigateToPath("/admin/orders");
+    }
     this.fetchProductsData();
   }
   onGridReady(params) {

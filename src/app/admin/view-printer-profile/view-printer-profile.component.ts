@@ -16,7 +16,7 @@ export class ViewPrinterProfileComponent implements OnInit {
   ngOnInit(): void {
     ////debugger;
     //this.IsProfDesi=this.profile.isVerified;
-    this.verifyDes = this.profile.isProfessional;
+    this.verifyDes = this.profile.isVerified;
     console.log(this.profile);
   }
   approveProfile() {

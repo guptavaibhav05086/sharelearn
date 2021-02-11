@@ -114,9 +114,13 @@ export class OnGoingOrderComponent implements OnInit {
         .subscribe(
           data => {
             console.log(data);
+            if (data["eta"] == null) {
+              alert("Delivery Initiation Fail.Please contact admin.");
+            }
           },
           err => {
             console.log(err);
+            alert("Delivery Initiation Fail.Please contact admin.");
           }
         );
     }

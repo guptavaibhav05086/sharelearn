@@ -1309,7 +1309,7 @@ export class OrderPageComponent implements OnInit {
         data => {
           if (!data) {
             this.Servicable = false;
-            alert("We are not serving in this area yet.");
+            alert("To Order, e-mail us at info@shapenprint.com");
           } else {
             this.Servicable = true;
           }

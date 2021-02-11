@@ -316,7 +316,8 @@ export class ActiveOrdersComponent implements OnInit {
     // );
   }
   downloadFile(filename, e, type) {
-    //debugger;
+    debugger;
+    e.target.classList.add("anchrClickColor");
     e.preventDefault();
     this.adminService.getFiles(filename, type).subscribe(
       (response: any) => {

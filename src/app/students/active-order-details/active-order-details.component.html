@@ -194,7 +194,8 @@
                           <div *ngIf="!isAllOrders">
                             <label [for]="itemNImg.name" class="btn btn-primary btn-block btn-outlined"
                               style="width:250px">UPLOAD</label>
-                            <input type="file" accept="image/*" style="display: none" [id]="itemNImg.name"
+                            <input type="file" accept="image/*,application/pdf" style="display: none"
+                              [id]="itemNImg.name"
                               (change)="uploadGSTCertificate($event.target.files,item.id,'normal',itemNImg.id)" />
                           </div>
                           <div style="width: 40px;" *ngIf="itemNImg.displayLoadingGif">

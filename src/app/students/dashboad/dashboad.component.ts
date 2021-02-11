@@ -19,7 +19,7 @@ export class DashboadComponent implements OnInit {
   ngOnInit() {
     let email = localStorage.getItem("email");
     this.spinner.show();
-    this.service.getConfig("PrinterPoint").subscribe(
+    this.service.getConfig("DesignerPoint").subscribe(
       data => {
         this.points = data;
         console.log(this.points);

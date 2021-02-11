@@ -4,6 +4,8 @@ import { AdminService } from "../../services/admin.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgxSpinnerService } from "ngx-spinner";
 import { PayoutFormComponent } from "../payout-form/payout-form.component";
+import { LoginService } from "src/app/services/login.service";
+import { HelperService } from "src/app/services/helper.service";
 //import {PayoutFormComponent } from ''
 @Component({
   selector: "app-vendor-payouts",
@@ -17,7 +19,9 @@ export class VendorPayoutsComponent implements OnInit {
   constructor(
     private service: AdminService,
     private modalService: NgbModal,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private loginService: LoginService,
+    private helperServive: HelperService
   ) {
     this.frameworkComponents = {
       buttonRenderer: ButtonrendererComponent
@@ -25,6 +29,9 @@ export class VendorPayoutsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.loginService.checkSupportRole()) {
+      this.helperServive.navigateToPath("/admin/orders");
+    }
     this.service.getDesignerPayout().subscribe(
       data => {
         this.payoutList = data;

@@ -7,6 +7,7 @@ import { AdminService } from "../../services/admin.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ActiveOrdersComponent } from "../active-orders/active-orders.component";
 import { BookMeetingComponent } from "../book-meeting/book-meeting.component";
+import { CustomerService } from "src/app/services/customer.service";
 @Component({
   selector: "app-all-orders",
   templateUrl: "./all-orders.component.html",
@@ -178,7 +179,8 @@ export class AllOrdersComponent implements OnInit {
   ];
   constructor(
     private customerService: AdminService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private custService: CustomerService
   ) {
     this.gridOptions = <GridOptions>{
       getRowStyle: this.checkRow.bind(this)
@@ -261,6 +263,17 @@ export class AllOrdersComponent implements OnInit {
       ////debugger;
       console.log(data);
       this.fetchOngoingOrder();
+      this.custService
+        .rescheduleMeetRequest(meet, e.rowData.OrderId)
+        .subscribe(data => {
+          alert("Meeting Rescheduling Done");
+          this.custService
+            .rescheduleMeetNotify(meet, e.rowData.OrderId)
+            .subscribe(data => {
+              alert("notifications sending Done");
+              console.log("notifications sending Done");
+            });
+        });
       // this.customerService.rescheduleMeetRequest(meet,e.rowData.OrderId).subscribe(data=>{
       //   this.customerService.rescheduleMeetNotify(meet,e.rowData.OrderId).subscribe(data=>{
       //     console.log('notifications sending Done')

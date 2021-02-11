@@ -4,6 +4,8 @@ import { AdminService } from "../../services/admin.service";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Productlist } from "src/app/Models/productlist";
 import { DOCUMENT } from "@angular/common";
+import { LoginService } from "src/app/services/login.service";
+import { HelperService } from "src/app/services/helper.service";
 @Component({
   selector: "app-product-lists",
   templateUrl: "./product-lists.component.html",
@@ -170,11 +172,16 @@ export class ProductListsComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     private service: AdminService,
+    private loginService: LoginService,
+    private helperServive: HelperService,
     @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngOnInit(): void {
     debugger;
+    // if (this.loginService.checkSupportRole) {
+    //   this.helperServive.navigateToPath("/admin/orders");
+    // }
     if (this.isEdit) {
       this.productform.patchValue({
         Pname: this.selProduct["value"],

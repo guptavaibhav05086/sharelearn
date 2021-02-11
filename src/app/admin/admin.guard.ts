@@ -7,7 +7,7 @@ import {
   Router
 } from "@angular/router";
 import { Observable } from "rxjs";
-import { LoginService } from '../services/login.service';
+import { LoginService } from "../services/login.service";
 
 @Injectable({
   providedIn: "root"
@@ -22,17 +22,20 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      let token = this.service.getUserToken();
-      let isUserVerified = false;
-      if (token.type.toLocaleLowerCase() == "admin") {
-        return true;
-        // let emailVerfied = localStorage.getItem("emailVerificationDone");
-        // if (emailVerfied == "True") {
-        //   return true;
-        // } else {
-        //   this.router.navigate(["/designer/dashboard"]);
-        // }
-      }
-      this.router.navigate(["/login"]);
+    let token = this.service.getUserToken();
+    let isUserVerified = false;
+    if (
+      token.type.toLocaleLowerCase() == "admin" ||
+      token.type.toLocaleLowerCase() == "support"
+    ) {
+      return true;
+      // let emailVerfied = localStorage.getItem("emailVerificationDone");
+      // if (emailVerfied == "True") {
+      //   return true;
+      // } else {
+      //   this.router.navigate(["/designer/dashboard"]);
+      // }
+    }
+    this.router.navigate(["/login"]);
   }
 }
