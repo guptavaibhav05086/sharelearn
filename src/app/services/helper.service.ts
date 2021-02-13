@@ -16,6 +16,58 @@ export class HelperService {
     private _httpclient: HttpClient
   ) {}
 
+  private blogToRoute = [
+    { key: 24, Value: "Brochure", url: "/blogs/tips-on-brochure" },
+    { key: 25, Value: "Business Cards", url: "/blogs/tips-on-business-cards" },
+    {
+      key: 26,
+      Value: "Business Envelopes",
+      url: "/blogs/tips-on-business-envelope"
+    },
+    { key: 27, Value: "Certificates", url: "/blogs/tips-on-certificates" },
+    { key: 28, Value: "Cover Page", url: "/blogs/tips-on-cover-page" },
+    {
+      key: 29,
+      Value: "Digital Marketing",
+      url: "/blogs/tips-on-digital-marketing-banners"
+    },
+    { key: 42, Value: "Envelopes", url: "/blogs/tips-on-business-envelope" },
+    { key: 30, Value: "Fabric Banners", url: "/blogs/tips-on-fabric-banners" },
+    { key: 31, Value: "Flyers", url: "/blogs/tips-on-flyer" },
+    {
+      key: 32,
+      Value: "Invitation Card",
+      url: "/blogs/tips-on-invitation-cards"
+    },
+    { key: 33, Value: "Letter Head", url: "/blogs/tips-on-letterhead" },
+    { key: 34, Value: "Logo", url: "/blogs/tips-on-logo" },
+    { key: 35, Value: "Poster", url: "/blogs/tips-on-posters" },
+    {
+      key: 36,
+      Value: "Promotional Coupon",
+      url: "/blogs/tips-on-promotional-coupon"
+    },
+    { key: 37, Value: "Report Card", url: "/blogs/tips-on-report-cards" },
+    {
+      key: 38,
+      Value: "Roll Up Standee",
+      url: "blogs/tips-on-roll-up-standees"
+    },
+    { key: 39, Value: "Stickers/Labels", url: "/blogs/tips-on-labels" },
+    { key: 40, Value: "Inshop Branding", url: "/" },
+    { key: 41, Value: "Vinyl", url: "/" },
+    {
+      key: 43,
+      Value: "Business Envelope",
+      url: "blogs/tips-on-business-envelope"
+    }
+  ];
+
+  getRouteToBlog(productName) {
+    debugger;
+    let result = this.blogToRoute.filter(item => item.Value == productName);
+    return result[0].url;
+  }
   getCourseList(): Array<CourseList> {
     let courseList: CourseList[] = [
       {
@@ -320,8 +372,8 @@ export class HelperService {
   navigateToPath(path: string) {
     this.router.navigate([path]);
   }
-  navigateToPathWithparams(path: string,params) {
-    this.router.navigate([path],params);
+  navigateToPathWithparams(path: string, params) {
+    this.router.navigate([path], params);
   }
   getStates(): Observable<Array<Cities>> {
     let url = `${environment.baseUrl}${environment.getState}`;

@@ -561,6 +561,16 @@ export class OrderPageComponent implements OnInit {
   clearContentImage() {
     this.uploadedFileNames.content = "";
   }
+  openBlog(e) {
+    e.preventDefault();
+    let url = this._helper.getRouteToBlog(
+      this.orderForm.controls["category"].value
+    );
+    //this.orderForm.controls['category'].value
+    if (url != null || url != "") {
+      window.open(url, "_blank");
+    }
+  }
   openPriceDescription(e) {
     e.preventDefault();
     let modelRef = this.modalService.open(PriceDescriptionComponent);

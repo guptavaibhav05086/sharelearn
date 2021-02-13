@@ -83,6 +83,21 @@ import { AboutusComponent } from './mainsitecomponents/aboutus/aboutus.component
 import { ChangePasswordComponent } from './mainsitecomponents/change-password/change-password.component';
 import { VerifyOTPComponent } from './mainsitecomponents/verify-otp/verify-otp.component';
 import { BrochureComponent } from './blogs/brochure/brochure.component';
+import { BusineescardsComponent } from './blogs/busineescards/busineescards.component';
+import { BusineesenvelopeComponent } from './blogs/busineesenvelope/busineesenvelope.component';
+import { CertificatesComponent } from './blogs/certificates/certificates.component';
+import { CoverpageComponent } from './blogs/coverpage/coverpage.component';
+import { DigitalmarketComponent } from './blogs/digitalmarket/digitalmarket.component';
+import { FabricbannerComponent } from './blogs/fabricbanner/fabricbanner.component';
+import { FlyerComponent } from './blogs/flyer/flyer.component';
+import { InvitationcardComponent } from './blogs/invitationcard/invitationcard.component';
+import { LabelComponent } from './blogs/label/label.component';
+import { LetterheadComponent } from './blogs/letterhead/letterhead.component';
+import { LogooComponent } from './blogs/logoo/logoo.component';
+import { PosterComponent } from './blogs/poster/poster.component';
+import { CouponComponent } from './blogs/coupon/coupon.component';
+import { CardsComponent } from './blogs/cards/cards.component';
+import { RollupComponent } from './blogs/rollup/rollup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -151,7 +166,22 @@ import { BrochureComponent } from './blogs/brochure/brochure.component';
     AboutusComponent,
     ChangePasswordComponent,
     VerifyOTPComponent,
-    BrochureComponent
+    BrochureComponent,
+    BusineescardsComponent,
+    BusineesenvelopeComponent,
+    CertificatesComponent,
+    CoverpageComponent,
+    DigitalmarketComponent,
+    FabricbannerComponent,
+    FlyerComponent,
+    InvitationcardComponent,
+    LabelComponent,
+    LetterheadComponent,
+    LogooComponent,
+    PosterComponent,
+    CouponComponent,
+    CardsComponent,
+    RollupComponent
   ],
   imports: [
     BrowserModule,
